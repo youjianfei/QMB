@@ -4,11 +4,23 @@
         "source": "D:\\MYwork\\work\\QuanMB\\library_pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\indicator_arrow.png"
     },
     {
+        "merged": "D:\\MYwork\\work\\QMB\\QuanMB\\library_pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_flip.png",
+        "source": "D:\\MYwork\\work\\QMB\\QuanMB\\library_pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
+    },
+    {
         "merged": "D:\\MYwork\\work\\QuanMB\\library_pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_rotate.png",
         "source": "D:\\MYwork\\work\\QuanMB\\library_pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
     },
     {
+        "merged": "D:\\MYwork\\work\\QMB\\QuanMB\\library_pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\indicator_arrow.png",
+        "source": "D:\\MYwork\\work\\QMB\\QuanMB\\library_pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\indicator_arrow.png"
+    },
+    {
         "merged": "D:\\MYwork\\work\\QuanMB\\library_pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_flip.png",
         "source": "D:\\MYwork\\work\\QuanMB\\library_pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "D:\\MYwork\\work\\QMB\\QuanMB\\library_pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\MYwork\\work\\QMB\\QuanMB\\library_pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
     }
 ]
