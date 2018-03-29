@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jingnuo.quanmb.activity.RegisterActivity">
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:background="@drawable/background_logintitle" />-->
+
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="全民帮"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textview_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/background_account"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_phonenumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:textColorHint="@color/gray_dbdbdb"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_account"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_yanzhegnma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:textColorHint="@color/gray_dbdbdb"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/button_getyanzhangma"
+            android:layout_width="80dp"
+            android:layout_height="27dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_chunse"
+            android:text="获取验证码"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_account"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:textColorHint="@color/gray_dbdbdb"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/edit_passwordagain"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_account"
+        android:hint="请再次输入密码"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:textColorHint="@color/gray_dbdbdb"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        >
+        <ImageView
+            android:id="@+id/image_choose"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/select_duigou"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我已阅读并同意"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/gray_969696"
+            android:textSize="12dp"
+            />
+        <TextView
+            android:id="@+id/textview_xieyi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《全民帮用户协议》"
+            android:textSize="12dp"
+            android:textColor="@color/yellow_button"
+            />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_morph_3dp"
+        android:text="注  册"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
+
+</LinearLayout>

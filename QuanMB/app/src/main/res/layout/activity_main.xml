@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jingnuo.quanmb.activity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/framelayout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_buttons">
+
+    </FrameLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/main_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relative_square"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/iv_Square"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/selsect_main_square" />
+
+            <TextView
+                android:id="@+id/tv_guangchang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_Square"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="帮帮广场"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_still"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/iv_findStill"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/selsect_main_stills" />
+
+            <TextView
+                android:id="@+id/tv_findStill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_findStill"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="找专业"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_release"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            >
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/iv_message"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/selsect_main_message" />
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_message"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="消息"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_person"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+           >
+
+            <ImageView
+                android:id="@+id/iv_person"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/selsect_main_person" />
+
+            <TextView
+                android:id="@+id/tv_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_person"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="个人"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/image_line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/main_buttons"
+        android:background="@color/gray_dbdbdb"
+        />
+    <ImageView
+        android:id="@+id/image_release"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/submit"
+        android:layout_marginBottom="5dp"
+        />
+
+</RelativeLayout>
