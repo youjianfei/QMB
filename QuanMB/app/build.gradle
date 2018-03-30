@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "27.0.3"
     defaultConfig {
-        applicationId "com.jingnuo.quanmb.quanmb"
+        applicationId "com.jingnuo.quanmb"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -42,5 +42,12 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.dubsmash.volley:library:2.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    // Retrofit库
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    // Okhttp库
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+
+
     testCompile 'junit:junit:4.12'
 }

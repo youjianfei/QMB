@@ -20,6 +20,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.Request_retrofit;
 import com.jingnuo.quanmb.utils.RsaUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -114,24 +115,25 @@ public class Fragment_acountLogin extends Fragment {
     }
 
     private void requestlogin(Map map) {
+//        Request_retrofit.retrofit_post(map);
 
-
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
-                isLogin = true;
-                Intent intent_login = new Intent(getActivity(), MainActivity.class);
-                getActivity().startActivity(intent_login);
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).postHttp(Urls.login, getActivity(), 1, map);
+//        new Volley_Utils(new Interface_volley_respose() {
+//            @Override
+//            public void onSuccesses(String respose) {
+//                LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
+//                isLogin = true;
+//                Intent intent_login = new Intent(getActivity(), MainActivity.class);
+//                getActivity().startActivity(intent_login);
+//
+//            }
+//
+//            @Override
+//            public void onError(int error) {
+//
+//            }
+//        }).postHttp(Urls.login, getActivity(), 1, map);
     }
+
 
     private void initview() {
         medit_account = rootview.findViewById(R.id.edit_account);

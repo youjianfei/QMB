@@ -5,5 +5,6 @@ package com.jingnuo.quanmb.data;
  */
 
 public class Urls {
-    public  static String login="http://192.168.1.184:8080/QuanMinBang/login/doLogin";
+
+    public  static String login="http://192.168.1.184:8080/QuanMinBang/v1.0/login/doLogin/";//登陆  post
 }
