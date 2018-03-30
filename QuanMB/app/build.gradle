@@ -35,6 +35,8 @@ dependencies {
     //状态栏 'com.jaeger.statusbaruitl:library:1.0.0'
     //圆形图片 'de.hdodenhof:circleimageview:2.0.0'
     compile project(':library_pulltorefresh')
+    // Retrofit库
+    // Okhttp库
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jaeger.statusbaruitl:library:1.0.0'
@@ -43,11 +45,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.dubsmash.volley:library:2.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    // Retrofit库
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    // Okhttp库
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-
-
     testCompile 'junit:junit:4.12'
 }

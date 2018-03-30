@@ -107,6 +107,8 @@ public class RegisterActivity extends BaseActivityother {
                 String passwordMM= PasswordJiami.passwordjiami(password);
                 map_register.put("password",passwordMM);
                 map_register.put("ValidateCode",yanzhengma);
+                map_register.put("type","1");
+
 
                 LogUtils.LOG("ceshi",yanzhengma,"注册");
                 LogUtils.LOG("ceshi","加密后"+passwordMM,getPackageName());
@@ -123,6 +125,7 @@ public class RegisterActivity extends BaseActivityother {
                 } else {
 
                     map_register.put("phoneNumbers",phonenumber);
+                    map_register.remove("type");
                     getzhuceyanzhengma(map_register);
 
                 }

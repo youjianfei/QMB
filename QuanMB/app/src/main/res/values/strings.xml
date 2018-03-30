@@ -1,8 +1,4 @@
-<resources
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation"
-    >
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">全民帮</string>
     <string name="text_tip">为了保障您的利益不受损，未达到交易意向前，请不要在需求详情中泄漏手机微信等重要联系方式!</string>
 
