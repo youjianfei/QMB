@@ -6,21 +6,22 @@ package com.jingnuo.quanmb.entityclass;
 
 public class UserBean {
 
+
     /**
      * code : 1
      * data : {"user_token":"aeeb6dbe819bc356325ea07e54c9f3ec"}
      * message : 登录成功
      */
 
-    private String code;
+    private int code;
     private DataBean data;
     private String message;
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

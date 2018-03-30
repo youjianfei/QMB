@@ -11,10 +11,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,6 +36,12 @@ public class RegisterActivity extends BaseActivityother {
 
     //数据
     String phonenumber = "", yanzhengma = "", password = "", passwordagain = "";
+
+    //对象
+
+    Map map_register;
+
+
 
 
     @Override
@@ -41,7 +56,7 @@ public class RegisterActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        map_register=new HashMap();
     }
 
     @Override
@@ -88,7 +103,14 @@ public class RegisterActivity extends BaseActivityother {
                     ToastUtils.showToast(this, "请阅读全民帮用户协议并同意");
                     return;
                 }
-                ToastUtils.showToast(this, "注册成功");
+                ToastUtils.showToast(this, "请阅读全民帮用户协议并同意"+yanzhengma);
+                String passwordMM= PasswordJiami.passwordjiami(password);
+                map_register.put("password",passwordMM);
+                map_register.put("ValidateCode",yanzhengma);
+
+                LogUtils.LOG("ceshi",yanzhengma,"注册");
+                LogUtils.LOG("ceshi","加密后"+passwordMM,getPackageName());
+                request_regist(map_register);
 
 
                 break;
@@ -99,16 +121,10 @@ public class RegisterActivity extends BaseActivityother {
                     LogUtils.LOG("ceshi","手机号"+phonenumber,getPackageName());
                     ToastUtils.showToast(this, "请输入手机号");
                 } else {
-                    //验证码倒计时
-                    timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            mhandler.sendEmptyMessage(0);
-                        }
-                    };
-                    timer.schedule(timerTask, 0, 1000);
-                    mButton_yanzhegnma.setEnabled(false);
+
+                    map_register.put("phoneNumbers",phonenumber);
+                    getzhuceyanzhengma(map_register);
+
                 }
 
                 break;
@@ -131,6 +147,73 @@ public class RegisterActivity extends BaseActivityother {
 
         }
 
+
+    }
+    //注册发送手机验证码
+    private  void  getzhuceyanzhengma(Map map){
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    ToastUtils.showToast(RegisterActivity.this, "验证码已发送");
+                    //验证码倒计时
+                    timer = new Timer();
+                    TimerTask timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            mhandler.sendEmptyMessage(0);
+                        }
+                    };
+                    timer.schedule(timerTask, 0, 1000);
+                    mButton_yanzhegnma.setEnabled(false);
+                } else {
+                    ToastUtils.showToast(RegisterActivity.this, msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.sendzhuceyanzhengma,this,1,map);
+    }
+    //注册请求
+    private void request_regist(Map map){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    ToastUtils.showToast(RegisterActivity.this, "新用户注册成功");
+                    finish();
+                } else {
+                    ToastUtils.showToast(RegisterActivity.this, msg);
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.phoneRegister,this,1,map);
 
     }
 

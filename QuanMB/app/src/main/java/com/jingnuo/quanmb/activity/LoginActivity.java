@@ -14,9 +14,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.fargment.Fragment_acountLogin;
 import com.jingnuo.quanmb.fargment.Fragment_phone_login;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
 
 public class LoginActivity extends BaseActivityother {
@@ -31,6 +33,8 @@ public class LoginActivity extends BaseActivityother {
 
     TextView mTextview_register;
 
+    //数据
+
 
     @Override
     public int setLayoutResID() {
@@ -39,6 +43,7 @@ public class LoginActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        Staticdata.UUID = InstalltionId.id(this);//第一次运行生成一个id
 
     }
 

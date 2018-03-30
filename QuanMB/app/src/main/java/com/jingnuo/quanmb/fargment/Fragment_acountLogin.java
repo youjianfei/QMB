@@ -12,18 +12,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.FindPasswordActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.RegisterActivity;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.Request_retrofit;
 import com.jingnuo.quanmb.utils.RsaUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;
@@ -33,6 +39,7 @@ import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.PUBLIC_KEY_STR;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
+import static com.jingnuo.quanmb.data.Staticdata.token;
 
 /**
  * Created by Administrator on 2018/3/20.
@@ -54,6 +61,7 @@ public class Fragment_acountLogin extends Fragment {
     //对象
     PublicKey publicKey;
     Map map_login;
+    UserBean userBean;
 
 
     @Nullable
@@ -86,12 +94,12 @@ public class Fragment_acountLogin extends Fragment {
                 } else {
                     //     加密过程
                     //获取公钥
-                    publicKey = RsaUtils.keyStrToPublicKey(PUBLIC_KEY_STR);
+//                    publicKey = RsaUtils.keyStrToPublicKey(PUBLIC_KEY_STR);
                     //公钥加密结果
-                    publicEncryptedResult = RsaUtils.encryptDataByPublicKey(password.getBytes(), publicKey);
+//                    publicEncryptedResult = RsaUtils.encryptDataByPublicKey(password.getBytes(), publicKey);
 //                    //私钥解密结果
 //                    String privateDecryptedResult = RsaUtils.decryptedToStrByPrivate(publicEncryptedResult,privateKey);
-
+                    publicEncryptedResult= PasswordJiami.passwordjiami(password);
                     LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
 
                     map_login = new HashMap();
@@ -117,21 +125,36 @@ public class Fragment_acountLogin extends Fragment {
     private void requestlogin(Map map) {
 //        Request_retrofit.retrofit_post(map);
 
-//        new Volley_Utils(new Interface_volley_respose() {
-//            @Override
-//            public void onSuccesses(String respose) {
-//                LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
-//                isLogin = true;
-//                Intent intent_login = new Intent(getActivity(), MainActivity.class);
-//                getActivity().startActivity(intent_login);
-//
-//            }
-//
-//            @Override
-//            public void onError(int error) {
-//
-//            }
-//        }).postHttp(Urls.login, getActivity(), 1, map);
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){//登录成功
+                    userBean=new Gson().fromJson(respose,UserBean.class);
+                    token=userBean.getData().getUser_token();
+                    LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
+                    isLogin = true;
+                    Intent intent_login = new Intent(getActivity(), MainActivity.class);
+                    getActivity().startActivity(intent_login);
+                }else {
+                    ToastUtils.showToast(getActivity(),msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.login, getActivity(), 1, map);
     }
 
 

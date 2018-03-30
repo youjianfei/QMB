@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Request_retrofit {
   public static  Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(Urls.login) // 设置 网络请求 Url
+            .baseUrl(Urls.Baseurl+Urls.login) // 设置 网络请求 Url
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     public static void retrofit_post(Map map){
