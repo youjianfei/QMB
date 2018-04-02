@@ -31,11 +31,7 @@
         <activity
             android:name="com.jingnuo.quanmb.activity.MainActivity"
             android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.jingnuo.quanmb.activity.LoginActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.RegisterActivity" />
@@ -51,7 +47,14 @@
         <activity android:name="com.jingnuo.quanmb.activity.SetPasswordActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PersonInfoActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.TaskDetailsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShopInActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.ShopInActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.LaunchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
