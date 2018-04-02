@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_background"
+
     android:orientation="vertical">
     <!--虚假布局，抢走editview的焦点-->
     <LinearLayout
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/re_title"
         android:background="@color/white"
+        android:id="@+id/relative_sort"
         >
         <TextView
             android:id="@+id/text_numberperson"

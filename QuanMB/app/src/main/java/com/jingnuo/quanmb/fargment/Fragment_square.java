@@ -1,18 +1,25 @@
 package com.jingnuo.quanmb.fargment;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_SquareList;
+import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
+import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 
@@ -29,8 +36,15 @@ public class Fragment_square extends Fragment{
     //控件
     EditText mEdit_serchSquare;
     PullToRefreshListView  mListview_square;
+    TextView mTextview_sort;
+    RelativeLayout mRelativelayout_sort;
 
+    Popwindow_SquareSort mPopwindow_square_sort;
+
+
+    //对象
     Adapter_SquareList mAdapter_SquareList;
+
 
     //数据
     List<String> mDate_square;
@@ -58,8 +72,23 @@ public class Fragment_square extends Fragment{
 
             }
         });
-    }
+        mTextview_sort.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View view) {
 
+                mPopwindow_square_sort=new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+                    @Override
+                    public void onSuccesses(String address, String id) {
+
+                    }
+                },mRelativelayout_sort);
+                mPopwindow_square_sort.showPopwindow();
+
+            }
+        });
+
+    }
     private void setview() {
 
     }
@@ -79,6 +108,10 @@ public class Fragment_square extends Fragment{
     private void initview() {
         mEdit_serchSquare=rootview.findViewById(R.id.edit_searchSquare);
         mListview_square=rootview.findViewById(R.id.list_square);
+        mTextview_sort=rootview.findViewById(R.id.text_sort);
+        mRelativelayout_sort=rootview.findViewById(R.id.relative_sort);
     }
+
+
 
 }
