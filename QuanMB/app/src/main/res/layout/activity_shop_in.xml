@@ -1,9 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.jingnuo.quanmb.activity.ShopInActivity">
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="商家入驻"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linrarlayout_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="名字"
+            android:textSize="15dp"
+            android:textColor="@color/black_text"
+            android:layout_marginLeft="30dp"
+            />
+        <EditText
+            android:id="@+id/edit_shopname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入名字"
+            android:textColorHint="@color/text_hide_tip"
+            android:textSize="15dp"
+            android:background="@null"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话"
+            android:textSize="15dp"
+            android:textColor="@color/black_text"
+            android:layout_marginLeft="30dp"
+            />
+        <EditText
+            android:id="@+id/edit_shopphonenumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入联系电话"
+            android:textColorHint="@color/text_hide_tip"
+            android:textSize="15dp"
+            android:background="@null"
+            android:inputType="number"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:id="@+id/tt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商铺地址"
+            android:textSize="15dp"
+            android:textColor="@color/black_text"
+            android:layout_marginLeft="30dp"
+            />
+        <TextView
+            android:id="@+id/textview_shopaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请设置商铺地址"
+            android:textSize="15dp"
+            android:textColor="@color/text_hide_tip"
+            android:layout_toRightOf="@+id/tt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/more"
+            android:layout_marginRight="30dp"/>
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/text_4"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_morph_20dp"
+        android:text="提交申请"
+        android:textColor="@color/white"
+        android:textSize="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="人工审核时间为1~3个工作日"
+        android:textColor="@color/text_hide_tip"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+</LinearLayout>

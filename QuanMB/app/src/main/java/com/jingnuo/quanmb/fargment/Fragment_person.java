@@ -15,6 +15,7 @@ import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
+import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.quanmb.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,7 +28,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     View rootview;
 
     //控件
-    TextView mTextview_authentication;
+    TextView mTextview_authentication,mTextview_shopin;
     RelativeLayout mRelativelayout_address;
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
@@ -52,6 +53,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mRelativelayout_address.setOnClickListener(this);
         mImageview_setting.setOnClickListener(this);
         mCircleImage.setOnClickListener(this);
+        mTextview_shopin.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -68,6 +70,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mRelativelayout_address=rootview.findViewById(R.id.relative_address);
         mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
+        mTextview_shopin=rootview.findViewById(R.id.textview_shopin);
     }
 
     @Override
@@ -89,7 +92,10 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 Intent intent_personInfo=new Intent(getActivity(), PersonInfoActivity.class);
                 getActivity().startActivity(intent_personInfo);
                 break;
-
+            case  R.id.textview_shopin:
+                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                getActivity().startActivity(intent_shopin);
+                break;
         }
 
     }
