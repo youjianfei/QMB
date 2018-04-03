@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -39,10 +40,14 @@ public class Popwindow_SquareSort {
     private RelativeLayout mLinearLayout;
     private ImageView mScrollview;
 
-    List <String> mData;
+    List <String> mData_sort;
+    List <String> mData_filter;
 
     SortAdapter madapter;
     MyListView popListview;
+
+    Filteradapter mAdapter_filter;
+    MyGridView popGridview;
 
 
 
@@ -72,15 +77,26 @@ public class Popwindow_SquareSort {
         mScrollview.setBackgroundResource(R.color.black);
         mScrollview.setAlpha((float) 0.7);
 
-        mData=new ArrayList<>();
-        mData.add("综合排序");
-        mData.add("速度最快 ");
-        mData.add("评分最高 ");
-        mData.add("服务最好 ");
+        popGridview=conView.findViewById(R.id.mygridview_filter);
 
-        madapter=new SortAdapter(mData,activity);
+
+        mData_sort=new ArrayList<>();
+        mData_sort.add("综合排序");
+        mData_sort.add("速度最快 ");
+        mData_sort.add("评分最高 ");
+        mData_sort.add("服务最好 ");
+
+        madapter=new SortAdapter(mData_sort,activity);
         popListview.setAdapter(madapter);
 
+
+        mData_filter=new ArrayList<>();
+        mData_filter.add("维修");
+        mData_filter.add("跑腿");
+        mData_filter.add("代取快递");
+        mData_filter.add("运输");
+        mAdapter_filter=new  Filteradapter(mData_filter,activity);
+        popGridview.setAdapter(mAdapter_filter);
 
 //        Utils.setAlpha((float) 0.3,activity);
 //        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -138,5 +154,37 @@ public class Popwindow_SquareSort {
             TextView mTextview;
         }
     }
+    class  Filteradapter extends BaseAdapter {
+        List <String> mData_grid;
+        Context mContext;
+        LayoutInflater mInfter;
 
+        public Filteradapter(List<String> mDatas, Context mContext) {
+            super(mDatas, mContext);
+            this.mData_grid=mDatas;
+            this.mContext=mContext;
+            mInfter=LayoutInflater.from(mContext);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder=null;
+            if(convertView==null){
+                holder=new ViewHolder();
+                convertView=mInfter.inflate(R.layout.item_gridview_pop_square_filter,null,false);
+                holder.mTextview=convertView.findViewById(R.id.textview_square_filter);
+                convertView.setTag(holder);
+            }else {
+                holder= (ViewHolder) convertView.getTag();
+            }
+            holder.mTextview.setText(mData_filter.get(position));
+
+
+            return convertView;
+        }
+    }
+    class ViewHolder {
+        TextView mTextview;
+    }
 }

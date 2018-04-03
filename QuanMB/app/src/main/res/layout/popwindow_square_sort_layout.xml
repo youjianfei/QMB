@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
-    <com.jingnuo.quanmb.customview.MyListView
-        android:id="@+id/list_sort"
+
+    <include
+        android:id="@+id/include_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/gray_background"
-        android:dividerHeight="1dp"
-        android:background="@color/white"
+        layout="@layout/include_popwindow_square_sort"
+        android:visibility="gone"
+        />
+    <include
+        android:id="@+id/include_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/include_popwindow_square_filter"
+        android:visibility="visible"
+        />
 
-        >
-
-
-    </com.jingnuo.quanmb.customview.MyListView>
     <ImageView
         android:id="@+id/iamgeview_a"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/list_sort"
         android:background="@color/black"
         />
 
@@ -28,4 +32,4 @@
 
 
 
-</RelativeLayout>
+</LinearLayout>
