@@ -37,7 +37,7 @@ public class Fragment_square extends Fragment{
     //控件
     EditText mEdit_serchSquare;
     PullToRefreshListView  mListview_square;
-    TextView mTextview_sort;
+    TextView mTextview_sort,mTextview_filter;
     RelativeLayout mRelativelayout_sort;
 
     Popwindow_SquareSort mPopwindow_square_sort;
@@ -64,6 +64,7 @@ public class Fragment_square extends Fragment{
     }
     Intent intend_taskdrtails;
     private void initlistenner() {
+        //listview的条目点击事件
         mListview_square.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -73,6 +74,7 @@ public class Fragment_square extends Fragment{
 
             }
         });
+        //智能排序文字点击  type=1
         mTextview_sort.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -83,9 +85,23 @@ public class Fragment_square extends Fragment{
                     public void onSuccesses(String address, String id) {
 
                     }
-                },mRelativelayout_sort);
+                },mRelativelayout_sort,1);
                 mPopwindow_square_sort.showPopwindow();
 
+            }
+        });
+        // 点击筛选  type=0
+        mTextview_filter.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View view) {
+                mPopwindow_square_sort=new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+                    @Override
+                    public void onSuccesses(String address, String id) {
+
+                    }
+                },mRelativelayout_sort,0);
+                mPopwindow_square_sort.showPopwindow();
             }
         });
 
@@ -110,6 +126,7 @@ public class Fragment_square extends Fragment{
         mEdit_serchSquare=rootview.findViewById(R.id.edit_searchSquare);
         mListview_square=rootview.findViewById(R.id.list_square);
         mTextview_sort=rootview.findViewById(R.id.text_sort);
+        mTextview_filter=rootview.findViewById(R.id.text_filter);
         mRelativelayout_sort=rootview.findViewById(R.id.relative_sort);
     }
 

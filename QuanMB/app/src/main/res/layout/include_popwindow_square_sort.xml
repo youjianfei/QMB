@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <com.jingnuo.quanmb.customview.MyListView
         android:id="@+id/list_sort"
         android:layout_width="match_parent"
@@ -10,9 +11,5 @@
         android:dividerHeight="1dp"
         android:background="@color/white"
 
-        >
-
-
-    </com.jingnuo.quanmb.customview.MyListView>
-
+        />
 </LinearLayout>

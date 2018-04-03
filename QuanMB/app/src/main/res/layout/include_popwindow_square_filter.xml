@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.jingnuo.quanmb.customview.CustomerScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="350dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/white"
             >
@@ -35,7 +36,6 @@
 
             </com.jingnuo.quanmb.customview.MyGridView>
             <ImageView
-                android:id="@+id/image_line1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="30dp"
@@ -44,13 +44,108 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/gray_dbdbdb"
                 />
-            <SeekBar
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="佣金金额"
+                android:textColor="@color/text_hide_tip"
+                android:textSize="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="25dp"
+                />
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textview_filter_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥ 0"
+                    android:textSize="13dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="15dp"
+                    />
+                <TextView
+                    android:id="@+id/textview_filter_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="￥ 0"
+                    android:textSize="13dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="30dp"
+                    />
 
-
+            </RelativeLayout>
+            <com.jaygoo.widget.RangeSeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:rsb_lineColorSelected="@color/yellow_button"
+                app:rsb_lineColorEdge="@color/colorSeekBarDefault"
+                app:rsb_cellMode="number"
+                app:rsb_seekBarMode="range"
+                app:rsb_thumbResId="@mipmap/circle_filter"
+                app:rsb_seekBarHeight="1dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/edit_realname"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_dbdbdb"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="帮手等级"
+                android:textColor="@color/text_hide_tip"
+                android:textSize="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="25dp"
+                />
+            <com.jingnuo.quanmb.customview.MyGridView
+                android:id="@+id/mygridview_filter_levle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/white"
+                android:numColumns="3"/>
         </LinearLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="重置"
+            android:textColor="@color/white"
+            android:background="#d5d2d2"
+            android:textSize="15dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:background="@color/yellow_jianbian_end"
+            android:textSize="15dp"
+            />
+
+
+    </LinearLayout>
+
 
 
 </LinearLayout>
