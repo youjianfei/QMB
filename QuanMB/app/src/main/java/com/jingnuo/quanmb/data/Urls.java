@@ -16,7 +16,9 @@ public class Urls {
     public  static String phoneRegister="register/Register/";//注册
 
 
-    public  static String square_default="search";//注册
+    public  static String square_default="search";//帮帮广场
+    public  static String tasktype="taskTypeList";//任务类型
+
 
 
 

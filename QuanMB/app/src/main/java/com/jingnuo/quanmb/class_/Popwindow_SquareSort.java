@@ -14,13 +14,20 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jaygoo.widget.RangeSeekBar;
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
+import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
+import com.jingnuo.quanmb.entityclass.TaskTypeBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -56,8 +63,10 @@ public class Popwindow_SquareSort {
     FilterAdapter mAdapter_filter_task;
     FilterAdapter mAdapter_filter_level;
     MyGridView mGridview_filter_task,mGridview_filter_level;
-    List<String> mData_filter_task;
-    List<String> mData_filter_level;
+    List<TaskTypeBean.DateBean.ListBean> listdata_tasktype;//接口返回的任务类型列表
+    List<PopwindowGridBean.FilterBean> mData_filter_task;
+    List<PopwindowGridBean.FilterBean> mData_filter_level;
+
     TextView mText_filter_left, mText_filter_right;
     RangeSeekBar mSeekBar;
 
@@ -71,37 +80,47 @@ public class Popwindow_SquareSort {
         this.type=type;
     }
 
-    public void initPopwindow() {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void showPopwindow() {
 
         //初始化popwindow；
         conView = LayoutInflater.from(activity).inflate(R.layout.popwindow_square_sort_layout, null, false);
         mPopupWindow = new PopupWindow(conView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
         mPopupWindow.setAnimationStyle(R.style.popmenu_animation);
-
-
+        mPopupWindow.showAsDropDown(mLinearLayout, 0, 0, Gravity.BOTTOM);
 
         initview();
         initdata();
         initlistenner();
+        request_taskType();
     }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void showPopwindow(){
-        if(mPopupWindow==null){
-            initPopwindow();
-            LogUtils.LOG("ceshi", "mPopupWindow   isS" , "pop");
-        }
+    //请求任务类型gridlist
+    private void request_taskType() {
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                listdata_tasktype.clear();
+                listdata_tasktype.addAll(new Gson().fromJson(respose,TaskTypeBean.class).getDate().getList());
+                for(int i=0;i<listdata_tasktype.size();i++){
+                    PopwindowGridBean.FilterBean  bean=new PopwindowGridBean.FilterBean();
+                    bean.setChoose(false);
+                    bean.setId(listdata_tasktype.get(i).getSpecialty_id());
+                    bean.setText(listdata_tasktype.get(i).getSpecialty_name());
+                    mData_filter_task.add(bean);
+                }
+                mAdapter_filter_task.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onError(int error) {
 
-        if(mPopupWindow.isShowing()){
-            LogUtils.LOG("ceshi", "mPopupWindow   isShowing" , "pop");
-        }else {
-            mPopupWindow.showAsDropDown(mLinearLayout, 0, 0, Gravity.BOTTOM);
-        }
+            }
+        }).Http(Urls.Baseurl_hiulin+Urls.tasktype,activity,0);
     }
-
 
     private void initlistenner() {
+        //点击筛选切换布局
         mText_filter_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +134,7 @@ public class Popwindow_SquareSort {
                 }
             }
         });
+        //点击排序切换布局
         mText_sort_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,16 +149,7 @@ public class Popwindow_SquareSort {
                 }
             }
         });
-        /**
-         * sort_pop用到的
-         */
-
-        mListview_pop_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                LogUtils.LOG("ceshi", "dianji 半透明" + i, "pop");
-            }
-        });
+        //点击遮罩关闭
         mImage_black.setOnClickListener(new View.OnClickListener() {//为了解决下面半透明问题暂时用的方法
             @Override
             public void onClick(View view) {
@@ -146,10 +157,36 @@ public class Popwindow_SquareSort {
                 mPopupWindow.dismiss();
             }
         });
+        /**
+         * sort_pop用到的
+         */
+        mListview_pop_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ToastUtils.showToast(activity,mData_sort.get(i));
+            }
+        });
+
 
         /**
          *  filter_pop用到的
          */
+        mGridview_filter_task.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ToastUtils.showToast(activity,mData_filter_task.get(i).getText());
+                LogUtils.LOG("ceshi",mData_filter_task.get(i).getText(),"pop");
+                if(mData_filter_task.get(i).isChoose()){
+                    mData_filter_task.get(i).setChoose(false);
+                }else {
+                    mData_filter_task.get(i).setChoose(true);
+                }
+                mAdapter_filter_task.notifyDataSetChanged();
+
+            }
+        });
+
+
         mSeekBar.setOnRangeChangedListener(new RangeSeekBar.OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float min, float max, boolean isFromUser) {
@@ -172,6 +209,21 @@ public class Popwindow_SquareSort {
 
             }
         });
+        mGridview_filter_level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ToastUtils.showToast(activity,mData_filter_level.get(i).getText());
+                LogUtils.LOG("ceshi",mData_filter_level.get(i).getText(),"pop");
+                if(mData_filter_level.get(i).isChoose()){
+                    mData_filter_level.get(i).setChoose(false);
+                }else {
+                    mData_filter_level.get(i).setChoose(true);
+
+                }
+                mAdapter_filter_level.notifyDataSetChanged();
+            }
+        });
+
 
 
     }
@@ -212,28 +264,22 @@ public class Popwindow_SquareSort {
         mListview_pop_sort.setAdapter(mAdapterSort);
 
         //filter_pop用到的布局和数据
+        listdata_tasktype=new ArrayList<>();
         mData_filter_task = new ArrayList<>();
-        mData_filter_task.add("同城帮");
-        mData_filter_task.add("维修");
-        mData_filter_task.add("家政");
-        mData_filter_task.add("互联网");
-        mData_filter_task.add("设计");
-        mData_filter_task.add("运输");
-        mData_filter_task.add("代购");
-        mData_filter_task.add("商务");
-        mData_filter_task.add("其他");
 
         mSeekBar.setValue(0,100);//设置初始值
         mText_filter_right.setText("￥  100");
         mAdapter_filter_task = new FilterAdapter(mData_filter_task, activity);
         mGridview_filter_task.setAdapter(mAdapter_filter_task);
 
-
         mData_filter_level=new ArrayList<>();
-        mData_filter_level.add("一级");
-        mData_filter_level.add("二级");
-        mData_filter_level.add("三级");
-        mData_filter_level.add("不限制");
+        for (int i=0;i<4;i++){
+            PopwindowGridBean.FilterBean  bean=new PopwindowGridBean.FilterBean();
+            bean.setChoose(false);
+            bean.setId(i);
+            bean.setText(i+"级");
+            mData_filter_level.add(bean);
+        }
         mAdapter_filter_level=new FilterAdapter(mData_filter_level,activity);
         mGridview_filter_level.setAdapter(mAdapter_filter_level);
 
@@ -276,11 +322,11 @@ public class Popwindow_SquareSort {
     }
 
     class FilterAdapter extends BaseAdapter {
-        List<String> mData_grid;
+        List<PopwindowGridBean.FilterBean> mData_grid;
         Context mContext;
         LayoutInflater mInfter;
 
-        public FilterAdapter(List<String> mDatas, Context mContext) {
+        public FilterAdapter(List<PopwindowGridBean.FilterBean> mDatas, Context mContext) {
             super(mDatas, mContext);
             this.mData_grid = mDatas;
             this.mContext = mContext;
@@ -299,8 +345,8 @@ public class Popwindow_SquareSort {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.mTextview.setText(mData_grid.get(position));
-
+                holder.mTextview.setSelected(mData_grid.get(position).isChoose());
+            holder.mTextview.setText(mData_grid.get(position).getText());
 
             return convertView;
         }
