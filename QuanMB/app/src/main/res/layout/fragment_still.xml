@@ -4,6 +4,124 @@
     android:layout_height="match_parent"
     android:background="@color/gray_background"
     >
+    <!--虚假布局，抢走editview的焦点-->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        />
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/background_white_corners"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/search"
+                android:layout_marginLeft="10dp"
+                />
+
+            <EditText
+                android:id="@+id/edit_searchSquare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="输入关键字"
+                android:singleLine="true"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/text_title2"
+                android:textColorHint="@color/text_hide_tip"
+                android:textSize="14dp"
+                android:imeOptions="actionSearch"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/re_title"
+        android:orientation="horizontal"
+        >
+        <ListView
+            android:id="@+id/gridview_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@+id/re_title"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:divider="@null"
+            />
+        <com.jingnuo.quanmb.customview.CustomerScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@mipmap/banner"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    />
+                <TextView
+                    android:id="@+id/textviw_classification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热门任务"
+                    android:textSize="15dp"
+                    android:textColor="@color/black_text2"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <com.jingnuo.quanmb.customview.MyGridView
+                    android:id="@+id/gridview_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingBottom="20dp"
+                    android:background="@color/white"
+                    />
+
+            </LinearLayout>
+
+        </com.jingnuo.quanmb.customview.CustomerScrollView>
+
+
+    </LinearLayout>
+
+
+
+
+
+
 
 
 

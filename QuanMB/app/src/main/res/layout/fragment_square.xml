@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray_background"
-
     android:orientation="vertical">
+
     <!--虚假布局，抢走editview的焦点-->
     <LinearLayout
         android:id="@+id/linearLayout_focus"
