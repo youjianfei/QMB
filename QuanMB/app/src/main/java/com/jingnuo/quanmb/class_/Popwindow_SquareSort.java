@@ -213,10 +213,15 @@ public class Popwindow_SquareSort {
 
         //filter_pop用到的布局和数据
         mData_filter_task = new ArrayList<>();
+        mData_filter_task.add("同城帮");
         mData_filter_task.add("维修");
-        mData_filter_task.add("跑腿");
-        mData_filter_task.add("代取快递");
+        mData_filter_task.add("家政");
+        mData_filter_task.add("互联网");
+        mData_filter_task.add("设计");
         mData_filter_task.add("运输");
+        mData_filter_task.add("代购");
+        mData_filter_task.add("商务");
+        mData_filter_task.add("其他");
 
         mSeekBar.setValue(0,100);//设置初始值
         mText_filter_right.setText("￥  100");
