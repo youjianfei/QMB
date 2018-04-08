@@ -1,23 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/gray_background"
     tools:context="com.jingnuo.quanmb.activity.SettingActivity">
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="设置"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="消息通知"
+        android:background="@color/white"
+        android:textColor="@color/black_text"
+        android:layout_below="@+id/re_title"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        />
+    <TextView
+        android:id="@+id/textview_suggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="意见反馈"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/text1"
+        android:textColor="@color/black_text"
+        android:paddingLeft="20dp"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        />
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/more"
+        android:layout_below="@+id/text1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="23dp"
+        />
+    <TextView
+        android:id="@+id/textview_cleancache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清除缓存"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/textview_suggest"
+        android:textColor="@color/black_text"
+        android:paddingLeft="20dp"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="44.7M"
+        android:layout_below="@+id/textview_suggest"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        />
+    <TextView
+        android:id="@+id/textview_shareAPP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="分享APP"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/textview_cleancache"
+        android:textColor="@color/black_text"
+        android:paddingLeft="20dp"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        />
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/more"
+        android:layout_below="@+id/textview_cleancache"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/imageView" />
+
+
     <Button
         android:id="@+id/change_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改密码"
-        />
+        android:layout_alignBaseline="@+id/change_phonenumber"
+        android:layout_alignBottom="@+id/change_phonenumber"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView" />
     <Button
         android:id="@+id/change_phonenumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改绑定手机号"
-        />
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/textview_shareAPP"
+        android:layout_toLeftOf="@+id/change_password"
+        android:layout_toStartOf="@+id/change_password"
+        android:layout_marginRight="47dp"
+        android:layout_marginEnd="47dp" />
 
 
-</LinearLayout>
+</RelativeLayout>
