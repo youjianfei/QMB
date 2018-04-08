@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:orientation="vertical"
+    tools:context="com.jingnuo.quanmb.activity.BargainActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="还价信息"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:text="你发布的任务被帮手还价啦"
+        android:textColor="@color/black_text"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingTop="11dp"
+        android:text="2018-04-07 23:22"
+        android:textColor="@color/text_hide_tip"
+        android:textSize="12dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="还价帮手"
+            android:textColor="@color/black_text"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:text="还价帮手"
+            android:textColor="@color/black_text"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_name"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@color/gray_dfdfdf" />
+
+        <ImageView
+            android:id="@+id/image_type"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/line1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/green_text"
+
+            />
+
+        <TextView
+            android:id="@+id/text_tasktype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/image_type"
+            android:background="@drawable/background_text_taskstate"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="跑腿"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/text_taskname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/text_tasktype"
+            android:lines="1"
+            android:text="我需要一个人帮我拿快递"
+            android:textColor="@color/black_text"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/taskprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_taskname"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/text_tasktype"
+            android:text="佣金100.00"
+            android:textColor="@color/yellow_jianbian_end"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/taskprice"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@color/gray_dfdfdf" />
+
+        <TextView
+            android:id="@+id/text_nowprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="当前价格：100.00"
+            android:textColor="@color/black_text"
+            android:layout_below="@id/line2"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/text_needprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:text="还价价格：110.00"
+            android:textColor="@color/black_text"
+            android:layout_below="@id/text_nowprice"
+            android:layout_marginBottom="15dp"
+            android:textSize="15dp" />
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提示:"
+            android:textColor="@color/text_hide_tip"
+            android:layout_marginLeft="30dp"
+            android:textSize="13dp"
+            android:layout_marginTop="16dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="接受：帮手的还价不影响该任务的正常出售，非还价帮手也可以按原价帮助"
+            android:textColor="@color/text_hide_tip"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="9dp"
+            android:textSize="13dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拒绝：点击后你将拒绝该帮手的还价"
+            android:textColor="@color/text_hide_tip"
+            android:layout_marginLeft="30dp"
+            android:textSize="13dp"
+            android:layout_marginTop="9dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="给帮手还价：点击后你可以使用报价功能把能接受的最低价格告诉帮手，以便促成该任务的完成"
+            android:textColor="@color/text_hide_tip"
+            android:layout_marginLeft="30dp"
+            android:textSize="13dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="16dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_red_20dp"
+            android:text="拒 绝"
+            android:textColor="@color/white"
+            android:layout_marginLeft="30dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="给帮手还价"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/button_yellow_20dp"
+            android:textColor="@color/white"
+
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:background="@drawable/button_green_20dp"
+            android:text="接 受"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="30dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

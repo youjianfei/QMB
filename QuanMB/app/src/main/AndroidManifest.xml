@@ -30,9 +30,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.jingnuo.quanmb.activity.MainActivity"
-            android:launchMode="singleTask">
-
-        </activity>
+            android:launchMode="singleTask" />
         <activity android:name="com.jingnuo.quanmb.activity.LoginActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.RegisterActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.FindPasswordActivity" />
@@ -55,6 +53,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.jingnuo.quanmb.activity.ShopInNextActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.BargainActivity"></activity>
     </application>
 
 </manifest>
