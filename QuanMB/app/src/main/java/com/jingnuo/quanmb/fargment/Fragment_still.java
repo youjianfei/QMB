@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.fargment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.Adapter.Adapter_classification_left;
 import com.jingnuo.quanmb.Adapter.Adapter_classification_right;
+import com.jingnuo.quanmb.activity.ShophallActivity;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.quanmb.R;
@@ -60,6 +62,13 @@ public class Fragment_still  extends Fragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mAdapter_classification_left.setSelectedPosition(i);
                 mAdapter_classification_left.notifyDataSetInvalidated();
+            }
+        });
+        mGridview_right.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent_shophalllist=new Intent(getActivity(), ShophallActivity.class);
+                getActivity().startActivity(intent_shophalllist);
             }
         });
     }

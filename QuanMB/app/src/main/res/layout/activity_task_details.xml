@@ -293,7 +293,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="还 价"
+            android:text="确认帮助"
             android:textSize="15dp"
             android:textColor="@color/white"
             android:layout_below="@+id/re2"
