@@ -55,7 +55,8 @@
         </activity>
         <activity android:name="com.jingnuo.quanmb.activity.ShopInNextActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.BargainActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ShopDetailActivity"></activity>
     </application>
 
 </manifest>

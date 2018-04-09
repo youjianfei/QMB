@@ -1,9 +1,11 @@
 package com.jingnuo.quanmb.activity;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -71,6 +73,15 @@ public class ShophallActivity extends BaseActivityother {
 
             }
         });
+        mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent mIntent_shopskillDetail=new Intent(ShophallActivity.this,ShopDetailActivity.class);
+                startActivity(mIntent_shopskillDetail);
+            }
+        });
+
+
     }
 
     @Override
