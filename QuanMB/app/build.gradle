@@ -17,12 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-//        lintOptions {
-//            //打包正式版本时出现   is not translated in "ar"
-//            checkReleaseBuilds false
-//            abortOnError false
-//        }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 
 }
 
@@ -51,4 +50,5 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.2.2'
     testCompile 'junit:junit:4.12'
+    compile files('libs/BaiduLBS_Android.jar')
 }
