@@ -16,6 +16,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.class_.Popwindow_Issue;
 import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.fargment.Fragment_person;
 import com.jingnuo.quanmb.fargment.Fragment_square;
@@ -172,9 +173,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.image_release:
                 if (isLogin) {
-                    Intent intent_issue = new Intent(this, IssueTaskActivity.class);
-                    startActivity(intent_issue);
+//                    Intent intent_issue = new Intent(this, IssueTaskActivity.class);
+//                    startActivity(intent_issue);
+                    Popwindow_Issue popwindow_issue=new Popwindow_Issue(MainActivity.this);
+                    popwindow_issue.showpopwindow();
                 } else {
+
                     Intent intent_login = new Intent(this, LoginActivity.class);
                     startActivity(intent_login);
                 }
