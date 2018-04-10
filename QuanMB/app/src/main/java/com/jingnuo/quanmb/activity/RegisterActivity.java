@@ -103,15 +103,17 @@ public class RegisterActivity extends BaseActivityother {
                     ToastUtils.showToast(this, "请阅读全民帮用户协议并同意");
                     return;
                 }
-                ToastUtils.showToast(this, "请阅读全民帮用户协议并同意"+yanzhengma);
                 String passwordMM= PasswordJiami.passwordjiami(password);
+                map_register.put("phoneNumbers",phonenumber);
                 map_register.put("password",passwordMM);
                 map_register.put("ValidateCode",yanzhengma);
-                map_register.put("type","1");
+                map_register.remove("type");
 
 
                 LogUtils.LOG("ceshi",yanzhengma,"注册");
                 LogUtils.LOG("ceshi","加密后"+passwordMM,getPackageName());
+                LogUtils.LOG("ceshi","电话号"+map_register.get("phoneNumbers")+"密码"+map_register.get("password")+"验证码"+map_register.get("ValidateCode"),getPackageName());
+
                 request_regist(map_register);
 
 
@@ -125,7 +127,7 @@ public class RegisterActivity extends BaseActivityother {
                 } else {
 
                     map_register.put("phoneNumbers",phonenumber);
-                    map_register.remove("type");
+                    map_register.put("type","1");
                     getzhuceyanzhengma(map_register);
 
                 }
@@ -204,11 +206,12 @@ public class RegisterActivity extends BaseActivityother {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                LogUtils.LOG("ceshi","注册返回"+respose,getPackageName());
                 if (status == 1) {
                     ToastUtils.showToast(RegisterActivity.this, "新用户注册成功");
                     finish();
                 } else {
-                    ToastUtils.showToast(RegisterActivity.this, msg);
+//                    ToastUtils.showToast(RegisterActivity.this, msg);
                 }
             }
 

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 
@@ -18,6 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.jingnuo.quanmb.data.Staticdata.ScreenWidth;
+import static com.jingnuo.quanmb.data.Staticdata.UUID;
 
 
 public class LaunchActivity extends BaseActivityother {
@@ -48,6 +50,8 @@ public class LaunchActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        UUID = InstalltionId.id(this);//第一次运行生成一个id
+
         Screenhight = SizeUtils.getScreenHeightPx(this);
         Screenwidth = SizeUtils.getScreenWidthPx(this);
         Staticdata.ScreenHight = Screenhight;

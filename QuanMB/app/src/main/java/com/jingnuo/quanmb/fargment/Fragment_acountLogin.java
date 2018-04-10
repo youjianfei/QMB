@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.PUBLIC_KEY_STR;
+import static com.jingnuo.quanmb.data.Staticdata.UUID;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 import static com.jingnuo.quanmb.data.Staticdata.token;
 
@@ -55,7 +56,6 @@ public class Fragment_acountLogin extends Fragment {
     //数据
     String account = "";
     String password = "";
-    String UUID = "";
     String publicEncryptedResult = "";
 
     //对象
@@ -79,7 +79,6 @@ public class Fragment_acountLogin extends Fragment {
     }
 
     private void initdata() {
-        UUID = InstalltionId.id(getActivity());//第一次运行生成一个id
 
     }
 

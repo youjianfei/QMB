@@ -38,6 +38,7 @@ dependencies {
     // Retrofit库
     // Okhttp库
     // 1、maven { url 'https://jitpack.io' }  2、'com.github.Jay-Goo:RangeSeekBar:v1.2.2'  双向滑动选择器
+    compile files('libs/BaiduLBS_Android.jar')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jaeger.statusbaruitl:library:1.0.0'
@@ -50,5 +51,4 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.2.2'
     testCompile 'junit:junit:4.12'
-    compile files('libs/BaiduLBS_Android.jar')
 }

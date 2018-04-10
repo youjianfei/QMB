@@ -12,7 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/background_logintitle">
-
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -264,7 +270,7 @@
                 android:id="@+id/edit_detailtask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="输入详细地址"
+                android:hint="填写详细任务内容"
                 android:textColorHint="@color/text_hide_tip"
                 android:textSize="14dp"
                 android:background="@null"

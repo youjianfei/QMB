@@ -37,12 +37,12 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="pbtu2nPYB1zCaaoOB3xy6hLGKCM19OKB"></meta-data>
+            android:value="pbtu2nPYB1zCaaoOB3xy6hLGKCM19OKB" />
         <!-- 百度地图用到的service组件 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
         <activity
             android:name="com.jingnuo.quanmb.activity.MainActivity"
@@ -73,7 +73,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.BargainActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopDetailActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LocationMapActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.LocationMapActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.IssueSkillActivity"></activity>
     </application>
 
 </manifest>
