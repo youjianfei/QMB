@@ -14,10 +14,13 @@ public class Urls {
     public  static String login="login/doLogin/";//登陆  post
     public  static String phoneLogin="login/moblieLogin/";//手机号验证登陆
     public  static String phoneRegister="register/Register/";//注册
+    public  static String findpassword="login/forgetPwd";//找回密码
 
 
     public  static String square_default="search";//帮帮广场
     public  static String tasktype="taskTypeList";//任务类型
+    public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
+    public  static String Skillmenu_right="major/searchTwo";//找专业二级菜单
 
 
 

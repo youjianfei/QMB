@@ -43,11 +43,10 @@
         android:paddingBottom="15dp"
         />
     <TextView
-        android:id="@+id/textview_suggest"
+        android:id="@+id/textview_changephone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="意见反馈"
-        android:layout_marginTop="8dp"
+        android:text="修改绑定手机号"
         android:layout_below="@+id/text1"
         android:textColor="@color/black_text"
         android:paddingLeft="20dp"
@@ -60,6 +59,28 @@
         android:layout_height="15dp"
         android:src="@mipmap/more"
         android:layout_below="@+id/text1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="23dp"
+        />
+    <TextView
+        android:id="@+id/textview_suggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="意见反馈"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/textview_changephone"
+        android:textColor="@color/black_text"
+        android:paddingLeft="20dp"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        />
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/more"
+        android:layout_below="@+id/textview_changephone"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="23dp"
@@ -85,7 +106,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
-        />
+        android:id="@+id/textView2" />
     <TextView
         android:id="@+id/textview_shareAPP"
         android:layout_width="match_parent"
@@ -115,21 +136,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改密码"
-        android:layout_alignBaseline="@+id/change_phonenumber"
-        android:layout_alignBottom="@+id/change_phonenumber"
-        android:layout_toLeftOf="@+id/imageView"
-        android:layout_toStartOf="@+id/imageView" />
-    <Button
-        android:id="@+id/change_phonenumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="修改绑定手机号"
-        android:layout_marginTop="69dp"
         android:layout_below="@+id/textview_shareAPP"
-        android:layout_toLeftOf="@+id/change_password"
-        android:layout_toStartOf="@+id/change_password"
-        android:layout_marginRight="47dp"
-        android:layout_marginEnd="47dp" />
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2"
+        android:layout_marginRight="61dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginTop="47dp" />
 
 
 </RelativeLayout>

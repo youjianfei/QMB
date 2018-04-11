@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.entityclass.Skillmenu_twoBean;
 import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 public class Adapter_classification_right extends BaseAdapter {
-    List<String> mData;
+    List<Skillmenu_twoBean.DataBean.ListBean> mData;
     Context mContext;
     LayoutInflater mInflater;
 
@@ -38,7 +39,7 @@ public class Adapter_classification_right extends BaseAdapter {
         } else {
             holder = (viewholder) convertView.getTag();
         }
-        holder.mTextview.setText(mData.get(position));
+        holder.mTextview.setText(mData.get(position).getSpecialty_name());
 
 
         return convertView;

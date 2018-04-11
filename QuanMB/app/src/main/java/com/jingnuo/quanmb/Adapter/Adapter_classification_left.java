@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.entityclass.Skillmenu_oneBean;
 import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 public class Adapter_classification_left extends BaseAdapter {
-    List<String> mData;
+    List<Skillmenu_oneBean.DataBean.ListBean> mData;
     Context mContext;
     LayoutInflater mInflater;
     private int selectedPosition = 0;// 选中的位置
@@ -27,7 +28,7 @@ public class Adapter_classification_left extends BaseAdapter {
         selectedPosition = position;
     }
 
-    public Adapter_classification_left(List mDatas, Context mContext) {
+    public Adapter_classification_left(List<Skillmenu_oneBean.DataBean.ListBean> mDatas, Context mContext) {
         super(mDatas, mContext);
         this.mData = mDatas;
         this.mContext = mContext;
@@ -47,7 +48,7 @@ public class Adapter_classification_left extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.mTextview_name.setText(mData.get(position));
+        holder.mTextview_name.setText(mData.get(position).getSpecialty_name());
 
         if (selectedPosition == position) {//判断是否是点击的 item
             holder.mLinearlayout.setSelected(true);

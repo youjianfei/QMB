@@ -10,9 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +32,7 @@ public class FindPasswordActivity extends BaseActivityother {
     ImageView mImageview_hide;
     //数据
     String phonenumber = "", yanzhengma = "", password = "";
+    Map findpasswordMap;
 
 
     @Override
@@ -37,6 +47,7 @@ public class FindPasswordActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        findpasswordMap = new HashMap();
 
     }
 
@@ -69,8 +80,11 @@ public class FindPasswordActivity extends BaseActivityother {
                     ToastUtils.showToast(this, "信息填写不完整");
                     return;
                 }
-                ToastUtils.showToast(this, "密码重置成功");
-
+                String passwordMM= PasswordJiami.passwordjiami(password);
+                findpasswordMap.put("phoneNumbers",phonenumber);
+                findpasswordMap.put("ValidateCode",yanzhengma);
+                findpasswordMap.put("newPassword",passwordMM);
+                changePasswordQuester(findpasswordMap);//修改密码请求
                 break;
             case R.id.button_yanzhengma_find://获取验证码
                 phonenumber = mEdit_phonenumber.getText().toString();
@@ -78,16 +92,9 @@ public class FindPasswordActivity extends BaseActivityother {
                     ToastUtils.showToast(this, "请填写手机号");
                     return;
                 }
-                //验证码倒计时
-                timer = new Timer();
-                TimerTask timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        mhandler.sendEmptyMessage(0);
-                    }
-                };
-                timer.schedule(timerTask, 0, 1000);
-                mButton_getyanzhengma.setEnabled(false);
+                findpasswordMap.put("phoneNumbers", phonenumber);
+
+                getyanzhengma(findpasswordMap);//得到验证码请求
 
                 break;
             case R.id.image_hide://隐藏显示密码
@@ -104,6 +111,71 @@ public class FindPasswordActivity extends BaseActivityother {
 
                 break;
         }
+    }
+
+    //发送手机验证码
+    private void getyanzhengma(Map map) {
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    ToastUtils.showToast(FindPasswordActivity.this, "验证码已发送");
+                    //验证码倒计时
+                    timer = new Timer();
+                    TimerTask timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            mhandler.sendEmptyMessage(0);
+                        }
+                    };
+                    timer.schedule(timerTask, 0, 1000);
+                    mButton_getyanzhengma.setEnabled(false);
+                } else {
+                    ToastUtils.showToast(FindPasswordActivity.this, msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl + Urls.sendzhuceyanzhengma, this, 1, map);
+    }
+
+    void changePasswordQuester(Map map) {
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ToastUtils.showToast(FindPasswordActivity.this, msg);
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl + Urls.findpassword, this, 1,map);
+
+
     }
 
 

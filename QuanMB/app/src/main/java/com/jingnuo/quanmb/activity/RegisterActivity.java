@@ -211,7 +211,7 @@ public class RegisterActivity extends BaseActivityother {
                     ToastUtils.showToast(RegisterActivity.this, "新用户注册成功");
                     finish();
                 } else {
-//                    ToastUtils.showToast(RegisterActivity.this, msg);
+                    ToastUtils.showToast(RegisterActivity.this, msg);
                 }
             }
 

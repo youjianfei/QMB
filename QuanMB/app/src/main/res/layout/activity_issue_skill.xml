@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="发布任务"
+            android:text="发布技能"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>

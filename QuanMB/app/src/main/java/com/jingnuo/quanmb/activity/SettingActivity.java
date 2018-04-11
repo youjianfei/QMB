@@ -5,13 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.jingnuo.quanmb.quanmb.R;
 
 public class SettingActivity extends BaseActivityother {
     //控件
     Button mButton_changepassword;
-    Button mButton_changephonenumber;
+
+    TextView mTextview_changephonenumber;
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_setting;
@@ -30,14 +33,14 @@ public class SettingActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         mButton_changepassword.setOnClickListener(this);
-        mButton_changephonenumber.setOnClickListener(this);
+        mTextview_changephonenumber.setOnClickListener(this);
 
     }
 
     @Override
     protected void initView() {
     mButton_changepassword=findViewById(R.id.change_password);
-        mButton_changephonenumber=findViewById(R.id.change_phonenumber);
+        mTextview_changephonenumber=findViewById(R.id.textview_changephone);
     }
 
     @Override
@@ -49,7 +52,7 @@ public class SettingActivity extends BaseActivityother {
                 startActivity(intent_changepassward);
 
                 break;
-            case R.id.change_phonenumber :
+            case R.id.textview_changephone :
                 Intent intent_changephonenumber=new Intent(this,ChangephoneNumberActivity.class);
                 startActivity(intent_changephonenumber);
 
