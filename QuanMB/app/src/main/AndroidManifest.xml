@@ -74,7 +74,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopDetailActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.LocationMapActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssueSkillActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.IssueSkillActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ShopCenterActivity"></activity>
     </application>
 
 </manifest>
