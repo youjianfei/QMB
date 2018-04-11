@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 import static com.jingnuo.quanmb.data.Staticdata.token;
 
@@ -166,6 +167,7 @@ public class Fragment_phone_login extends Fragment {
                 if (phonenumber.equals("") || yangzhengma.equals("")) {
                     ToastUtils.showToast(getActivity(), "请输入手机号和验证码");
                 } else {
+                    Userphonenumber=phonenumber;//将电话号设为全局变量
                     Map map = new HashMap();
                     map.put("ValidateCode", yangzhengma);
                     map.put("phoneNumbers", phonenumber);

@@ -39,6 +39,7 @@ import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.PUBLIC_KEY_STR;
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
+import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 import static com.jingnuo.quanmb.data.Staticdata.token;
 
@@ -102,6 +103,7 @@ public class Fragment_acountLogin extends Fragment {
                     LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
 
                     map_login = new HashMap();
+                    Userphonenumber=account;//将电话号设为全局变量
                     map_login.put("username", account);
                     map_login.put("password", publicEncryptedResult);
                     map_login.put("uuid", UUID);

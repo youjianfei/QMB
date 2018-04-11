@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
+import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -128,7 +130,13 @@ public class RegisterActivity extends BaseActivityother {
 
                     map_register.put("phoneNumbers",phonenumber);
                     map_register.put("type","1");
-                    getzhuceyanzhengma(map_register);
+
+                    new SendYanZhengMa(new SendYanZhengmaSuccess() {
+                        @Override
+                        public void onSuccesses(String yanzhengma) {
+                            ToastUtils.showToast(RegisterActivity.this,yanzhengma);
+                        }
+                    },mButton_yanzhegnma).sendyanzhengma(RegisterActivity.this,map_register);
 
                 }
 
@@ -153,44 +161,6 @@ public class RegisterActivity extends BaseActivityother {
         }
 
 
-    }
-    //注册发送手机验证码
-    private  void  getzhuceyanzhengma(Map map){
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                int status = 0;
-                String msg = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (status == 1) {
-                    ToastUtils.showToast(RegisterActivity.this, "验证码已发送");
-                    //验证码倒计时
-                    timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            mhandler.sendEmptyMessage(0);
-                        }
-                    };
-                    timer.schedule(timerTask, 0, 1000);
-                    mButton_yanzhegnma.setEnabled(false);
-                } else {
-                    ToastUtils.showToast(RegisterActivity.this, msg);
-                }
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).postHttp(Urls.Baseurl+Urls.sendzhuceyanzhengma,this,1,map);
     }
     //注册请求
     private void request_regist(Map map){
@@ -223,39 +193,4 @@ public class RegisterActivity extends BaseActivityother {
 
     }
 
-
-    //验证码倒计时
-    int time = 60;
-    Timer timer;
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    mButton_yanzhegnma.setText( time + " s");
-                    time--;
-                    if (time == 0) {
-                        timer.cancel();
-                        timer=null;
-                        mButton_yanzhegnma.setText("获取验证码");
-                        mButton_yanzhegnma.setEnabled(true);
-                        time = 60;
-                    }
-                    break;
-            }
-        }
-
-
-    };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(timer!=null){
-            timer.cancel();
-            timer=null;
-        }
-
-    }
 }

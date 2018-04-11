@@ -15,6 +15,10 @@ public class Urls {
     public  static String phoneLogin="login/moblieLogin/";//手机号验证登陆
     public  static String phoneRegister="register/Register/";//注册
     public  static String findpassword="login/forgetPwd";//找回密码
+    public  static String changephonenumber="user/modifyPhone1";//更换绑定手机号第一步
+    public  static String bindphonenumber="user/modifyPhone2";//更换绑定手机号第er步,绑定手机号
+    public  static String changepassword="user/changePwd";//更换密码
+
 
 
     public  static String square_default="search";//帮帮广场

@@ -11,9 +11,8 @@ import com.jingnuo.quanmb.quanmb.R;
 
 public class SettingActivity extends BaseActivityother {
     //控件
-    Button mButton_changepassword;
-
     TextView mTextview_changephonenumber;
+    TextView mTextview_changepassword;
 
     @Override
     public int setLayoutResID() {
@@ -32,22 +31,22 @@ public class SettingActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mButton_changepassword.setOnClickListener(this);
+        mTextview_changepassword.setOnClickListener(this);
         mTextview_changephonenumber.setOnClickListener(this);
 
     }
 
     @Override
     protected void initView() {
-    mButton_changepassword=findViewById(R.id.change_password);
         mTextview_changephonenumber=findViewById(R.id.textview_changephone);
+        mTextview_changepassword=findViewById(R.id.textview_changepassword);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
-            case R.id.change_password :
+            case R.id.textview_changepassword :
                 Intent intent_changepassward=new Intent(this,ChangepasswordActivity.class);
                 startActivity(intent_changepassward);
 

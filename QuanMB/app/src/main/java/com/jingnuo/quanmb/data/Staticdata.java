@@ -18,6 +18,7 @@ public class Staticdata {
     public static boolean isLogin = false;//默认为未登录
     //用户的token
     public static String token = "";
+    public static String Userphonenumber = "";
 
 
 }

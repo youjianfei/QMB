@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
+import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.PasswordJiami;
@@ -94,7 +96,16 @@ public class FindPasswordActivity extends BaseActivityother {
                 }
                 findpasswordMap.put("phoneNumbers", phonenumber);
 
-                getyanzhengma(findpasswordMap);//得到验证码请求
+
+                new SendYanZhengMa(new SendYanZhengmaSuccess() {//得到验证码请求
+                    @Override
+                    public void onSuccesses(String yanzhengma) {
+                        ToastUtils.showToast(FindPasswordActivity.this,yanzhengma);
+
+                    }
+                },mButton_getyanzhengma).sendyanzhengma(FindPasswordActivity.this,findpasswordMap);
+
+
 
                 break;
             case R.id.image_hide://隐藏显示密码
@@ -113,45 +124,6 @@ public class FindPasswordActivity extends BaseActivityother {
         }
     }
 
-    //发送手机验证码
-    private void getyanzhengma(Map map) {
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                int status = 0;
-                String msg = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (status == 1) {
-                    ToastUtils.showToast(FindPasswordActivity.this, "验证码已发送");
-                    //验证码倒计时
-                    timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            mhandler.sendEmptyMessage(0);
-                        }
-                    };
-                    timer.schedule(timerTask, 0, 1000);
-                    mButton_getyanzhengma.setEnabled(false);
-                } else {
-                    ToastUtils.showToast(FindPasswordActivity.this, msg);
-                }
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).postHttp(Urls.Baseurl + Urls.sendzhuceyanzhengma, this, 1, map);
-    }
-
     void changePasswordQuester(Map map) {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -166,7 +138,7 @@ public class FindPasswordActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 ToastUtils.showToast(FindPasswordActivity.this, msg);
-
+                finish();
             }
 
             @Override
@@ -175,42 +147,6 @@ public class FindPasswordActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl + Urls.findpassword, this, 1,map);
 
-
     }
 
-
-    //验证码倒计时
-    int time = 60;
-    Timer timer;
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    mButton_getyanzhengma.setText(time + " s");
-                    time--;
-                    if (time == 0) {
-                        timer.cancel();
-                        timer = null;
-                        mButton_getyanzhengma.setText("获取验证码");
-                        mButton_getyanzhengma.setEnabled(true);
-                        time = 60;
-                    }
-                    break;
-            }
-        }
-
-
-    };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-
-    }
 }
