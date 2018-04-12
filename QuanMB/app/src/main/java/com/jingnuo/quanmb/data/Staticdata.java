@@ -1,5 +1,7 @@
 package com.jingnuo.quanmb.data;
 
+import com.jingnuo.quanmb.entityclass.UserBean;
+
 /**
  * Created by Administrator on 2018/3/26.
  */
@@ -19,6 +21,11 @@ public class Staticdata {
     //用户的token
     public static String token = "";
     public static String Userphonenumber = "";
+
+
+    public  static UserBean static_userBean=new UserBean();
+
+
 
 
 }

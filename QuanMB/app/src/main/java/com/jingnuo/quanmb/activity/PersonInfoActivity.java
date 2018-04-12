@@ -11,6 +11,7 @@ import com.jingnuo.quanmb.quanmb.R;
 public class PersonInfoActivity extends BaseActivityother {
     //控件
     TextView mtextview_phonenumber,mTextview_changepassword,mTextview_setsafepassword;
+    TextView mtextview_nickname;
 
 
     @Override
@@ -31,12 +32,14 @@ public class PersonInfoActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         mTextview_changepassword.setOnClickListener(this);
+        mtextview_nickname.setOnClickListener(this);
     }
 
     @Override
     protected void initView() {
         mtextview_phonenumber=findViewById(R.id.text_phonrnumber);
         mTextview_changepassword=findViewById(R.id.text_changephonenumber);
+        mtextview_nickname=findViewById(R.id.text_name);
     }
 
     @Override
@@ -47,6 +50,11 @@ public class PersonInfoActivity extends BaseActivityother {
             Intent intent_change=new Intent(this,ChangepasswordActivity.class);
             startActivity(intent_change);
             break;
+        case R.id.text_name:
+            Intent intent_nickname =new Intent(this,SetNicknameActivity.class);
+            startActivity(intent_nickname);
+            break;
+
     }
     }
 }

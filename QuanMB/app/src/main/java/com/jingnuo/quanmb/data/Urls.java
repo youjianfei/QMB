@@ -19,6 +19,8 @@ public class Urls {
     public  static String bindphonenumber="user/modifyPhone2";//更换绑定手机号第er步,绑定手机号
     public  static String changepassword="user/changePwd";//更换密码
 
+    public  static String setnickname="user/setNickName";//更换昵称
+
 
 
     public  static String square_default="search";//帮帮广场

@@ -153,6 +153,16 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
         android:id="@+id/imageView" />
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="退 出 登 录"
+        android:textColor="@color/white"
+        android:background="@drawable/button_red_20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        />
 
 
 </RelativeLayout>

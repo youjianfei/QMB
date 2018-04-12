@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.FindPasswordActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.RegisterActivity;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
@@ -25,6 +26,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.Request_retrofit;
 import com.jingnuo.quanmb.utils.RsaUtils;
+import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -80,6 +82,9 @@ public class Fragment_acountLogin extends Fragment {
     }
 
     private void initdata() {
+        account=SharedPreferencesUtils.getString(getActivity(),"QMB","phonenumber");
+        medit_account.setText(account);
+
 
     }
 
@@ -92,14 +97,10 @@ public class Fragment_acountLogin extends Fragment {
                 if (account.equals("") || password.equals("")) {
                     ToastUtils.showToast(getActivity(), "请填写账号密码");
                 } else {
-                    //     加密过程
-                    //获取公钥
-//                    publicKey = RsaUtils.keyStrToPublicKey(PUBLIC_KEY_STR);
-                    //公钥加密结果
-//                    publicEncryptedResult = RsaUtils.encryptDataByPublicKey(password.getBytes(), publicKey);
-//                    //私钥解密结果
-//                    String privateDecryptedResult = RsaUtils.decryptedToStrByPrivate(publicEncryptedResult,privateKey);
-                    publicEncryptedResult= PasswordJiami.passwordjiami(password);
+                    SharedPreferencesUtils.putString(getActivity(),"QMB","phonenumber",account);//存电话号
+
+
+                    publicEncryptedResult= PasswordJiami.passwordjiami(password);//对密码加密
                     LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
 
                     map_login = new HashMap();
@@ -139,7 +140,9 @@ public class Fragment_acountLogin extends Fragment {
                     e.printStackTrace();
                 }
                 if(status==1){//登录成功
+                    SharedPreferencesUtils.putString(getActivity(),"QMB","password",password);//登录成功之后存未加密de密码
                     userBean=new Gson().fromJson(respose,UserBean.class);
+                   Staticdata. static_userBean=userBean;
                     token=userBean.getData().getUser_token();
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;

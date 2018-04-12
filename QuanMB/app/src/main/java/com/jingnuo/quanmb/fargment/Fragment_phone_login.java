@@ -14,13 +14,16 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.SetPasswordActivity;
+import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -59,6 +62,7 @@ public class Fragment_phone_login extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_phone_login, container, false);
         initview();
+        initdata();
         initlinster();
 
         return rootview;
@@ -66,42 +70,14 @@ public class Fragment_phone_login extends Fragment {
 
     //发送验证码的请求
     private void sendZhanzhengma(Map map) {
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                int status = 0;
-                String msg = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (status == 1) {
-                    ToastUtils.showToast(getActivity(), "验证码已发送");
-                    //验证码倒计时
-                    timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            mhandler.sendEmptyMessage(0);
-                        }
-                    };
-                    timer.schedule(timerTask, 0, 1000);
-                    mButton_yanzhengma.setEnabled(false);
-                } else {
-                    ToastUtils.showToast(getActivity(), msg);
-                }
+       new SendYanZhengMa(new SendYanZhengmaSuccess() {
+           @Override
+           public void onSuccesses(String yanzhengma) {
+               ToastUtils.showToast(getActivity(),yanzhengma);
 
+           }
+       },mButton_yanzhengma).sendyanzhengma(getActivity(),map);
 
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).postHttp(Urls.Baseurl+Urls.sendyanzhengma, getActivity(), 1, map);
     }
 
     //手机号登录请求
@@ -120,6 +96,7 @@ public class Fragment_phone_login extends Fragment {
                 }
                 if(status==1){//登录成功
                     userBean=new Gson().fromJson(respose,UserBean.class);
+                    Staticdata. static_userBean=userBean;
                     token=userBean.getData().getUser_token();
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
@@ -152,6 +129,7 @@ public class Fragment_phone_login extends Fragment {
                 if (phonenumber.equals("")) {
                     ToastUtils.showToast(getActivity(), "请输入手机号");
                 } else {
+                    SharedPreferencesUtils.putString(getActivity(),"QMB","phonenumber",phonenumber);
                     Map map = new HashMap();
                     map.put("phoneNumbers", phonenumber);
                     sendZhanzhengma(map);//发送验证码请求
@@ -188,39 +166,10 @@ public class Fragment_phone_login extends Fragment {
         medit_yanzhegnma = rootview.findViewById(R.id.edit_yanzhengma);
 
     }
-
-    //验证码倒计时
-    int time = 60;
-    Timer timer;
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    mButton_yanzhengma.setText(time + " s");
-                    time--;
-                    if (time == 0) {
-                        timer.cancel();
-                        timer = null;
-                        mButton_yanzhengma.setText("获取验证码");
-                        mButton_yanzhengma.setEnabled(true);
-                        time = 60;
-                    }
-                    break;
-            }
-        }
-
-
-    };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
+    private void initdata(){
+        phonenumber=SharedPreferencesUtils.getString(getActivity(),"QMB","phonenumber");
+        medit_phone.setText(phonenumber);
 
     }
+
 }
