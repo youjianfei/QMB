@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 
 public class PersonInfoActivity extends BaseActivityother {
@@ -26,7 +27,8 @@ public class PersonInfoActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+        mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
     }
 
     @Override

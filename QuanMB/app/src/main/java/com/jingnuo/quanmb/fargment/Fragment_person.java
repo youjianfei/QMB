@@ -16,7 +16,10 @@ import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
+
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,6 +35,8 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     RelativeLayout mRelativelayout_address;
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
+    TextView mTextview_nickname;
+    TextView mTextview_phonenumber;
 
     @Nullable
     @Override
@@ -60,6 +65,9 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     }
 
     private void initdata() {
+        mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+        mTextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+
     }
 
     private void setview() {
@@ -71,6 +79,8 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
         mTextview_shopin=rootview.findViewById(R.id.textview_shopin);
+        mTextview_nickname=rootview.findViewById(R.id.text_username);
+        mTextview_phonenumber=rootview.findViewById(R.id.textview_phonenumber);
     }
 
     @Override

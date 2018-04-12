@@ -7,7 +7,15 @@
     android:background="@color/gray_background"
     android:orientation="vertical"
     tools:context="com.jingnuo.quanmb.activity.IssueSkillActivity">
-
+    <!--虚假布局，抢走editview的焦点-->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        />
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
@@ -50,6 +58,7 @@
             android:background="@color/white">
 
             <TextView
+                android:id="@+id/textz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -59,12 +68,23 @@
                 android:textColor="@color/black_text" />
 
             <ImageView
+                android:id="@+id/imageqq"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="15dp"
                 android:src="@mipmap/more" />
+            <TextView
+                android:id="@+id/text_chooce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textColor="@color/black_text2"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageqq"
+                android:layout_marginRight="5dp"
+                />
 
         </RelativeLayout>
 
