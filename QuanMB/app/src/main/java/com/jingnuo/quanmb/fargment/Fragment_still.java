@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -25,6 +27,7 @@ import com.jingnuo.quanmb.entityclass.Skillmenu_oneBean;
 import com.jingnuo.quanmb.entityclass.Skillmenu_twoBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.ArrayList;
@@ -88,6 +91,28 @@ public class Fragment_still  extends Fragment{
                 getActivity().startActivity(intent_shophalllist);
             }
         });
+        //监听键盘确定按钮，以便直接搜索
+        mEdit_serch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                //当actionId == XX_SEND 或者 XX_DONE时都触发
+                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
+                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
+                if (actionId == EditorInfo.IME_ACTION_SEND
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+                    //处理事件
+                    String  search=mEdit_serch.getText()+"";
+                    String searchhou= Utils.ZhuanMa(search);
+                    LogUtils.LOG("ceshi", "点击了确定按钮...."+searchhou, "fragmentsquare");
+                    Intent intent_search=new Intent(getActivity(),ShophallActivity.class);
+                    intent_search.putExtra("search",searchhou);
+                    getActivity().startActivity(intent_search);
+
+                }
+                return false;
+            }
+        });
     }
 
     private void initdata() {
@@ -105,6 +130,7 @@ public class Fragment_still  extends Fragment{
         mtextview_classification_title=rootview.findViewById(R.id.textviw_classification);
         mListview_left=rootview.findViewById(R.id.gridview_left);
         mGridview_right=rootview.findViewById(R.id.gridview_right);
+        mEdit_serch=rootview.findViewById(R.id.edit_searchSquare);
     }
 
 

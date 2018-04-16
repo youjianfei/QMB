@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -22,6 +23,7 @@ import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -36,6 +38,7 @@ public class ShophallActivity extends BaseActivityother {
     LinearLayout mLinearlayout_filter;
     PullToRefreshListView mListview;
 
+
     //对象
     Popwindow_SquareSort mPopwindow_square_sort;
     Adapter_shophall mAdapter_shophall;
@@ -43,6 +46,7 @@ public class ShophallActivity extends BaseActivityother {
     PermissionHelper mPermission;//动态申请权限
     //数据
     int specialty_id=0;
+    String search="";
     int page=1;
     List<SkillmentlistBean.DataBean.ListBean> mData;
 
@@ -53,13 +57,16 @@ public class ShophallActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        request(specialty_id,1);
+            request(1);
+
+
     }
 
     @Override
     protected void initData() {
         mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         specialty_id=getIntent().getIntExtra("specialty_id",0);
+        search=getIntent().getStringExtra("search");
         mData = new ArrayList<>();
 
         mAdapter_shophall = new Adapter_shophall(mData, this,mPermission);
@@ -97,13 +104,14 @@ public class ShophallActivity extends BaseActivityother {
         mListview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                request(specialty_id,1);
+                page=1;
+                request(1);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page++;
-                request(specialty_id,page);
+                request(page);
 
             }
         });
@@ -115,11 +123,17 @@ public class ShophallActivity extends BaseActivityother {
     protected void initView() {
         mLinerlayout_sort = findViewById(R.id.linearlayout_sort);
         mLinearlayout_filter = findViewById(R.id.linearlayout_filter);
-
         mListview = findViewById(R.id.mlistview_shophall);
     }
 
-    void request(int specialty_id , final int page) {
+    void request( final int page) {
+        String URL="";
+        if(specialty_id==0){
+            URL=Urls.Baseurl+Urls.Skillmenulist+"?title="+search+"&curPageNo="+page;
+        }else {
+            URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&curPageNo="+page;
+        }
+        LogUtils.LOG("ceshi","接口："+URL,"找专业列表");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -144,7 +158,7 @@ public class ShophallActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&curPageNo="+page,this,0);
+        }).Http(URL,this,0);
 
 
     }
