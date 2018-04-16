@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     tools:context="com.jingnuo.quanmb.activity.ShophallActivity">
 
     <RelativeLayout
@@ -99,9 +100,9 @@
         android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="8dp"
-        >
+        ptr:ptrMode="both"
+        />
 
 
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>

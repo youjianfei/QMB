@@ -80,7 +80,11 @@ public class Fragment_still  extends Fragment{
         mGridview_right.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
                 Intent intent_shophalllist=new Intent(getActivity(), ShophallActivity.class);
+                int id= mListData_right.get(i).getSpecialty_id();
+                intent_shophalllist.putExtra("specialty_id",id);
                 getActivity().startActivity(intent_shophalllist);
             }
         });

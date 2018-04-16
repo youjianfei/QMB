@@ -50,5 +50,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.2.2'
+    compile 'com.master.android:permissionhelper:1.4'//动态申请权限compile 'com.master.android:permissionhelper:1.4'
+
     testCompile 'junit:junit:4.12'
 }

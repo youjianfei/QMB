@@ -151,13 +151,12 @@
         android:divider="@null"
         android:dividerHeight="8dp"
         ptr:ptrMode="both"
-        >
+        />
 
 
 
 
 
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 
 
