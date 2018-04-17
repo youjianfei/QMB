@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
 import com.jingnuo.quanmb.quanmb.R;
 
@@ -38,7 +39,12 @@ public class IssueSkillActivity extends BaseActivityother {
         mTextview_chooce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPopwindow_skilltype=new Popwindow_SkillType(IssueSkillActivity.this);
+                mPopwindow_skilltype=new Popwindow_SkillType(IssueSkillActivity.this, new InterfacePopwindow_SkillType() {
+                    @Override
+                    public void onSuccesses(String type, int id) {
+                        mTextview_chooce.setText(type);
+                    }
+                });
                 mPopwindow_skilltype.showPopwindow();
             }
         });

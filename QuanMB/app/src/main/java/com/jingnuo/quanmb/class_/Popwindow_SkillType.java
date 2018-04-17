@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
+import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.BaseActivityother;
 import com.jingnuo.quanmb.data.Urls;
@@ -24,6 +26,7 @@ import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 
 /**
@@ -42,12 +45,15 @@ public class Popwindow_SkillType {
     ListView popListview;
     //对象
     Adapter_choose mAdapter;
+    InterfacePopwindow_SkillType  mInterface;
     //数据
     List<Skillmenu_oneBean.DataBean.ListBean>listdata_one;
     List<Skillmenu_twoBean.DataBean.ListBean>listdata_two;
 
-    public Popwindow_SkillType(Activity activity) {
+    int  level=1;
+    public Popwindow_SkillType(Activity activity ,InterfacePopwindow_SkillType mInterface) {
         this.activity = activity;
+        this.mInterface=mInterface;
         listdata_one=new ArrayList<>();
         listdata_two=new ArrayList<>();
     }
@@ -58,6 +64,7 @@ public class Popwindow_SkillType {
         mPopupWindow=new PopupWindow(conView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
+        mPopupWindow.setAnimationStyle(R.style.popskilltype_animation);
         mPopupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
 
         popListview= conView.findViewById(R.id.Listview_addresspopwindow);
@@ -67,7 +74,7 @@ public class Popwindow_SkillType {
         Utils.setAlpha((float) 0.3,activity);
         initdata();
         initlistennr();
-        request();
+        request(Urls.Baseurl+Urls.Skillmenu_one,level);
     }
 
     private void initdata() {
@@ -75,7 +82,8 @@ public class Popwindow_SkillType {
         popListview.setAdapter(mAdapter);
     }
 
-    private void request() {
+    private void request(String url_list , final int level_) {
+
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -88,15 +96,46 @@ public class Popwindow_SkillType {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl+Urls.Skillmenu_one,activity,0);
+        }).Http(url_list,activity,0);
 
     }
 
     private void initlistennr() {
-        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        mTextview_one.setOnClickListener(new View.OnClickListener() {//点击一级请选择
+            @Override
+            public void onClick(View view) {
+                level=1;
+                request(Urls.Baseurl+Urls.Skillmenu_one,level);
+                mTextview_two.setVisibility(View.GONE);
+            }
+        });
+
+        mImage_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopupWindow.dismiss();
+            }
+        });
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {//点击一级菜单请求二级菜单
             @Override
             public void onDismiss() {
                 Utils.setAlpha(1,activity);
+            }
+        });
+        popListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(level==1){
+                    level=2;
+                    int  id=listdata_one.get(i).getSpecialty_id();
+                    mTextview_one.setText(listdata_one.get(i).getSpecialty_name());
+                    request(Urls.Baseurl+Urls.Skillmenu_right+"?specialty_id="+id,level);
+                    mTextview_two.setVisibility(View.VISIBLE);
+                }else {
+                    mTextview_two.setText(listdata_one.get(i).getSpecialty_name());
+                    mInterface.onSuccesses(listdata_one.get(i).getSpecialty_name(),listdata_one.get(i).getSpecialty_id());
+                }
+
             }
         });
     }
@@ -125,6 +164,7 @@ public class Popwindow_SkillType {
             }else {
                 viewholder= (Viewholder) convertView.getTag();
             }
+            viewholder.mtextview_choose.setText(mData.get(position).getSpecialty_name());
 
             return convertView;
         }

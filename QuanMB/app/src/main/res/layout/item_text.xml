@@ -16,7 +16,8 @@
         android:layout_toRightOf="@+id/image_shoppic"
         android:layout_toLeftOf="@+id/image_call"
         android:layout_marginTop="13dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
 
         />

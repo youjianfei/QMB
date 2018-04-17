@@ -22,5 +22,10 @@
         <item name="android:windowEnterAnimation">@anim/popwindow_issue_show</item>
         <item name="android:windowExitAnimation">@anim/popwindow_issue_hide</item>
     </style>
+    <!--popwindow  发布任务选择类型动画-->
+    <style name="popskilltype_animation" >
+        <item name="android:windowEnterAnimation">@anim/popwindow_skilltype_show</item>
+        <!--<item name="android:windowExitAnimation">@anim/popwindow_issue_hide</item>-->
+    </style>
 
 </resources>
