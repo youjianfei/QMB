@@ -10,11 +10,25 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [qqappid: "你的qq appid"]//友盟配置的qq   id
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {//友盟要用到
+        debug {
+            storeFile file('quanminbang.jks')
+            storePassword "quanminbang123"
+            keyAlias "quanminbang"
+            keyPassword "quanminbang123"
         }
     }
     sourceSets {
@@ -51,6 +65,13 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.2.2'
     compile 'com.master.android:permissionhelper:1.4'//动态申请权限compile 'com.master.android:permissionhelper:1.4'
-
+    compile 'com.umeng.sdk:common:latest.integration'
+    compile 'com.umeng.sdk:utdid:1.1.5.3'
+    compile 'com.umeng.sdk:debug:latest.integration'
+    compile 'com.umeng.sdk:share-core:latest.integration'
+    compile 'com.umeng.sdk:share-qq:latest.integration'
+    compile 'com.umeng.sdk:share-wechat:latest.integration'
+    compile 'com.umeng.sdk:share-sina:latest.integration'
     testCompile 'junit:junit:4.12'
+
 }
