@@ -122,7 +122,7 @@ public class Fragment_square extends Fragment {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_hiulin + Urls.square_default, getActivity(), 0);
+        }).Http(Urls.Baseurl_cui + Urls.square_default, getActivity(), 0);
 
 
     }

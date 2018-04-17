@@ -121,17 +121,20 @@
         android:layout_margin="40dp"
         >
         <ImageView
+            android:id="@+id/image_wxLogin"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@mipmap/weixin_logo"
             />
         <ImageView
+            android:id="@+id/image_qqLogin"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@mipmap/qq_logo"
             android:layout_centerInParent="true"
             />
         <ImageView
+            android:id="@+id/image_xlLogin"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@mipmap/weibo_logo"

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
@@ -20,6 +21,11 @@ import com.jingnuo.quanmb.fargment.Fragment_phone_login;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 public class LoginActivity extends BaseActivityother {
     TabItem mtabitem_accont,mtabitem_phone;
@@ -32,6 +38,10 @@ public class LoginActivity extends BaseActivityother {
     FragmentTransaction transaction;
 
     TextView mTextview_register;
+
+    ImageView mImageview_wxlogin,mImage_qqlogin,mImage_xlLogin;
+
+    private UMShareAPI mShareAPI;//第三方登录登录
 
     //数据
 
@@ -49,15 +59,19 @@ public class LoginActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        mShareAPI = UMShareAPI.get(this);
         mFragment_acount=new Fragment_acountLogin();
         fragmetnmanager=getFragmentManager();
         transaction=fragmetnmanager.beginTransaction();
         transaction.add(R.id.framelayout_login,mFragment_acount).commit();
+
     }
 
     @Override
     protected void initListener() {
+        mImage_qqlogin.setOnClickListener(this);
+        mImage_xlLogin.setOnClickListener(this);
+        mImageview_wxlogin.setOnClickListener(this);
         mTextview_register.setOnClickListener(this);
         mTabLayout_login.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -110,6 +124,9 @@ public class LoginActivity extends BaseActivityother {
         mTabLayout_login=findViewById(R.id.tablayout_login);
         mtabitem_accont=findViewById(R.id.tab_account);
         mtabitem_phone=findViewById(R.id.tab_phone);
+        mImageview_wxlogin=findViewById(R.id.image_wxLogin);
+        mImage_qqlogin=findViewById(R.id.image_qqLogin);
+        mImage_xlLogin=findViewById(R.id.image_xlLogin);
     }
 
     @Override
@@ -120,10 +137,65 @@ public class LoginActivity extends BaseActivityother {
                 Intent intent_register=new Intent(this,RegisterActivity.class);
                 startActivity(intent_register);
                 break;
+            case R.id.image_xlLogin://新浪登录
+                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.SINA, umAuthListener);
+                break;
+            case R.id.image_qqLogin://QQ登录
+                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+                break;
+            case R.id.image_wxLogin://微信登录
+                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                break;
+
         }
 
-
     }
+
+    /**
+     * 第三方登录回调监听
+     * @param transaction
+     */
+    private UMAuthListener umAuthListener=new UMAuthListener() {
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+
+            LogUtils.LOG("ceshi", "三方开始登录:" +share_media,"三方登录回调");
+        }
+
+        @Override
+        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+
+            switch (share_media){
+                case WEIXIN:
+                    LogUtils.LOG("ceshi", "登录方法:" +share_media,"三方登录回调");
+                    LogUtils.LOG("ceshi", "微信登陆成功openid:" + map.get("unionid") + "name:" + map.get("screen_name"),"三方登录回调");
+                    LogUtils.LOG("ceshi", "微信登陆成功" + map.toString(),"三方登录回调");
+                    break;
+                case SINA:
+
+                    break;
+                case QQ:
+                    LogUtils.LOG("ceshi", "登录方法:" +share_media,"三方登录回调");
+                    LogUtils.LOG("ceshi", "QQ登陆成功openid:" + map.toString(),"三方登录回调");
+
+                    break;
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+            LogUtils.LOG("ceshi", "登录方法:" +share_media,"三方登录回调");
+            LogUtils.LOG("ceshi", "登陆失败" + throwable.getMessage(),"三方登录回调");
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+            LogUtils.LOG("ceshi", "登陆取消" + share_media,"三方登录回调");
+        }
+    };
+
+
     private void hideFragments(FragmentTransaction transaction) {//隐藏Fragment,以便点击时展映相应的Fragment
         if (mFragment_acount != null) {
             transaction.hide(mFragment_acount);

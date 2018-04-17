@@ -6,7 +6,7 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
     public  static  String Baseurl="http://192.168.1.184:8080/QuanMinBang/v1.0/";
-    public  static  String Baseurl_hiulin="http://192.168.1.103:8080/QuanMinBang/";
+    public  static  String Baseurl_cui="http://192.168.1.103:8080/QuanMinBang/v1.0/";
 
     public  static String sendyanzhengma="send/sendValidate/";//登录发送短信验证码  post
     public  static String sendzhuceyanzhengma="send/sendValidate/";//注册发送注册短信验证码  post
@@ -22,9 +22,8 @@ public class Urls {
     public  static String setnickname="user/setNickName";//更换昵称
 
 
-
-    public  static String square_default="search";//帮帮广场
-    public  static String tasktype="taskTypeList";//任务类型
+    public  static String square_default="querySpecialty/search";//帮帮广场
+    public  static String tasktype="querySpecialty/taskTypeList";//任务类型
     public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
     public  static String Skillmenu_right="major/searchTwo";//找专业二级菜单list
     public  static String Skillmenulist="major/searchPost";//二级菜单点开列表    参数  specialty_id

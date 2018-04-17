@@ -19,13 +19,14 @@ public class App extends Application {
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());//初始化Baidu地图
         UMConfigure.init(this,"5ad55925f43e4835c1000064"
-                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         UMConfigure.setLogEnabled(true);
+
 
     }
     {
         PlatformConfig.setWeixin("wx1589c6a947d1f803", "aad4f32f43f69d06cdaf6df5e1237e8b");
-        PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834","http://sns.whalecloud.com");
+        PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834","http://www.sina.com.cn/");
         PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
 
     }

@@ -116,7 +116,7 @@ public class Popwindow_SquareSort {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_hiulin+Urls.tasktype,activity,0);
+        }).Http(Urls.Baseurl_cui+Urls.tasktype,activity,0);
     }
 
     private void initlistenner() {
