@@ -5,6 +5,7 @@ import android.app.Application;
 import com.baidu.mapapi.SDKInitializer;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareConfig;
 
@@ -20,5 +21,12 @@ public class App extends Application {
         UMConfigure.init(this,"5ad55925f43e4835c1000064"
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
         UMConfigure.setLogEnabled(true);
+
+    }
+    {
+        PlatformConfig.setWeixin("wx1589c6a947d1f803", "aad4f32f43f69d06cdaf6df5e1237e8b");
+        PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834","http://sns.whalecloud.com");
+        PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
+
     }
 }
