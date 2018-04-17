@@ -2,14 +2,12 @@ package com.jingnuo.quanmb.activity;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -17,7 +15,6 @@ import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_shophall;
-import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Urls;
@@ -97,7 +94,8 @@ public class ShophallActivity extends BaseActivityother {
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent mIntent_shopskillDetail = new Intent(ShophallActivity.this, ShopDetailActivity.class);
+                Intent mIntent_shopskillDetail = new Intent(ShophallActivity.this, SkillDetailActivity.class);
+                mIntent_shopskillDetail.putExtra("id",mData.get(i).getRelease_specialty_id());
                 startActivity(mIntent_shopskillDetail);
             }
         });

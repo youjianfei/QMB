@@ -27,6 +27,7 @@ public class Urls {
     public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
     public  static String Skillmenu_right="major/searchTwo";//找专业二级菜单list
     public  static String Skillmenulist="major/searchPost";//二级菜单点开列表    参数  specialty_id
+    public  static String Skilldetail="major/queryPostDetail";//服务内容详情    参数  id  get请求
 
 
 
