@@ -5,31 +5,123 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jingnuo.quanmb.activity.LocationMapActivity">
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="任务地点"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
+
+    </RelativeLayout>
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@+id/re_title"
         android:clickable="true" />
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/address"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@drawable/background_text_type"
+        android:layout_below="@+id/re_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         >
+        <ImageView
+            android:id="@+id/image_address"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/address"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
         <TextView
+            android:id="@+id/text_mapget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="当前位置："
+            android:layout_toRightOf="@+id/image_address"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:id="@+id/image_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/text_mapget"
+            android:background="@color/gray_dfdfdf"
             />
         <EditText
             android:id="@+id/textview_location"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/image_line"
             android:hint="请输入自定义名称"
+            android:singleLine="true"
             android:textSize="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="20dp"
             android:background="@null"
+            android:layout_marginBottom="10dp"
+            android:imeOptions="actionSearch"
             />
-    </LinearLayout>
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/list_searchaddresslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/address"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_text_type"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:id="@+id/iamge_cancle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/canll"
+        android:layout_below="@+id/address"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+
+        />
+    <Button
+        android:id="@+id/button_addresssubmit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/background_logintitle"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="确 定"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        />
+
 
 
 </RelativeLayout>

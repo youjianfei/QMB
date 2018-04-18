@@ -17,7 +17,7 @@ public class Staticdata {
     public static int ScreenWidth = 0;
 
     //用户是否已经登陆  true表示登录   flase表示未登录    待解决   退出程序后还为true
-    public static boolean isLogin = false;//默认为未登录
+    public static boolean isLogin = true;//默认为未登录
     //用户的token
     public static String token = "";
     public static String Userphonenumber = "";

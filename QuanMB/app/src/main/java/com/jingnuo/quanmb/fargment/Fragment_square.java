@@ -208,7 +208,7 @@ public class Fragment_square extends Fragment {
 
                     }else {
                         String searchhou= Utils.ZhuanMa(search);
-                        map_filter_sort.put("name","searchhou");
+                        map_filter_sort.put("name",searchhou);
                         request_square(map_filter_sort,page);
                     }
 
