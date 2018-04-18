@@ -23,6 +23,7 @@ import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
+import com.jingnuo.quanmb.entityclass.Spuare_sortBean;
 import com.jingnuo.quanmb.entityclass.TaskTypeBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -52,7 +53,7 @@ public class Popwindow_SquareSort {
 
     //sort_pop用到的布局 数据
     private ImageView mImage_black;//下面的遮罩
-    List<String> mData_sort;//排序方式的list数据
+    List<Spuare_sortBean.DataBean.ListBean> mData_sort;//排序方式的list数据
 
     SortAdapter mAdapterSort;
     MyListView mListview_pop_sort;
@@ -94,7 +95,29 @@ public class Popwindow_SquareSort {
         initdata();
         initlistenner();
         request_taskType();
+        request_taskSort();
     }
+    //请求智能排序list
+    private void request_taskSort() {
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                if(new Gson().fromJson(respose,Spuare_sortBean.class).getData().getList()!=null){
+                    mData_sort.clear();
+                    mData_sort.addAll(new Gson().fromJson(respose,Spuare_sortBean.class).getData().getList());
+                    mAdapterSort.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.tasksort,activity,0);
+
+    }
+
     //请求任务类型gridlist
     private void request_taskType() {
         new Volley_Utils(new Interface_volley_respose() {
@@ -163,7 +186,7 @@ public class Popwindow_SquareSort {
         mListview_pop_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ToastUtils.showToast(activity,mData_sort.get(i));
+                ToastUtils.showToast(activity,mData_sort.get(i).getName());
             }
         });
 
@@ -256,10 +279,6 @@ public class Popwindow_SquareSort {
     public void initdata() {
         //sort_pop用到的布局 数据
         mData_sort = new ArrayList<>();
-        mData_sort.add("综合排序");
-        mData_sort.add("速度最快 ");
-        mData_sort.add("评分最高 ");
-        mData_sort.add("服务最好 ");
         mAdapterSort = new SortAdapter(mData_sort, activity);
         mListview_pop_sort.setAdapter(mAdapterSort);
 
@@ -267,8 +286,9 @@ public class Popwindow_SquareSort {
         listdata_tasktype=new ArrayList<>();
         mData_filter_task = new ArrayList<>();
 
-        mSeekBar.setValue(0,100);//设置初始值
-        mText_filter_right.setText("￥  100");
+        mSeekBar.setRange(0,1000);//设置范围
+        mSeekBar.setValue(0,1000);//设置初始值
+        mText_filter_right.setText("￥  1000");
         mAdapter_filter_task = new FilterAdapter(mData_filter_task, activity);
         mGridview_filter_task.setAdapter(mAdapter_filter_task);
 
@@ -287,7 +307,7 @@ public class Popwindow_SquareSort {
 
 
     class SortAdapter extends BaseAdapter {
-        List<String> mData;
+        List<Spuare_sortBean.DataBean.ListBean> mData;
         Context mContext;
         LayoutInflater mInflater;
 
@@ -305,13 +325,13 @@ public class Popwindow_SquareSort {
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.item_listview_pop_square_sort, null, false);
-                holder.mTextview = (TextView) convertView.findViewById(R.id.text_sort);
+                holder.mTextview =  convertView.findViewById(R.id.text_sort);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
 
             }
-            holder.mTextview.setText(mData.get(position));
+            holder.mTextview.setText(mData.get(position).getName());
 
             return convertView;
         }

@@ -18,6 +18,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillsdetailsBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 
@@ -166,7 +167,7 @@ public class SkillDetailActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi",respose,"服务详情");
                 mSkilldetailsbean=new Gson().fromJson(respose,SkillsdetailsBean.class);
                 mTextview_title.setText(mSkilldetailsbean.getData().getDetail().get(0).getTitle());
-                mTextview_issuetime.setText(mSkilldetailsbean.getData().getDetail().get(0).getRelease_date()+"");
+                mTextview_issuetime.setText(Utils.getStrTime(mSkilldetailsbean.getData().getDetail().get(0).getRelease_date()+""));
                 mTextview_skilltype.setText(mSkilldetailsbean.getData().getDetail().get(0).getSpecialty_name());
                 mTextview_name.setText(mSkilldetailsbean.getData().getDetail().get(0).getContacts());
                 mTextview_shopaddress.setText(mSkilldetailsbean.getData().getDetail().get(0).getRelease_address());

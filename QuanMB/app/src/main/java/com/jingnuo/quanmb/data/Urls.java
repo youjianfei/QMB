@@ -24,6 +24,7 @@ public class Urls {
 
     public  static String square_default="querySpecialty/search";//帮帮广场
     public  static String tasktype="querySpecialty/taskTypeList";//任务类型
+    public  static String tasksort="querySort/getSortBy";//智能排序方式
     public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
     public  static String Skillmenu_right="major/searchTwo";//找专业二级菜单list
     public  static String Skillmenulist="major/searchPost";//二级菜单点开列表    参数  specialty_id

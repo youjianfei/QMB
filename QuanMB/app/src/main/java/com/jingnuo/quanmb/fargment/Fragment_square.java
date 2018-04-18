@@ -30,13 +30,16 @@ import com.jingnuo.quanmb.entityclass.Square_defaultBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/3/20.
@@ -59,6 +62,7 @@ public class Fragment_square extends Fragment {
 
 
     //数据
+    Map map_filter_sort;
     int page = 1;//分页加载；
     Square_defaultBean.DataBean mSquare_default_DataBean;
     List<Square_defaultBean.DataBean.ListBean> mListDate_square;
@@ -72,19 +76,19 @@ public class Fragment_square extends Fragment {
         initdata();
         setview();
         initlistenner();
-        request_square(page);//首页默认请求 page==1
+        request_square(map_filter_sort,page);//首页默认请求 page==1
 
         return rootview;
     }
 
-    private void request_square(final int page) {
+    private void request_square(Map map_filterOrsort,final int page) {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
                 if (mListview_square.isRefreshing()) {
                     mListview_square.onRefreshComplete();
                 }
-
+                LogUtils.LOG("ceshi", "" + respose, "fragmentsquare");
 
                 int status = 0;
                 String msg = "";
@@ -122,7 +126,7 @@ public class Fragment_square extends Fragment {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui + Urls.square_default, getActivity(), 0);
+        }).postHttp(Urls.Baseurl_cui + Urls.square_default, getActivity(), 1,map_filterOrsort);
 
 
     }
@@ -176,14 +180,14 @@ public class Fragment_square extends Fragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                request_square(1);
+                request_square(map_filter_sort,1);
                 LogUtils.LOG("ceshi", "下拉刷新生效", "fragmentsquare");
 
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                request_square(++page);
+                request_square(map_filter_sort,++page);
             }
         });
         //监听键盘确定按钮，以便直接搜索
@@ -198,6 +202,16 @@ public class Fragment_square extends Fragment {
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
                     LogUtils.LOG("ceshi", "点击了确定按钮", "fragmentsquare");
+                    String search="";
+                    search=mEdit_serchSquare.getText()+"";
+                    if(search.equals("")){
+
+                    }else {
+                        String searchhou= Utils.ZhuanMa(search);
+                        map_filter_sort.put("name","searchhou");
+                        request_square(map_filter_sort,page);
+                    }
+
 
                 }
                 return false;
@@ -210,6 +224,10 @@ public class Fragment_square extends Fragment {
     }
 
     private void initdata() {
+        map_filter_sort=new HashMap();
+        map_filter_sort.put("minCommission","0");
+        map_filter_sort.put("maxCommission","1000");
+
         mListDate_square = new ArrayList<>();
         mAdapter_SquareList = new Adapter_SquareList(mListDate_square, getContext());
         mListview_square.setAdapter(mAdapter_SquareList);
