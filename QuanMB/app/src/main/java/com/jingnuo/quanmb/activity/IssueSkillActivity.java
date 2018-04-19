@@ -1,26 +1,36 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.yancy.imageselector.ImageConfig;
+import com.yancy.imageselector.ImageSelector;
+import com.yancy.imageselector.ImageSelectorActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IssueSkillActivity extends BaseActivityother {
@@ -34,6 +44,8 @@ public class IssueSkillActivity extends BaseActivityother {
     EditText mEditview_skilldetail;
     EditText mEditview_name;
     EditText mEditview_phonenumber;
+
+    TextView choosePIC;
 
     Button mButton_submit;
 
@@ -97,7 +109,25 @@ public class IssueSkillActivity extends BaseActivityother {
 
             }
         });
+        choosePIC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageConfig imageConfig
+                        = new ImageConfig.Builder(new GlideLoader())
+                        // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
+                        .steepToolBarColor(getResources().getColor(R.color.blue))
+                        // 标题的背景颜色 （默认黑色）
+                        .titleBgColor(getResources().getColor(R.color.blue))
+                        // 提交按钮字体的颜色  （默认白色）
+                        .titleSubmitTextColor(getResources().getColor(R.color.white))
+                        // 标题颜色 （默认白色）
+                        .titleTextColor(getResources().getColor(R.color.white))
+                        .build();
+                ImageSelector.open(IssueSkillActivity.this, imageConfig);   // 开启图片选择器
 
+
+            }
+        });
     }
 
     @Override
@@ -110,6 +140,8 @@ public class IssueSkillActivity extends BaseActivityother {
         mEditview_name=findViewById(R.id.edit_skillpeoplename);
         mEditview_phonenumber=findViewById(R.id.edit_skillpeoplename);
         mButton_submit=findViewById(R.id.button_submit);
+
+        choosePIC=findViewById(R.id.text2);
     }
     boolean checknull(){
         if(mTextview_chooce.getText().equals("请选择")){
@@ -184,5 +216,17 @@ public class IssueSkillActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl+Urls.IssueSkill,this,1,map);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
 
+            // Get Image Path List
+            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+
+            for (String path : pathList) {
+                Log.i("ImagePathList", path);
+            }
+        }
+    }
 }
