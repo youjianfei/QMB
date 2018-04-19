@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -70,7 +71,10 @@ public class Popwindow_SquareSort {
 
     TextView mText_filter_left, mText_filter_right;
     RangeSeekBar mSeekBar;
+    Button mButton_chongzhi,mButton_complete;
 
+    String TYpe="";//多个选择类型拼接
+    int Min=0;int Max=1000;
 
 
 
@@ -186,7 +190,9 @@ public class Popwindow_SquareSort {
         mListview_pop_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ToastUtils.showToast(activity,mData_sort.get(i).getName());
+                mInterface.onSuccesses(mData_sort.get(i).getName(),mData_sort.get(i).getCode());
+                mPopupWindow.dismiss();
+
             }
         });
 
@@ -219,6 +225,8 @@ public class Popwindow_SquareSort {
                     mText_filter_right.setText("￥  "+df.format(max));
                     mSeekBar.setLeftProgressDescription(df.format(min));
                     mSeekBar.setRightProgressDescription(df.format(max));
+                    Max= (int) max;
+                    Min= (int) min;
                 }
             }
 
@@ -247,7 +255,20 @@ public class Popwindow_SquareSort {
             }
         });
 
-
+        mButton_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TYpe="";
+                for(int i=0;i<mData_filter_task.size();i++){
+                    if(mData_filter_task.get(i).isChoose()){
+                        TYpe=TYpe+mData_filter_task.get(i).getId()+"%";
+                    }
+                }
+                LogUtils.LOG("ceshi","条件拼接"+TYpe,"任务条件筛选");
+                mInterface.onSuccesses(TYpe,Min+"%"+Max);
+                mPopupWindow.dismiss();
+            }
+        });
 
     }
 
@@ -274,6 +295,8 @@ public class Popwindow_SquareSort {
         mText_filter_left = conView.findViewById(R.id.textview_filter_left);
         mText_filter_right = conView.findViewById(R.id.textview_filter_right);
         mSeekBar = conView.findViewById(R.id.seekbar);
+        mButton_chongzhi=conView.findViewById(R.id.button_chongzhi);
+        mButton_complete=conView.findViewById(R.id.button_complte);
     }
 
     public void initdata() {

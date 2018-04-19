@@ -22,6 +22,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Skillmenu_oneBean;
 import com.jingnuo.quanmb.entityclass.Skillmenu_twoBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -87,6 +88,7 @@ public class Popwindow_SkillType {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"popwindow");
                 listdata_one.clear();
                 listdata_one.addAll(new Gson().fromJson(respose,Skillmenu_oneBean.class).getData().getList());
                 mAdapter.notifyDataSetChanged();

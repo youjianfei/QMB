@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/gray_background"
     tools:context="com.jingnuo.quanmb.activity.IssueTaskActivity">
-
+    <!--虚假布局，抢走editview的焦点-->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        />
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
@@ -30,6 +38,7 @@
 
 
     </RelativeLayout>
+
     <com.jingnuo.quanmb.customview.CustomerScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

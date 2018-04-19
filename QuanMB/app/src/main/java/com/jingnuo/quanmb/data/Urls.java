@@ -21,14 +21,20 @@ public class Urls {
 
     public  static String setnickname="user/setNickName";//更换昵称
 
-
+    //任务模块
     public  static String square_default="/task/querySpecialty/search";//帮帮广场
-    public  static String tasktype="/task/querySpecialty/taskTypeList";//任务类型
-    public  static String tasksort="/task/querySort/getSortBy";//智能排序方式
+    public  static String tasktype="/task/querySpecialty/taskTypeList";//任务类型列表一级
+    public  static String tasksort="/task/querySort/getSortBy";//任务智能排序方式
+    public  static String taskdetails="/task/taskDetail/getTaskDetail";//任务详情
+    public  static String issuetask="/task/querySpecialty/TaskAnnouncementList";//发布任务
+
+    //专业模块
     public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
     public  static String Skillmenu_right="major/searchTwo";//找专业二级菜单list
     public  static String Skillmenulist="major/searchPost";//二级菜单点开列表    参数  specialty_id
     public  static String Skilldetail="major/queryPostDetail";//服务内容详情    参数  id  get请求
+    public  static String IssueSkill="major/releaseSpecialty";//发布专业    post
+
 
 
 

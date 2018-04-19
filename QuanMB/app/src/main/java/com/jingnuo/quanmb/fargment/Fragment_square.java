@@ -63,9 +63,11 @@ public class Fragment_square extends Fragment {
 
     //数据
     Map map_filter_sort;
-    int page = 1;//分页加载；
     Square_defaultBean.DataBean mSquare_default_DataBean;
     List<Square_defaultBean.DataBean.ListBean> mListDate_square;
+    int page = 1;//分页加载；
+    int MinCommission=0,MaxCommission=1000;
+
 
 
     @Nullable
@@ -76,12 +78,13 @@ public class Fragment_square extends Fragment {
         initdata();
         setview();
         initlistenner();
-        request_square(map_filter_sort,page);//首页默认请求 page==1
+        request_square(map_filter_sort, page);//首页默认请求 page==1
 
         return rootview;
     }
 
-    private void request_square(Map map_filterOrsort,final int page) {
+    private void request_square(Map map_filterOrsort, final int page) {
+        map_filterOrsort.put("pageNum", page + "");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -103,7 +106,7 @@ public class Fragment_square extends Fragment {
                     mSquare_default_DataBean = new Gson().fromJson(respose, Square_defaultBean.class).getData();
 
                     if (mSquare_default_DataBean.getList() == null || mSquare_default_DataBean.getList().size() == 0) {
-                        ToastUtils.showToast(getActivity(), "没有更多了");
+                        ToastUtils.showToast(getActivity(), "没有符合条件的任务");
                         return;
                     }
                     if (page == 1 && mSquare_default_DataBean.getList() != null) {
@@ -126,7 +129,7 @@ public class Fragment_square extends Fragment {
             public void onError(int error) {
 
             }
-        }).postHttp(Urls.Baseurl_cui + Urls.square_default, getActivity(), 1,map_filterOrsort);
+        }).postHttp(Urls.Baseurl_cui + Urls.square_default, getActivity(), 1, map_filterOrsort);
 
 
     }
@@ -140,6 +143,7 @@ public class Fragment_square extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LogUtils.LOG("ceshi", "" + i, "fragmentsquare");
                 intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
+                intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_id());
                 getActivity().startActivity(intend_taskdrtails);
 
             }
@@ -153,6 +157,10 @@ public class Fragment_square extends Fragment {
                 mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
                     @Override
                     public void onSuccesses(String address, String id) {
+                        page=1;
+                        LogUtils.LOG("ceshi",address+id,"排序方式");
+                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
+                        request_square(map_filter_sort,page);
 
                     }
                 }, mRelativelayout_sort, 1);
@@ -165,9 +173,15 @@ public class Fragment_square extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
+
                 mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
                     @Override
                     public void onSuccesses(String address, String id) {
+                        page=1;
+                        LogUtils.LOG("ceshi",address+id,"条件筛选");
+                        String [] Q = id.split("%");
+                        initMap(Q[0],Q[1],page+"","",address,"");
+                        request_square(map_filter_sort,page);
 
                     }
                 }, mRelativelayout_sort, 0);
@@ -180,14 +194,14 @@ public class Fragment_square extends Fragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                request_square(map_filter_sort,1);
+                request_square(map_filter_sort, 1);
                 LogUtils.LOG("ceshi", "下拉刷新生效", "fragmentsquare");
 
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                request_square(map_filter_sort,++page);
+                request_square(map_filter_sort, ++page);
             }
         });
         //监听键盘确定按钮，以便直接搜索
@@ -202,15 +216,11 @@ public class Fragment_square extends Fragment {
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
                     LogUtils.LOG("ceshi", "点击了确定按钮", "fragmentsquare");
-                    String search="";
-                    search=mEdit_serchSquare.getText()+"";
-                    if(search.equals("")){
-
-                    }else {
-                        String searchhou= Utils.ZhuanMa(search);
-                        map_filter_sort.put("name",searchhou);
-                        request_square(map_filter_sort,page);
-                    }
+                    String search = "";
+                    search = mEdit_serchSquare.getText() + "";
+                    String searchhou = Utils.ZhuanMa(search);
+                    initMap(MinCommission+"",MaxCommission+"",page+"",search,"","");
+                    request_square(map_filter_sort, page);
 
 
                 }
@@ -224,13 +234,19 @@ public class Fragment_square extends Fragment {
     }
 
     private void initdata() {
-        map_filter_sort=new HashMap();
-        map_filter_sort.put("minCommission","0");
-        map_filter_sort.put("maxCommission","1000");
-
+        map_filter_sort = new HashMap();
+        initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
         mListDate_square = new ArrayList<>();
         mAdapter_SquareList = new Adapter_SquareList(mListDate_square, getContext());
         mListview_square.setAdapter(mAdapter_SquareList);
+    }
+    void initMap(String  minCommission,String  maxCommission,String  pageNum,String  name,String  task_type,String  code){
+        map_filter_sort.put("minCommission", minCommission);
+        map_filter_sort.put("maxCommission", maxCommission);
+        map_filter_sort.put("pageNum", pageNum);
+        map_filter_sort.put("name", name);//关键字搜索
+        map_filter_sort.put("task_type", task_type);//条件筛选
+        map_filter_sort.put("code", code);//排序方式筛选
     }
 
     private void initview() {

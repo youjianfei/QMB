@@ -95,7 +95,8 @@ public class ShophallActivity extends BaseActivityother {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent mIntent_shopskillDetail = new Intent(ShophallActivity.this, SkillDetailActivity.class);
-                mIntent_shopskillDetail.putExtra("id",mData.get(i).getRelease_specialty_id());
+
+                mIntent_shopskillDetail.putExtra("id",mData.get(i-1).getRelease_specialty_id());
                 startActivity(mIntent_shopskillDetail);
             }
         });
