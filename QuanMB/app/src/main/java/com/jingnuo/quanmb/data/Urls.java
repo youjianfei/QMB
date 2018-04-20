@@ -7,9 +7,12 @@ package com.jingnuo.quanmb.data;
 public class Urls {
     public  static  String Baseurl="http://192.168.1.184:8080/QuanMinBang/v1.0/";
     public  static  String Baseurl_cui="http://192.168.1.103:8080/QuanMinBang/v1.0/";
+    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
 
     public  static String sendyanzhengma="send/sendValidate/";//登录发送短信验证码  post
     public  static String sendzhuceyanzhengma="send/sendValidate/";//注册发送注册短信验证码  post
+    public  static String upLoadImage="uploadIge/headImgUpload/";//注册发送注册短信验证码  post
+
 
     public  static String login="login/doLogin/";//登陆  post
     public  static String phoneLogin="login/moblieLogin/";//手机号验证登陆

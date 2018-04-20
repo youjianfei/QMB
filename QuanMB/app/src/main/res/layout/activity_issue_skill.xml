@@ -266,7 +266,24 @@
                 android:layout_marginTop="15dp"
                 android:text="添加照片"
                 android:textColor="@color/black_text" />
-
+            <ImageView
+                android:id="@+id/image_line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/text2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/gray_background" />
+            <ImageView
+                android:id="@+id/iamge_choosePIC"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/image_line5"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@color/background"
+                />
 
         </RelativeLayout>
 

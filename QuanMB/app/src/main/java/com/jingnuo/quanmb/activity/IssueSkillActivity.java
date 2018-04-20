@@ -1,7 +1,11 @@
 package com.jingnuo.quanmb.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,15 +17,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
+import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
+import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
+import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
 import com.yancy.imageselector.ImageSelectorActivity;
@@ -29,6 +39,7 @@ import com.yancy.imageselector.ImageSelectorActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,12 +56,14 @@ public class IssueSkillActivity extends BaseActivityother {
     EditText mEditview_name;
     EditText mEditview_phonenumber;
 
-    TextView choosePIC;
+
+    ImageView choosePIC;
 
     Button mButton_submit;
 
 
     //对象
+    PermissionHelper permissionHelper;
     Popwindow_SkillType mPopwindow_skilltype;
 
     //数据
@@ -112,18 +125,31 @@ public class IssueSkillActivity extends BaseActivityother {
         choosePIC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageConfig imageConfig
-                        = new ImageConfig.Builder(new GlideLoader())
-                        // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
-                        .steepToolBarColor(getResources().getColor(R.color.blue))
-                        // 标题的背景颜色 （默认黑色）
-                        .titleBgColor(getResources().getColor(R.color.blue))
-                        // 提交按钮字体的颜色  （默认白色）
-                        .titleSubmitTextColor(getResources().getColor(R.color.white))
-                        // 标题颜色 （默认白色）
-                        .titleTextColor(getResources().getColor(R.color.white))
-                        .build();
-                ImageSelector.open(IssueSkillActivity.this, imageConfig);   // 开启图片选择器
+                 permissionHelper=new PermissionHelper(IssueSkillActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
+                Permissionmanage permissionmanage=new Permissionmanage(permissionHelper, new InterfacePermission() {
+                    @Override
+                    public void onResult(boolean result) {
+                        LogUtils.LOG("ceshi",result+"","");
+                        if(result){
+                            ImageConfig imageConfig
+                                    = new ImageConfig.Builder(new GlideLoader())
+                                    // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
+                                    .steepToolBarColor(getResources().getColor(R.color.yellow_jianbian_end))
+                                    // 标题的背景颜色 （默认黑色）
+                                    .titleBgColor(getResources().getColor(R.color.yellow_jianbian_end))
+                                    // 提交按钮字体的颜色  （默认白色）
+                                    .titleSubmitTextColor(getResources().getColor(R.color.white))
+                                    // 标题颜色 （默认白色）
+                                    .titleTextColor(getResources().getColor(R.color.white))
+                                    .build();
+                            ImageSelector.open(IssueSkillActivity.this, imageConfig);   // 开启图片选择器
+                        }else {
+                            ToastUtils.showToast(IssueSkillActivity.this,"请允许开启照相功能，并读取本地文件");
+                        }
+                    }
+                });
+                permissionmanage.requestpermission();
+
 
 
             }
@@ -141,7 +167,7 @@ public class IssueSkillActivity extends BaseActivityother {
         mEditview_phonenumber=findViewById(R.id.edit_skillpeoplename);
         mButton_submit=findViewById(R.id.button_submit);
 
-        choosePIC=findViewById(R.id.text2);
+        choosePIC=findViewById(R.id.iamge_choosePIC);
     }
     boolean checknull(){
         if(mTextview_chooce.getText().equals("请选择")){
@@ -223,10 +249,29 @@ public class IssueSkillActivity extends BaseActivityother {
 
             // Get Image Path List
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
-
+            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
             for (String path : pathList) {
                 Log.i("ImagePathList", path);
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
+                dataPictrue.add(mBitmap);
+                choosePIC.setImageBitmap(mBitmap);
+                UpLoadImage.getIntence(IssueSkillActivity.this, new Interface_loadImage_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        LogUtils.LOG("ceshi",respose,"发布技能上传图片返回");
+
+                    }
+                }).uploadImg(pathList,1);
+
             }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissionHelper != null) {
+            permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
