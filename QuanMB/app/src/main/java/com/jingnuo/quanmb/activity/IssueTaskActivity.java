@@ -229,6 +229,8 @@ public class IssueTaskActivity extends BaseActivityother {
         if(task_description.equals("")){
             ToastUtils.showToast(this,"请填写任务说明");
             return false;
+            
+
         }
         String  task_type=mTextview_choose.getText()+"";
         if(task_type.equals("请选择")){
