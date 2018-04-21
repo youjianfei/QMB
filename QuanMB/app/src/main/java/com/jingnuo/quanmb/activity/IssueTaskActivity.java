@@ -154,7 +154,6 @@ public class IssueTaskActivity extends BaseActivityother {
                     startActivity(intent);
                     finish();
                 }
-
             }
         });
         choosePIC1.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +228,7 @@ public class IssueTaskActivity extends BaseActivityother {
         if(task_description.equals("")){
             ToastUtils.showToast(this,"请填写任务说明");
             return false;
-            
+
 
         }
         String  task_type=mTextview_choose.getText()+"";
