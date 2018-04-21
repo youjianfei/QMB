@@ -90,7 +90,7 @@ public class Volley_Utils {
             public void onResponse(String response) {
                 if (response != null || response.length() != 0) {
                     mInterface.onSuccesses(response);
-                    LogUtils.LOG("ceshi","post成功","vollryUtils");
+                    LogUtils.LOG("ceshi","post成功"+response,"vollryUtils");
                 }
 
             }

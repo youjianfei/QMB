@@ -27,5 +27,4 @@
         <item name="android:windowEnterAnimation">@anim/popwindow_skilltype_show</item>
         <!--<item name="android:windowExitAnimation">@anim/popwindow_issue_hide</item>-->
     </style>
-
 </resources>

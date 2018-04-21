@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:orientation="vertical"
+    tools:context="com.jingnuo.quanmb.activity.IssueTaskNextActivity">
+    <!--虚假布局，抢走editview的焦点-->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        />
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="发布任务"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="联系人："
+            android:textColor="@color/black_text" />
+
+        <EditText
+            android:id="@+id/edit_lianxiren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="110dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:hint="请输入联系人"
+            android:lines="1"
+            android:textColor="@color/black_text2"
+            android:textColorHint="@color/text_hide_tip"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/image_line6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/edit_lianxiren"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_background" />
+        <LinearLayout
+            android:id="@+id/linearlayout_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_line6"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            >
+            <ImageView
+                android:id="@+id/image_choosenan"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/select_duigou"
+                android:layout_marginRight="5dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:layout_marginRight="10dp"
+                />
+
+            <ImageView
+                android:id="@+id/image_choosenv"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/select_duigou"
+                android:layout_marginRight="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女"
+                android:layout_marginRight="5dp"
+                />
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_line6"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="性别："
+            android:visibility="gone"
+            android:textColor="@color/black_text" />
+
+        <ImageView
+            android:id="@+id/image_line7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/linearlayout_sex"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_line7"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="电话："
+            android:textColor="@color/black_text" />
+
+        <EditText
+            android:id="@+id/edit_phonenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/image_line7"
+            android:layout_marginLeft="110dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:hint="请输入联系电话"
+            android:inputType="number"
+            android:lines="1"
+            android:textColor="@color/black_text2"
+            android:textColorHint="@color/text_hide_tip"
+            android:textSize="14dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="确认发布"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_morph_20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        />
+
+
+</LinearLayout>

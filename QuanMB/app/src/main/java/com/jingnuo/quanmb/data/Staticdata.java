@@ -2,6 +2,9 @@ package com.jingnuo.quanmb.data;
 
 import com.jingnuo.quanmb.entityclass.UserBean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2018/3/26.
  */
@@ -17,13 +20,16 @@ public class Staticdata {
     public static int ScreenWidth = 0;
 
     //用户是否已经登陆  true表示登录   flase表示未登录    待解决   退出程序后还为true
-    public static boolean isLogin = true;//默认为未登录
+    public static boolean isLogin = false;//默认为未登录
     //用户的token
     public static String token = "";
     public static String Userphonenumber = "";
 
 
     public  static UserBean static_userBean=new UserBean();
+
+    //发布任务需要向下一页传递map  这里把map写为全局变量
+    public static Map  map_task = new HashMap();
 
 
 

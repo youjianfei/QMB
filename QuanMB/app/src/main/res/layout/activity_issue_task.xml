@@ -161,7 +161,7 @@
                 android:textSize="14dp"
                 android:textColor="@color/text_hide_tip"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="45dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="110dp"
                 android:layout_below="@+id/image_line1"
@@ -172,7 +172,7 @@
                 android:src="@mipmap/more"
                 android:layout_marginTop="15dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="30dp"
                 android:layout_below="@+id/image_line1"
                 />
             <ImageView
@@ -204,7 +204,7 @@
                 android:textSize="14dp"
                 android:textColor="@color/text_hide_tip"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="45dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="110dp"
                 android:layout_below="@+id/image_line2"
@@ -215,7 +215,7 @@
                 android:src="@mipmap/more"
                 android:layout_marginTop="15dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="30dp"
                 android:layout_below="@+id/image_line2"
                 />
             <ImageView
@@ -256,6 +256,7 @@
                 android:layout_marginBottom="15dp"
                 />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -314,6 +315,66 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/text7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:text="添加照片(可不选)"
+                android:textColor="@color/black_text" />
+            <ImageView
+                android:id="@+id/image_line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/text7"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/gray_background" />
+            <ImageView
+                android:id="@+id/iamge_choosePIC1"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/image_line5"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/addpic"
+                android:scaleType="centerCrop"
+                />
+            <ImageView
+                android:id="@+id/iamge_choosePIC2"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/image_line5"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/addpic"
+                android:scaleType="centerCrop"
+                />
+            <ImageView
+                android:id="@+id/iamge_choosePIC3"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/image_line5"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/addpic"
+                android:scaleType="centerCrop"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/relative_3"
             android:layout_marginTop="8dp"
             android:background="@color/white">
@@ -327,7 +388,6 @@
                 android:text="任务佣金："
                 android:textColor="@color/text_title2"
                 android:textSize="15dp"
-
                 />
             <EditText
                 android:id="@+id/edit_charges"
@@ -345,12 +405,74 @@
                 android:layout_marginLeft="110dp"
                 android:layout_marginBottom="15dp"
                 />
+            <ImageView
+                android:id="@+id/image_line8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/edit_charges"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/gray_background" />
+            <TextView
+                android:id="@+id/textview_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:text="是否接受议价："
+                android:layout_below="@+id/image_line8"
+                android:textColor="@color/text_title2"
+                android:textSize="15dp"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image_line8"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                >
+                <ImageView
+                    android:id="@+id/image_choosejieshou"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/select_duigou"
+                    android:layout_marginRight="5dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="接受"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/image_choosejujue"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/select_duigou"
+                    android:layout_marginRight="5dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="拒绝"
+                    android:layout_marginRight="5dp"
+                    />
+
+
+            </LinearLayout>
+
         </RelativeLayout>
         <Button
             android:id="@+id/button_submitsave"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="确认发布"
+            android:text="下一步"
             android:textSize="15dp"
             android:textColor="@color/white"
             android:background="@drawable/button_morph_20dp"

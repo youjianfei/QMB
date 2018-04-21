@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="发布技能"
+            android:text="发布服务"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -264,7 +264,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
-                android:text="添加照片"
+                android:text="添加照片(可不选)"
                 android:textColor="@color/black_text" />
             <ImageView
                 android:id="@+id/image_line5"
@@ -275,14 +275,39 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/gray_background" />
             <ImageView
-                android:id="@+id/iamge_choosePIC"
-                android:layout_width="80dp"
+                android:id="@+id/iamge_choosePIC1"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/image_line5"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/addpic"
+                android:scaleType="centerCrop"
+                />
+            <ImageView
+                android:id="@+id/iamge_choosePIC2"
+                android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:layout_below="@+id/image_line5"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:src="@color/background"
+                android:src="@mipmap/addpic"
+                android:scaleType="centerCrop"
+                />
+            <ImageView
+                android:id="@+id/iamge_choosePIC3"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/image_line5"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/addpic"
+                android:scaleType="centerCrop"
                 />
 
         </RelativeLayout>

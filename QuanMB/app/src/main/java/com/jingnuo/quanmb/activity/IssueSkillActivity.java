@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,7 +59,9 @@ public class IssueSkillActivity extends BaseActivityother {
     EditText mEditview_phonenumber;
 
 
-    ImageView choosePIC;
+    ImageView choosePIC1;
+    ImageView choosePIC2;
+    ImageView choosePIC3;
 
     Button mButton_submit;
 
@@ -72,9 +76,11 @@ public class IssueSkillActivity extends BaseActivityother {
     String description="";//
     String release_address="郑州";//发布地点// TODO: 地点实现
     String detail_address="";//详细地点
-    String img_id="daiwancheng";//图片                   // TODO: 图片
+    String img_id="";//图片                   // TODO: 图片
     String contacts="";//联系人
     String mobile_no="";//电话
+    List<String> mList_picID;
+    int PICposition=0;
 
 
     Map map_issueSkill;
@@ -93,7 +99,9 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        permissionHelper=new PermissionHelper(IssueSkillActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
         map_issueSkill=new HashMap();
+        mList_picID=new ArrayList<>();
 
     }
 
@@ -122,36 +130,25 @@ public class IssueSkillActivity extends BaseActivityother {
 
             }
         });
-        choosePIC.setOnClickListener(new View.OnClickListener() {
+        choosePIC1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 permissionHelper=new PermissionHelper(IssueSkillActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
-                Permissionmanage permissionmanage=new Permissionmanage(permissionHelper, new InterfacePermission() {
-                    @Override
-                    public void onResult(boolean result) {
-                        LogUtils.LOG("ceshi",result+"","");
-                        if(result){
-                            ImageConfig imageConfig
-                                    = new ImageConfig.Builder(new GlideLoader())
-                                    // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
-                                    .steepToolBarColor(getResources().getColor(R.color.yellow_jianbian_end))
-                                    // 标题的背景颜色 （默认黑色）
-                                    .titleBgColor(getResources().getColor(R.color.yellow_jianbian_end))
-                                    // 提交按钮字体的颜色  （默认白色）
-                                    .titleSubmitTextColor(getResources().getColor(R.color.white))
-                                    // 标题颜色 （默认白色）
-                                    .titleTextColor(getResources().getColor(R.color.white))
-                                    .build();
-                            ImageSelector.open(IssueSkillActivity.this, imageConfig);   // 开启图片选择器
-                        }else {
-                            ToastUtils.showToast(IssueSkillActivity.this,"请允许开启照相功能，并读取本地文件");
-                        }
-                    }
-                });
-                permissionmanage.requestpermission();
-
-
-
+                PICposition=1;
+                choosePIC();//选择图片
+            }
+        });
+        choosePIC2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PICposition=2;
+                choosePIC();//选择图片
+            }
+        });
+        choosePIC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePIC();//选择图片
+                PICposition=3;
             }
         });
     }
@@ -167,7 +164,9 @@ public class IssueSkillActivity extends BaseActivityother {
         mEditview_phonenumber=findViewById(R.id.edit_skillpeoplename);
         mButton_submit=findViewById(R.id.button_submit);
 
-        choosePIC=findViewById(R.id.iamge_choosePIC);
+        choosePIC1=findViewById(R.id.iamge_choosePIC1);
+        choosePIC2=findViewById(R.id.iamge_choosePIC2);
+        choosePIC3=findViewById(R.id.iamge_choosePIC3);
     }
     boolean checknull(){
         if(mTextview_chooce.getText().equals("请选择")){
@@ -199,22 +198,25 @@ public class IssueSkillActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请填写手机号码");
             return false;
         }
+        for (String imageID : mList_picID) {
+            img_id=img_id+imageID+"%";
+        }
+        LogUtils.LOG("ceshi","图片ID:"+img_id,"上传图片返回拼接后");
         map_issueSkill.put("specialty_id",specialty_id);
         map_issueSkill.put("title",tittle);
         map_issueSkill.put("description",description);
         map_issueSkill.put("release_address",release_address);
         map_issueSkill.put("detail_address",detail_address);
-        map_issueSkill.put("img_id","1");
+        map_issueSkill.put("img_id",img_id);
         map_issueSkill.put("contacts",contacts);
         map_issueSkill.put("mobile_no",mobile_no);
-        map_issueSkill.put("client_no","90000000007");//客户号
-        map_issueSkill.put("business_no","1");//商户号
         map_issueSkill.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_issueSkill.put("service_area","郑州");
         //todo 从登录信息中获得商户号  客户号  post
         return true;
     }
     void request (Map map){
+        LogUtils.LOG("ceshi",map.toString(),"发布服务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -242,6 +244,41 @@ public class IssueSkillActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl+Urls.IssueSkill,this,1,map);
     }
+
+    void choosePIC(){
+        Permissionmanage permissionmanage=new Permissionmanage(permissionHelper, new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                LogUtils.LOG("ceshi",result+"","");
+                if(result){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//安卓7.0权限 代替了FileProvider方式   https://blog.csdn.net/xiaoyu940601/article/details/54406725
+                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        StrictMode.setVmPolicy(builder.build());
+                    }
+                    ImageConfig imageConfig
+                            = new ImageConfig.Builder(new GlideLoader())
+                            // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
+                            .steepToolBarColor(getResources().getColor(R.color.yellow_jianbian_end))
+                            // 标题的背景颜色 （默认黑色）
+                            .titleBgColor(getResources().getColor(R.color.yellow_jianbian_end))
+                            // 提交按钮字体的颜色  （默认白色）
+                            .titleSubmitTextColor(getResources().getColor(R.color.white))
+                            // 标题颜色 （默认白色）
+                            .titleTextColor(getResources().getColor(R.color.white))
+                            // 开启单选   （默认为多选）
+                            .singleSelect()
+                            .showCamera()
+                            // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
+                            .filePath("/ImageSelector/Pictures")
+                            .build();
+                    ImageSelector.open(IssueSkillActivity.this, imageConfig);   // 开启图片选择器
+                }else {
+                    ToastUtils.showToast(IssueSkillActivity.this,"请允许开启照相功能，并读取本地文件");
+                }
+            }
+        });
+        permissionmanage.requestpermission();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -255,12 +292,37 @@ public class IssueSkillActivity extends BaseActivityother {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
                 dataPictrue.add(mBitmap);
-                choosePIC.setImageBitmap(mBitmap);
+                switch (PICposition){
+                    case 1:
+                        choosePIC1.setImageBitmap(mBitmap);
+                        break;
+                    case 2:
+                        choosePIC2.setImageBitmap(mBitmap);
+                        break;
+                    case 3:
+                        choosePIC3.setImageBitmap(mBitmap);
+                        break;
+                }
                 UpLoadImage.getIntence(IssueSkillActivity.this, new Interface_loadImage_respose() {
                     @Override
                     public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"发布技能上传图片返回");
+                        LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
+                        int status = 0;
+                        String msg = "";
+                        String imageID="";
+                        try {
+                            JSONObject object = new JSONObject(respose);
+                            status = (Integer) object.get("code");//登录状态
+                            msg = (String) object.get("msg");//登录返回信息
 
+                            if(status==1){
+                                imageID=(String) object.get("imgID");
+                                LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
+                                mList_picID.add(imageID);
+                                    }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }).uploadImg(pathList,1);
 
