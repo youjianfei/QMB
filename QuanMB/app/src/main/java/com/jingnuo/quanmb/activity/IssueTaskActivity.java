@@ -168,6 +168,7 @@ public class IssueTaskActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 PICposition=2;
+                
                 choosePIC();//选择图片
             }
         });
