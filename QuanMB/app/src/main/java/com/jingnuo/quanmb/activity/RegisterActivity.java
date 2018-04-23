@@ -122,7 +122,7 @@ public class RegisterActivity extends BaseActivityother {
                 break;
             case R.id.button_getyanzhangma://获取验证码
                 phonenumber = mEdit_phonenumber.getText().toString();
-                LogUtils.LOG("ceshi","手机号"+phonenumber,"注册界面");
+                LogUtils.LOG("ceshi","手机号"+phonenumber+"url:","注册界面");
                 if (phonenumber.equals("")) {
                     LogUtils.LOG("ceshi","手机号"+phonenumber,getPackageName());
                     ToastUtils.showToast(this, "请输入手机号");

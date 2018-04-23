@@ -124,7 +124,7 @@ public class SkillDetailActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                Uri data = Uri.parse("tel:" + mSkilldetailsbean.getData().getDetail().get(0).getMobile_no());
+                Uri data = Uri.parse("tel:" + mSkilldetailsbean.getData().getDetail().getMobile_no());
                 intent.setData(data);
 
                 if (ActivityCompat.checkSelfPermission(SkillDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -166,13 +166,13 @@ public class SkillDetailActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi",respose,"服务详情");
                 mSkilldetailsbean=new Gson().fromJson(respose,SkillsdetailsBean.class);
-                mTextview_title.setText(mSkilldetailsbean.getData().getDetail().get(0).getTitle());
-                mTextview_issuetime.setText(Utils.getStrTime(mSkilldetailsbean.getData().getDetail().get(0).getRelease_date()+""));
-                mTextview_skilltype.setText(mSkilldetailsbean.getData().getDetail().get(0).getSpecialty_name());
-                mTextview_name.setText(mSkilldetailsbean.getData().getDetail().get(0).getContacts());
-                mTextview_shopaddress.setText(mSkilldetailsbean.getData().getDetail().get(0).getRelease_address());
-                mTextview_content.setText(mSkilldetailsbean.getData().getDetail().get(0).getDescription());
-                mTextview_shopname.setText(mSkilldetailsbean.getData().getDetail().get(0).getBusiness_name());
+                mTextview_title.setText(mSkilldetailsbean.getData().getDetail().getTitle());
+                mTextview_issuetime.setText(Utils.getStrTime(mSkilldetailsbean.getData().getDetail().getRelease_date()+""));
+                mTextview_skilltype.setText(mSkilldetailsbean.getData().getDetail().getSpecialty_name());
+                mTextview_name.setText(mSkilldetailsbean.getData().getDetail().getContacts());
+                mTextview_shopaddress.setText(mSkilldetailsbean.getData().getDetail().getRelease_address());
+                mTextview_content.setText(mSkilldetailsbean.getData().getDetail().getDescription());
+                mTextview_shopname.setText(mSkilldetailsbean.getData().getDetail().getBusiness_name());
 
             }
 

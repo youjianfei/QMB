@@ -1,7 +1,5 @@
 package com.jingnuo.quanmb.entityclass;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2018/4/17.
  */
@@ -10,14 +8,22 @@ public class SkillsdetailsBean {
 
 
     /**
-     * data : {"detail":[{"business_no":"1","client_no":"90000000007","contacts":"李师傅","createDate":1523951173000,"createName":"root@192.168.1.184","description":"买卖外卖","img_id":"1","mobile_no":"15729112602","release_address":"afsafsfwsfewfew","release_date":1523951172000,"release_specialty_id":1000000001,"service_area":"郑州","specialty_id":2011,"specialty_name":"帮送","title":"买卖","updateDate":1523958837000,"updateName":"root@192.168.1.184"}]}
+     * code : 1
+     * data : {"detail":{"business_name":"ad","business_no":"1","client_no":"90000000007","contacts":"李师傅","createDate":1523951173000,"createName":"root@192.168.1.184","description":"买卖外卖","detail_address":"","img_url":"d:aaa,c:ccc,f:fff,","mobile_no":"15729112602","release_address":"afsafsfwsfewfew","release_date":1523951172000,"release_specialty_id":1000000001,"service_area":"郑州","specialty_id":2011,"specialty_name":"帮送","status":"","title":"买卖","updateDate":1524293126000,"updateName":"root@192.168.1.184"}}
      * message : 获取帖子详情成功
-     * status : 1
      */
 
+    private int code;
     private DataBean data;
     private String message;
-    private int status;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public DataBean getData() {
         return data;
@@ -35,34 +41,32 @@ public class SkillsdetailsBean {
         this.message = message;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public static class DataBean {
-        private List<DetailBean> detail;
+        /**
+         * detail : {"business_name":"ad","business_no":"1","client_no":"90000000007","contacts":"李师傅","createDate":1523951173000,"createName":"root@192.168.1.184","description":"买卖外卖","detail_address":"","img_url":"d:aaa,c:ccc,f:fff,","mobile_no":"15729112602","release_address":"afsafsfwsfewfew","release_date":1523951172000,"release_specialty_id":1000000001,"service_area":"郑州","specialty_id":2011,"specialty_name":"帮送","status":"","title":"买卖","updateDate":1524293126000,"updateName":"root@192.168.1.184"}
+         */
 
-        public List<DetailBean> getDetail() {
+        private DetailBean detail;
+
+        public DetailBean getDetail() {
             return detail;
         }
 
-        public void setDetail(List<DetailBean> detail) {
+        public void setDetail(DetailBean detail) {
             this.detail = detail;
         }
 
         public static class DetailBean {
             /**
+             * business_name : ad
              * business_no : 1
              * client_no : 90000000007
              * contacts : 李师傅
              * createDate : 1523951173000
              * createName : root@192.168.1.184
              * description : 买卖外卖
-             * img_id : 1
+             * detail_address :
+             * img_url : d:aaa,c:ccc,f:fff,
              * mobile_no : 15729112602
              * release_address : afsafsfwsfewfew
              * release_date : 1523951172000
@@ -70,19 +74,21 @@ public class SkillsdetailsBean {
              * service_area : 郑州
              * specialty_id : 2011
              * specialty_name : 帮送
+             * status :
              * title : 买卖
-             * updateDate : 1523958837000
+             * updateDate : 1524293126000
              * updateName : root@192.168.1.184
              */
 
-            private String business_no;
             private String business_name;
+            private String business_no;
             private String client_no;
             private String contacts;
             private long createDate;
             private String createName;
             private String description;
-            private String img_id;
+            private String detail_address;
+            private String img_url;
             private String mobile_no;
             private String release_address;
             private long release_date;
@@ -90,6 +96,7 @@ public class SkillsdetailsBean {
             private String service_area;
             private int specialty_id;
             private String specialty_name;
+            private String status;
             private String title;
             private long updateDate;
             private String updateName;
@@ -150,12 +157,20 @@ public class SkillsdetailsBean {
                 this.description = description;
             }
 
-            public String getImg_id() {
-                return img_id;
+            public String getDetail_address() {
+                return detail_address;
             }
 
-            public void setImg_id(String img_id) {
-                this.img_id = img_id;
+            public void setDetail_address(String detail_address) {
+                this.detail_address = detail_address;
+            }
+
+            public String getImg_url() {
+                return img_url;
+            }
+
+            public void setImg_url(String img_url) {
+                this.img_url = img_url;
             }
 
             public String getMobile_no() {
@@ -212,6 +227,14 @@ public class SkillsdetailsBean {
 
             public void setSpecialty_name(String specialty_name) {
                 this.specialty_name = specialty_name;
+            }
+
+            public String getStatus() {
+                return status;
+            }
+
+            public void setStatus(String status) {
+                this.status = status;
             }
 
             public String getTitle() {

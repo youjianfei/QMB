@@ -10,6 +10,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.activity.RegisterActivity;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -34,6 +35,7 @@ public class SendYanZhengMa {
     }
 
     public void sendyanzhengma(Activity activity, Map map){
+        LogUtils.LOG("ceshi","发送+"+Urls.Baseurl+Urls.sendzhuceyanzhengma,"发送验证码位置");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
