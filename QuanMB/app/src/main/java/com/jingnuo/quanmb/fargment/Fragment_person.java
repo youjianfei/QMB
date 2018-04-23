@@ -120,6 +120,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 Staticdata.isLogin=false;
                 Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent_logout);
+                getActivity().finish();
                 break;
         }
 
