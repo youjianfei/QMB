@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="专业灯具上门安装维修清洗养护"
+                android:text="服务标题"
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13dp"
-                android:text="发布时间   2013.03.25"
+                android:text="发布时间   "
                 android:textColor="@color/text_hide_tip"
                 android:layout_below="@+id/text_shopskilltitel"
                 android:layout_marginTop="10dp"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13dp"
-                android:text="已有1254人浏览"
+                android:text="已有1000人浏览"
                 android:textColor="@color/text_hide_tip"
                 android:layout_below="@+id/text_shopskilltitel"
                 android:layout_marginTop="10dp"
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13dp"
-                android:text="维修/安装"
+                android:text=""
                 android:textColor="@color/black_text"
                 android:layout_below="@+id/image_line1"
                 android:layout_toRightOf="@+id/text_a"
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13dp"
-                android:text="李师傅"
+                android:text="联系人"
                 android:textColor="@color/black_text"
                 android:layout_below="@+id/image_line2"
                 android:layout_toRightOf="@+id/text_a"
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13dp"
-                android:text="二七区 万达小区 1号楼"
+                android:text="商家地址"
                 android:textColor="@color/black_text"
                 android:layout_below="@+id/image_line3"
                 android:layout_toRightOf="@+id/text_a"
@@ -270,7 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
-                android:text="悟空和乌普在天神殿打斗，乌普这时已经将悟空术还有龟派气功等各种用气绝技领悟的很通透。悟空正想对乌普使用龟派气功，此时贝吉塔突然出现，一声大喊:卡卡罗特，你有时间在这里训练这小子，还不如跟我单挑然后暗笑了一番，突然间，一阵惊天地泣鬼神的吼声，贝吉塔化身超级赛亚人3，将天神殿震得直晃动！"
+                android:text="服务详情"
                 android:textColor="@color/text_hide_tip"
                 android:layout_below="@+id/image_line6"
                 android:layout_marginTop="10dp"
@@ -301,12 +301,61 @@
                 android:layout_centerHorizontal="true"
                 android:lines="1"
                 />
+
+            <RelativeLayout
+                android:id="@+id/skill_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_below="@+id/text_more"
+                >
+
+
+                <ImageView
+                    android:id="@+id/iamge_skillPIC1"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@mipmap/addpic"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/iamge_skillPIC2"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@mipmap/addpic"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/iamge_skillPIC3"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@mipmap/addpic"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    />
+
+            </RelativeLayout>
+
+
             <ImageView
                 android:id="@+id/image_line8"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/text_more"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/skill_pic"
                 android:background="@color/gray_background"
                 />
             <ImageView
@@ -323,7 +372,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
-                android:text="郑州灯管家"
+                android:text="商家姓名"
                 android:textColor="@color/black_text"
                 android:layout_below="@+id/image_line8"
                 android:layout_marginTop="27.5dp"

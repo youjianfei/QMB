@@ -38,17 +38,18 @@ public class UpLoadImage {
     private  static  UpLoadImage mUpLoadImage;
 
 
-    public UpLoadImage(Context context) {
+    public UpLoadImage(Context context, Interface_loadImage_respose interface_loadImage_respose) {
         this.context=context.getApplicationContext();
+        this.interface_loadImage_respose=interface_loadImage_respose;
     }
 
-    public  static  UpLoadImage getIntence(Context context, Interface_loadImage_respose interface_loadImage_respose){//单例模式
-        if(mUpLoadImage==null){
-            mUpLoadImage= new UpLoadImage(context);
-            mUpLoadImage.interface_loadImage_respose=interface_loadImage_respose;//接口回调
-        }
-        return  mUpLoadImage;
-    }
+//    public  static  UpLoadImage getIntence(Context context, Interface_loadImage_respose interface_loadImage_respose){//单例模式
+//        if(mUpLoadImage==null){
+//            mUpLoadImage= new UpLoadImage(context);
+//            mUpLoadImage.interface_loadImage_respose=interface_loadImage_respose;//接口回调
+//        }
+//        return  mUpLoadImage;
+//    }
 
 
     public  void uploadImg(List<String> pathList, int  type) {
@@ -100,6 +101,10 @@ public class UpLoadImage {
             }
         });
 
+    }
+
+    public void cancleOkhttp(){
+        client.dispatcher().cancelAll();
     }
 
 }

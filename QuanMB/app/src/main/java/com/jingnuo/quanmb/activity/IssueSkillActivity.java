@@ -76,7 +76,7 @@ public class IssueSkillActivity extends BaseActivityother {
     String description="";//
     String release_address="郑州";//发布地点// TODO: 地点实现
     String detail_address="";//详细地点
-    String img_id="";//图片                   // TODO: 图片
+    String img_id="";//图片
     String contacts="";//联系人
     String mobile_no="";//电话
     List<String> mList_picID;
@@ -199,7 +199,7 @@ public class IssueSkillActivity extends BaseActivityother {
             return false;
         }
         for (String imageID : mList_picID) {
-            img_id=img_id+imageID+"%";
+            img_id=img_id+imageID+",";
         }
         LogUtils.LOG("ceshi","图片ID:"+img_id,"上传图片返回拼接后");
         map_issueSkill.put("specialty_id",specialty_id);
@@ -212,7 +212,6 @@ public class IssueSkillActivity extends BaseActivityother {
         map_issueSkill.put("mobile_no",mobile_no);
         map_issueSkill.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_issueSkill.put("service_area","郑州");
-        //todo 从登录信息中获得商户号  客户号  post
         return true;
     }
     void request (Map map){
@@ -303,7 +302,7 @@ public class IssueSkillActivity extends BaseActivityother {
                         choosePIC3.setImageBitmap(mBitmap);
                         break;
                 }
-                UpLoadImage.getIntence(IssueSkillActivity.this, new Interface_loadImage_respose() {
+                    new  UpLoadImage(IssueSkillActivity.this, new Interface_loadImage_respose() {
                     @Override
                     public void onSuccesses(String respose) {
                         LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");

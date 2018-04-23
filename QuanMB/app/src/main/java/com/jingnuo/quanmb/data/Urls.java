@@ -28,7 +28,8 @@ public class Urls {
     public  static String square_default="/task/querySpecialty/search";//帮帮广场
     public  static String tasktype="/task/querySpecialty/taskTypeList";//任务类型列表一级
     public  static String tasksort="/task/querySort/getSortBy";//任务智能排序方式
-    public  static String taskdetails="/task/taskDetail/getTaskDetail";//任务详情
+    public  static String taskdetails="/task/taskDetail/getTaskDetail";//任务详情  ?id=
+    public  static String helptask="/task/taskDetail/taskHelp";//确认帮助 ?id=
     public  static String issuetask="/task/querySpecialty/TaskAnnouncementList";//发布任务
 
     //专业模块

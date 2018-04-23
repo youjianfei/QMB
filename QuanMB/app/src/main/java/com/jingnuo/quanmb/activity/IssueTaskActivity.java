@@ -129,7 +129,7 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_time.setOnClickListener(new View.OnClickListener() {//时间选择器  选择预约时间
             @Override
             public void onClick(View view) {
-                DataTime_select.getIntence(IssueTaskActivity.this, new InterfaceDate_select() {
+               new  DataTime_select(IssueTaskActivity.this, new InterfaceDate_select() {
                     @Override
                     public void onResult(final String time) {
                         LogUtils.LOG("ceshi","时间选择器+"+mTextview_time.toString(),"时间团择期");
@@ -137,7 +137,7 @@ public class IssueTaskActivity extends BaseActivityother {
                    runOnUiThread(new Runnable() {
                        @Override
                        public void run() {
-                           mTextview_time.setText(time);//todo 界面销毁后复制无效
+                           mTextview_time.setText(time);
                        }
                    });
 
@@ -252,9 +252,9 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请填写详细地址");
             return false;
         }
-
+        LogUtils.LOG("ceshi",mList_picID.size()+".............","tupianOD");
         for (String imageID : mList_picID) {
-            img_id=img_id+imageID+"%";
+            img_id=img_id+imageID+",";
         }
         map_issueTask.put("task_name",task_name+"");
         map_issueTask.put("task_description",task_description+"");
@@ -339,7 +339,7 @@ public class IssueTaskActivity extends BaseActivityother {
                         choosePIC3.setImageBitmap(mBitmap);
                         break;
                 }
-                UpLoadImage.getIntence(IssueTaskActivity.this, new Interface_loadImage_respose() {
+               new  UpLoadImage(IssueTaskActivity.this, new Interface_loadImage_respose() {
                     @Override
                     public void onSuccesses(String respose) {
                         LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
@@ -355,6 +355,7 @@ public class IssueTaskActivity extends BaseActivityother {
                                 imageID=(String) object.get("imgID");
                                 LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
                                 mList_picID.add(imageID);
+                                LogUtils.LOG("ceshi",mList_picID.size()+"tupiangeshu","发布技能上传图片返回imageID333");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -365,5 +366,17 @@ public class IssueTaskActivity extends BaseActivityother {
             }
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.LOG("ceshi","onDestroy","121212");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.LOG("ceshi","onPause","121212");
     }
 }

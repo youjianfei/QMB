@@ -1,18 +1,25 @@
 package com.jingnuo.quanmb.entityclass;
 
-import java.util.List;
-
 public class TaskDetailBean {
 
+
     /**
-     * data : [{"Status_name":"待帮助","commission":1001,"detailed_address":"1709","img_url":"","name":"王丽","task_EndDate":"2018-04-23 10:34:23","task_StartDate":"2018-04-18 10:34:19","task_description":"1单元顶层无电梯","task_name":"修水管","user_grade":"一级"}]
+     * data : {"Status_name":"已接单","commission":233,"detailed_address":"detailed_address","img_url":"d:aaa","is_counteroffer":"1","name":"王丽","task_EndDate":"2018-04-17 15:31:03","task_StartDate":"2018-04-16 15:30:58","task_Status_code":"02","task_description":"task_description","task_name":"task_name","user_grade":"一级"}
      * message : 获取列表成功
      * status : 1
      */
 
+    private DataBean data;
     private String message;
     private int status;
-    private List<DataBean> data;
+
+    public DataBean getData() {
+        return data;
+    }
+
+    public void setData(DataBean data) {
+        this.data = data;
+    }
 
     public String getMessage() {
         return message;
@@ -30,25 +37,19 @@ public class TaskDetailBean {
         this.status = status;
     }
 
-    public List<DataBean> getData() {
-        return data;
-    }
-
-    public void setData(List<DataBean> data) {
-        this.data = data;
-    }
-
     public static class DataBean {
         /**
-         * Status_name : 待帮助
-         * commission : 1001
-         * detailed_address : 1709
-         * img_url :
+         * Status_name : 已接单
+         * commission : 233
+         * detailed_address : detailed_address
+         * img_url : d:aaa
+         * is_counteroffer : 1
          * name : 王丽
-         * task_EndDate : 2018-04-23 10:34:23
-         * task_StartDate : 2018-04-18 10:34:19
-         * task_description : 1单元顶层无电梯
-         * task_name : 修水管
+         * task_EndDate : 2018-04-17 15:31:03
+         * task_StartDate : 2018-04-16 15:30:58
+         * task_Status_code : 02
+         * task_description : task_description
+         * task_name : task_name
          * user_grade : 一级
          */
 
@@ -56,9 +57,11 @@ public class TaskDetailBean {
         private int commission;
         private String detailed_address;
         private String img_url;
+        private String is_counteroffer;
         private String name;
         private String task_EndDate;
         private String task_StartDate;
+        private String task_Status_code;
         private String task_description;
         private String task_name;
         private String user_grade;
@@ -95,6 +98,14 @@ public class TaskDetailBean {
             this.img_url = img_url;
         }
 
+        public String getIs_counteroffer() {
+            return is_counteroffer;
+        }
+
+        public void setIs_counteroffer(String is_counteroffer) {
+            this.is_counteroffer = is_counteroffer;
+        }
+
         public String getName() {
             return name;
         }
@@ -117,6 +128,14 @@ public class TaskDetailBean {
 
         public void setTask_StartDate(String task_StartDate) {
             this.task_StartDate = task_StartDate;
+        }
+
+        public String getTask_Status_code() {
+            return task_Status_code;
+        }
+
+        public void setTask_Status_code(String task_Status_code) {
+            this.task_Status_code = task_Status_code;
         }
 
         public String getTask_description() {

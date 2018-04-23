@@ -31,17 +31,11 @@ public class DataTime_select {
     String startime;
     private  static  DataTime_select dataTime_select;
     private Context context;
-    private DataTime_select(Context context){
-        this.context=context.getApplicationContext();
+    public DataTime_select(Context context, InterfaceDate_select mInterfaceDare){
+        this.context=context;
         this.mInterfaceDare=mInterfaceDare;
     }
-    public  static  DataTime_select getIntence(Context context,InterfaceDate_select mInterfaceDare){//单例模式
-        if(dataTime_select==null){
-            dataTime_select= new DataTime_select(context);
-            dataTime_select.mInterfaceDare=mInterfaceDare;
-        }
-        return  dataTime_select;
-    }
+
 
     public  void timeSelect(final Activity activity){//时间选择器  先选择日期，在选择时间  0:开始；1:结束
         YEAR=month.get(Calendar.YEAR);

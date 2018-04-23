@@ -71,7 +71,7 @@ public class Adapter_shophall extends BaseAdapter {
                 intent.setData(data);
 
                 if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
+
 //                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
                     mPermission.request(new PermissionHelper.PermissionCallback() {
                         @Override
