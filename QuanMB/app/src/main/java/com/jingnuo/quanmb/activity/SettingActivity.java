@@ -13,8 +13,6 @@ import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 
 public class SettingActivity extends BaseActivityother {
     //控件
-    TextView mTextview_changephonenumber;
-    TextView mTextview_changepassword;
 
     Button mButton_logout;
     @Override
@@ -34,15 +32,11 @@ public class SettingActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mTextview_changepassword.setOnClickListener(this);
-        mTextview_changephonenumber.setOnClickListener(this);
         mButton_logout.setOnClickListener(this);
     }
 
     @Override
     protected void initView() {
-        mTextview_changephonenumber=findViewById(R.id.textview_changephone);
-        mTextview_changepassword=findViewById(R.id.textview_changepassword);
         mButton_logout=findViewById(R.id.button_logout);
     }
 
@@ -50,16 +44,7 @@ public class SettingActivity extends BaseActivityother {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
-            case R.id.textview_changepassword :
-                Intent intent_changepassward=new Intent(this,ChangepasswordActivity.class);
-                startActivity(intent_changepassward);
 
-                break;
-            case R.id.textview_changephone :
-                Intent intent_changephonenumber=new Intent(this,ChangephoneNumberActivity.class);
-                startActivity(intent_changephonenumber);
-
-                break;
             case R.id.button_logout :
                 SharedPreferencesUtils.putString(SettingActivity.this,"QMB","password","");
                 Staticdata.isLogin=false;

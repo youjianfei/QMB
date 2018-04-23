@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
+import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
 
@@ -31,12 +33,16 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     View rootview;
 
     //控件
-    TextView mTextview_authentication,mTextview_shopin;
-    RelativeLayout mRelativelayout_address;
+    TextView mTextview_banghsou,mTextview_shopcenter;
+    TextView mTextview_address;
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
     TextView mTextview_nickname;
     TextView mTextview_phonenumber;
+
+
+    TextView mTextview_logout;
+
 
     @Nullable
     @Override
@@ -54,11 +60,12 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     }
 
     private void initlistener() {
-        mTextview_authentication.setOnClickListener(this);
-        mRelativelayout_address.setOnClickListener(this);
+        mTextview_banghsou.setOnClickListener(this);
+        mTextview_address.setOnClickListener(this);
         mImageview_setting.setOnClickListener(this);
         mCircleImage.setOnClickListener(this);
-        mTextview_shopin.setOnClickListener(this);
+        mTextview_shopcenter.setOnClickListener(this);
+        mTextview_logout.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -74,23 +81,24 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     }
 
     private void initview() {
-        mTextview_authentication = rootview.findViewById(R.id.textview_authentication);
-        mRelativelayout_address=rootview.findViewById(R.id.relative_address);
+        mTextview_banghsou = rootview.findViewById(R.id.textview_bangshou);
+        mTextview_address=rootview.findViewById(R.id.textview_address);
         mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
-        mTextview_shopin=rootview.findViewById(R.id.textview_shopin);
+        mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
         mTextview_nickname=rootview.findViewById(R.id.text_username);
         mTextview_phonenumber=rootview.findViewById(R.id.textview_phonenumber);
+        mTextview_logout=rootview.findViewById(R.id.textview_logout);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.textview_authentication:
+            case R.id.textview_bangshou:
                 Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
                 getActivity().startActivity(intent_anthentication);
                 break;
-            case R.id.relative_address:
+            case R.id.textview_address:
                 Intent intent_datiladdress = new Intent(getActivity(), DatailAddressActivity.class);
                 getActivity().startActivity(intent_datiladdress);
                 break;
@@ -102,9 +110,16 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 Intent intent_personInfo=new Intent(getActivity(), PersonInfoActivity.class);
                 getActivity().startActivity(intent_personInfo);
                 break;
-            case  R.id.textview_shopin:
+            case  R.id.textview_shopcenter:
                 Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
                 getActivity().startActivity(intent_shopin);
+                break;
+
+            case R.id.textview_logout:
+                SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
+                Staticdata.isLogin=false;
+                Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent_logout);
                 break;
         }
 

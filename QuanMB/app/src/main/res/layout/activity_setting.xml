@@ -43,41 +43,7 @@
         android:paddingBottom="15dp"
         />
 
-    <TextView
-        android:id="@+id/textview_changephone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="修改绑定手机号"
-        android:layout_marginTop="1dp"
-        android:layout_below="@+id/text1"
-        android:textColor="@color/black_text"
-        android:paddingLeft="20dp"
-        android:background="@color/white"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        />
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:src="@mipmap/more"
-        android:layout_below="@+id/text1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="23dp"
-        />
-    <TextView
-        android:id="@+id/textview_changepassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="修改密码"
-        android:layout_marginTop="1dp"
-        android:layout_below="@+id/textview_changephone"
-        android:textColor="@color/black_text"
-        android:paddingLeft="20dp"
-        android:background="@color/white"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        />
+
     <ImageView
         android:layout_width="15dp"
         android:layout_height="15dp"
@@ -93,7 +59,7 @@
         android:layout_height="wrap_content"
         android:text="意见反馈"
         android:layout_marginTop="8dp"
-        android:layout_below="@+id/textview_changepassword"
+        android:layout_below="@+id/text1"
         android:textColor="@color/black_text"
         android:paddingLeft="20dp"
         android:background="@color/white"

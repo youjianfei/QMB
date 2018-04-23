@@ -35,6 +35,7 @@ public class PersonInfoActivity extends BaseActivityother {
     protected void initListener() {
         mTextview_changepassword.setOnClickListener(this);
         mtextview_nickname.setOnClickListener(this);
+        mtextview_phonenumber.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +57,11 @@ public class PersonInfoActivity extends BaseActivityother {
             Intent intent_nickname =new Intent(this,SetNicknameActivity.class);
             startActivity(intent_nickname);
             break;
+        case R.id.text_phonrnumber:
+            Intent intent_change_phone =new Intent(this,ChangephoneNumberActivity.class);
+            startActivity(intent_change_phone);
+            break;
+
 
     }
     }
