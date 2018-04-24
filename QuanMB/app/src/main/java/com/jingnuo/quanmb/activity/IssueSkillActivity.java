@@ -69,6 +69,7 @@ public class IssueSkillActivity extends BaseActivityother {
     //对象
     PermissionHelper permissionHelper;
     Popwindow_SkillType mPopwindow_skilltype;
+    UpLoadImage upLoadImage;
 
     //数据
     String  specialty_id ="";//专业类形
@@ -93,7 +94,28 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        upLoadImage=new UpLoadImage(this, new Interface_loadImage_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
+                int status = 0;
+                String msg = "";
+                String imageID="";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
 
+                    if(status==1){
+                        imageID=(String) object.get("imgID");
+                        LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
+                        mList_picID.add(imageID);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -302,28 +324,7 @@ public class IssueSkillActivity extends BaseActivityother {
                         choosePIC3.setImageBitmap(mBitmap);
                         break;
                 }
-                    new  UpLoadImage(IssueSkillActivity.this, new Interface_loadImage_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
-                        int status = 0;
-                        String msg = "";
-                        String imageID="";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("msg");//登录返回信息
-
-                            if(status==1){
-                                imageID=(String) object.get("imgID");
-                                LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
-                                mList_picID.add(imageID);
-                                    }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).uploadImg(pathList,1);
+                   upLoadImage.uploadImg(pathList,6);
 
             }
         }

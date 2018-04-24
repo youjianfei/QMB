@@ -40,6 +40,12 @@ public class Urls {
     public  static String IssueSkill="business/releaseSpecialty";//发布专业    post
 
 
+    //帮手模块
+    public  static String authenticationHelper="helper/helperReal";//帮手认证
+
+
+
+
 
 
 

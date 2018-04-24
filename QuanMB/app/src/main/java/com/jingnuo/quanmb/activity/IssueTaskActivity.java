@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Parcelable;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,7 @@ public class IssueTaskActivity extends BaseActivityother {
     //对象
     Popwindow_SkillType mPopwindow_skilltype;
     PermissionHelper permissionHelper;
+    UpLoadImage upLoadImage;
 
     //数据
     String task_name = "";
@@ -94,6 +96,29 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        upLoadImage=new UpLoadImage(this, new Interface_loadImage_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
+                int status = 0;
+                String msg = "";
+                String imageID="";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+
+                    if(status==1){
+                        imageID=(String) object.get("imgID");
+                        LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
+                        mList_picID.add(imageID);
+                        LogUtils.LOG("ceshi",mList_picID.size()+"tupiangeshu","发布技能上传图片返回imageID333");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -322,12 +347,11 @@ public class IssueTaskActivity extends BaseActivityother {
 
             // Get Image Path List
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
-            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
+//            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
             for (String path : pathList) {
-                Log.i("ImagePathList", path);
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
-                dataPictrue.add(mBitmap);
+//                dataPictrue.add(mBitmap);
                 switch (PICposition){
                     case 1:
                         choosePIC1.setImageBitmap(mBitmap);
@@ -339,44 +363,23 @@ public class IssueTaskActivity extends BaseActivityother {
                         choosePIC3.setImageBitmap(mBitmap);
                         break;
                 }
-               new  UpLoadImage(IssueTaskActivity.this, new Interface_loadImage_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
-                        int status = 0;
-                        String msg = "";
-                        String imageID="";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("msg");//登录返回信息
-
-                            if(status==1){
-                                imageID=(String) object.get("imgID");
-                                LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
-                                mList_picID.add(imageID);
-                                LogUtils.LOG("ceshi",mList_picID.size()+"tupiangeshu","发布技能上传图片返回imageID333");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).uploadImg(pathList,1);
+                    upLoadImage.uploadImg(pathList,2);
 
             }
         }
 
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissionHelper != null) {
+            permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.LOG("ceshi","onDestroy","121212");
+        upLoadImage=null;
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LogUtils.LOG("ceshi","onPause","121212");
-    }
 }
