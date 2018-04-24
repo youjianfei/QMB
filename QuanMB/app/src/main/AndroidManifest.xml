@@ -80,7 +80,9 @@
         <activity android:name="com.jingnuo.quanmb.activity.ShopCenterActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.SetNicknameActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.chooseImageActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssueTaskNextActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.IssueTaskNextActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.HelperOrderActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.SystemMessageActivity"></activity>
     </application>
 
 </manifest>

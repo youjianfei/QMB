@@ -126,9 +126,11 @@ public class LaunchActivity extends BaseActivityother {
     }
 
     void request(Map map){
+        LogUtils.LOG("ceshi", "登录MAP+"+map , "fragment_account");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+
                 int  status=0;
                 String msg="";
                 try {
@@ -142,6 +144,7 @@ public class LaunchActivity extends BaseActivityother {
                     userBean=new Gson().fromJson(respose,UserBean.class);
                     Staticdata.static_userBean=userBean;
                     token=userBean.getData().getUser_token();
+
                     LogUtils.LOG("ceshi", userBean.getData().getUser_token() , "fragment_account");
                     isLogin = true;
 

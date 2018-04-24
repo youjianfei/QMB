@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="65dp"
                     android:layout_marginTop="22dp"
-                    android:text="我的发布"
+                    android:text="发布任务"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -184,7 +184,7 @@
                     android:layout_below="@+id/image1"
                     android:layout_marginLeft="65dp"
                     android:layout_marginTop="22dp"
-                    android:text="我的发布"
+                    android:text="我的订单"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -200,7 +200,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="35dp"
                     android:layout_marginTop="22dp"
-                    android:text="我的订单" />
+                    android:text="我的发布" />
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
@@ -217,7 +217,7 @@
                     android:layout_marginRight="35dp"
                     android:layout_marginTop="22dp"
                     android:layout_below="@+id/image1"
-                    android:text="关于我们" />
+                    android:text="我的认证" />
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"

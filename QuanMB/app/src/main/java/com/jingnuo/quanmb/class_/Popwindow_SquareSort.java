@@ -261,7 +261,7 @@ public class Popwindow_SquareSort {
                 TYpe="";
                 for(int i=0;i<mData_filter_task.size();i++){
                     if(mData_filter_task.get(i).isChoose()){
-                        TYpe=TYpe+mData_filter_task.get(i).getId()+"%";
+                        TYpe=TYpe+mData_filter_task.get(i).getId()+",";
                     }
                 }
                 LogUtils.LOG("ceshi","条件拼接"+TYpe,"任务条件筛选");

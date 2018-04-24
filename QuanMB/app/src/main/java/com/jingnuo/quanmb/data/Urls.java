@@ -32,12 +32,13 @@ public class Urls {
     public  static String helptask="/task/taskDetail/taskHelp";//确认帮助 ?id=
     public  static String issuetask="/task/querySpecialty/TaskAnnouncementList";//发布任务
 
-    //专业模块
+    //专业/商家模块
     public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
     public  static String Skillmenu_right="major/searchTwo";//找专业二级菜单list
     public  static String Skillmenulist="major/searchPost";//二级菜单点开列表    参数  specialty_id
     public  static String Skilldetail="business/queryPostDetail";//服务内容详情    参数  id  get请求
     public  static String IssueSkill="business/releaseSpecialty";//发布专业    post
+    public  static String shopIn="business/commitApply";//商家入驻审核    post
 
 
     //帮手模块
@@ -45,7 +46,8 @@ public class Urls {
 
 
 
-
+    //消息模块
+    public static String  pushMessage="messsageCon/getMessageByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
 
 
 

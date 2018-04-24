@@ -9,7 +9,7 @@ public class UserBean {
 
     /**
      * code : 1
-     * data : {"appuser":{"client_no":"","createDate":"2018-04-11 17:20:25","createName":"root@192.168.1.184","mobile_no":"18539931923","nick_name":"123","role":"","status":"","updateDate":"2018-04-12 09:44:15","updateName":"root@192.168.1.184","user_grade":"1","user_id":"34","user_name":"18539931923","user_password":"0ba03e4f53f18469","user_reputation":"100"},"user_token":"8d8a6a616f52159528aa5b2ae722a6a9"}
+     * data : {"appuser":{"age":9,"agreement_status":"y","birthday":"2018-04-02 00:00:00","cer_no":"410323","cer_type":"1","client_no":"90000000009","createDate":"2018-04-23 09:45:07","createName":"root@192.168.1.184","mobile_no":"18539931923","name":"小猪佩奇","nick_name":"333","role":"1","sex":"0","status":"","updateDate":"2018-04-24 18:13:53","updateName":"root@192.168.1.184","user_grade":"1","user_id":"1000000006","user_name":"18539931923","user_password":"565491d704013245","user_reputation":"100"},"business_status":1,"helper_status":0,"user_token":"6895de7d97e204754b18a50efc37d351"}
      * message : 登录成功
      */
 
@@ -43,11 +43,15 @@ public class UserBean {
 
     public static class DataBean {
         /**
-         * appuser : {"client_no":"","createDate":"2018-04-11 17:20:25","createName":"root@192.168.1.184","mobile_no":"18539931923","nick_name":"123","role":"","status":"","updateDate":"2018-04-12 09:44:15","updateName":"root@192.168.1.184","user_grade":"1","user_id":"34","user_name":"18539931923","user_password":"0ba03e4f53f18469","user_reputation":"100"}
-         * user_token : 8d8a6a616f52159528aa5b2ae722a6a9
+         * appuser : {"age":9,"agreement_status":"y","birthday":"2018-04-02 00:00:00","cer_no":"410323","cer_type":"1","client_no":"90000000009","createDate":"2018-04-23 09:45:07","createName":"root@192.168.1.184","mobile_no":"18539931923","name":"小猪佩奇","nick_name":"333","role":"1","sex":"0","status":"","updateDate":"2018-04-24 18:13:53","updateName":"root@192.168.1.184","user_grade":"1","user_id":"1000000006","user_name":"18539931923","user_password":"565491d704013245","user_reputation":"100"}
+         * business_status : 1
+         * helper_status : 0
+         * user_token : 6895de7d97e204754b18a50efc37d351
          */
 
         private AppuserBean appuser;
+        private int business_status;
+        private int helper_status;
         private String user_token;
 
         public AppuserBean getAppuser() {
@@ -56,6 +60,22 @@ public class UserBean {
 
         public void setAppuser(AppuserBean appuser) {
             this.appuser = appuser;
+        }
+
+        public int getBusiness_status() {
+            return business_status;
+        }
+
+        public void setBusiness_status(int business_status) {
+            this.business_status = business_status;
+        }
+
+        public int getHelper_status() {
+            return helper_status;
+        }
+
+        public void setHelper_status(int helper_status) {
+            this.helper_status = helper_status;
         }
 
         public String getUser_token() {
@@ -68,28 +88,42 @@ public class UserBean {
 
         public static class AppuserBean {
             /**
-             * client_no :
-             * createDate : 2018-04-11 17:20:25
+             * age : 9
+             * agreement_status : y
+             * birthday : 2018-04-02 00:00:00
+             * cer_no : 410323
+             * cer_type : 1
+             * client_no : 90000000009
+             * createDate : 2018-04-23 09:45:07
              * createName : root@192.168.1.184
              * mobile_no : 18539931923
-             * nick_name : 123
-             * role :
+             * name : 小猪佩奇
+             * nick_name : 333
+             * role : 1
+             * sex : 0
              * status :
-             * updateDate : 2018-04-12 09:44:15
+             * updateDate : 2018-04-24 18:13:53
              * updateName : root@192.168.1.184
              * user_grade : 1
-             * user_id : 34
+             * user_id : 1000000006
              * user_name : 18539931923
-             * user_password : 0ba03e4f53f18469
+             * user_password : 565491d704013245
              * user_reputation : 100
              */
 
+            private int age;
+            private String agreement_status;
+            private String birthday;
+            private String cer_no;
+            private String cer_type;
             private String client_no;
             private String createDate;
             private String createName;
             private String mobile_no;
+            private String name;
             private String nick_name;
             private String role;
+            private String sex;
             private String status;
             private String updateDate;
             private String updateName;
@@ -98,6 +132,46 @@ public class UserBean {
             private String user_name;
             private String user_password;
             private String user_reputation;
+
+            public int getAge() {
+                return age;
+            }
+
+            public void setAge(int age) {
+                this.age = age;
+            }
+
+            public String getAgreement_status() {
+                return agreement_status;
+            }
+
+            public void setAgreement_status(String agreement_status) {
+                this.agreement_status = agreement_status;
+            }
+
+            public String getBirthday() {
+                return birthday;
+            }
+
+            public void setBirthday(String birthday) {
+                this.birthday = birthday;
+            }
+
+            public String getCer_no() {
+                return cer_no;
+            }
+
+            public void setCer_no(String cer_no) {
+                this.cer_no = cer_no;
+            }
+
+            public String getCer_type() {
+                return cer_type;
+            }
+
+            public void setCer_type(String cer_type) {
+                this.cer_type = cer_type;
+            }
 
             public String getClient_no() {
                 return client_no;
@@ -131,6 +205,14 @@ public class UserBean {
                 this.mobile_no = mobile_no;
             }
 
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
             public String getNick_name() {
                 return nick_name;
             }
@@ -145,6 +227,14 @@ public class UserBean {
 
             public void setRole(String role) {
                 this.role = role;
+            }
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
             }
 
             public String getStatus() {

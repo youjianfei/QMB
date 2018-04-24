@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.data;
 
+import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
 import com.jingnuo.quanmb.entityclass.UserBean;
 
 import java.util.HashMap;
@@ -28,8 +29,10 @@ public class Staticdata {
 
     public  static UserBean static_userBean=new UserBean();
 
-    //发布任务需要向下一页传递map  这里把map写为全局变量
+    //发布任务需要向下一页传递map  这里偷懒把map写为全局变量
     public static Map  map_task = new HashMap();
+    //确认帮助任务需要向下一页传入数据，把qurenbean写为全局变量
+    public  static QueRenHelp_Bean queRenHelp_bean=null;
 
 
 

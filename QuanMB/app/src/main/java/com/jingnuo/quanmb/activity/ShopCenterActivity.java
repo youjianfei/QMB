@@ -7,6 +7,8 @@ import com.jingnuo.quanmb.quanmb.R;
 public class ShopCenterActivity extends BaseActivityother {
 
 
+
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_shop_center;

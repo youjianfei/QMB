@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.jingnuo.quanmb.activity.BargainActivity;
+import com.jingnuo.quanmb.activity.SystemMessageActivity;
 import com.jingnuo.quanmb.quanmb.R;
 
 /**
@@ -21,6 +22,7 @@ public class Fragment_message extends Fragment {
     //控件
 
     RelativeLayout mRelativelayout_bargain;
+    RelativeLayout mRelativelayout_systemmessage;
 
 
 
@@ -42,9 +44,17 @@ public class Fragment_message extends Fragment {
                 getActivity().startActivity(intend_bargain);
             }
         });
+        mRelativelayout_systemmessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_system=new Intent(getActivity(), SystemMessageActivity.class);
+                getActivity().startActivity(intent_system);
+            }
+        });
     }
 
     private void initview() {
         mRelativelayout_bargain=rootview.findViewById(R.id.relativelayout_Kanprice);
+        mRelativelayout_systemmessage=rootview.findViewById(R.id.relativelayout_systemnotice);
     }
 }

@@ -9,10 +9,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
 import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 public class TaskDetailsActivity extends BaseActivityother {
@@ -39,6 +42,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 
 
 
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_task_details;
@@ -59,13 +63,24 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        //确认帮助请求//todo   确认帮助请求
+        //确认帮助请求
         mButton_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             new Volley_Utils(new Interface_volley_respose() {
                 @Override
                 public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","确认帮助+"+respose,"TaskDetailsActivity");
+                    Staticdata.queRenHelp_bean=new Gson().fromJson(respose,QueRenHelp_Bean.class);
+                    if(Staticdata.queRenHelp_bean.getStatus()==1){
+                            Intent  intent_querenhelp=new Intent(TaskDetailsActivity.this,HelperOrderActivity.class);
+                            startActivity(intent_querenhelp);
+                            finish();
+
+
+                    }else {
+                        ToastUtils.showToast(TaskDetailsActivity.this,Staticdata.queRenHelp_bean.getMessage());
+                    }
 
 
                 }
@@ -74,7 +89,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 public void onError(int error) {
 
                 }
-            }).Http(Urls.Baseurl_cui+Urls.helptask,TaskDetailsActivity.this,0);
+            }).Http(Urls.Baseurl_cui+Urls.helptask+"?tid="+ID+"&user_token="+ Staticdata.static_userBean.getData().getUser_token(),TaskDetailsActivity.this,0);
             }
         });
 

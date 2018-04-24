@@ -54,7 +54,6 @@ dependencies {
     // 1、maven { url 'https://jitpack.io' }  2、'com.github.Jay-Goo:RangeSeekBar:v1.2.2'  双向滑动选择器
     compile files('libs/BaiduLBS_Android.jar')
     //动态申请权限compile 'com.master.android:permissionhelper:1.4'
-
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jaeger.statusbaruitl:library:1.0.0'
@@ -78,4 +77,5 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //图片选择器
     testCompile 'junit:junit:4.12'
+
 }

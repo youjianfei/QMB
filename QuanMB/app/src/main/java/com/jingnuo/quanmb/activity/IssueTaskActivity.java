@@ -127,6 +127,8 @@ public class IssueTaskActivity extends BaseActivityother {
         permissionHelper=new PermissionHelper(IssueTaskActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
         map_issueTask=new HashMap();
         mList_picID=new ArrayList<>();
+
+
     }
 
     @Override
