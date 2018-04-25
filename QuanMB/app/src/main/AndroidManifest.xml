@@ -82,7 +82,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.chooseImageActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.IssueTaskNextActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.HelperOrderActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SystemMessageActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SystemMessageActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.BarginmessageListActivity"></activity>
     </application>
 
 </manifest>

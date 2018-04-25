@@ -8,6 +8,8 @@ import com.jingnuo.quanmb.quanmb.R;
 public class BargainActivity extends BaseActivityother {
 
 
+
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_bargain;

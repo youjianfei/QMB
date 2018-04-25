@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.jingnuo.quanmb.Adapter.Adapter_SystemmessageList;
+import com.jingnuo.quanmb.Adapter.Adapter_BarginmessageList;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -17,25 +17,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SystemMessageActivity extends BaseActivityother {
+public class BarginmessageListActivity extends BaseActivityother {
 
     //控件
-    PullToRefreshListView  mListview;
-
+    PullToRefreshListView mList_view;
     //数据
     Map map_message;
-
-    List<String >  mData;
-
     int page=1;
 
-    //对象
-    Adapter_SystemmessageList adapter_systemmessageList;
+    List<String> mData;
 
+    //对象
+    Adapter_BarginmessageList adapter_barginmessageList;
 
     @Override
     public int setLayoutResID() {
-        return R.layout.activity_system_message;
+        return R.layout.activity_barginmessage_list;
     }
 
     @Override
@@ -46,20 +43,23 @@ public class SystemMessageActivity extends BaseActivityother {
     @Override
     protected void initData() {
         mData=new ArrayList<>();
-        mData.add("xitong同好值");
-        mData.add("sadfsdfsd");
-        mData.add("xitong同好sdafsaf值");
-        adapter_systemmessageList=new Adapter_SystemmessageList(mData,this);
-        mListview.setAdapter(adapter_systemmessageList);
+        mData.add("sdfdsfasf");
+        mData.add("防守打法");
+        mData.add("第三方");
+        mData.add("结婚后");
+        adapter_barginmessageList=new Adapter_BarginmessageList(mData,this);
+        mList_view.setAdapter(adapter_barginmessageList);
+
 
 
         map_message=new HashMap();
         map_message.put("pageNo",page+"");
-        map_message.put("type","1");
-        map_message.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+        map_message.put("type","2");
+        map_message.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_message.put("user_token",Staticdata.static_userBean.getData().getUser_token());
         LogUtils.LOG("ceshi","系统消息内容map"+map_message,"SystemMessageActivity");
-        requestSystermyMessage(map_message);
+        requestBarginMessage(map_message);
+
 
     }
 
@@ -70,10 +70,11 @@ public class SystemMessageActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mListview=findViewById(R.id.list_systerme);
+        mList_view=findViewById(R.id.list_bargin);
+
     }
 
-    void requestSystermyMessage(Map map){
+    void requestBarginMessage(Map map){
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -86,9 +87,6 @@ public class SystemMessageActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).postHttp(Urls.Baseurl_hu+Urls.pushMessage,SystemMessageActivity.this,1,map);
-
-
-
+        }).postHttp(Urls.Baseurl_hu+Urls.pushMessage,BarginmessageListActivity.this,1,map);
     }
 }

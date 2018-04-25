@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.jingnuo.quanmb.activity.BargainActivity;
+import com.jingnuo.quanmb.activity.BarginmessageListActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
 import com.jingnuo.quanmb.quanmb.R;
 
@@ -40,7 +41,7 @@ public class Fragment_message extends Fragment {
         mRelativelayout_bargain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intend_bargain=new Intent(getActivity(), BargainActivity.class);
+                Intent intend_bargain=new Intent(getActivity(), BarginmessageListActivity.class);
                 getActivity().startActivity(intend_bargain);
             }
         });
