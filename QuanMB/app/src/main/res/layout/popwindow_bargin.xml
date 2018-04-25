@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativelayout"
+    android:background="@drawable/background_white_corners">
+        <ImageView
+            android:id="@+id/iamge_close"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/close"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:id="@+id/text_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请输入还价金额"
+            android:textSize="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/text_title2"
+            />
+        <EditText
+            android:id="@+id/edit_bargin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_text"
+             android:gravity="center"
+            android:hint="点击输入金额"
+            android:lines="1"
+            android:textSize="12dp"
+            android:digits="123456789.0"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@null"
+             />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/edit_bargin"
+            android:background="@color/gray_background"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/text_queren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确 定"
+            android:textSize="15dp"
+            android:textColor="@color/text_title2"
+            android:layout_below="@+id/edit_bargin"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
+            />
+
+
+
+
+
+
+</RelativeLayout>

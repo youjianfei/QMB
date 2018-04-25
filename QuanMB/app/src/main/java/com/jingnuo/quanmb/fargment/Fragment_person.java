@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
+import com.jingnuo.quanmb.activity.MyOrderActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
+import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
@@ -39,6 +41,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     CircleImageView  mCircleImage;
     TextView mTextview_nickname;
     TextView mTextview_phonenumber;
+    TextView mTextview_myorder;
 
 
     TextView mTextview_logout;
@@ -66,6 +69,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mCircleImage.setOnClickListener(this);
         mTextview_shopcenter.setOnClickListener(this);
         mTextview_logout.setOnClickListener(this);
+        mTextview_myorder.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -88,6 +92,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
         mTextview_nickname=rootview.findViewById(R.id.text_username);
         mTextview_phonenumber=rootview.findViewById(R.id.textview_phonenumber);
+        mTextview_myorder=rootview.findViewById(R.id.text_myorder);
         mTextview_logout=rootview.findViewById(R.id.textview_logout);
     }
 
@@ -110,9 +115,21 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 Intent intent_personInfo=new Intent(getActivity(), PersonInfoActivity.class);
                 getActivity().startActivity(intent_personInfo);
                 break;
-            case  R.id.textview_shopcenter:
-                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-                getActivity().startActivity(intent_shopin);
+            case  R.id.textview_shopcenter://1  商户  0  不是商户
+                if(Staticdata.static_userBean.getData().getBusiness_status()==1){
+                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                    getActivity().startActivity(intent_shopcenter);
+
+                }else {//申请商户界面
+                    Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                    getActivity().startActivity(intent_shopin);
+                }
+
+                break;
+            case R.id.text_myorder:
+                Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);
+                getActivity().startActivity(intent_myorder);
+
                 break;
 
             case R.id.textview_logout:

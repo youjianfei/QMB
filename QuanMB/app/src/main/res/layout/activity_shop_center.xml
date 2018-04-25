@@ -58,7 +58,7 @@
                 android:src="@mipmap/user_pic" />
 
             <TextView
-                android:id="@+id/text_username"
+                android:id="@+id/text_shopname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image_shoppeoplepic"
@@ -69,10 +69,10 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/textview_phonenumber"
+                android:id="@+id/textview_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_username"
+                android:layout_below="@+id/text_shopname"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="认证地址"
@@ -83,7 +83,7 @@
                 android:id="@+id/relative_info"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_below="@+id/textview_phonenumber"
+                android:layout_below="@+id/textview_address"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
@@ -100,6 +100,7 @@
                     android:textSize="15dp" />
 
                 <TextView
+                    android:id="@+id/textview_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textview1"

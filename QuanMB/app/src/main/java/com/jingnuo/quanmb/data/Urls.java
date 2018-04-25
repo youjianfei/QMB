@@ -23,14 +23,17 @@ public class Urls {
     public  static String changepassword="user/changePwd";//更换密码
 
     public  static String setnickname="user/setNickName";//更换昵称
+    public  static String setheadPic="user/setheadimage";//设置头像
 
     //任务模块
-    public  static String square_default="/task/querySpecialty/search";//帮帮广场
-    public  static String tasktype="/task/querySpecialty/taskTypeList";//任务类型列表一级
-    public  static String tasksort="/task/querySort/getSortBy";//任务智能排序方式
+    public  static String square_default="task/querySpecialty/search";//帮帮广场
+    public  static String tasktype="task/querySpecialty/taskTypeList";//任务类型列表一级
+    public  static String tasksort="task/querySort/getSortBy";//任务智能排序方式
     public  static String taskdetails="/task/taskDetail/getTaskDetail";//任务详情  ?id=
-    public  static String helptask="/task/taskDetail/taskHelp";//确认帮助 ?id=
-    public  static String issuetask="/task/querySpecialty/TaskAnnouncementList";//发布任务
+    public  static String helptask="order/taskHelp";//确认帮助 ?id=
+    public  static String barginmonry="bargain/taskBargain";//还价
+
+    public  static String issuetask="task/querySpecialty/TaskAnnouncementList";//发布任务
 
     //专业/商家模块
     public  static String Skillmenu_one="major/searchOne";//找专业一级菜单
@@ -38,7 +41,14 @@ public class Urls {
     public  static String Skillmenulist="major/searchPost";//二级菜单点开列表    参数  specialty_id
     public  static String Skilldetail="business/queryPostDetail";//服务内容详情    参数  id  get请求
     public  static String IssueSkill="business/releaseSpecialty";//发布专业    post
+
+    //商户
     public  static String shopIn="business/commitApply";//商家入驻审核    post
+    public  static String shopcenter="business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
+
+
+
+
 
 
     //帮手模块

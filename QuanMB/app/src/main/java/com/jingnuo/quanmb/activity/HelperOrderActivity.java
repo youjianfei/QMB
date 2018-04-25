@@ -37,9 +37,9 @@ public class HelperOrderActivity extends BaseActivityother {
         if(Staticdata.queRenHelp_bean!=null){
             mTextview_titile.setText(Staticdata.queRenHelp_bean.getDate().getTask_name());
             mTextview_state.setText(Staticdata.queRenHelp_bean.getDate().getStatus_name());
-            mTextview_money.setText(Staticdata.queRenHelp_bean.getDate().getCommission());
+            mTextview_money.setText(Staticdata.queRenHelp_bean.getDate().getCommission()+"");
             mTextview_time.setText(Staticdata.queRenHelp_bean.getDate().getTask_StartDate());
-            mTextview_peoplename.setText(Staticdata.queRenHelp_bean.getDate().getClient_name());
+            mTextview_peoplename.setText(Staticdata.queRenHelp_bean.getDate().getName());
             mTextview_taskDetail.setText(Staticdata.queRenHelp_bean.getDate().getTask_description());
             mTextview_resttime.setText(Staticdata.queRenHelp_bean.getDate().getTask_EndDate());
             mTextview_address.setText(Staticdata.queRenHelp_bean.getDate().getDetailed_address());
@@ -57,7 +57,7 @@ public class HelperOrderActivity extends BaseActivityother {
     protected void initView() {
         mTextview_state=findViewById(R.id.text_taskstate);
         mTextview_titile=findViewById(R.id.text_tasktitle);
-        mTextview_money=findViewById(R.id.text_taskmoney);
+        mTextview_money=findViewById(R.id.text_taskmoney_);
         mTextview_time=findViewById(R.id.text_tasktime);
         mTextview_peoplename=findViewById(R.id.text_name);
         mTextview_taskDetail=findViewById(R.id.text_taskdetail);
