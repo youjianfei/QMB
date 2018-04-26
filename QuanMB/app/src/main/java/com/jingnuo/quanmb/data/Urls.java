@@ -61,4 +61,9 @@ public class Urls {
 
 
 
+    //个人中心
+    public  static String myorderlist="task/taskQueryMyList";//  post
+
+
+
 }
