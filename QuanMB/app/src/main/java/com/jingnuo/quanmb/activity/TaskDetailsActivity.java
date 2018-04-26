@@ -108,33 +108,37 @@ public class TaskDetailsActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         //确认帮助请求
-        LogUtils.LOG("ceshi","确认帮助网址+"+Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(),"TaskDetailsActivity");
         mButton_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
-                        Staticdata.queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
-                        if (Staticdata.queRenHelp_bean.getStatus() == 1) {
-                            Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
-                            startActivity(intent_querenhelp);
-                            finish();
+                if (Staticdata.isLogin) {//是否登录
+                    LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
+                            Staticdata.queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
+                            if (Staticdata.queRenHelp_bean.getStatus() == 1) {
+                                Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
+                                startActivity(intent_querenhelp);
+                                finish();
 
 
-                        } else {
-                            ToastUtils.showToast(TaskDetailsActivity.this, Staticdata.queRenHelp_bean.getMessage());
+                            } else {
+                                ToastUtils.showToast(TaskDetailsActivity.this, Staticdata.queRenHelp_bean.getMessage());
+                            }
                         }
 
+                        @Override
+                        public void onError(int error) {
 
-                    }
+                        }
+                    }).Http(Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), TaskDetailsActivity.this, 0);
 
-                    @Override
-                    public void onError(int error) {
-
-                    }
-                }).Http(Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), TaskDetailsActivity.this, 0);
+                } else {
+                    Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
+                    startActivity(intent_login);
+                }
             }
         });
         //还价
@@ -162,7 +166,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     }
 
     void requestTaseDetail() {
-        LogUtils.LOG("ceshi","任务详情接口+"+Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID,"TaskDetailsActivity");
+        LogUtils.LOG("ceshi", "任务详情接口+" + Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID, "TaskDetailsActivity");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
