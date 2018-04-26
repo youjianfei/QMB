@@ -84,7 +84,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.HelperOrderActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.SystemMessageActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.BarginmessageListActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MyOrderActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.MyOrderActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MytaskDetailActivity"></activity>
     </application>
 
 </manifest>

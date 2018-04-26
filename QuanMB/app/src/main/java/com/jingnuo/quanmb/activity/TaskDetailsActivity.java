@@ -175,7 +175,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_state.setText(mTaskData.getData().getStatus_name());
                 mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
                 mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
-                mTextview_taskissuetime.setText(mTaskData.getData().getTask_StartDate());
+                mTextview_taskissuetime.setText("发布时间："+mTaskData.getData().getTask_StartDate());
                 mTextview_name.setText(mTaskData.getData().getName());
                 mTextview_taskdetails.setText(mTaskData.getData().getTask_description());
                 mTextview_tasktime.setText(mTaskData.getData().getTask_EndDate());
