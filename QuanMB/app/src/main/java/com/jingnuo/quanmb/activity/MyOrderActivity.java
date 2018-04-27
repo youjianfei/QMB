@@ -54,7 +54,7 @@ public class MyOrderActivity extends BaseActivityother {
     }
 
     @Override
-    protected void initData() {//  code  01/08待帮助  02/03/05 进行中  06  已完成  07/13已关闭
+    protected void initData() {//  code  01,08待帮助  02,03,05 进行中  06  已完成  07,13已关闭
         map_myorder=new HashMap();
         map_myorder.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_myorder.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
@@ -105,6 +105,7 @@ public class MyOrderActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","点击的条目+"+i,"MyOrderActivity");
 
                 Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
+                intent_mytaskdetail.putExtra("ID",mData.get(i-1).getTask_id());
                 startActivity(intent_mytaskdetail);
 
             }
@@ -115,10 +116,10 @@ public class MyOrderActivity extends BaseActivityother {
     protected void initView() {
         mTablayout=findViewById(R.id.tablayout);
         mTablayout.addTab(mTablayout.newTab().setText("全部").setTag(""));
-        mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01"));
-        mTablayout.addTab(mTablayout.newTab().setText("进行中").setTag("02"));
+        mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01,08"));
+        mTablayout.addTab(mTablayout.newTab().setText("进行中").setTag("02,03,05"));
         mTablayout.addTab(mTablayout.newTab().setText("已完成").setTag("06"));
-        mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("07"));
+        mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("07,13"));
 
         mListView=findViewById(R.id.list_myorder);
 
@@ -149,4 +150,15 @@ public class MyOrderActivity extends BaseActivityother {
         }).postHttp(Urls.Baseurl_cui+Urls.myorderlist,MyOrderActivity.this,1,map);
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtils.LOG("ceshi","onRestart","MyOrderActivity");
+        page=1;
+        request(map_myorder,page);
+
+    }
+
+
 }

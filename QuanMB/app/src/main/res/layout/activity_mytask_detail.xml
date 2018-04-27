@@ -108,38 +108,6 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:text="雇主"
-            android:textColor="#7f7f7f"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:text="雇主"
-            android:textColor="@color/black_text"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_name"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="16dp"
-            android:src="@color/gray_dfdfdf" />
-
-        <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -269,7 +237,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button_help"
+        android:id="@+id/button_cancle"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
@@ -278,6 +246,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:text="撤消任务"
+        android:visibility="invisible"
         android:textColor="@color/white"
         android:textSize="15dp" />
 </RelativeLayout>
