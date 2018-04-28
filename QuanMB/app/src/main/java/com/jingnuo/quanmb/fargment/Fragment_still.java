@@ -104,7 +104,7 @@ public class Fragment_still  extends Fragment{
                     //处理事件
                     String  search=mEdit_serch.getText()+"";
                     String searchhou= Utils.ZhuanMa(search);
-                    LogUtils.LOG("ceshi", "点击了确定按钮...."+searchhou, "fragmentsquare");
+                    LogUtils.LOG("ceshi", "点击了确定按钮...."+searchhou, "fragmentstill");
                     Intent intent_search=new Intent(getActivity(),ShophallActivity.class);
                     intent_search.putExtra("search",searchhou);
                     getActivity().startActivity(intent_search);
@@ -167,4 +167,18 @@ public class Fragment_still  extends Fragment{
         }).Http(Urls.Baseurl+Urls.Skillmenu_right+"?specialty_id="+id,getContext(),0);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.LOG("ceshi", "onResume", "fragmentstill");
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.LOG("ceshi", "onPause", "fragmentstill");
+
+    }
 }

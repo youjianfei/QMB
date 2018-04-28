@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
+import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
@@ -24,7 +26,9 @@ import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
+import com.jingnuo.quanmb.class_.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
+import com.jingnuo.quanmb.class_.Popwindow_complatetask;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
@@ -69,6 +73,7 @@ public class IssueTaskActivity extends BaseActivityother {
     Popwindow_SkillType mPopwindow_skilltype;
     PermissionHelper permissionHelper;
     UpLoadImage upLoadImage;
+    Popwindow_CompleteTime popwindow_completeTime;
 
     //数据
     String task_name = "";
@@ -127,8 +132,15 @@ public class IssueTaskActivity extends BaseActivityother {
         permissionHelper=new PermissionHelper(IssueTaskActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
         map_issueTask=new HashMap();
         mList_picID=new ArrayList<>();
-
-
+        //完成任务期限  弹窗
+        popwindow_completeTime=new Popwindow_CompleteTime(IssueTaskActivity.this, new Interence_complteTask_time() {
+            @Override
+            public void onResult(String result,int tag) {
+                LogUtils.LOG("ceshi",result,"IssueTaskActivity");
+                mTextview_time.setText(result);
+                mTextview_time.setTag(tag);
+            }
+        });
     }
 
     @Override
@@ -153,23 +165,11 @@ public class IssueTaskActivity extends BaseActivityother {
                 mPopwindow_skilltype.showPopwindow();
             }
         });
-        mTextview_time.setOnClickListener(new View.OnClickListener() {//时间选择器  选择预约时间
+        mTextview_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               new  DataTime_select(IssueTaskActivity.this, new InterfaceDate_select() {
-                    @Override
-                    public void onResult(final String time) {
-                        LogUtils.LOG("ceshi","时间选择器+"+mTextview_time.toString(),"时间团择期");
+                popwindow_completeTime .showPopwindow();
 
-                   runOnUiThread(new Runnable() {
-                       @Override
-                       public void run() {
-                           mTextview_time.setText(time);
-                       }
-                   });
-
-                    }
-                }).timeSelect(IssueTaskActivity.this);
             }
         });
 
@@ -263,11 +263,13 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请选择任务类型");
             return  false;
         }
-        task_EndDate=mTextview_time.getText()+"";
-        if(task_StartDate.equals("请选择服务预约时间")){
-            ToastUtils.showToast(this,"请选择预约时间");
+
+        if(task_StartDate.equals("请选择任务完成期限")){
+            ToastUtils.showToast(this,"请选择任务完成期限");
             return false;
         }
+        task_EndDate=mTextview_time.getTag()+"";
+
         release_address="郑州";//TODO
         commission=mEditview_taskmoney.getText()+"";
         if(commission.equals("")){

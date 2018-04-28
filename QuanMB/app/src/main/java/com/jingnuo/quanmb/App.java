@@ -22,7 +22,6 @@ public class App extends Application {
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         UMConfigure.setLogEnabled(true);
 
-
     }
     {
         PlatformConfig.setWeixin("wx1589c6a947d1f803", "aad4f32f43f69d06cdaf6df5e1237e8b");
