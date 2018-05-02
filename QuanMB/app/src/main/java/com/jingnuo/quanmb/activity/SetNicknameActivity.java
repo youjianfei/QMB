@@ -8,6 +8,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -55,6 +56,7 @@ public class SetNicknameActivity extends BaseActivityother {
                 }else {
                         map_nickname.put("NickName",nickname);
                         map_nickname.put("user_token", Staticdata.token);
+                    LogUtils.LOG("ceshi","修改昵称的map"+map_nickname.toString(),"SetNicknameActivity");
                     request(map_nickname);
                 }
             }
