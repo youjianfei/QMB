@@ -1,6 +1,8 @@
 package com.jingnuo.quanmb.activity;
 
 
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -18,12 +20,13 @@ public class ShopCenterActivity extends BaseActivityother {
     TextView mTextview_address;//地址
     TextView mTextview_money;//佣金
 
+    RelativeLayout mRealtivelayout_issue;
+    RelativeLayout mRealtivelayout_myissue;
+    RelativeLayout mRealtivelayout_myorder;
+    RelativeLayout mRealtivelayout_myauthentication;
+
     //对象
     ShopcenterBean shopcenterBean;
-
-
-
-
 
 
     @Override
@@ -44,22 +47,55 @@ public class ShopCenterActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mRealtivelayout_issue.setOnClickListener(this);
+        mRealtivelayout_myissue.setOnClickListener(this);
+        mRealtivelayout_myorder.setOnClickListener(this);
+        mRealtivelayout_myauthentication.setOnClickListener(this);
 
     }
 
     @Override
     protected void initView() {
-        mTextview_shopname=findViewById(R.id.text_shopname);
-        mTextview_address=findViewById(R.id.textview_address);
-        mTextview_money=findViewById(R.id.textview_money);
+        mTextview_shopname = findViewById(R.id.text_shopname);
+        mTextview_address = findViewById(R.id.textview_address);
+        mTextview_money = findViewById(R.id.textview_money);
+        mRealtivelayout_issue = findViewById(R.id.relative_issuetask);
+        mRealtivelayout_myissue = findViewById(R.id.relative_myissue);
+        mRealtivelayout_myorder = findViewById(R.id.myorder);
+        mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
 
     }
 
-    void  requestshopcenter(){
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.relative_issuetask:
+
+
+                break;
+
+            case R.id.relative_myissue:
+
+                break;
+
+            case R.id.myorder:
+
+                break;
+
+            case R.id.myauthentication:
+
+                break;
+        }
+
+
+    }
+
+    void requestshopcenter() {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                shopcenterBean=new Gson().fromJson(respose,ShopcenterBean.class);
+                shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                 mTextview_shopname.setText(shopcenterBean.getData().getList().getBusiness_name());
                 mTextview_address.setText(shopcenterBean.getData().getList().getBusiness_address());
 
@@ -69,8 +105,8 @@ public class ShopCenterActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl+Urls.shopcenter+ Staticdata.static_userBean.getData()
-                .getUser_token()+"&client_no="+Staticdata.static_userBean.getData().getAppuser()
-                .getClient_no(),ShopCenterActivity.this,0);
+        }).Http(Urls.Baseurl + Urls.shopcenter + Staticdata.static_userBean.getData()
+                .getUser_token() + "&client_no=" + Staticdata.static_userBean.getData().getAppuser()
+                .getClient_no(), ShopCenterActivity.this, 0);
     }
 }

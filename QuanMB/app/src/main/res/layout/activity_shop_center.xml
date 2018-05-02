@@ -136,102 +136,135 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/relative_info"
                 android:layout_marginTop="8dp"
-                android:background="@color/white">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginTop="22dp"
-                    android:src="@mipmap/myrelease"
-                    />
-
-                <TextView
-                    android:id="@+id/textv_issue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="22dp"
-                    android:text="发布任务"
-                    android:textSize="15dp" />
-
-                <ImageView
-                    android:id="@+id/image1"
+                <RelativeLayout
+                    android:id="@+id/relative_issuetask"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
-                    android:background="@color/gray_background" />
+                    android:layout_height="45dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_below="@+id/image1"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginTop="22dp"
-                    android:src="@mipmap/address"
-                    />
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="35dp"
+                        android:src="@mipmap/myrelease" />
 
-                <TextView
-                    android:id="@+id/textv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/image1"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="22dp"
-                    android:text="我的订单"
-                    android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="发布任务"
+                        android:textSize="15dp" />
 
-                <ImageView
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/gray_background" />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@mipmap/more" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/text_myorder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="35dp"
-                    android:layout_marginTop="22dp"
-                    android:text="我的发布" />
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="22dp"
-                    android:src="@mipmap/task"
-                    android:layout_toLeftOf="@id/text_myorder"
-                    />
-                <TextView
-                    android:id="@+id/text_aboutus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="35dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_below="@+id/image1"
-                    android:text="我的认证" />
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="22dp"
-                    android:src="@mipmap/aboutus"
-                    android:layout_toLeftOf="@id/text_myorder"
-                    android:layout_below="@+id/image1"
+                <RelativeLayout
+                    android:id="@+id/relative_myissue"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
 
-                    />
+                    >
 
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="35dp"
+                        android:src="@mipmap/myrelease" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="我的发布"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@mipmap/more" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/myorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="35dp"
+                        android:src="@mipmap/myrelease" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="我的订单"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@mipmap/more" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/myauthentication"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="35dp"
+                        android:src="@mipmap/myrelease" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="我的认证"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@mipmap/more" />
+                </RelativeLayout>
+
+            </LinearLayout>
 
 
         </RelativeLayout>

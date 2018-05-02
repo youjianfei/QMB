@@ -7,7 +7,8 @@ package com.jingnuo.quanmb.data;
 public class Urls {
     public  static  String Baseurl="http://www.quanminbang.top/v1.0/";
     public  static  String Baseurl_cui="http://www.quanminbang.top/v1.0/";
-    public  static  String Baseurl_hu="http://www.quanminbang.top/v1.0/";
+//    public  static  String Baseurl_hu="http://www.quanminbang.top/v1.0/";
+    public  static  String Baseurl_hu="http://192.168.1.197:8080/QuanMinBang/v1.0/";
 
     public  static String sendyanzhengma="send/sendValidate";//登录发送短信验证码  post
     public  static String sendzhuceyanzhengma="send/sendValidate";//注册发送注册短信验证码  post

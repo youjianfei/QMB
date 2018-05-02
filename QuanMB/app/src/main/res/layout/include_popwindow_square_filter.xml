@@ -90,33 +90,33 @@
                 app:rsb_thumbResId="@mipmap/circle_filter"
                 app:rsb_seekBarHeight="1dp"
                 />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_below="@+id/edit_realname"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_dbdbdb"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="帮手等级"
-                android:textColor="@color/text_hide_tip"
-                android:textSize="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="25dp"
-                />
-            <com.jingnuo.quanmb.customview.MyGridView
-                android:id="@+id/mygridview_filter_levle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:numColumns="3"/>
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginRight="30dp"-->
+                <!--android:layout_below="@+id/edit_realname"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@color/gray_dbdbdb"-->
+                <!--/>-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="帮手等级"-->
+                <!--android:textColor="@color/text_hide_tip"-->
+                <!--android:textSize="15dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginTop="25dp"-->
+                <!--/>-->
+            <!--<com.jingnuo.quanmb.customview.MyGridView-->
+                <!--android:id="@+id/mygridview_filter_levle"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:numColumns="3"/>-->
         </LinearLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
     <LinearLayout

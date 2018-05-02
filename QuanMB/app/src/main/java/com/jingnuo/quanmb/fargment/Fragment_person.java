@@ -100,8 +100,14 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.textview_bangshou:
-                Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
-                getActivity().startActivity(intent_anthentication);
+                if(Staticdata.static_userBean.getData().getHelper_status()==1){
+                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                    getActivity().startActivity(intent_shopcenter);
+
+                }else {//申请帮手界面
+                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
+                    getActivity().startActivity(intent_anthentication);
+                }
                 break;
             case R.id.textview_address:
                 Intent intent_datiladdress = new Intent(getActivity(), DatailAddressActivity.class);

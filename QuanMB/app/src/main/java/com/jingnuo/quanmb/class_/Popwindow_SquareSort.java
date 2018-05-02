@@ -64,10 +64,10 @@ public class Popwindow_SquareSort {
     private DecimalFormat df = new DecimalFormat("0");
     FilterAdapter mAdapter_filter_task;
     FilterAdapter mAdapter_filter_level;
-    MyGridView mGridview_filter_task,mGridview_filter_level;
+    MyGridView mGridview_filter_task;
     List<TaskTypeBean.DateBean.ListBean> listdata_tasktype;//接口返回的任务类型列表
     List<PopwindowGridBean.FilterBean> mData_filter_task;
-    List<PopwindowGridBean.FilterBean> mData_filter_level;
+//    List<PopwindowGridBean.FilterBean> mData_filter_level;
 
     TextView mText_filter_left, mText_filter_right;
     RangeSeekBar mSeekBar;
@@ -240,20 +240,20 @@ public class Popwindow_SquareSort {
 
             }
         });
-        mGridview_filter_level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ToastUtils.showToast(activity,mData_filter_level.get(i).getText());
-                LogUtils.LOG("ceshi",mData_filter_level.get(i).getText(),"pop");
-                if(mData_filter_level.get(i).isChoose()){
-                    mData_filter_level.get(i).setChoose(false);
-                }else {
-                    mData_filter_level.get(i).setChoose(true);
-
-                }
-                mAdapter_filter_level.notifyDataSetChanged();
-            }
-        });
+//        mGridview_filter_level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                ToastUtils.showToast(activity,mData_filter_level.get(i).getText());
+//                LogUtils.LOG("ceshi",mData_filter_level.get(i).getText(),"pop");
+//                if(mData_filter_level.get(i).isChoose()){
+//                    mData_filter_level.get(i).setChoose(false);
+//                }else {
+//                    mData_filter_level.get(i).setChoose(true);
+//
+//                }
+//                mAdapter_filter_level.notifyDataSetChanged();
+//            }
+//        });
 
         mButton_complete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,7 +291,7 @@ public class Popwindow_SquareSort {
         mImage_black.setAlpha((float) 0.7);
         //filter_pop用到的布局和数据
         mGridview_filter_task = conView.findViewById(R.id.mygridview_filter);
-        mGridview_filter_level = conView.findViewById(R.id.mygridview_filter_levle);
+//        mGridview_filter_level = conView.findViewById(R.id.mygridview_filter_levle);
         mText_filter_left = conView.findViewById(R.id.textview_filter_left);
         mText_filter_right = conView.findViewById(R.id.textview_filter_right);
         mSeekBar = conView.findViewById(R.id.seekbar);
@@ -315,16 +315,16 @@ public class Popwindow_SquareSort {
         mAdapter_filter_task = new FilterAdapter(mData_filter_task, activity);
         mGridview_filter_task.setAdapter(mAdapter_filter_task);
 
-        mData_filter_level=new ArrayList<>();
-        for (int i=0;i<4;i++){
-            PopwindowGridBean.FilterBean  bean=new PopwindowGridBean.FilterBean();
-            bean.setChoose(false);
-            bean.setId(i);
-            bean.setText(i+"级");
-            mData_filter_level.add(bean);
-        }
-        mAdapter_filter_level=new FilterAdapter(mData_filter_level,activity);
-        mGridview_filter_level.setAdapter(mAdapter_filter_level);
+//        mData_filter_level=new ArrayList<>();
+//        for (int i=0;i<4;i++){
+//            PopwindowGridBean.FilterBean  bean=new PopwindowGridBean.FilterBean();
+//            bean.setChoose(false);
+//            bean.setId(i);
+//            bean.setText(i+"级");
+//            mData_filter_level.add(bean);
+//        }
+//        mAdapter_filter_level=new FilterAdapter(mData_filter_level,activity);
+//        mGridview_filter_level.setAdapter(mAdapter_filter_level);
 
     }
 

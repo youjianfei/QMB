@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.quanmb.R;
-import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
 
 import java.util.ArrayList;
