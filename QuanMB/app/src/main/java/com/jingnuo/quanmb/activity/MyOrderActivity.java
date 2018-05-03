@@ -73,6 +73,7 @@ public class MyOrderActivity extends BaseActivityother {
             public void onTabSelected(TabLayout.Tab tab) {
                 LogUtils.LOG("ceshi",tab.getTag()+"","MyOrderActivity");
                 map_myorder.put("code",tab.getTag());
+                page=1;
                 request(map_myorder,page);
             }
 
@@ -135,11 +136,16 @@ public class MyOrderActivity extends BaseActivityother {
                 myorderBean=new Gson().fromJson(respose,MyorderBean.class);
                 if(page==1){
                     mData.clear();
-                    mData.addAll(myorderBean.getDate());
-                    adapter_myIssue.notifyDataSetChanged();
+                    if(myorderBean.getDate()!=null){
+                        mData.addAll(myorderBean.getDate());
+                        adapter_myIssue.notifyDataSetChanged();
+                    }
                 }else {
-                    mData.addAll(myorderBean.getDate());
-                    adapter_myIssue.notifyDataSetChanged();
+                    if (myorderBean.getDate()!=null){
+                        mData.addAll(myorderBean.getDate());
+                        adapter_myIssue.notifyDataSetChanged();
+                    }
+
                 }
             }
 

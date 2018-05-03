@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -89,6 +90,16 @@ public class PersonInfoActivity extends BaseActivityother {
         map_setheadpic=new HashMap();
         mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_headPIC);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtils.LOG("ceshi","onRestart","personinfoactivity");
+        mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+        mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
     }
 
     @Override
@@ -139,13 +150,17 @@ public class PersonInfoActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 int status = 0;
                 String msg = "";
+                String imageUrl = "";
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");//登录状态
                     msg = (String) object.get("message");//登录返回信息
+                    imageUrl=(String) object.get("img_url");
 
                     if (status == 1) {
                         ToastUtils.showToast(PersonInfoActivity.this,"设置头像成功");
+                        Staticdata.static_userBean.getData().setImg_url(imageUrl);
+                        Glide.with(PersonInfoActivity.this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_headPIC);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -157,8 +172,6 @@ public class PersonInfoActivity extends BaseActivityother {
 
             }
         }).postHttp(Urls.Baseurl+Urls.setheadPic,PersonInfoActivity.this,1,map);
-
-
 
     }
 

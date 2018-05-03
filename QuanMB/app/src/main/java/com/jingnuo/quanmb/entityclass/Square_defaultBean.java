@@ -8,8 +8,9 @@ import java.util.List;
 
 public class Square_defaultBean {
 
+
     /**
-     * data : {"list":[{"client_no":"1","commission":1,"createDate":"2018-04-03 17:31:11","createName":"root","img_url":"","release_address":"release_address","task_Img_id":"1","task_StartDate":"2018-04-03 17:31:12","task_Status_code":"1","task_description":"task_EndDate","task_id":2,"task_name":"task_name","task_type":101,"updateDate":"2018-04-03 17:31:12","updateName":"UpdateName","user_reputation":"100"},{"client_no":"1","commission":1,"createDate":"2018-04-03 17:32:54","createName":"root","img_url":"","release_address":"release_address","task_Img_id":"1","task_StartDate":"2018-04-03 17:32:56","task_Status_code":"1","task_description":"task_EndDate","task_id":3,"task_name":"task_name","task_type":101,"updateDate":"2018-04-03 17:32:56","updateName":"UpdateName","user_reputation":"100"}]}
+     * data : {"list":[{"commission":50,"createDate":"2018-05-02 19:41:48","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"asdasdasd","specialty_name":"帮买","task_ID":6,"task_Name":"12333","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:29","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":8,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:31","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":9,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:31","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":10,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:31","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":11,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:32","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412940&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=embEdjISzB1L1UyJ5Cy3S0dFYkI%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":12,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:32","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412940&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=embEdjISzB1L1UyJ5Cy3S0dFYkI%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":13,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:32","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412940&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=embEdjISzB1L1UyJ5Cy3S0dFYkI%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":14,"task_Name":"天天疼","user_reputation":100}]}
      * message : 获取列表成功
      * status : 1
      */
@@ -55,48 +56,26 @@ public class Square_defaultBean {
 
         public static class ListBean {
             /**
-             * client_no : 1
-             * commission : 1
-             * createDate : 2018-04-03 17:31:11
-             * createName : root
-             * img_url :
-             * release_address : release_address
-             * task_Img_id : 1
-             * task_StartDate : 2018-04-03 17:31:12
-             * task_Status_code : 1
-             * task_description : task_EndDate
-             * task_id : 2
-             * task_name : task_name
-             * task_type : 101
-             * updateDate : 2018-04-03 17:31:12
-             * updateName : UpdateName
+             * commission : 50
+             * createDate : 2018-05-02 19:41:48
+             * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D
+             * nick_name : 请问
+             * release_Address : asdasdasd
+             * specialty_name : 帮买
+             * task_ID : 6
+             * task_Name : 12333
              * user_reputation : 100
              */
 
-            private String client_no;
             private int commission;
             private String createDate;
-            private String createName;
-            private String img_url;
-            private String release_address;
-            private String task_Img_id;
-            private String task_StartDate;
-            private String task_Status_code;
-            private String task_description;
-            private int task_id;
-            private String task_name;
-            private int task_type;
-            private String updateDate;
-            private String updateName;
-            private String user_reputation;
-
-            public String getClient_no() {
-                return client_no;
-            }
-
-            public void setClient_no(String client_no) {
-                this.client_no = client_no;
-            }
+            private String headUrl;
+            private String nick_name;
+            private String release_Address;
+            private String specialty_name;
+            private int task_ID;
+            private String task_Name;
+            private int user_reputation;
 
             public int getCommission() {
                 return commission;
@@ -114,107 +93,59 @@ public class Square_defaultBean {
                 this.createDate = createDate;
             }
 
-            public String getCreateName() {
-                return createName;
+            public String getHeadUrl() {
+                return headUrl;
             }
 
-            public void setCreateName(String createName) {
-                this.createName = createName;
+            public void setHeadUrl(String headUrl) {
+                this.headUrl = headUrl;
             }
 
-            public String getImg_url() {
-                return img_url;
+            public String getNick_name() {
+                return nick_name;
             }
 
-            public void setImg_url(String img_url) {
-                this.img_url = img_url;
+            public void setNick_name(String nick_name) {
+                this.nick_name = nick_name;
             }
 
-            public String getRelease_address() {
-                return release_address;
+            public String getRelease_Address() {
+                return release_Address;
             }
 
-            public void setRelease_address(String release_address) {
-                this.release_address = release_address;
+            public void setRelease_Address(String release_Address) {
+                this.release_Address = release_Address;
             }
 
-            public String getTask_Img_id() {
-                return task_Img_id;
+            public String getSpecialty_name() {
+                return specialty_name;
             }
 
-            public void setTask_Img_id(String task_Img_id) {
-                this.task_Img_id = task_Img_id;
+            public void setSpecialty_name(String specialty_name) {
+                this.specialty_name = specialty_name;
             }
 
-            public String getTask_StartDate() {
-                return task_StartDate;
+            public int getTask_ID() {
+                return task_ID;
             }
 
-            public void setTask_StartDate(String task_StartDate) {
-                this.task_StartDate = task_StartDate;
+            public void setTask_ID(int task_ID) {
+                this.task_ID = task_ID;
             }
 
-            public String getTask_Status_code() {
-                return task_Status_code;
+            public String getTask_Name() {
+                return task_Name;
             }
 
-            public void setTask_Status_code(String task_Status_code) {
-                this.task_Status_code = task_Status_code;
+            public void setTask_Name(String task_Name) {
+                this.task_Name = task_Name;
             }
 
-            public String getTask_description() {
-                return task_description;
-            }
-
-            public void setTask_description(String task_description) {
-                this.task_description = task_description;
-            }
-
-            public int getTask_id() {
-                return task_id;
-            }
-
-            public void setTask_id(int task_id) {
-                this.task_id = task_id;
-            }
-
-            public String getTask_name() {
-                return task_name;
-            }
-
-            public void setTask_name(String task_name) {
-                this.task_name = task_name;
-            }
-
-            public int getTask_type() {
-                return task_type;
-            }
-
-            public void setTask_type(int task_type) {
-                this.task_type = task_type;
-            }
-
-            public String getUpdateDate() {
-                return updateDate;
-            }
-
-            public void setUpdateDate(String updateDate) {
-                this.updateDate = updateDate;
-            }
-
-            public String getUpdateName() {
-                return updateName;
-            }
-
-            public void setUpdateName(String updateName) {
-                this.updateName = updateName;
-            }
-
-            public String getUser_reputation() {
+            public int getUser_reputation() {
                 return user_reputation;
             }
 
-            public void setUser_reputation(String user_reputation) {
+            public void setUser_reputation(int user_reputation) {
                 this.user_reputation = user_reputation;
             }
         }

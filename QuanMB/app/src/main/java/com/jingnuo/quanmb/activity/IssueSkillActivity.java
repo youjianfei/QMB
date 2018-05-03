@@ -183,7 +183,7 @@ public class IssueSkillActivity extends BaseActivityother {
         mEditview_addressdetail=findViewById(R.id.edit_skilldetailaddress);
         mEditview_skilldetail=findViewById(R.id.edit_detailskill);
         mEditview_name=findViewById(R.id.edit_skillpeoplename);
-        mEditview_phonenumber=findViewById(R.id.edit_skillpeoplename);
+        mEditview_phonenumber=findViewById(R.id.edit_skillpeoplephone);
         mButton_submit=findViewById(R.id.button_submit);
 
         choosePIC1=findViewById(R.id.iamge_choosePIC1);

@@ -34,7 +34,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     TextView mTextview_taskdetails;
     TextView mTextview_taskstarttime;
     TextView mTextview_taskaddress;
-    TextView mTextview_helplevle;
+//    TextView mTextview_helplevle;
 
     Button mButton_cancle;
 
@@ -117,7 +117,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
         mTextview_taskstarttime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
-        mTextview_helplevle = findViewById(R.id.text_tlevel);
+//        mTextview_helplevle = findViewById(R.id.text_tlevel);
         mButton_cancle=findViewById(R.id.button_cancle);
     }
     void request(Map map){
@@ -132,8 +132,8 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_tasktime.setText(taskDetailBean.getData().getTask_StartDate());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
                 mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_EndDate());
-                mTextview_taskaddress.setText(taskDetailBean.getData().getTask_EndDate());
-                mTextview_helplevle.setText(taskDetailBean.getData().getUser_grade());
+                mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
+//                mTextview_helplevle.setText(taskDetailBean.getData().getUser_grade());
                 if(taskDetailBean.getData().getTask_Status_code().equals("02")||taskDetailBean.getData().getTask_Status_code().equals("01")||taskDetailBean.getData().getTask_Status_code().equals("08")){
                     mButton_cancle.setVisibility(View.VISIBLE);
                 }

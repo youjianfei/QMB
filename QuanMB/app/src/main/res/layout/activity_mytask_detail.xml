@@ -197,42 +197,43 @@
             android:layout_toRightOf="@+id/text4"
             android:text=""
             android:textColor="@color/black_text"
+            android:layout_marginBottom="16dp"
             android:textSize="15dp" />
 
-        <ImageView
-            android:id="@+id/line4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_address"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="16dp"
-            android:src="@color/gray_dfdfdf" />
+        <!--<ImageView-->
+            <!--android:id="@+id/line4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_below="@+id/text_address"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:src="@color/gray_dfdfdf" />-->
 
-        <TextView
-            android:id="@+id/text5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line4"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:text="帮手等级"
-            android:textColor="#7f7f7f"
-            android:textSize="15dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/text5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/line4"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:text="帮手等级"-->
+            <!--android:textColor="#7f7f7f"-->
+            <!--android:textSize="15dp" />-->
 
-        <TextView
-            android:id="@+id/text_tlevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/line4"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:text="不限制"
-            android:textColor="@color/black_text"
-            android:textSize="15dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/text_tlevel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@+id/line4"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:text="不限制"-->
+            <!--android:textColor="@color/black_text"-->
+            <!--android:textSize="15dp" />-->
 
     </RelativeLayout>
 

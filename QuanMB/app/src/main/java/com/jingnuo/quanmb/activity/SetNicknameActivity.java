@@ -84,6 +84,7 @@ public class SetNicknameActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 if(status==1){
+                    Staticdata.static_userBean.getData().getAppuser().setNick_name(nickname);
                     ToastUtils.showToast(SetNicknameActivity.this,msg);
                     finish();
                 }else {

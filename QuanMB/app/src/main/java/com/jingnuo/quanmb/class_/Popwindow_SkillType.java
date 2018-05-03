@@ -136,6 +136,7 @@ public class Popwindow_SkillType {
                 }else {
                     mTextview_two.setText(listdata_one.get(i).getSpecialty_name());
                     mInterface.onSuccesses(listdata_one.get(i).getSpecialty_name(),listdata_one.get(i).getSpecialty_id());
+                    mPopupWindow.dismiss();
                 }
 
             }

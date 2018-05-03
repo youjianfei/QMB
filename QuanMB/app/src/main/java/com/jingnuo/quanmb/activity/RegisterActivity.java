@@ -11,13 +11,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PasswordJiami;
+import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -28,6 +32,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.jingnuo.quanmb.data.Staticdata.UUID;
+import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
+import static com.jingnuo.quanmb.data.Staticdata.isLogin;
+import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class RegisterActivity extends BaseActivityother {
     //控件
@@ -116,6 +125,12 @@ public class RegisterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","加密后"+passwordMM,getPackageName());
                 LogUtils.LOG("ceshi","电话号"+map_register.get("phoneNumbers")+"密码"+map_register.get("password")+"验证码"+map_register.get("ValidateCode"),getPackageName());
 
+                map_login = new HashMap();
+                Userphonenumber=phonenumber;//将电话号设为全局变量
+                map_login.put("username", phonenumber);
+                map_login.put("password", passwordMM);
+                map_login.put("uuid", UUID);
+
                 request_regist(map_register);
 
 
@@ -179,7 +194,10 @@ public class RegisterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","注册返回"+respose,getPackageName());
                 if (status == 1) {
                     ToastUtils.showToast(RegisterActivity.this, "新用户注册成功");
-                    finish();
+
+                    //注册成功之后直接登陆 设置全局变量islogin为 true
+                    requestlogin(map_login);//登陆请求
+
                 } else {
                     ToastUtils.showToast(RegisterActivity.this, msg);
                 }
@@ -191,6 +209,45 @@ public class RegisterActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl+Urls.phoneRegister,this,1,map);
 
+    }
+    UserBean userBean;
+    Map map_login;
+    private void requestlogin(Map map) {
+//        Request_retrofit.retrofit_post(map);
+
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){//登录成功
+                    SharedPreferencesUtils.putString(RegisterActivity.this,"QMB","password",password);//登录成功之后存未加密de密码
+                    userBean=new Gson().fromJson(respose,UserBean.class);
+                    Staticdata. static_userBean=userBean;
+                    token=userBean.getData().getUser_token();
+                    LogUtils.LOG("ceshi", respose + "1111111111", "RegisterActivity");
+                    isLogin = true;
+                    Intent intent_login = new Intent(RegisterActivity.this, MainActivity.class);
+                    RegisterActivity.this.startActivity(intent_login);
+                    finish();
+                }else {
+                    ToastUtils.showToast(RegisterActivity.this,msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.login, RegisterActivity.this, 1, map);
     }
 
 }

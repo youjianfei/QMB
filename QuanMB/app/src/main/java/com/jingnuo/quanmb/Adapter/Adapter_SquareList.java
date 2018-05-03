@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.class_.Task_type;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
 import com.jingnuo.quanmb.quanmb.R;
@@ -41,18 +43,20 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mText_task_username=convertView.findViewById(R.id.text_square_personname);
             holder.mText_task_address=convertView.findViewById(R.id.text_square_address);
             holder.mText_task_price=convertView.findViewById(R.id.text_square_price);
+            holder.mImage_view=convertView.findViewById(R.id.image_square_person);
             convertView.setTag(holder);
 
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
 
-        holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
+        holder.mText_task_des.setText(mData.get(position).getTask_Name()+"");
         holder.mText_task_creattime.setText(mData.get(position).getCreateDate()+"");
-        holder.mText_task_username.setText(mData.get(position).getCreateName()+"");
-        holder.mText_task_address.setText(mData.get(position).getRelease_address()+"");
+        holder.mText_task_username.setText(mData.get(position).getNick_name()+"");
+        holder.mText_task_address.setText(mData.get(position).getRelease_Address()+"");
         holder.mText_task_price.setText(mData.get(position).getCommission()+"");
-        holder.mText_task_type.setText(Task_type.task_type(mData.get(position).getTask_type())+"");
+        holder.mText_task_type.setText(mData.get(position).getSpecialty_name()+"");
+        Glide.with(mContext).load(mData.get(position).getHeadUrl()).into(holder.mImage_view);
 
         return convertView;
     }
@@ -63,5 +67,6 @@ public class Adapter_SquareList extends  BaseAdapter {
         TextView mText_task_username ;//发布任务的用户名
         TextView mText_task_address ;//发布任务的地址
         TextView mText_task_price ;//任务的佣金
+        ImageView mImage_view;//头像
     }
 }

@@ -9,7 +9,7 @@ public class UserBean {
 
     /**
      * code : 1
-     * data : {"appuser":{"age":9,"agreement_status":"y","birthday":"2018-04-02 00:00:00","cer_no":"410323","cer_type":"1","client_no":"90000000009","createDate":"2018-04-23 09:45:07","createName":"root@192.168.1.184","mobile_no":"18539931923","name":"小猪佩奇","nick_name":"333","role":"1","sex":"0","status":"","updateDate":"2018-04-24 18:13:53","updateName":"root@192.168.1.184","user_grade":"1","user_id":"1000000006","user_name":"18539931923","user_password":"565491d704013245","user_reputation":"100"},"business_status":1,"helper_status":0,"user_token":"6895de7d97e204754b18a50efc37d351"}
+     * data : {"appuser":{"avatar_img_id":"6","client_no":"2147483667","createDate":"2018-05-02 16:23:43","createName":"root@47.95.254.3","mobile_no":"18539931923","nick_name":"aaaaa","role":"","status":"","updateDate":"2018-05-03 11:44:02","updateName":"root@115.57.138.146","user_grade":"1","user_id":"6","user_name":"18539931923","user_password":"565491d704013245","user_reputation":"100"},"business_status":0,"helper_status":0,"img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/touxiang.png?Expires=1525405573&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=%2FLmSKaDGmoQp8LrbmUnKMeYXLtk%3D","user_token":"22c7c14a309c4245bb414e563183729a"}
      * message : 登录成功
      */
 
@@ -43,15 +43,17 @@ public class UserBean {
 
     public static class DataBean {
         /**
-         * appuser : {"age":9,"agreement_status":"y","birthday":"2018-04-02 00:00:00","cer_no":"410323","cer_type":"1","client_no":"90000000009","createDate":"2018-04-23 09:45:07","createName":"root@192.168.1.184","mobile_no":"18539931923","name":"小猪佩奇","nick_name":"333","role":"1","sex":"0","status":"","updateDate":"2018-04-24 18:13:53","updateName":"root@192.168.1.184","user_grade":"1","user_id":"1000000006","user_name":"18539931923","user_password":"565491d704013245","user_reputation":"100"}
-         * business_status : 1
+         * appuser : {"avatar_img_id":"6","client_no":"2147483667","createDate":"2018-05-02 16:23:43","createName":"root@47.95.254.3","mobile_no":"18539931923","nick_name":"aaaaa","role":"","status":"","updateDate":"2018-05-03 11:44:02","updateName":"root@115.57.138.146","user_grade":"1","user_id":"6","user_name":"18539931923","user_password":"565491d704013245","user_reputation":"100"}
+         * business_status : 0
          * helper_status : 0
-         * user_token : 6895de7d97e204754b18a50efc37d351
+         * img_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/touxiang.png?Expires=1525405573&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=%2FLmSKaDGmoQp8LrbmUnKMeYXLtk%3D
+         * user_token : 22c7c14a309c4245bb414e563183729a
          */
 
         private AppuserBean appuser;
         private int business_status;
         private int helper_status;
+        private String img_url;
         private String user_token;
 
         public AppuserBean getAppuser() {
@@ -78,6 +80,14 @@ public class UserBean {
             this.helper_status = helper_status;
         }
 
+        public String getImg_url() {
+            return img_url;
+        }
+
+        public void setImg_url(String img_url) {
+            this.img_url = img_url;
+        }
+
         public String getUser_token() {
             return user_token;
         }
@@ -88,42 +98,30 @@ public class UserBean {
 
         public static class AppuserBean {
             /**
-             * age : 9
-             * agreement_status : y
-             * birthday : 2018-04-02 00:00:00
-             * cer_no : 410323
-             * cer_type : 1
-             * client_no : 90000000009
-             * createDate : 2018-04-23 09:45:07
-             * createName : root@192.168.1.184
+             * avatar_img_id : 6
+             * client_no : 2147483667
+             * createDate : 2018-05-02 16:23:43
+             * createName : root@47.95.254.3
              * mobile_no : 18539931923
-             * name : 小猪佩奇
-             * nick_name : 333
-             * role : 1
-             * sex : 0
+             * nick_name : aaaaa
+             * role :
              * status :
-             * updateDate : 2018-04-24 18:13:53
-             * updateName : root@192.168.1.184
+             * updateDate : 2018-05-03 11:44:02
+             * updateName : root@115.57.138.146
              * user_grade : 1
-             * user_id : 1000000006
+             * user_id : 6
              * user_name : 18539931923
              * user_password : 565491d704013245
              * user_reputation : 100
              */
 
-            private int age;
-            private String agreement_status;
-            private String birthday;
-            private String cer_no;
-            private String cer_type;
+            private String avatar_img_id;
             private String client_no;
             private String createDate;
             private String createName;
             private String mobile_no;
-            private String name;
             private String nick_name;
             private String role;
-            private String sex;
             private String status;
             private String updateDate;
             private String updateName;
@@ -133,44 +131,12 @@ public class UserBean {
             private String user_password;
             private String user_reputation;
 
-            public int getAge() {
-                return age;
+            public String getAvatar_img_id() {
+                return avatar_img_id;
             }
 
-            public void setAge(int age) {
-                this.age = age;
-            }
-
-            public String getAgreement_status() {
-                return agreement_status;
-            }
-
-            public void setAgreement_status(String agreement_status) {
-                this.agreement_status = agreement_status;
-            }
-
-            public String getBirthday() {
-                return birthday;
-            }
-
-            public void setBirthday(String birthday) {
-                this.birthday = birthday;
-            }
-
-            public String getCer_no() {
-                return cer_no;
-            }
-
-            public void setCer_no(String cer_no) {
-                this.cer_no = cer_no;
-            }
-
-            public String getCer_type() {
-                return cer_type;
-            }
-
-            public void setCer_type(String cer_type) {
-                this.cer_type = cer_type;
+            public void setAvatar_img_id(String avatar_img_id) {
+                this.avatar_img_id = avatar_img_id;
             }
 
             public String getClient_no() {
@@ -205,14 +171,6 @@ public class UserBean {
                 this.mobile_no = mobile_no;
             }
 
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
             public String getNick_name() {
                 return nick_name;
             }
@@ -227,14 +185,6 @@ public class UserBean {
 
             public void setRole(String role) {
                 this.role = role;
-            }
-
-            public String getSex() {
-                return sex;
-            }
-
-            public void setSex(String sex) {
-                this.sex = sex;
             }
 
             public String getStatus() {

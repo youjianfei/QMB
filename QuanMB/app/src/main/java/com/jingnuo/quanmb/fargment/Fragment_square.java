@@ -143,7 +143,7 @@ public class Fragment_square extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LogUtils.LOG("ceshi", "" + i, "fragmentsquare");
                 intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
-                intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_id());
+                intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID());
                 getActivity().startActivity(intend_taskdrtails);
 
             }

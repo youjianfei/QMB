@@ -80,6 +80,8 @@ public class ShopInActivity extends BaseActivityother {
 
                                 if(status==1){
                                     ToastUtils.showToast(ShopInActivity.this,msg);
+                                    Intent  intent_shopIn_next=new Intent(ShopInActivity.this,ShopInNextActivity.class);
+                                    startActivity(intent_shopIn_next);
                                     finish();
                                 }else {
                                     ToastUtils.showToast(ShopInActivity.this,"提交申请失败，请稍候重试");
@@ -97,11 +99,6 @@ public class ShopInActivity extends BaseActivityother {
                     }).postHttp(Urls.Baseurl+Urls.shopIn,ShopInActivity.this,1,map_submit);
                 }
 
-
-
-
-                Intent  intent_shopIn_next=new Intent(ShopInActivity.this,ShopInNextActivity.class);
-                startActivity(intent_shopIn_next);
             }
         });
 

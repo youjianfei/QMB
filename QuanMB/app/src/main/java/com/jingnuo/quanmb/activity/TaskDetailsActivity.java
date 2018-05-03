@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -26,6 +27,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_state;
     TextView mTextview_tasktitle;
@@ -35,7 +38,8 @@ public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_taskdetails;
     TextView mTextview_tasktime;
     TextView mTextview_taskaddress;
-    TextView mTextview_peoplelevel;
+//    TextView mTextview_peoplelevel;
+    CircleImageView  imageView_head;
 
     Button mButton_help;
     Button mButton_counteroffer;
@@ -80,7 +84,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         String msg = "";
                         try {
                             JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
+                            status = (Integer) object.get("status");//登录状态
                             msg = (String) object.get("message");//登录返回信息
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -160,9 +164,10 @@ public class TaskDetailsActivity extends BaseActivityother {
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
         mTextview_tasktime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
-        mTextview_peoplelevel = findViewById(R.id.text_tlevel);
+//        mTextview_peoplelevel = findViewById(R.id.text_tlevel);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
+        imageView_head=findViewById(R.id.image_task);
     }
 
     void requestTaseDetail() {
@@ -176,12 +181,13 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
                 mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
                 mTextview_taskissuetime.setText("发布时间："+mTaskData.getData().getTask_StartDate());
-                mTextview_name.setText(mTaskData.getData().getName());
+                mTextview_name.setText(mTaskData.getData().getNick_name());
                 mTextview_taskdetails.setText(mTaskData.getData().getTask_description());
                 mTextview_tasktime.setText(mTaskData.getData().getTask_EndDate());
                 mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
-                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
+//                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
+                Glide.with(TaskDetailsActivity.this).load(mTaskData.getData().getUrl()).into(imageView_head);
                 if (is_counteroffer.equals("1")) {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                 }

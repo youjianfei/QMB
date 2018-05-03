@@ -14,18 +14,31 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.fargment.Fragment_acountLogin;
 import com.jingnuo.quanmb.fargment.Fragment_phone_login;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
+
+import static com.jingnuo.quanmb.data.Staticdata.isLogin;
+import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class LoginActivity extends BaseActivityother {
     TabItem mtabitem_accont,mtabitem_phone;
@@ -44,6 +57,7 @@ public class LoginActivity extends BaseActivityother {
     private UMShareAPI mShareAPI;//第三方登录登录
 
     //数据
+    Map map_wechat;
 
 
     @Override
@@ -168,9 +182,19 @@ public class LoginActivity extends BaseActivityother {
 
             switch (share_media){
                 case WEIXIN:
-                    LogUtils.LOG("ceshi", "登录方法:" +share_media,"三方登录回调");
-                    LogUtils.LOG("ceshi", "微信登陆成功openid:" + map.get("unionid") + "name:" + map.get("screen_name"),"三方登录回调");
-                    LogUtils.LOG("ceshi", "微信登陆成功" + map.toString(),"三方登录回调");
+//                    LogUtils.LOG("ceshi", "微信登陆成功" + map.toString(),"三方登录回调");
+                     map_wechat=new HashMap();
+                     map_wechat.put("unionid",map.get("unionid"));
+                     map_wechat.put("uuid",Staticdata.UUID);
+                     map_wechat.put("nick_name",map.get("name"));
+                     if (map.get("gender").equals("男")){
+                         map_wechat.put("sex","0");
+                     }else {
+                         map_wechat.put("sex","1");
+
+                     }
+                    wechatLogin(map_wechat);
+
                     break;
                 case SINA:
 
@@ -194,6 +218,42 @@ public class LoginActivity extends BaseActivityother {
             LogUtils.LOG("ceshi", "登陆取消" + share_media,"三方登录回调");
         }
     };
+    void wechatLogin(Map map){
+        LogUtils.LOG("ceshi", "微信map" + map.toString(),"三方登录回调");
+        LogUtils.LOG("ceshi", "微信mapURL" +Urls.Baseurl+Urls.wechatlogin,"三方登录回调");
+
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", "微信登录结果" + respose,"三方登录回调");
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
+                    Staticdata. static_userBean=new Gson().fromJson(respose,UserBean.class);
+                    token=Staticdata. static_userBean.getData().getUser_token();
+                    isLogin = true;
+                    Intent intent_login = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent_login);
+                    ToastUtils.showToast(LoginActivity.this,msg);
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.wechatlogin,LoginActivity.this,1,map);
+
+    }
 
 
     private void hideFragments(FragmentTransaction transaction) {//隐藏Fragment,以便点击时展映相应的Fragment

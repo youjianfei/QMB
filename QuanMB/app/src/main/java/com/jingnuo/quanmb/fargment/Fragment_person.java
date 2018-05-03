@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
@@ -21,6 +22,7 @@ import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
@@ -78,7 +80,25 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     private void initdata() {
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mTextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
 
+    }
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {//重新显示fragment 需要执行的操作
+//        super.onHiddenChanged(hidden);
+//        LogUtils.LOG("ceshi","onHiddenChanged"+hidden,"fragmentperson");
+//        if(!hidden){
+//
+//        }
+//    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.LOG("ceshi","onResume","fragmentperson");
+        mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+        mTextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
     }
 
     private void setview() {
@@ -148,4 +168,5 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         }
 
     }
+
 }

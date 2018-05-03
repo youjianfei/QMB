@@ -5,5 +5,5 @@ package com.jingnuo.quanmb.Interface;
  */
 
 public interface InterfacePopwindow_square_sort {
-    public void onSuccesses(String address,String id);
+    public void onSuccesses(String name,String id);
 }

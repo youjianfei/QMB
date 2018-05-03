@@ -393,7 +393,7 @@
                 android:id="@+id/edit_charges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="可由对方出价"
+                android:hint="不填写则由帮手出价"
                 android:textColorHint="@color/text_hide_tip"
                 android:textSize="14dp"
                 android:background="@null"

@@ -4,7 +4,7 @@ public class TaskDetailBean {
 
 
     /**
-     * data : {"Status_name":"已接单","commission":233,"detailed_address":"detailed_address","img_url":"d:aaa","is_counteroffer":"1","name":"王丽","task_EndDate":"2018-04-17 15:31:03","task_StartDate":"2018-04-16 15:30:58","task_Status_code":"02","task_description":"task_description","task_name":"task_name","user_grade":"一级"}
+     * data : {"Status_name":"待帮助","client_no":"2147483666","commission":10009,"detailed_address":"圣龙汇金广场508","is_counteroffer":"1","nick_name":"请问","specialty_name":"同城帮","task_EndDate":"2018-05-03 10:37:07","task_StartDate":"2018-05-03 10:37:06","task_Status_code":"01","task_description":"我需要一个人帮我去领快递","task_name":"我需要一个人帮我去领快递","url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525420294&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=c87UeDoK0Ayhie%2B9cpUypDjBP4s%3D,","user_grade":"1"}
      * message : 获取列表成功
      * status : 1
      */
@@ -39,31 +39,35 @@ public class TaskDetailBean {
 
     public static class DataBean {
         /**
-         * Status_name : 已接单
-         * commission : 233
-         * detailed_address : detailed_address
-         * img_url : d:aaa
+         * Status_name : 待帮助
+         * client_no : 2147483666
+         * commission : 10009
+         * detailed_address : 圣龙汇金广场508
          * is_counteroffer : 1
-         * name : 王丽
-         * task_EndDate : 2018-04-17 15:31:03
-         * task_StartDate : 2018-04-16 15:30:58
-         * task_Status_code : 02
-         * task_description : task_description
-         * task_name : task_name
-         * user_grade : 一级
+         * nick_name : 请问
+         * specialty_name : 同城帮
+         * task_EndDate : 2018-05-03 10:37:07
+         * task_StartDate : 2018-05-03 10:37:06
+         * task_Status_code : 01
+         * task_description : 我需要一个人帮我去领快递
+         * task_name : 我需要一个人帮我去领快递
+         * url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525420294&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=c87UeDoK0Ayhie%2B9cpUypDjBP4s%3D,
+         * user_grade : 1
          */
 
         private String Status_name;
+        private String client_no;
         private int commission;
         private String detailed_address;
-        private String img_url;
         private String is_counteroffer;
-        private String name;
+        private String nick_name;
+        private String specialty_name;
         private String task_EndDate;
         private String task_StartDate;
         private String task_Status_code;
         private String task_description;
         private String task_name;
+        private String url;
         private String user_grade;
 
         public String getStatus_name() {
@@ -72,6 +76,14 @@ public class TaskDetailBean {
 
         public void setStatus_name(String Status_name) {
             this.Status_name = Status_name;
+        }
+
+        public String getClient_no() {
+            return client_no;
+        }
+
+        public void setClient_no(String client_no) {
+            this.client_no = client_no;
         }
 
         public int getCommission() {
@@ -90,14 +102,6 @@ public class TaskDetailBean {
             this.detailed_address = detailed_address;
         }
 
-        public String getImg_url() {
-            return img_url;
-        }
-
-        public void setImg_url(String img_url) {
-            this.img_url = img_url;
-        }
-
         public String getIs_counteroffer() {
             return is_counteroffer;
         }
@@ -106,12 +110,20 @@ public class TaskDetailBean {
             this.is_counteroffer = is_counteroffer;
         }
 
-        public String getName() {
-            return name;
+        public String getNick_name() {
+            return nick_name;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setNick_name(String nick_name) {
+            this.nick_name = nick_name;
+        }
+
+        public String getSpecialty_name() {
+            return specialty_name;
+        }
+
+        public void setSpecialty_name(String specialty_name) {
+            this.specialty_name = specialty_name;
         }
 
         public String getTask_EndDate() {
@@ -152,6 +164,14 @@ public class TaskDetailBean {
 
         public void setTask_name(String task_name) {
             this.task_name = task_name;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
         }
 
         public String getUser_grade() {

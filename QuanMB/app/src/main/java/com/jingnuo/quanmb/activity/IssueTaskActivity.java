@@ -271,11 +271,9 @@ public class IssueTaskActivity extends BaseActivityother {
         task_EndDate=mTextview_time.getTag()+"";
 
         release_address="郑州";//TODO
+
         commission=mEditview_taskmoney.getText()+"";
-        if(commission.equals("")){
-            ToastUtils.showToast(this,"请填写任务佣金");
-            return  false;
-        }
+
         detailed_address=mEditview_addressDetail.getText()+"";
         if (mEditview_addressDetail.equals("")){
             ToastUtils.showToast(this,"请填写详细地址");
