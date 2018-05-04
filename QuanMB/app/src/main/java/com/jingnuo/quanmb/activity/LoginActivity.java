@@ -243,6 +243,10 @@ public class LoginActivity extends BaseActivityother {
                     startActivity(intent_login);
                     ToastUtils.showToast(LoginActivity.this,msg);
                     finish();
+                }else {
+                    Intent intent_wechat = new Intent(LoginActivity.this, ThreeRegisterActivity.class);
+                    startActivity(intent_wechat);
+
                 }
 
             }

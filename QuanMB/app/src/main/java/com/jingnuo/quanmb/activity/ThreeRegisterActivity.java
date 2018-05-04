@@ -7,10 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +61,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 phonenumber = mEdit_phonenumber.getText() + "";
-                if (yanzhengma.equals("")) {
+                if (phonenumber.equals("")) {
                     ToastUtils.showToast(ThreeRegisterActivity.this, "请输入手机号");
                     return;
                 }else {
@@ -71,6 +76,27 @@ public class ThreeRegisterActivity extends BaseActivityother {
                         }
                     },mButton_getyanzhengma).sendyanzhengma(ThreeRegisterActivity.this,map_relogin);
 
+                }
+            }
+        });
+
+
+        mButton_complte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(initmap()){
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi","微信登录绑定结果"+respose,"微信登录绑定结果");
+
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).postHttp(Urls.Baseurl+Urls.registerBind,ThreeRegisterActivity.this,1,map_relogin);
                 }
             }
         });
@@ -105,7 +131,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
             return false;
         }
         if(passwordagain.equals(password)){
-
+            passwordagain=getmEdit_passwordagain.getText()+"";
         }else {
             ToastUtils.showToast(ThreeRegisterActivity.this,"两次输入密码不一致");
             return false;
