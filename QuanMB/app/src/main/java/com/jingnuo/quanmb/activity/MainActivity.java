@@ -175,8 +175,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 if (isLogin) {
 //                    Intent intent_issue = new Intent(this, IssueTaskActivity.class);
 //                    startActivity(intent_issue);
-                    Popwindow_Issue popwindow_issue=new Popwindow_Issue(MainActivity.this);
-                    popwindow_issue.showpopwindow();
+//                    Popwindow_Issue popwindow_issue=new Popwindow_Issue(MainActivity.this);
+//                    popwindow_issue.showpopwindow();
+                    Intent intend_issue_task=new Intent(this, IssueTaskActivity.class);
+                    this.startActivity(intend_issue_task);
                 } else {
 
                     Intent intent_login = new Intent(this, LoginActivity.class);

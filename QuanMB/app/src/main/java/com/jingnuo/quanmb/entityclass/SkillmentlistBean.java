@@ -76,6 +76,7 @@ public class SkillmentlistBean {
              */
 
             private String business_no;
+            private String helper_no;
             private String client_no;
             private String contacts;
             private String createDate;
@@ -92,6 +93,14 @@ public class SkillmentlistBean {
             private String title;
             private String updateDate;
             private String updateName;
+
+            public String getHelper_no() {
+                return helper_no;
+            }
+
+            public void setHelper_no(String helper_no) {
+                this.helper_no = helper_no;
+            }
 
             public String getBusiness_no() {
                 return business_no;

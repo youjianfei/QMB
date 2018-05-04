@@ -23,8 +23,10 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_SquareList;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
 import com.jingnuo.quanmb.quanmb.R;
@@ -105,13 +107,15 @@ public class Fragment_square extends Fragment {
                 if (status == 1) {
                     mSquare_default_DataBean = new Gson().fromJson(respose, Square_defaultBean.class).getData();
 
-                    if (mSquare_default_DataBean.getList() == null || mSquare_default_DataBean.getList().size() == 0) {
-                        ToastUtils.showToast(getActivity(), "没有符合条件的任务");
-                        return;
-                    }
+//                    if (mSquare_default_DataBean.getList() == null || mSquare_default_DataBean.getList().size() == 0) {
+//                        ToastUtils.showToast(getActivity(), "没有符合条件的任务");
+//
+//                        return;
+//                    }
                     if (page == 1 && mSquare_default_DataBean.getList() != null) {
                         mListDate_square.clear();
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
+
                         mAdapter_SquareList.notifyDataSetChanged();
                     } else if (page != 1 && mSquare_default_DataBean.getList() != null) {
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
@@ -142,9 +146,16 @@ public class Fragment_square extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LogUtils.LOG("ceshi", "" + i, "fragmentsquare");
-                intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
-                intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID());
-                getActivity().startActivity(intend_taskdrtails);
+                if(Staticdata.isLogin&&mListDate_square.get(i-1).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
+                    intend_taskdrtails = new Intent(getActivity(), MytaskDetailActivity.class);
+                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID());
+                    getActivity().startActivity(intend_taskdrtails);
+                }else {
+                    intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
+                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID());
+                    getActivity().startActivity(intend_taskdrtails);
+                }
+
 
             }
         });

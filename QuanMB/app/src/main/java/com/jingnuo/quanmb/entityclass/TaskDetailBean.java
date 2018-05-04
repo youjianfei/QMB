@@ -4,7 +4,7 @@ public class TaskDetailBean {
 
 
     /**
-     * data : {"Status_name":"待帮助","client_no":"2147483666","commission":10009,"detailed_address":"圣龙汇金广场508","is_counteroffer":"1","nick_name":"请问","specialty_name":"同城帮","task_EndDate":"2018-05-03 10:37:07","task_StartDate":"2018-05-03 10:37:06","task_Status_code":"01","task_description":"我需要一个人帮我去领快递","task_name":"我需要一个人帮我去领快递","url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525420294&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=c87UeDoK0Ayhie%2B9cpUypDjBP4s%3D,","user_grade":"1"}
+     * data : {"Status_name":"待帮助","client_no":"2147483681","commission":123,"createDate":"2018-05-03 19:38:39","detailed_address":"312","is_counteroffer":"1","nick_name":"3333","specialty_name":"房屋","task_EndDate":"2018-05-04 19:38:39","task_Status_code":"01","task_description":"123","task_name":"12312","url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/d2389f24-a789-4d0e-9760-442ab37386b4hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525506806&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=aE0V0QKTuRfrmt0NSUhgJF3P1v0%3D,","user_grade":"1"}
      * message : 获取列表成功
      * status : 1
      */
@@ -40,30 +40,30 @@ public class TaskDetailBean {
     public static class DataBean {
         /**
          * Status_name : 待帮助
-         * client_no : 2147483666
-         * commission : 10009
-         * detailed_address : 圣龙汇金广场508
+         * client_no : 2147483681
+         * commission : 123
+         * createDate : 2018-05-03 19:38:39
+         * detailed_address : 312
          * is_counteroffer : 1
-         * nick_name : 请问
-         * specialty_name : 同城帮
-         * task_EndDate : 2018-05-03 10:37:07
-         * task_StartDate : 2018-05-03 10:37:06
+         * nick_name : 3333
+         * specialty_name : 房屋
+         * task_EndDate : 2018-05-04 19:38:39
          * task_Status_code : 01
-         * task_description : 我需要一个人帮我去领快递
-         * task_name : 我需要一个人帮我去领快递
-         * url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525420294&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=c87UeDoK0Ayhie%2B9cpUypDjBP4s%3D,
+         * task_description : 123
+         * task_name : 12312
+         * url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/d2389f24-a789-4d0e-9760-442ab37386b4hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525506806&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=aE0V0QKTuRfrmt0NSUhgJF3P1v0%3D,
          * user_grade : 1
          */
 
         private String Status_name;
         private String client_no;
         private int commission;
+        private String createDate;
         private String detailed_address;
         private String is_counteroffer;
         private String nick_name;
         private String specialty_name;
         private String task_EndDate;
-        private String task_StartDate;
         private String task_Status_code;
         private String task_description;
         private String task_name;
@@ -92,6 +92,14 @@ public class TaskDetailBean {
 
         public void setCommission(int commission) {
             this.commission = commission;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
         }
 
         public String getDetailed_address() {
@@ -132,14 +140,6 @@ public class TaskDetailBean {
 
         public void setTask_EndDate(String task_EndDate) {
             this.task_EndDate = task_EndDate;
-        }
-
-        public String getTask_StartDate() {
-            return task_StartDate;
-        }
-
-        public void setTask_StartDate(String task_StartDate) {
-            this.task_StartDate = task_StartDate;
         }
 
         public String getTask_Status_code() {

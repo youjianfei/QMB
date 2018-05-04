@@ -10,7 +10,7 @@ public class Square_defaultBean {
 
 
     /**
-     * data : {"list":[{"commission":50,"createDate":"2018-05-02 19:41:48","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"asdasdasd","specialty_name":"帮买","task_ID":6,"task_Name":"12333","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:29","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":8,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:31","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":9,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:31","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":10,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:31","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":11,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:32","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412940&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=embEdjISzB1L1UyJ5Cy3S0dFYkI%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":12,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:32","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412940&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=embEdjISzB1L1UyJ5Cy3S0dFYkI%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":13,"task_Name":"天天疼","user_reputation":100},{"commission":50,"createDate":"2018-05-02 19:56:32","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412940&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=embEdjISzB1L1UyJ5Cy3S0dFYkI%3D","nick_name":"请问","release_Address":"郑州","specialty_name":"帮送","task_ID":14,"task_Name":"天天疼","user_reputation":100}]}
+     * data : {"list":[{"client_no":"2147483681","commission":123,"createDate":"2018-05-03 19:38:39","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/d2389f24-a789-4d0e-9760-442ab37386b4hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525484590&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=allMbmC%2BKCqfENWu4raWqCJ2YUU%3D","release_Address":"郑州","specialty_name":"房屋","task_ID":9,"task_Name":"12312","task_description":"123","user_reputation":100},{"client_no":"2147483672","commission":50,"createDate":"2018-05-04 09:13:43","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/316e6c34-62bb-4be0-a628-f75f5dbcec70mmexport1525309537560.jpg?Expires=1525484590&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=3aCv2F5CLU3rTIuI3VvWKCLsvL0%3D","release_Address":"郑州","specialty_name":"帮买","task_ID":10,"task_Name":"买个囊","task_description":"着急用","user_reputation":100},{"client_no":"2147483678","commission":63,"createDate":"2018-05-04 09:40:00","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/39ae9297-2376-4668-a92d-33056c9af298MYXJ_20180501183347_fast.jpg?Expires=1525484590&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=OcXF%2BlLATUeUsBdkBR02oFo94ik%3D","release_Address":"郑州","specialty_name":"玻璃","task_ID":11,"task_Name":"sdafasdf","task_description":"sadfsadfsadf","user_reputation":100}]}
      * message : 获取列表成功
      * status : 1
      */
@@ -56,26 +56,36 @@ public class Square_defaultBean {
 
         public static class ListBean {
             /**
-             * commission : 50
-             * createDate : 2018-05-02 19:41:48
-             * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/bf441495-e4e3-4c95-9e88-477c0aaf421dbut_gift_normal.png?Expires=1525412939&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=e97NNdexBI8FuG19cI380YOW7qA%3D
-             * nick_name : 请问
-             * release_Address : asdasdasd
-             * specialty_name : 帮买
-             * task_ID : 6
-             * task_Name : 12333
+             * client_no : 2147483681
+             * commission : 123
+             * createDate : 2018-05-03 19:38:39
+             * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/d2389f24-a789-4d0e-9760-442ab37386b4hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525484590&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=allMbmC%2BKCqfENWu4raWqCJ2YUU%3D
+             * release_Address : 郑州
+             * specialty_name : 房屋
+             * task_ID : 9
+             * task_Name : 12312
+             * task_description : 123
              * user_reputation : 100
              */
 
+            private String client_no;
             private int commission;
             private String createDate;
             private String headUrl;
-            private String nick_name;
             private String release_Address;
             private String specialty_name;
             private int task_ID;
             private String task_Name;
+            private String task_description;
             private int user_reputation;
+
+            public String getClient_no() {
+                return client_no;
+            }
+
+            public void setClient_no(String client_no) {
+                this.client_no = client_no;
+            }
 
             public int getCommission() {
                 return commission;
@@ -99,14 +109,6 @@ public class Square_defaultBean {
 
             public void setHeadUrl(String headUrl) {
                 this.headUrl = headUrl;
-            }
-
-            public String getNick_name() {
-                return nick_name;
-            }
-
-            public void setNick_name(String nick_name) {
-                this.nick_name = nick_name;
             }
 
             public String getRelease_Address() {
@@ -139,6 +141,14 @@ public class Square_defaultBean {
 
             public void setTask_Name(String task_Name) {
                 this.task_Name = task_Name;
+            }
+
+            public String getTask_description() {
+                return task_description;
+            }
+
+            public void setTask_description(String task_description) {
+                this.task_description = task_description;
             }
 
             public int getUser_reputation() {

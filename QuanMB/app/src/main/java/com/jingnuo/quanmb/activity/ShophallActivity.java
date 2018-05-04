@@ -97,6 +97,15 @@ public class ShophallActivity extends BaseActivityother {
                 Intent mIntent_shopskillDetail = new Intent(ShophallActivity.this, SkillDetailActivity.class);
 
                 mIntent_shopskillDetail.putExtra("id",mData.get(i-1).getRelease_specialty_id());
+                LogUtils.LOG("ceshi",mData.get(i-1).getBusiness_no(),"ShophallActivity");
+                if(mData.get(i-1).getBusiness_no().equals("")){
+                    mIntent_shopskillDetail.putExtra("role",1+"");
+                    LogUtils.LOG("ceshi",mData.get(i-1).getBusiness_no(),"ShophallActivity1");
+                }else {
+                    mIntent_shopskillDetail.putExtra("role",2+"");
+                    LogUtils.LOG("ceshi",mData.get(i-1).getBusiness_no(),"ShophallActivity2");
+
+                }
                 startActivity(mIntent_shopskillDetail);
             }
         });

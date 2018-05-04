@@ -60,6 +60,7 @@ public class SkillDetailActivity extends BaseActivityother {
     String image_url="";
 
     String id="";
+    String role="";//身份
 
 
 
@@ -96,7 +97,10 @@ public class SkillDetailActivity extends BaseActivityother {
         mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         Intent intent=getIntent();
         id= intent.getStringExtra("id");
-        request(id);
+        role= intent.getStringExtra("role");
+        LogUtils.LOG("ceshi",role+"行","role");
+
+        request(id,role);
     }
 
     @Override
@@ -201,12 +205,20 @@ public class SkillDetailActivity extends BaseActivityother {
 
     }
 
-    void request(String id){
+    void request(String id ,String role){
+        String URL="";
+        if(role.equals("1")){
+            URL=  Urls.Baseurl+Urls.Skilldetail_1+"?id="+id;
+        }else {
+            URL=  Urls.Baseurl+Urls.Skilldetail_2+"?id="+id;
+        }
+        LogUtils.LOG("ceshi","专业详情网址："+URL,"fdsfsdf");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi",respose,"服务详情");
                 mSkilldetailsbean=new Gson().fromJson(respose,SkillsdetailsBean.class);
+
                 mTextview_title.setText(mSkilldetailsbean.getData().getDetail().getTitle());
                 mTextview_issuetime.setText(Utils.getStrTime(mSkilldetailsbean.getData().getDetail().getRelease_date()+""));
                 mTextview_skilltype.setText(mSkilldetailsbean.getData().getDetail().getSpecialty_name());
@@ -222,7 +234,7 @@ public class SkillDetailActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl+Urls.Skilldetail+"?id="+id,SkillDetailActivity.this,0);
+        }).Http(URL,SkillDetailActivity.this,0);
 
 
 

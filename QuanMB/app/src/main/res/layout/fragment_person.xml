@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:text="我的订单"
+                    android:text="我的发布"
                     android:layout_toRightOf="@+id/image1"
                     android:textColor="@color/black_text"
                     android:textSize="15dp" />

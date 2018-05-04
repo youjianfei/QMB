@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -15,6 +16,7 @@ import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;
@@ -22,6 +24,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MytaskDetailActivity extends BaseActivityother {
     //控件
@@ -35,6 +39,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     TextView mTextview_taskstarttime;
     TextView mTextview_taskaddress;
 //    TextView mTextview_helplevle;
+    CircleImageView  mImageview_head;
 
     Button mButton_cancle;
 
@@ -58,7 +63,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        ID = intent.getIntExtra("ID", 0);
+        ID = intent.getIntExtra("id", 0);
         map_taskdetail=new HashMap();
         map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
@@ -118,6 +123,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mTextview_taskstarttime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
 //        mTextview_helplevle = findViewById(R.id.text_tlevel);
+        mImageview_head=findViewById(R.id.image_task);
         mButton_cancle=findViewById(R.id.button_cancle);
     }
     void request(Map map){
@@ -128,11 +134,18 @@ public class MytaskDetailActivity extends BaseActivityother {
                 taskDetailBean=new Gson().fromJson(respose,TaskDetailBean.class);
                 mTextview_taskstate.setText(taskDetailBean.getData().getStatus_name());
                 mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
-                mTextview_taskmoney.setText(taskDetailBean.getData().getCommission()+"");
-                mTextview_tasktime.setText(taskDetailBean.getData().getTask_StartDate());
+                mTextview_taskmoney.setText("佣金：" +taskDetailBean.getData().getCommission()+"元");
+                mTextview_tasktime.setText("发布时间：" + taskDetailBean.getData().getCreateDate());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
-                mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_EndDate());
+
+                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+                long ago = Long.parseLong(Utils.getTime(taskDetailBean.getData().getTask_EndDate()));//任务过期时间
+                String time = Utils.getDistanceTime(ago, now);//算出的差值
+                mTextview_taskstarttime.setText(time);
+
+
                 mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
+                Glide.with(MytaskDetailActivity.this).load(taskDetailBean.getData().getUrl()).into(mImageview_head);
 //                mTextview_helplevle.setText(taskDetailBean.getData().getUser_grade());
                 if(taskDetailBean.getData().getTask_Status_code().equals("02")||taskDetailBean.getData().getTask_Status_code().equals("01")||taskDetailBean.getData().getTask_Status_code().equals("08")){
                     mButton_cancle.setVisibility(View.VISIBLE);

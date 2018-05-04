@@ -19,6 +19,7 @@ import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;
@@ -38,8 +39,8 @@ public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_taskdetails;
     TextView mTextview_tasktime;
     TextView mTextview_taskaddress;
-//    TextView mTextview_peoplelevel;
-    CircleImageView  imageView_head;
+    //    TextView mTextview_peoplelevel;
+    CircleImageView imageView_head;
 
     Button mButton_help;
     Button mButton_counteroffer;
@@ -116,6 +117,12 @@ public class TaskDetailsActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (Staticdata.isLogin) {//是否登录
+                    if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")) {
+                        ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
+                        Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
+                        startActivity(intent_renzheng);
+                    }
+
                     LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
@@ -129,7 +136,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 
 
                             } else {
-                                ToastUtils.showToast(TaskDetailsActivity.this, Staticdata.queRenHelp_bean.getMessage());
+//                                ToastUtils.showToast(TaskDetailsActivity.this, Staticdata.queRenHelp_bean.getMessage());
                             }
                         }
 
@@ -149,7 +156,20 @@ public class TaskDetailsActivity extends BaseActivityother {
         mButton_counteroffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popwindow_bargin.showpop();
+                if (Staticdata.isLogin) {
+                    if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")) {
+                        ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
+                        Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
+                        startActivity(intent_renzheng);
+                    } else {
+                        popwindow_bargin.showpop();
+                    }
+                } else {
+                    Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
+                    startActivity(intent_login);
+                    finish();
+                }
+
             }
         });
     }
@@ -167,7 +187,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 //        mTextview_peoplelevel = findViewById(R.id.text_tlevel);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
-        imageView_head=findViewById(R.id.image_task);
+        imageView_head = findViewById(R.id.image_task);
     }
 
     void requestTaseDetail() {
@@ -180,10 +200,14 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_state.setText(mTaskData.getData().getStatus_name());
                 mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
                 mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
-                mTextview_taskissuetime.setText("发布时间："+mTaskData.getData().getTask_StartDate());
+                mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getCreateDate());
                 mTextview_name.setText(mTaskData.getData().getNick_name());
                 mTextview_taskdetails.setText(mTaskData.getData().getTask_description());
-                mTextview_tasktime.setText(mTaskData.getData().getTask_EndDate());
+                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+                long ago = Long.parseLong(Utils.getTime(mTaskData.getData().getTask_EndDate()));//任务过期时间
+                String time = Utils.getDistanceTime(ago, now);//算出的差值
+                mTextview_tasktime.setText(time);
+
                 mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();

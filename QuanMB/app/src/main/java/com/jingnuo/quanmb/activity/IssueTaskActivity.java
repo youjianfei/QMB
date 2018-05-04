@@ -80,7 +80,7 @@ public class IssueTaskActivity extends BaseActivityother {
     String task_description = "";
     String task_typeID = "";
     String task_StartDate = "";
-    String task_EndDate = "";
+    String task_time = "";
     String client_no = "";
     String release_address = "";
     String commission = "";
@@ -268,7 +268,7 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请选择任务完成期限");
             return false;
         }
-        task_EndDate=mTextview_time.getTag()+"";
+        task_time=mTextview_time.getTag()+"";
 
         release_address="郑州";//TODO
 
@@ -286,7 +286,7 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("task_name",task_name+"");
         map_issueTask.put("task_description",task_description+"");
         map_issueTask.put("task_type",task_typeID+"");
-        map_issueTask.put("task_EndDate",task_EndDate);
+        map_issueTask.put("task_time",task_time);
         map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token()+"");
         map_issueTask.put("release_address","郑州");//TODO 地区
         map_issueTask.put("commission",commission+"");

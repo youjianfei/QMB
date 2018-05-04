@@ -159,7 +159,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_morph_3dp"
-        android:text="注  册"
+        android:text="完 成"
         android:textColor="@color/white"
         android:textSize="16dp" />
 

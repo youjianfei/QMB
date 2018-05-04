@@ -203,7 +203,7 @@ public class Popwindow_SquareSort {
         mGridview_filter_task.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ToastUtils.showToast(activity,mData_filter_task.get(i).getText());
+//                ToastUtils.showToast(activity,mData_filter_task.get(i).getText());
                 LogUtils.LOG("ceshi",mData_filter_task.get(i).getText(),"pop");
                 if(mData_filter_task.get(i).isChoose()){
                     mData_filter_task.get(i).setChoose(false);

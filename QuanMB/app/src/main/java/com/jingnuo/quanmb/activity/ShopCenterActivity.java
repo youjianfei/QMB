@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShopcenterBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 
@@ -71,11 +73,12 @@ public class ShopCenterActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.relative_issuetask:
-
-
+                Intent intend_issue_skill=new Intent(ShopCenterActivity.this, IssueSkillActivity.class);
+                ShopCenterActivity.this.startActivity(intend_issue_skill);
                 break;
 
             case R.id.relative_myissue:
+
 
                 break;
 
@@ -95,6 +98,7 @@ public class ShopCenterActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","商户中心："+respose,"ShopCenterActivity");
                 shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                 mTextview_shopname.setText(shopcenterBean.getData().getList().getBusiness_name());
                 mTextview_address.setText(shopcenterBean.getData().getList().getBusiness_address());

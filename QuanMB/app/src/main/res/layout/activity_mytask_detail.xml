@@ -37,7 +37,7 @@
         android:layout_below="@+id/re_title"
         android:background="@color/white">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_task"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -74,7 +74,7 @@
             android:id="@+id/text_taskmoney"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_taskstate"
+            android:layout_below="@+id/text_tasktitle"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
@@ -148,7 +148,7 @@
             android:layout_below="@+id/line2"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:text="预约时间"
+            android:text="剩余时间"
             android:textColor="#7f7f7f"
             android:textSize="15dp" />
 

@@ -35,8 +35,8 @@ public class Adapter_myIssue extends BaseAdapter {
             viewHolder.mTextview_issuetime = convertView.findViewById(R.id.textview_issuename);
             viewHolder.mTextview_money = convertView.findViewById(R.id.textview_moneyy);
             viewHolder.mTextview_content = convertView.findViewById(R.id.text_content);
-            viewHolder.mTextview_helpername = convertView.findViewById(R.id.text_helpername);
-            viewHolder.mTextview_startime = convertView.findViewById(R.id.text_resttime);
+            viewHolder.mTextview_taskstate = convertView.findViewById(R.id.text_taskstate);
+//            viewHolder.mTextview_startime = convertView.findViewById(R.id.text_resttime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (viewHolde) convertView.getTag();
@@ -45,8 +45,8 @@ public class Adapter_myIssue extends BaseAdapter {
         viewHolder.mTextview_issuetime.setText("发布时间：" + mData.get(position).getTask_StartDate());
         viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
         viewHolder.mTextview_content.setText(mData.get(position).getTask_description());
-        viewHolder.mTextview_helpername.setText(mData.get(position).getName());
-        viewHolder.mTextview_startime.setText("预约时间：" + mData.get(position).getTask_EndDate());
+        viewHolder.mTextview_taskstate.setText(mData.get(position).getStatus_name());
+//        viewHolder.mTextview_startime.setText("预约时间：" + mData.get(position).getTask_EndDate());
 
         return convertView;
     }
@@ -56,7 +56,7 @@ public class Adapter_myIssue extends BaseAdapter {
         TextView mTextview_issuetime;
         TextView mTextview_money;
         TextView mTextview_content;
-        TextView mTextview_helpername;
-        TextView mTextview_startime;
+        TextView mTextview_taskstate;
+//        TextView mTextview_startime;
     }
 }

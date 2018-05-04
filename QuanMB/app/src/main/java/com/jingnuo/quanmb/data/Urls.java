@@ -5,12 +5,12 @@ package com.jingnuo.quanmb.data;
  */
 
 public class Urls {
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
-//    public  static  String Baseurl_hu="http://192.168.1.197:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
+    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
@@ -44,7 +44,8 @@ public class Urls {
     public static String Skillmenu_one = "major/searchOne";//找专业一级菜单
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开列表    参数  specialty_id
-    public static String Skilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
+    public static String Skilldetail_2 = "business/queryPostDetail";//服务内容详情    参数  id  get请求
+    public static String Skilldetail_1 = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String IssueSkill = "business/releaseSpecialty";//发布专业    post
 
     //商户
