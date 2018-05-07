@@ -21,6 +21,7 @@
             android:src="@mipmap/back_white" />
 
         <TextView
+            android:id="@+id/textview_tt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -64,7 +65,7 @@
                 android:layout_below="@+id/image_shoppeoplepic"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="13dp"
-                android:text="我是商家"
+                android:text="认证身份"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 

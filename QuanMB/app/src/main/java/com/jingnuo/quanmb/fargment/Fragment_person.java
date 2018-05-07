@@ -122,8 +122,8 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
             case R.id.textview_bangshou:
                 if(Staticdata.static_userBean.getData().getHelper_status()==1){
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                    intent_shopcenter.putExtra("type",1);//1  帮手
                     getActivity().startActivity(intent_shopcenter);
-
                 }else {//申请帮手界面
                     Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
                     getActivity().startActivity(intent_anthentication);
@@ -144,6 +144,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
             case  R.id.textview_shopcenter://1  商户  0  不是商户
                 if(Staticdata.static_userBean.getData().getBusiness_status()==1){
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                    intent_shopcenter.putExtra("type",2);//2  商户
                     getActivity().startActivity(intent_shopcenter);
 
                 }else {//申请商户界面

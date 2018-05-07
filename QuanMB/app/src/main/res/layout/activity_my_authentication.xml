@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_background"
+    tools:context="com.jingnuo.quanmb.activity.MyAuthenticationActivity">
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_logintitle">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="我的认证"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:id="@+id/iamge_1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@color/black_text2"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/text_gerenrenzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人认证"
+            android:layout_toRightOf="@+id/iamge_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:id="@+id/text_idcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="410185199209202516"
+            android:layout_toRightOf="@+id/iamge_1"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/text_gerenrenzheng"
+            />
+
+        <TextView
+            android:id="@+id/renzheng_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未认证"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:layout_marginTop="6dp"
+        >
+        <ImageView
+            android:id="@+id/iamge_2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@color/black_text2"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/text_qiyerenzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全民帮"
+            android:layout_toRightOf="@+id/iamge_2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:id="@+id/text_qiyeaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汇金广场"
+            android:layout_toRightOf="@+id/iamge_2"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/text_qiyerenzheng"
+            />
+
+        <TextView
+            android:id="@+id/renzheng_state2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未认证"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

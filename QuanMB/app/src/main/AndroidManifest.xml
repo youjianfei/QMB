@@ -88,6 +88,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.ThreeRegisterActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ThreeLoginBindActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.BarginMessageActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MyTodoActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MyAuthenticationActivity" />
     </application>
 
 </manifest>

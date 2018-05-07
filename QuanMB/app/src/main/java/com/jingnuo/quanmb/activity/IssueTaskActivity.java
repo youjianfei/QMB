@@ -273,6 +273,14 @@ public class IssueTaskActivity extends BaseActivityother {
         release_address="郑州";//TODO
 
         commission=mEditview_taskmoney.getText()+"";
+        if(!commission.equals("")){
+            float min=Float.parseFloat(commission);
+            LogUtils.LOG("ceshi",min+"","sfdsfsaf");
+            if(min<5){
+                ToastUtils.showToast(IssueTaskActivity.this,"佣金最低为5元");
+                return false;
+            }
+        }
 
         detailed_address=mEditview_addressDetail.getText()+"";
         if (mEditview_addressDetail.equals("")){

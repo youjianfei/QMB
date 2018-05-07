@@ -54,10 +54,13 @@ public class Urls {
     //商户
     public static String shopIn = "business/commitApply";//商家入驻审核    post
     public static String shopcenter = "business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
+    public static String  shoporder= "business/queryBusinessOrder?user_token=";//商家接收的任务
 
 
     //帮手模块
     public static String authenticationHelper = "helper/helperReal";//帮手认证
+    public static String helperInfo = "helper/queryHelperInfo?user_token=";//帮手信息
+    public static String  helporder= "business/queryHelperOrder?user_token=";//帮手接收的任务
 
 
     //消息模块
