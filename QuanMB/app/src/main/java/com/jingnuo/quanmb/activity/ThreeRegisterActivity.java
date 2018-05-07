@@ -1,24 +1,37 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.PasswordJiami;
+import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.jingnuo.quanmb.data.Staticdata.isLogin;
+import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class ThreeRegisterActivity extends BaseActivityother {
 
@@ -30,13 +43,15 @@ public class ThreeRegisterActivity extends BaseActivityother {
 //    ImageView mImage_choose;
     Button mButton_getyanzhengma;
     Button mButton_complte;
+    TextView mTextview_bindnow;
 
     //数据
+    UserBean userBean;
     String phonenumber = "";
     String password = "";
     String passwordagain = "";
     String yanzhengma = "";
-
+    String publicEncryptedResult = "";//加密后密码
     Map map_relogin;
 
 
@@ -88,8 +103,28 @@ public class ThreeRegisterActivity extends BaseActivityother {
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
-                            LogUtils.LOG("ceshi","微信登录绑定结果"+respose,"微信登录绑定结果");
-
+                            LogUtils.LOG("ceshi",respose,"注册绑定");
+                            int  status=0;
+                            String msg="";
+                            try {
+                                JSONObject object=new JSONObject(respose);
+                                status = (Integer) object.get("code");//登录状态
+                                msg = (String) object.get("message");//登录返回信息
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            if(status==1){//登录成功
+                                SharedPreferencesUtils.putString(ThreeRegisterActivity.this,"QMB","password",password);//登录成功之后存未加密de密码
+                                userBean=new Gson().fromJson(respose,UserBean.class);
+                                Staticdata. static_userBean=userBean;
+                                token=userBean.getData().getUser_token();
+                                isLogin = true;
+                                Intent intent_login = new Intent(ThreeRegisterActivity.this, MainActivity.class);
+                                ThreeRegisterActivity.this.startActivity(intent_login);
+                                finish();
+                            }else {
+                                ToastUtils.showToast(ThreeRegisterActivity.this,msg);
+                            }
                         }
 
                         @Override
@@ -101,6 +136,14 @@ public class ThreeRegisterActivity extends BaseActivityother {
             }
         });
 
+        mTextview_bindnow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_bind=new Intent(ThreeRegisterActivity.this,ThreeLoginBindActivity.class);
+                startActivity(intent_bind);
+
+            }
+        });
     }
 
     @Override
@@ -112,6 +155,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
         mButton_getyanzhengma = findViewById(R.id.button_getyanzhangma);
 //        mImage_choose = findViewById(R.id.image_choose);
         mButton_complte = findViewById(R.id.button_register);
+        mTextview_bindnow=findViewById(R.id.textview_bind);
     }
 
     boolean initmap() {
@@ -120,23 +164,31 @@ public class ThreeRegisterActivity extends BaseActivityother {
             ToastUtils.showToast(ThreeRegisterActivity.this,"请输入手机号");
             return false;
         }
+        map_relogin.put("phoneNumbers",phonenumber);
         yanzhengma=mEdit_yanzhengma.getText()+"";
         if(yanzhengma.equals("")){
             ToastUtils.showToast(ThreeRegisterActivity.this,"请输入验证码");
             return false;
         }
+        map_relogin.put("ValidateCode",yanzhengma);
         password=mEdit_password.getText()+"";
         if(password.equals("")){
             ToastUtils.showToast(ThreeRegisterActivity.this,"请输入密码");
             return false;
         }
-        if(passwordagain.equals(password)){
-            passwordagain=getmEdit_passwordagain.getText()+"";
-        }else {
+        publicEncryptedResult= PasswordJiami.passwordjiami(password);//对密码加密
+        map_relogin.put("password",publicEncryptedResult);
+        passwordagain=getmEdit_passwordagain.getText()+"";
+        if(!passwordagain.equals(password)){
             ToastUtils.showToast(ThreeRegisterActivity.this,"两次输入密码不一致");
             return false;
         }
-
+        map_relogin.remove("type");
+        map_relogin.put("confirm",publicEncryptedResult);
+        map_relogin.put("nick_name", Staticdata.map_wechat.get("nick_name"));
+        map_relogin.put("sex",Staticdata.map_wechat.get("sex"));
+        map_relogin.put("unionid",Staticdata.map_wechat.get("unionid"));
+        map_relogin.put("uuid",Staticdata.UUID);
         return true;
 
 

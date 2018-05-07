@@ -6,11 +6,11 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -23,6 +23,7 @@ public class Urls {
     public static String phoneLogin = "login/moblieLogin";//手机号验证登陆
     public static String phoneRegister = "register/Register";//注册
     public static String registerBind = "login/registerBind";//三方登录注册绑定
+    public static String existsBind = "login/existsBind";//三方登录已有账号绑定
     public static String findpassword = "login/forgetPwd";//找回密码
     public static String changephonenumber = "user/modifyPhone1";//更换绑定手机号第一步
     public static String bindphonenumber = "user/modifyPhone2";//更换绑定手机号第er步,绑定手机号

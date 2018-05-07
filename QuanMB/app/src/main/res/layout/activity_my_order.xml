@@ -25,11 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="我的订单"
+            android:text="我的发布"
             android:textColor="@color/white"
             android:textSize="18sp" />
-
-
     </RelativeLayout>
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"

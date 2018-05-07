@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivityother {
     private UMShareAPI mShareAPI;//第三方登录登录
 
     //数据
-    Map map_wechat;
+
 
 
     @Override
@@ -183,25 +183,23 @@ public class LoginActivity extends BaseActivityother {
             switch (share_media){
                 case WEIXIN:
 //                    LogUtils.LOG("ceshi", "微信登陆成功" + map.toString(),"三方登录回调");
-                     map_wechat=new HashMap();
-                     map_wechat.put("unionid",map.get("unionid"));
-                     map_wechat.put("uuid",Staticdata.UUID);
-                     map_wechat.put("nick_name",map.get("name"));
+                     Staticdata.map_wechat=new HashMap();
+                    Staticdata.map_wechat.put("unionid",map.get("unionid"));
+                    Staticdata.map_wechat.put("uuid",Staticdata.UUID);
+                    Staticdata.map_wechat.put("nick_name",map.get("name"));
                      if (map.get("gender").equals("男")){
-                         map_wechat.put("sex","0");
+                         Staticdata.map_wechat.put("sex","0");
                      }else {
-                         map_wechat.put("sex","1");
+                         Staticdata.map_wechat.put("sex","1");
 
                      }
-                    wechatLogin(map_wechat);
+                    wechatLogin(Staticdata.map_wechat);
 
                     break;
                 case SINA:
 
                     break;
                 case QQ:
-                    LogUtils.LOG("ceshi", "登录方法:" +share_media,"三方登录回调");
-                    LogUtils.LOG("ceshi", "QQ登陆成功openid:" + map.toString(),"三方登录回调");
 
                     break;
             }
@@ -246,7 +244,6 @@ public class LoginActivity extends BaseActivityother {
                 }else {
                     Intent intent_wechat = new Intent(LoginActivity.this, ThreeRegisterActivity.class);
                     startActivity(intent_wechat);
-
                 }
 
             }

@@ -33,6 +33,8 @@ public class Staticdata {
     public static Map  map_task = new HashMap();
     //确认帮助任务需要向下一页传入数据，把qurenbean写为全局变量
     public  static QueRenHelp_Bean queRenHelp_bean=null;
+    //向下一页传入数据，写为全局变量
+    public  static Map map_wechat=new HashMap();
 
 
 

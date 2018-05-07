@@ -177,7 +177,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                    startActivity(intent_issue);
 //                    Popwindow_Issue popwindow_issue=new Popwindow_Issue(MainActivity.this);
 //                    popwindow_issue.showpopwindow();
-                    Intent intend_issue_task=new Intent(this, IssueTaskActivity.class);
+                    Intent intend_issue_task = new Intent(this, IssueTaskActivity.class);
                     this.startActivity(intend_issue_task);
                 } else {
 
@@ -187,13 +187,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.relative_message:
-                LogUtils.LOG("ceshi", "消息被点击", "mainactivity");
-                ChangeBottomButton(mRelativeLayout_message);
-                if (mFragment_menssage == null) {
-                    mFragment_menssage = new Fragment_message();
-                    transaction.add(R.id.framelayout_main, mFragment_menssage).commit();
+                if (isLogin) {
+                    ChangeBottomButton(mRelativeLayout_message);
+                    if (mFragment_menssage == null) {
+                        mFragment_menssage = new Fragment_message();
+                        transaction.add(R.id.framelayout_main, mFragment_menssage).commit();
+                    } else {
+                        transaction.show(mFragment_menssage).commit();
+                    }
                 } else {
-                    transaction.show(mFragment_menssage).commit();
+                    Intent intent_login = new Intent(this, LoginActivity.class);
+                    startActivity(intent_login);
                 }
                 break;
             case R.id.relative_person:
@@ -265,9 +269,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             finish();
         }
     }
+
     public class MyLocationListener extends BDAbstractLocationListener {
         @Override
-        public void onReceiveLocation(BDLocation location){
+        public void onReceiveLocation(BDLocation location) {
             //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
             //以下只列举部分获取经纬度相关（常用）的结果信息
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
@@ -282,7 +287,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             int errorCode = location.getLocType();
             //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
 
-            LogUtils.LOG("ceshi","纬度信息"+latitude+"经度信息"+longitude+"定位精度"+radius+"经纬度坐标类型"+coorType+"错误返回码"+errorCode,"mainactivity");
+            LogUtils.LOG("ceshi", "纬度信息" + latitude + "经度信息" + longitude + "定位精度" + radius + "经纬度坐标类型" + coorType + "错误返回码" + errorCode, "mainactivity");
         }
     }
 

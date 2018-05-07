@@ -78,7 +78,8 @@ public class ShopCenterActivity extends BaseActivityother {
                 break;
 
             case R.id.relative_myissue:
-
+                Intent intent_myorder=new Intent(ShopCenterActivity.this, MyOrderActivity.class);
+                startActivity(intent_myorder);
 
                 break;
 
