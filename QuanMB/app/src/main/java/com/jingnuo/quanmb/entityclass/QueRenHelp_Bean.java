@@ -4,7 +4,7 @@ public class QueRenHelp_Bean {
 
 
     /**
-     * date : {"Status_name":"已接单","client_name":"崔","client_sex":"男","commission":20,"detailed_address":"0809","img_url":"d:aaa","is_counteroffer":"1","mobile_no":"110","name":"王丽","task_EndDate":"2018-04-20 14:44:38","task_StartDate":"2018-04-03 14:44:23","task_Status_code":"02","task_description":"接口连接超时","task_name":"接口维护2","user_grade":"一级"}
+     * date : {"Status_name":"已接单","client_no":"2147483680","counteroffer_Amount":33333,"createDate":"2018-05-08 17:05:28","detailed_address":"33333333","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525856854&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=4l53l8r7pLb6A2fKpK8QTI7Yoms%3D","is_counteroffer":"1","nick_name":"中单亚索  不给就送","order_Amount":33333,"order_EndDate":"2018-05-23 17:07:33","specialty_name":"家具","task_Status_code":"02","task_description":"33333333","task_name":"33333333","user_grade":"1"}
      * message : 确认帮助成功
      * status : 1
      */
@@ -40,33 +40,51 @@ public class QueRenHelp_Bean {
     public static class DateBean {
         /**
          * Status_name : 已接单
-         * client_name : 崔
-         * client_sex : 男
-         * commission : 20
-         * detailed_address : 0809
-         * img_url : d:aaa
+         * client_no : 2147483680
+         * counteroffer_Amount : 33333
+         * createDate : 2018-05-08 17:05:28
+         * detailed_address : 33333333
+         * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525856854&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=4l53l8r7pLb6A2fKpK8QTI7Yoms%3D
          * is_counteroffer : 1
-         * mobile_no : 110
-         * name : 王丽
-         * task_EndDate : 2018-04-20 14:44:38
-         * task_StartDate : 2018-04-03 14:44:23
+         * nick_name : 中单亚索  不给就送
+         * order_Amount : 33333
+         * order_EndDate : 2018-05-23 17:07:33
+         * specialty_name : 家具
          * task_Status_code : 02
-         * task_description : 接口连接超时
-         * task_name : 接口维护2
-         * user_grade : 一级
+         * task_description : 33333333
+         * task_name : 33333333
+         * user_grade : 1
          */
-
-        private String Status_name;
-        private String client_name;
-        private String client_sex;
-        private int commission;
-        private String detailed_address;
-        private String img_url;
-        private String is_counteroffer;
         private String mobile_no;
-        private String name;
-        private String task_EndDate;
-        private String task_StartDate;
+        private String Status_name;
+        private String client_no;
+        private int counteroffer_Amount;
+        private String createDate;
+        private String detailed_address;
+        private String order_no;
+
+        public String getMobile_no() {
+            return mobile_no;
+        }
+
+        public String getOrder_no() {
+            return order_no;
+        }
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
+        }
+
+        public void setMobile_no(String mobile_no) {
+            this.mobile_no = mobile_no;
+        }
+
+        private String headUrl;
+        private String is_counteroffer;
+        private String nick_name;
+        private int order_Amount;
+        private String order_EndDate;
+        private String specialty_name;
         private String task_Status_code;
         private String task_description;
         private String task_name;
@@ -80,28 +98,28 @@ public class QueRenHelp_Bean {
             this.Status_name = Status_name;
         }
 
-        public String getClient_name() {
-            return client_name;
+        public String getClient_no() {
+            return client_no;
         }
 
-        public void setClient_name(String client_name) {
-            this.client_name = client_name;
+        public void setClient_no(String client_no) {
+            this.client_no = client_no;
         }
 
-        public String getClient_sex() {
-            return client_sex;
+        public int getCounteroffer_Amount() {
+            return counteroffer_Amount;
         }
 
-        public void setClient_sex(String client_sex) {
-            this.client_sex = client_sex;
+        public void setCounteroffer_Amount(int counteroffer_Amount) {
+            this.counteroffer_Amount = counteroffer_Amount;
         }
 
-        public int getCommission() {
-            return commission;
+        public String getCreateDate() {
+            return createDate;
         }
 
-        public void setCommission(int commission) {
-            this.commission = commission;
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
         }
 
         public String getDetailed_address() {
@@ -112,12 +130,12 @@ public class QueRenHelp_Bean {
             this.detailed_address = detailed_address;
         }
 
-        public String getImg_url() {
-            return img_url;
+        public String getHeadUrl() {
+            return headUrl;
         }
 
-        public void setImg_url(String img_url) {
-            this.img_url = img_url;
+        public void setHeadUrl(String headUrl) {
+            this.headUrl = headUrl;
         }
 
         public String getIs_counteroffer() {
@@ -128,36 +146,36 @@ public class QueRenHelp_Bean {
             this.is_counteroffer = is_counteroffer;
         }
 
-        public String getMobile_no() {
-            return mobile_no;
+        public String getNick_name() {
+            return nick_name;
         }
 
-        public void setMobile_no(String mobile_no) {
-            this.mobile_no = mobile_no;
+        public void setNick_name(String nick_name) {
+            this.nick_name = nick_name;
         }
 
-        public String getName() {
-            return name;
+        public int getOrder_Amount() {
+            return order_Amount;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setOrder_Amount(int order_Amount) {
+            this.order_Amount = order_Amount;
         }
 
-        public String getTask_EndDate() {
-            return task_EndDate;
+        public String getOrder_EndDate() {
+            return order_EndDate;
         }
 
-        public void setTask_EndDate(String task_EndDate) {
-            this.task_EndDate = task_EndDate;
+        public void setOrder_EndDate(String order_EndDate) {
+            this.order_EndDate = order_EndDate;
         }
 
-        public String getTask_StartDate() {
-            return task_StartDate;
+        public String getSpecialty_name() {
+            return specialty_name;
         }
 
-        public void setTask_StartDate(String task_StartDate) {
-            this.task_StartDate = task_StartDate;
+        public void setSpecialty_name(String specialty_name) {
+            this.specialty_name = specialty_name;
         }
 
         public String getTask_Status_code() {

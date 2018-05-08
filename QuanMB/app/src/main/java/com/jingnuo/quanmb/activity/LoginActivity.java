@@ -41,6 +41,7 @@ import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class LoginActivity extends BaseActivityother {
+
     TabItem mtabitem_accont,mtabitem_phone;
     TabLayout mTabLayout_login;
 

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="商铺大厅"
+            android:text="服务大厅"
             android:textColor="@color/white"
             android:textSize="18sp" />
 

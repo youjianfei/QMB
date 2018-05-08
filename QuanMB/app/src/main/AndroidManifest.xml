@@ -90,6 +90,7 @@
         <activity android:name="com.jingnuo.quanmb.activity.BarginMessageActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.MyTodoActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.MyAuthenticationActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MySkillActivity"></activity>
     </application>
 
 </manifest>

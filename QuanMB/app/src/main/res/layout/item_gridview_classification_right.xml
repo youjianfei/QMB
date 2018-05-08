@@ -6,9 +6,9 @@
     android:orientation="vertical"
     >
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@color/black"
+        android:id="@+id/image_view"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginTop="25dp"
         />
     <TextView
@@ -18,7 +18,7 @@
         android:textColor="@color/black_text"
         android:text="汽车美容"
         android:textSize="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         />
 
 

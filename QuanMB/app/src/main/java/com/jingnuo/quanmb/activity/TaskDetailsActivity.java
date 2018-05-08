@@ -211,7 +211,9 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
-                Glide.with(TaskDetailsActivity.this).load(mTaskData.getData().getUrl()).into(imageView_head);
+                String  imageURL=mTaskData.getData().getUrl().substring(0,mTaskData.getData().getUrl().length()-1);
+                Glide.with(TaskDetailsActivity.this).load(imageURL).into(imageView_head);
+
                 if (is_counteroffer.equals("1")) {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                 }

@@ -69,7 +69,7 @@
         android:padding="3dp"
         android:textSize="12dp"
         android:background="@drawable/text_yellow"
-        android:text="帮手名字"
+        android:text="任务状态"
         android:layout_alignParentRight="true"
         android:textColor="@color/yellow_jianbian_start" />
 

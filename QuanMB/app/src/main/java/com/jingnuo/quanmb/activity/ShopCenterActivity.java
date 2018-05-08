@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -16,12 +17,15 @@ import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class ShopCenterActivity extends BaseActivityother {
     //控件
+    CircleImageView  imageview_head;
     TextView mTextview_tt;
-    TextView mTextview_name;  //商铺名字
-    TextView mTextview_namenext;//地址
+    TextView mTextview_name;  //名字
+    TextView mTextview_namenext;//
     TextView mTextview_money;//佣金
 
     RelativeLayout mRealtivelayout_issue;
@@ -61,11 +65,11 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myissue.setOnClickListener(this);
         mRealtivelayout_myorder.setOnClickListener(this);
         mRealtivelayout_myauthentication.setOnClickListener(this);
-
     }
 
     @Override
     protected void initView() {
+        imageview_head=findViewById(R.id.image_shoppeoplepic);
         mTextview_tt = findViewById(R.id.textview_tt);
         mTextview_name = findViewById(R.id.text_shopname);
         mTextview_namenext = findViewById(R.id.textview_address);
@@ -87,8 +91,9 @@ public class ShopCenterActivity extends BaseActivityother {
                 break;
 
             case R.id.relative_myissue:
-//                Intent intent_myorder=new Intent(ShopCenterActivity.this, MyOrderActivity.class);
-//                startActivity(intent_myorder);
+                Intent intent_myorder=new Intent(ShopCenterActivity.this, MySkillActivity.class);
+                intent_myorder.putExtra("type",type);
+                startActivity(intent_myorder);
 
                 break;
 
@@ -122,10 +127,12 @@ public class ShopCenterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", "商户中心：" + respose, "ShopCenterActivity");
                 if(type==1){
                     helpterInfoBean=new Gson().fromJson(respose,HelpterInfoBean.class);
+//                    Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList()).into(imageview_head);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
                     mTextview_namenext.setText(helpterInfoBean.getData().getList().getHelper_cer_no());
                 }else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
+                    Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getAvatar_url()).into(imageview_head);
                     mTextview_name.setText(shopcenterBean.getData().getList().getBusiness_name());
                     mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address());
                 }

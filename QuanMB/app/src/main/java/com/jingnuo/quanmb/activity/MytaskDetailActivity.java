@@ -145,7 +145,8 @@ public class MytaskDetailActivity extends BaseActivityother {
 
 
                 mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
-                Glide.with(MytaskDetailActivity.this).load(taskDetailBean.getData().getUrl()).into(mImageview_head);
+                String  imageURL=taskDetailBean.getData().getUrl().substring(0,taskDetailBean.getData().getUrl().length()-1);
+                Glide.with(MytaskDetailActivity.this).load(imageURL).into(mImageview_head);
 //                mTextview_helplevle.setText(taskDetailBean.getData().getUser_grade());
                 if(taskDetailBean.getData().getTask_Status_code().equals("02")||taskDetailBean.getData().getTask_Status_code().equals("01")||taskDetailBean.getData().getTask_Status_code().equals("08")){
                     mButton_cancle.setVisibility(View.VISIBLE);

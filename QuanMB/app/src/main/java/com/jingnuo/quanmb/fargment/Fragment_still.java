@@ -135,6 +135,7 @@ public class Fragment_still  extends Fragment{
 
 
     void requestOnemenu(){
+        LogUtils.LOG("ceshi",Urls.Baseurl+Urls.Skillmenu_one,"一级专业接口");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -155,6 +156,7 @@ public class Fragment_still  extends Fragment{
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"二级专业id");
                 mListData_right.clear();
                 mListData_right.addAll(new  Gson().fromJson(respose,Skillmenu_twoBean.class).getData().getList());
                 mAdapter_classification_right.notifyDataSetChanged();

@@ -173,7 +173,7 @@ public class SkillDetailActivity extends BaseActivityother {
 
     }
     void setImage(String  image){
-        if(image.equals("")){
+        if(image==null||image.equals("")){
 
         }else {
             String []images=image.split(",");
@@ -216,6 +216,7 @@ public class SkillDetailActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+
                 LogUtils.LOG("ceshi",respose,"服务详情");
                 mSkilldetailsbean=new Gson().fromJson(respose,SkillsdetailsBean.class);
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_person">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textview_titl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="专业修电脑"
+            android:textColor="@color/text_black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textview_issuename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/textview_titl"
+            android:textSize="15dp"
+            android:text="发布时间：2018.03.25 10：22"
+            android:textColor="@color/gray_969696" />
+        <TextView
+            android:id="@+id/text_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_issuename"
+            android:textColor="@color/black_text2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="这里是专业的详细描述" />
+
+        <ImageView
+            android:id="@+id/image_01"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/text_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_background" />
+
+        <TextView
+            android:id="@+id/text_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_01"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:textSize="12dp"
+            android:background="@drawable/text_gray"
+            android:text="撤消服务"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_gray" />
+
+    </RelativeLayout>
+</RelativeLayout>

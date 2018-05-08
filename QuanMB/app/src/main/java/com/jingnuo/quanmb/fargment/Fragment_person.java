@@ -24,8 +24,12 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,6 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fragment_person extends Fragment implements View.OnClickListener{
     View rootview;
+    private UMShareAPI mShareAPI;//第三方登录登录
 
     //控件
     TextView mTextview_banghsou,mTextview_shopcenter;
@@ -160,6 +165,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.textview_logout:
+                logout();
                 SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
                 Staticdata.isLogin=false;
                 Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
@@ -168,6 +174,29 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 break;
         }
 
+    }
+    public void  logout(){//登出注销微信授权
+        mShareAPI = UMShareAPI.get(getActivity());
+        mShareAPI.deleteOauth(getActivity(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media, int i) {
+
+            }
+        });
     }
 
 }

@@ -2,9 +2,10 @@ package com.jingnuo.quanmb.entityclass;
 
 public class ShopcenterBean {
 
+
     /**
      * code : 1
-     * data : {"list":{"business_address":"asd","business_grade":"1","business_id":1,"business_license":"1","business_mobile_no":"66688888","business_name":"ad","business_no":"1","business_reputation":100,"business_type_id":2011,"client_no":"90000000009","createDate":"2018-04-10 15:10:42","createName":"root@192.168.1.184","legal_person":"sad","legal_person_cer_no":"11","organization_name":"sds","social_credit_code":"11","status":"1","updateDate":"2018-04-23 09:47:12","updateName":"root@192.168.1.184"}}
+     * data : {"list":{"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/3539bdf1-1be4-4334-9f27-edf9cab898e0magazine-unlock-01-2.3.968-_d03b446f06574c478ba844bd2c37514b.jpg?Expires=1525868739&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=kHXlI2d6iSzdums8T6i92O4MZys%3D","business_address":"中州大道","business_grade":"1","business_id":2,"business_license":"141","business_mobile_no":"18539931923","business_name":"奔腾cpu","business_no":"1","business_reputation":100,"business_type_id":2024,"business_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/29a5aabd-cb96-4999-8278-ee5bb11efb2005_02_2018_20_46_05_7264.png..png?Expires=1525868739&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=g%2Boz3ZECFuP%2F4UgbzhbZXnit4wA%3D,","client_no":"90000000003","createDate":"2018-05-03 19:36:57","createName":"root@115.57.138.146","legal_person":"李催化","legal_person_cer_no":"002","organization_name":"转专业","social_credit_code":"001","status":"1","updateDate":"2018-05-08 20:19:19","updateName":"root@115.57.140.29"}}
      * message : 查看信息成功
      */
 
@@ -38,7 +39,7 @@ public class ShopcenterBean {
 
     public static class DataBean {
         /**
-         * list : {"business_address":"asd","business_grade":"1","business_id":1,"business_license":"1","business_mobile_no":"66688888","business_name":"ad","business_no":"1","business_reputation":100,"business_type_id":2011,"client_no":"90000000009","createDate":"2018-04-10 15:10:42","createName":"root@192.168.1.184","legal_person":"sad","legal_person_cer_no":"11","organization_name":"sds","social_credit_code":"11","status":"1","updateDate":"2018-04-23 09:47:12","updateName":"root@192.168.1.184"}
+         * list : {"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/3539bdf1-1be4-4334-9f27-edf9cab898e0magazine-unlock-01-2.3.968-_d03b446f06574c478ba844bd2c37514b.jpg?Expires=1525868739&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=kHXlI2d6iSzdums8T6i92O4MZys%3D","business_address":"中州大道","business_grade":"1","business_id":2,"business_license":"141","business_mobile_no":"18539931923","business_name":"奔腾cpu","business_no":"1","business_reputation":100,"business_type_id":2024,"business_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/29a5aabd-cb96-4999-8278-ee5bb11efb2005_02_2018_20_46_05_7264.png..png?Expires=1525868739&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=g%2Boz3ZECFuP%2F4UgbzhbZXnit4wA%3D,","client_no":"90000000003","createDate":"2018-05-03 19:36:57","createName":"root@115.57.138.146","legal_person":"李催化","legal_person_cer_no":"002","organization_name":"转专业","social_credit_code":"001","status":"1","updateDate":"2018-05-08 20:19:19","updateName":"root@115.57.140.29"}
          */
 
         private ListBean list;
@@ -53,27 +54,30 @@ public class ShopcenterBean {
 
         public static class ListBean {
             /**
-             * business_address : asd
+             * avatar_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/3539bdf1-1be4-4334-9f27-edf9cab898e0magazine-unlock-01-2.3.968-_d03b446f06574c478ba844bd2c37514b.jpg?Expires=1525868739&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=kHXlI2d6iSzdums8T6i92O4MZys%3D
+             * business_address : 中州大道
              * business_grade : 1
-             * business_id : 1
-             * business_license : 1
-             * business_mobile_no : 66688888
-             * business_name : ad
+             * business_id : 2
+             * business_license : 141
+             * business_mobile_no : 18539931923
+             * business_name : 奔腾cpu
              * business_no : 1
              * business_reputation : 100
-             * business_type_id : 2011
-             * client_no : 90000000009
-             * createDate : 2018-04-10 15:10:42
-             * createName : root@192.168.1.184
-             * legal_person : sad
-             * legal_person_cer_no : 11
-             * organization_name : sds
-             * social_credit_code : 11
+             * business_type_id : 2024
+             * business_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/29a5aabd-cb96-4999-8278-ee5bb11efb2005_02_2018_20_46_05_7264.png..png?Expires=1525868739&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=g%2Boz3ZECFuP%2F4UgbzhbZXnit4wA%3D,
+             * client_no : 90000000003
+             * createDate : 2018-05-03 19:36:57
+             * createName : root@115.57.138.146
+             * legal_person : 李催化
+             * legal_person_cer_no : 002
+             * organization_name : 转专业
+             * social_credit_code : 001
              * status : 1
-             * updateDate : 2018-04-23 09:47:12
-             * updateName : root@192.168.1.184
+             * updateDate : 2018-05-08 20:19:19
+             * updateName : root@115.57.140.29
              */
 
+            private String avatar_url;
             private String business_address;
             private String business_grade;
             private int business_id;
@@ -83,6 +87,7 @@ public class ShopcenterBean {
             private String business_no;
             private int business_reputation;
             private int business_type_id;
+            private String business_url;
             private String client_no;
             private String createDate;
             private String createName;
@@ -93,6 +98,14 @@ public class ShopcenterBean {
             private String status;
             private String updateDate;
             private String updateName;
+
+            public String getAvatar_url() {
+                return avatar_url;
+            }
+
+            public void setAvatar_url(String avatar_url) {
+                this.avatar_url = avatar_url;
+            }
 
             public String getBusiness_address() {
                 return business_address;
@@ -164,6 +177,14 @@ public class ShopcenterBean {
 
             public void setBusiness_type_id(int business_type_id) {
                 this.business_type_id = business_type_id;
+            }
+
+            public String getBusiness_url() {
+                return business_url;
+            }
+
+            public void setBusiness_url(String business_url) {
+                this.business_url = business_url;
             }
 
             public String getClient_no() {
