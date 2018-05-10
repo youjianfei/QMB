@@ -1,10 +1,8 @@
 package com.jingnuo.quanmb.entityclass;
 
 public class TaskDetailBean {
-
-
     /**
-     * data : {"Status_name":"待帮助","client_no":"2147483681","commission":123,"createDate":"2018-05-03 19:38:39","detailed_address":"312","is_counteroffer":"1","nick_name":"3333","specialty_name":"房屋","task_EndDate":"2018-05-04 19:38:39","task_Status_code":"01","task_description":"123","task_name":"12312","url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/d2389f24-a789-4d0e-9760-442ab37386b4hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525506806&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=aE0V0QKTuRfrmt0NSUhgJF3P1v0%3D,","user_grade":"1"}
+     * data : {"Status_name":"待帮助","client_name":"看看","client_no":"90000000003","client_sex":"0","commission":63,"createDate":"2018-05-09 09:08:23","detailed_address":"了了了我我","is_counteroffer":"1","mobile_no":"2556","nick_name":"天天","specialty_name":"app开发","task_EndDate":"2018-05-12 09:08:23","task_ID":46,"task_Status_code":"01","task_Time":5,"task_description":"开发炸弹","task_name":"我选","url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/05cdaca5-5fa8-4e99-a439-b3bfb73f3d21dts_featured_ath_clr100.png?Expires=1525919126&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=eLBGuzFvy8PxOb1LSGBnSFOQ0gI%3D,","user_grade":"1"}
      * message : 获取列表成功
      * status : 1
      */
@@ -40,35 +38,71 @@ public class TaskDetailBean {
     public static class DataBean {
         /**
          * Status_name : 待帮助
-         * client_no : 2147483681
-         * commission : 123
-         * createDate : 2018-05-03 19:38:39
-         * detailed_address : 312
+         * client_name : 看看
+         * client_no : 90000000003
+         * client_sex : 0
+         * commission : 63
+         * createDate : 2018-05-09 09:08:23
+         * detailed_address : 了了了我我
          * is_counteroffer : 1
-         * nick_name : 3333
-         * specialty_name : 房屋
-         * task_EndDate : 2018-05-04 19:38:39
+         * mobile_no : 2556
+         * nick_name : 天天
+         * specialty_name : app开发
+         * task_EndDate : 2018-05-12 09:08:23
+         * task_ID : 46
          * task_Status_code : 01
-         * task_description : 123
-         * task_name : 12312
-         * url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/d2389f24-a789-4d0e-9760-442ab37386b4hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525506806&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=aE0V0QKTuRfrmt0NSUhgJF3P1v0%3D,
+         * task_Time : 5
+         * task_description : 开发炸弹
+         * task_name : 我选
+         * url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/05cdaca5-5fa8-4e99-a439-b3bfb73f3d21dts_featured_ath_clr100.png?Expires=1525919126&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=eLBGuzFvy8PxOb1LSGBnSFOQ0gI%3D,
          * user_grade : 1
          */
 
         private String Status_name;
+        private String client_name;
         private String client_no;
+        private String client_sex;
         private int commission;
         private String createDate;
         private String detailed_address;
         private String is_counteroffer;
+        private String mobile_no;
         private String nick_name;
         private String specialty_name;
         private String task_EndDate;
+        private int task_ID;
         private String task_Status_code;
+        private int task_Time;
         private String task_description;
         private String task_name;
-        private String url;
+        private String Avatar_imgUrl;
+        private String task_ImgUrl;
         private String user_grade;
+        private String order_no;
+
+        public String getAvatar_imgUrl() {
+            return Avatar_imgUrl;
+        }
+
+        public void setAvatar_imgUrl(String avatar_imgUrl) {
+            Avatar_imgUrl = avatar_imgUrl;
+        }
+
+        public String getTask_ImgUrl() {
+            return task_ImgUrl;
+        }
+
+        public void setTask_ImgUrl(String task_ImgUrl) {
+            this.task_ImgUrl = task_ImgUrl;
+        }
+
+        public String getOrder_no() {
+            return order_no;
+        }
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
+        }
 
         public String getStatus_name() {
             return Status_name;
@@ -78,12 +112,28 @@ public class TaskDetailBean {
             this.Status_name = Status_name;
         }
 
+        public String getClient_name() {
+            return client_name;
+        }
+
+        public void setClient_name(String client_name) {
+            this.client_name = client_name;
+        }
+
         public String getClient_no() {
             return client_no;
         }
 
         public void setClient_no(String client_no) {
             this.client_no = client_no;
+        }
+
+        public String getClient_sex() {
+            return client_sex;
+        }
+
+        public void setClient_sex(String client_sex) {
+            this.client_sex = client_sex;
         }
 
         public int getCommission() {
@@ -118,6 +168,14 @@ public class TaskDetailBean {
             this.is_counteroffer = is_counteroffer;
         }
 
+        public String getMobile_no() {
+            return mobile_no;
+        }
+
+        public void setMobile_no(String mobile_no) {
+            this.mobile_no = mobile_no;
+        }
+
         public String getNick_name() {
             return nick_name;
         }
@@ -142,12 +200,28 @@ public class TaskDetailBean {
             this.task_EndDate = task_EndDate;
         }
 
+        public int getTask_ID() {
+            return task_ID;
+        }
+
+        public void setTask_ID(int task_ID) {
+            this.task_ID = task_ID;
+        }
+
         public String getTask_Status_code() {
             return task_Status_code;
         }
 
         public void setTask_Status_code(String task_Status_code) {
             this.task_Status_code = task_Status_code;
+        }
+
+        public int getTask_Time() {
+            return task_Time;
+        }
+
+        public void setTask_Time(int task_Time) {
+            this.task_Time = task_Time;
         }
 
         public String getTask_description() {
@@ -166,13 +240,6 @@ public class TaskDetailBean {
             this.task_name = task_name;
         }
 
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
 
         public String getUser_grade() {
             return user_grade;
@@ -182,4 +249,9 @@ public class TaskDetailBean {
             this.user_grade = user_grade;
         }
     }
+
+
+
+
+
 }

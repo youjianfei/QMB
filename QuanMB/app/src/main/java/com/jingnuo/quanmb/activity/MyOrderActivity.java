@@ -108,7 +108,6 @@ public class MyOrderActivity extends BaseActivityother {
                 Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
                 intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id());
                 startActivity(intent_mytaskdetail);
-
             }
         });
     }

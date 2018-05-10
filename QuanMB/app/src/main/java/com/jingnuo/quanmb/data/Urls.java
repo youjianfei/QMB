@@ -7,11 +7,11 @@ package com.jingnuo.quanmb.data;
 public class Urls {
 
 //    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
+    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
     public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-//    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
+    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
@@ -40,14 +40,15 @@ public class Urls {
     public static String taskdetailscancle = "task/taskCancel";//撤消任务
     public static String helptask = "order/taskHelp";//确认帮助 ?id=
     public static String barginmonry = "bargain/taskBargain";//还价
-    public static String completetask = "order/requestOk?user_token=";//任务完成申请
-
+    public static String applycompletetask = "order/requestOk?user_token=";//申请任务完成
+    public static String completetask = "order/affirmOk?user_token=";//确认任务完成
     public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布任务
 
     //专业/商家模块
     public static String Skillmenu_one = "major/searchOne";//找专业一级菜单
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
-    public static String Skillmenulist = "major/searchPost";//二级菜单点开列表    参数  specialty_id
+    public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
+    public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
     public static String Skilldetail_2 = "business/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String Skilldetail_1 = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String IssueSkill = "business/releaseSpecialty";//发布专业    post
@@ -56,7 +57,9 @@ public class Urls {
     public static String shopIn = "business/commitApply";//商家入驻审核    post
     public static String shopcenter = "business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
     public static String  shoporder= "business/queryBusinessOrder?user_token=";//商家接收的任务
-    public static String  shopkill= "business/queryMyRelease?user_token=";//帮手发布的服务
+    public static String  shoporderdetail= "business/queryOrderDetail?user_token=";//商家接收的任务详情
+    public static String  shopkill= "business/queryMyRelease?user_token=";//商户发布的服务
+    public static String  shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
 
 
 
@@ -64,15 +67,17 @@ public class Urls {
     public static String authenticationHelper = "helper/helperReal";//帮手认证
     public static String helperInfo = "helper/queryHelperInfo?user_token=";//帮手信息
     public static String  helporder= "helper/queryHelperOrder?user_token=";//帮手接收的任务
+    public static String  helporderdetail= "helper/queryOrderDetail?user_token=";//商家接收的任务详情
     public static String  helpskill= "helper/queryMyRelease?user_token=";//帮手发布的服务
 
 
     //消息模块
     public static String pushMessage = "messsageCon/getMessageByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
 
-
     //个人中心
     public static String myorderlist = "task/taskQueryMyList";//  post
+    public static String mytaskdetails = "task/getTaskDetail";//任务详情  ?id=
+
 
 
 }

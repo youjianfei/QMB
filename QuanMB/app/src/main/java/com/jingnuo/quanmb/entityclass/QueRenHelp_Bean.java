@@ -1,10 +1,8 @@
 package com.jingnuo.quanmb.entityclass;
 
 public class QueRenHelp_Bean {
-
-
     /**
-     * date : {"Status_name":"已接单","client_no":"2147483680","counteroffer_Amount":33333,"createDate":"2018-05-08 17:05:28","detailed_address":"33333333","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525856854&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=4l53l8r7pLb6A2fKpK8QTI7Yoms%3D","is_counteroffer":"1","nick_name":"中单亚索  不给就送","order_Amount":33333,"order_EndDate":"2018-05-23 17:07:33","specialty_name":"家具","task_Status_code":"02","task_description":"33333333","task_name":"33333333","user_grade":"1"}
+     * date : {"Status_name":"已接单","client_no":"2147483680","counteroffer_Amount":36,"createDate":"2018-05-09 09:25:52","detailed_address":"你以为上午","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525915582&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=26NdcEb%2B9lCn%2Foq028dYH26FlHA%3D","is_counteroffer":"1","mobile_no":"1368","nick_name":"中单亚索  不给就送","order_Amount":36,"order_EndDate":"2018-05-12 09:26:21","order_no":"QMB180509100000127","specialty_name":"家具","task_Status_code":"02","task_description":"孩子我继续我我","task_name":"你以为继续我","user_grade":"1"}
      * message : 确认帮助成功
      * status : 1
      */
@@ -41,54 +39,49 @@ public class QueRenHelp_Bean {
         /**
          * Status_name : 已接单
          * client_no : 2147483680
-         * counteroffer_Amount : 33333
-         * createDate : 2018-05-08 17:05:28
-         * detailed_address : 33333333
-         * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525856854&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=4l53l8r7pLb6A2fKpK8QTI7Yoms%3D
+         * counteroffer_Amount : 36
+         * createDate : 2018-05-09 09:25:52
+         * detailed_address : 你以为上午
+         * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525915582&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=26NdcEb%2B9lCn%2Foq028dYH26FlHA%3D
          * is_counteroffer : 1
+         * mobile_no : 1368
          * nick_name : 中单亚索  不给就送
-         * order_Amount : 33333
-         * order_EndDate : 2018-05-23 17:07:33
+         * order_Amount : 36
+         * order_EndDate : 2018-05-12 09:26:21
+         * order_no : QMB180509100000127
          * specialty_name : 家具
          * task_Status_code : 02
-         * task_description : 33333333
-         * task_name : 33333333
+         * task_description : 孩子我继续我我
+         * task_name : 你以为继续我
          * user_grade : 1
          */
-        private String mobile_no;
+
         private String Status_name;
         private String client_no;
         private int counteroffer_Amount;
         private String createDate;
         private String detailed_address;
-        private String order_no;
-
-        public String getMobile_no() {
-            return mobile_no;
-        }
-
-        public String getOrder_no() {
-            return order_no;
-        }
-
-        public void setOrder_no(String order_no) {
-            this.order_no = order_no;
-        }
-
-        public void setMobile_no(String mobile_no) {
-            this.mobile_no = mobile_no;
-        }
-
         private String headUrl;
         private String is_counteroffer;
+        private String mobile_no;
         private String nick_name;
         private int order_Amount;
         private String order_EndDate;
+        private String order_no;
         private String specialty_name;
         private String task_Status_code;
         private String task_description;
         private String task_name;
         private String user_grade;
+        private String  task_id;
+
+        public String getTask_id() {
+            return task_id;
+        }
+
+        public void setTask_id(String task_id) {
+            this.task_id = task_id;
+        }
 
         public String getStatus_name() {
             return Status_name;
@@ -146,6 +139,14 @@ public class QueRenHelp_Bean {
             this.is_counteroffer = is_counteroffer;
         }
 
+        public String getMobile_no() {
+            return mobile_no;
+        }
+
+        public void setMobile_no(String mobile_no) {
+            this.mobile_no = mobile_no;
+        }
+
         public String getNick_name() {
             return nick_name;
         }
@@ -168,6 +169,14 @@ public class QueRenHelp_Bean {
 
         public void setOrder_EndDate(String order_EndDate) {
             this.order_EndDate = order_EndDate;
+        }
+
+        public String getOrder_no() {
+            return order_no;
+        }
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
         }
 
         public String getSpecialty_name() {
@@ -210,4 +219,6 @@ public class QueRenHelp_Bean {
             this.user_grade = user_grade;
         }
     }
+
+
 }

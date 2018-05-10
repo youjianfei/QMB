@@ -29,7 +29,18 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>
-
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/re_title"
+        app:tabMode="fixed"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:tabTextColor="@color/text_title2"
+        app:tabSelectedTextColor="@color/yellow_jianbian_start"
+        app:tabIndicatorColor="@color/yellow_jianbian_start"
+        app:tabMinWidth="110dp"
+        />
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/list_myskill"
         android:layout_width="match_parent"

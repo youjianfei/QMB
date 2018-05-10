@@ -87,7 +87,7 @@ public class IssueTaskActivity extends BaseActivityother {
     String img_id="";//图片
     String detailed_address = "";
     String task_Status_code = "";
-    int  is_counteroffer=1;//是否接受议价 1 接受  2 拒绝
+    int  is_counteroffer=1;//是否接受议价 1 接受  0 拒绝
     boolean ceshi=true;
 
     int PICposition=0;
@@ -272,15 +272,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
         release_address="郑州";//TODO
 
-        commission=mEditview_taskmoney.getText()+"";
-        if(!commission.equals("")){
-            float min=Float.parseFloat(commission);
-            LogUtils.LOG("ceshi",min+"","sfdsfsaf");
-            if(min<5){
-                ToastUtils.showToast(IssueTaskActivity.this,"佣金最低为5元");
-                return false;
-            }
-        }
+
 
         detailed_address=mEditview_addressDetail.getText()+"";
         if (mEditview_addressDetail.equals("")){
@@ -290,6 +282,21 @@ public class IssueTaskActivity extends BaseActivityother {
         LogUtils.LOG("ceshi",mList_picID.size()+".............","tupianOD");
         for (String imageID : mList_picID) {
             img_id=img_id+imageID+",";
+        }
+        commission=mEditview_taskmoney.getText()+"";
+        if(!commission.equals("")){
+            float min=Float.parseFloat(commission);
+            LogUtils.LOG("ceshi",min+"","sfdsfsaf");
+            if(min<5){
+                ToastUtils.showToast(IssueTaskActivity.this,"佣金最低为5元");
+                return false;
+            }
+        }else {
+            LogUtils.LOG("ceshi",is_counteroffer+"","is_counteroffer");
+            if(is_counteroffer==0){
+                ToastUtils.showToast(IssueTaskActivity.this,"由帮手出价必须接受议价");
+                return false;
+            }
         }
         map_issueTask.put("task_name",task_name+"");
         map_issueTask.put("task_description",task_description+"");

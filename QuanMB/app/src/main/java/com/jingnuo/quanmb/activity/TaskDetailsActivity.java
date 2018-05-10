@@ -102,8 +102,6 @@ public class TaskDetailsActivity extends BaseActivityother {
 
                     }
                 }).postHttp(Urls.Baseurl_cui + Urls.barginmonry, TaskDetailsActivity.this, 1, map_bargin);
-
-
             }
         });
 
@@ -128,13 +126,12 @@ public class TaskDetailsActivity extends BaseActivityother {
                         @Override
                         public void onSuccesses(String respose) {
                             LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
-                            Staticdata.queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
-                            if (Staticdata.queRenHelp_bean.getStatus() == 1) {
+                            QueRenHelp_Bean queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
+                            if (queRenHelp_bean.getStatus() == 1) {
                                 Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
+                                intent_querenhelp.putExtra("order_no", queRenHelp_bean.getDate().getOrder_no());
                                 startActivity(intent_querenhelp);
                                 finish();
-
-
                             } else {
 //                                ToastUtils.showToast(TaskDetailsActivity.this, Staticdata.queRenHelp_bean.getMessage());
                             }
@@ -211,11 +208,16 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
-                String  imageURL=mTaskData.getData().getUrl().substring(0,mTaskData.getData().getUrl().length()-1);
+                String imageURL = mTaskData.getData().getAvatar_imgUrl().substring(0, mTaskData.getData().getAvatar_imgUrl().length() - 1);
                 Glide.with(TaskDetailsActivity.this).load(imageURL).into(imageView_head);
 
                 if (is_counteroffer.equals("1")) {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
+                }
+                if(mTaskData.getData().getCommission()==0){
+                    mButton_counteroffer.setVisibility(View.VISIBLE);
+                    mButton_help.setVisibility(View.GONE);
+                    mTextview_taskmoney.setText("佣金：帮手出价" );
                 }
             }
 

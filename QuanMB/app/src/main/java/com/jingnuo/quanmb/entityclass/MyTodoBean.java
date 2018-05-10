@@ -66,6 +66,15 @@ public class MyTodoBean {
             private String task_description;
             private String task_name;
             private int task_order_id;
+            private String task_id;
+
+            public String getTask_id() {
+                return task_id;
+            }
+
+            public void setTask_id(String task_id) {
+                this.task_id = task_id;
+            }
 
             public int getOrder_amount() {
                 return order_amount;

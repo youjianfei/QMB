@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="#f7f3f7"
+        android:background="@mipmap/launchbg"
         >
 
     </LinearLayout>

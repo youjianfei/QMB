@@ -37,6 +37,8 @@ public class ShopCenterActivity extends BaseActivityother {
     ShopcenterBean shopcenterBean;//商户
     HelpterInfoBean helpterInfoBean;//帮手
 
+
+
     //数据
     int type = 0;  //1 帮手  2  商户
 

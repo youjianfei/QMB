@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.entityclass.MyorderBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.Utils;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Adapter_myIssue extends BaseAdapter {
             viewHolder.mTextview_money = convertView.findViewById(R.id.textview_moneyy);
             viewHolder.mTextview_content = convertView.findViewById(R.id.text_content);
             viewHolder.mTextview_taskstate = convertView.findViewById(R.id.text_taskstate);
-//            viewHolder.mTextview_startime = convertView.findViewById(R.id.text_resttime);
+            viewHolder.mTextview_resttime = convertView.findViewById(R.id.text_resttime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (viewHolde) convertView.getTag();
@@ -46,7 +47,16 @@ public class Adapter_myIssue extends BaseAdapter {
         viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
         viewHolder.mTextview_content.setText(mData.get(position).getTask_description());
         viewHolder.mTextview_taskstate.setText(mData.get(position).getStatus_name());
-//        viewHolder.mTextview_startime.setText("预约时间：" + mData.get(position).getTask_EndDate());
+
+        if(mData.get(position).getTask_EndDate().equals("")){
+            viewHolder.mTextview_resttime.setVisibility(View.INVISIBLE);
+        }else {
+            long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+            long ago = Long.parseLong(Utils.getTime(mData.get(position).getTask_EndDate()));
+            String time = Utils.getDistanceTime(ago, now);//算出的差值
+            viewHolder.mTextview_resttime.setText("剩余时间："+time);
+            viewHolder.mTextview_resttime.setVisibility(View.VISIBLE);
+        }
 
         return convertView;
     }
@@ -57,6 +67,6 @@ public class Adapter_myIssue extends BaseAdapter {
         TextView mTextview_money;
         TextView mTextview_content;
         TextView mTextview_taskstate;
-//        TextView mTextview_startime;
+        TextView mTextview_resttime;
     }
 }

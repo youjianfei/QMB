@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -93,6 +95,16 @@ public class MyTodoActivity extends BaseActivityother {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent  intent=new Intent(MyTodoActivity.this,HelperOrderActivity.class);
+                intent.putExtra("type",type);
+                LogUtils.LOG("ceshi","列表数"+mdata.size()+"点击位置"+position,"sadfasfd");
+                intent.putExtra("order_no",mdata.get(position-1).getOrder_no()+"");
+                startActivity(intent);
             }
         });
     }

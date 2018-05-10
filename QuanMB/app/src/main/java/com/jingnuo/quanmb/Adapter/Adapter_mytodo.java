@@ -7,8 +7,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.HelperOrderActivity;
+import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.MyTodoBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -26,7 +36,7 @@ public class Adapter_mytodo extends  BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
         if(convertView==null){
             holder=new ViewHolder();
@@ -45,7 +55,48 @@ public class Adapter_mytodo extends  BaseAdapter {
         holder.mTextview_content.setText(mdata.get(position).getTask_description());
         holder.mTextview_money.setText(mdata.get(position).getOrder_amount()+"元");
         holder.mTextview_state.setText(mdata.get(position).getOrder_status());
+        if(mdata.get(position).getOrder_status().equals("已完成")){
+            holder.mTextview_complete.setText("任务完成");
+            holder.mTextview_complete.setEnabled(false);
+        }else {
+            holder.mTextview_complete.setText("申请完成");
+            holder.mTextview_complete.setEnabled(true);
+        }
 
+        holder.mTextview_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtils.LOG("ceshi","申请完成任务接口+"+ Urls.Baseurl_cui+Urls.applycompletetask+ Staticdata.static_userBean.getData().getUser_token()+
+                        "&order_no="+mdata.get(position).getOrder_no()+
+                        "&task_id="+mdata.get(position).getTask_id(),"申请完成任务");
+                new Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        LogUtils.LOG("ceshi",respose,"申请完成");
+                        int status = 0;
+                        String msg = "";
+                        try {
+                            JSONObject object = new JSONObject(respose);
+                            status = (Integer) object.get("code");//登录状态
+                            msg = (String) object.get("message");//登录返回信息
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if(status==1){
+                            ToastUtils.showToast(mContext,msg);
+                        }else {
+                            ToastUtils.showToast(mContext,msg);
+                        }
+                    }
+                    @Override
+                    public void onError(int error) {
+
+                    }
+                }).Http(Urls.Baseurl_cui+Urls.applycompletetask+ Staticdata.static_userBean.getData().getUser_token()+
+                        "&order_no="+mdata.get(position).getOrder_no()+
+                        "&task_id="+mdata.get(position).getTask_order_id(),mContext,0);
+            }
+        });
 
         return convertView;
     }

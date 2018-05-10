@@ -32,7 +32,7 @@ public class Staticdata {
     //发布任务需要向下一页传递map  这里偷懒把map写为全局变量
     public static Map  map_task = new HashMap();
     //确认帮助任务需要向下一页传入数据，把qurenbean写为全局变量
-    public  static QueRenHelp_Bean queRenHelp_bean=null;
+//    public  static QueRenHelp_Bean queRenHelp_bean=null;
     //向下一页传入数据，写为全局变量
     public  static Map map_wechat=new HashMap();
 

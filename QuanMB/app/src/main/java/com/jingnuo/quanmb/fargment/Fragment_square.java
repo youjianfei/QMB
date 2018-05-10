@@ -268,5 +268,10 @@ public class Fragment_square extends Fragment {
         mRelativelayout_sort = rootview.findViewById(R.id.relative_sort);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        page = 1;
+        request_square(map_filter_sort, 1);
+    }
 }

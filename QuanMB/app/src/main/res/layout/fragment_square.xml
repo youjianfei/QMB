@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/background_logintitle">
-
+        <!--android:background="@drawable/background_logintitle"-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -36,7 +36,6 @@
                 android:src="@mipmap/search"
                 android:layout_marginLeft="10dp"
                 />
-
             <EditText
                 android:id="@+id/edit_searchSquare"
                 android:layout_width="match_parent"
@@ -53,8 +52,6 @@
                 />
 
         </LinearLayout>
-
-
         <TextView
             android:id="@+id/textview_login"
             android:layout_width="wrap_content"
@@ -83,18 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/re_title"
         android:background="@color/white">
-
-        <TextView
-            android:id="@+id/text_numberperson"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:text="25位帮友在此求助"
-            android:textColor="#888888"
-            android:textSize="14dp" />
-
         <TextView
             android:id="@+id/text_filter"
             android:layout_width="wrap_content"
@@ -103,6 +88,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="130dp"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:text="筛选"
             android:textColor="#888888"
             android:textSize="14dp" />

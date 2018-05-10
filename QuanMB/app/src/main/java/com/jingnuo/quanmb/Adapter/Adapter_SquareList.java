@@ -44,6 +44,7 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mText_task_username=convertView.findViewById(R.id.text_square_personname);
             holder.mText_task_address=convertView.findViewById(R.id.text_square_address);
             holder.mText_task_price=convertView.findViewById(R.id.text_square_price);
+            holder.mTextview_yuan=convertView.findViewById(R.id.textyuan);
             holder.mImage_view=convertView.findViewById(R.id.image_square_person);
             convertView.setTag(holder);
 
@@ -55,7 +56,14 @@ public class Adapter_SquareList extends  BaseAdapter {
         holder.mText_task_creattime.setText(mData.get(position).getCreateDate()+"");
         holder.mText_task_username.setText(mData.get(position).getTask_Name()+"");
         holder.mText_task_address.setText(mData.get(position).getRelease_Address()+"");
-        holder.mText_task_price.setText(mData.get(position).getCommission()+"");
+        if(mData.get(position).getCommission()==0){
+            holder.mTextview_yuan.setText("帮手出价");
+            holder.mText_task_price.setVisibility(View.INVISIBLE);
+        }else {
+            holder.mText_task_price.setText(mData.get(position).getCommission()+"");
+            holder.mTextview_yuan.setText("元");
+            holder.mText_task_price.setVisibility(View.VISIBLE);
+        }
         holder.mText_task_type.setText(mData.get(position).getSpecialty_name()+"");
         Glide.with(mContext).load(mData.get(position).getHeadUrl()).into(holder.mImage_view);
 
@@ -68,6 +76,7 @@ public class Adapter_SquareList extends  BaseAdapter {
         TextView mText_task_username ;//任务的标题
         TextView mText_task_address ;//发布任务的地址
         TextView mText_task_price ;//任务的佣金
+        TextView mTextview_yuan;
         ImageView mImage_view;//头像
     }
 }

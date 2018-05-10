@@ -137,7 +137,7 @@ public class ShophallActivity extends BaseActivityother {
     void request( final int page) {
         String URL="";
         if(specialty_id==0){
-            URL=Urls.Baseurl+Urls.Skillmenulist+"?title="+search+"&curPageNo="+page;
+            URL=Urls.Baseurl+Urls.searchSkill+"?title="+search+"&curPageNo="+page;
         }else {
             URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&curPageNo="+page;
         }
