@@ -192,7 +192,7 @@ public class TaskDetailsActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", "任务详情返回信息" + respose, "TaskDetailsActivity");
                 mTaskData = new Gson().fromJson(respose, TaskDetailBean.class);
-                mTextview_state.setText(mTaskData.getData().getStatus_name());
+                mTextview_state.setText(mTaskData.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
                 mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
                 mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getCreateDate());

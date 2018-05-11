@@ -54,7 +54,10 @@
             android:layout_marginTop="13dp"
             android:layout_toRightOf="@+id/image_task"
             android:background="@drawable/background_text_taskstate"
-            android:padding="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:text="进行中"
             android:textColor="@color/white"
             android:textSize="12dp" />
@@ -150,7 +153,7 @@
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:src="@mipmap/taskdetail"
+            android:src="@mipmap/resttime"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="18dp"
             android:layout_below="@+id/line2"

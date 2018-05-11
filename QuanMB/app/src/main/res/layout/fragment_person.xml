@@ -177,7 +177,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="22dp"
                     android:layout_toRightOf="@+id/iamge_1"
-                    android:src="@mipmap/address" />
+                    android:src="@mipmap/address_blue" />
 
                 <TextView
                     android:id="@+id/textview_address"
@@ -207,7 +207,7 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30dp"
-                    android:src="@mipmap/mytask" />
+                    android:src="@mipmap/people" />
 
                 <TextView
                     android:id="@+id/textview_bangshou"
@@ -233,7 +233,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="22dp"
                     android:layout_toRightOf="@+id/iamge_22"
-                    android:src="@mipmap/mytask" />
+                    android:src="@mipmap/shopcenter" />
 
                 <TextView
                     android:id="@+id/textview_shopcenter"

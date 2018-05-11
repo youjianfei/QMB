@@ -53,7 +53,7 @@ public class Adapter_mytodo extends  BaseAdapter {
         }
         holder.mTextview_title.setText(mdata.get(position).getTask_name());
         holder.mTextview_content.setText(mdata.get(position).getTask_description());
-        holder.mTextview_money.setText(mdata.get(position).getOrder_amount()+"元");
+        holder.mTextview_money.setText("佣金："+mdata.get(position).getOrder_amount()+"元");
         holder.mTextview_state.setText(mdata.get(position).getOrder_status());
         if(mdata.get(position).getOrder_status().equals("已完成")){
             holder.mTextview_complete.setText("任务完成");

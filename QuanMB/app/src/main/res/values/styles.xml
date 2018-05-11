@@ -27,4 +27,10 @@
         <item name="android:windowEnterAnimation">@anim/popwindow_skilltype_show</item>
         <!--<item name="android:windowExitAnimation">@anim/popwindow_issue_hide</item>-->
     </style>
+    <style name="popwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popwindow_show2</item>
+        <!-- 指定显示时的动画xml -->
+        <!--<item name="android:windowExitAnimation">@anim/popwindow_hide</item>-->
+        <!-- 指定消失时的动画xml -->
+    </style>
 </resources>

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -49,6 +50,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
 
     }
 

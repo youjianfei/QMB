@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
+import com.jingnuo.quanmb.class_.Popwindow_lookpic;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillsdetailsBean;
 import com.jingnuo.quanmb.quanmb.R;
@@ -44,6 +45,7 @@ public class SkillDetailActivity extends BaseActivityother {
     //对象
     SkillsdetailsBean   mSkilldetailsbean;
     PermissionHelper mPermission;//动态申请权限
+    Popwindow_lookpic popwindow_lookpic;
 
 
 
@@ -58,6 +60,9 @@ public class SkillDetailActivity extends BaseActivityother {
     private final int STATE_EXPANDED = 3; //文本行数超过限定行数,被点击全文展开
 
     String image_url="";
+    String image_url1="";
+    String image_url2="";
+    String image_url3="";
 
     String id="";
     String role="";//身份
@@ -72,7 +77,7 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-
+        popwindow_lookpic=new Popwindow_lookpic(this);
     }
     @Override
     protected void initView() {
@@ -105,6 +110,24 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mImageview_skill1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_lookpic.showPopwindow(image_url1);
+            }
+        });
+        mImageview_skill2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_lookpic.showPopwindow(image_url2);
+            }
+        });
+        mImageview_skill3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_lookpic.showPopwindow(image_url3);
+            }
+        });
         mTextview_content.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -181,16 +204,24 @@ public class SkillDetailActivity extends BaseActivityother {
             LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");
             switch (len){
                 case 1:
+                    LogUtils.LOG("ceshi","图片的地址"+images[0],"SkillDetailActivity分隔图片");
+                    image_url1=images[0];
                     mImageview_skill1.setVisibility(View.VISIBLE);
-                    Glide.with(SkillDetailActivity.this).load(images[0]).into(mImageview_skill1);
+                    Glide.with(SkillDetailActivity.this).load(image_url1).into(mImageview_skill1);
                     break;
                 case 2:
+                    image_url1=images[0];
+                    image_url2=images[1];
+
                     mImageview_skill1.setVisibility(View.VISIBLE);
                     mImageview_skill2.setVisibility(View.VISIBLE);
                     Glide.with(SkillDetailActivity.this).load(images[0]).into(mImageview_skill1);
                     Glide.with(SkillDetailActivity.this).load(images[1]).into(mImageview_skill2);
                     break;
                 case 3:
+                    image_url1=images[0];
+                    image_url2=images[1];
+                    image_url3=images[2];
                     mImageview_skill1.setVisibility(View.VISIBLE);
                     mImageview_skill2.setVisibility(View.VISIBLE);
                     mImageview_skill3.setVisibility(View.VISIBLE);

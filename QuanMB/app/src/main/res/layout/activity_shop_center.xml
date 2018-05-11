@@ -186,7 +186,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myrelease" />
+                        android:src="@mipmap/myfabu" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -217,7 +217,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myrelease" />
+                        android:src="@mipmap/myorder" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myrelease" />
+                        android:src="@mipmap/myrenzheng" />
 
                     <TextView
                         android:layout_width="wrap_content"

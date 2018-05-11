@@ -51,7 +51,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         mLocationClient = new LocationClient(getApplicationContext());
         //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);
@@ -150,7 +150,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.relative_square:
-                LogUtils.LOG("ceshi", "帮帮广场被点击", "mainactivity");
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 ChangeBottomButton(mRelativeLayout_square);
                 if (mFragment_square == null) {
                     mFragment_square = new Fragment_square();
@@ -161,7 +161,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.relative_still:
-                LogUtils.LOG("ceshi", "技能被点击", "mainactivity");
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 ChangeBottomButton(mRelativeLayout_still);
                 if (mFragment_stilll == null) {
                     mFragment_stilll = new Fragment_still();
@@ -187,6 +187,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.relative_message:
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 if (isLogin) {
                     ChangeBottomButton(mRelativeLayout_message);
                     if (mFragment_menssage == null) {
@@ -201,7 +202,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 break;
             case R.id.relative_person:
-                LogUtils.LOG("ceshi", "个人中心被点击" + isLogin, "mainactivity");
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
                 if (isLogin) {
                     ChangeBottomButton(mRelativeLayout_person);
                     if (mFragment_person == null) {

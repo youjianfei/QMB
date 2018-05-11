@@ -168,9 +168,13 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
-                mTextview_taskstate.setText(taskDetailBean.getData().getStatus_name());
+                mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
-                mTextview_taskmoney.setText("佣金：" + taskDetailBean.getData().getCommission() + "元");
+                if(taskDetailBean.getData().getCommission()==0){
+                    mTextview_taskmoney.setText("佣金：" + "由帮手出价");
+                }else {
+                    mTextview_taskmoney.setText("佣金：" + taskDetailBean.getData().getCommission() + "元");
+                }
                 mTextview_tasktime.setText("发布时间：" + taskDetailBean.getData().getCreateDate());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
 
