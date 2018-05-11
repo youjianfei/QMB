@@ -19,7 +19,7 @@
         android:id="@+id/relative_sort"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@color/white">
         <!--android:background="@drawable/background_logintitle"-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="70dp"
-            android:background="@drawable/background_white_corners"
+            android:background="@drawable/background_gray_corners"
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <ImageView
@@ -60,7 +60,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="35dp"
             android:text="郑州"
-            android:textColor="@color/white"
+            android:textColor="@color/black_text"
             android:textSize="14sp" />
         <ImageView
             android:layout_width="15dp"

@@ -10,7 +10,7 @@
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -18,7 +18,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/back_white" />
+            android:src="@mipmap/back_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,18 +26,24 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="常用地址"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp" />
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/ddddd"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/re_title"
+        android:background="@color/gray_background"
+        />
     <ListView
         android:id="@+id/list_datiladdress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/gray_background"
         android:dividerHeight="8dp"
-        android:layout_below="@+id/re_title"
+        android:layout_below="@+id/ddddd"
         android:layout_above="@+id/button_addnewaddress"
-
         >
 
     </ListView>

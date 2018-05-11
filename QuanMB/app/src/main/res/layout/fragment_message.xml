@@ -9,7 +9,7 @@
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="消息"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -82,7 +82,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:src="@mipmap/money" />
+            android:src="@mipmap/price" />
 
         <TextView
             android:id="@+id/text_2"
@@ -128,7 +128,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:src="@mipmap/price" />
+            android:src="@mipmap/money" />
 
         <TextView
             android:id="@+id/text_3"

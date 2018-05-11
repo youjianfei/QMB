@@ -10,7 +10,7 @@
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -18,7 +18,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/back_white" />
+            android:src="@mipmap/back_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="设置"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </RelativeLayout>
@@ -38,11 +38,20 @@
         android:background="@color/white"
         android:textColor="@color/black_text"
         android:layout_below="@+id/re_title"
+        android:layout_marginTop="5dp"
         android:paddingLeft="20dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         />
-
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/more"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/re_title"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        />
 
     <ImageView
         android:layout_width="15dp"
@@ -66,15 +75,7 @@
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         />
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:src="@mipmap/more"
-        android:layout_below="@+id/textview_changephone"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="23dp"
-        />
+
     <TextView
         android:id="@+id/textview_cleancache"
         android:layout_width="match_parent"

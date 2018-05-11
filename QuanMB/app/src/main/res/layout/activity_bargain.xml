@@ -12,7 +12,7 @@
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -20,7 +20,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/back_white" />
+            android:src="@mipmap/back_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="还价信息"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </RelativeLayout>
@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
+        android:layout_marginTop="5dp"
         android:paddingTop="16dp"
         android:text="你发布的任务被帮手还价啦"
         android:textColor="@color/black_text"

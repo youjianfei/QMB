@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     tools:context="com.jingnuo.quanmb.activity.ShophallActivity">
 
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -20,7 +20,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/back_white" />
+            android:src="@mipmap/back_black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,81 +28,82 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="服务大厅"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </RelativeLayout>
+
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
-    >
-    <LinearLayout
-        android:id="@+id/linearlayout_sort"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="综合排序"
-            android:textSize="15dp"
-            android:textColor="@color/black_text"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_sort"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
             android:gravity="center"
-            />
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:src="@mipmap/jiantou_xia1"
-            />
-    </LinearLayout>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="综合排序"
+                android:textColor="@color/black_text"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@mipmap/jiantou_xia1" />
+        </LinearLayout>
+
         <ImageView
             android:layout_width="0.5dp"
             android:layout_height="20dp"
-            android:background="@color/black"
             android:layout_margin="5dp"
+            android:background="@color/black"
             tools:ignore="Suspicious0dp" />
-    <LinearLayout
-        android:id="@+id/linearlayout_filter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/linearlayout_filter"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="筛选"
-            android:textSize="15dp"
-            android:textColor="@color/black_text"
-            android:gravity="center"
-            />
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:src="@mipmap/jiantou_xia1"
-            />
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="筛选"
+                android:textColor="@color/black_text"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@mipmap/jiantou_xia1" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
     <ImageView
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:src="@color/gray_dfdfdf"
-        />
+        android:src="@color/gray_dfdfdf" />
+
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/mlistview_shophall"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="8dp"
-        ptr:ptrMode="both"
-        />
-
+        ptr:ptrMode="both" />
 
 
 </LinearLayout>
