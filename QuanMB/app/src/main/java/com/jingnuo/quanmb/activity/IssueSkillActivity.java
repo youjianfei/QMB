@@ -83,6 +83,8 @@ public class IssueSkillActivity extends BaseActivityother {
     List<String> mList_picID;
     int PICposition=0;
 
+    int  type=0;
+
 
     Map map_issueSkill;
 
@@ -121,6 +123,7 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        type=getIntent().getIntExtra("type",0);
         permissionHelper=new PermissionHelper(IssueSkillActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
         map_issueSkill=new HashMap();
         mList_picID=new ArrayList<>();
@@ -237,6 +240,12 @@ public class IssueSkillActivity extends BaseActivityother {
         return true;
     }
     void request (Map map){
+        String URL="";
+        if(type==1){
+            URL=  Urls.Baseurl+Urls.helperIssueSkill;
+        }else {
+            URL=  Urls.Baseurl+Urls.shopIssueSkill;
+        }
         LogUtils.LOG("ceshi",map.toString(),"发布服务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -263,7 +272,7 @@ public class IssueSkillActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).postHttp(Urls.Baseurl+Urls.IssueSkill,this,1,map);
+        }).postHttp(URL,this,1,map);
     }
 
     void choosePIC(){

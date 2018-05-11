@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.entityclass.BargainMessageListBean;
 import com.jingnuo.quanmb.quanmb.R;
 
 import org.w3c.dom.Text;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class Adapter_BarginmessageList extends BaseAdapter{
     Context mContext;
-    List<String> mData;
+    List<BargainMessageListBean.DataBean> mData;
     LayoutInflater mInflater;
 
     public Adapter_BarginmessageList(List mDatas, Context mContext) {
@@ -32,15 +33,16 @@ public class Adapter_BarginmessageList extends BaseAdapter{
             hoder=new viewHoder();
             convertView=mInflater.inflate(R.layout.item_barginmessage,null,false);
             hoder.mTextview_content=convertView.findViewById(R.id.text_taskcontent);
-            hoder.mTextview_type=convertView.findViewById(R.id.text_tasktype);
+            hoder.mTextview_type=convertView.findViewById(R.id.text_tasktype);//还价状态
             hoder.mTextview_title=convertView.findViewById(R.id.text_tasktitle);
             hoder.mTextview_time=convertView.findViewById(R.id.text_tasktime);
             convertView.setTag(hoder);
         }else {
             hoder= (viewHoder) convertView.getTag();
         }
-        hoder.mTextview_title.setText(mData.get(position));
-
+        hoder.mTextview_title.setText(mData.get(position).getTitle());
+        hoder.mTextview_content.setText(mData.get(position).getContent());
+        hoder.mTextview_time.setText(mData.get(position).getCreateDate());
         return convertView;
     }
 

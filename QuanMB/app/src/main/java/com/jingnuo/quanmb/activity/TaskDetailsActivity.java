@@ -72,7 +72,6 @@ public class TaskDetailsActivity extends BaseActivityother {
         popwindow_bargin = new Popwindow_bargin(this, new Interence_bargin() {
             @Override
             public void onResult(String result) {//还价网络请求
-                ToastUtils.showToast(TaskDetailsActivity.this, result);
                 Map map_bargin = new HashMap();
                 map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                 map_bargin.put("task_id", "" + ID);
@@ -96,7 +95,6 @@ public class TaskDetailsActivity extends BaseActivityother {
                             ToastUtils.showToast(TaskDetailsActivity.this, msg);
                         }
                     }
-
                     @Override
                     public void onError(int error) {
 

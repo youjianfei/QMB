@@ -103,6 +103,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         LogUtils.LOG("ceshi","onResume","fragmentperson");
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mTextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+        LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
     }
 

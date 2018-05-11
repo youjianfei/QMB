@@ -49,7 +49,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:lines="3"
+        android:maxLines="3"
         android:text="这里是任务的详细描述" />
 
     <ImageView

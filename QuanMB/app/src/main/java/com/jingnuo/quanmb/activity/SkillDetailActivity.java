@@ -208,11 +208,11 @@ public class SkillDetailActivity extends BaseActivityother {
     void request(String id ,String role){
         String URL="";
         if(role.equals("1")){
-            URL=  Urls.Baseurl+Urls.Skilldetail_1+"?id="+id;
+            URL=  Urls.Baseurl+Urls.helperSkilldetail+"?id="+id;
         }else {
-            URL=  Urls.Baseurl+Urls.Skilldetail_2+"?id="+id;
+            URL=  Urls.Baseurl+Urls.shopkilldetail+"?id="+id;
         }
-        LogUtils.LOG("ceshi","专业详情网址："+URL,"fdsfsdf");
+        LogUtils.LOG("ceshi","专业详情网址："+URL,"服务详情");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {

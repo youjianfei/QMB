@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
@@ -61,6 +62,9 @@ public class IssueTaskActivity extends BaseActivityother {
     EditText mEditview_taskmoney;
     ImageView mImage_choosejieshou;
     ImageView mImage_choosejujue;
+    ImageView mImage_chooseme;
+    ImageView mImage_choosehelper;
+    RelativeLayout relativelayout_chujia;
 
 
     Button mButton_sub;
@@ -84,13 +88,14 @@ public class IssueTaskActivity extends BaseActivityother {
     String client_no = "";
     String release_address = "";
     String commission = "";
-    String img_id="";//图片
+    String img_id = "";//图片
     String detailed_address = "";
     String task_Status_code = "";
-    int  is_counteroffer=1;//是否接受议价 1 接受  0 拒绝
-    boolean ceshi=true;
+    int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
+    int isMEchujia = 1;//1  由我出价   2  由帮手出价
+    boolean ceshi = true;
 
-    int PICposition=0;
+    int PICposition = 0;
     List<String> mList_picID;
     Map map_issueTask;
 
@@ -101,23 +106,23 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        upLoadImage=new UpLoadImage(this, new Interface_loadImage_respose() {
+        upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
+                LogUtils.LOG("ceshi", respose, "发布技能上传图片返回respose");
                 int status = 0;
                 String msg = "";
-                String imageID="";
+                String imageID = "";
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");//登录状态
                     msg = (String) object.get("msg");//登录返回信息
 
-                    if(status==1){
-                        imageID=(String) object.get("imgID");
-                        LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
+                    if (status == 1) {
+                        imageID = (String) object.get("imgID");
+                        LogUtils.LOG("ceshi", "单张图片ID" + imageID, "发布技能上传图片返回imageID");
                         mList_picID.add(imageID);
-                        LogUtils.LOG("ceshi",mList_picID.size()+"tupiangeshu","发布技能上传图片返回imageID333");
+                        LogUtils.LOG("ceshi", mList_picID.size() + "tupiangeshu", "发布技能上传图片返回imageID333");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -129,14 +134,14 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        permissionHelper=new PermissionHelper(IssueTaskActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
-        map_issueTask=new HashMap();
-        mList_picID=new ArrayList<>();
+        permissionHelper = new PermissionHelper(IssueTaskActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+        map_issueTask = new HashMap();
+        mList_picID = new ArrayList<>();
         //完成任务期限  弹窗
-        popwindow_completeTime=new Popwindow_CompleteTime(IssueTaskActivity.this, new Interence_complteTask_time() {
+        popwindow_completeTime = new Popwindow_CompleteTime(IssueTaskActivity.this, new Interence_complteTask_time() {
             @Override
-            public void onResult(String result,int tag) {
-                LogUtils.LOG("ceshi",result,"IssueTaskActivity");
+            public void onResult(String result, int tag) {
+                LogUtils.LOG("ceshi", result, "IssueTaskActivity");
                 mTextview_time.setText(result);
                 mTextview_time.setTag(tag);
             }
@@ -159,7 +164,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     @Override
                     public void onSuccesses(String type, int id) {
                         mTextview_choose.setText(type);
-                        task_typeID=id+"";
+                        task_typeID = id + "";
                     }
                 });
                 mPopwindow_skilltype.showPopwindow();
@@ -168,7 +173,7 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popwindow_completeTime .showPopwindow();
+                popwindow_completeTime.showPopwindow();
 
             }
         });
@@ -176,8 +181,8 @@ public class IssueTaskActivity extends BaseActivityother {
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(initmap()){
-                    Intent intent=new Intent(IssueTaskActivity.this,IssueTaskNextActivity.class);
+                if (initmap()) {
+                    Intent intent = new Intent(IssueTaskActivity.this, IssueTaskNextActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -186,14 +191,14 @@ public class IssueTaskActivity extends BaseActivityother {
         choosePIC1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PICposition=1;
+                PICposition = 1;
                 choosePIC();//选择图片
             }
         });
         choosePIC2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PICposition=2;
+                PICposition = 2;
 
                 choosePIC();//选择图片
             }
@@ -202,30 +207,54 @@ public class IssueTaskActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 choosePIC();//选择图片
-                PICposition=3;
+                PICposition = 3;
             }
         });
         mImage_choosejieshou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!mImage_choosejieshou.isSelected()){
+                if (!mImage_choosejieshou.isSelected()) {
                     mImage_choosejieshou.setSelected(true);
                     mImage_choosejujue.setSelected(false);
-                    is_counteroffer=1;
+                    is_counteroffer = 1;
                 }
             }
         });
         mImage_choosejujue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!mImage_choosejujue.isSelected()){
+                if (!mImage_choosejujue.isSelected()) {
                     mImage_choosejieshou.setSelected(false);
                     mImage_choosejujue.setSelected(true);
-                    is_counteroffer=0;
+                    is_counteroffer = 0;
                 }
             }
         });
 
+        mImage_chooseme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mImage_chooseme.isSelected()) {
+                    mImage_chooseme.setSelected(true);
+                    mImage_choosehelper.setSelected(false);
+                    isMEchujia = 1;
+                    relativelayout_chujia.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mImage_choosehelper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mImage_choosehelper.isSelected()) {
+                    mImage_choosehelper.setSelected(true);
+                    mImage_chooseme.setSelected(false);
+                    isMEchujia = 2;
+                    relativelayout_chujia.setVisibility(View.GONE);
+                    mEditview_taskmoney.setText("");
+                    is_counteroffer = 1;
+                }
+            }
+        });
     }
 
     @Override
@@ -238,89 +267,89 @@ public class IssueTaskActivity extends BaseActivityother {
         mEditview_taskdetails = findViewById(R.id.edit_detailtask);
         mEditview_taskmoney = findViewById(R.id.edit_charges);
         mButton_sub = findViewById(R.id.button_submitsave);
-        choosePIC1=findViewById(R.id.iamge_choosePIC1);
-        choosePIC2=findViewById(R.id.iamge_choosePIC2);
-        choosePIC3=findViewById(R.id.iamge_choosePIC3);
-        mImage_choosejieshou=findViewById(R.id.image_choosejieshou);
+        choosePIC1 = findViewById(R.id.iamge_choosePIC1);
+        choosePIC2 = findViewById(R.id.iamge_choosePIC2);
+        choosePIC3 = findViewById(R.id.iamge_choosePIC3);
+        mImage_choosejieshou = findViewById(R.id.image_choosejieshou);
         mImage_choosejieshou.setSelected(true);
-        mImage_choosejujue=findViewById(R.id.image_choosejujue);
+        mImage_choosejujue = findViewById(R.id.image_choosejujue);
+        mImage_chooseme = findViewById(R.id.image_chooseme);
+        mImage_chooseme.setSelected(true);
+        mImage_choosehelper = findViewById(R.id.image_choosehelper);
+        relativelayout_chujia = findViewById(R.id.relativelayout_chujia);
     }
-    boolean initmap(){
-        task_name=mEditview_title.getText()+"";
-        if(task_name.equals("")){
-            ToastUtils.showToast(this,"请填写任务标题");
+
+    boolean initmap() {
+        task_name = mEditview_title.getText() + "";
+        if (task_name.equals("")) {
+            ToastUtils.showToast(this, "请填写任务标题");
             return false;
         }
-        task_description=mEditview_taskdetails.getText()+"";
-        if(task_description.equals("")){
-            ToastUtils.showToast(this,"请填写任务说明");
-            return false;
-
-
-        }
-        String  task_type=mTextview_choose.getText()+"";
-        if(task_type.equals("请选择")){
-            ToastUtils.showToast(this,"请选择任务类型");
-            return  false;
-        }
-
-        if(task_StartDate.equals("请选择任务完成期限")){
-            ToastUtils.showToast(this,"请选择任务完成期限");
+        task_description = mEditview_taskdetails.getText() + "";
+        if (task_description.equals("")) {
+            ToastUtils.showToast(this, "请填写任务说明");
             return false;
         }
-        task_time=mTextview_time.getTag()+"";
-
-        release_address="郑州";//TODO
-
-
-
-        detailed_address=mEditview_addressDetail.getText()+"";
-        if (mEditview_addressDetail.equals("")){
-            ToastUtils.showToast(this,"请填写详细地址");
+        String task_type = mTextview_choose.getText() + "";
+        if (task_type.equals("请选择")) {
+            ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }
-        LogUtils.LOG("ceshi",mList_picID.size()+".............","tupianOD");
+
+        if (task_StartDate.equals("请选择任务完成期限")) {
+            ToastUtils.showToast(this, "请选择任务完成期限");
+            return false;
+        }
+        task_time = mTextview_time.getTag() + "";
+
+        release_address = "郑州";//TODO
+
+        detailed_address = mEditview_addressDetail.getText() + "";
+        if (mEditview_addressDetail.equals("")) {
+            ToastUtils.showToast(this, "请填写详细地址");
+            return false;
+        }
+        LogUtils.LOG("ceshi", mList_picID.size() + ".............", "tupianOD");
         for (String imageID : mList_picID) {
-            img_id=img_id+imageID+",";
+            img_id = img_id + imageID + ",";
         }
-        commission=mEditview_taskmoney.getText()+"";
-        if(!commission.equals("")){
-            float min=Float.parseFloat(commission);
-            LogUtils.LOG("ceshi",min+"","sfdsfsaf");
-            if(min<5){
-                ToastUtils.showToast(IssueTaskActivity.this,"佣金最低为5元");
+        commission = mEditview_taskmoney.getText() + "";
+        if (!commission.equals("")) {
+            float min = Float.parseFloat(commission);
+            LogUtils.LOG("ceshi", min + "", "sfdsfsaf");
+            if (min < 5) {
+                ToastUtils.showToast(IssueTaskActivity.this, "佣金最低为5元");
                 return false;
             }
-        }else {
-            LogUtils.LOG("ceshi",is_counteroffer+"","is_counteroffer");
-            if(is_counteroffer==0){
-                ToastUtils.showToast(IssueTaskActivity.this,"由帮手出价必须接受议价");
+        } else {
+            if (isMEchujia == 1) {
+                ToastUtils.showToast(IssueTaskActivity.this, "请填写佣金");
                 return false;
             }
         }
-        map_issueTask.put("task_name",task_name+"");
-        map_issueTask.put("task_description",task_description+"");
-        map_issueTask.put("task_type",task_typeID+"");
-        map_issueTask.put("task_time",task_time);
-        map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token()+"");
-        map_issueTask.put("release_address","郑州");//TODO 地区
-        map_issueTask.put("commission",commission+"");
-        map_issueTask.put("task_Img_id",img_id+"");
-        map_issueTask.put("detailed_address",detailed_address+"");
-        map_issueTask.put("is_counteroffer",is_counteroffer+"");
-        Staticdata. map_task=map_issueTask;//借助全局变量来传递数据   //TODO 后期更改
-        LogUtils.LOG("ceshi",map_issueTask.toString(),"发布任务map集合中的内容");
+        map_issueTask.put("task_name", task_name + "");
+        map_issueTask.put("task_description", task_description + "");
+        map_issueTask.put("task_type", task_typeID + "");
+        map_issueTask.put("task_time", task_time);
+        map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
+        map_issueTask.put("release_address", "郑州");//TODO 地区
+        map_issueTask.put("commission", commission + "");
+        map_issueTask.put("task_Img_id", img_id + "");
+        map_issueTask.put("detailed_address", detailed_address + "");
+        map_issueTask.put("is_counteroffer", is_counteroffer + "");
+        Staticdata.map_task = map_issueTask;//借助全局变量来传递数据   //TODO 后期更改
+        LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
 
         return true;
     }
 
-    void choosePIC(){
-        Permissionmanage permissionmanage=new Permissionmanage(permissionHelper, new InterfacePermission() {
+    void choosePIC() {
+        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
             @Override
             public void onResult(boolean result) {
-                LogUtils.LOG("ceshi",result+"","");
-                if(result){
+                LogUtils.LOG("ceshi", result + "", "");
+                if (result) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//安卓7.0权限 代替了FileProvider方式   https://blog.csdn.net/xiaoyu940601/article/details/54406725
                         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                         StrictMode.setVmPolicy(builder.build());
@@ -342,8 +371,8 @@ public class IssueTaskActivity extends BaseActivityother {
                             .filePath("/ImageSelector/Pictures")
                             .build();
                     ImageSelector.open(IssueTaskActivity.this, imageConfig);   // 开启图片选择器
-                }else {
-                    ToastUtils.showToast(IssueTaskActivity.this,"请允许开启照相功能，并读取本地文件");
+                } else {
+                    ToastUtils.showToast(IssueTaskActivity.this, "请允许开启照相功能，并读取本地文件");
                 }
             }
         });
@@ -369,7 +398,7 @@ public class IssueTaskActivity extends BaseActivityother {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
 //                dataPictrue.add(mBitmap);
-                switch (PICposition){
+                switch (PICposition) {
                     case 1:
                         choosePIC1.setImageBitmap(mBitmap);
                         break;
@@ -380,12 +409,13 @@ public class IssueTaskActivity extends BaseActivityother {
                         choosePIC3.setImageBitmap(mBitmap);
                         break;
                 }
-                    upLoadImage.uploadImg(pathList,2);
+                upLoadImage.uploadImg(pathList, 2);
 
             }
         }
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -393,10 +423,11 @@ public class IssueTaskActivity extends BaseActivityother {
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        upLoadImage=null;
+        upLoadImage = null;
     }
 
 }

@@ -9,7 +9,7 @@
         android:layout_below="@+id/re_title"
         android:background="@color/white"
         >
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_task"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -19,28 +19,14 @@
             android:layout_marginBottom="15dp"
             />
         <TextView
-            android:id="@+id/text_tasktype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="进行中"
-            android:textSize="12dp"
-            android:textColor="@color/white"
-            android:padding="2dp"
-            android:background="@drawable/background_text_taskstate"
-            android:layout_toRightOf="@+id/image_task"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="13dp"
-            />
-
-        <TextView
             android:id="@+id/text_tasktitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="13dp"
-            android:layout_toRightOf="@+id/text_tasktype"
-            android:text=""
+            android:layout_toRightOf="@+id/image_task"
+            android:layout_marginLeft="20dp"
+            android:text="是的发是打发"
             android:textColor="#333333"
             android:textSize="15dp" />
 
@@ -48,12 +34,12 @@
             android:id="@+id/text_taskcontent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_tasktype"
+            android:layout_below="@+id/text_tasktitle"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/image_task"
-            android:text="帮手愿意100元帮忙"
+            android:text="还价消息内容"
             android:textColor="@color/text_gray"
             android:textSize="15dp" />
 
@@ -61,12 +47,13 @@
             android:id="@+id/text_tasktime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_tasktype"
+            android:layout_below="@+id/text_taskcontent"
             android:layout_marginTop="5dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:text="03:25"
             android:textColor="@color/black_text2"
+            android:layout_marginBottom="15dp"
             android:textSize="13dp" />
 
     </RelativeLayout>

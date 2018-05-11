@@ -49,9 +49,6 @@ public class Urls {
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
-    public static String Skilldetail_2 = "business/queryPostDetail";//服务内容详情    参数  id  get请求
-    public static String Skilldetail_1 = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
-    public static String IssueSkill = "business/releaseSpecialty";//发布专业    post
 
     //商户
     public static String shopIn = "business/commitApply";//商家入驻审核    post
@@ -60,6 +57,8 @@ public class Urls {
     public static String  shoporderdetail= "business/queryOrderDetail?user_token=";//商家接收的任务详情
     public static String  shopkill= "business/queryMyRelease?user_token=";//商户发布的服务
     public static String  shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
+    public static String shopIssueSkill = "business/releaseSpecialty";//发布专业    post
+    public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
 
 
 
@@ -69,10 +68,15 @@ public class Urls {
     public static String  helporder= "helper/queryHelperOrder?user_token=";//帮手接收的任务
     public static String  helporderdetail= "helper/queryOrderDetail?user_token=";//商家接收的任务详情
     public static String  helpskill= "helper/queryMyRelease?user_token=";//帮手发布的服务
+    public static String helperIssueSkill = "helper/releaseSpecialty";//发布专业    post
+    public static String helperSkilldetail = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
 
 
     //消息模块
     public static String pushMessage = "messsageCon/getMessageByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
+
+
+
 
     //个人中心
     public static String myorderlist = "task/taskQueryMyList";//  post

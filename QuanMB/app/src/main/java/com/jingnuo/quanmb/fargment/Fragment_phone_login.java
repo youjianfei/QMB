@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.SetPasswordActivity;
+import com.jingnuo.quanmb.class_.ProgressDlog;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -55,7 +56,7 @@ public class Fragment_phone_login extends Fragment {
 
     //对象
     UserBean userBean;
-
+    ProgressDlog progressDlog;
 
     @Nullable
     @Override
@@ -82,9 +83,11 @@ public class Fragment_phone_login extends Fragment {
 
     //手机号登录请求
     private void loginrequest(Map map) {
+        progressDlog.showPD("正在登录中");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                progressDlog.cancelPD();
                 int  status=0;
                 String msg="";
                 try {
@@ -167,6 +170,7 @@ public class Fragment_phone_login extends Fragment {
 
     }
     private void initdata(){
+        progressDlog=new ProgressDlog(getActivity());
         phonenumber=SharedPreferencesUtils.getString(getActivity(),"QMB","phonenumber");
         medit_phone.setText(phonenumber);
 

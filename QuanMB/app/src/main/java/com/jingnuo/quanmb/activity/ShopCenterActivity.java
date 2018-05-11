@@ -89,6 +89,7 @@ public class ShopCenterActivity extends BaseActivityother {
         switch (v.getId()) {
             case R.id.relative_issuetask:
                 Intent intend_issue_skill = new Intent(ShopCenterActivity.this, IssueSkillActivity.class);
+                intend_issue_skill.putExtra("type",type);
                 ShopCenterActivity.this.startActivity(intend_issue_skill);
                 break;
 
