@@ -186,7 +186,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/image_11"
-                    android:text="常用地址"
+                    android:text="常用联系人"
                     android:textColor="@color/black_text"
                     android:textSize="15dp" />
 

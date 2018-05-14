@@ -229,10 +229,10 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getCreateDate());
                 mTextview_name.setText(mTaskData.getData().getNick_name());
                 mTextview_taskdetails.setText(mTaskData.getData().getTask_description());
-                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
-                long ago = Long.parseLong(Utils.getTime(mTaskData.getData().getTask_EndDate()));//任务过期时间
-                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_tasktime.setText(time);
+//                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+//                long ago = Long.parseLong(Utils.getTime(mTaskData.getData().getTask_EndDate()));//任务过期时间
+//                String time = Utils.getDistanceTime(ago, now);//算出的差值
+                mTextview_tasktime.setText(mTaskData.getData().getTask_Time());
 
                 mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
@@ -245,7 +245,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 if (is_counteroffer.equals("1")) {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                 }
-                if(mTaskData.getData().getCommission()==0){
+                if(mTaskData.getData().getIs_helper_bid().equals("Y")){
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                     mButton_help.setVisibility(View.GONE);
                     mTextview_taskmoney.setText("佣金：帮手出价" );

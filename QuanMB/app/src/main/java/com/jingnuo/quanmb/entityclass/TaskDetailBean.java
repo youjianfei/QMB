@@ -72,13 +72,22 @@ public class TaskDetailBean {
         private String task_EndDate;
         private int task_ID;
         private String task_Status_code;
-        private int task_Time;
+        private String task_Time;
         private String task_description;
+        private String is_helper_bid;
         private String task_name;
         private String Avatar_imgUrl;
         private String task_ImgUrl;
         private String user_grade;
         private String order_no;
+
+        public String getIs_helper_bid() {
+            return is_helper_bid;
+        }
+
+        public void setIs_helper_bid(String is_helper_bid) {
+            this.is_helper_bid = is_helper_bid;
+        }
 
         public String getAvatar_imgUrl() {
             return Avatar_imgUrl;
@@ -216,11 +225,11 @@ public class TaskDetailBean {
             this.task_Status_code = task_Status_code;
         }
 
-        public int getTask_Time() {
+        public String getTask_Time() {
             return task_Time;
         }
 
-        public void setTask_Time(int task_Time) {
+        public void setTask_Time(String task_Time) {
             this.task_Time = task_Time;
         }
 

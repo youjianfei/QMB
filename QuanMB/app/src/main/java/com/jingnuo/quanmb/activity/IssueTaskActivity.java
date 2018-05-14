@@ -184,7 +184,6 @@ public class IssueTaskActivity extends BaseActivityother {
                 if (initmap()) {
                     Intent intent = new Intent(IssueTaskActivity.this, IssueTaskNextActivity.class);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -249,6 +248,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     mImage_choosehelper.setSelected(true);
                     mImage_chooseme.setSelected(false);
                     isMEchujia = 2;
+                    map_issueTask.put("is_helper_bid",   "Y");//由帮手出价
                     relativelayout_chujia.setVisibility(View.GONE);
                     mEditview_taskmoney.setText("");
                     is_counteroffer = 1;
@@ -316,6 +316,7 @@ public class IssueTaskActivity extends BaseActivityother {
         commission = mEditview_taskmoney.getText() + "";
         if (!commission.equals("")) {
             float min = Float.parseFloat(commission);
+            map_issueTask.put("is_helper_bid",   "N");//由我出价
             LogUtils.LOG("ceshi", min + "", "sfdsfsaf");
             if (min < 5) {
                 ToastUtils.showToast(IssueTaskActivity.this, "佣金最低为5元");
@@ -323,6 +324,7 @@ public class IssueTaskActivity extends BaseActivityother {
             }
         } else {
             if (isMEchujia == 1) {
+                map_issueTask.put("is_helper_bid",   "N");
                 ToastUtils.showToast(IssueTaskActivity.this, "请填写佣金");
                 return false;
             }
@@ -337,7 +339,7 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("task_Img_id", img_id + "");
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
-        Staticdata.map_task = map_issueTask;//借助全局变量来传递数据   //TODO 后期更改
+        Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
 

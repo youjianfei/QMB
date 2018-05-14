@@ -47,7 +47,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
     TextView mTextview_nickname;
-    TextView mTextview_phonenumber;
+    TextView mTextview_chengwei;
     TextView mTextview_myorder;
 
 
@@ -84,7 +84,13 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
     private void initdata() {
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
-        mTextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+        if(Staticdata.static_userBean.getData().getBusiness_status()==1){
+            mTextview_chengwei.setText("商户");
+        }else if(Staticdata.static_userBean.getData().getHelper_status()==1){
+            mTextview_chengwei.setText("帮手");
+        }else {
+            mTextview_chengwei.setText("未认证");
+        }
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
 
     }
@@ -102,7 +108,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         super.onResume();
         LogUtils.LOG("ceshi","onResume","fragmentperson");
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
-        mTextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
         LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
     }
@@ -117,7 +122,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mCircleImage=rootview.findViewById(R.id.image_userpic);
         mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
         mTextview_nickname=rootview.findViewById(R.id.text_username);
-        mTextview_phonenumber=rootview.findViewById(R.id.textview_phonenumber);
+        mTextview_chengwei=rootview.findViewById(R.id.textview_phonenumber);
         mTextview_myorder=rootview.findViewById(R.id.text_myorder);
         mTextview_logout=rootview.findViewById(R.id.textview_logout);
     }

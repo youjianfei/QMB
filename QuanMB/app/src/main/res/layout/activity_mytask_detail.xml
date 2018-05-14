@@ -220,7 +220,7 @@
                     android:layout_below="@+id/line2"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="15dp"
-                    android:text="剩余时间"
+                    android:text="希望完成时间"
                     android:textColor="#7f7f7f"
                     android:textSize="15dp" />
 
@@ -230,8 +230,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/line2"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
                     android:layout_marginTop="15dp"
                     android:text=""
                     android:textColor="@color/black_text"

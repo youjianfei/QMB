@@ -105,9 +105,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relative_1"
+            android:background="@color/white"
+            android:layout_below="@+id/relative_2"
             android:layout_marginTop="8dp"
-            android:background="@color/white">
+            >
             <TextView
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
@@ -142,6 +143,64 @@
                 android:layout_below="@+id/edit_tasktitle"
                 android:background="@color/gray_dbdbdb"
                 />
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/taskexplain"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_below="@+id/image_line1"
+                />
+            <TextView
+                android:id="@+id/text6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="说明"
+                android:textColor="@color/text_title2"
+                android:layout_toRightOf="@+id/image2"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="15dp"
+                android:textSize="15dp"
+                android:layout_below="@+id/image_line1"
+
+                />
+            <ImageView
+                android:id="@+id/image_line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/text6"
+                android:background="@color/gray_dbdbdb"
+                />
+            <EditText
+                android:id="@+id/edit_detailtask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请描述你的任务，不少于20字"
+                android:textColorHint="@color/text_hide_tip"
+                android:textSize="14dp"
+                android:background="@null"
+                android:gravity="top"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true"
+                android:lines="3"
+                android:layout_marginLeft="30dp"
+                android:layout_below="@+id/image_line4"
+                android:layout_marginBottom="15dp"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative_1"
+            android:layout_marginTop="8dp"
+            android:background="@color/white">
+
             <TextView
                 android:id="@+id/text3"
                 android:layout_width="wrap_content"
@@ -150,7 +209,6 @@
                 android:layout_marginTop="15dp"
                 android:text="希望完成时间："
                 android:textColor="@color/text_title2"
-                android:layout_below="@+id/image_line1"
                 android:textSize="15dp"
                 />
             <TextView
@@ -164,7 +222,6 @@
                 android:layout_marginRight="45dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="110dp"
-                android:layout_below="@+id/image_line1"
                 />
             <ImageView
                 android:layout_width="15dp"
@@ -173,7 +230,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
-                android:layout_below="@+id/image_line1"
                 />
             <ImageView
                 android:id="@+id/image_line2"
@@ -257,61 +313,7 @@
                 />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_below="@+id/relative_2"
-            android:layout_marginTop="8dp"
-            >
-            <ImageView
-                android:id="@+id/image2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/taskexplain"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:id="@+id/text6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="说明"
-                android:textColor="@color/text_title2"
-                android:layout_toRightOf="@+id/image2"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="15dp"
-                android:textSize="15dp"
-                />
-            <ImageView
-                android:id="@+id/image_line4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/text6"
-                android:background="@color/gray_dbdbdb"
-                />
-            <EditText
-                android:id="@+id/edit_detailtask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请描述你的任务，不少于20字"
-                android:textColorHint="@color/text_hide_tip"
-                android:textSize="14dp"
-                android:background="@null"
-                android:gravity="top"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                android:layout_alignParentRight="true"
-                android:lines="3"
-                android:layout_marginLeft="30dp"
-                android:layout_below="@+id/image_line4"
-                android:layout_marginBottom="15dp"
-                />
 
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

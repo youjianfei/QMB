@@ -134,7 +134,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 }
                 if(status==1){
                     ToastUtils.showToast(IssueTaskNextActivity.this,"任务发布成功");
-                    finish();
+                    Intent intent=new Intent(IssueTaskNextActivity.this,MainActivity.class);
+                    startActivity(intent);
 
                 }else {
                     ToastUtils.showToast(IssueTaskNextActivity.this,"发布失败");

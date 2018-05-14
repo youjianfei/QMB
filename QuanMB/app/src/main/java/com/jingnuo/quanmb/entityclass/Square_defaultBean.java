@@ -77,7 +77,16 @@ public class Square_defaultBean {
             private int task_ID;
             private String task_Name;
             private String task_description;
+            private String is_helper_bid;
             private int user_reputation;
+
+            public String getIs_helper_bid() {
+                return is_helper_bid;
+            }
+
+            public void setIs_helper_bid(String is_helper_bid) {
+                this.is_helper_bid = is_helper_bid;
+            }
 
             public String getClient_no() {
                 return client_no;

@@ -12,6 +12,7 @@ import com.jingnuo.quanmb.class_.Task_type;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.Utils;
 
 import java.util.List;
 
@@ -53,10 +54,15 @@ public class Adapter_SquareList extends  BaseAdapter {
         }
 
         holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
-        holder.mText_task_creattime.setText(mData.get(position).getCreateDate()+"");
+
+        long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+        long ago = Long.parseLong(Utils.getTime(mData.get(position).getCreateDate()));//任务发布时间
+        String time = Utils.getDistanceTime2(ago, now);//算出的差值
+        holder.mText_task_creattime.setText(time);
+//        holder.mText_task_creattime.setText(mData.get(position).getCreateDate()+"");
         holder.mText_task_username.setText(mData.get(position).getTask_Name()+"");
         holder.mText_task_address.setText(mData.get(position).getRelease_Address()+"");
-        if(mData.get(position).getCommission()==0){
+        if(mData.get(position).getIs_helper_bid().equals("Y")){
             holder.mTextview_yuan.setText("帮手出价");
             holder.mText_task_price.setVisibility(View.INVISIBLE);
         }else {

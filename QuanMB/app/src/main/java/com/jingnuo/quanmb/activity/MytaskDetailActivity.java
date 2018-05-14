@@ -199,18 +199,18 @@ public class MytaskDetailActivity extends BaseActivityother {
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
-                if(taskDetailBean.getData().getCommission()==0){
-                    mTextview_taskmoney.setText("佣金：" + "由帮手出价");
+                if(taskDetailBean.getData().getIs_helper_bid().equals("Y")){
+                    mTextview_taskmoney.setText("佣金：" + "帮手出价");
                 }else {
                     mTextview_taskmoney.setText("佣金：" + taskDetailBean.getData().getCommission() + "元");
                 }
                 mTextview_tasktime.setText("发布时间：" + taskDetailBean.getData().getCreateDate());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
 
-                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
-                long ago = Long.parseLong(Utils.getTime(taskDetailBean.getData().getTask_EndDate()));//任务过期时间
-                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_taskstarttime.setText(time);
+//                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+//                long ago = Long.parseLong(Utils.getTime(taskDetailBean.getData().getTask_EndDate()));//任务过期时间
+//                String time = Utils.getDistanceTime(ago, now);//算出的差值
+                mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_Time());
 
 
                 mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
