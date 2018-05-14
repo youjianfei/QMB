@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,6 +13,7 @@ import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Popwindow_bargin;
+import com.jingnuo.quanmb.class_.Popwindow_lookpic;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
@@ -41,6 +43,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_taskaddress;
     //    TextView mTextview_peoplelevel;
     CircleImageView imageView_head;
+    ImageView mImageview_skill1,mImageview_skill2,mImageview_skill3;
 
     Button mButton_help;
     Button mButton_counteroffer;
@@ -49,9 +52,15 @@ public class TaskDetailsActivity extends BaseActivityother {
     int ID = 0;//任务id;
     String is_counteroffer = "";
 
+
+    String image_url="";
+    String image_url1="";
+    String image_url2="";
+    String image_url3="";
+
     //对象
     TaskDetailBean mTaskData;
-
+    Popwindow_lookpic popwindow_lookpic;
     Popwindow_bargin popwindow_bargin;
 
 
@@ -62,6 +71,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        popwindow_lookpic=new Popwindow_lookpic(this);
         requestTaseDetail();
     }
 
@@ -108,6 +118,24 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mImageview_skill1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_lookpic.showPopwindow(image_url1);
+            }
+        });
+        mImageview_skill2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_lookpic.showPopwindow(image_url2);
+            }
+        });
+        mImageview_skill3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_lookpic.showPopwindow(image_url3);
+            }
+        });
         //确认帮助请求
         mButton_help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +211,9 @@ public class TaskDetailsActivity extends BaseActivityother {
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
         imageView_head = findViewById(R.id.image_task);
+        mImageview_skill1=findViewById(R.id.iamge_skillPIC1);
+        mImageview_skill2=findViewById(R.id.iamge_skillPIC2);
+        mImageview_skill3=findViewById(R.id.iamge_skillPIC3);
     }
 
     void requestTaseDetail() {
@@ -208,6 +239,8 @@ public class TaskDetailsActivity extends BaseActivityother {
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
                 String imageURL = mTaskData.getData().getAvatar_imgUrl().substring(0, mTaskData.getData().getAvatar_imgUrl().length() - 1);
                 Glide.with(TaskDetailsActivity.this).load(imageURL).into(imageView_head);
+                image_url=mTaskData.getData().getTask_ImgUrl();
+                setImage(image_url);
 
                 if (is_counteroffer.equals("1")) {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
@@ -226,6 +259,46 @@ public class TaskDetailsActivity extends BaseActivityother {
             }
         }).Http(Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID, this, 0);
 
+
+    }
+    void setImage(String  image){
+        if(image==null||image.equals("")){
+
+        }else {
+            String []images=image.split(",");
+            int len=images.length;
+            LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");
+            switch (len){
+                case 1:
+                    LogUtils.LOG("ceshi","图片的地址"+images[0],"SkillDetailActivity分隔图片");
+                    image_url1=images[0];
+                    mImageview_skill1.setVisibility(View.VISIBLE);
+                    Glide.with(TaskDetailsActivity.this).load(image_url1).into(mImageview_skill1);
+                    break;
+                case 2:
+                    image_url1=images[0];
+                    image_url2=images[1];
+
+                    mImageview_skill1.setVisibility(View.VISIBLE);
+                    mImageview_skill2.setVisibility(View.VISIBLE);
+                    Glide.with(TaskDetailsActivity.this).load(images[0]).into(mImageview_skill1);
+                    Glide.with(TaskDetailsActivity.this).load(images[1]).into(mImageview_skill2);
+                    break;
+                case 3:
+                    image_url1=images[0];
+                    image_url2=images[1];
+                    image_url3=images[2];
+                    mImageview_skill1.setVisibility(View.VISIBLE);
+                    mImageview_skill2.setVisibility(View.VISIBLE);
+                    mImageview_skill3.setVisibility(View.VISIBLE);
+                    Glide.with(TaskDetailsActivity.this).load(images[0]).into(mImageview_skill1);
+                    Glide.with(TaskDetailsActivity.this).load(images[1]).into(mImageview_skill2);
+                    Glide.with(TaskDetailsActivity.this).load(images[2]).into(mImageview_skill3);
+                    break;
+            }
+
+
+        }
 
     }
 

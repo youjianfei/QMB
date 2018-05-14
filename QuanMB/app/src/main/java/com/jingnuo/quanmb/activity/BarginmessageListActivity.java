@@ -2,8 +2,12 @@ package com.jingnuo.quanmb.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_BarginmessageList;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -62,7 +66,28 @@ public class BarginmessageListActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        //下拉  上拉 加载刷新
+        mList_view.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page = 1;
+                map_message.put("pageNo",page+"");
+                requestBarginMessage(map_message);
 
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page++;
+                map_message.put("pageNo",page+"");
+            }
+        });
+        mList_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     @Override
@@ -76,6 +101,9 @@ public class BarginmessageListActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                if (mList_view.isRefreshing()) {
+                    mList_view.onRefreshComplete();
+                }
                 bargainMessageListBean=new Gson().fromJson(respose,BargainMessageListBean.class);
                 if(page==1){
                     mData.clear();
@@ -83,9 +111,9 @@ public class BarginmessageListActivity extends BaseActivityother {
                     adapter_barginmessageList.notifyDataSetChanged();
 
                 }else {
-
+                    mData.addAll(bargainMessageListBean.getData());
+                    adapter_barginmessageList.notifyDataSetChanged();
                 }
-
 
             }
 

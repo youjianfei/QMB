@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
@@ -35,6 +36,7 @@ public abstract class BaseActivityother extends Activity implements OnClickListe
 //        if (null != childView) {
 //            ViewCompat.setFitsSystemWindows(childView,false);
 //        }
+
         StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
 
         initView();
