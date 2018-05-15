@@ -27,7 +27,9 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -57,6 +59,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     String image_url1="";
     String image_url2="";
     String image_url3="";
+    List<String> imageview_urllist;
 
     //对象
     TaskDetailBean mTaskData;
@@ -71,6 +74,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        imageview_urllist=new ArrayList<>();
         popwindow_lookpic=new Popwindow_lookpic(this);
         requestTaseDetail();
     }
@@ -121,19 +125,19 @@ public class TaskDetailsActivity extends BaseActivityother {
         mImageview_skill1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(image_url1);
+                popwindow_lookpic.showPopwindow(0,imageview_urllist);
             }
         });
         mImageview_skill2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(image_url2);
+                popwindow_lookpic.showPopwindow(1,imageview_urllist);
             }
         });
         mImageview_skill3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(image_url3);
+                popwindow_lookpic.showPopwindow(2,imageview_urllist);
             }
         });
         //确认帮助请求
@@ -267,6 +271,9 @@ public class TaskDetailsActivity extends BaseActivityother {
             String []images=image.split(",");
             int len=images.length;
             LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");
+            for(int i=0;i<len;i++){
+                imageview_urllist.add(images[i]);
+            }
             switch (len){
                 case 1:
                     LogUtils.LOG("ceshi","图片的地址"+images[0],"SkillDetailActivity分隔图片");

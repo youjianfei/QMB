@@ -77,8 +77,8 @@ public class BargainActivity extends BaseActivityother {
                 }else {
                     URL_bargain=Urls.Baseurl_cui+Urls.helpterbargain;
                     map_goonbargain.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map_goonbargain.put("task_id",bargainMessagedetailsBean.getData().getTask_id());
-                    map_goonbargain.put("counteroffer_Amount",result);
+                    map_goonbargain.put("task_id",bargainMessagedetailsBean.getData().getTask_id()+"");
+                    map_goonbargain.put("counteroffer_Amount",result+"");
                 }
                 LogUtils.LOG("ceshi","map+"+map_goonbargain,"继续还价");
                 LogUtils.LOG("ceshi",URL_bargain,"继续还价");
@@ -192,6 +192,7 @@ public class BargainActivity extends BaseActivityother {
                 map_refuse.put("id",bargainMessagedetailsBean.getData().getTask_id()+"");
                 map_refuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map_refuse.put("is_accept","0");
+                map_refuse.put("send_client_no",bargainMessagedetailsBean.getData().getReceive_client_no());
                 map_refuse.put("counteroffer_Amount",bargainMessagedetailsBean.getData().getCounteroffer_Amount()+"");
                 if(bargainMessagedetailsBean.getData().getHelper_no()!=null){
                     map_refuse.put("helper_no",bargainMessagedetailsBean.getData().getHelper_no());

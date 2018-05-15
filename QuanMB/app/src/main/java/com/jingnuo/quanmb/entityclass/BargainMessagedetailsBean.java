@@ -69,8 +69,17 @@ public class BargainMessagedetailsBean {
         private String task_name;
         private String binding_id;
         private String send_client_no;
+        private String receive_client_no;
 
         private double response_Amount;
+
+        public String getReceive_client_no() {
+            return receive_client_no;
+        }
+
+        public void setReceive_client_no(String receive_client_no) {
+            this.receive_client_no = receive_client_no;
+        }
 
         public String getSend_client_no() {
             return send_client_no;

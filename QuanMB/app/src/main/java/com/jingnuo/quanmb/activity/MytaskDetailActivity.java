@@ -83,24 +83,24 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mImageview_skill1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(image_url1);
-            }
-        });
-        mImageview_skill2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(image_url2);
-            }
-        });
-        mImageview_skill3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(image_url3);
-            }
-        });
+//        mImageview_skill1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                popwindow_lookpic.showPopwindow(image_url1);
+//            }
+//        });
+//        mImageview_skill2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                popwindow_lookpic.showPopwindow(image_url2);
+//            }
+//        });
+//        mImageview_skill3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                popwindow_lookpic.showPopwindow(image_url3);
+//            }
+//        });
         mButton_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
