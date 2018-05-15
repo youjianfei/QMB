@@ -43,7 +43,6 @@
                 android:id="@+id/re1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/re_title"
                 android:layout_marginTop="5dp"
                 android:background="@color/white">
 
@@ -155,44 +154,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
                     android:layout_below="@+id/text_taskdetail"
                     >
-
-                    <ImageView
-                        android:id="@+id/iamge_skillPIC1"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@mipmap/addpic"
-                        android:scaleType="centerCrop"
-                        android:visibility="gone"
-                        />
-                    <ImageView
-                        android:id="@+id/iamge_skillPIC2"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@mipmap/addpic"
-                        android:scaleType="centerCrop"
-                        android:visibility="gone"
-                        />
-                    <ImageView
-                        android:id="@+id/iamge_skillPIC3"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="30dp"
-                        android:src="@mipmap/addpic"
-                        android:scaleType="centerCrop"
-                        android:visibility="gone"
-                        />
+                    <com.jingnuo.quanmb.customview.MyGridView
+                        android:id="@+id/GridView_PIC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:numColumns="3"/>
 
                 </RelativeLayout>
 

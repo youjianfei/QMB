@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Popwindow_bargin;
 import com.jingnuo.quanmb.class_.Popwindow_lookpic;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
@@ -45,7 +48,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_taskaddress;
     //    TextView mTextview_peoplelevel;
     CircleImageView imageView_head;
-    ImageView mImageview_skill1,mImageview_skill2,mImageview_skill3;
+    MyGridView imageGridview;
 
     Button mButton_help;
     Button mButton_counteroffer;
@@ -56,15 +59,13 @@ public class TaskDetailsActivity extends BaseActivityother {
 
 
     String image_url="";
-    String image_url1="";
-    String image_url2="";
-    String image_url3="";
     List<String> imageview_urllist;
 
     //对象
     TaskDetailBean mTaskData;
     Popwindow_lookpic popwindow_lookpic;
     Popwindow_bargin popwindow_bargin;
+    Adapter_Gridviewpic adapter_gridviewpic;
 
 
     @Override
@@ -75,6 +76,8 @@ public class TaskDetailsActivity extends BaseActivityother {
     @Override
     protected void setData() {
         imageview_urllist=new ArrayList<>();
+        adapter_gridviewpic=new Adapter_Gridviewpic(imageview_urllist,this);
+        imageGridview.setAdapter(adapter_gridviewpic);
         popwindow_lookpic=new Popwindow_lookpic(this);
         requestTaseDetail();
     }
@@ -122,24 +125,13 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mImageview_skill1.setOnClickListener(new View.OnClickListener() {
+        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(0,imageview_urllist);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popwindow_lookpic.showPopwindow(position,imageview_urllist);
             }
         });
-        mImageview_skill2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(1,imageview_urllist);
-            }
-        });
-        mImageview_skill3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popwindow_lookpic.showPopwindow(2,imageview_urllist);
-            }
-        });
+
         //确认帮助请求
         mButton_help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,12 +203,10 @@ public class TaskDetailsActivity extends BaseActivityother {
         mTextview_tasktime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
 //        mTextview_peoplelevel = findViewById(R.id.text_tlevel);
+        imageGridview=findViewById(R.id.GridView_PIC);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
         imageView_head = findViewById(R.id.image_task);
-        mImageview_skill1=findViewById(R.id.iamge_skillPIC1);
-        mImageview_skill2=findViewById(R.id.iamge_skillPIC2);
-        mImageview_skill3=findViewById(R.id.iamge_skillPIC3);
     }
 
     void requestTaseDetail() {
@@ -274,34 +264,7 @@ public class TaskDetailsActivity extends BaseActivityother {
             for(int i=0;i<len;i++){
                 imageview_urllist.add(images[i]);
             }
-            switch (len){
-                case 1:
-                    LogUtils.LOG("ceshi","图片的地址"+images[0],"SkillDetailActivity分隔图片");
-                    image_url1=images[0];
-                    mImageview_skill1.setVisibility(View.VISIBLE);
-                    Glide.with(TaskDetailsActivity.this).load(image_url1).into(mImageview_skill1);
-                    break;
-                case 2:
-                    image_url1=images[0];
-                    image_url2=images[1];
-
-                    mImageview_skill1.setVisibility(View.VISIBLE);
-                    mImageview_skill2.setVisibility(View.VISIBLE);
-                    Glide.with(TaskDetailsActivity.this).load(images[0]).into(mImageview_skill1);
-                    Glide.with(TaskDetailsActivity.this).load(images[1]).into(mImageview_skill2);
-                    break;
-                case 3:
-                    image_url1=images[0];
-                    image_url2=images[1];
-                    image_url3=images[2];
-                    mImageview_skill1.setVisibility(View.VISIBLE);
-                    mImageview_skill2.setVisibility(View.VISIBLE);
-                    mImageview_skill3.setVisibility(View.VISIBLE);
-                    Glide.with(TaskDetailsActivity.this).load(images[0]).into(mImageview_skill1);
-                    Glide.with(TaskDetailsActivity.this).load(images[1]).into(mImageview_skill2);
-                    Glide.with(TaskDetailsActivity.this).load(images[2]).into(mImageview_skill3);
-                    break;
-            }
+            adapter_gridviewpic.notifyDataSetChanged();
 
 
         }

@@ -9,15 +9,18 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_lookpic;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillsdetailsBean;
 import com.jingnuo.quanmb.quanmb.R;
@@ -25,6 +28,9 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SkillDetailActivity extends BaseActivityother {
@@ -39,14 +45,14 @@ public class SkillDetailActivity extends BaseActivityother {
     TextView mTextview_content;
     TextView mTextview_shopname;
     LinearLayout mLinearlayout_phonenumber;
+    MyGridView imageGridview;
 
-    ImageView mImageview_skill1,mImageview_skill2,mImageview_skill3;
 
     //对象
     SkillsdetailsBean   mSkilldetailsbean;
     PermissionHelper mPermission;//动态申请权限
     Popwindow_lookpic popwindow_lookpic;
-
+    Adapter_Gridviewpic adapter_gridviewpic;
 
 
 
@@ -60,9 +66,7 @@ public class SkillDetailActivity extends BaseActivityother {
     private final int STATE_EXPANDED = 3; //文本行数超过限定行数,被点击全文展开
 
     String image_url="";
-    String image_url1="";
-    String image_url2="";
-    String image_url3="";
+    List<String> imageview_urllist;
 
     String id="";
     String role="";//身份
@@ -77,6 +81,9 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        imageview_urllist=new ArrayList<>();
+        adapter_gridviewpic=new Adapter_Gridviewpic(imageview_urllist,this);
+        imageGridview.setAdapter(adapter_gridviewpic);
         popwindow_lookpic=new Popwindow_lookpic(this);
     }
     @Override
@@ -91,9 +98,7 @@ public class SkillDetailActivity extends BaseActivityother {
         mTextview_content=findViewById(R.id.text_servicedetail);
         mTextview_shopname=findViewById(R.id.text_shopname);
         mLinearlayout_phonenumber=findViewById(R.id.linearlayout_phonenumber);
-        mImageview_skill1=findViewById(R.id.iamge_skillPIC1);
-        mImageview_skill2=findViewById(R.id.iamge_skillPIC2);
-        mImageview_skill3=findViewById(R.id.iamge_skillPIC3);
+        imageGridview=findViewById(R.id.GridView_PIC);
 
 
     }
@@ -110,24 +115,12 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-//        mImageview_skill1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                popwindow_lookpic.showPopwindow(image_url1);
-//            }
-//        });
-//        mImageview_skill2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                popwindow_lookpic.showPopwindow(image_url2);
-//            }
-//        });
-//        mImageview_skill3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                popwindow_lookpic.showPopwindow(image_url3);
-//            }
-//        });
+        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popwindow_lookpic.showPopwindow(position,imageview_urllist);
+            }
+        });
         mTextview_content.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -202,34 +195,10 @@ public class SkillDetailActivity extends BaseActivityother {
             String []images=image.split(",");
             int len=images.length;
             LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");
-            switch (len){
-                case 1:
-                    LogUtils.LOG("ceshi","图片的地址"+images[0],"SkillDetailActivity分隔图片");
-                    image_url1=images[0];
-                    mImageview_skill1.setVisibility(View.VISIBLE);
-                    Glide.with(SkillDetailActivity.this).load(image_url1).into(mImageview_skill1);
-                    break;
-                case 2:
-                    image_url1=images[0];
-                    image_url2=images[1];
-
-                    mImageview_skill1.setVisibility(View.VISIBLE);
-                    mImageview_skill2.setVisibility(View.VISIBLE);
-                    Glide.with(SkillDetailActivity.this).load(images[0]).into(mImageview_skill1);
-                    Glide.with(SkillDetailActivity.this).load(images[1]).into(mImageview_skill2);
-                    break;
-                case 3:
-                    image_url1=images[0];
-                    image_url2=images[1];
-                    image_url3=images[2];
-                    mImageview_skill1.setVisibility(View.VISIBLE);
-                    mImageview_skill2.setVisibility(View.VISIBLE);
-                    mImageview_skill3.setVisibility(View.VISIBLE);
-                    Glide.with(SkillDetailActivity.this).load(images[0]).into(mImageview_skill1);
-                    Glide.with(SkillDetailActivity.this).load(images[1]).into(mImageview_skill2);
-                    Glide.with(SkillDetailActivity.this).load(images[2]).into(mImageview_skill3);
-                    break;
+            for(int i=0;i<len;i++){
+                imageview_urllist.add(images[i]);
             }
+            adapter_gridviewpic.notifyDataSetChanged();
 
 
         }

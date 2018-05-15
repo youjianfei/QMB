@@ -1,18 +1,23 @@
 package com.jingnuo.quanmb.class_;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +54,7 @@ public class Popwindow_lookpic {
     }
 
     private void initview(int position,List<String> imageList) {
+
 //        imageView_lookpic = view.findViewById(R.id.image_pic);
         View dotview;
         listdate_viewpager=new ArrayList<>();
