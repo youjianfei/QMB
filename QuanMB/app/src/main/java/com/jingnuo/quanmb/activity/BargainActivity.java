@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.MarkerOptions;
@@ -44,6 +45,8 @@ public class BargainActivity extends BaseActivityother {
     Button mButton_goon;
     Button mButton_refuse;
 
+    LinearLayout mLinearlayout_caozuo;
+    TextView  mTextview_bargainstate;
 
 
 
@@ -76,6 +79,7 @@ public class BargainActivity extends BaseActivityother {
                     map_goonbargain.put("send_client_no",bargainMessagedetailsBean.getData().getSend_client_no());
                 }else {
                     URL_bargain=Urls.Baseurl_cui+Urls.helpterbargain;
+                    map_goonbargain.put("binding_id",bargainMessagedetailsBean.getData().getBinding_id());
                     map_goonbargain.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_goonbargain.put("task_id",bargainMessagedetailsBean.getData().getTask_id()+"");
                     map_goonbargain.put("counteroffer_Amount",result+"");
@@ -86,6 +90,21 @@ public class BargainActivity extends BaseActivityother {
                     @Override
                     public void onSuccesses(String respose) {
                         LogUtils.LOG("ceshi",respose,"继续还价");
+                        int status = 0;
+                        String msg = "";
+                        try {
+                            JSONObject object = new JSONObject(respose);
+                            status = (Integer) object.get("code");
+                            msg = (String) object.get("message");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if(status==1){
+                            ToastUtils.showToast(BargainActivity.this,msg);
+                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
+                        }else {
+                            ToastUtils.showToast(BargainActivity.this,msg);
+                        }
                     }
 
                     @Override
@@ -136,6 +155,8 @@ public class BargainActivity extends BaseActivityother {
         mButton_accept=findViewById(R.id.button_accect);
         mButton_goon=findViewById(R.id.button_goon);
         mButton_refuse=findViewById(R.id.button_refuse);
+        mLinearlayout_caozuo=findViewById(R.id.linearlayout_caozuo);
+        mTextview_bargainstate=findViewById(R.id.text_bargainstate);
     }
 
     @Override
@@ -147,6 +168,9 @@ public class BargainActivity extends BaseActivityother {
                 map_accept.put("id",bargainMessagedetailsBean.getData().getTask_id()+"");
                 map_accept.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map_accept.put("is_accept","1");
+                map_accept.put("binding_id",binding_id+"");
+                map_accept.put("mark",bargainMessagedetailsBean.getData().getMark()+"");
+                map_accept.put("send_client_no",bargainMessagedetailsBean.getData().getSend_client_no());
                 map_accept.put("counteroffer_Amount",bargainMessagedetailsBean.getData().getCounteroffer_Amount()+"");
                 if(bargainMessagedetailsBean.getData().getHelper_no()!=null){
                     map_accept.put("helper_no",bargainMessagedetailsBean.getData().getHelper_no());
@@ -162,13 +186,14 @@ public class BargainActivity extends BaseActivityother {
                         String msg = "";
                         try {
                             JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("message");//登录返回信息
+                            status = (Integer) object.get("code");
+                            msg = (String) object.get("message");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         if(status==1){
                             ToastUtils.showToast(BargainActivity.this,msg);
+                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
                         }else {
                             ToastUtils.showToast(BargainActivity.this,msg);
                         }
@@ -192,6 +217,8 @@ public class BargainActivity extends BaseActivityother {
                 map_refuse.put("id",bargainMessagedetailsBean.getData().getTask_id()+"");
                 map_refuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map_refuse.put("is_accept","0");
+                map_refuse.put("binding_id",binding_id+"");
+                map_refuse.put("mark",bargainMessagedetailsBean.getData().getMark()+"");
                 map_refuse.put("send_client_no",bargainMessagedetailsBean.getData().getSend_client_no());
                 map_refuse.put("counteroffer_Amount",bargainMessagedetailsBean.getData().getCounteroffer_Amount()+"");
                 if(bargainMessagedetailsBean.getData().getHelper_no()!=null){
@@ -214,6 +241,8 @@ public class BargainActivity extends BaseActivityother {
                             e.printStackTrace();
                         }
                         if(status==1){
+                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
+
                             ToastUtils.showToast(BargainActivity.this,msg);
                         }else {
                             ToastUtils.showToast(BargainActivity.this,msg);
@@ -246,10 +275,29 @@ public class BargainActivity extends BaseActivityother {
                 }
                 if(status==1){
                     bargainMessagedetailsBean=new Gson().fromJson(respose,BargainMessagedetailsBean.class);
+                    //判断  is_accept  是否操作过
+                    if(bargainMessagedetailsBean.getData().getIs_accept()==null||bargainMessagedetailsBean.getData().getIs_accept().equals("")){
+                        mLinearlayout_caozuo.setVisibility(View.VISIBLE);
+                        mTextview_bargainstate.setVisibility(View.GONE);
+                    }else if(bargainMessagedetailsBean.getData().getIs_accept().equals("0")){
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+                        mTextview_bargainstate.setText("被拒绝");
+                    }else if(bargainMessagedetailsBean.getData().getIs_accept().equals("1")){
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+                        mTextview_bargainstate.setText("已接受");
+                    }else if(bargainMessagedetailsBean.getData().getIs_accept().equals("2")){
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+                        mTextview_bargainstate.setText("还价中");
+                    }
+
                     if(bargainMessagedetailsBean.getData().getMark().equals("1")){
                         mTextview_message.setText("被雇主还价了！");
                         mTextview_1.setText("还价雇主");
                         mTextview_yourmoney.setVisibility(View.GONE);
+                        mButton_refuse.setVisibility(View.GONE);
 
                     }else {
                         mTextview_message.setText("你发布的任务被帮手还价了！");

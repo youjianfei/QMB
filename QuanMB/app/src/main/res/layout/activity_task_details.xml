@@ -192,6 +192,7 @@
                     android:layout_marginRight="30dp"
                     android:textColor="@color/black_text"
                     />
+
                 <RelativeLayout
                     android:id="@+id/skill_pic"
                     android:layout_width="match_parent"
@@ -204,7 +205,7 @@
                     <com.jingnuo.quanmb.customview.MyGridView
                         android:id="@+id/GridView_PIC"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="80dp"
                         android:background="@color/white"
                         android:numColumns="3"/>
 

@@ -12,12 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.InterfaceDate_select;
@@ -31,6 +34,7 @@ import com.jingnuo.quanmb.class_.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
 import com.jingnuo.quanmb.class_.Popwindow_complatetask;
 import com.jingnuo.quanmb.class_.UpLoadImage;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -59,6 +63,7 @@ public class IssueTaskActivity extends BaseActivityother {
     EditText mEditview_addressDetail;//详细地址
     EditText mEditview_title;
     EditText mEditview_taskdetails;
+    MyGridView imageGridview;
     EditText mEditview_taskmoney;
     ImageView mImage_choosejieshou;
     ImageView mImage_choosejujue;
@@ -69,15 +74,13 @@ public class IssueTaskActivity extends BaseActivityother {
 
     Button mButton_sub;
 
-    ImageView choosePIC1;
-    ImageView choosePIC2;
-    ImageView choosePIC3;
 
     //对象
     Popwindow_SkillType mPopwindow_skilltype;
     PermissionHelper permissionHelper;
     UpLoadImage upLoadImage;
     Popwindow_CompleteTime popwindow_completeTime;
+    Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
 
     //数据
     String task_name = "";
@@ -89,13 +92,14 @@ public class IssueTaskActivity extends BaseActivityother {
     String release_address = "";
     String commission = "";
     String img_id = "";//图片
+    Bitmap mBitmap=null;
+    List<Bitmap> mlistdata_pic;
     String detailed_address = "";
     String task_Status_code = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
     int isMEchujia = 1;//1  由我出价   2  由帮手出价
     boolean ceshi = true;
 
-    int PICposition = 0;
     List<String> mList_picID;
     Map map_issueTask;
 
@@ -106,6 +110,11 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        mlistdata_pic=new ArrayList<>();
+        Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+        mlistdata_pic.add(bitmap);
+        adapter_gridviewpic_upLoad=new Adapter_Gridviewpic_UPLoad(mlistdata_pic,this);
+        imageGridview.setAdapter(adapter_gridviewpic_upLoad);
         upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -187,26 +196,17 @@ public class IssueTaskActivity extends BaseActivityother {
                 }
             }
         });
-        choosePIC1.setOnClickListener(new View.OnClickListener() {
+        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                PICposition = 1;
-                choosePIC();//选择图片
-            }
-        });
-        choosePIC2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PICposition = 2;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi","点击+"+position,"选择图片");
+                if(mlistdata_pic.size()-1==position){
+                    choosePIC();
+                }else {
+                    mlistdata_pic.remove(position);
+                    adapter_gridviewpic_upLoad.notifyDataSetChanged();
+                }
 
-                choosePIC();//选择图片
-            }
-        });
-        choosePIC3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                choosePIC();//选择图片
-                PICposition = 3;
             }
         });
         mImage_choosejieshou.setOnClickListener(new View.OnClickListener() {
@@ -265,11 +265,9 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_time = findViewById(R.id.edit_tasktime);
         mEditview_addressDetail = findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = findViewById(R.id.edit_detailtask);
+        imageGridview=findViewById(R.id.GridView_PIC);
         mEditview_taskmoney = findViewById(R.id.edit_charges);
         mButton_sub = findViewById(R.id.button_submitsave);
-        choosePIC1 = findViewById(R.id.iamge_choosePIC1);
-        choosePIC2 = findViewById(R.id.iamge_choosePIC2);
-        choosePIC3 = findViewById(R.id.iamge_choosePIC3);
         mImage_choosejieshou = findViewById(R.id.image_choosejieshou);
         mImage_choosejieshou.setSelected(true);
         mImage_choosejujue = findViewById(R.id.image_choosejujue);
@@ -381,7 +379,6 @@ public class IssueTaskActivity extends BaseActivityother {
         permissionmanage.requestpermission();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -390,7 +387,6 @@ public class IssueTaskActivity extends BaseActivityother {
             mTextview_taskAddress.setText(address);
         }
 
-
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
 
             // Get Image Path List
@@ -398,21 +394,11 @@ public class IssueTaskActivity extends BaseActivityother {
 //            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
             for (String path : pathList) {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
-                Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
+                 mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
 //                dataPictrue.add(mBitmap);
-                switch (PICposition) {
-                    case 1:
-                        choosePIC1.setImageBitmap(mBitmap);
-                        break;
-                    case 2:
-                        choosePIC2.setImageBitmap(mBitmap);
-                        break;
-                    case 3:
-                        choosePIC3.setImageBitmap(mBitmap);
-                        break;
-                }
+                mlistdata_pic.add(0,mBitmap);
+                adapter_gridviewpic_upLoad.notifyDataSetChanged();
                 upLoadImage.uploadImg(pathList, 2);
-
             }
         }
 

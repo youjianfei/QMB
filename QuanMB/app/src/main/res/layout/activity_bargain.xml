@@ -227,10 +227,12 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linearlayout_caozuo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
+        android:visibility="gone"
         >
         <Button
             android:id="@+id/button_refuse"
@@ -267,6 +269,20 @@
             />
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/text_bargainstate"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textSize="15dp"
+        android:text="还价中"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/text_yellow2"
+        android:visibility="gone"
+        />
 
 
 </LinearLayout>

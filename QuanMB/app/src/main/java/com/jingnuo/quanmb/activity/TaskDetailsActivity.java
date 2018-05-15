@@ -101,7 +101,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         String msg = "";
                         try {
                             JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("status");//登录状态
+                            status = (Integer) object.get("code");//登录状态
                             msg = (String) object.get("message");//登录返回信息
                         } catch (JSONException e) {
                             e.printStackTrace();

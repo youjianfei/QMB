@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
@@ -27,6 +29,7 @@ import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
 import com.jingnuo.quanmb.class_.UpLoadImage;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
@@ -57,11 +60,8 @@ public class IssueSkillActivity extends BaseActivityother {
     EditText mEditview_skilldetail;
     EditText mEditview_name;
     EditText mEditview_phonenumber;
+    MyGridView imageGridview;
 
-
-    ImageView choosePIC1;
-    ImageView choosePIC2;
-    ImageView choosePIC3;
 
     Button mButton_submit;
 
@@ -70,7 +70,7 @@ public class IssueSkillActivity extends BaseActivityother {
     PermissionHelper permissionHelper;
     Popwindow_SkillType mPopwindow_skilltype;
     UpLoadImage upLoadImage;
-
+    Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
     //数据
     String  specialty_id ="";//专业类形
     String tittle="";//
@@ -78,6 +78,8 @@ public class IssueSkillActivity extends BaseActivityother {
     String release_address="郑州";//发布地点// TODO: 地点实现
     String detail_address="";//详细地点
     String img_id="";//图片
+    Bitmap mBitmap=null;
+    List<Bitmap> mlistdata_pic;
     String contacts="";//联系人
     String mobile_no="";//电话
     List<String> mList_picID;
@@ -96,6 +98,11 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        mlistdata_pic=new ArrayList<>();
+        Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+        mlistdata_pic.add(bitmap);
+        adapter_gridviewpic_upLoad=new Adapter_Gridviewpic_UPLoad(mlistdata_pic,this);
+        imageGridview.setAdapter(adapter_gridviewpic_upLoad);
         upLoadImage=new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -155,25 +162,17 @@ public class IssueSkillActivity extends BaseActivityother {
 
             }
         });
-        choosePIC1.setOnClickListener(new View.OnClickListener() {
+        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                PICposition=1;
-                choosePIC();//选择图片
-            }
-        });
-        choosePIC2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PICposition=2;
-                choosePIC();//选择图片
-            }
-        });
-        choosePIC3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                choosePIC();//选择图片
-                PICposition=3;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi","点击+"+position,"选择图片");
+                if(mlistdata_pic.size()-1==position){
+                    choosePIC();
+                }else {
+                    mlistdata_pic.remove(position);
+                    adapter_gridviewpic_upLoad.notifyDataSetChanged();
+                }
+
             }
         });
     }
@@ -188,10 +187,8 @@ public class IssueSkillActivity extends BaseActivityother {
         mEditview_name=findViewById(R.id.edit_skillpeoplename);
         mEditview_phonenumber=findViewById(R.id.edit_skillpeoplephone);
         mButton_submit=findViewById(R.id.button_submit);
+        imageGridview=findViewById(R.id.GridView_PIC);
 
-        choosePIC1=findViewById(R.id.iamge_choosePIC1);
-        choosePIC2=findViewById(R.id.iamge_choosePIC2);
-        choosePIC3=findViewById(R.id.iamge_choosePIC3);
     }
     boolean checknull(){
         if(mTextview_chooce.getText().equals("请选择")){
@@ -322,17 +319,8 @@ public class IssueSkillActivity extends BaseActivityother {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
                 dataPictrue.add(mBitmap);
-                switch (PICposition){
-                    case 1:
-                        choosePIC1.setImageBitmap(mBitmap);
-                        break;
-                    case 2:
-                        choosePIC2.setImageBitmap(mBitmap);
-                        break;
-                    case 3:
-                        choosePIC3.setImageBitmap(mBitmap);
-                        break;
-                }
+                mlistdata_pic.add(0,mBitmap);
+                adapter_gridviewpic_upLoad.notifyDataSetChanged();
                    upLoadImage.uploadImg(pathList,6);
 
             }

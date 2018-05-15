@@ -70,8 +70,17 @@ public class BargainMessagedetailsBean {
         private String binding_id;
         private String send_client_no;
         private String receive_client_no;
+        private String is_accept;
 
         private double response_Amount;
+
+        public String getIs_accept() {
+            return is_accept;
+        }
+
+        public void setIs_accept(String is_accept) {
+            this.is_accept = is_accept;
+        }
 
         public String getReceive_client_no() {
             return receive_client_no;

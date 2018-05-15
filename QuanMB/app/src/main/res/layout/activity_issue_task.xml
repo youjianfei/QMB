@@ -192,7 +192,16 @@
                 android:layout_below="@+id/image_line4"
                 android:layout_marginBottom="15dp"
                 />
-
+            <com.jingnuo.quanmb.customview.MyGridView
+                android:id="@+id/GridView_PIC"
+                android:layout_below="@+id/edit_detailtask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:numColumns="3"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -314,66 +323,6 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/text7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="添加照片(可不选)"
-                android:textColor="@color/black_text" />
-            <ImageView
-                android:id="@+id/image_line5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/text7"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/gray_background" />
-            <ImageView
-                android:id="@+id/iamge_choosePIC1"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:layout_below="@+id/image_line5"
-                android:layout_marginTop="10dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="10dp"
-                android:src="@mipmap/addpic"
-                android:scaleType="centerCrop"
-                />
-            <ImageView
-                android:id="@+id/iamge_choosePIC2"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:layout_below="@+id/image_line5"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:src="@mipmap/addpic"
-                android:scaleType="centerCrop"
-                />
-            <ImageView
-                android:id="@+id/iamge_choosePIC3"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:layout_below="@+id/image_line5"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/addpic"
-                android:scaleType="centerCrop"
-                />
-
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
