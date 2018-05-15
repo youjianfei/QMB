@@ -72,7 +72,7 @@ public class TaskDetailBean {
         private String task_EndDate;
         private int task_ID;
         private String task_Status_code;
-        private String task_Time;
+        private String task_hope;
         private String task_description;
         private String is_helper_bid;
         private String task_name;
@@ -225,12 +225,13 @@ public class TaskDetailBean {
             this.task_Status_code = task_Status_code;
         }
 
-        public String getTask_Time() {
-            return task_Time;
+
+        public String getTask_hope() {
+            return task_hope;
         }
 
-        public void setTask_Time(String task_Time) {
-            this.task_Time = task_Time;
+        public void setTask_hope(String task_hope) {
+            this.task_hope = task_hope;
         }
 
         public String getTask_description() {

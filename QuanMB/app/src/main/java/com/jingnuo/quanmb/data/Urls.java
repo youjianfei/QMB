@@ -11,7 +11,7 @@ public class Urls {
 //    public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
     public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
+    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
@@ -74,6 +74,10 @@ public class Urls {
 
     //消息模块
     public static String pushMessage = "messsageCon/getMessageByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
+    public static String bargainmessage="bargain/bargainMessage";//还价详情
+    public static String acceptORrefuse="bargain/bargainAccpetOrNo";//接受拒绝还价
+    public static String helpterbargain="bargain/taskBargain";//帮手还价
+    public static String kehubargain="bargain/bargainEmployer";//雇主还价
 
 
 

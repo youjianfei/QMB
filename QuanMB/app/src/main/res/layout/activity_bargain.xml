@@ -34,6 +34,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/textmessagetitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -45,6 +46,7 @@
         android:textSize="16dp" />
 
     <TextView
+        android:id="@+id/text_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -63,6 +65,7 @@
         >
 
         <TextView
+            android:id="@+id/textview_shenfen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -154,14 +157,15 @@
             android:src="@color/gray_dfdfdf" />
 
         <TextView
-            android:id="@+id/text_nowprice"
+            android:id="@+id/text_yourprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:text="当前价格：100.00"
+            android:text="你的还价："
             android:textColor="@color/black_text"
             android:layout_below="@id/line2"
+            android:visibility="gone"
             android:textSize="15dp" />
         <TextView
             android:id="@+id/text_needprice"
@@ -169,9 +173,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
-            android:text="还价价格：110.00"
+            android:text="还价价格："
             android:textColor="@color/black_text"
-            android:layout_below="@id/text_nowprice"
+            android:layout_below="@id/text_yourprice"
             android:layout_marginBottom="15dp"
             android:textSize="15dp" />
 
@@ -214,7 +218,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="给帮手还价：点击后你可以使用报价功能把能接受的最低价格告诉帮手，以便促成该任务的完成"
+            android:text="继续还价：点击后你可以使用报价功能把能接受的最低价格告诉帮手，以便促成该任务的完成"
             android:textColor="@color/text_hide_tip"
             android:layout_marginLeft="30dp"
             android:textSize="13dp"
@@ -227,9 +231,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
-
         >
         <Button
+            android:id="@+id/button_refuse"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"
@@ -239,10 +243,11 @@
             android:layout_marginLeft="30dp"
             />
         <Button
+            android:id="@+id/button_goon"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"
-            android:text="给帮手还价"
+            android:text="继续还价"
             android:layout_marginLeft="12dp"
             android:background="@drawable/button_yellow_20dp"
             android:textColor="@color/white"
@@ -250,6 +255,7 @@
             />
 
         <Button
+            android:id="@+id/button_accect"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"

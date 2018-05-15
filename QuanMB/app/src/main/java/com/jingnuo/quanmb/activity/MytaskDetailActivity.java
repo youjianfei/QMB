@@ -210,7 +210,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
 //                long ago = Long.parseLong(Utils.getTime(taskDetailBean.getData().getTask_EndDate()));//任务过期时间
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_Time());
+                mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_hope());
 
 
                 mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());

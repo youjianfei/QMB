@@ -102,7 +102,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         if (status == 1) {
                             ToastUtils.showToast(TaskDetailsActivity.this, "还价申请已发出");
                         } else {
-                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
+                            ToastUtils.showToast(TaskDetailsActivity.this, "请重新还价");
                         }
                     }
                     @Override
@@ -192,7 +192,6 @@ public class TaskDetailsActivity extends BaseActivityother {
                     startActivity(intent_login);
                     finish();
                 }
-
             }
         });
     }
@@ -232,7 +231,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 //                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
 //                long ago = Long.parseLong(Utils.getTime(mTaskData.getData().getTask_EndDate()));//任务过期时间
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_tasktime.setText(mTaskData.getData().getTask_Time());
+                mTextview_tasktime.setText(mTaskData.getData().getTask_hope());
 
                 mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());

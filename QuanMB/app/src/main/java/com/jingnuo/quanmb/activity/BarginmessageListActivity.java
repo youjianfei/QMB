@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -86,6 +87,18 @@ public class BarginmessageListActivity extends BaseActivityother {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
+
+        mList_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent_bargain=new Intent(BarginmessageListActivity.this,BargainActivity.class);
+                intent_bargain.putExtra("binding_id",mData.get(position-1).getBinding_id()+"");
+                intent_bargain.putExtra("receive_client_no",mData.get(position-1).getReceive_client_no()+"");
+                intent_bargain.putExtra("send_client_no",mData.get(position-1).getSend_client_no()+"");
+                startActivity(intent_bargain);
             }
         });
     }
