@@ -3,7 +3,9 @@ package com.jingnuo.quanmb.data;
 import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
 import com.jingnuo.quanmb.entityclass.UserBean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +33,7 @@ public class Staticdata {
 
     //发布任务需要向下一页传递map  这里偷懒把map写为全局变量
     public static Map  map_task = new HashMap();
+    public static List<List<String>> imagePathlist=new ArrayList();
     //确认帮助任务需要向下一页传入数据，把qurenbean写为全局变量
 //    public  static QueRenHelp_Bean queRenHelp_bean=null;
     //向下一页传入数据，写为全局变量

@@ -28,6 +28,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
+import com.jingnuo.quanmb.class_.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -71,6 +72,7 @@ public class IssueSkillActivity extends BaseActivityother {
     Popwindow_SkillType mPopwindow_skilltype;
     UpLoadImage upLoadImage;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
+    ProgressDlog progressDlog;
     //数据
     String  specialty_id ="";//专业类形
     String tittle="";//
@@ -82,10 +84,12 @@ public class IssueSkillActivity extends BaseActivityother {
     List<Bitmap> mlistdata_pic;
     String contacts="";//联系人
     String mobile_no="";//电话
-    List<String> mList_picID;
-    int PICposition=0;
+    List<String> mList_picID;// 上传图片返回ID;
+    List<List<String>> mList_picPath;//；本地图片path集合;
 
     int  type=0;
+    int  count=0;//图片的张数。判断调用几次上传图片接口
+
 
 
     Map map_issueSkill;
@@ -98,6 +102,7 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        mList_picPath=new ArrayList<>();
         mlistdata_pic=new ArrayList<>();
         Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         mlistdata_pic.add(bitmap);
@@ -106,19 +111,42 @@ public class IssueSkillActivity extends BaseActivityother {
         upLoadImage=new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
             public void onSuccesses(String respose) {
+                if(respose.equals("erro")){
+                    progressDlog.cancelPD();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showToast(IssueSkillActivity.this,"网络开小差儿，请重新提交");
+                        }
+                    });
+                    mList_picID.clear();
+                    return;
+                }
                 LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
                 int status = 0;
                 String msg = "";
                 String imageID="";
                 try {
                     JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("msg");//登录返回信息
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
 
                     if(status==1){
+                        count++;
                         imageID=(String) object.get("imgID");
                         LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
-                        mList_picID.add(imageID);
+                        mList_picID.add(0,imageID);
+                        if(count!=mList_picPath.size()){
+                            uploadimgagain(count);
+                        }else {
+                            for (String image : mList_picID) {
+                                img_id=img_id+image+",";
+                            }
+                            map_issueSkill.put("img_id",img_id);
+                            request(map_issueSkill);
+                            LogUtils.LOG("ceshi","上传图片完成","发布技能上传图片");
+                        }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -130,6 +158,7 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        progressDlog=new ProgressDlog(this);
         type=getIntent().getIntExtra("type",0);
         permissionHelper=new PermissionHelper(IssueSkillActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
         map_issueSkill=new HashMap();
@@ -157,7 +186,9 @@ public class IssueSkillActivity extends BaseActivityother {
             public void onClick(View view) {
                boolean Nonull= checknull();//判空方法
                 if(Nonull){
-                    request(map_issueSkill);
+                    progressDlog.showPD("正在发布，请稍等");
+                    uploadimg();//上传图片
+
                 }
 
             }
@@ -170,6 +201,7 @@ public class IssueSkillActivity extends BaseActivityother {
                     choosePIC();
                 }else {
                     mlistdata_pic.remove(position);
+                    mList_picPath.remove(position);//删除图片地址以便上传；
                     adapter_gridviewpic_upLoad.notifyDataSetChanged();
                 }
 
@@ -220,9 +252,7 @@ public class IssueSkillActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请填写手机号码");
             return false;
         }
-        for (String imageID : mList_picID) {
-            img_id=img_id+imageID+",";
-        }
+
         LogUtils.LOG("ceshi","图片ID:"+img_id,"上传图片返回拼接后");
         map_issueSkill.put("specialty_id",specialty_id);
         map_issueSkill.put("title",tittle);
@@ -235,6 +265,17 @@ public class IssueSkillActivity extends BaseActivityother {
         map_issueSkill.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_issueSkill.put("service_area","郑州");
         return true;
+    }
+    void uploadimg(){
+        if( mList_picPath.size()>=1){
+            upLoadImage.uploadImg(mList_picPath.get(0),6);
+        }else {
+            request(map_issueSkill);
+        }
+
+    }
+    void uploadimgagain(int  count){
+        upLoadImage.uploadImg(mList_picPath.get(count),6);
     }
     void request (Map map){
         String URL="";
@@ -251,15 +292,19 @@ public class IssueSkillActivity extends BaseActivityother {
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 if(status==1){
+                    progressDlog.cancelPD();
                     ToastUtils.showToast(IssueSkillActivity.this,msg);
                     finish();
                 }else {
+                    mList_picPath.clear();
+                    mList_picID.clear();
+                    progressDlog.cancelPD();
                     ToastUtils.showToast(IssueSkillActivity.this,msg);
                 }
 
@@ -267,7 +312,9 @@ public class IssueSkillActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                mList_picPath.clear();
+                mList_picID.clear();
+                progressDlog.cancelPD();
             }
         }).postHttp(URL,this,1,map);
     }
@@ -321,9 +368,9 @@ public class IssueSkillActivity extends BaseActivityother {
                 dataPictrue.add(mBitmap);
                 mlistdata_pic.add(0,mBitmap);
                 adapter_gridviewpic_upLoad.notifyDataSetChanged();
-                   upLoadImage.uploadImg(pathList,6);
 
             }
+            mList_picPath.add(0,pathList);//添加图片地址以便上传；
         }
     }
     @Override
@@ -331,6 +378,14 @@ public class IssueSkillActivity extends BaseActivityother {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (permissionHelper != null) {
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(progressDlog!=null){
+            progressDlog.cancelPD();
         }
     }
 }

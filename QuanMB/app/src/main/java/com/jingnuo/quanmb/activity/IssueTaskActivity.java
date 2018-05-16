@@ -33,6 +33,7 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.class_.Popwindow_SkillType;
 import com.jingnuo.quanmb.class_.Popwindow_complatetask;
+import com.jingnuo.quanmb.class_.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -78,7 +79,6 @@ public class IssueTaskActivity extends BaseActivityother {
     //对象
     Popwindow_SkillType mPopwindow_skilltype;
     PermissionHelper permissionHelper;
-    UpLoadImage upLoadImage;
     Popwindow_CompleteTime popwindow_completeTime;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
 
@@ -91,7 +91,6 @@ public class IssueTaskActivity extends BaseActivityother {
     String client_no = "";
     String release_address = "";
     String commission = "";
-    String img_id = "";//图片
     Bitmap mBitmap=null;
     List<Bitmap> mlistdata_pic;
     String detailed_address = "";
@@ -102,7 +101,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
     List<String> mList_picID;
     Map map_issueTask;
-
+    List<List<String>> mList_picPath;//；本地图片path集合;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_issue_task;
@@ -110,39 +109,18 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+         mList_picPath=new ArrayList<>();
         mlistdata_pic=new ArrayList<>();
         Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad=new Adapter_Gridviewpic_UPLoad(mlistdata_pic,this);
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-        upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi", respose, "发布技能上传图片返回respose");
-                int status = 0;
-                String msg = "";
-                String imageID = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("msg");//登录返回信息
-
-                    if (status == 1) {
-                        imageID = (String) object.get("imgID");
-                        LogUtils.LOG("ceshi", "单张图片ID" + imageID, "发布技能上传图片返回imageID");
-                        mList_picID.add(imageID);
-                        LogUtils.LOG("ceshi", mList_picID.size() + "tupiangeshu", "发布技能上传图片返回imageID333");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
     }
 
     @Override
     protected void initData() {
+
         permissionHelper = new PermissionHelper(IssueTaskActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
         mList_picID = new ArrayList<>();
@@ -191,6 +169,7 @@ public class IssueTaskActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (initmap()) {
+                    LogUtils.LOG("ceshi","图片地址的个数"+Staticdata.imagePathlist.size(),"发布任务图片");
                     Intent intent = new Intent(IssueTaskActivity.this, IssueTaskNextActivity.class);
                     startActivity(intent);
                 }
@@ -204,9 +183,9 @@ public class IssueTaskActivity extends BaseActivityother {
                     choosePIC();
                 }else {
                     mlistdata_pic.remove(position);
+                    mList_picPath.remove(position);//删除图片地址以便上传；
                     adapter_gridviewpic_upLoad.notifyDataSetChanged();
                 }
-
             }
         });
         mImage_choosejieshou.setOnClickListener(new View.OnClickListener() {
@@ -307,15 +286,12 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请填写详细地址");
             return false;
         }
-        LogUtils.LOG("ceshi", mList_picID.size() + ".............", "tupianOD");
-        for (String imageID : mList_picID) {
-            img_id = img_id + imageID + ",";
-        }
+
         commission = mEditview_taskmoney.getText() + "";
         if (!commission.equals("")) {
             float min = Float.parseFloat(commission);
             map_issueTask.put("is_helper_bid",   "N");//由我出价
-            LogUtils.LOG("ceshi", min + "", "sfdsfsaf");
+            LogUtils.LOG("ceshi", min + "", "最低佣金");
             if (min < 5) {
                 ToastUtils.showToast(IssueTaskActivity.this, "佣金最低为5元");
                 return false;
@@ -334,15 +310,16 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
         map_issueTask.put("release_address", "郑州");//TODO 地区
         map_issueTask.put("commission", commission + "");
-        map_issueTask.put("task_Img_id", img_id + "");
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
+        Staticdata.imagePathlist=mList_picPath;
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
 
         return true;
     }
+
 
     void choosePIC() {
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
@@ -398,8 +375,9 @@ public class IssueTaskActivity extends BaseActivityother {
 //                dataPictrue.add(mBitmap);
                 mlistdata_pic.add(0,mBitmap);
                 adapter_gridviewpic_upLoad.notifyDataSetChanged();
-                upLoadImage.uploadImg(pathList, 2);
+//                upLoadImage.uploadImg(pathList, 2);
             }
+            mList_picPath.add(0,pathList);//添加图片地址以便上传；
         }
 
     }
@@ -412,10 +390,5 @@ public class IssueTaskActivity extends BaseActivityother {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        upLoadImage = null;
-    }
 
 }

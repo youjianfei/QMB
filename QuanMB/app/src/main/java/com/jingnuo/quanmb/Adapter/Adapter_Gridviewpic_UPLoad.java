@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 
 import java.util.List;
@@ -36,9 +37,9 @@ public class Adapter_Gridviewpic_UPLoad extends BaseAdapter{
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_lookic_gridview, parent, false);
-            holder.mImageView = (ImageView) convertView.findViewById(R.id.share_picture);
-            holder.mRelativeLayout = (RelativeLayout) convertView.findViewById(R.id.REL_shareimg);
-
+            holder.mImageView =  convertView.findViewById(R.id.share_picture);
+            holder.mImageView_cancel =  convertView.findViewById(R.id.image_cancel);
+            holder.mRelativeLayout =  convertView.findViewById(R.id.REL_shareimg);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -49,6 +50,12 @@ public class Adapter_Gridviewpic_UPLoad extends BaseAdapter{
         para.height = weight;
         para.width = weight;
         holder.mImageView.setLayoutParams(para);
+        if(position==mDatas.size()-1){
+            LogUtils.LOG("ceshi","weizhi+"+position,"适配器");
+            holder.mImageView_cancel.setVisibility(View.GONE);
+        }else {
+            holder.mImageView_cancel.setVisibility(View.VISIBLE);
+        }
 
         return convertView;
     }
@@ -65,6 +72,8 @@ public class Adapter_Gridviewpic_UPLoad extends BaseAdapter{
 
     class ViewHolder {
         ImageView mImageView;
+        ImageView mImageView_cancel;
         RelativeLayout mRelativeLayout;
+
     }
 }

@@ -207,6 +207,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:background="@color/white"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:numColumns="3"/>
 
                 </RelativeLayout>

@@ -120,7 +120,6 @@ public class TaskDetailsActivity extends BaseActivityother {
             }
         });
 
-
     }
 
     @Override

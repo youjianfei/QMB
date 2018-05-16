@@ -6,6 +6,7 @@ import android.content.Context;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,7 +90,7 @@ public class UpLoadImage {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                interface_loadImage_respose.onSuccesses("erro");
                 LogUtils.LOG("ceshi","上传失败:e.getLocalizedMessage() = " + e.getLocalizedMessage(),"上传图片");
             }
 
