@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -39,6 +40,7 @@ import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
@@ -375,6 +377,14 @@ public class IssueTaskActivity extends BaseActivityother {
 //                dataPictrue.add(mBitmap);
                 mlistdata_pic.add(0,mBitmap);
                 adapter_gridviewpic_upLoad.notifyDataSetChanged();
+
+                //调用压缩图片的方法，返回压缩后的图片path
+                String src_path = path;//原图片的路径
+                String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
+                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
+                pathList.clear();
+                pathList.add(compressImage);
+
 //                upLoadImage.uploadImg(pathList, 2);
             }
             mList_picPath.add(0,pathList);//添加图片地址以便上传；
