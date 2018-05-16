@@ -101,7 +101,7 @@ public class IssueTaskActivity extends BaseActivityother {
     int isMEchujia = 1;//1  由我出价   2  由帮手出价
     boolean ceshi = true;
 
-    List<String> mList_picID;
+    List<String> mList_picID;//上传图片返回ID
     Map map_issueTask;
     List<List<String>> mList_picPath;//；本地图片path集合;
     @Override
