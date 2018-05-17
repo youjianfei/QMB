@@ -39,12 +39,23 @@
         android:background="@drawable/background_white"
         >
         <TextView
-            android:id="@+id/text_systemmessagetext"
+            android:id="@+id/text_systemmessagetitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black_text"
             android:textSize="15dp"
-            android:text="一级标题"
+            android:text="交易标题"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+        <TextView
+            android:id="@+id/text_systemmessagetext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_title2"
+            android:textSize="15dp"
+            android:text="交易提醒详情"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"

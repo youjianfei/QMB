@@ -54,7 +54,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     Button mButton_counteroffer;
 
     //数据
-    int ID = 0;//任务id;
+    String ID = "";//任务id;
     String is_counteroffer = "";
 
 
@@ -85,7 +85,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     @Override
     protected void initData() {
         Intent intend_id = getIntent();
-        ID = intend_id.getIntExtra("id", 0);
+        ID = intend_id.getStringExtra("id");
         popwindow_bargin = new Popwindow_bargin(this, new Interence_bargin() {
             @Override
             public void onResult(String result) {//还价网络请求

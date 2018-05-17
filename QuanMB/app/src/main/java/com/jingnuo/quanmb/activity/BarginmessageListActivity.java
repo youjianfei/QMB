@@ -81,12 +81,7 @@ public class BarginmessageListActivity extends BaseActivityother {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page++;
                 map_message.put("pageNo",page+"");
-            }
-        });
-        mList_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                requestBarginMessage(map_message);
             }
         });
 
@@ -132,7 +127,9 @@ public class BarginmessageListActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                if (mList_view.isRefreshing()) {
+                    mList_view.onRefreshComplete();
+                }
             }
         }).postHttp(Urls.Baseurl_hu+Urls.pushMessage,BarginmessageListActivity.this,1,map);
     }

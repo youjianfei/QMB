@@ -40,14 +40,9 @@ public class DatailAddressActivity extends BaseActivityother {
     @Override
     protected void initData() {
         mData_address=new ArrayList<>();
-        mData_address.add("常用地址：在神话故事中，女娲是创造了“人”的神，");
-        mData_address.add("我们知道布局文件可以让我们很方便的对各个UI控件进行位置安排跟属性设置");
-        mData_address.add("我们知道布局文件可以让我们很方便的对各个UI控件进行位置安排跟属性设置");
-        mData_address.add("我们知道布局文件可以让我们很方便的对各个UI控件进行位置安排跟属性设置");
-        mData_address.add("我们知道布局文件可以让我们很方便的对各个UI控件进行位置安排跟属性设置");
-        mData_address.add("我们知道布局文件可以让我们很方便的对各个UI控件进行位置安排跟属性设置");
-        mData_address.add("中华人民共和国河南省人民大会堂");
-        mData_address.add("中华人民共和国河南省人民大会堂");
+        mData_address.add("胡秀恩");
+        mData_address.add("崔文超");
+        mData_address.add("陈雷星");
         mAdapter_datilyaddress=new Adapter_DatlyAddressList(mData_address,this);
         mListview_address.setAdapter(mAdapter_datilyaddress);
     }

@@ -101,8 +101,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
                                 img_id=img_id+image+",";
                             }
                             Staticdata.map_task.put("task_Img_id",img_id);
-                            requast(Staticdata.map_task);
                             LogUtils.LOG("ceshi","上传图片完成","发布技能上传图片");
+                            requast(Staticdata.map_task);
                         }
                     }
                 } catch (JSONException e) {
@@ -198,8 +198,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("status");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
+                    status = (Integer) object.get("status");//
+                    msg = (String) object.get("message");//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -210,8 +210,10 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     Staticdata.imagePathlist.clear();
                     Staticdata.map_task.clear();
                 }else {
+                    count=0;
+                    mList_picID.clear();
                     progressDlog.cancelPD();
-                    ToastUtils.showToast(IssueTaskNextActivity.this,"发布失败");
+                    ToastUtils.showToast(IssueTaskNextActivity.this,msg);
                 }
 
             }
@@ -219,6 +221,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
             @Override
             public void onError(int error) {
                 progressDlog.cancelPD();
+                count=0;
+                mList_picID.clear();
             }
         }).postHttp(Urls.Baseurl_cui+Urls.issuetask,this,1,map);
     }
@@ -228,6 +232,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
         super.onDestroy();
         if (progressDlog!=null){
             progressDlog.cancelPD();
+            mList_picID.clear();
         }
     }
 }

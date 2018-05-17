@@ -15,10 +15,10 @@
         android:layout_marginLeft="23dp"
         />
     <TextView
-        android:id="@+id/text_phonrnumber"
+        android:id="@+id/text_sex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18539931923"
+        android:text="女"
         android:textSize="15dp"
         android:textColor="@color/black_text2"
         android:layout_marginTop="15dp"
@@ -27,16 +27,16 @@
         />
 
     <TextView
-        android:id="@+id/text_address"
+        android:id="@+id/text_phonenumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="郑州市升龙汇金广场写字楼"
+        android:text="电话号码"
         android:textSize="15dp"
         android:textColor="@color/text_title2"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="23dp"
         android:layout_marginRight="23dp"
-        android:layout_below="@+id/text_phonrnumber"
+        android:layout_below="@+id/text_sex"
         />
     <ImageView
         android:id="@+id/line1"
@@ -45,7 +45,7 @@
         android:layout_marginLeft="23dp"
         android:layout_marginRight="23dp"
         android:src="@color/gray_dfdfdf"
-        android:layout_below="@+id/text_address"
+        android:layout_below="@+id/text_phonenumber"
         android:layout_marginTop="15dp"
         />
     <ImageView

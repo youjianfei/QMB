@@ -56,7 +56,7 @@ public class SystemMessageActivity extends BaseActivityother {
         map_message=new HashMap();
         map_message.put("pageNo",page+"");
         map_message.put("type","1");
-        map_message.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+        map_message.put("receive_client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_message.put("user_token",Staticdata.static_userBean.getData().getUser_token());
         LogUtils.LOG("ceshi","系统消息内容map"+map_message,"SystemMessageActivity");
         requestSystermyMessage(map_message);

@@ -86,7 +86,7 @@ public class HelperOrderActivity extends BaseActivityother {
                             }
                             if(status==1){
                                 ToastUtils.showToast(HelperOrderActivity.this,msg);
-                                finish();
+                                request();
                             }else {
                                 ToastUtils.showToast(HelperOrderActivity.this,msg);
                             }
@@ -143,6 +143,12 @@ public class HelperOrderActivity extends BaseActivityother {
                 mTextview_taskDetail.setText(helpOrderBean.getData().getDetail().getTask_description());
                 mTextview_address.setText(helpOrderBean.getData().getDetail().getTask_description());
                 mTextview_phonenumber.setText(helpOrderBean.getData().getDetail().getMobile_no());
+                if (helpOrderBean.getData().getDetail().getOrder_status().equals("06")){
+                    mButton_queren.setEnabled(false);
+                    mButton_queren.setText("等待雇主确认");
+                }else {
+                    mButton_queren.setEnabled(true);
+                }
 
             }
 

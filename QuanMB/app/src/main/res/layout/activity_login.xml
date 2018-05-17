@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="其他登录方式"
+            android:text="微信登录"
             android:textSize="15dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
@@ -130,6 +130,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@mipmap/weixin_logo"
+            android:layout_centerInParent="true"
             />
         <ImageView
             android:id="@+id/image_qqLogin"
@@ -137,6 +138,7 @@
             android:layout_height="60dp"
             android:src="@mipmap/qq_logo"
             android:layout_centerInParent="true"
+            android:visibility="gone"
             />
         <ImageView
             android:id="@+id/image_xlLogin"
@@ -144,6 +146,7 @@
             android:layout_height="60dp"
             android:src="@mipmap/weibo_logo"
             android:layout_alignParentRight="true"
+            android:visibility="gone"
             />
 
 

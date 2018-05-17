@@ -106,7 +106,7 @@ public class MyOrderActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","点击的条目+"+i,"MyOrderActivity");
 
                 Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
-                intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id());
+                intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id()+"");
                 startActivity(intent_mytaskdetail);
             }
         });

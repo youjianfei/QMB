@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.jingnuo.quanmb.activity.BargainActivity;
 import com.jingnuo.quanmb.activity.BarginmessageListActivity;
+import com.jingnuo.quanmb.activity.DealActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
 import com.jingnuo.quanmb.quanmb.R;
 
@@ -24,6 +25,7 @@ public class Fragment_message extends Fragment {
 
     RelativeLayout mRelativelayout_bargain;
     RelativeLayout mRelativelayout_systemmessage;
+    RelativeLayout mRelativelayout_dealmessage;
 
 
 
@@ -52,10 +54,18 @@ public class Fragment_message extends Fragment {
                 getActivity().startActivity(intent_system);
             }
         });
+        mRelativelayout_dealmessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_deal=new Intent(getActivity(), DealActivity.class);
+                getActivity().startActivity(intent_deal);
+            }
+        });
     }
 
     private void initview() {
         mRelativelayout_bargain=rootview.findViewById(R.id.relativelayout_Kanprice);
         mRelativelayout_systemmessage=rootview.findViewById(R.id.relativelayout_systemnotice);
+        mRelativelayout_dealmessage=rootview.findViewById(R.id.relativelayout_Jiaoyinotice);
     }
 }

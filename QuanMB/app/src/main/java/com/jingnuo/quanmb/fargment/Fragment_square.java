@@ -148,11 +148,11 @@ public class Fragment_square extends Fragment {
                 LogUtils.LOG("ceshi", "" + i, "fragmentsquare");
                 if(Staticdata.isLogin&&mListDate_square.get(i-1).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
                     intend_taskdrtails = new Intent(getActivity(), MytaskDetailActivity.class);
-                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID());
+                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID()+"");
                     getActivity().startActivity(intend_taskdrtails);
                 }else {
                     intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
-                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID());
+                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID()+"");
                     getActivity().startActivity(intend_taskdrtails);
                 }
 

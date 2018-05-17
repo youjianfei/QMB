@@ -70,7 +70,7 @@ public class TaskDetailBean {
         private String nick_name;
         private String specialty_name;
         private String task_EndDate;
-        private int task_ID;
+        private int task_id;
         private String task_Status_code;
         private String task_hope;
         private String task_description;
@@ -209,12 +209,12 @@ public class TaskDetailBean {
             this.task_EndDate = task_EndDate;
         }
 
-        public int getTask_ID() {
-            return task_ID;
+        public int getTask_id() {
+            return task_id;
         }
 
-        public void setTask_ID(int task_ID) {
-            this.task_ID = task_ID;
+        public void setTask_id(int task_id) {
+            this.task_id = task_id;
         }
 
         public String getTask_Status_code() {

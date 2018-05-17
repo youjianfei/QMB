@@ -5,12 +5,12 @@ import android.os.Bundle;
 
 import com.jingnuo.quanmb.quanmb.R;
 
-public class BarginMessageActivity extends BaseActivityother {
+public class PayActivity extends BaseActivityother {
 
 
     @Override
     public int setLayoutResID() {
-        return R.layout.activity_bargin_message;
+        return R.layout.activity_pay;
     }
 
     @Override

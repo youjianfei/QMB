@@ -49,9 +49,10 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     Button mButton_cancle;
     Button mButton_complete;
+    Button mButton_completed;
 
     //数据
-    int ID = 0;
+    String ID = "";
     Map map_taskdetail;
 
     String image_url="";
@@ -77,7 +78,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        ID = intent.getIntExtra("id", 0);
+        ID = intent.getStringExtra("id");
         map_taskdetail = new HashMap();
         map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
@@ -131,8 +132,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
-                        "&order_no=" + taskDetailBean.getData().getOrder_no() +
-                        "&task_id=" + taskDetailBean.getData().getTask_ID(), "确认完成");
+                        "&task_id=" + taskDetailBean.getData().getTask_id(), "确认完成");
                 new Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
@@ -146,7 +146,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                             if (status == 1) {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
-                                finish();
+                                request(map_taskdetail);
                             } else {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
                             }
@@ -160,8 +160,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                     }
                 }).Http(Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
-                        "&order_no=" + taskDetailBean.getData().getOrder_no() +
-                        "&task_id=" + taskDetailBean.getData().getTask_ID(), MytaskDetailActivity.this, 0);
+                        "&task_id=" + taskDetailBean.getData().getTask_id(), MytaskDetailActivity.this, 0);
             }
         });
 
@@ -180,6 +179,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mImageview_head = findViewById(R.id.image_task);
         mButton_cancle = findViewById(R.id.button_cancle);
         mButton_complete = findViewById(R.id.button_complete);
+        mButton_completed = findViewById(R.id.button_completed);
         imageGridview=findViewById(R.id.GridView_PIC);
 
     }
@@ -215,9 +215,14 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                 if (taskDetailBean.getData().getTask_Status_code().equals("02") || taskDetailBean.getData().getTask_Status_code().equals("01") || taskDetailBean.getData().getTask_Status_code().equals("08")) {
                     mButton_cancle.setVisibility(View.VISIBLE);
+                }else {
+                    mButton_cancle.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
-                    mButton_complete.setVisibility(View.GONE);
+                    mButton_complete.setVisibility(View.VISIBLE);
+                }
+                if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
+                    mButton_completed.setVisibility(View.VISIBLE);
                 }
             }
 
