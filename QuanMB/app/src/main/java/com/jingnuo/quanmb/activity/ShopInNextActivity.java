@@ -26,7 +26,7 @@ public class ShopInNextActivity extends BaseActivityother {
     protected void initData() {
         //添加头部3个步骤的图片
         ImageView imageview_shopin=new ImageView(this);
-        imageview_shopin.setBackgroundResource(R.mipmap.shopin_3);
+        imageview_shopin.setBackgroundResource(R.mipmap.shopin_2);
         LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*0.27));
         imageview_shopin.setLayoutParams(mLayoutparams);
         mLineatlayout_addview.addView(imageview_shopin);

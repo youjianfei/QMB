@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class Staticdata {
     public static String UUID = "";
+    public static String JpushID="";
 
     //登陆时候Rsa加密的公钥
     public static String PUBLIC_KEY_STR = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXtNyajfT+Z1+p4wLQXIzlbiSJUXG8lhS9ZeCjDHXclZa6G2xUWvliVXSPc8gAuWC1yz1OibXwspGq48kzqPoyqlNr37uBBjUArquKD/ky0BaADOeD+eHy7jnkXdshSUZAdYpIYEKuM3y+/9qSI+qkJZV/Z8xHKDLUIXYToL/AWwIDAQAB";
@@ -38,8 +39,5 @@ public class Staticdata {
 //    public  static QueRenHelp_Bean queRenHelp_bean=null;
     //向下一页传入数据，写为全局变量
     public  static Map map_wechat=new HashMap();
-
-
-
 
 }

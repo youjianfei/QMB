@@ -3,6 +3,7 @@ package com.jingnuo.quanmb;
 import android.app.Application;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.Config;
@@ -29,8 +30,9 @@ public class App extends Application {
          */
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-       String jjjj= JPushInterface.getRegistrationID(getApplicationContext());
-        LogUtils.LOG("ceshi",jjjj,"app");
+       String jpushid= JPushInterface.getRegistrationID(getApplicationContext());
+        LogUtils.LOG("ceshi",jpushid,"app");
+        Staticdata.JpushID=jpushid;
 
     }
     {
@@ -38,4 +40,6 @@ public class App extends Application {
         PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834","http://www.sina.com.cn/");
         PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
     }
+
+
 }

@@ -28,6 +28,7 @@ import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
@@ -38,10 +39,12 @@ import com.jingnuo.quanmb.class_.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -54,6 +57,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.http.Url;
 
 import static com.jingnuo.quanmb.data.Staticdata.map_task;
 
@@ -171,9 +176,41 @@ public class IssueTaskActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (initmap()) {
-                    LogUtils.LOG("ceshi","图片地址的个数"+Staticdata.imagePathlist.size(),"发布任务图片");
-                    Intent intent = new Intent(IssueTaskActivity.this, IssueTaskNextActivity.class);
-                    startActivity(intent);
+                    Map map_check=new HashMap();
+                    map_check.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                    map_check.put("task_name",map_issueTask.get("task_name"));
+                    map_check.put("task_description",map_issueTask.get("task_description"));
+                    map_check.put("detailed_address",map_issueTask.get("detailed_address"));
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            int status = 0;
+                            String msg = "";
+                            boolean data;
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//
+                                msg = (String) object.get("msg");//
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            if(status==1){
+                                Staticdata.map_task.put("check",1+"");
+                                LogUtils.LOG("ceshi","图片地址的个数"+Staticdata.imagePathlist.size(),"发布任务图片");
+                                Intent intent = new Intent(IssueTaskActivity.this, IssueTaskNextActivity.class);
+                                startActivity(intent);
+                            }else {
+                                ToastUtils.showToast(IssueTaskActivity.this,msg);
+                            }
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).postHttp(Urls.Baseurl_cui+Urls.checkissuetask,IssueTaskActivity.this,1,map_check);
+
                 }
             }
         });
@@ -274,9 +311,9 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }
-
-        if (task_StartDate.equals("请选择任务完成期限")) {
-            ToastUtils.showToast(this, "请选择任务完成期限");
+        task_time=mTextview_time.gett
+        if (task_time.equals("请选择希望完成时间")) {
+            ToastUtils.showToast(this, "请选择希望完成时间");
             return false;
         }
         task_time = mTextview_time.getTag() + "";

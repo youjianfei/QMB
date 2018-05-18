@@ -40,25 +40,27 @@ public class BargainActivity extends BaseActivityother {
     TextView mTextview_money;
     TextView mTextview_yourmoney;
     TextView mTextview_mymoney;
-    CircleImageView  mImageview;
+    CircleImageView mImageview;
     Button mButton_accept;
     Button mButton_goon;
     Button mButton_refuse;
 
     LinearLayout mLinearlayout_caozuo;
-    TextView  mTextview_bargainstate;
-
+    TextView mTextview_bargainstate;
 
 
     //数据
-    String binding_id="";
-    String receive_client_no="";
-    String send_client_no="";
+    String binding_id = "";
+    String receive_client_no = "";
+    String send_client_no = "";
+
+    String content="";
 
     Map map_bargainmessagedetail;
     BargainMessagedetailsBean bargainMessagedetailsBean;
 
     Popwindow_bargin popwindow_bargin;
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_bargain;
@@ -66,30 +68,30 @@ public class BargainActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        popwindow_bargin=new Popwindow_bargin(BargainActivity.this, new Interence_bargin() {
+        popwindow_bargin = new Popwindow_bargin(BargainActivity.this, new Interence_bargin() {
             @Override
             public void onResult(String result) {
-                String  URL_bargain="";
-                Map map_goonbargain=new HashMap();
-                if(bargainMessagedetailsBean.getData().getMark().equals("2")){
-                    URL_bargain=Urls.Baseurl_cui+Urls.kehubargain;
-                    map_goonbargain.put("binding_id",bargainMessagedetailsBean.getData().getBinding_id());
-                    map_goonbargain.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map_goonbargain.put("counteroffer_Amount",result);
-                    map_goonbargain.put("send_client_no",bargainMessagedetailsBean.getData().getSend_client_no());
-                }else {
-                    URL_bargain=Urls.Baseurl_cui+Urls.helpterbargain;
-                    map_goonbargain.put("binding_id",bargainMessagedetailsBean.getData().getBinding_id());
-                    map_goonbargain.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map_goonbargain.put("task_id",bargainMessagedetailsBean.getData().getTask_id()+"");
-                    map_goonbargain.put("counteroffer_Amount",result+"");
+                String URL_bargain = "";
+                Map map_goonbargain = new HashMap();
+                if (bargainMessagedetailsBean.getData().getMark().equals("2")) {
+                    URL_bargain = Urls.Baseurl_cui + Urls.kehubargain;
+                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
+                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                    map_goonbargain.put("counteroffer_Amount", result);
+                    map_goonbargain.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
+                } else {
+                    URL_bargain = Urls.Baseurl_cui + Urls.helpterbargain;
+                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
+                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                    map_goonbargain.put("task_id", bargainMessagedetailsBean.getData().getTask_id() + "");
+                    map_goonbargain.put("counteroffer_Amount", result + "");
                 }
-                LogUtils.LOG("ceshi","map+"+map_goonbargain,"继续还价");
-                LogUtils.LOG("ceshi",URL_bargain,"继续还价");
-                new  Volley_Utils(new Interface_volley_respose() {
+                LogUtils.LOG("ceshi", "map+" + map_goonbargain, "继续还价");
+                LogUtils.LOG("ceshi", URL_bargain, "继续还价");
+                new Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"继续还价");
+                        LogUtils.LOG("ceshi", respose, "继续还价");
                         int status = 0;
                         String msg = "";
                         try {
@@ -99,11 +101,11 @@ public class BargainActivity extends BaseActivityother {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        if(status==1){
-                            ToastUtils.showToast(BargainActivity.this,msg);
+                        if (status == 1) {
+                            ToastUtils.showToast(BargainActivity.this, msg);
                             requestBargainmessage(map_bargainmessagedetail);//刷新状态
-                        }else {
-                            ToastUtils.showToast(BargainActivity.this,msg);
+                        } else {
+                            ToastUtils.showToast(BargainActivity.this, msg);
                         }
                     }
 
@@ -111,7 +113,7 @@ public class BargainActivity extends BaseActivityother {
                     public void onError(int error) {
 
                     }
-                }).postHttp(URL_bargain,BargainActivity.this,1,map_goonbargain);
+                }).postHttp(URL_bargain, BargainActivity.this, 1, map_goonbargain);
 
             }
         });
@@ -119,16 +121,17 @@ public class BargainActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        map_bargainmessagedetail=new HashMap();
-        Intent intent=getIntent();
-        binding_id=intent.getStringExtra("binding_id");
-        receive_client_no=intent.getStringExtra("receive_client_no");
-        send_client_no=intent.getStringExtra("send_client_no");
-        map_bargainmessagedetail.put("binding_id",binding_id+"");
-        map_bargainmessagedetail.put("receive_client_no",receive_client_no);
-        map_bargainmessagedetail.put("send_client_no",send_client_no);
+        map_bargainmessagedetail = new HashMap();
+        Intent intent = getIntent();
+        binding_id = intent.getStringExtra("binding_id");
+        receive_client_no = intent.getStringExtra("receive_client_no");
+        send_client_no = intent.getStringExtra("send_client_no");
+        content = intent.getStringExtra("content");
+        map_bargainmessagedetail.put("binding_id", binding_id + "");
+        map_bargainmessagedetail.put("receive_client_no", receive_client_no);
+        map_bargainmessagedetail.put("send_client_no", send_client_no);
         map_bargainmessagedetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-        LogUtils.LOG("ceshi","map+"+map_bargainmessagedetail,"还价消息详情");
+        LogUtils.LOG("ceshi", "map+" + map_bargainmessagedetail, "还价消息详情");
         requestBargainmessage(map_bargainmessagedetail);
 
     }
@@ -142,46 +145,46 @@ public class BargainActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mTextview_message=findViewById(R.id.textmessagetitle);
-        mTextview_time=findViewById(R.id.text_time);
-        mTextview_1=findViewById(R.id.textview_shenfen);
-        mTextview_name=findViewById(R.id.text_name);
-        mTextview_taskstatename=findViewById(R.id.text_tasktype);
-        mTextview_tasktitle=findViewById(R.id.text_taskname);
-        mTextview_money=findViewById(R.id.taskprice);
-        mTextview_yourmoney=findViewById(R.id.text_yourprice);
-        mTextview_mymoney=findViewById(R.id.text_needprice);
-        mImageview=findViewById(R.id.image_type);
-        mButton_accept=findViewById(R.id.button_accect);
-        mButton_goon=findViewById(R.id.button_goon);
-        mButton_refuse=findViewById(R.id.button_refuse);
-        mLinearlayout_caozuo=findViewById(R.id.linearlayout_caozuo);
-        mTextview_bargainstate=findViewById(R.id.text_bargainstate);
+        mTextview_message = findViewById(R.id.textmessagetitle);
+        mTextview_time = findViewById(R.id.text_time);
+        mTextview_1 = findViewById(R.id.textview_shenfen);
+        mTextview_name = findViewById(R.id.text_name);
+        mTextview_taskstatename = findViewById(R.id.text_tasktype);
+        mTextview_tasktitle = findViewById(R.id.text_taskname);
+        mTextview_money = findViewById(R.id.taskprice);
+        mTextview_yourmoney = findViewById(R.id.text_yourprice);
+        mTextview_mymoney = findViewById(R.id.text_needprice);
+        mImageview = findViewById(R.id.image_type);
+        mButton_accept = findViewById(R.id.button_accect);
+        mButton_goon = findViewById(R.id.button_goon);
+        mButton_refuse = findViewById(R.id.button_refuse);
+        mLinearlayout_caozuo = findViewById(R.id.linearlayout_caozuo);
+        mTextview_bargainstate = findViewById(R.id.text_bargainstate);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_accect://接受还价
-                Map map_accept=new HashMap();
-                map_accept.put("id",bargainMessagedetailsBean.getData().getTask_id()+"");
-                map_accept.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                map_accept.put("is_accept","1");
-                map_accept.put("binding_id",binding_id+"");
-                map_accept.put("mark",bargainMessagedetailsBean.getData().getMark()+"");
-                map_accept.put("send_client_no",bargainMessagedetailsBean.getData().getSend_client_no());
-                map_accept.put("counteroffer_Amount",bargainMessagedetailsBean.getData().getCounteroffer_Amount()+"");
-                if(bargainMessagedetailsBean.getData().getHelper_no()!=null){
-                    map_accept.put("helper_no",bargainMessagedetailsBean.getData().getHelper_no());
-                }else {
-                    map_accept.put("business_no",bargainMessagedetailsBean.getData().getBusiness_no());
+                Map map_accept = new HashMap();
+                map_accept.put("id", bargainMessagedetailsBean.getData().getTask_id() + "");
+                map_accept.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                map_accept.put("is_accept", "1");
+                map_accept.put("binding_id", binding_id + "");
+                map_accept.put("mark", bargainMessagedetailsBean.getData().getMark() + "");
+                map_accept.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
+                map_accept.put("counteroffer_Amount", bargainMessagedetailsBean.getData().getCounteroffer_Amount() + "");
+                if (bargainMessagedetailsBean.getData().getHelper_no() != null) {
+                    map_accept.put("helper_no", bargainMessagedetailsBean.getData().getHelper_no());
+                } else {
+                    map_accept.put("business_no", bargainMessagedetailsBean.getData().getBusiness_no());
                 }
-                LogUtils.LOG("ceshi",map_accept.toString(),"接受还价map");
-                new  Volley_Utils(new Interface_volley_respose() {
+                LogUtils.LOG("ceshi", map_accept.toString(), "接受还价map");
+                new Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"接受还价");
+                        LogUtils.LOG("ceshi", respose, "接受还价");
                         int status = 0;
                         String msg = "";
                         try {
@@ -191,11 +194,11 @@ public class BargainActivity extends BaseActivityother {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        if(status==1){
-                            ToastUtils.showToast(BargainActivity.this,msg);
+                        if (status == 1) {
+                            ToastUtils.showToast(BargainActivity.this, msg);
                             requestBargainmessage(map_bargainmessagedetail);//刷新状态
-                        }else {
-                            ToastUtils.showToast(BargainActivity.this,msg);
+                        } else {
+                            ToastUtils.showToast(BargainActivity.this, msg);
                         }
                     }
 
@@ -203,7 +206,7 @@ public class BargainActivity extends BaseActivityother {
                     public void onError(int error) {
 
                     }
-                }).postHttp(Urls.Baseurl_cui+Urls.acceptORrefuse,BargainActivity.this,1,map_accept);
+                }).postHttp(Urls.Baseurl_cui + Urls.acceptORrefuse, BargainActivity.this, 1, map_accept);
 
 
                 break;
@@ -213,24 +216,24 @@ public class BargainActivity extends BaseActivityother {
 
                 break;
             case R.id.button_refuse://拒觉还价
-                Map map_refuse=new HashMap();
-                map_refuse.put("id",bargainMessagedetailsBean.getData().getTask_id()+"");
-                map_refuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                map_refuse.put("is_accept","0");
-                map_refuse.put("binding_id",binding_id+"");
-                map_refuse.put("mark",bargainMessagedetailsBean.getData().getMark()+"");
-                map_refuse.put("send_client_no",bargainMessagedetailsBean.getData().getSend_client_no());
-                map_refuse.put("counteroffer_Amount",bargainMessagedetailsBean.getData().getCounteroffer_Amount()+"");
-                if(bargainMessagedetailsBean.getData().getHelper_no()!=null){
-                    map_refuse.put("helper_no",bargainMessagedetailsBean.getData().getHelper_no());
-                }else {
-                    map_refuse.put("business_no",bargainMessagedetailsBean.getData().getBusiness_no());
+                Map map_refuse = new HashMap();
+                map_refuse.put("id", bargainMessagedetailsBean.getData().getTask_id() + "");
+                map_refuse.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                map_refuse.put("is_accept", "0");
+                map_refuse.put("binding_id", binding_id + "");
+                map_refuse.put("mark", bargainMessagedetailsBean.getData().getMark() + "");
+                map_refuse.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
+                map_refuse.put("counteroffer_Amount", bargainMessagedetailsBean.getData().getCounteroffer_Amount() + "");
+                if (bargainMessagedetailsBean.getData().getHelper_no() != null) {
+                    map_refuse.put("helper_no", bargainMessagedetailsBean.getData().getHelper_no());
+                } else {
+                    map_refuse.put("business_no", bargainMessagedetailsBean.getData().getBusiness_no());
                 }
-                LogUtils.LOG("ceshi",map_refuse.toString(),"拒接还价map");
-                new  Volley_Utils(new Interface_volley_respose() {
+                LogUtils.LOG("ceshi", map_refuse.toString(), "拒接还价map");
+                new Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"拒绝还价");
+                        LogUtils.LOG("ceshi", respose, "拒绝还价");
                         int status = 0;
                         String msg = "";
                         try {
@@ -240,12 +243,12 @@ public class BargainActivity extends BaseActivityother {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        if(status==1){
+                        if (status == 1) {
                             requestBargainmessage(map_bargainmessagedetail);//刷新状态
 
-                            ToastUtils.showToast(BargainActivity.this,msg);
-                        }else {
-                            ToastUtils.showToast(BargainActivity.this,msg);
+                            ToastUtils.showToast(BargainActivity.this, msg);
+                        } else {
+                            ToastUtils.showToast(BargainActivity.this, msg);
                         }
                     }
 
@@ -253,17 +256,18 @@ public class BargainActivity extends BaseActivityother {
                     public void onError(int error) {
 
                     }
-                }).postHttp(Urls.Baseurl_cui+Urls.acceptORrefuse,BargainActivity.this,1,map_refuse);
+                }).postHttp(Urls.Baseurl_cui + Urls.acceptORrefuse, BargainActivity.this, 1, map_refuse);
 
                 break;
         }
     }
 
-    void  requestBargainmessage(Map map){
+    void requestBargainmessage(Map map) {
+        LogUtils.LOG("ceshi","还价消息详情网址+"+Urls.Baseurl_cui + Urls.bargainmessage,"还价消息详情");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose,"还价消息详情");
+                LogUtils.LOG("ceshi", respose, "还价消息详情");
                 int status = 0;
                 String msg = "";
                 try {
@@ -273,39 +277,69 @@ public class BargainActivity extends BaseActivityother {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(status==1){
-                    bargainMessagedetailsBean=new Gson().fromJson(respose,BargainMessagedetailsBean.class);
+                if (status == 1) {
+                    bargainMessagedetailsBean = new Gson().fromJson(respose, BargainMessagedetailsBean.class);
                     //判断  is_accept  是否操作过
-                    if(bargainMessagedetailsBean.getData().getIs_accept()==null||bargainMessagedetailsBean.getData().getIs_accept().equals("")){
+                    if (bargainMessagedetailsBean.getData().getIs_accept() == null || bargainMessagedetailsBean.getData().getIs_accept().equals("")) {
                         mLinearlayout_caozuo.setVisibility(View.VISIBLE);
                         mTextview_bargainstate.setVisibility(View.GONE);
-                    }else if(bargainMessagedetailsBean.getData().getIs_accept().equals("0")){
+                    }
+//                    else if (bargainMessagedetailsBean.getData().getIs_accept().equals("0") && bargainMessagedetailsBean.getData().getMark().equals("1")) {
+//                        mLinearlayout_caozuo.setVisibility(View.GONE);
+//                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+//                        mTextview_bargainstate.setText("被拒绝");
+//                        mTextview_message.setText("你的还价被雇主拒绝了！");
+//                    }
+                    else if (bargainMessagedetailsBean.getData().getIs_accept().equals("0") && bargainMessagedetailsBean.getData().getMark().equals("2")) {
                         mLinearlayout_caozuo.setVisibility(View.GONE);
                         mTextview_bargainstate.setVisibility(View.VISIBLE);
-                        mTextview_bargainstate.setText("被拒绝");
-                    }else if(bargainMessagedetailsBean.getData().getIs_accept().equals("1")){
+                        mTextview_bargainstate.setText("已拒绝");
+                        mTextview_message.setText("你拒绝了帮手的还价！");
+                    }
+//                    else if (bargainMessagedetailsBean.getData().getIs_accept().equals("1") && bargainMessagedetailsBean.getData().getMark().equals("1")) {
+//                        mLinearlayout_caozuo.setVisibility(View.GONE);
+//                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+//                        mTextview_bargainstate.setText("已接受");
+//                        mTextview_message.setText("雇主接受了还价！");
+//                    }
+                    else if (bargainMessagedetailsBean.getData().getIs_accept().equals("1") && bargainMessagedetailsBean.getData().getMark().equals("2")) {
                         mLinearlayout_caozuo.setVisibility(View.GONE);
                         mTextview_bargainstate.setVisibility(View.VISIBLE);
                         mTextview_bargainstate.setText("已接受");
-                    }else if(bargainMessagedetailsBean.getData().getIs_accept().equals("2")){
+                        mTextview_message.setText("你接受了帮手的还价！");
+                    } else if (bargainMessagedetailsBean.getData().getIs_accept().equals("2") && bargainMessagedetailsBean.getData().getMark().equals("1")) {
                         mLinearlayout_caozuo.setVisibility(View.GONE);
                         mTextview_bargainstate.setVisibility(View.VISIBLE);
                         mTextview_bargainstate.setText("还价中");
+                        mTextview_message.setText("该任务被雇主还价了！");
+                    } else if (bargainMessagedetailsBean.getData().getIs_accept().equals("2") && bargainMessagedetailsBean.getData().getMark().equals("2")) {
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+                        mTextview_bargainstate.setText("还价中");
+                        mTextview_message.setText("你发布的任务被帮手还价了！");
                     }
 
-                    if(bargainMessagedetailsBean.getData().getMark().equals("1")){
-                        mTextview_message.setText("被雇主还价了！");
+                    //由于mark问题  帮手被拒绝改为下面判断
+                    if(content.contains("拒绝")){
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.VISIBLE);
+                        mTextview_bargainstate.setText("被拒绝");
+                        mTextview_message.setText("你的还价被雇主拒绝了！");
+                    }
+
+
+
+                    if (bargainMessagedetailsBean.getData().getMark().equals("1")) {
                         mTextview_1.setText("还价雇主");
                         mTextview_yourmoney.setVisibility(View.GONE);
                         mButton_refuse.setVisibility(View.GONE);
 
-                    }else {
-                        mTextview_message.setText("你发布的任务被帮手还价了！");
+                    } else {
                         mTextview_1.setText("还价帮手");
-                        LogUtils.LOG("ceshi",bargainMessagedetailsBean.getData().getResponse_Amount()+"","sdafsadf");
-                        if(bargainMessagedetailsBean.getData().getResponse_Amount()!=0.0){
+                        LogUtils.LOG("ceshi", bargainMessagedetailsBean.getData().getResponse_Amount() + "", "sdafsadf");
+                        if (bargainMessagedetailsBean.getData().getResponse_Amount() != 0.0) {
                             mTextview_yourmoney.setVisibility(View.VISIBLE);
-                            mTextview_yourmoney.setText("你的还价："+bargainMessagedetailsBean.getData().getResponse_Amount()+"元");
+                            mTextview_yourmoney.setText("你的还价：" + bargainMessagedetailsBean.getData().getResponse_Amount() + "元");
                         }
 
                     }
@@ -313,14 +347,14 @@ public class BargainActivity extends BaseActivityother {
                     mTextview_name.setText(bargainMessagedetailsBean.getData().getName());
                     mTextview_taskstatename.setText(bargainMessagedetailsBean.getData().getSpecialty_name());
                     mTextview_tasktitle.setText(bargainMessagedetailsBean.getData().getTask_name());
-                    if(bargainMessagedetailsBean.getData().getIs_helper_bid().equals("N")){
-                        mTextview_money.setText(bargainMessagedetailsBean.getData().getCommission()+"");
-                    }else {
+                    if (bargainMessagedetailsBean.getData().getIs_helper_bid().equals("N")) {
+                        mTextview_money.setText(bargainMessagedetailsBean.getData().getCommission() + "元");
+                    } else {
                         mTextview_money.setText("帮手出价");
                     }
 
-                    mTextview_mymoney.setText("还价价格："+bargainMessagedetailsBean.getData().getCounteroffer_Amount()+"元");
-                    String URL_imagehead=bargainMessagedetailsBean.getData().getAvatar_imgUrl().substring(0,bargainMessagedetailsBean.getData().getAvatar_imgUrl().length()-1);
+                    mTextview_mymoney.setText("还价价格：" + bargainMessagedetailsBean.getData().getCounteroffer_Amount() + "元");
+                    String URL_imagehead = bargainMessagedetailsBean.getData().getAvatar_imgUrl().substring(0, bargainMessagedetailsBean.getData().getAvatar_imgUrl().length() - 1);
                     Glide.with(BargainActivity.this).load(bargainMessagedetailsBean.getData().getAvatar_imgUrl()).load(URL_imagehead).into(mImageview);
 
                 }
@@ -331,6 +365,6 @@ public class BargainActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).postHttp(Urls.Baseurl_cui+Urls.bargainmessage,BargainActivity.this,1,map);
+        }).postHttp(Urls.Baseurl_cui + Urls.bargainmessage, BargainActivity.this, 1, map);
     }
 }

@@ -105,6 +105,17 @@ public class IssueTaskNextActivity extends BaseActivityother {
                             requast(Staticdata.map_task);
                         }
                     }
+                    else {
+                        progressDlog.cancelPD();
+                        mList_picID.clear();
+                        final String finalMsg = msg;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.showToast(IssueTaskNextActivity.this, finalMsg);
+                            }
+                        });
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
@@ -20,13 +21,20 @@ import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
+import com.jingnuo.quanmb.activity.ShopInNextActivity;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.Map;
@@ -135,7 +143,10 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
                     intent_shopcenter.putExtra("type",1);//1  帮手
                     getActivity().startActivity(intent_shopcenter);
-                }else {//申请帮手界面
+                }else if(Staticdata.static_userBean.getData().getHelper_status()==2) {//即时帮手也是商户
+                    ToastUtils.showToast(getContext(),"你已经是商户啦！");
+                }
+                else {//申请帮手界面
                     Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
                     getActivity().startActivity(intent_anthentication);
                 }
@@ -153,16 +164,56 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 getActivity().startActivity(intent_personInfo);
                 break;
             case  R.id.textview_shopcenter://1  商户  0  不是商户
-                if(Staticdata.static_userBean.getData().getBusiness_status()==1){
-                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-                    intent_shopcenter.putExtra("type",2);//2  商户
-                    getActivity().startActivity(intent_shopcenter);
+                LogUtils.LOG("ceshi",Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),"检测商户审核状态接口");
+                new Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        LogUtils.LOG("ceshi",respose,"检测商户审核状态");
+                        int status = 0;
+                        String msg = "";
+                        String state = "";
+                        try {
+                            JSONObject object = new JSONObject(respose);
+                            status = (Integer) object.get("code");//
+                            msg = (String) object.get("message");//
+                            state = (String) object.get("status");//
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (state.equals("00")){//审核通过
+                            Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                            intent_shopcenter.putExtra("type",2);//2  商户
+                            getActivity().startActivity(intent_shopcenter);
+                        }else if(state.equals("01")){//没提交
+                            Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                            getActivity().startActivity(intent_shopin);
 
-                }else {//申请商户界面
-                    Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-                    getActivity().startActivity(intent_shopin);
-                }
+                        }else if(state.equals("02")){//正在审核
+                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
+                            getActivity().startActivity(intent_shopinext);
 
+
+                        }else if(state.equals("03")){//没提交审核
+                            Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                            getActivity().startActivity(intent_shopin);
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(int error) {
+
+                    }
+                }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
+//                if(Staticdata.static_userBean.getData().getBusiness_status()==1){
+//                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+//                    intent_shopcenter.putExtra("type",2);//2  商户
+//                    getActivity().startActivity(intent_shopcenter);
+//
+//                }else {//申请商户界面
+//                    Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+//                    getActivity().startActivity(intent_shopin);
+//                }
                 break;
             case R.id.text_myorder:
                 Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);

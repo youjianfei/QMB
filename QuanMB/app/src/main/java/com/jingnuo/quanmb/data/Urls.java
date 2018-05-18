@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
 //    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
         public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
 
@@ -45,6 +45,7 @@ public class Urls {
     public static String applycompletetask = "order/requestOk?user_token=";//申请任务完成
     public static String completetask = "order/affirmOk?user_token=";//确认任务完成
     public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布任务
+    public static String checkissuetask = "task/querySpecialty/checkAnnouncementList";//检验任务内容是否有违规
 
     //专业/商家模块
     public static String Skillmenu_one = "major/searchOne";//找专业一级菜单
@@ -54,6 +55,8 @@ public class Urls {
 
     //商户
     public static String shopIn = "business/commitApply";//商家入驻审核    post
+    public static String shopIn_state = "business/queryBusinessStatus?user_token=";//商家入驻审核状态
+
     public static String shopcenter = "business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
     public static String  shoporder= "business/queryBusinessOrder?user_token=";//商家接收的任务
     public static String  shoporderdetail= "business/queryOrderDetail?user_token=";//商家接收的任务详情

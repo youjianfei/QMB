@@ -110,6 +110,7 @@ public class Fragment_acountLogin extends Fragment {
                     map_login = new HashMap();
                     Userphonenumber=account;//将电话号设为全局变量
                     map_login.put("username", account);
+                    map_login.put("Jpush_id", Staticdata.JpushID);
                     map_login.put("password", publicEncryptedResult);
                     map_login.put("uuid", UUID);
                     //登陆成功后 设置全局变量islogin为 true

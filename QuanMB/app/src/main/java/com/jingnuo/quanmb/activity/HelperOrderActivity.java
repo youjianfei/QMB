@@ -88,13 +88,14 @@ public class HelperOrderActivity extends BaseActivityother {
                                 ToastUtils.showToast(HelperOrderActivity.this,msg);
                                 request();
                             }else {
+                                request();
                                 ToastUtils.showToast(HelperOrderActivity.this,msg);
                             }
                         }
 
                         @Override
                         public void onError(int error) {
-
+                            request();
                         }
                     }).Http(Urls.Baseurl_cui+Urls.applycompletetask+Staticdata.static_userBean.getData().getUser_token()+
                             "&order_no="+helpOrderBean.getData().getDetail().getOrder_no()+
@@ -126,6 +127,7 @@ public class HelperOrderActivity extends BaseActivityother {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                mButton_queren.setEnabled(true);
                 LogUtils.LOG("ceshi","帮手订单+"+respose,"帮手订单网址");
                 helpOrderBean=new Gson().fromJson(respose,HelpOrderBean.class);
                 Glide.with(HelperOrderActivity.this).load(helpOrderBean.getData().getDetail().getHeadUrl()).into(mImageview_head);
@@ -146,7 +148,14 @@ public class HelperOrderActivity extends BaseActivityother {
                 if (helpOrderBean.getData().getDetail().getOrder_status().equals("06")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("等待雇主确认");
-                }else {
+                }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("00")){
+                    mButton_queren.setEnabled(false);
+                    mButton_queren.setText("已完成");
+                }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("02")){
+                    mButton_queren.setEnabled(false);
+                    mButton_queren.setText(helpOrderBean.getData().getDetail().getOrder_status_name());
+                }
+                else {
                     mButton_queren.setEnabled(true);
                 }
 
@@ -154,7 +163,7 @@ public class HelperOrderActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                request();
             }
         }).Http(URL,HelperOrderActivity.this,0);
     }

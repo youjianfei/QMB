@@ -29,6 +29,7 @@ import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
+    public static MainActivity mainActivity;
     //布局
     Fragment_square mFragment_square;
     Fragment_still mFragment_stilll;
@@ -40,6 +41,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //控件
     private RelativeLayout mRelativeLayout_square, mRelativeLayout_still, mRelativeLayout_message, mRelativeLayout_person;
     ImageView mImage_release;
+    ImageView image_reddot;
+
 
 
     //百度地图相关
@@ -114,9 +117,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mRelativeLayout_message = findViewById(R.id.relative_message);
         mRelativeLayout_person = findViewById(R.id.relative_person);
         mImage_release = findViewById(R.id.image_release);
+        image_reddot = findViewById(R.id.image_reddot);
     }
 
     public void initdata() {
+        mainActivity=this;
         mLocationClient.start();//百度地图获取当前位置经纬度
         mFragment_square = new Fragment_square();
         fragmetnmanager = getSupportFragmentManager();
@@ -141,7 +146,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     }
+    public void setREDDOT(boolean isshow) {
+        if(isshow){
+            image_reddot.setVisibility(View.VISIBLE);
+        }else {
+            image_reddot.setVisibility(View.GONE);
+        }
 
+
+    }
 
     @Override
     public void onClick(View view) {
@@ -189,6 +202,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.relative_message:
                 StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 if (isLogin) {
+                    setREDDOT(false);
                     ChangeBottomButton(mRelativeLayout_message);
                     if (mFragment_menssage == null) {
                         mFragment_menssage = new Fragment_message();

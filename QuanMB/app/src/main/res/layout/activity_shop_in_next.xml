@@ -39,25 +39,25 @@
         android:visibility="visible"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:text="恭喜您"
-        android:textColor="@color/yellow_jianbian_end"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="25dp"-->
+        <!--android:text="恭喜您"-->
+        <!--android:textColor="@color/yellow_jianbian_end"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="已成功认证成为商家用户"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/text_hide_tip"
-        />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="20dp"-->
+        <!--android:text="已成功认证成为商家用户"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:textColor="@color/text_hide_tip"-->
+        <!--/>-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -129,6 +129,7 @@ public class RegisterActivity extends BaseActivityother {
                 Userphonenumber=phonenumber;//将电话号设为全局变量
                 map_login.put("username", phonenumber);
                 map_login.put("password", passwordMM);
+                map_login.put("Jpush_id", Staticdata.JpushID);
                 map_login.put("uuid", UUID);
 
                 request_regist(map_register);

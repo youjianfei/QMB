@@ -220,9 +220,11 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
                     mButton_complete.setVisibility(View.VISIBLE);
+                    mButton_completed.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
                     mButton_completed.setVisibility(View.VISIBLE);
+                    mButton_complete.setVisibility(View.GONE);
                 }
             }
 

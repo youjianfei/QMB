@@ -153,6 +153,7 @@ public class Fragment_phone_login extends Fragment {
                     map.put("ValidateCode", yangzhengma);
                     map.put("phoneNumbers", phonenumber);
                     map.put("uuid", Staticdata.UUID);
+                    map.put("Jpush_id", Staticdata.JpushID);
                     loginrequest(map);
 
 

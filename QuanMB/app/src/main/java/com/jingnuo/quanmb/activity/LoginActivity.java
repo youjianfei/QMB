@@ -188,6 +188,7 @@ public class LoginActivity extends BaseActivityother {
                     Staticdata.map_wechat.put("unionid",map.get("unionid"));
                     Staticdata.map_wechat.put("uuid",Staticdata.UUID);
                     Staticdata.map_wechat.put("nick_name",map.get("name"));
+                    Staticdata.map_wechat.put("Jpush_id", Staticdata.JpushID);
                      if (map.get("gender").equals("男")){
                          Staticdata.map_wechat.put("sex","0");
                      }else {

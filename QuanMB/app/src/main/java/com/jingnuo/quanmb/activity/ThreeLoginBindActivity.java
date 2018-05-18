@@ -146,6 +146,8 @@ public class ThreeLoginBindActivity extends BaseActivityother {
         map_bind.put("sex",Staticdata.map_wechat.get("sex"));
         map_bind.put("unionid",Staticdata.map_wechat.get("unionid"));
         map_bind.put("uuid",Staticdata.UUID);
+        map_bind.put("Jpush_id", Staticdata.JpushID);
+
         return  true;
 
     }

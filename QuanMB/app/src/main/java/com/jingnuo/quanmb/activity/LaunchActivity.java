@@ -81,6 +81,7 @@ public class LaunchActivity extends BaseActivityother {
             Userphonenumber=phonenumber;//将电话号设为全局变量
             map_autoLogind.put("username", phonenumber);
             map_autoLogind.put("password", publicEncryptedResult);
+            map_autoLogind.put("Jpush_id", Staticdata.JpushID);
             map_autoLogind.put("uuid", UUID);
             //登陆成功后 设置全局变量islogin为 true
             request(map_autoLogind);

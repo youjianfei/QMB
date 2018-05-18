@@ -93,6 +93,7 @@ public class BarginmessageListActivity extends BaseActivityother {
                 intent_bargain.putExtra("binding_id",mData.get(position-1).getBinding_id()+"");
                 intent_bargain.putExtra("receive_client_no",mData.get(position-1).getReceive_client_no()+"");
                 intent_bargain.putExtra("send_client_no",mData.get(position-1).getSend_client_no()+"");
+                intent_bargain.putExtra("content",mData.get(position-1).getContent()+"");
                 startActivity(intent_bargain);
             }
         });
