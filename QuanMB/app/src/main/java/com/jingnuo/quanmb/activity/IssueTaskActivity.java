@@ -99,16 +99,17 @@ public class IssueTaskActivity extends BaseActivityother {
     String release_address = "";
     String commission = "";
     Bitmap mBitmap=null;
-    List<Bitmap> mlistdata_pic;
+
     String detailed_address = "";
     String task_Status_code = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
     int isMEchujia = 1;//1  由我出价   2  由帮手出价
     boolean ceshi = true;
-
-    List<String> mList_picID;//上传图片返回ID
+    int  PIC_mix=3;//选择图片得张数
+    List<Bitmap> mlistdata_pic;//展示得 选择得图片得bitmap
+    List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
     Map map_issueTask;
-    List<List<String>> mList_picPath;//；本地图片path集合;
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_issue_task;
@@ -116,8 +117,8 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-         mList_picPath=new ArrayList<>();
-        mlistdata_pic=new ArrayList<>();
+        mlistdata_pic=new ArrayList<Bitmap>();//展示得 选择得图片得bitmap
+        mList_PicPath_down=new ArrayList<>();
         Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad=new Adapter_Gridviewpic_UPLoad(mlistdata_pic,this);
@@ -130,7 +131,6 @@ public class IssueTaskActivity extends BaseActivityother {
 
         permissionHelper = new PermissionHelper(IssueTaskActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-        mList_picID = new ArrayList<>();
         //完成任务期限  弹窗
         popwindow_completeTime = new Popwindow_CompleteTime(IssueTaskActivity.this, new Interence_complteTask_time() {
             @Override
@@ -176,6 +176,10 @@ public class IssueTaskActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (initmap()) {
+
+                    Staticdata.imagePathlist=mList_PicPath_down;
+
+
                     Map map_check=new HashMap();
                     map_check.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_check.put("task_name",map_issueTask.get("task_name"));
@@ -222,7 +226,8 @@ public class IssueTaskActivity extends BaseActivityother {
                     choosePIC();
                 }else {
                     mlistdata_pic.remove(position);
-                    mList_picPath.remove(position);//删除图片地址以便上传；
+                    mList_PicPath_down.remove(position);//删除图片地址以便上传；
+                    PIC_mix=3-mList_PicPath_down.size();
                     adapter_gridviewpic_upLoad.notifyDataSetChanged();
                 }
             }
@@ -311,7 +316,7 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }
-        task_time=mTextview_time.gett
+        task_time=mTextview_time.getText()+"";
         if (task_time.equals("请选择希望完成时间")) {
             ToastUtils.showToast(this, "请选择希望完成时间");
             return false;
@@ -352,7 +357,7 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
-        Staticdata.imagePathlist=mList_picPath;
+
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
 
@@ -380,8 +385,13 @@ public class IssueTaskActivity extends BaseActivityother {
                             .titleSubmitTextColor(getResources().getColor(R.color.white))
                             // 标题颜色 （默认白色）
                             .titleTextColor(getResources().getColor(R.color.white))
-                            // 开启单选   （默认为多选）
-                            .singleSelect()
+//                            // 开启单选   （默认为多选）
+//                            .singleSelect()
+                            // 开启多选   （默认为多选）
+                            .mutiSelect()
+                            // 多选时的最大数量   （默认 9 张）
+                            //这里只允许上传3张
+                            .mutiSelectMaxSize(PIC_mix)
                             .showCamera()
                             // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
                             .filePath("/ImageSelector/Pictures")
@@ -407,24 +417,25 @@ public class IssueTaskActivity extends BaseActivityother {
 
             // Get Image Path List
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+
 //            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
             for (String path : pathList) {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                  mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
 //                dataPictrue.add(mBitmap);
                 mlistdata_pic.add(0,mBitmap);
-                adapter_gridviewpic_upLoad.notifyDataSetChanged();
+//                upLoadImage.uploadImg(pathList, 2);
 
                 //调用压缩图片的方法，返回压缩后的图片path
                 String src_path = path;//原图片的路径
                 String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
                 final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
-                pathList.clear();
-                pathList.add(compressImage);
-
-//                upLoadImage.uploadImg(pathList, 2);
+                List<String> mList_picpath=new ArrayList<>();
+                mList_picpath.add(compressImage);
+                mList_PicPath_down.add(0,mList_picpath);
             }
-            mList_picPath.add(0,pathList);//添加图片地址以便上传；
+            PIC_mix=3-mList_PicPath_down.size();
+            adapter_gridviewpic_upLoad.notifyDataSetChanged();
         }
 
     }

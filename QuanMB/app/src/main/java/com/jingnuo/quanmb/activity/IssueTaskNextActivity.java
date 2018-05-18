@@ -166,7 +166,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
             }
         });
 
-
     }
 
     @Override
@@ -210,7 +209,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("status");//
-                    msg = (String) object.get("message");//
+                    msg = (String) object.get("msg");//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
