@@ -46,6 +46,8 @@ public class SkillDetailActivity extends BaseActivityother {
     TextView mTextview_shopname;
     LinearLayout mLinearlayout_phonenumber;
     MyGridView imageGridview;
+    ImageView mImageView_Suggest;
+
 
 
     //对象
@@ -99,7 +101,7 @@ public class SkillDetailActivity extends BaseActivityother {
         mTextview_shopname=findViewById(R.id.text_shopname);
         mLinearlayout_phonenumber=findViewById(R.id.linearlayout_phonenumber);
         imageGridview=findViewById(R.id.GridView_PIC);
-
+        mImageView_Suggest=findViewById(R.id.image_complain);
 
     }
     @Override
@@ -115,6 +117,13 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mImageView_Suggest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_suggest=new Intent(SkillDetailActivity.this,SuggestActivity.class);
+                startActivity(intent_suggest);
+            }
+        });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
