@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.data;
 
+import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
 import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
 import com.jingnuo.quanmb.entityclass.UserBean;
 
@@ -39,5 +40,10 @@ public class Staticdata {
 //    public  static QueRenHelp_Bean queRenHelp_bean=null;
     //向下一页传入数据，写为全局变量
     public  static Map map_wechat=new HashMap();
+
+    //广场弹窗得选择框记录功能，这里写为静态变量
+    public  static List<PopwindowGridBean.FilterBean> mData_filter_task=new ArrayList<>();
+
+
 
 }

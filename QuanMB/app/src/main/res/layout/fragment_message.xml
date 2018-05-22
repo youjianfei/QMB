@@ -56,6 +56,9 @@
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/image_1"
             android:text="暂时没有系统消息"
+            android:lines="1"
+
+            android:layout_marginRight="20dp"
             android:textColor="@color/text_hide_tip"
             android:textSize="15dp"
 
@@ -101,9 +104,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_2"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/image_2"
             android:text="暂时没有新消息"
+            android:lines="1"
+
             android:textColor="@color/text_hide_tip"
             android:textSize="15dp"
 
@@ -147,8 +153,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_3"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/image_3"
+            android:lines="1"
             android:text="暂无交易"
             android:textColor="@color/text_hide_tip"
             android:textSize="15dp" />

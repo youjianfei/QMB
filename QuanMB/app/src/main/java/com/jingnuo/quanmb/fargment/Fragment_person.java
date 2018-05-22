@@ -37,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
+import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -139,6 +140,10 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.textview_bangshou:
+
+
+
+
                 if(Staticdata.static_userBean.getData().getHelper_status()==1){
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
                     intent_shopcenter.putExtra("type",1);//1  帮手
@@ -147,8 +152,53 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                     ToastUtils.showToast(getContext(),"你已经是商户啦！");
                 }
                 else {//申请帮手界面
-                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
-                    getActivity().startActivity(intent_anthentication);
+//                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
+//                    getActivity().startActivity(intent_anthentication);
+                    Map map=new HashMap();
+                    map.put("user_token",Staticdata.token);
+                    map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi",respose,"帮手审核状态");
+                            int status = 0;
+                            String msg = "";
+                            String state = "";
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//
+                                msg = (String) object.get("msg");//
+                                state = (String) object.get("status");//
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            if (state.equals("2")){//审核通过
+                                Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                                intent_shopcenter.putExtra("type",1);//2  商户
+                                getActivity().startActivity(intent_shopcenter);
+                            }else if(status==0){//没提交
+                                Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
+                                getActivity().startActivity(intent_shopin);
+
+                            }else if(state.equals("1")){//正在审核
+                                Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
+                                getActivity().startActivity(intent_shopinext);
+
+
+                            }else if(state.equals("3")){//审核失败
+                                Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
+                                getActivity().startActivity(intent_shopin);
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).postHttp(Urls.Baseurl_hu+Urls.helpIn_state,getActivity(),1,map);
+                    LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.helpIn_state,"帮手审核状态");
+                    LogUtils.LOG("ceshi",map.toString(),"帮手审核状态map");
                 }
                 break;
             case R.id.textview_address:

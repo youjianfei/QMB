@@ -26,7 +26,7 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
         }
         LogUtils.LOG("ceshi","接收的广播+"+title,"极光广播接收器");
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-
+        LogUtils.LOG("ceshi","接收的广播+"+extras,"极光广播接收器");
         if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
 
             Intent mainIntent = new Intent(context, MainActivity.class);

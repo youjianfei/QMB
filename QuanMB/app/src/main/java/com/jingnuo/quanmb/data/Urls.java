@@ -6,13 +6,13 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-        public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+//        public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -69,6 +69,7 @@ public class Urls {
 
     //帮手模块
     public static String authenticationHelper = "helper/helperReal";//帮手认证
+    public static String helpIn_state = "helper/getHelperAuditState";//帮手认证审核状态
     public static String helperInfo = "helper/queryHelperInfo?user_token=";//帮手信息
     public static String  helporder= "helper/queryHelperOrder?user_token=";//帮手接收的任务
     public static String  helporderdetail= "helper/queryOrderDetail?user_token=";//商家接收的任务详情
@@ -78,7 +79,11 @@ public class Urls {
 
 
     //消息模块
+
     public static String pushMessage = "messsageCon/getMessageByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
+    public static String getNewmessage = "messsageCon/getUserNewsByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
+
+
     public static String bargainmessage="bargain/bargainMessage";//还价详情
     public static String acceptORrefuse="bargain/bargainAccpetOrNo";//接受拒绝还价
     public static String helpterbargain="bargain/taskBargain";//帮手还价

@@ -84,11 +84,14 @@ public class IssueSkillActivity extends BaseActivityother {
     String detail_address="";//详细地点
     String img_id="";//图片
     Bitmap mBitmap=null;
-    List<Bitmap> mlistdata_pic;
+
     String contacts="";//联系人
     String mobile_no="";//电话
+    List<Bitmap> mlistdata_pic;//展示得 选择得图片得bitmap
     List<String> mList_picID;// 上传图片返回ID;
-    List<List<String>> mList_picPath;//；本地图片path集合;
+    List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
+
+    int  PIC_mix=3;//选择图片得张数
 
     int  type=0;
     int  count=0;//图片的张数。判断调用几次上传图片接口
@@ -105,7 +108,7 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        mList_picPath=new ArrayList<>();
+        mList_PicPath_down=new ArrayList<>();
         mlistdata_pic=new ArrayList<>();
         Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         mlistdata_pic.add(bitmap);
@@ -139,7 +142,7 @@ public class IssueSkillActivity extends BaseActivityother {
                         imageID=(String) object.get("imgID");
                         LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
                         mList_picID.add(0,imageID);
-                        if(count!=mList_picPath.size()){
+                        if(count!=mList_PicPath_down.size()){
                             uploadimgagain(count);
                         }else {
                             for (String image : mList_picID) {
@@ -149,6 +152,17 @@ public class IssueSkillActivity extends BaseActivityother {
                             request(map_issueSkill);
                             LogUtils.LOG("ceshi","上传图片完成","发布技能上传图片");
                         }
+
+                    }else {
+                        progressDlog.cancelPD();
+                        mList_picID.clear();
+                        final String finalMsg = msg;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.showToast(IssueSkillActivity.this, finalMsg);
+                            }
+                        });
 
                     }
                 } catch (JSONException e) {
@@ -204,8 +218,9 @@ public class IssueSkillActivity extends BaseActivityother {
                     choosePIC();
                 }else {
                     mlistdata_pic.remove(position);
-                    mList_picPath.remove(position);//删除图片地址以便上传；
+                    mList_PicPath_down.remove(position);//删除图片地址以便上传；
                     adapter_gridviewpic_upLoad.notifyDataSetChanged();
+                    PIC_mix=3-mList_PicPath_down.size();
                 }
 
             }
@@ -270,15 +285,15 @@ public class IssueSkillActivity extends BaseActivityother {
         return true;
     }
     void uploadimg(){
-        if( mList_picPath.size()>=1){
-            upLoadImage.uploadImg(mList_picPath.get(0),6);
+        if( mList_PicPath_down.size()>=1){
+            upLoadImage.uploadImg(mList_PicPath_down.get(0),6);
         }else {
             request(map_issueSkill);
         }
 
     }
     void uploadimgagain(int  count){
-        upLoadImage.uploadImg(mList_picPath.get(count),6);
+        upLoadImage.uploadImg(mList_PicPath_down.get(count),6);
     }
     void request (Map map){
         String URL="";
@@ -305,7 +320,7 @@ public class IssueSkillActivity extends BaseActivityother {
                     ToastUtils.showToast(IssueSkillActivity.this,msg);
                     finish();
                 }else {
-                    mList_picPath.clear();
+                    mList_PicPath_down.clear();
                     mList_picID.clear();
                     progressDlog.cancelPD();
                     ToastUtils.showToast(IssueSkillActivity.this,msg);
@@ -315,7 +330,7 @@ public class IssueSkillActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-                mList_picPath.clear();
+                mList_PicPath_down.clear();
                 mList_picID.clear();
                 progressDlog.cancelPD();
             }
@@ -343,7 +358,12 @@ public class IssueSkillActivity extends BaseActivityother {
                             // 标题颜色 （默认白色）
                             .titleTextColor(getResources().getColor(R.color.white))
                             // 开启单选   （默认为多选）
-                            .singleSelect()
+//                            .singleSelect()
+                            // 开启多选   （默认为多选）
+                            .mutiSelect()
+                            // 多选时的最大数量   （默认 9 张）
+                            //这里只允许上传3张
+                            .mutiSelectMaxSize(PIC_mix)
                             .showCamera()
                             // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
                             .filePath("/ImageSelector/Pictures")
@@ -369,19 +389,18 @@ public class IssueSkillActivity extends BaseActivityother {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
                 dataPictrue.add(mBitmap);
-
+                mlistdata_pic.add(0,mBitmap);
                 //调用压缩图片的方法，返回压缩后的图片path
                 String src_path = path;//原图片的路径
                 String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
                 final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
-                pathList.clear();
-                pathList.add(compressImage);
-
-                mlistdata_pic.add(0,mBitmap);
-                adapter_gridviewpic_upLoad.notifyDataSetChanged();
+                List<String> mList_picpath=new ArrayList<>();
+                mList_picpath.add(compressImage);
+                mList_PicPath_down.add(0,mList_picpath);
 
             }
-            mList_picPath.add(0,pathList);//添加图片地址以便上传；
+            PIC_mix=3-mList_PicPath_down.size();
+            adapter_gridviewpic_upLoad.notifyDataSetChanged();
         }
     }
     @Override

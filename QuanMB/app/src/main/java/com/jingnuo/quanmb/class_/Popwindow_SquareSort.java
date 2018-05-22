@@ -22,6 +22,7 @@ import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
 import com.jingnuo.quanmb.entityclass.Spuare_sortBean;
@@ -45,11 +46,11 @@ public class Popwindow_SquareSort {
     private Activity activity;
     private InterfacePopwindow_square_sort mInterface;
     private RelativeLayout mLinearLayout;//用于定位 popwindow弹出的位置
-    private int type=0;
+    private int type = 0;
     PopupWindow mPopupWindow;
     View mInclude_sort;
     View mInclude_filter;
-    TextView mText_sort_title,mText_filter_title;
+    TextView mText_sort_title, mText_filter_title;
 
 
     //sort_pop用到的布局 数据
@@ -66,23 +67,22 @@ public class Popwindow_SquareSort {
     FilterAdapter mAdapter_filter_level;
     MyGridView mGridview_filter_task;
     List<TaskTypeBean.DateBean.ListBean> listdata_tasktype;//接口返回的任务类型列表
-    List<PopwindowGridBean.FilterBean> mData_filter_task;
 //    List<PopwindowGridBean.FilterBean> mData_filter_level;
 
     TextView mText_filter_left, mText_filter_right;
     RangeSeekBar mSeekBar;
-    Button mButton_chongzhi,mButton_complete;
+    Button mButton_chongzhi, mButton_complete;
 
-    String TYpe="";//多个选择类型拼接
-    int Min=0;int Max=1000;
+    String TYpe = "";//多个选择类型拼接
+    int Min = 0;
+    int Max = 1000;
 
 
-
-    public Popwindow_SquareSort(Activity activity, InterfacePopwindow_square_sort mInterface, RelativeLayout mLinearLayout,int type) {
+    public Popwindow_SquareSort(Activity activity, InterfacePopwindow_square_sort mInterface, RelativeLayout mLinearLayout, int type) {
         this.activity = activity;
         this.mInterface = mInterface;
         this.mLinearLayout = mLinearLayout;
-        this.type=type;
+        this.type = type;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -101,14 +101,15 @@ public class Popwindow_SquareSort {
         request_taskType();
         request_taskSort();
     }
+
     //请求智能排序list
     private void request_taskSort() {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                if(new Gson().fromJson(respose,Spuare_sortBean.class).getData().getList()!=null){
+                if (new Gson().fromJson(respose, Spuare_sortBean.class).getData().getList() != null) {
                     mData_sort.clear();
-                    mData_sort.addAll(new Gson().fromJson(respose,Spuare_sortBean.class).getData().getList());
+                    mData_sort.addAll(new Gson().fromJson(respose, Spuare_sortBean.class).getData().getList());
                     mAdapterSort.notifyDataSetChanged();
                 }
 
@@ -118,7 +119,7 @@ public class Popwindow_SquareSort {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui+Urls.tasksort,activity,0);
+        }).Http(Urls.Baseurl_cui + Urls.tasksort, activity, 0);
 
     }
 
@@ -128,14 +129,17 @@ public class Popwindow_SquareSort {
             @Override
             public void onSuccesses(String respose) {
                 listdata_tasktype.clear();
-                listdata_tasktype.addAll(new Gson().fromJson(respose,TaskTypeBean.class).getDate().getList());
-                for(int i=0;i<listdata_tasktype.size();i++){
-                    PopwindowGridBean.FilterBean  bean=new PopwindowGridBean.FilterBean();
-                    bean.setChoose(false);
-                    bean.setId(listdata_tasktype.get(i).getSpecialty_id());
-                    bean.setText(listdata_tasktype.get(i).getSpecialty_name());
-                    mData_filter_task.add(bean);
+                listdata_tasktype.addAll(new Gson().fromJson(respose, TaskTypeBean.class).getDate().getList());
+                if(Staticdata. mData_filter_task.size()!=listdata_tasktype.size()){
+                    for (int i = 0; i < listdata_tasktype.size(); i++) {
+                        PopwindowGridBean.FilterBean bean = new PopwindowGridBean.FilterBean();
+                        bean.setChoose(false);
+                        bean.setId(listdata_tasktype.get(i).getSpecialty_id());
+                        bean.setText(listdata_tasktype.get(i).getSpecialty_name());
+                        Staticdata. mData_filter_task.add(bean);
+                    }
                 }
+
                 mAdapter_filter_task.notifyDataSetChanged();
             }
 
@@ -143,7 +147,7 @@ public class Popwindow_SquareSort {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui+Urls.tasktype,activity,0);
+        }).Http(Urls.Baseurl_cui + Urls.tasktype, activity, 0);
     }
 
     private void initlistenner() {
@@ -151,11 +155,11 @@ public class Popwindow_SquareSort {
         mText_filter_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LogUtils.LOG("ceshi","type="+type,"pop");
-                if(type==0){
+                LogUtils.LOG("ceshi", "type=" + type, "pop");
+                if (type == 0) {
                     mPopupWindow.dismiss();
-                }else {
-                    type=0;
+                } else {
+                    type = 0;
                     mInclude_filter.setVisibility(View.VISIBLE);
                     mInclude_sort.setVisibility(View.GONE);
                 }
@@ -165,12 +169,12 @@ public class Popwindow_SquareSort {
         mText_sort_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LogUtils.LOG("ceshi","type="+type,"pop");
+                LogUtils.LOG("ceshi", "type=" + type, "pop");
 
-                if(type==1){
+                if (type == 1) {
                     mPopupWindow.dismiss();
-                }else {
-                    type=1;
+                } else {
+                    type = 1;
                     mInclude_filter.setVisibility(View.GONE);
                     mInclude_sort.setVisibility(View.VISIBLE);
                 }
@@ -190,7 +194,7 @@ public class Popwindow_SquareSort {
         mListview_pop_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mInterface.onSuccesses(mData_sort.get(i).getName(),mData_sort.get(i).getCode());
+                mInterface.onSuccesses(mData_sort.get(i).getName(), mData_sort.get(i).getCode());
                 mPopupWindow.dismiss();
 
             }
@@ -204,11 +208,11 @@ public class Popwindow_SquareSort {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                ToastUtils.showToast(activity,mData_filter_task.get(i).getText());
-                LogUtils.LOG("ceshi",mData_filter_task.get(i).getText(),"pop");
-                if(mData_filter_task.get(i).isChoose()){
-                    mData_filter_task.get(i).setChoose(false);
-                }else {
-                    mData_filter_task.get(i).setChoose(true);
+                LogUtils.LOG("ceshi",Staticdata. mData_filter_task.get(i).getText(), "pop");
+                if (Staticdata.mData_filter_task.get(i).isChoose()) {
+                    Staticdata.mData_filter_task.get(i).setChoose(false);
+                } else {
+                    Staticdata.mData_filter_task.get(i).setChoose(true);
                 }
                 mAdapter_filter_task.notifyDataSetChanged();
 
@@ -219,14 +223,19 @@ public class Popwindow_SquareSort {
         mSeekBar.setOnRangeChangedListener(new RangeSeekBar.OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float min, float max, boolean isFromUser) {
-                LogUtils.LOG("ceshi","min:"+min+"max:"+max+"isFromuser"+isFromUser,"popwinsow_filter");
+                LogUtils.LOG("ceshi", "min:" + min + "max:" + max + "isFromuser" + isFromUser, "popwinsow_filter");
                 if (isFromUser) {
-                    mText_filter_left.setText("￥  "+df.format(min));
-                    mText_filter_right.setText("￥  "+df.format(max));
+                    mText_filter_left.setText("￥  " + df.format(min));
+                    if(max==1000){
+                        mText_filter_right.setText("￥  " + df.format(max)+"+");
+                    }else {
+                        mText_filter_right.setText("￥  " + df.format(max));
+                    }
+
                     mSeekBar.setLeftProgressDescription(df.format(min));
                     mSeekBar.setRightProgressDescription(df.format(max));
-                    Max= (int) max;
-                    Min= (int) min;
+                    Max = (int) max;
+                    Min = (int) min;
                 }
             }
 
@@ -258,32 +267,51 @@ public class Popwindow_SquareSort {
         mButton_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TYpe="";
-                for(int i=0;i<mData_filter_task.size();i++){
-                    if(mData_filter_task.get(i).isChoose()){
-                        TYpe=TYpe+mData_filter_task.get(i).getId()+",";
+                TYpe = "";
+                for (int i = 0; i < Staticdata.mData_filter_task.size(); i++) {
+                    if (Staticdata.mData_filter_task.get(i).isChoose()) {
+                        TYpe = TYpe + Staticdata.mData_filter_task.get(i).getId() + ",";
                     }
                 }
-                LogUtils.LOG("ceshi","条件拼接"+TYpe,"任务条件筛选");
-                mInterface.onSuccesses(TYpe,Min+"%"+Max);
+                LogUtils.LOG("ceshi", "条件拼接" + TYpe, "任务条件筛选");
+                mInterface.onSuccesses(TYpe, Min + "%" + Max);
                 mPopupWindow.dismiss();
+            }
+        });
+        mButton_chongzhi.setOnClickListener(new View.OnClickListener() {//重置按钮点击事件
+            @Override
+            public void onClick(View v) {
+                //重置任务类型
+                for (int i = 0; i < Staticdata.mData_filter_task.size(); i++) {
+                    Staticdata.mData_filter_task.get(i).setChoose(false);
+                }
+                mAdapter_filter_task.notifyDataSetChanged();
+
+
+                //重置价格区间
+                mSeekBar.setValue(0, 1000);//设置初始值
+                Max = (int) 0;
+                Min = (int) 1000;
+                mText_filter_left.setText("￥  " + df.format(0));
+                mText_filter_right.setText("￥  " + df.format(1000)+"+");
+
             }
         });
 
     }
 
     public void initview() {
-        mInclude_sort=conView.findViewById(R.id.include_sort);
-        mInclude_filter=conView.findViewById(R.id.include_filter);
-        if(type==0){
+        mInclude_sort = conView.findViewById(R.id.include_sort);
+        mInclude_filter = conView.findViewById(R.id.include_filter);
+        if (type == 0) {
             mInclude_filter.setVisibility(View.VISIBLE);
             mInclude_sort.setVisibility(View.GONE);
-        }else {
+        } else {
             mInclude_filter.setVisibility(View.GONE);
             mInclude_sort.setVisibility(View.VISIBLE);
         }
-        mText_sort_title=conView.findViewById(R.id.text_sort_title);
-        mText_filter_title=conView.findViewById(R.id.text_filter_title);
+        mText_sort_title = conView.findViewById(R.id.text_sort_title);
+        mText_filter_title = conView.findViewById(R.id.text_filter_title);
         //sort_pop用到的布局 数据
         mImage_black = conView.findViewById(R.id.iamgeview_a);
         mListview_pop_sort = conView.findViewById(R.id.list_sort);
@@ -295,8 +323,8 @@ public class Popwindow_SquareSort {
         mText_filter_left = conView.findViewById(R.id.textview_filter_left);
         mText_filter_right = conView.findViewById(R.id.textview_filter_right);
         mSeekBar = conView.findViewById(R.id.seekbar);
-        mButton_chongzhi=conView.findViewById(R.id.button_chongzhi);
-        mButton_complete=conView.findViewById(R.id.button_complte);
+        mButton_chongzhi = conView.findViewById(R.id.button_chongzhi);
+        mButton_complete = conView.findViewById(R.id.button_complte);
     }
 
     public void initdata() {
@@ -306,13 +334,12 @@ public class Popwindow_SquareSort {
         mListview_pop_sort.setAdapter(mAdapterSort);
 
         //filter_pop用到的布局和数据
-        listdata_tasktype=new ArrayList<>();
-        mData_filter_task = new ArrayList<>();
+        listdata_tasktype = new ArrayList<>();
 
-        mSeekBar.setRange(0,1000);//设置范围
-        mSeekBar.setValue(0,1000);//设置初始值
-        mText_filter_right.setText("￥  1000");
-        mAdapter_filter_task = new FilterAdapter(mData_filter_task, activity);
+        mSeekBar.setRange(0, 1000);//设置范围
+        mSeekBar.setValue(0, 1000);//设置初始值
+        mText_filter_right.setText("￥  1000+");
+        mAdapter_filter_task = new FilterAdapter(Staticdata.mData_filter_task, activity);
         mGridview_filter_task.setAdapter(mAdapter_filter_task);
 
 //        mData_filter_level=new ArrayList<>();
@@ -348,7 +375,7 @@ public class Popwindow_SquareSort {
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.item_listview_pop_square_sort, null, false);
-                holder.mTextview =  convertView.findViewById(R.id.text_sort);
+                holder.mTextview = convertView.findViewById(R.id.text_sort);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -388,7 +415,7 @@ public class Popwindow_SquareSort {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-                holder.mTextview.setSelected(mData_grid.get(position).isChoose());
+            holder.mTextview.setSelected(mData_grid.get(position).isChoose());
             holder.mTextview.setText(mData_grid.get(position).getText());
 
             return convertView;
