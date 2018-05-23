@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.entityclass.BargainMessageListBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.Utils;
 
 import org.w3c.dom.Text;
 
@@ -46,7 +47,12 @@ public class Adapter_BarginmessageList extends BaseAdapter{
         }
         hoder.mTextview_title.setText(mData.get(position).getTitle());
         hoder.mTextview_content.setText(mData.get(position).getContent());
-        hoder.mTextview_time.setText(mData.get(position).getCreateDate());
+
+        long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+        long ago = Long.parseLong(Utils.getTime(mData.get(position).getCreateDate()));//
+        String time = Utils.getDistanceTime2(ago, now);//算出的差值
+        hoder.mTextview_time.setText(time);
+
         Glide.with(mContext).load(mData.get(position).getImg_url()).into(hoder.mImageview_head);
         return convertView;
     }

@@ -55,7 +55,7 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
-            tools:node="replace"></service>
+            tools:node="replace" />
 
         <receiver
             android:name="com.jingnuo.quanmb.broadcastrReceiver.JpushBroadcastRecricer"
@@ -119,7 +119,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.MySkillActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.DealActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PayActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SuggestActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SuggestActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.OrderThinkActivity"></activity>
     </application>
 
 </manifest>
