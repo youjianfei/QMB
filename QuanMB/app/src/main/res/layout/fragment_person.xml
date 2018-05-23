@@ -248,6 +248,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/relative_mycollect"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/relative_myreceiveTask"
@@ -260,15 +261,16 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30dp"
-                    android:src="@mipmap/aboutus" />
+                    android:src="@mipmap/xingxingblue" />
 
                 <TextView
+                    android:id="@+id/textview_colllect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/image_3"
-                    android:text="关于我们"
+                    android:text="我的收藏"
                     android:textColor="@color/black_text"
                     android:textSize="15dp" />
                 <ImageView
@@ -285,6 +287,31 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="22dp"
                     android:layout_toRightOf="@+id/iamge_33"
+                    android:src="@mipmap/aboutus" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/image_333"
+                    android:text="关于我们"
+                    android:textColor="@color/black_text"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relative_mycollect"
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
+                <ImageView
+                    android:id="@+id/image_3331"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
                     android:src="@mipmap/logout" />
 
                 <TextView
@@ -293,13 +320,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@+id/image_333"
+                    android:layout_toRightOf="@+id/image_3331"
                     android:text="退出登录"
                     android:textColor="@color/black_text"
                     android:textSize="15dp" />
             </RelativeLayout>
-
-
 
 
         </RelativeLayout>

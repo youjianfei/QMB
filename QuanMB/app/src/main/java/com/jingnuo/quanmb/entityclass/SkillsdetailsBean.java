@@ -95,11 +95,20 @@ public class SkillsdetailsBean {
             private int release_specialty_id;
             private String service_area;
             private int specialty_id;
+            private int collection_status;
             private String specialty_name;
             private String status;
             private String title;
             private long updateDate;
             private String updateName;
+
+            public int getCollection_status() {
+                return collection_status;
+            }
+
+            public void setCollection_status(int collection_status) {
+                this.collection_status = collection_status;
+            }
 
             public String getBusiness_name() {
                 return business_name;

@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MyOrderActivity;
+import com.jingnuo.quanmb.activity.MySkillCollectActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
@@ -58,6 +59,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     TextView mTextview_nickname;
     TextView mTextview_chengwei;
     TextView mTextview_myorder;
+    TextView mTextview_mycollect;
 
 
     TextView mTextview_logout;
@@ -86,9 +88,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_shopcenter.setOnClickListener(this);
         mTextview_logout.setOnClickListener(this);
         mTextview_myorder.setOnClickListener(this);
+        mTextview_mycollect.setOnClickListener(this);
     }
 
     private void setdata() {
+
     }
 
     private void initdata() {
@@ -134,15 +138,17 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_chengwei=rootview.findViewById(R.id.textview_phonenumber);
         mTextview_myorder=rootview.findViewById(R.id.text_myorder);
         mTextview_logout=rootview.findViewById(R.id.textview_logout);
+        mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.textview_colllect:
+                Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
+                startActivity(intent_collect);
+                break;
             case R.id.textview_bangshou:
-
-
-
 
                 if(Staticdata.static_userBean.getData().getHelper_status()==1){
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);

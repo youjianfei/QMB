@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
 //    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
         public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
 
@@ -52,6 +52,11 @@ public class Urls {
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
+
+
+    public static String setColltctSkill = "user/myCollection";//收藏、取消收藏接口
+
+
 
     //商户
     public static String shopIn = "business/commitApply";//商家入驻审核    post

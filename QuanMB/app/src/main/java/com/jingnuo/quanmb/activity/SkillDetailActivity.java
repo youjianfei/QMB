@@ -21,16 +21,23 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_lookpic;
 import com.jingnuo.quanmb.customview.MyGridView;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillsdetailsBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class SkillDetailActivity extends BaseActivityother {
@@ -45,8 +52,10 @@ public class SkillDetailActivity extends BaseActivityother {
     TextView mTextview_content;
     TextView mTextview_shopname;
     LinearLayout mLinearlayout_phonenumber;
+    LinearLayout mLinearlayout_collection;
     MyGridView imageGridview;
     ImageView mImageView_Suggest;
+    ImageView mImageview_collect;
 
 
 
@@ -72,6 +81,8 @@ public class SkillDetailActivity extends BaseActivityother {
 
     String id="";
     String role="";//身份
+
+    int collrctID=1;  //1 添加收藏 2取消收藏
 
 
 
@@ -102,7 +113,8 @@ public class SkillDetailActivity extends BaseActivityother {
         mLinearlayout_phonenumber=findViewById(R.id.linearlayout_phonenumber);
         imageGridview=findViewById(R.id.GridView_PIC);
         mImageView_Suggest=findViewById(R.id.image_complain);
-
+        mLinearlayout_collection=findViewById(R.id.linearlayout_collection);
+        mImageview_collect=findViewById(R.id.imageview_collect);
     }
     @Override
     protected void initData() {
@@ -117,13 +129,10 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mImageView_Suggest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_suggest=new Intent(SkillDetailActivity.this,SuggestActivity.class);
-                startActivity(intent_suggest);
-            }
-        });
+        mLinearlayout_collection.setOnClickListener(this);
+        mImageView_Suggest.setOnClickListener(this);
+        mTextview_more.setOnClickListener(this);
+        mLinearlayout_phonenumber.setOnClickListener(this);
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -143,13 +152,20 @@ public class SkillDetailActivity extends BaseActivityother {
                     mTextview_more.setVisibility(View.GONE);
                     LogUtils.LOG("ceshi",mTextview_content.getLineCount()+"行","服务详情");
                 }
-
                 return true;
             }
         });
-        mTextview_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.image_complain:
+                Intent intent_suggest=new Intent(SkillDetailActivity.this,SuggestActivity.class);
+                startActivity(intent_suggest);
+                break;
+            case R.id.text_more:
                 if(mTextview_more.getText().equals("展开全文")){
                     mTextview_content.setMaxLines(Integer.MAX_VALUE);
                     mTextview_more.setText("收起");
@@ -157,11 +173,41 @@ public class SkillDetailActivity extends BaseActivityother {
                     mTextview_content.setMaxLines(MAX_LINE_COUNT);
                     mTextview_more.setText("展开全文");
                 }
-            }
-        });
-        mLinearlayout_phonenumber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.linearlayout_collection:
+                Map map=new HashMap();
+                map.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                map.put("specialty_id",mSkilldetailsbean.getData().getDetail().getSpecialty_id()+"");
+                map.put("user_token",Staticdata.token);
+                map.put("type",collrctID+"");
+                LogUtils.LOG("ceshi",map.toString()+"收藏网址"+Urls.Baseurl+Urls.setColltctSkill,"服务详情");
+                new Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        int status = 0;
+                        String msg = "";
+                        boolean data;
+                        try {
+                            JSONObject object = new JSONObject(respose);
+                            status = (Integer) object.get("code");//
+                            msg = (String) object.get("message");//
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        request(id,role);
+                        ToastUtils.showToast(SkillDetailActivity.this,msg);
+
+                    }
+
+                    @Override
+                    public void onError(int error) {
+
+                    }
+                }).postHttp(Urls.Baseurl+Urls.setColltctSkill,this,1,map);
+
+                break;
+            case R.id.linearlayout_phonenumber:
                 Intent intent = new Intent(Intent.ACTION_CALL);
                 Uri data = Uri.parse("tel:" + mSkilldetailsbean.getData().getDetail().getMobile_no());
                 intent.setData(data);
@@ -193,10 +239,10 @@ public class SkillDetailActivity extends BaseActivityother {
                 }
 
                 startActivity(intent);//调用具体方法
-            }
-        });
-
+                break;
+        }
     }
+
     void setImage(String  image){
         if(image==null||image.equals("")){
 
@@ -238,6 +284,8 @@ public class SkillDetailActivity extends BaseActivityother {
                 mTextview_shopname.setText(mSkilldetailsbean.getData().getDetail().getBusiness_name());
                 image_url=mSkilldetailsbean.getData().getDetail().getImg_url();
                 setImage(image_url);
+                collrctID=mSkilldetailsbean.getData().getDetail().getCollection_status()==0?1:2;
+                mImageview_collect.setSelected(mSkilldetailsbean.getData().getDetail().getCollection_status()==0?false:true);
             }
 
             @Override
