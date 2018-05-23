@@ -58,9 +58,6 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
                 context.startActivities(intents);
             }
 
-
-
-
         }
 
     }

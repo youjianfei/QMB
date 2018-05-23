@@ -120,7 +120,10 @@
         <activity android:name="com.jingnuo.quanmb.activity.DealActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PayActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.SuggestActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.OrderThinkActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.OrderThinkActivity">
+
+
+        </activity>
     </application>
 
 </manifest>

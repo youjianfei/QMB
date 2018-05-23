@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,6 +32,96 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/black"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/imageview_helper"
+            />
+        <TextView
+            android:id="@+id/textview_helpername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="帮手名字"
+            android:textColor="@color/text_title2"
+            android:layout_toRightOf="@+id/imageview_helper"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/textview_helperorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单号码1324563621"
+            android:textColor="@color/text_title2"
+            android:layout_toRightOf="@+id/imageview_helper"
+            android:layout_below="@+id/textview_helpername"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="12dp"
+            />
+        <ImageView
+            android:id="@+id/image_1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:src="@color/gray_background"
+            android:layout_below="@+id/imageview_helper"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/image_1"
+            android:numStars="5"
+            android:stepSize="1"
+            />
+        <EditText
+            android:id="@+id/edit_think"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/background_account"
+            android:layout_below="@+id/ratingbar"
+            android:lines="5"
+            android:maxLines="10"
+            android:hint="你对帮手的服务还满意吗？"
+            android:padding="5dp"
+            android:textSize="15dp"
+            android:gravity="top"
+            />
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="提 交"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_morph_20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/edit_think"
+            />
+
+
+    </RelativeLayout>
+
+
 
 
 
