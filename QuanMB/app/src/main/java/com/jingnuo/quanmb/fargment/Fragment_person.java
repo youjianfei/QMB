@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
@@ -25,11 +26,15 @@ import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.activity.ShopInNextActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.WechatPayBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -38,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,9 +66,15 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     TextView mTextview_chengwei;
     TextView mTextview_myorder;
     TextView mTextview_mycollect;
+    TextView mTextview_aboutus;
 
 
     TextView mTextview_logout;
+
+
+
+    private IWXAPI api;
+    WechatPayBean wechatPayBean;
 
 
     @Nullable
@@ -89,6 +101,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_logout.setOnClickListener(this);
         mTextview_myorder.setOnClickListener(this);
         mTextview_mycollect.setOnClickListener(this);
+        mTextview_aboutus.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -139,11 +152,98 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_myorder=rootview.findViewById(R.id.text_myorder);
         mTextview_logout=rootview.findViewById(R.id.textview_logout);
         mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
+        mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.textview_aboutus://关于我们  暂时用于微信支付
+                api = WXAPIFactory.createWXAPI(getActivity(), "wx1589c6a947d1f803");//微信支付用到
+                Map map_pay=new HashMap();
+                map_pay.put("body","全民帮—任务付款");
+                map_pay.put("total_fee","0.01");
+                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                map_pay.put("user_token",Staticdata.token);
+                map_pay.put("task_id","141");
+                LogUtils.LOG("ceshi",map_pay.toString(),"关于我们");
+                new  Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        LogUtils.LOG("ceshi","请求服务器统一下单"+Urls.Baseurl_hu+Urls.wechatPay,"关于我们");
+                        wechatPayBean=new Gson().fromJson(respose,WechatPayBean.class);
+                        PayReq request = new PayReq();
+                        request.appId = "wx1589c6a947d1f803";
+                        request.partnerId = wechatPayBean.getData().getMch_id();
+                        request.prepayId =wechatPayBean.getData().getPrepay_id();
+                        request.packageValue = "Sign=WXPay";
+                        request.nonceStr = wechatPayBean.getData().getNonce_str();
+                        request.timeStamp = wechatPayBean.getData().getTimestamp();
+
+
+                        Map<String ,String> json=new HashMap();
+                        json.put("appid","wx1589c6a947d1f803");
+                        json.put("partnerid",request.partnerId);
+                        json.put("prepayid",request.prepayId);
+                        json.put("package","Sign=WXPay");
+                        json.put("noncestr",request.nonceStr);
+                        json.put("timestamp", request.timeStamp);
+
+
+                        String[] keys = json.keySet().toArray(new String[0]);
+                        Arrays.sort(keys);
+
+                        // 2. 按照排序拼接参数名与参数值
+                        StringBuffer paramBuffer = new StringBuffer();
+                        for (String key : keys) {
+                            paramBuffer.append(key + "=").append(json.get(key)).append("&");
+                        }
+                        // 需要签名的数据
+                        String stringSignTemp = paramBuffer + "key=" + "40F4131427068E08451D37F02021473A";
+                        request.sign =stringSignTemp;
+
+                        api.sendReq(request);
+
+
+
+                    }
+
+                    @Override
+                    public void onError(int error) {
+
+                    }
+                }).postHttp(Urls.Baseurl_hu+Urls.wechatPay,getActivity(),1,map_pay);
+
+
+
+
+
+//                Map<String ,String> json=new HashMap();
+//                json.put("appid","wx1589c6a947d1f803");
+//                json.put("partnerid","1501850171");
+//                json.put("prepayid","wx23201816947288d97641e20e0196952431");
+//                json.put("package","Sign=WXPay");
+//                json.put("noncestr","ijhBMR10xJQdlU7b");
+//                json.put("timestamp", "1527077752");
+//
+//
+//                String[] keys = json.keySet().toArray(new String[0]);
+//                Arrays.sort(keys);
+//
+//                // 2. 按照排序拼接参数名与参数值
+//                StringBuffer paramBuffer = new StringBuffer();
+//                for (String key : keys) {
+//                    paramBuffer.append(key + "=").append(json.get(key)).append("&");
+//                }
+//                // 需要签名的数据
+//                String stringSignTemp = paramBuffer + "key=" + "40F4131427068E08451D37F02021473A";
+//                request.sign =stringSignTemp;
+//
+//                api.sendReq(request);
+
+
+                break;
             case R.id.textview_colllect:
                 Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
                 startActivity(intent_collect);

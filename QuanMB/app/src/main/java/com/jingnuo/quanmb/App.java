@@ -5,6 +5,8 @@ import android.app.Application;
 import com.baidu.mapapi.SDKInitializer;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -18,6 +20,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 
 public class App extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -122,6 +122,12 @@
         <activity android:name="com.jingnuo.quanmb.activity.SuggestActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.OrderThinkActivity"></activity>
         <activity android:name="com.jingnuo.quanmb.activity.MySkillCollectActivity"></activity>
+        <activity
+            android:name="com.jingnuo.quanmb.wxapi.WXPayEntryActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="behind" />
     </application>
 
 </manifest>
