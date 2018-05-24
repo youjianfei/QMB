@@ -7,7 +7,7 @@
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/background_logintitle">
+        android:background="@mipmap/personbackground2">
 
 
         <TextView
@@ -43,7 +43,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/background_logintitle">
+                android:background="@mipmap/personbackground">
 
             </ImageView>
 
