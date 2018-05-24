@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class ThreeRegisterActivity extends BaseActivityother {
 
@@ -117,7 +116,6 @@ public class ThreeRegisterActivity extends BaseActivityother {
                                 SharedPreferencesUtils.putString(ThreeRegisterActivity.this,"QMB","password",password);//登录成功之后存未加密de密码
                                 userBean=new Gson().fromJson(respose,UserBean.class);
                                 Staticdata. static_userBean=userBean;
-                                token=userBean.getData().getUser_token();
                                 isLogin = true;
                                 Intent intent_login = new Intent(ThreeRegisterActivity.this, MainActivity.class);
                                 ThreeRegisterActivity.this.startActivity(intent_login);

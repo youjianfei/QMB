@@ -36,7 +36,6 @@ import java.util.TimerTask;
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
 import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class RegisterActivity extends BaseActivityother {
     //控件
@@ -232,7 +231,6 @@ public class RegisterActivity extends BaseActivityother {
                     SharedPreferencesUtils.putString(RegisterActivity.this,"QMB","password",password);//登录成功之后存未加密de密码
                     userBean=new Gson().fromJson(respose,UserBean.class);
                     Staticdata. static_userBean=userBean;
-                    token=userBean.getData().getUser_token();
                     LogUtils.LOG("ceshi", respose + "1111111111", "RegisterActivity");
                     isLogin = true;
                     Intent intent_login = new Intent(RegisterActivity.this, MainActivity.class);

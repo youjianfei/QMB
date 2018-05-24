@@ -116,4 +116,18 @@ public class Fragment_message extends Fragment {
         }).postHttp(Urls.Baseurl_hu+Urls.getNewmessage,getActivity(),1,map_getnewmessage);
 
     }
+    @Override
+    public void onHiddenChanged(boolean hidden) {//fragment显示与隐藏状态监听
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            request();
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        request();
+    }
 }

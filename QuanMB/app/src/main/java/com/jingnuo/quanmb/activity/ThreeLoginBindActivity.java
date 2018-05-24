@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class ThreeLoginBindActivity extends BaseActivityother {
     //控件
@@ -107,7 +106,6 @@ public class ThreeLoginBindActivity extends BaseActivityother {
                     SharedPreferencesUtils.putString(ThreeLoginBindActivity.this,"QMB","password",password);//登录成功之后存未加密de密码
                     userBean=new Gson().fromJson(respose,UserBean.class);
                     Staticdata. static_userBean=userBean;
-                    token=userBean.getData().getUser_token();
                     LogUtils.LOG("ceshi", respose + "1111111111", "微信绑定已有账号");
                     isLogin = true;
                     Intent intent_login = new Intent(ThreeLoginBindActivity.this, MainActivity.class);

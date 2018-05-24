@@ -20,6 +20,7 @@
     <color name="text_hide_tip">#999999</color>
     <color name="yellow_jianbian_end">#fe6e3f</color>
     <color name="yellow_jianbian_start">#ff7f02</color>
+    <color name="yellow_background">#ff642f</color>
     <color name="yellow_button">#fe6e3f</color>
     <color name="green_text">#40ce3b</color>
     <color name="blue_green">#3bca9e</color>

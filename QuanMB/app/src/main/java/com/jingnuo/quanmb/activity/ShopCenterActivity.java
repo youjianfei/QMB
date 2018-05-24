@@ -50,7 +50,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.yellow_background), 0);//状态栏颜色
 
     }
 

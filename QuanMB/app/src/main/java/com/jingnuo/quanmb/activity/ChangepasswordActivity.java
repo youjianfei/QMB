@@ -64,7 +64,7 @@ public class ChangepasswordActivity extends BaseActivityother {
                 map_changpassword.put("oldPassword",OldpasswordMM);
                 map_changpassword.put("newPassword",NewpasswordMM);
                 map_changpassword.put("confirm",NewpasswordMM);
-                map_changpassword.put("user_token", Staticdata.token);
+                map_changpassword.put("user_token", Staticdata.static_userBean.getData().getUser_token());
 
                 request(map_changpassword);
             }

@@ -38,7 +38,6 @@ import java.util.TimerTask;
 
 import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 /**
  * Created by Administrator on 2018/3/20.
@@ -100,7 +99,6 @@ public class Fragment_phone_login extends Fragment {
                 if(status==1){//登录成功
                     userBean=new Gson().fromJson(respose,UserBean.class);
                     Staticdata. static_userBean=userBean;
-                    token=userBean.getData().getUser_token();
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
                     Intent intent_login = new Intent(getActivity(), MainActivity.class);

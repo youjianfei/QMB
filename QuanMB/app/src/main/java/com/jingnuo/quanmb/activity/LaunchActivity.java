@@ -36,7 +36,6 @@ import static com.jingnuo.quanmb.data.Staticdata.ScreenWidth;
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
 import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 
 public class LaunchActivity extends BaseActivityother {
@@ -144,7 +143,6 @@ public class LaunchActivity extends BaseActivityother {
                 if(status==1){//登录成功
                     userBean=new Gson().fromJson(respose,UserBean.class);
                     Staticdata.static_userBean=userBean;
-                    token=userBean.getData().getUser_token();
 
                     LogUtils.LOG("ceshi", userBean.getData().getUser_token() , "fragment_account");
                     isLogin = true;

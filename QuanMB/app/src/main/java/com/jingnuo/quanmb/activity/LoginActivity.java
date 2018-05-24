@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class LoginActivity extends BaseActivityother {
 
@@ -237,7 +236,6 @@ public class LoginActivity extends BaseActivityother {
                 }
                 if(status==1){
                     Staticdata. static_userBean=new Gson().fromJson(respose,UserBean.class);
-                    token=Staticdata. static_userBean.getData().getUser_token();
                     isLogin = true;
                     Intent intent_login = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent_login);

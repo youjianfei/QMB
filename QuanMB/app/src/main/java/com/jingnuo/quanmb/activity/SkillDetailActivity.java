@@ -175,10 +175,14 @@ public class SkillDetailActivity extends BaseActivityother {
                 }
                 break;
             case R.id.linearlayout_collection:
+                if(Staticdata.static_userBean.getData().getUser_token()==null){
+                    ToastUtils.showToast(SkillDetailActivity.this,"请先登录！");
+                    return;
+                }
                 Map map=new HashMap();
                 map.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                 map.put("specialty_id",mSkilldetailsbean.getData().getDetail().getSpecialty_id()+"");
-                map.put("user_token",Staticdata.token);
+                map.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map.put("type",collrctID+"");
                 LogUtils.LOG("ceshi",map.toString()+"收藏网址"+Urls.Baseurl+Urls.setColltctSkill,"服务详情");
                 new Volley_Utils(new Interface_volley_respose() {
@@ -262,10 +266,15 @@ public class SkillDetailActivity extends BaseActivityother {
 
     void request(String id ,String role){
         String URL="";
+        String usertoken="";
+        if(Staticdata.static_userBean.getData()!=null){
+            usertoken=Staticdata.static_userBean.getData().getUser_token();
+        }
+
         if(role.equals("1")){
-            URL=  Urls.Baseurl+Urls.helperSkilldetail+"?id="+id;
+            URL=  Urls.Baseurl+Urls.helperSkilldetail+"?id="+id+"&user_token="+usertoken;
         }else {
-            URL=  Urls.Baseurl+Urls.shopkilldetail+"?id="+id;
+            URL=  Urls.Baseurl+Urls.shopkilldetail+"?id="+id+"&user_token="+usertoken;
         }
         LogUtils.LOG("ceshi","专业详情网址："+URL,"服务详情");
         new Volley_Utils(new Interface_volley_respose() {

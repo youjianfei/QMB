@@ -51,6 +51,8 @@ public class Fragment_still  extends Fragment{
     List<Skillmenu_oneBean.DataBean.ListBean>mListData_left;
     List<Skillmenu_twoBean.DataBean.ListBean>mListData_right;
 
+    int  position=0;//一级菜单的位置
+
 
     //对象
     Adapter_classification_left mAdapter_classification_left;
@@ -75,6 +77,7 @@ public class Fragment_still  extends Fragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mAdapter_classification_left.setSelectedPosition(i);
                 mAdapter_classification_left.notifyDataSetInvalidated();
+                position=i;
                 int ID=mListData_left.get(i).getSpecialty_id();
                 LogUtils.LOG("ceshi","一级菜单对应的id:"+ID,"找专业frament");
                 requestRightMenu(ID);
@@ -143,7 +146,7 @@ public class Fragment_still  extends Fragment{
                 mListData_left.addAll(new Gson().fromJson(respose,Skillmenu_oneBean.class).getData().getList());
                 LogUtils.LOG("ceshi",mListData_left.size()+"个数据","找专业一级菜单");
                 mAdapter_classification_left.notifyDataSetChanged();
-                requestRightMenu(mListData_left.get(0).getSpecialty_id());
+                requestRightMenu(mListData_left.get(position).getSpecialty_id());
             }
 
             @Override
@@ -173,14 +176,16 @@ public class Fragment_still  extends Fragment{
     public void onResume() {
         super.onResume();
         LogUtils.LOG("ceshi", "onResume", "fragmentstill");
-
+        requestOnemenu();
 
     }
-
     @Override
-    public void onPause() {
-        super.onPause();
-        LogUtils.LOG("ceshi", "onPause", "fragmentstill");
+    public void onHiddenChanged(boolean hidden) {//fragment显示与隐藏状态监听
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            requestOnemenu();
+        }
 
     }
+
 }

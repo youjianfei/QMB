@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.jingnuo.quanmb.data.Staticdata.token;
 
 public class ChangephoneNumberNextActivity extends BaseActivityother {
 
@@ -50,7 +49,7 @@ public class ChangephoneNumberNextActivity extends BaseActivityother {
     @Override
     protected void initData() {
         map_bindphonenumber = new HashMap();
-        map_bindphonenumber.put("user_token",token);
+        map_bindphonenumber.put("user_token",Staticdata.static_userBean.getData().getUser_token());
 
     }
 

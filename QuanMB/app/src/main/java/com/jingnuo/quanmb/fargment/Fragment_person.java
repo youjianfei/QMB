@@ -165,7 +165,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 map_pay.put("body","全民帮—任务付款");
                 map_pay.put("total_fee","0.01");
                 map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                map_pay.put("user_token",Staticdata.token);
+                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map_pay.put("task_id","141");
                 LogUtils.LOG("ceshi",map_pay.toString(),"关于我们");
                 new  Volley_Utils(new Interface_volley_respose() {
@@ -215,41 +215,12 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                     }
                 }).postHttp(Urls.Baseurl_hu+Urls.wechatPay,getActivity(),1,map_pay);
 
-
-
-
-
-//                Map<String ,String> json=new HashMap();
-//                json.put("appid","wx1589c6a947d1f803");
-//                json.put("partnerid","1501850171");
-//                json.put("prepayid","wx23201816947288d97641e20e0196952431");
-//                json.put("package","Sign=WXPay");
-//                json.put("noncestr","ijhBMR10xJQdlU7b");
-//                json.put("timestamp", "1527077752");
-//
-//
-//                String[] keys = json.keySet().toArray(new String[0]);
-//                Arrays.sort(keys);
-//
-//                // 2. 按照排序拼接参数名与参数值
-//                StringBuffer paramBuffer = new StringBuffer();
-//                for (String key : keys) {
-//                    paramBuffer.append(key + "=").append(json.get(key)).append("&");
-//                }
-//                // 需要签名的数据
-//                String stringSignTemp = paramBuffer + "key=" + "40F4131427068E08451D37F02021473A";
-//                request.sign =stringSignTemp;
-//
-//                api.sendReq(request);
-
-
                 break;
             case R.id.textview_colllect:
                 Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
                 startActivity(intent_collect);
                 break;
             case R.id.textview_bangshou:
-
                 if(Staticdata.static_userBean.getData().getHelper_status()==1){
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
                     intent_shopcenter.putExtra("type",1);//1  帮手
@@ -261,7 +232,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 //                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
 //                    getActivity().startActivity(intent_anthentication);
                     Map map=new HashMap();
-                    map.put("user_token",Staticdata.token);
+                    map.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
@@ -321,6 +292,12 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 break;
             case  R.id.textview_shopcenter://1  商户  0  不是商户
                 LogUtils.LOG("ceshi",Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),"检测商户审核状态接口");
+                if(Staticdata.static_userBean.getData().getBusiness_status()==1){
+                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                    intent_shopcenter.putExtra("type",2);//2  商户
+                    getActivity().startActivity(intent_shopcenter);
+                    return;
+                }
                 new Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
@@ -348,14 +325,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                             Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
                             getActivity().startActivity(intent_shopinext);
 
-
                         }else if(state.equals("03")){//没提交审核
                             Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
                             getActivity().startActivity(intent_shopin);
                         }
-
                     }
-
                     @Override
                     public void onError(int error) {
 
@@ -381,6 +355,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 logout();
                 SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
                 Staticdata.isLogin=false;
+                Staticdata.static_userBean.setData(null);//用户信息清空
                 Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent_logout);
                 getActivity().finish();
@@ -411,5 +386,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
             }
         });
     }
+
 
 }

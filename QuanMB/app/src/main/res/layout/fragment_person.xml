@@ -325,6 +325,13 @@
                     android:text="退出登录"
                     android:textColor="@color/black_text"
                     android:textSize="15dp" />
+                <ImageView
+                    android:id="@+id/iamge_222"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_background"
+                    android:layout_centerHorizontal="true"
+                    />
             </RelativeLayout>
 
 
