@@ -1,6 +1,10 @@
 package com.jingnuo.quanmb.activity;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -50,16 +54,28 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private MyLocationListener myListener = new MyLocationListener();
 
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         mLocationClient = new LocationClient(getApplicationContext());
         //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);
         //注册监听函数
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
+
+
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setCustomView(R.mipmap.aboutus);
         setmapdata();// 百度地图配置参数
         initview();
         initdata();
@@ -163,7 +179,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.relative_square:
-                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+//                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 ChangeBottomButton(mRelativeLayout_square);
                 if (mFragment_square == null) {
                     mFragment_square = new Fragment_square();
@@ -174,7 +190,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.relative_still:
-                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+//                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 ChangeBottomButton(mRelativeLayout_still);
                 if (mFragment_stilll == null) {
                     mFragment_stilll = new Fragment_still();
@@ -200,7 +216,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.relative_message:
-                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+//                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
                 if (isLogin) {
                     setREDDOT(false);
                     ChangeBottomButton(mRelativeLayout_message);
@@ -216,7 +232,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 break;
             case R.id.relative_person:
-                StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
+//                StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
                 if (isLogin) {
                     ChangeBottomButton(mRelativeLayout_person);
                     if (mFragment_person == null) {
