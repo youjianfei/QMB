@@ -419,8 +419,6 @@ public class BargainActivity extends BaseActivityother {
         }).postHttp(Urls.Baseurl_cui + Urls.bargainmessage, BargainActivity.this, 1, map);
     }
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

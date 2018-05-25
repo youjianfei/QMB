@@ -83,6 +83,7 @@ public class Urls {
     public static String  helpskill= "helper/queryMyRelease?user_token=";//帮手发布的服务
     public static String helperIssueSkill = "helper/releaseSpecialty";//发布专业    post
     public static String helperSkilldetail = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
+    public static String orderthink = "order/orderEvaluate";//评价帮手
 
 
     //消息模块

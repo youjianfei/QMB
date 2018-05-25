@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +38,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MytaskDetailActivity extends BaseActivityother {
     //控件
 
+    RelativeLayout mRelativylaout_background;
     TextView mTextview_taskstate;
     TextView mTextview_tasktitle;
     TextView mTextview_taskmoney;
@@ -146,7 +149,10 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                             if (status == 1) {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
-                                request(map_taskdetail);
+//                                request(map_taskdetail);
+                                Intent intend_think=new Intent(MytaskDetailActivity.this,OrderThinkActivity.class);
+                                intend_think.putExtra("task_id",taskDetailBean.getData().getTask_id()+"");
+                                startActivity(intend_think);
                             } else {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
                             }
@@ -181,7 +187,12 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_complete = findViewById(R.id.button_complete);
         mButton_completed = findViewById(R.id.button_completed);
         imageGridview=findViewById(R.id.GridView_PIC);
-
+        mRelativylaout_background=findViewById(R.id.RelativeLayout_background);
+        ImageView image=new ImageView(this);
+        image.setBackgroundResource(R.mipmap.mytaskbackground);
+        LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*0.24));
+        image.setLayoutParams(mLayoutparams);
+        mRelativylaout_background.addView(image);
     }
 
     void request(Map map) {
@@ -249,5 +260,11 @@ public class MytaskDetailActivity extends BaseActivityother {
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        request(map_taskdetail);
     }
 }
