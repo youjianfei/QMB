@@ -25,6 +25,7 @@ import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.activity.ShopInNextActivity;
+import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.WechatPayBean;
@@ -169,55 +170,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map_pay.put("task_id","141");
                 LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-                new  Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi","请求服务器统一下单"+Urls.Baseurl_hu+Urls.wechatPay,"关于我们");
-                        wechatPayBean=new Gson().fromJson(respose,WechatPayBean.class);
-                        PayReq request = new PayReq();
-                        request.appId = "wx1589c6a947d1f803";
-                        request.partnerId = wechatPayBean.getData().getMch_id();
-                        request.prepayId =wechatPayBean.getData().getPrepay_id();
-                        request.packageValue = "Sign=WXPay";
-                        request.nonceStr = wechatPayBean.getData().getNonce_str();
-                        request.timeStamp = wechatPayBean.getData().getTimestamp();
-
-
-                        Map<String ,String> json=new HashMap();
-                        json.put("appid","wx1589c6a947d1f803");
-                        json.put("partnerid",request.partnerId);
-                        json.put("prepayid",request.prepayId);
-                        json.put("package","Sign=WXPay");
-                        json.put("noncestr",request.nonceStr);
-                        json.put("timestamp", request.timeStamp);
-
-
-                        String[] keys = json.keySet().toArray(new String[0]);
-                        Arrays.sort(keys);
-
-                        // 2. 按照排序拼接参数名与参数值
-                        StringBuffer paramBuffer = new StringBuffer();
-                        for (String key : keys) {
-                            paramBuffer.append(key + "=").append(json.get(key)).append("&");
-                        }
-                        // 需要签名的数据
-                        String stringSignTemp = paramBuffer + "key=" + "40F4131427068E08451D37F02021473A";
-                        request.sign =stringSignTemp;
-
-                        api.sendReq(request);
-
-
-
-                    }
-
-                    @Override
-                    public void onError(int error) {
-
-                    }
-                }).postHttp(Urls.Baseurl_hu+Urls.wechatPay,getActivity(),1,map_pay);
+                new WechatPay(getActivity(),api,map_pay).wepay();
 
                 break;
             case R.id.textview_aboutus://关于我们
+
 
                 break;
             case R.id.textview_colllect:

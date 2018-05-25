@@ -42,7 +42,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
     public void onResp(BaseResp baseResp) {
         if(baseResp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){
             Log.i("ceshi","onPayFinish,errCode="+baseResp.errCode);
-            Intent intent = new Intent("com.lyzzb.zzb.PAYSUCCESS_ERRO");
+            Intent intent = new Intent("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
             if(baseResp.errCode==0){
                 intent.putExtra("pay","success");
                 sendBroadcast(intent);
@@ -56,7 +56,6 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
                 intent.putExtra("pay","erro");
                 sendBroadcast(intent);
 
-//                ToastUtils.showToast(this,"支付失败");
 
                 finish();
             }

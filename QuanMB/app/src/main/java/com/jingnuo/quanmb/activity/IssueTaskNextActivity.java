@@ -2,26 +2,33 @@ package com.jingnuo.quanmb.activity;
 
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
+import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
 import com.jingnuo.quanmb.class_.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
+import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +53,11 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     UpLoadImage upLoadImage;
     ProgressDlog progressDlog;
+    private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
+    private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
+
+    private IWXAPI api;
+
 
 
 
@@ -59,11 +71,35 @@ public class IssueTaskNextActivity extends BaseActivityother {
     protected void setData() {
         progressDlog=new ProgressDlog(this);
         mList_picID=new ArrayList<>();
+        intentFilter_paysuccess = new IntentFilter();
+        intentFilter_paysuccess.addAction("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
+        paysuccess_BroadcastReciver=new PaySuccessOrErroBroadcastReciver(new Interface_paySuccessOrerro() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "payResult");
+                if(respose.equals("success")){//支付成功
+                    Staticdata.map_task.put("payResult","1");
+                    requast(Staticdata.map_task);//正式发布任务
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                progressDlog.cancelPD();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showToast(IssueTaskNextActivity.this, "支付失败");
+                    }
+                });
+            }
+        });
+        registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
     }
 
     @Override
     protected void initData() {
-
+        api = WXAPIFactory.createWXAPI(IssueTaskNextActivity.this, "wx1589c6a947d1f803");//微信支付用到
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(),"发布任务map集合中的内容");
         upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
@@ -102,7 +138,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
                             }
                             Staticdata.map_task.put("task_Img_id",img_id);
                             LogUtils.LOG("ceshi","上传图片完成","发布技能上传图片");
-                            requast(Staticdata.map_task);
+                            requestTaskid();
+//                            requast(Staticdata.map_task);//正式发布任务
                         }
                     }
                     else {
@@ -127,7 +164,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
         if( Staticdata.imagePathlist.size()>=1){
             upLoadImage.uploadImg(Staticdata.imagePathlist.get(0),2);
         }else {
-            requast(Staticdata.map_task);
+//            requast(Staticdata.map_task);
+            requestTaskid();
         }
 
     }
@@ -196,8 +234,54 @@ public class IssueTaskNextActivity extends BaseActivityother {
         Staticdata.map_task.put("task_Img_id","");
         return true;
     }
+    void requestTaskid(){//请求任务号,成功后调取支付
+        LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.gettaskid
+                +Staticdata.static_userBean.getData().getUser_token(),"获取任务ID");
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"获取任务ID");
+//                {"code":1,"date":151,"message":"获取成功"}
+                int status = 0;
+                String msg = "";
+                int data = 0;
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    data = (Integer) object.get("date");//登录状态
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                    if(status==1){
+                        Staticdata.map_task.put("task_id",data+"");
 
-    void requast( Map map){
+                        Map map_pay=new HashMap();
+                        map_pay.put("body","全民帮—任务付款");
+                        map_pay.put("total_fee","0.01");
+                        map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                        map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                        map_pay.put("task_id",data+"");
+                        LogUtils.LOG("ceshi",map_pay.toString(),"充值");
+                        new WechatPay(IssueTaskNextActivity.this,api,map_pay).wepay();
+
+                    }else {
+                        ToastUtils.showToast(IssueTaskNextActivity.this,msg);
+                        progressDlog.cancelPD();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.gettaskid
+                +Staticdata.static_userBean.getData().getUser_token(),IssueTaskNextActivity.this,0);
+    }
+
+    void requast( Map map){//正式发布任务
         LogUtils.LOG("ceshi",Staticdata.map_task.toString(),"发布任务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -240,6 +324,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(paysuccess_BroadcastReciver);
         if (progressDlog!=null){
             progressDlog.cancelPD();
             mList_picID.clear();
