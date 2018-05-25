@@ -99,7 +99,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        api = WXAPIFactory.createWXAPI(IssueTaskNextActivity.this, "wx1589c6a947d1f803");//微信支付用到
+        api = WXAPIFactory.createWXAPI(IssueTaskNextActivity.this, Staticdata.WechatApi);//微信支付用到
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(),"发布任务map集合中的内容");
         upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override

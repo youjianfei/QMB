@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +13,11 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
+import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
 import com.jingnuo.quanmb.class_.Popwindow_bargin;
+import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.BargainMessagedetailsBean;
@@ -21,6 +25,8 @@ import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +67,12 @@ public class BargainActivity extends BaseActivityother {
 
     Popwindow_bargin popwindow_bargin;
 
+    private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
+    private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
+
+
+    private IWXAPI api;
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_bargain;
@@ -68,6 +80,28 @@ public class BargainActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        intentFilter_paysuccess = new IntentFilter();
+        intentFilter_paysuccess.addAction("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
+        paysuccess_BroadcastReciver=new PaySuccessOrErroBroadcastReciver(new Interface_paySuccessOrerro() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "payResult");
+                if(respose.equals("success")){//支付成功
+                    acceptBargain();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showToast(BargainActivity.this, "支付失败");
+                    }
+                });
+            }
+        });
+        registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
         popwindow_bargin = new Popwindow_bargin(BargainActivity.this, new Interence_bargin() {
             @Override
             public void onResult(String result) {
@@ -121,6 +155,8 @@ public class BargainActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        api = WXAPIFactory.createWXAPI(BargainActivity.this, Staticdata.WechatApi);//微信支付用到
+
         map_bargainmessagedetail = new HashMap();
         Intent intent = getIntent();
         binding_id = intent.getStringExtra("binding_id");
@@ -135,6 +171,51 @@ public class BargainActivity extends BaseActivityother {
         requestBargainmessage(map_bargainmessagedetail);
 
     }
+    void acceptBargain(){//补差价支付成功
+
+        Map map_accept = new HashMap();
+        map_accept.put("id", bargainMessagedetailsBean.getData().getTask_id() + "");
+        map_accept.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+        map_accept.put("is_accept", "1");
+        map_accept.put("binding_id", binding_id + "");
+        map_accept.put("mark", bargainMessagedetailsBean.getData().getMark() + "");
+        map_accept.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
+        map_accept.put("counteroffer_Amount", bargainMessagedetailsBean.getData().getCounteroffer_Amount() + "");
+        if (bargainMessagedetailsBean.getData().getHelper_no() != null) {
+            map_accept.put("helper_no", bargainMessagedetailsBean.getData().getHelper_no());
+        } else {
+            map_accept.put("business_no", bargainMessagedetailsBean.getData().getBusiness_no());
+        }
+        LogUtils.LOG("ceshi", map_accept.toString(), "接受还价map");
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "接受还价");
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");
+                    msg = (String) object.get("message");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    ToastUtils.showToast(BargainActivity.this, msg);
+                    requestBargainmessage(map_bargainmessagedetail);//刷新状态
+                } else {
+                    ToastUtils.showToast(BargainActivity.this, msg);
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl_cui + Urls.acceptORrefuse, BargainActivity.this, 1, map_accept);
+
+    }
+
 
     @Override
     protected void initListener() {
@@ -167,46 +248,16 @@ public class BargainActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.button_accect://接受还价
-                Map map_accept = new HashMap();
-                map_accept.put("id", bargainMessagedetailsBean.getData().getTask_id() + "");
-                map_accept.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                map_accept.put("is_accept", "1");
-                map_accept.put("binding_id", binding_id + "");
-                map_accept.put("mark", bargainMessagedetailsBean.getData().getMark() + "");
-                map_accept.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
-                map_accept.put("counteroffer_Amount", bargainMessagedetailsBean.getData().getCounteroffer_Amount() + "");
-                if (bargainMessagedetailsBean.getData().getHelper_no() != null) {
-                    map_accept.put("helper_no", bargainMessagedetailsBean.getData().getHelper_no());
-                } else {
-                    map_accept.put("business_no", bargainMessagedetailsBean.getData().getBusiness_no());
-                }
-                LogUtils.LOG("ceshi", map_accept.toString(), "接受还价map");
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi", respose, "接受还价");
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");
-                            msg = (String) object.get("message");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (status == 1) {
-                            ToastUtils.showToast(BargainActivity.this, msg);
-                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
-                        } else {
-                            ToastUtils.showToast(BargainActivity.this, msg);
-                        }
-                    }
+                Map map_pay=new HashMap();
+                map_pay.put("body","全民帮—任务付款");
+                map_pay.put("total_fee","0.01");
+                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                map_pay.put("task_id",bargainMessagedetailsBean.getData().getTask_id() + "");
+                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
+                new WechatPay(BargainActivity.this,api,map_pay).wepay();//吊起微信支付
 
-                    @Override
-                    public void onError(int error) {
 
-                    }
-                }).postHttp(Urls.Baseurl_cui + Urls.acceptORrefuse, BargainActivity.this, 1, map_accept);
 
 
                 break;
@@ -366,5 +417,13 @@ public class BargainActivity extends BaseActivityother {
 
             }
         }).postHttp(Urls.Baseurl_cui + Urls.bargainmessage, BargainActivity.this, 1, map);
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(paysuccess_BroadcastReciver);
     }
 }

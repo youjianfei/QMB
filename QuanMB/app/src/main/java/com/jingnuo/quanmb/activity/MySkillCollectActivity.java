@@ -121,7 +121,7 @@ public class MySkillCollectActivity extends BaseActivityother {
 
             }
         }).Http(Urls.Baseurl+Urls.ColltctSkillList+ Staticdata.static_userBean.getData().getUser_token()
-                +"&client_no="+Staticdata.static_userBean.getData().getAppuser().getClient_no(),this,0);
+                +"&client_no="+Staticdata.static_userBean.getData().getAppuser().getClient_no()+"&curPageNo="+page,this,0);
     }
 
     @Override

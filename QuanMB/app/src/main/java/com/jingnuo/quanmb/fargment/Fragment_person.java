@@ -162,7 +162,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_recharge://充值
-                api = WXAPIFactory.createWXAPI(getActivity(), "wx1589c6a947d1f803");//微信支付用到
+                api = WXAPIFactory.createWXAPI(getActivity(), Staticdata.WechatApi);//微信支付用到
                 Map map_pay=new HashMap();
                 map_pay.put("body","全民帮—充值");
                 map_pay.put("total_fee","0.01");
