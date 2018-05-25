@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -67,9 +68,8 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     TextView mTextview_myorder;
     TextView mTextview_mycollect;
     TextView mTextview_aboutus;
-
-
     TextView mTextview_logout;
+    Button mButton_rechange;//充值
 
 
 
@@ -102,6 +102,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_myorder.setOnClickListener(this);
         mTextview_mycollect.setOnClickListener(this);
         mTextview_aboutus.setOnClickListener(this);
+        mButton_rechange.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -153,21 +154,21 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_logout=rootview.findViewById(R.id.textview_logout);
         mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
         mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
-
+        mButton_rechange=rootview.findViewById(R.id.button_recharge);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.textview_aboutus://关于我们  暂时用于微信支付
+            case R.id.button_recharge://充值
                 api = WXAPIFactory.createWXAPI(getActivity(), "wx1589c6a947d1f803");//微信支付用到
                 Map map_pay=new HashMap();
-                map_pay.put("body","全民帮—任务付款");
+                map_pay.put("body","全民帮—充值");
                 map_pay.put("total_fee","0.01");
                 map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                 map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                 map_pay.put("task_id","141");
-                LogUtils.LOG("ceshi",map_pay.toString(),"关于我们");
+                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
                 new  Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {
@@ -214,6 +215,9 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
                     }
                 }).postHttp(Urls.Baseurl_hu+Urls.wechatPay,getActivity(),1,map_pay);
+
+                break;
+            case R.id.textview_aboutus://关于我们
 
                 break;
             case R.id.textview_colllect:

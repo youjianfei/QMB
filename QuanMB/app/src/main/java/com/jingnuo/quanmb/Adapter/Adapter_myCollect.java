@@ -7,12 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.entityclass.SkillCollectBean;
 import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.List;
 
 public class Adapter_myCollect extends BaseAdapter {
-    List<String> mData;
+    List<SkillCollectBean.DataBean.ListBean> mData;
     Context mContext;
     LayoutInflater mInfalater;
 
@@ -37,7 +38,9 @@ public class Adapter_myCollect extends BaseAdapter {
         }else {
             holder= (ViewHolder) convertView.getTag();
         }
-        holder.mTextview_name.setText(mData.get(position));
+        holder.mTextview_name.setText(mData.get(position).getRelease_address());
+        holder.mTextview_title.setText(mData.get(position).getTitle());
+        holder.mTextview_time.setText(mData.get(position).getCreateDate());
 
         return convertView;
     }

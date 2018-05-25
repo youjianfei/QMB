@@ -63,26 +63,46 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="13dp"
                 android:text="用户名"
-
                 android:textColor="@color/white"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/textview_phonenumber"
+                android:textSize="16dp" />
+            <LinearLayout
+                android:id="@+id/linearlayout_chengwei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_chengwei"
                 android:layout_below="@+id/text_username"
-                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="13dp" />
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                >
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@color/background"
+                    android:layout_marginTop="3dp"
+                    />
+                <TextView
+                    android:id="@+id/textview_phonenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_username"
+                    android:text="xvsadg "
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
 
             <RelativeLayout
                 android:id="@+id/relative_info"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_below="@+id/textview_phonenumber"
+                android:layout_below="@+id/linearlayout_chengwei"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"

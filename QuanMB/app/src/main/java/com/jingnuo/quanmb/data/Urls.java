@@ -7,12 +7,12 @@ package com.jingnuo.quanmb.data;
 public class Urls {
 
 //    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
     public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -55,6 +55,7 @@ public class Urls {
 
 
     public static String setColltctSkill = "user/myCollection";//收藏、取消收藏接口
+    public static String ColltctSkillList = "user/getCollectionList?user_token=";//收藏列表
 
 
 

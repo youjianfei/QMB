@@ -24,7 +24,7 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
 
         Bundle bundle = intent.getExtras();
         String title = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-        if(bundle!=null){
+        if(bundle.getString(JPushInterface.EXTRA_EXTRA)!=null){
             if(MainActivity.mainActivity!=null){
                 MainActivity.mainActivity.setREDDOT(true);
             }

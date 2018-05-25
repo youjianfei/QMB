@@ -1,7 +1,10 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_SystemmessageList;
@@ -52,7 +55,6 @@ public class SystemMessageActivity extends BaseActivityother {
         adapter_systemmessageList=new Adapter_SystemmessageList(mData,this);
         mListview.setAdapter(adapter_systemmessageList);
 
-
         map_message=new HashMap();
         map_message.put("pageNo",page+"");
         map_message.put("type","1");
@@ -60,11 +62,17 @@ public class SystemMessageActivity extends BaseActivityother {
         map_message.put("user_token",Staticdata.static_userBean.getData().getUser_token());
         LogUtils.LOG("ceshi","系统消息内容map"+map_message,"SystemMessageActivity");
         requestSystermyMessage(map_message);
-
     }
 
     @Override
     protected void initListener() {
+        mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent_messagedetail=new Intent(SystemMessageActivity.this,SystemmessageDetailActivity.class);
+                startActivity(intent_messagedetail);
+            }
+        });
 
     }
 
