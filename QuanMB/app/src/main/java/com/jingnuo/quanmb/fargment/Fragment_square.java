@@ -23,6 +23,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_SquareList;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.LocationaddressActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
@@ -54,6 +55,7 @@ public class Fragment_square extends Fragment {
     EditText mEdit_serchSquare;
     PullToRefreshListView mListview_square;
     TextView mTextview_sort, mTextview_filter;
+    TextView mTextview_address;
     RelativeLayout mRelativelayout_sort;
 
     Popwindow_SquareSort mPopwindow_square_sort;
@@ -141,6 +143,14 @@ public class Fragment_square extends Fragment {
     Intent intend_taskdrtails;
 
     private void initlistenner() {
+        mTextview_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_address=new Intent(getActivity(), LocationaddressActivity.class);
+                startActivity(intent_address);
+
+            }
+        });
         //listview的条目点击事件
         mListview_square.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -266,6 +276,7 @@ public class Fragment_square extends Fragment {
         mTextview_sort = rootview.findViewById(R.id.text_sort);
         mTextview_filter = rootview.findViewById(R.id.text_filter);
         mRelativelayout_sort = rootview.findViewById(R.id.relative_sort);
+        mTextview_address=rootview.findViewById(R.id.textview_login);
     }
 
     @Override

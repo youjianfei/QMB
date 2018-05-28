@@ -29,7 +29,11 @@
 
 
 
+    <color name="zimu_background">#ededed</color>
 
+    <color name="daohangzimu">#5a5a5a</color>
+    <color name="daohangzimu_background">#bfbfbf</color>
+    <color name="friend_mingzi">#484848</color>
 
 
 

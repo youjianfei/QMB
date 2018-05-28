@@ -110,4 +110,5 @@ dependencies {
     compile files('libs/umeng-share-wechat-full-6.9.2.jar')
     compile files('libs/umeng-shareboard-widget-6.9.2.jar')
     compile files('libs/wechat-sdk-android-without-mta-5.1.4.jar')
+    compile files('libs/pinyin4j-2.5.0.jar')
 }

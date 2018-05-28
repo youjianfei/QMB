@@ -128,13 +128,13 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="behind" />
-        <activity android:name="com.jingnuo.quanmb.activity.SystemmessageDetailActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SystemmessageDetailActivity" />
         <activity
             android:name="com.jingnuo.quanmb.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
+        <activity android:name="com.jingnuo.quanmb.activity.LocationaddressActivity"></activity>
     </application>
 
 </manifest>
