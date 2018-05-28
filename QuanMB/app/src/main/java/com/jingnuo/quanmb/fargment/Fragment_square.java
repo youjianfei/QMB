@@ -57,6 +57,7 @@ public class Fragment_square extends Fragment {
     TextView mTextview_sort, mTextview_filter;
     TextView mTextview_address;
     RelativeLayout mRelativelayout_sort;
+    RelativeLayout mRelayout_address;
 
     Popwindow_SquareSort mPopwindow_square_sort;
 
@@ -143,12 +144,12 @@ public class Fragment_square extends Fragment {
     Intent intend_taskdrtails;
 
     private void initlistenner() {
-        mTextview_address.setOnClickListener(new View.OnClickListener() {
+
+        mRelayout_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_address=new Intent(getActivity(), LocationaddressActivity.class);
                 startActivity(intent_address);
-
             }
         });
         //listview的条目点击事件
@@ -243,7 +244,6 @@ public class Fragment_square extends Fragment {
                     initMap(MinCommission+"",MaxCommission+"",page+"",search,"","");
                     request_square(map_filter_sort, page);
 
-
                 }
                 return false;
             }
@@ -277,6 +277,7 @@ public class Fragment_square extends Fragment {
         mTextview_filter = rootview.findViewById(R.id.text_filter);
         mRelativelayout_sort = rootview.findViewById(R.id.relative_sort);
         mTextview_address=rootview.findViewById(R.id.textview_login);
+        mRelayout_address=rootview.findViewById(R.id.relayout_address);
     }
 
     @Override

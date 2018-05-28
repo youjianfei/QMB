@@ -52,24 +52,34 @@
                 />
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/textview_login"
+        <RelativeLayout
+            android:id="@+id/relayout_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="35dp"
-            android:text="郑州"
-            android:layout_marginTop="35dp"
-            android:textColor="@color/black_text"
-            android:textSize="14sp" />
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginRight="12dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="35dp"
-            android:src="@mipmap/jiantou_xia"
-            />
+
+            >
+            <TextView
+                android:id="@+id/textview_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
+                android:text="郑州"
+                android:layout_marginTop="35dp"
+                android:textColor="@color/black_text"
+                android:textSize="14sp" />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="35dp"
+                android:src="@mipmap/jiantou_xia"
+                />
+
+        </RelativeLayout>
+
 
 
     </RelativeLayout>
