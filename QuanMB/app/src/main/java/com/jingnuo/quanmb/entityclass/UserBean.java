@@ -55,6 +55,24 @@ public class UserBean {
         private int helper_status;
         private String img_url;
         private String user_token;
+        private String appellation_name;
+        private String iconImgUrl;
+
+        public String getAppellation_name() {
+            return appellation_name;
+        }
+
+        public void setAppellation_name(String appellation_name) {
+            this.appellation_name = appellation_name;
+        }
+
+        public String getIconImgUrl() {
+            return iconImgUrl;
+        }
+
+        public void setIconImgUrl(String iconImgUrl) {
+            this.iconImgUrl = iconImgUrl;
+        }
 
         public AppuserBean getAppuser() {
             return appuser;

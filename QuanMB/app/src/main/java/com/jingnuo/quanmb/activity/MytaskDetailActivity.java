@@ -253,6 +253,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             String []images=image.split(",");
             int len=images.length;
             LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");
+            imageview_urllist.clear();
             for(int i=0;i<len;i++){
                 imageview_urllist.add(images[i]);
             }

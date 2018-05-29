@@ -357,6 +357,7 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
+        Staticdata.map_task.put("tasktypename",task_type);
 
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 

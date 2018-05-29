@@ -6,14 +6,14 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
-//    public  static  String Baseurl_hu="http://192.168.1.151:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
@@ -107,5 +107,6 @@ public class Urls {
 
     //支付
     public static String wechatPay = "AppPay/WeChatPreOrder";//微信支付
+    public static String zhifubaoPay = "ALiPay/doAlipay";//支付宝支付
 
 }

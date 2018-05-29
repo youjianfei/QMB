@@ -80,6 +80,7 @@
                 android:paddingTop="3dp"
                 >
                 <ImageView
+                    android:id="@+id/image_chengwei"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:background="@color/background"
@@ -90,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_username"
-                    android:text="xvsadg "
+                    android:text="称谓"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/white"
                     android:textSize="12dp" />

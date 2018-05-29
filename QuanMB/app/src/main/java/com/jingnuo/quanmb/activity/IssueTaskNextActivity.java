@@ -79,7 +79,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if(respose.equals("success")){//支付成功
                     Staticdata.map_task.put("payResult","1");
-                    requast(Staticdata.map_task);//正式发布任务
+//                    requast(Staticdata.map_task);//正式发布任务
                 }
             }
 
@@ -199,6 +199,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
             public void onClick(View view) {
                 if(initmap()){
                     progressDlog.showPD("正在发布，请稍等");
+                    mList_picID.clear();
+                    count=0;
                     uploadimg();
                 }
             }
@@ -234,7 +236,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
         Staticdata.map_task.put("task_Img_id","");
         return true;
     }
-    void requestTaskid(){//请求任务号,成功后调取支付
+    void requestTaskid(){//请求任务号,成功后跳转支付界面
         LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.gettaskid
                 +Staticdata.static_userBean.getData().getUser_token(),"获取任务ID");
         new  Volley_Utils(new Interface_volley_respose() {
@@ -253,14 +255,20 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     if(status==1){
                         Staticdata.map_task.put("task_id",data+"");
 
-                        Map map_pay=new HashMap();
-                        map_pay.put("body","全民帮—任务付款");
-                        map_pay.put("total_fee","0.01");
-                        map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                        map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                        map_pay.put("task_id",data+"");
-                        LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-                        new WechatPay(IssueTaskNextActivity.this,api,map_pay).wepay();
+                        Intent intentpay=new Intent(IssueTaskNextActivity.this,PayActivity.class);
+                        intentpay.putExtra("title","全民帮—任务付款");
+                        intentpay.putExtra("amount","0.01");
+                        intentpay.putExtra("taskid",data+"");
+                        startActivity(intentpay);
+
+//                        Map map_pay=new HashMap();
+//                        map_pay.put("body","全民帮—任务付款");
+//                        map_pay.put("total_fee","0.01");
+//                        map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                        map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                        map_pay.put("task_id",data+"");
+//                        LogUtils.LOG("ceshi",map_pay.toString(),"充值");
+//                        new WechatPay(IssueTaskNextActivity.this,api,map_pay).wepay();
 
                     }else {
                         ToastUtils.showToast(IssueTaskNextActivity.this,msg);

@@ -117,23 +117,23 @@
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="30dp"
                     android:background="@drawable/button_bluemiao_20dp"
                     android:text="提现"
                     android:textColor="@color/blue"
                     android:textSize="12dp" />
 
-                <Button
-                    android:id="@+id/button_recharge"
-                    android:layout_width="55dp"
-                    android:layout_height="25dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@+id/button_cash"
-                    android:background="@drawable/button_blue_20dp"
-                    android:text="充值"
-                    android:textColor="@color/white"
-                    android:textSize="12dp" />
+                <!--<Button-->
+                    <!--android:id="@+id/button_recharge"-->
+                    <!--android:layout_width="55dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_toLeftOf="@+id/button_cash"-->
+                    <!--android:background="@drawable/button_blue_20dp"-->
+                    <!--android:text="充值"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="12dp" />-->
 
             </RelativeLayout>
 

@@ -31,8 +31,8 @@ import java.util.List;
 
 public class ShophallActivity extends BaseActivityother {
     //控件
-    LinearLayout mLinerlayout_sort;
-    LinearLayout mLinearlayout_filter;
+//    LinearLayout mLinerlayout_sort;
+//    LinearLayout mLinearlayout_filter;
     PullToRefreshListView mListview;
 
 
@@ -72,25 +72,25 @@ public class ShophallActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mLinerlayout_sort.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View view) {
-//                mPopwindow_square_sort = new Popwindow_SquareSort(this, new InterfacePopwindow_square_sort() {
-//                    @Override
-//                    public void onSuccesses(String address, String id) {
+//        mLinerlayout_sort.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+//            @Override
+//            public void onClick(View view) {
+////                mPopwindow_square_sort = new Popwindow_SquareSort(this, new InterfacePopwindow_square_sort() {
+////                    @Override
+////                    public void onSuccesses(String address, String id) {
+////
+////                    }
+////                }, mRelativelayout_sort, 1);
+////                mPopwindow_square_sort.showPopwindow();
+//            }
+//        });
+//        mLinearlayout_filter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
 //
-//                    }
-//                }, mRelativelayout_sort, 1);
-//                mPopwindow_square_sort.showPopwindow();
-            }
-        });
-        mLinearlayout_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//            }
+//        });
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -129,8 +129,8 @@ public class ShophallActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mLinerlayout_sort = findViewById(R.id.linearlayout_sort);
-        mLinearlayout_filter = findViewById(R.id.linearlayout_filter);
+//        mLinerlayout_sort = findViewById(R.id.linearlayout_sort);
+//        mLinearlayout_filter = findViewById(R.id.linearlayout_filter);
         mListview = findViewById(R.id.mlistview_shophall);
     }
 

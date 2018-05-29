@@ -285,5 +285,6 @@ public class Fragment_square extends Fragment {
         super.onResume();
         page = 1;
         request_square(map_filter_sort, 1);
+
     }
 }

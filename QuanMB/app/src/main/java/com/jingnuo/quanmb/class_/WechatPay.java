@@ -16,6 +16,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.jingnuo.quanmb.data.Staticdata.WechatApi;
+import static com.jingnuo.quanmb.data.Staticdata.WechatApipay;
+
 public class WechatPay {
     Activity activity;
     private IWXAPI api;
@@ -36,7 +39,7 @@ public class WechatPay {
                 LogUtils.LOG("ceshi","请求服务器统一下单"+ Urls.Baseurl_hu+Urls.wechatPay,"关于我们");
                 wechatPayBean=new Gson().fromJson(respose,WechatPayBean.class);
                 PayReq request = new PayReq();
-                request.appId = "wx1589c6a947d1f803";
+                request.appId = WechatApi;
                 request.partnerId = wechatPayBean.getData().getMch_id();
                 request.prepayId =wechatPayBean.getData().getPrepay_id();
                 request.packageValue = "Sign=WXPay";
@@ -45,7 +48,7 @@ public class WechatPay {
 
 
                 Map<String ,String> json=new HashMap();
-                json.put("appid","wx1589c6a947d1f803");
+                json.put("appid",WechatApi);
                 json.put("partnerid",request.partnerId);
                 json.put("prepayid",request.prepayId);
                 json.put("package","Sign=WXPay");
@@ -62,7 +65,7 @@ public class WechatPay {
                     paramBuffer.append(key + "=").append(json.get(key)).append("&");
                 }
                 // 需要签名的数据
-                String stringSignTemp = paramBuffer + "key=" + "40F4131427068E08451D37F02021473A";
+                String stringSignTemp = paramBuffer + "key=" +WechatApipay;
                 request.sign =stringSignTemp;
 
                 api.sendReq(request);

@@ -16,11 +16,12 @@ import java.util.Map;
 public class Staticdata {
     public static String UUID = "";
     public static String JpushID="";
-    public  static String WechatApi="wx1589c6a947d1f803";
+    public  static String WechatApi="wx1589c6a947d1f803";//微信appid
+    public  static String WechatApipay="40F4131427068E08451D37F02021473A";//微信支付签名密钥
+
 
     //登陆时候Rsa加密的公钥
     public static String PUBLIC_KEY_STR = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXtNyajfT+Z1+p4wLQXIzlbiSJUXG8lhS9ZeCjDHXclZa6G2xUWvliVXSPc8gAuWC1yz1OibXwspGq48kzqPoyqlNr37uBBjUArquKD/ky0BaADOeD+eHy7jnkXdshSUZAdYpIYEKuM3y+/9qSI+qkJZV/Z8xHKDLUIXYToL/AWwIDAQAB";
-
     //手机屏幕的宽高
     public static int ScreenHight = 0;
     public static int ScreenWidth = 0;

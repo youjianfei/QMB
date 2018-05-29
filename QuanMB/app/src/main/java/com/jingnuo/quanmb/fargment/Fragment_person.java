@@ -9,17 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MyOrderActivity;
 import com.jingnuo.quanmb.activity.MySkillCollectActivity;
+import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
@@ -28,13 +26,11 @@ import com.jingnuo.quanmb.activity.ShopInNextActivity;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
-import com.jingnuo.quanmb.entityclass.WechatPayBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
-import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.UMAuthListener;
@@ -44,8 +40,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +58,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     TextView mTextview_address;
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
+    ImageView mimage_chengwei;
     TextView mTextview_nickname;
     TextView mTextview_chengwei;
     TextView mTextview_myorder;
@@ -75,7 +70,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
 
     private IWXAPI api;
-    WechatPayBean wechatPayBean;
+
 
 
     @Nullable
@@ -112,14 +107,16 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
     private void initdata() {
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
-        if(Staticdata.static_userBean.getData().getBusiness_status()==1){
-            mTextview_chengwei.setText("商户");
-        }else if(Staticdata.static_userBean.getData().getHelper_status()==1){
-            mTextview_chengwei.setText("帮手");
-        }else {
-            mTextview_chengwei.setText("未认证");
-        }
+//        if(Staticdata.static_userBean.getData().getBusiness_status()==1){
+//            mTextview_chengwei.setText("商户");
+//        }else if(Staticdata.static_userBean.getData().getHelper_status()==1){
+//            mTextview_chengwei.setText("帮手");
+//        }else {
+//            mTextview_chengwei.setText("未认证");
+//        }
+        mTextview_chengwei.setText(Staticdata.static_userBean.getData().getAppellation_name());
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
+        Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mCircleImage);
 
     }
 //    @Override
@@ -138,6 +135,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
+        Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mimage_chengwei);
     }
 
     private void setview() {
@@ -156,7 +154,10 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
         mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
         mButton_rechange=rootview.findViewById(R.id.button_recharge);
+        mimage_chengwei=rootview.findViewById(R.id.image_chengwei);
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -173,10 +174,21 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 new WechatPay(getActivity(),api,map_pay).wepay();
 
                 break;
-            case R.id.textview_aboutus://关于我们
+            case R.id.textview_aboutus://关于我们  暂时接支付宝支付
+//                Map map_zpay=new HashMap();
+//                map_zpay.put("subject","全民帮—充值");
+//                map_zpay.put("total_fee","0.01");
+//                map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                map_zpay.put("task_id","141");
+//                LogUtils.LOG("ceshi",map_zpay.toString(),"支付宝qingqiu接口");
+//                LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.zhifubaoPay,"支付宝qingqiu接口");
+//                new ZhifubaoPay(getActivity(),map_zpay).zhifubaoPay();
 
-
+                Intent intent_pay=new Intent(getActivity(), PayActivity.class);
+                startActivity(intent_pay);
                 break;
+
             case R.id.textview_colllect:
                 Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
                 startActivity(intent_collect);
