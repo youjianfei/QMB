@@ -61,6 +61,8 @@ public class Adapter_shophall extends BaseAdapter {
         }
         viewholder.mTextview_skillstitle.setText(mData.get(position).getTitle());
         viewholder.mTextview_address.setText(mData.get(position).getRelease_address());
+//        String imageUrl[]=mData.get(position).getImage_url().split(",");
+
 
         //点击拨打电话
         viewholder.mImage_call.setOnClickListener(new View.OnClickListener() {

@@ -3,6 +3,7 @@ package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class ShopCenterActivity extends BaseActivityother {
     RelativeLayout mRealtivelayout_myissue;
     RelativeLayout mRealtivelayout_myorder;
     RelativeLayout mRealtivelayout_myauthentication;
+    Button mButtonCash;
 
     //对象
     ShopcenterBean shopcenterBean;//商户
@@ -69,6 +71,7 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myissue.setOnClickListener(this);
         mRealtivelayout_myorder.setOnClickListener(this);
         mRealtivelayout_myauthentication.setOnClickListener(this);
+        mButtonCash.setOnClickListener(this);
     }
 
     @Override
@@ -82,13 +85,17 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myissue = findViewById(R.id.relative_myissue);
         mRealtivelayout_myorder = findViewById(R.id.myorder);
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
-
+        mButtonCash=findViewById(R.id.button_cash);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.button_cash:
+                Intent intent_cash=new Intent(this, CashoutActivity.class);
+                startActivity(intent_cash);
+                break;
             case R.id.relative_issuetask:
                 Intent intend_issue_skill = new Intent(ShopCenterActivity.this, IssueSkillActivity.class);
                 intend_issue_skill.putExtra("type",type);
@@ -141,7 +148,6 @@ public class ShopCenterActivity extends BaseActivityother {
                     mTextview_name.setText(shopcenterBean.getData().getList().getBusiness_name());
                     mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address());
                 }
-
 
             }
 

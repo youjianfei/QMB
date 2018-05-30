@@ -13,12 +13,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
+import com.jingnuo.quanmb.activity.CashoutActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MyOrderActivity;
 import com.jingnuo.quanmb.activity.MySkillCollectActivity;
 import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
+import com.jingnuo.quanmb.activity.RechargeActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
@@ -66,6 +68,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     TextView mTextview_aboutus;
     TextView mTextview_logout;
     Button mButton_rechange;//充值
+    Button mButton_cashout;//提现
 
 
 
@@ -99,6 +102,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_mycollect.setOnClickListener(this);
         mTextview_aboutus.setOnClickListener(this);
         mButton_rechange.setOnClickListener(this);
+        mButton_cashout.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -154,6 +158,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
         mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
         mButton_rechange=rootview.findViewById(R.id.button_recharge);
+        mButton_cashout=rootview.findViewById(R.id.button_tixian);
         mimage_chengwei=rootview.findViewById(R.id.image_chengwei);
     }
 
@@ -162,16 +167,24 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.button_tixian://提现
+                Intent intent_cash=new Intent(getActivity(), CashoutActivity.class);
+                startActivity(intent_cash);
+
+                break;
             case R.id.button_recharge://充值
-                api = WXAPIFactory.createWXAPI(getActivity(), Staticdata.WechatApi);//微信支付用到
-                Map map_pay=new HashMap();
-                map_pay.put("body","全民帮—充值");
-                map_pay.put("total_fee","0.01");
-                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                map_pay.put("task_id","141");
-                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-                new WechatPay(getActivity(),api,map_pay).wepay();
+//                api = WXAPIFactory.createWXAPI(getActivity(), Staticdata.WechatApi);//微信支付用到
+//                Map map_pay=new HashMap();
+//                map_pay.put("body","全民帮—充值");
+//                map_pay.put("total_fee","0.01");
+//                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                map_pay.put("task_id","141");
+//                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
+//                new WechatPay(getActivity(),api,map_pay).wepay();
+                Intent intent_recharge=new Intent(getActivity(), RechargeActivity.class);
+                startActivity(intent_recharge);
+
 
                 break;
             case R.id.textview_aboutus://关于我们  暂时接支付宝支付
