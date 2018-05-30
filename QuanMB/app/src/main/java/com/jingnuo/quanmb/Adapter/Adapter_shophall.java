@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.activity.BaseActivityother;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
 import com.jingnuo.quanmb.quanmb.R;
@@ -61,7 +62,7 @@ public class Adapter_shophall extends BaseAdapter {
         }
         viewholder.mTextview_skillstitle.setText(mData.get(position).getTitle());
         viewholder.mTextview_address.setText(mData.get(position).getRelease_address());
-//        String imageUrl[]=mData.get(position).getImage_url().split(",");
+        Glide.with(mContext).load(mData.get(position).getAvatar_url()).into(viewholder.mImageview_shoppic);
 
 
         //点击拨打电话
