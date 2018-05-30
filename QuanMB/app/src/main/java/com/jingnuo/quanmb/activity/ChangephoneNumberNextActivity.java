@@ -84,6 +84,7 @@ public class ChangephoneNumberNextActivity extends BaseActivityother {
                 }
                 map_bindphonenumber.put("ValidateCode", yanzhengam);
                 map_bindphonenumber.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                map_bindphonenumber.put("type","1");
                 new Volley_Utils(new Interface_volley_respose() {
                     @Override
                     public void onSuccesses(String respose) {

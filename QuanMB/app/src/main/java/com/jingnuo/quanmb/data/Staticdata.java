@@ -1,5 +1,7 @@
 package com.jingnuo.quanmb.data;
 
+import android.graphics.Bitmap;
+
 import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
 import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
 import com.jingnuo.quanmb.entityclass.UserBean;
@@ -37,8 +39,10 @@ public class Staticdata {
     //发布任务需要向下一页传递map  这里偷懒把map写为全局变量
     public static Map  map_task = new HashMap();
     public static List<List<String>> imagePathlist=new ArrayList();
-    //确认帮助任务需要向下一页传入数据，把qurenbean写为全局变量
-//    public  static QueRenHelp_Bean queRenHelp_bean=null;
+    public static List<Bitmap> mlistdata_pic=new ArrayList<>();//展示 选择的图片得bitmap
+
+
+
     //向下一页传入数据，写为全局变量
     public  static Map map_wechat=new HashMap();
 

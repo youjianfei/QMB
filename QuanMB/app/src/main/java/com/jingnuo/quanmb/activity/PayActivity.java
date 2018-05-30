@@ -114,6 +114,7 @@ public class PayActivity extends BaseActivityother {
         mRelayout_wechat.setOnClickListener(this);
         mRelayout_zhifubao.setOnClickListener(this);
         mButton_submit.setOnClickListener(this);
+
     }
 
     @Override
@@ -202,6 +203,7 @@ public class PayActivity extends BaseActivityother {
                 if(pay==2){
                     //微信支付
                     Map map_pay=new HashMap();
+                    map_pay.put("isrecharge","N");
                     map_pay.put("body",title_pay);
                     map_pay.put("total_fee",amount);
                     map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
@@ -214,6 +216,7 @@ public class PayActivity extends BaseActivityother {
                 if(pay==3){
                     //支付宝支付
                     Map map_zpay=new HashMap();
+                    map_zpay.put("isrecharge","N");
                     map_zpay.put("subject",title_pay);
                     map_zpay.put("total_fee",amount);
                     map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
@@ -228,5 +231,11 @@ public class PayActivity extends BaseActivityother {
 
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(paysuccess_BroadcastReciver);
     }
 }

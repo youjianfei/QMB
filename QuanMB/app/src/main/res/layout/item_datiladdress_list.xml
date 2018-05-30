@@ -55,7 +55,7 @@
         android:background="@drawable/select_duigou"
         android:layout_below="@+id/line1"
         android:layout_marginLeft="23dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="17dp"
         />
     <TextView
         android:layout_width="wrap_content"

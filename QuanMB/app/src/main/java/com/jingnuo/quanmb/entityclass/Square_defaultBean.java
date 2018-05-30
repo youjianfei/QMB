@@ -69,7 +69,7 @@ public class Square_defaultBean {
              */
 
             private String client_no;
-            private int commission;
+            private double commission;
             private String createDate;
             private String headUrl;
             private String release_Address;
@@ -96,11 +96,11 @@ public class Square_defaultBean {
                 this.client_no = client_no;
             }
 
-            public int getCommission() {
+            public double getCommission() {
                 return commission;
             }
 
-            public void setCommission(int commission) {
+            public void setCommission(double commission) {
                 this.commission = commission;
             }
 

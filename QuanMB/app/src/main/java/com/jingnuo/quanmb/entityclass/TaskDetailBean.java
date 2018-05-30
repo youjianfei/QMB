@@ -62,7 +62,7 @@ public class TaskDetailBean {
         private String client_name;
         private String client_no;
         private String client_sex;
-        private int commission;
+        private double commission;
         private String createDate;
         private String detailed_address;
         private String is_counteroffer;
@@ -145,11 +145,11 @@ public class TaskDetailBean {
             this.client_sex = client_sex;
         }
 
-        public int getCommission() {
+        public double getCommission() {
             return commission;
         }
 
-        public void setCommission(int commission) {
+        public void setCommission(double commission) {
             this.commission = commission;
         }
 

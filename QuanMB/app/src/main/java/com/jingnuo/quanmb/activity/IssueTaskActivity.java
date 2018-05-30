@@ -42,6 +42,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -98,15 +99,15 @@ public class IssueTaskActivity extends BaseActivityother {
     String client_no = "";
     String release_address = "";
     String commission = "";
-    Bitmap mBitmap=null;
+    Bitmap mBitmap = null;
 
     String detailed_address = "";
     String task_Status_code = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
     int isMEchujia = 1;//1  由我出价   2  由帮手出价
     boolean ceshi = true;
-    int  PIC_mix=3;//选择图片得张数
-    List<Bitmap> mlistdata_pic;//展示得 选择得图片得bitmap
+    int PIC_mix = 3;//选择图片得张数
+
     List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
     Map map_issueTask;
 
@@ -117,11 +118,13 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        mlistdata_pic=new ArrayList<Bitmap>();//展示得 选择得图片得bitmap
-        mList_PicPath_down=new ArrayList<>();
-        Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
-        mlistdata_pic.add(bitmap);
-        adapter_gridviewpic_upLoad=new Adapter_Gridviewpic_UPLoad(mlistdata_pic,this);
+
+        Staticdata.mlistdata_pic.clear();//展示得 选择得图片得bitmap
+
+        mList_PicPath_down = new ArrayList<>();
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+        Staticdata.mlistdata_pic.add(bitmap);
+        adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, this);
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
 
     }
@@ -144,6 +147,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mEditview_taskmoney.addTextChangedListener(new MoneyTextWatcher(mEditview_taskmoney).setDigits(2));
         mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,14 +181,14 @@ public class IssueTaskActivity extends BaseActivityother {
             public void onClick(View view) {
                 if (initmap()) {
 
-                    Staticdata.imagePathlist=mList_PicPath_down;
+                    Staticdata.imagePathlist = mList_PicPath_down;
 
 
-                    Map map_check=new HashMap();
-                    map_check.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map_check.put("task_name",map_issueTask.get("task_name"));
-                    map_check.put("task_description",map_issueTask.get("task_description"));
-                    map_check.put("detailed_address",map_issueTask.get("detailed_address"));
+                    Map map_check = new HashMap();
+                    map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                    map_check.put("task_name", map_issueTask.get("task_name"));
+                    map_check.put("task_description", map_issueTask.get("task_description"));
+                    map_check.put("detailed_address", map_issueTask.get("detailed_address"));
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -199,13 +203,13 @@ public class IssueTaskActivity extends BaseActivityother {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if(status==1){
-                                Staticdata.map_task.put("check",1+"");
-                                LogUtils.LOG("ceshi","图片地址的个数"+Staticdata.imagePathlist.size(),"发布任务图片");
+                            if (status == 1) {
+                                Staticdata.map_task.put("check", 1 + "");
+                                LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
                                 Intent intent = new Intent(IssueTaskActivity.this, IssueTaskNextActivity.class);
                                 startActivity(intent);
-                            }else {
-                                ToastUtils.showToast(IssueTaskActivity.this,msg);
+                            } else {
+                                ToastUtils.showToast(IssueTaskActivity.this, msg);
                             }
                         }
 
@@ -213,7 +217,7 @@ public class IssueTaskActivity extends BaseActivityother {
                         public void onError(int error) {
 
                         }
-                    }).postHttp(Urls.Baseurl_cui+Urls.checkissuetask,IssueTaskActivity.this,1,map_check);
+                    }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, IssueTaskActivity.this, 1, map_check);
 
                 }
             }
@@ -221,13 +225,13 @@ public class IssueTaskActivity extends BaseActivityother {
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.LOG("ceshi","点击+"+position,"选择图片");
-                if(mlistdata_pic.size()-1==position){
+                LogUtils.LOG("ceshi", "点击+" + position, "选择图片");
+                if (Staticdata.mlistdata_pic.size() - 1 == position) {
                     choosePIC();
-                }else {
-                    mlistdata_pic.remove(position);
+                } else {
+                    Staticdata.mlistdata_pic.remove(position);
                     mList_PicPath_down.remove(position);//删除图片地址以便上传；
-                    PIC_mix=3-mList_PicPath_down.size();
+                    PIC_mix = 3 - mList_PicPath_down.size();
                     adapter_gridviewpic_upLoad.notifyDataSetChanged();
                 }
             }
@@ -271,7 +275,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     mImage_choosehelper.setSelected(true);
                     mImage_chooseme.setSelected(false);
                     isMEchujia = 2;
-                    map_issueTask.put("is_helper_bid",   "Y");//由帮手出价
+                    map_issueTask.put("is_helper_bid", "Y");//由帮手出价
                     relativelayout_chujia.setVisibility(View.GONE);
                     mEditview_taskmoney.setText("");
                     is_counteroffer = 1;
@@ -288,7 +292,7 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_time = findViewById(R.id.edit_tasktime);
         mEditview_addressDetail = findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = findViewById(R.id.edit_detailtask);
-        imageGridview=findViewById(R.id.GridView_PIC);
+        imageGridview = findViewById(R.id.GridView_PIC);
         mEditview_taskmoney = findViewById(R.id.edit_charges);
         mButton_sub = findViewById(R.id.button_submitsave);
         mImage_choosejieshou = findViewById(R.id.image_choosejieshou);
@@ -316,7 +320,7 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }
-        task_time=mTextview_time.getText()+"";
+        task_time = mTextview_time.getText() + "";
         if (task_time.equals("请选择希望完成时间")) {
             ToastUtils.showToast(this, "请选择希望完成时间");
             return false;
@@ -334,7 +338,7 @@ public class IssueTaskActivity extends BaseActivityother {
         commission = mEditview_taskmoney.getText() + "";
         if (!commission.equals("")) {
             float min = Float.parseFloat(commission);
-            map_issueTask.put("is_helper_bid",   "N");//由我出价
+            map_issueTask.put("is_helper_bid", "N");//由我出价
             LogUtils.LOG("ceshi", min + "", "最低佣金");
             if (min < 5) {
                 ToastUtils.showToast(IssueTaskActivity.this, "佣金最低为5元");
@@ -342,7 +346,7 @@ public class IssueTaskActivity extends BaseActivityother {
             }
         } else {
             if (isMEchujia == 1) {
-                map_issueTask.put("is_helper_bid",   "N");
+                map_issueTask.put("is_helper_bid", "N");
                 ToastUtils.showToast(IssueTaskActivity.this, "请填写佣金");
                 return false;
             }
@@ -351,13 +355,14 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
+        map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
         map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
         map_issueTask.put("release_address", "郑州");//TODO 地区
         map_issueTask.put("commission", commission + "");
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
-        Staticdata.map_task.put("tasktypename",task_type);
+        Staticdata.map_task.put("tasktypename", task_type);
 
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
@@ -422,20 +427,20 @@ public class IssueTaskActivity extends BaseActivityother {
 //            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
             for (String path : pathList) {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
-                 mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
+                mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
 //                dataPictrue.add(mBitmap);
-                mlistdata_pic.add(0,mBitmap);
+                Staticdata.mlistdata_pic.add(0, mBitmap);
 //                upLoadImage.uploadImg(pathList, 2);
 
                 //调用压缩图片的方法，返回压缩后的图片path
                 String src_path = path;//原图片的路径
                 String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
                 final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
-                List<String> mList_picpath=new ArrayList<>();
+                List<String> mList_picpath = new ArrayList<>();
                 mList_picpath.add(compressImage);
-                mList_PicPath_down.add(0,mList_picpath);
+                mList_PicPath_down.add(0, mList_picpath);
             }
-            PIC_mix=3-mList_PicPath_down.size();
+            PIC_mix = 3 - mList_PicPath_down.size();
             adapter_gridviewpic_upLoad.notifyDataSetChanged();
         }
 
