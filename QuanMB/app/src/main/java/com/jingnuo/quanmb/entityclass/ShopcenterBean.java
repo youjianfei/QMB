@@ -86,7 +86,7 @@ public class ShopcenterBean {
             private String business_name;
             private String business_no;
             private int business_reputation;
-            private int business_type_id;
+            private String business_type_id;
             private String business_url;
             private String client_no;
             private String createDate;
@@ -98,6 +98,19 @@ public class ShopcenterBean {
             private String status;
             private String updateDate;
             private String updateName;
+            private String introduction;
+
+            public String getIntroduction() {
+                return introduction;
+            }
+
+            public void setIntroduction(String introduction) {
+                this.introduction = introduction;
+            }
+
+            public ListBean(String avatar_url) {
+                this.avatar_url = avatar_url;
+            }
 
             public String getAvatar_url() {
                 return avatar_url;
@@ -171,11 +184,11 @@ public class ShopcenterBean {
                 this.business_reputation = business_reputation;
             }
 
-            public int getBusiness_type_id() {
+            public String getBusiness_type_id() {
                 return business_type_id;
             }
 
-            public void setBusiness_type_id(int business_type_id) {
+            public void setBusiness_type_id(String business_type_id) {
                 this.business_type_id = business_type_id;
             }
 

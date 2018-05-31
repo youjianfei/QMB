@@ -60,7 +60,7 @@ public class MyTodoBean {
              * task_order_id : 1
              */
 
-            private int order_amount;
+            private double order_amount;
             private String order_no;
             private String order_status;
             private String task_description;
@@ -76,11 +76,11 @@ public class MyTodoBean {
                 this.task_id = task_id;
             }
 
-            public int getOrder_amount() {
+            public double getOrder_amount() {
                 return order_amount;
             }
 
-            public void setOrder_amount(int order_amount) {
+            public void setOrder_amount(double order_amount) {
                 this.order_amount = order_amount;
             }
 

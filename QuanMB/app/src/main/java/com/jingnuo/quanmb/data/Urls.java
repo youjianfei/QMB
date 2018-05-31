@@ -71,6 +71,7 @@ public class Urls {
     public static String  shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
     public static String shopIssueSkill = "business/releaseSpecialty";//发布专业    post
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
+    public static String setshophead = "business/setBusinessAvatar";//服务内容详情    参数  id  get请求
 
 
 

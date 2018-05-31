@@ -75,7 +75,7 @@ public class HelpOrderBean {
             private String headUrl;
             private String mobile_no;
             private String nick_name;
-            private int order_amount;
+            private double order_amount;
             private String order_no;
             private String order_status;
             private String order_status_name;
@@ -141,11 +141,11 @@ public class HelpOrderBean {
                 this.nick_name = nick_name;
             }
 
-            public int getOrder_amount() {
+            public double getOrder_amount() {
                 return order_amount;
             }
 
-            public void setOrder_amount(int order_amount) {
+            public void setOrder_amount(double order_amount) {
                 this.order_amount = order_amount;
             }
 

@@ -55,8 +55,8 @@ public class BargainMessagedetailsBean {
 
         private String Avatar_imgUrl;
         private String Status_name;
-        private int commission;
-        private int counteroffer_Amount;
+        private double commission;
+        private double counteroffer_Amount;
         private String createDate;
         private String helper_no;
         private String business_no;
@@ -146,19 +146,19 @@ public class BargainMessagedetailsBean {
             this.Status_name = Status_name;
         }
 
-        public int getCommission() {
+        public double getCommission() {
             return commission;
         }
 
-        public void setCommission(int commission) {
+        public void setCommission(double commission) {
             this.commission = commission;
         }
 
-        public int getCounteroffer_Amount() {
+        public double getCounteroffer_Amount() {
             return counteroffer_Amount;
         }
 
-        public void setCounteroffer_Amount(int counteroffer_Amount) {
+        public void setCounteroffer_Amount(double counteroffer_Amount) {
             this.counteroffer_Amount = counteroffer_Amount;
         }
 

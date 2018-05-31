@@ -148,7 +148,9 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name="com.jingnuo.quanmb.activity.RechargeActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.CashoutActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.CashoutActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ShopCenterInfoActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ShopinfoEditActivity"></activity>
     </application>
 
 </manifest>

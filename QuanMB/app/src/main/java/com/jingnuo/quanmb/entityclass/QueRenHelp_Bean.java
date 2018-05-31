@@ -58,14 +58,14 @@ public class QueRenHelp_Bean {
 
         private String Status_name;
         private String client_no;
-        private int counteroffer_Amount;
+        private double counteroffer_Amount;
         private String createDate;
         private String detailed_address;
         private String headUrl;
         private String is_counteroffer;
         private String mobile_no;
         private String nick_name;
-        private int order_Amount;
+        private double order_Amount;
         private String order_EndDate;
         private String order_no;
         private String specialty_name;
@@ -99,11 +99,11 @@ public class QueRenHelp_Bean {
             this.client_no = client_no;
         }
 
-        public int getCounteroffer_Amount() {
+        public double getCounteroffer_Amount() {
             return counteroffer_Amount;
         }
 
-        public void setCounteroffer_Amount(int counteroffer_Amount) {
+        public void setCounteroffer_Amount(double counteroffer_Amount) {
             this.counteroffer_Amount = counteroffer_Amount;
         }
 
@@ -155,11 +155,11 @@ public class QueRenHelp_Bean {
             this.nick_name = nick_name;
         }
 
-        public int getOrder_Amount() {
+        public double getOrder_Amount() {
             return order_Amount;
         }
 
-        public void setOrder_Amount(int order_Amount) {
+        public void setOrder_Amount(double order_Amount) {
             this.order_Amount = order_Amount;
         }
 

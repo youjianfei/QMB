@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -30,6 +31,8 @@ public class AddAddressActivity extends BaseActivityother {
     Button mButton_submit;
     ImageView mImage_nan;
     ImageView mImage_nv;
+    ImageView mImage_setmoren;
+    RelativeLayout mRelayout_setmoren;
 
     String  name="";
     String  phonenumber="";
@@ -40,6 +43,7 @@ public class AddAddressActivity extends BaseActivityother {
     String  type="";
     String id="";//编辑要用
     String URL="";
+    String isDefult="N";
 
 
 
@@ -63,6 +67,7 @@ public class AddAddressActivity extends BaseActivityother {
             mtextview_title.setText("新增联系人");
             URL= Urls.Baseurl+Urls.addLianxiren;
         }else {
+            mRelayout_setmoren.setVisibility(View.VISIBLE);
             URL= Urls.Baseurl+Urls.editLianxiren;
             mtextview_title.setText("编辑联系人");
             name=intent.getStringExtra("name");
@@ -80,6 +85,7 @@ public class AddAddressActivity extends BaseActivityother {
             mEdit_number.setText(phonenumber);
 
             map_lianxiren.put("id",id);
+            map_lianxiren.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
             return;
         }
         mImage_nan.setSelected(true);
@@ -101,6 +107,19 @@ public class AddAddressActivity extends BaseActivityother {
                 mImage_nan.setSelected(false);
                 mImage_nv.setSelected(true);
                 sex=1;
+            }
+        });
+        mImage_setmoren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isDefult.equals("N")){
+                    mImage_setmoren.setSelected(true);
+                    isDefult="Y";
+                }else {
+                    mImage_setmoren.setSelected(false);
+                    isDefult="N";
+                }
+
             }
         });
         mButton_submit.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +162,8 @@ public class AddAddressActivity extends BaseActivityother {
         mButton_submit=findViewById(R.id.button_submitsave);
         mImage_nan=findViewById(R.id.image_choosejieshou);
         mImage_nv=findViewById(R.id.image_choosejujue);
+        mImage_setmoren=findViewById(R.id.image_setmoren);
+        mRelayout_setmoren=findViewById(R.id.relay_setmoren);
     }
     boolean init(){
         name=mEdit_name.getText()+"";
@@ -160,7 +181,7 @@ public class AddAddressActivity extends BaseActivityother {
         map_lianxiren.put("mobile_no",phonenumber);
         map_lianxiren.put("user_token",Staticdata.static_userBean.getData().getUser_token());
         map_lianxiren.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-        map_lianxiren.put("is_default","N");//暂时设为 不是默认
+        map_lianxiren.put("is_default",isDefult);//暂时设为 不是默认
         return true;
     }
 }

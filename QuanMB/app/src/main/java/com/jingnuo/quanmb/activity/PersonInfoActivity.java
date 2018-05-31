@@ -66,8 +66,8 @@ public class PersonInfoActivity extends BaseActivityother {
                 String imageID = "";
                 try {
                     JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("msg");//登录返回信息
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
 
                     if (status == 1) {
                         imageID = (String) object.get("imgID");

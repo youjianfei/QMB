@@ -72,7 +72,7 @@ public class MyorderBean {
          */
 
         private String Status_name;
-        private int commission;
+        private double commission;
         private int count;
         private String detailed_address;
         private String is_counteroffer;
@@ -94,11 +94,11 @@ public class MyorderBean {
             this.Status_name = Status_name;
         }
 
-        public int getCommission() {
+        public double getCommission() {
             return commission;
         }
 
-        public void setCommission(int commission) {
+        public void setCommission(double commission) {
             this.commission = commission;
         }
 

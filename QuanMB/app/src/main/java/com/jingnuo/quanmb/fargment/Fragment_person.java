@@ -173,33 +173,13 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
                 break;
             case R.id.button_recharge://充值
-//                api = WXAPIFactory.createWXAPI(getActivity(), Staticdata.WechatApi);//微信支付用到
-//                Map map_pay=new HashMap();
-//                map_pay.put("body","全民帮—充值");
-//                map_pay.put("total_fee","0.01");
-//                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-//                map_pay.put("task_id","141");
-//                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-//                new WechatPay(getActivity(),api,map_pay).wepay();
                 Intent intent_recharge=new Intent(getActivity(), RechargeActivity.class);
                 startActivity(intent_recharge);
 
 
                 break;
-            case R.id.textview_aboutus://关于我们  暂时接支付宝支付
-//                Map map_zpay=new HashMap();
-//                map_zpay.put("subject","全民帮—充值");
-//                map_zpay.put("total_fee","0.01");
-//                map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-//                map_zpay.put("task_id","141");
-//                LogUtils.LOG("ceshi",map_zpay.toString(),"支付宝qingqiu接口");
-//                LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.zhifubaoPay,"支付宝qingqiu接口");
-//                new ZhifubaoPay(getActivity(),map_zpay).zhifubaoPay();
+            case R.id.textview_aboutus://关于我们
 
-                Intent intent_pay=new Intent(getActivity(), PayActivity.class);
-                startActivity(intent_pay);
                 break;
 
             case R.id.textview_colllect:
