@@ -105,6 +105,9 @@ public class Urls {
     public static String mytaskdetails = "task/getTaskDetail";//任务详情  ?id=
     public static String myLianxiren = "user/getContactsList";//常用联系人
     public static String deleteLianxiren = "user/deleteContacts?user_token=";//删除联系人
+    public static String setmorenLianxiren = "user/setIsDefault?user_token=";//设为默认联系人
+    public static String addLianxiren = "user/addContacts";//新增联系人
+    public static String editLianxiren = "user/editContacts";//编辑联系人
 
 
     //支付

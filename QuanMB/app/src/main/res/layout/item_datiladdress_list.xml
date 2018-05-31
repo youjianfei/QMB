@@ -48,26 +48,35 @@
         android:layout_below="@+id/text_phonenumber"
         android:layout_marginTop="15dp"
         />
-    <ImageView
-        android:id="@+id/image_choose"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:background="@drawable/select_duigou"
-        android:layout_below="@+id/line1"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="17dp"
-        />
-    <TextView
+    <LinearLayout
+        android:id="@+id/linearlayout_setmoren"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="设为默认"
-        android:textColor="@color/black_text2"
+        android:orientation="horizontal"
         android:layout_below="@+id/line1"
-        android:layout_toRightOf="@+id/image_choose"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="15dp"
-        />
+        >
+        <ImageView
+            android:id="@+id/image_choose"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/select_duigou"
+
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="17dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设为默认"
+            android:textColor="@color/black_text2"
+            android:layout_below="@+id/line1"
+            android:layout_toRightOf="@+id/image_choose"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="15dp"
+            />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textview_delete"
         android:layout_width="wrap_content"

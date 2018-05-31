@@ -214,28 +214,11 @@
                     android:textSize="15dp" />
 
             </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/white">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:background="@color/white">-->
 
                 <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
@@ -312,16 +295,16 @@
 
 
                 <!--</LinearLayout>-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/image_line6"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp"
-                    android:text="性别："
-                    android:visibility="gone"
-                    android:textColor="@color/black_text" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/image_line6"-->
+                    <!--android:layout_marginBottom="15dp"-->
+                    <!--android:layout_marginLeft="30dp"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:text="性别："-->
+                    <!--android:visibility="gone"-->
+                    <!--android:textColor="@color/black_text" />-->
 
                 <!--<ImageView-->
                     <!--android:id="@+id/image_line7"-->
@@ -359,7 +342,7 @@
                     <!--android:textColor="@color/black_text2"-->
                     <!--android:textColorHint="@color/text_hide_tip"-->
                     <!--android:textSize="14dp" />-->
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
             <RelativeLayout
                 android:id="@+id/relayout_choselianxiren"
                 android:layout_width="match_parent"
@@ -391,6 +374,13 @@
                 android:background="@color/white"
                 android:visibility="gone"
                 >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/gray_background"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    />
 
                 <TextView
                     android:id="@+id/textview_name"
