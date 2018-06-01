@@ -63,7 +63,11 @@ public class Adapter_shophall extends BaseAdapter {
         viewholder.mTextview_skillstitle.setText(mData.get(position).getTitle());
         viewholder.mTextview_address.setText(mData.get(position).getRelease_address());
         Glide.with(mContext).load(mData.get(position).getAvatar_url()).into(viewholder.mImageview_shoppic);
-
+        if(mData.get(position).getBusiness_no().equals("")){
+            viewholder.mTextview_vip.setText("认证帮手");
+        }else {
+            viewholder.mTextview_vip.setText("认证商户");
+        }
 
         //点击拨打电话
         viewholder.mImage_call.setOnClickListener(new View.OnClickListener() {

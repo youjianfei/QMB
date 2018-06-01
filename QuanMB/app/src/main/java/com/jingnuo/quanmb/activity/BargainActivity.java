@@ -248,17 +248,20 @@ public class BargainActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.button_accect://接受还价
-                Map map_pay=new HashMap();
-                map_pay.put("body","全民帮—任务付款");
-                map_pay.put("total_fee","0.01");
-                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                map_pay.put("task_id",bargainMessagedetailsBean.getData().getTask_id() + "");
-                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-                new WechatPay(BargainActivity.this,api,map_pay).wepay();//吊起微信支付
-
-
-
+//                Map map_pay=new HashMap();
+//                map_pay.put("body","全民帮—任务付款");
+//                map_pay.put("isrecharge","N");
+//                map_pay.put("total_fee","0.01");
+//                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                map_pay.put("task_id",bargainMessagedetailsBean.getData().getTask_id() + "");
+//                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
+//                new WechatPay(BargainActivity.this,api,map_pay).wepay();//吊起微信支付
+                Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
+                intentpay.putExtra("title", "任务付款");
+                intentpay.putExtra("amount", "0.01");
+                intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
+                startActivity(intentpay);
 
                 break;
             case R.id.button_goon://继续还价

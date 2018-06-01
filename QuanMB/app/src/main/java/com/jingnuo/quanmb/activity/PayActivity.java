@@ -77,8 +77,8 @@ public class PayActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if(respose.equals("success")){//支付成功
-                    Staticdata.map_task.put("payResult","1");
-                    requast(Staticdata.map_task);//正式发布任务
+                    finish();
+
                 }
             }
 
@@ -104,7 +104,11 @@ public class PayActivity extends BaseActivityother {
         taskid=intent.getStringExtra("taskid");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_head);
         mTextview_amount.setText("¥"+amount);
-        mTextview_order.setText(Staticdata.map_task.get("tasktypename").toString()+"-"+Staticdata.map_task.get("task_id"));
+        if(Staticdata.map_task.get("tasktypename")!=null){
+            mTextview_order.setText(Staticdata.map_task.get("tasktypename").toString()+"-"+Staticdata.map_task.get("task_id"));
+        }else {
+            mTextview_order.setText(title_pay+"-"+taskid);
+        }
         image_yue.setSelected(true);
     }
 
@@ -197,7 +201,11 @@ public class PayActivity extends BaseActivityother {
                     //余额支付
                     ToastUtils.showToast(this,"对不起，余额不足");
                     Staticdata.map_task.put("payResult","1");
-                    requast(Staticdata.map_task);//正式发布任务
+//                    requast(Staticdata.map_task);//正式发布任务
+                    Intent intent = new Intent("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
+                    intent.putExtra("pay","success");
+                    PayActivity.this. sendBroadcast(intent);
+                    finish();
                     return;
                 }
                 if(pay==2){
@@ -236,6 +244,6 @@ public class PayActivity extends BaseActivityother {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(paysuccess_BroadcastReciver);
+//        unregisterReceiver(paysuccess_BroadcastReciver);
     }
 }

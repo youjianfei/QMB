@@ -9,7 +9,6 @@
         android:id="@+id/image_shoppic"
         android:layout_width="75dp"
         android:layout_height="55dp"
-        android:background="@color/green_text"
         android:layout_marginTop="13dp"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="13dp"

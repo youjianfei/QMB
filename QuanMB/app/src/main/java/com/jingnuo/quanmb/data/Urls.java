@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-//    public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -59,30 +59,28 @@ public class Urls {
     public static String ColltctSkillList = "user/getCollectionList?user_token=";//收藏列表
 
 
-
     //商户
     public static String shopIn = "business/commitApply";//商家入驻审核    post
     public static String shopIn_state = "business/queryBusinessStatus?user_token=";//商家入驻审核状态
 
     public static String shopcenter = "business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
-    public static String  shoporder= "business/queryBusinessOrder?user_token=";//商家接收的任务
-    public static String  shoporderdetail= "business/queryOrderDetail?user_token=";//商家接收的任务详情
-    public static String  shopkill= "business/queryMyRelease?user_token=";//商户发布的服务
-    public static String  shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
+    public static String shoporder = "business/queryBusinessOrder?user_token=";//商家接收的任务
+    public static String shoporderdetail = "business/queryOrderDetail?user_token=";//商家接收的任务详情
+    public static String shopkill = "business/queryMyRelease?user_token=";//商户发布的服务
+    public static String shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
     public static String shopIssueSkill = "business/releaseSpecialty";//发布专业    post
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String setshophead = "business/setBusinessAvatar";//设置商户头像
     public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
 
 
-
     //帮手模块
     public static String authenticationHelper = "helper/helperReal";//帮手认证
     public static String helpIn_state = "helper/getHelperAuditState";//帮手认证审核状态
     public static String helperInfo = "helper/queryHelperInfo?user_token=";//帮手信息
-    public static String  helporder= "helper/queryHelperOrder?user_token=";//帮手接收的任务
-    public static String  helporderdetail= "helper/queryOrderDetail?user_token=";//商家接收的任务详情
-    public static String  helpskill= "helper/queryMyRelease?user_token=";//帮手发布的服务
+    public static String helporder = "helper/queryHelperOrder?user_token=";//帮手接收的任务
+    public static String helporderdetail = "helper/queryOrderDetail?user_token=";//商家接收的任务详情
+    public static String helpskill = "helper/queryMyRelease?user_token=";//帮手发布的服务
     public static String helperIssueSkill = "helper/releaseSpecialty";//发布专业    post
     public static String helperSkilldetail = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String orderthink = "order/orderEvaluate";//评价帮手
@@ -94,12 +92,10 @@ public class Urls {
     public static String getNewmessage = "messsageCon/getUserNewsByType";//消息类型 1系统消息，2还价消息，3交易消息，4推荐任务
 
 
-    public static String bargainmessage="bargain/bargainMessage";//还价详情
-    public static String acceptORrefuse="bargain/bargainAccpetOrNo";//接受拒绝还价
-    public static String helpterbargain="bargain/taskBargain";//帮手还价
-    public static String kehubargain="bargain/bargainEmployer";//雇主还价
-
-
+    public static String bargainmessage = "bargain/bargainMessage";//还价详情
+    public static String acceptORrefuse = "bargain/bargainAccpetOrNo";//接受拒绝还价
+    public static String helpterbargain = "bargain/taskBargain";//帮手还价
+    public static String kehubargain = "bargain/bargainEmployer";//雇主还价
 
 
     //个人中心

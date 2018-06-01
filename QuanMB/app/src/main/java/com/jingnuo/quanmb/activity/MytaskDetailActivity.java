@@ -39,6 +39,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     //控件
 
     RelativeLayout mRelativylaout_background;
+    TextView getmTextview_statejieshao;
     TextView mTextview_taskstate;
     TextView mTextview_tasktitle;
     TextView mTextview_taskmoney;
@@ -181,6 +182,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
         mTextview_taskstarttime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
+        getmTextview_statejieshao = findViewById(R.id.text_state);
 //        mTextview_helplevle = findViewById(R.id.text_tlevel);
         mImageview_head = findViewById(R.id.image_task);
         mButton_cancle = findViewById(R.id.button_cancle);
@@ -188,11 +190,6 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_completed = findViewById(R.id.button_completed);
         imageGridview=findViewById(R.id.GridView_PIC);
         mRelativylaout_background=findViewById(R.id.RelativeLayout_background);
-        ImageView image=new ImageView(this);
-        image.setBackgroundResource(R.mipmap.mytaskbackground);
-        LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*0.24));
-        image.setLayoutParams(mLayoutparams);
-        mRelativylaout_background.addView(image);
     }
 
     void request(Map map) {
@@ -229,14 +226,23 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }else {
                     mButton_cancle.setVisibility(View.GONE);
                 }
+                if (taskDetailBean.getData().getTask_Status_code().equals("01")) {
+                    getmTextview_statejieshao.setText("正在等待帮手接单...");
+                }
+                if (taskDetailBean.getData().getTask_Status_code().equals("02")) {
+                    getmTextview_statejieshao.setText("帮手正在全速完成任务...");
+                }
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
                     mButton_complete.setVisibility(View.VISIBLE);
                     mButton_completed.setVisibility(View.GONE);
+                    getmTextview_statejieshao.setText("帮手已经完成任务，快去确认订单");
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
                     mButton_completed.setVisibility(View.VISIBLE);
                     mButton_complete.setVisibility(View.GONE);
+                    getmTextview_statejieshao.setText("很好的一次合作");
                 }
+
             }
 
             @Override

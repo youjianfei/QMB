@@ -27,6 +27,7 @@ import com.jingnuo.quanmb.entityclass.Skillmenu_oneBean;
 import com.jingnuo.quanmb.entityclass.Skillmenu_twoBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -106,6 +107,10 @@ public class Fragment_still  extends Fragment{
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
                     String  search=mEdit_serch.getText()+"";
+                    if(search.length()>5){
+                        ToastUtils.showToast(getContext(),"搜索关键字太长");
+                        return false;
+                    }
                     String searchhou= Utils.ZhuanMa(search);
                     LogUtils.LOG("ceshi", "点击了确定按钮...."+searchhou, "fragmentstill");
                     Intent intent_search=new Intent(getActivity(),ShophallActivity.class);

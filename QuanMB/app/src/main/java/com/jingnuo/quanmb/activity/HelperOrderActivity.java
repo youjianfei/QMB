@@ -154,6 +154,9 @@ public class HelperOrderActivity extends BaseActivityother {
                 }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("02")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText(helpOrderBean.getData().getDetail().getOrder_status_name());
+                } else if(helpOrderBean.getData().getDetail().getOrder_status().equals("01")){
+                    mButton_queren.setEnabled(false);
+                    mButton_queren.setText("逾期未完成");
                 }
                 else {
                     mButton_queren.setEnabled(true);

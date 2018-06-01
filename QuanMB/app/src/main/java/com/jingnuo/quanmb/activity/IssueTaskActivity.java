@@ -151,8 +151,8 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mIntent_map = new Intent(IssueTaskActivity.this, LocationMapActivity.class);
-                startActivityForResult(mIntent_map, 2018418);
+//                Intent mIntent_map = new Intent(IssueTaskActivity.this, LocationMapActivity.class);
+//                startActivityForResult(mIntent_map, 2018418);
             }
         });
         mTextview_choose.setOnClickListener(new View.OnClickListener() {
@@ -310,9 +310,17 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请填写任务标题");
             return false;
         }
+        if(task_name.length()>20){
+            ToastUtils.showToast(this, "任务标题有点长");
+            return false;
+        }
         task_description = mEditview_taskdetails.getText() + "";
         if (task_description.equals("")) {
             ToastUtils.showToast(this, "请填写任务说明");
+            return false;
+        }
+        if(task_description.length()<20){
+            ToastUtils.showToast(this, "任务说明太短了");
             return false;
         }
         String task_type = mTextview_choose.getText() + "";
@@ -330,7 +338,7 @@ public class IssueTaskActivity extends BaseActivityother {
         release_address = "郑州";//TODO
 
         detailed_address = mEditview_addressDetail.getText() + "";
-        if (mEditview_addressDetail.equals("")) {
+        if (detailed_address.equals("")) {
             ToastUtils.showToast(this, "请填写详细地址");
             return false;
         }

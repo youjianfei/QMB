@@ -240,8 +240,12 @@ public class Fragment_square extends Fragment {
                     LogUtils.LOG("ceshi", "点击了确定按钮", "fragmentsquare");
                     String search = "";
                     search = mEdit_serchSquare.getText() + "";
+                    if(search.length()>5){
+                        ToastUtils.showToast(getContext(),"搜索关键字太长");
+                        return false;
+                    }
                     String searchhou = Utils.ZhuanMa(search);
-                    initMap(MinCommission+"",MaxCommission+"",page+"",search,"","");
+                    initMap(MinCommission+"",MaxCommission+"",page+"",searchhou,"","");
                     request_square(map_filter_sort, page);
 
                 }

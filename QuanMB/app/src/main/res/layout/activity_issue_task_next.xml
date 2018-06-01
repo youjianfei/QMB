@@ -54,11 +54,83 @@
             android:orientation="vertical"
             >
             <RelativeLayout
+                android:id="@+id/relayout_choselianxiren"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/textview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="没有联系人，请点击之后选择联系人"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="28dp"
+                    android:textSize="12dp"
+                    android:textColor="@color/red2"
+                    />
+                <RelativeLayout
+                    android:id="@+id/relayout_showlianxiren"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@color/yellow2"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:id="@+id/textview_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联系人"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:textSize="15dp"
+                        />
+                    <TextView
+                        android:id="@+id/textview_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="性别"
+                        android:textColor="@color/text_title2"
+                        android:layout_toRightOf="@+id/textview_name"
+                        android:layout_alignBaseline="@+id/textview_name"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:id="@+id/textview_phonenumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电话号码"
+                        android:layout_alignLeft="@+id/textview_sex"
+                        android:textColor="@color/text_title2"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/textview_name"
+                        />
+                </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/more"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="27.5dp"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:src="@mipmap/line"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/re2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/re1"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/white">
                 <TextView
                     android:id="@+id/text_tasktitle"
@@ -214,204 +286,7 @@
                     android:textSize="15dp" />
 
             </RelativeLayout>
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:background="@color/white">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="15dp"-->
-                    <!--android:layout_marginLeft="30dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:text="联系人："-->
-                    <!--android:textColor="@color/black_text" />-->
-
-                <!--<EditText-->
-                    <!--android:id="@+id/edit_lianxiren"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginLeft="110dp"-->
-                    <!--android:layout_marginRight="30dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:background="@null"-->
-                    <!--android:hint="请输入联系人"-->
-                    <!--android:lines="1"-->
-                    <!--android:textColor="@color/black_text2"-->
-                    <!--android:textColorHint="@color/text_hide_tip"-->
-                    <!--android:textSize="14dp" />-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/image_line6"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_below="@+id/edit_lianxiren"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:background="@color/gray_background" />-->
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/linearlayout_sex"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/image_line6"-->
-                    <!--android:orientation="horizontal"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:layout_marginRight="30dp"-->
-                    <!--&gt;-->
-                    <!--<ImageView-->
-                        <!--android:id="@+id/image_choosenan"-->
-                        <!--android:layout_width="15dp"-->
-                        <!--android:layout_height="15dp"-->
-                        <!--android:src="@drawable/select_duigou"-->
-                        <!--android:layout_marginRight="5dp"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="男"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--/>-->
-
-                    <!--<ImageView-->
-                        <!--android:id="@+id/image_choosenv"-->
-                        <!--android:layout_width="15dp"-->
-                        <!--android:layout_height="15dp"-->
-                        <!--android:src="@drawable/select_duigou"-->
-                        <!--android:layout_marginRight="5dp"-->
-                        <!--/>-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="女"-->
-                        <!--android:layout_marginRight="5dp"-->
-                        <!--/>-->
-
-
-                <!--</LinearLayout>-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/image_line6"-->
-                    <!--android:layout_marginBottom="15dp"-->
-                    <!--android:layout_marginLeft="30dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:text="性别："-->
-                    <!--android:visibility="gone"-->
-                    <!--android:textColor="@color/black_text" />-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/image_line7"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_below="@+id/linearlayout_sex"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:background="@color/gray_background" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/image_line7"-->
-                    <!--android:layout_marginBottom="15dp"-->
-                    <!--android:layout_marginLeft="30dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:text="电话："-->
-                    <!--android:textColor="@color/black_text" />-->
-
-                <!--<EditText-->
-                    <!--android:id="@+id/edit_phonenumber"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_below="@+id/image_line7"-->
-                    <!--android:layout_marginLeft="110dp"-->
-                    <!--android:layout_marginRight="30dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:background="@null"-->
-                    <!--android:hint="请输入联系电话"-->
-                    <!--android:inputType="number"-->
-                    <!--android:lines="1"-->
-                    <!--android:textColor="@color/black_text2"-->
-                    <!--android:textColorHint="@color/text_hide_tip"-->
-                    <!--android:textSize="14dp" />-->
-            <!--</RelativeLayout>-->
-            <RelativeLayout
-                android:id="@+id/relayout_choselianxiren"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                >
-
-                <TextView
-                    android:id="@+id/textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="选择联系人"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="30dp"
-                    />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/more"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="30dp"
-                    android:layout_centerVertical="true"
-                    />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/relayout_showlianxiren"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/white"
-                android:visibility="gone"
-                >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@color/gray_background"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    />
-
-                <TextView
-                    android:id="@+id/textview_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="联系人"
-                    android:textColor="@color/text_title2"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="30dp"
-                    />
-                <TextView
-                    android:id="@+id/textview_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="性别"
-                    android:textColor="@color/text_title2"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="60dp"
-                    />
-                <TextView
-                    android:id="@+id/textview_phonenumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="电话号码"
-                    android:textColor="@color/text_title2"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_below="@+id/textview_name"
-                    />
-            </RelativeLayout>
 
 
             <Button

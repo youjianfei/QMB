@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 
@@ -57,6 +58,7 @@ public class Popwindow_bargin {
                 Utils.setAlpha((float) 1,activity);
             }
         });
+        mEdit_money.addTextChangedListener(new MoneyTextWatcher(mEdit_money).setDigits(2));
         mImageview_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

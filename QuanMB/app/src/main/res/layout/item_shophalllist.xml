@@ -52,7 +52,7 @@
         android:id="@+id/textview_vip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="会员2年"
+        android:text="认证身份"
         android:textColor="@color/yellow_jianbian_end"
         android:padding="2dp"
         android:layout_below="@+id/text_shopskills"

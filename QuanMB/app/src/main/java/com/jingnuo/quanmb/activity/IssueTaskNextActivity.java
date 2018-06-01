@@ -92,7 +92,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if (respose.equals("success")) {//支付成功
                     Staticdata.map_task.put("payResult", "1");
-//                    requast(Staticdata.map_task);//正式发布任务
+                    requast(Staticdata.map_task);//正式发布任务
                 }
             }
 
@@ -316,9 +316,9 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 int data = 0;
                 try {
                     JSONObject object = new JSONObject(respose);
-                    data = (Integer) object.get("date");//登录状态
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
+                    data = (Integer) object.get("date");//
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
                     if (status == 1) {
                         Staticdata.map_task.put("task_id", data + "");
 

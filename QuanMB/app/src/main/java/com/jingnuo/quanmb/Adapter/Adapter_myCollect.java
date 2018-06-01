@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.entityclass.SkillCollectBean;
 import com.jingnuo.quanmb.quanmb.R;
 
@@ -41,6 +42,7 @@ public class Adapter_myCollect extends BaseAdapter {
         holder.mTextview_name.setText(mData.get(position).getRelease_address());
         holder.mTextview_title.setText(mData.get(position).getTitle());
         holder.mTextview_time.setText(mData.get(position).getCreateDate());
+        Glide.with(mContext).load(mData.get(position).getAvatar_url()).into( holder.mImageview);
 
         return convertView;
     }
