@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.jingnuo.quanmb.activity.ShopinfoEditActivity">
     <!--虚假布局，抢走editview的焦点-->
     <LinearLayout
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="修改资料"
+            android:text="编辑资料"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

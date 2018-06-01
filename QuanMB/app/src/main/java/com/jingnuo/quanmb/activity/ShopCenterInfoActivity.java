@@ -164,6 +164,15 @@ public class ShopCenterInfoActivity extends BaseActivityother {
                 popwindow_lookpic.showPopwindow(position,imageview_urllist);
             }
         });
+        mTextview_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_edit=new Intent(ShopCenterInfoActivity.this,ShopinfoEditActivity.class);
+                intent_edit.putExtra("business_id",shopcenterBean.getData().getList().getBusiness_id()+"");
+                intent_edit.putExtra("jianjie",shopcenterBean.getData().getList().getIntroduction()+"");
+                startActivity(intent_edit);
+            }
+        });
     }
 
     @Override
@@ -278,5 +287,9 @@ public class ShopCenterInfoActivity extends BaseActivityother {
         }
     }
 
-
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        request();
+    }
 }

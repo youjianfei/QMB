@@ -11,13 +11,13 @@ public class Urls {
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-    public static String Baseurl = "http://192.168.1.185:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
-    public static String upLoadImage = "uploadIge/headImgUpload";//上传图片
+    public static String upLoadImage = "uploadIge/headImgUpload";//上传图片  1.证件图片 2.任务图片 3.头像图片 4.商户证件图片 5.图标 6.发布专业图片
 
 
     public static String login = "login/doLogin";//登陆  post
@@ -71,7 +71,8 @@ public class Urls {
     public static String  shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
     public static String shopIssueSkill = "business/releaseSpecialty";//发布专业    post
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
-    public static String setshophead = "business/setBusinessAvatar";//服务内容详情    参数  id  get请求
+    public static String setshophead = "business/setBusinessAvatar";//设置商户头像
+    public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
 
 
 
