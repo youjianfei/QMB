@@ -148,6 +148,24 @@ public class UserBean {
             private String user_name;
             private String user_password;
             private String user_reputation;
+            private String balance;
+            private String push_register;
+
+            public String getPush_register() {
+                return push_register;
+            }
+
+            public void setPush_register(String push_register) {
+                this.push_register = push_register;
+            }
+
+            public String getBalance() {
+                return balance;
+            }
+
+            public void setBalance(String balance) {
+                this.balance = balance;
+            }
 
             public String getAvatar_img_id() {
                 return avatar_img_id;

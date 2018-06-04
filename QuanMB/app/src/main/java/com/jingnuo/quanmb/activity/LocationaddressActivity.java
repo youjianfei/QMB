@@ -8,11 +8,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.PinyinComparator;
 import com.jingnuo.quanmb.customview.SideBar;
+import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.AllCityBean;
 import com.jingnuo.quanmb.entityclass.LocationAddressListBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.PinyinUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,11 +31,13 @@ public class LocationaddressActivity extends BaseActivityother {
     private SideBar mSideBar;
     private TextView dialog;
 
-    List<String > addressName;
+    List<AllCityBean.DataBean> addressName;
     List<LocationAddressListBean > mdata;
 
     LocationAddressListBean locationAddressListBean;
     List_LocationAddressrAdapter listLocationAddressrAdapter;
+
+    AllCityBean allCityBean;
 
 
     @Override
@@ -39,23 +47,7 @@ public class LocationaddressActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        for(int i=0;i<addressName.size();i++){
-            String pinyin = PinyinUtils.getPingYin(addressName.get(i));
-            String Fpinyin = pinyin.substring(0, 1).toUpperCase();
-            locationAddressListBean = new LocationAddressListBean();
-            locationAddressListBean.setName(addressName.get(i));
-            locationAddressListBean.setPinYin(pinyin);
-            locationAddressListBean.setIsselect(false);
-            if (Fpinyin.matches("[A-Z]")) {
-                locationAddressListBean.setFirstPinYin(Fpinyin);
-            } else {
-                locationAddressListBean.setFirstPinYin("#");
-            }
-
-            mdata.add(locationAddressListBean);
-        }
-        Collections.sort(mdata, new PinyinComparator());//实现排序
-        listLocationAddressrAdapter.notifyDataSetChanged();
+        requestAllcity();
 
     }
 
@@ -65,19 +57,38 @@ public class LocationaddressActivity extends BaseActivityother {
         mdata=new ArrayList<>();
         listLocationAddressrAdapter=new List_LocationAddressrAdapter(mdata,this);
         mListview.setAdapter(listLocationAddressrAdapter);
-        addressName.add("你啊");
-        addressName.add("犯嘀咕");
-        addressName.add("内容");
-        addressName.add("松岛枫");
-        addressName.add("咯咯");
-        addressName.add("昂达枫");
-        addressName.add("戚薇");
-        addressName.add("换个");
-        addressName.add("真实的");
-        addressName.add("歌好");
-        addressName.add("梵蒂冈");
-        addressName.add("我无法");
-        addressName.add("人");
+    }
+    void  requestAllcity(){
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                allCityBean=new Gson().fromJson(respose,AllCityBean.class);
+                addressName.addAll(allCityBean.getData());
+                for(int i=0;i<addressName.size();i++){
+                    String pinyin = PinyinUtils.getPingYin(addressName.get(i).getName());
+                    String Fpinyin = pinyin.substring(0, 1).toUpperCase();
+                    locationAddressListBean = new LocationAddressListBean();
+                    locationAddressListBean.setName(addressName.get(i).getName());
+                    locationAddressListBean.setPinYin(pinyin);
+                    locationAddressListBean.setIsselect(false);
+                    if (Fpinyin.matches("[A-Z]")) {
+                        locationAddressListBean.setFirstPinYin(Fpinyin);
+                    } else {
+                        locationAddressListBean.setFirstPinYin("#");
+                    }
+
+                    mdata.add(locationAddressListBean);
+                }
+                Collections.sort(mdata, new PinyinComparator());//实现排序
+                listLocationAddressrAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_hu+Urls.getallCity+ Staticdata.static_userBean.getData().getUser_token(),LocationaddressActivity.this,0);
+
     }
 
     @Override

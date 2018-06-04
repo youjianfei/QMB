@@ -93,6 +93,15 @@ public class HelpterInfoBean {
             private String status;
             private String updateDate;
             private String updateName;
+            private String commission;
+
+            public String getCommission() {
+                return commission;
+            }
+
+            public void setCommission(String commission) {
+                this.commission = commission;
+            }
 
             public String getClient_no() {
                 return client_no;

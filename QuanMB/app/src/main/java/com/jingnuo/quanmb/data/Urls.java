@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -99,6 +99,7 @@ public class Urls {
 
 
     //个人中心
+    public static String personinfo = "user/queryUserInfo?user_token=";//  post
     public static String myorderlist = "task/taskQueryMyList";//  post
     public static String mytaskdetails = "task/getTaskDetail";//任务详情  ?id=
     public static String myLianxiren = "user/getContactsList";//常用联系人
@@ -111,5 +112,10 @@ public class Urls {
     //支付
     public static String wechatPay = "AppPay/WeChatPreOrder";//微信支付
     public static String zhifubaoPay = "ALiPay/doAlipay";//支付宝支付
+
+
+    //省市县
+    public static String getallCity = "area/getAllCity?user_token=";//支付宝支付
+
 
 }

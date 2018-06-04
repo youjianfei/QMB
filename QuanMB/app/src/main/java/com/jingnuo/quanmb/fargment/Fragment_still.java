@@ -59,7 +59,8 @@ public class Fragment_still  extends Fragment{
     Adapter_classification_left mAdapter_classification_left;
 
     Adapter_classification_right mAdapter_classification_right;
-
+    Skillmenu_oneBean skillmenu_oneBean;
+    Skillmenu_oneBean.DataBean.ListBean listBean;
 
     @Nullable
     @Override
@@ -147,8 +148,13 @@ public class Fragment_still  extends Fragment{
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                skillmenu_oneBean=new Gson().fromJson(respose,Skillmenu_oneBean.class);
                 mListData_left.clear();
-                mListData_left.addAll(new Gson().fromJson(respose,Skillmenu_oneBean.class).getData().getList());
+                mListData_left.addAll(skillmenu_oneBean.getData().getList());
+                listBean=new Skillmenu_oneBean.DataBean.ListBean();//其他  类目  本地手动添加的
+                listBean.setSpecialty_id(111);
+                listBean.setSpecialty_name("其他");
+                mListData_left.add(listBean);
                 LogUtils.LOG("ceshi",mListData_left.size()+"个数据","找专业一级菜单");
                 mAdapter_classification_left.notifyDataSetChanged();
                 requestRightMenu(mListData_left.get(position).getSpecialty_id());

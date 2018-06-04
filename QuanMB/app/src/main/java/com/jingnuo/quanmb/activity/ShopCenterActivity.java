@@ -150,11 +150,14 @@ public class ShopCenterActivity extends BaseActivityother {
 //                    Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList()).into(imageview_head);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
                     mTextview_namenext.setText(helpterInfoBean.getData().getList().getHelper_cer_no());
+                    mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
+
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                     Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getAvatar_url()).into(imageview_head);
                     mTextview_name.setText(shopcenterBean.getData().getList().getBusiness_name());
                     mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address());
+                    mTextview_money.setText(shopcenterBean.getData().getList().getCommission()+"");
                 }
 
             }

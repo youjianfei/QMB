@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.CashoutActivity;
@@ -28,6 +29,7 @@ import com.jingnuo.quanmb.activity.ShopInNextActivity;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
@@ -62,6 +64,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     CircleImageView  mCircleImage;
     ImageView mimage_chengwei;
     TextView mTextview_nickname;
+    TextView mTextview_moneycount;
     TextView mTextview_chengwei;
     TextView mTextview_myorder;
     TextView mTextview_mycollect;
@@ -123,31 +126,58 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mCircleImage);
 
     }
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {//重新显示fragment 需要执行的操作
-//        super.onHiddenChanged(hidden);
-//        LogUtils.LOG("ceshi","onHiddenChanged"+hidden,"fragmentperson");
-//        if(!hidden){
-//
-//        }
-//    }
 
     @Override
     public void onResume() {
         super.onResume();
         LogUtils.LOG("ceshi","onResume","fragmentperson");
-        mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
-        LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
-        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
-        Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mimage_chengwei);
+//        mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+//        LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
+//        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
+//        Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mimage_chengwei);
+        requestInfo();
     }
 
+    void requestInfo(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                String state = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
+                    LogUtils.LOG("ceshi",respose,"个人中心");
+                    Staticdata.static_userBean=new Gson().fromJson(respose, UserBean.class);
+                    mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+                    LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
+                    Glide.with(getActivity()).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
+                    Glide.with(getActivity()).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mimage_chengwei);
+                    mTextview_moneycount.setText(Staticdata.static_userBean.getData().getAppuser().getBalance()+"");
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl+Urls.personinfo+Staticdata.static_userBean.getData().getUser_token(),getActivity(),0);
+    }
     private void setview() {
+        requestInfo();
     }
 
     private void initview() {
         mTextview_banghsou = rootview.findViewById(R.id.textview_bangshou);
         mTextview_address=rootview.findViewById(R.id.textview_address);
+        mTextview_moneycount=rootview.findViewById(R.id.textview_2);
         mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
         mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
@@ -301,15 +331,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
                     }
                 }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
-//                if(Staticdata.static_userBean.getData().getBusiness_status()==1){
-//                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-//                    intent_shopcenter.putExtra("type",2);//2  商户
-//                    getActivity().startActivity(intent_shopcenter);
-//
-//                }else {//申请商户界面
-//                    Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-//                    getActivity().startActivity(intent_shopin);
-//                }
                 break;
             case R.id.text_myorder:
                 Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);

@@ -53,10 +53,11 @@ public class SettingActivity extends BaseActivityother {
         switch (v.getId()){
 
             case R.id.button_logout :
-                SharedPreferencesUtils.putString(SettingActivity.this,"QMB","password","");
-                Staticdata.isLogin=false;
-                Intent intent_logout=new Intent(SettingActivity.this,LoginActivity.class);
-                startActivity(intent_logout);
+//                SharedPreferencesUtils.putString(SettingActivity.this,"QMB","password","");
+//                Staticdata.isLogin=false;
+//                Intent intent_logout=new Intent(SettingActivity.this,LoginActivity.class);
+//                startActivity(intent_logout);
+//                finish();
                 break;
 
             case R.id.textview_cleancache:

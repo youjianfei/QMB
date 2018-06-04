@@ -107,7 +107,7 @@
                     android:layout_below="@+id/textview1"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="5dp"
-                    android:text="120.00"
+                    android:text="0.00"
                     android:textColor="@color/yellow_jianbian_end"
                     android:textSize="20dp" />
 

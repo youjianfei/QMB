@@ -99,6 +99,15 @@ public class ShopcenterBean {
             private String updateDate;
             private String updateName;
             private String introduction;
+            private String  commission;
+
+            public String getCommission() {
+                return commission;
+            }
+
+            public void setCommission(String commission) {
+                this.commission = commission;
+            }
 
             public String getIntroduction() {
                 return introduction;

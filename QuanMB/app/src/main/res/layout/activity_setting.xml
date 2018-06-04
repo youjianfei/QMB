@@ -146,6 +146,7 @@
         android:background="@drawable/button_red_20dp"
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
+        android:visibility="gone"
         />
 
 
