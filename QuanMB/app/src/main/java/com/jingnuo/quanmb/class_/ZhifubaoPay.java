@@ -46,7 +46,7 @@ public class ZhifubaoPay {
                         intent.putExtra("pay","success");
                        activity. sendBroadcast(intent);
                     } else {
-                        Toast.makeText(activity, "支付失败", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity, "支付失败", Toast.LENGTH_SHORT).show();
                         intent.putExtra("pay","erro");
                         activity. sendBroadcast(intent);
                     }

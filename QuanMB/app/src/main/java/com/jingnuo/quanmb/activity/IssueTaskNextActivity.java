@@ -324,7 +324,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
                         Intent intentpay = new Intent(IssueTaskNextActivity.this, PayActivity.class);
                         intentpay.putExtra("title", "全民帮—任务付款");
-                        intentpay.putExtra("amount", "0.01");
+                        intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
                         intentpay.putExtra("taskid", data + "");
                         startActivity(intentpay);
 
@@ -394,6 +394,13 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 mList_picID.clear();
             }
         }).postHttp(Urls.Baseurl_cui + Urls.issuetask, this, 1, map);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        progressDlog.cancelPD();
     }
 
     @Override

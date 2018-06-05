@@ -110,12 +110,14 @@ public class Urls {
 
 
     //支付
+    public static String balancePay = "balance/payByBalance";//余额支付
     public static String wechatPay = "AppPay/WeChatPreOrder";//微信支付
     public static String zhifubaoPay = "ALiPay/doAlipay";//支付宝支付
+    public static String getBalance = "balance/getUserBalance?user_token=";//查询钱包余额
 
 
     //省市县
-    public static String getallCity = "area/getAllCity?user_token=";//支付宝支付
+    public static String getallCity = "area/getAllCity?user_token=";//所有城市
 
 
 }

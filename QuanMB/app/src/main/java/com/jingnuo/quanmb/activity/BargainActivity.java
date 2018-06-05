@@ -60,6 +60,9 @@ public class BargainActivity extends BaseActivityother {
     String receive_client_no = "";
     String send_client_no = "";
 
+    double amount=0;//还价的金额；
+    double money=0;//雇主付过的金额
+
     String content="";
 
     Map map_bargainmessagedetail;
@@ -248,18 +251,10 @@ public class BargainActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.button_accect://接受还价
-//                Map map_pay=new HashMap();
-//                map_pay.put("body","全民帮—任务付款");
-//                map_pay.put("isrecharge","N");
-//                map_pay.put("total_fee","0.01");
-//                map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-//                map_pay.put("task_id",bargainMessagedetailsBean.getData().getTask_id() + "");
-//                LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-//                new WechatPay(BargainActivity.this,api,map_pay).wepay();//吊起微信支付
+                double amount_need=amount-money;
                 Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
-                intentpay.putExtra("title", "任务付款");
-                intentpay.putExtra("amount", "0.01");
+                intentpay.putExtra("title", "任务补差价");
+                intentpay.putExtra("amount", amount_need+"");
                 intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
                 startActivity(intentpay);
 
@@ -338,24 +333,12 @@ public class BargainActivity extends BaseActivityother {
                         mLinearlayout_caozuo.setVisibility(View.VISIBLE);
                         mTextview_bargainstate.setVisibility(View.GONE);
                     }
-//                    else if (bargainMessagedetailsBean.getData().getIs_accept().equals("0") && bargainMessagedetailsBean.getData().getMark().equals("1")) {
-//                        mLinearlayout_caozuo.setVisibility(View.GONE);
-//                        mTextview_bargainstate.setVisibility(View.VISIBLE);
-//                        mTextview_bargainstate.setText("被拒绝");
-//                        mTextview_message.setText("你的还价被雇主拒绝了！");
-//                    }
                     else if (bargainMessagedetailsBean.getData().getIs_accept().equals("0") && bargainMessagedetailsBean.getData().getMark().equals("2")) {
                         mLinearlayout_caozuo.setVisibility(View.GONE);
                         mTextview_bargainstate.setVisibility(View.VISIBLE);
                         mTextview_bargainstate.setText("已拒绝");
                         mTextview_message.setText("你拒绝了帮手的还价！");
                     }
-//                    else if (bargainMessagedetailsBean.getData().getIs_accept().equals("1") && bargainMessagedetailsBean.getData().getMark().equals("1")) {
-//                        mLinearlayout_caozuo.setVisibility(View.GONE);
-//                        mTextview_bargainstate.setVisibility(View.VISIBLE);
-//                        mTextview_bargainstate.setText("已接受");
-//                        mTextview_message.setText("雇主接受了还价！");
-//                    }
                     else if (bargainMessagedetailsBean.getData().getIs_accept().equals("1") && bargainMessagedetailsBean.getData().getMark().equals("2")) {
                         mLinearlayout_caozuo.setVisibility(View.GONE);
                         mTextview_bargainstate.setVisibility(View.VISIBLE);
@@ -402,12 +385,14 @@ public class BargainActivity extends BaseActivityother {
                     mTextview_taskstatename.setText(bargainMessagedetailsBean.getData().getSpecialty_name());
                     mTextview_tasktitle.setText(bargainMessagedetailsBean.getData().getTask_name());
                     if (bargainMessagedetailsBean.getData().getIs_helper_bid().equals("N")) {
-                        mTextview_money.setText(bargainMessagedetailsBean.getData().getCommission() + "元");
+                        money=bargainMessagedetailsBean.getData().getCommission();
+                        mTextview_money.setText( money+ "元");
                     } else {
                         mTextview_money.setText("帮手出价");
+                        money=5;
                     }
-
-                    mTextview_mymoney.setText("还价价格：" + bargainMessagedetailsBean.getData().getCounteroffer_Amount() + "元");
+                    amount=bargainMessagedetailsBean.getData().getCounteroffer_Amount();
+                    mTextview_mymoney.setText("还价价格：" + amount + "元");
                     String URL_imagehead = bargainMessagedetailsBean.getData().getAvatar_imgUrl().substring(0, bargainMessagedetailsBean.getData().getAvatar_imgUrl().length() - 1);
                     Glide.with(BargainActivity.this).load(bargainMessagedetailsBean.getData().getAvatar_imgUrl()).load(URL_imagehead).into(mImageview);
 

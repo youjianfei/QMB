@@ -54,8 +54,8 @@ public class PayActivity extends BaseActivityother {
     private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
 
 
-
-
+    double balance=0;//余额
+    double intend_amount=0;//要付的金额
     String title_pay="";
     String amount="";
     String taskid="";
@@ -78,7 +78,6 @@ public class PayActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if(respose.equals("success")){//支付成功
                     finish();
-
                 }
             }
 
@@ -110,6 +109,44 @@ public class PayActivity extends BaseActivityother {
             mTextview_order.setText(title_pay+"-"+taskid);
         }
         image_yue.setSelected(true);
+        requestYue();//请求实时余额
+    }
+
+
+    void requestYue(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                String balan="";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
+                    if(status==1){
+                        balan=(String) object.get("balance");
+                        balance= Double.parseDouble(balan);
+                         intend_amount=Double.parseDouble(amount);
+                        if(balance<intend_amount){
+                            image_yue.setSelected(false);
+                            image_wechat.setSelected(true);
+                            image_zhifubao.setSelected(false);
+                            pay=2;
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_hu+Urls.getBalance+Staticdata.static_userBean.getData().getUser_token()+"&client_no="+
+        Staticdata.static_userBean.getData().getAppuser().getClient_no(),this,0);
     }
 
     @Override
@@ -134,51 +171,17 @@ public class PayActivity extends BaseActivityother {
         image_zhifubao = findViewById(R.id.image_zhifubao);
         mButton_submit=findViewById(R.id.button_submit);
     }
-    void requast( Map map){//正式发布任务
-        LogUtils.LOG("ceshi",Staticdata.map_task.toString(),"发布任务的map参数");
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-//                progressDlog.cancelPD();
-                LogUtils.LOG("ceshi","发布任务返回json","发布任务");
-                int status = 0;
-                String msg = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("status");//
-                    msg = (String) object.get("msg");//
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if(status==1){
-                    ToastUtils.showToast(PayActivity.this,"任务发布成功");
-                    Intent intent=new Intent(PayActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    Staticdata.imagePathlist.clear();
-                    Staticdata.map_task.clear();
-                }else {
-//                    count=0;
-//                    mList_picID.clear();
-//                    progressDlog.cancelPD();
-                    ToastUtils.showToast(PayActivity.this,msg);
-                }
 
-            }
-
-            @Override
-            public void onError(int error) {
-//                progressDlog.cancelPD();
-//                count=0;
-//                mList_picID.clear();
-            }
-        }).postHttp(Urls.Baseurl_cui+Urls.issuetask,this,1,map);
-    }
     @Override
     public void onClick(View v) {
         super.onClick(v);
 
         switch (v.getId()) {
             case R.id.relayoutyue:
+                if(balance<intend_amount){
+                   ToastUtils.showToast(this,"余额不足");
+                   return;
+                }
                 image_yue.setSelected(true);
                 image_wechat.setSelected(false);
                 image_zhifubao.setSelected(false);
@@ -199,13 +202,13 @@ public class PayActivity extends BaseActivityother {
             case R.id.button_submit:
                 if(pay==1){
                     //余额支付
-                    ToastUtils.showToast(this,"对不起，余额不足");
-                    Staticdata.map_task.put("payResult","1");
-//                    requast(Staticdata.map_task);//正式发布任务
-                    Intent intent = new Intent("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
-                    intent.putExtra("pay","success");
-                    PayActivity.this. sendBroadcast(intent);
-                    finish();
+                    Map map_yue=new HashMap();
+                    map_yue.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                    map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                    map_yue.put("pay_money",amount);
+                    map_yue.put("task_id",taskid);
+                    map_yue.put("bill_title",title_pay);
+                    balancePay(map_yue);
                     return;
                 }
                 if(pay==2){
@@ -241,9 +244,43 @@ public class PayActivity extends BaseActivityother {
         }
     }
 
+    void balancePay(Map map){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                String balan="";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
+                    Intent intent = new Intent("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
+                    if(status==1){
+                        Staticdata.map_task.put("payResult","1");
+                        intent.putExtra("pay","success");
+                        PayActivity.this. sendBroadcast(intent);
+                        finish();
+                    }else {
+                        intent.putExtra("pay","erro");
+                        PayActivity.this. sendBroadcast(intent);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl_hu+Urls.balancePay,this,1,map);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        unregisterReceiver(paysuccess_BroadcastReciver);
+        unregisterReceiver(paysuccess_BroadcastReciver);
     }
 }

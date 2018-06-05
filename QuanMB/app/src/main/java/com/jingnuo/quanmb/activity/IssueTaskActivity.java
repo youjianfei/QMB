@@ -275,7 +275,6 @@ public class IssueTaskActivity extends BaseActivityother {
                     mImage_choosehelper.setSelected(true);
                     mImage_chooseme.setSelected(false);
                     isMEchujia = 2;
-                    map_issueTask.put("is_helper_bid", "Y");//由帮手出价
                     relativelayout_chujia.setVisibility(View.GONE);
                     mEditview_taskmoney.setText("");
                     is_counteroffer = 1;
@@ -357,16 +356,20 @@ public class IssueTaskActivity extends BaseActivityother {
                 map_issueTask.put("is_helper_bid", "N");
                 ToastUtils.showToast(IssueTaskActivity.this, "请填写佣金");
                 return false;
+            }else{
+                commission="5";
+                map_issueTask.put("is_helper_bid", "Y");//由帮手出价
+
             }
         }
         map_issueTask.put("task_name", task_name + "");
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
+        map_issueTask.put("commission", commission+"");//由帮手出价
         map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
         map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
         map_issueTask.put("release_address", "郑州");//TODO 地区
-        map_issueTask.put("commission", commission + "");
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
