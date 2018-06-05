@@ -252,12 +252,15 @@ public class BargainActivity extends BaseActivityother {
         switch (v.getId()) {
             case R.id.button_accect://接受还价
                 double amount_need=amount-money;
-                Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
-                intentpay.putExtra("title", "任务补差价");
-                intentpay.putExtra("amount", amount_need+"");
-                intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
-                startActivity(intentpay);
-
+                if(amount_need>0){
+                    Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
+                    intentpay.putExtra("title", "任务补差价");
+                    intentpay.putExtra("amount", amount_need+"");
+                    intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
+                    startActivity(intentpay);
+                }else {
+                    acceptBargain();
+                }
                 break;
             case R.id.button_goon://继续还价
                 popwindow_bargin.showpop();

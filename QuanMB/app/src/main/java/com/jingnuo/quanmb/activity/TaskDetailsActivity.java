@@ -56,6 +56,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     //数据
     String ID = "";//任务id;
     String is_counteroffer = "";
+    double commison=0;
 
 
     String image_url="";
@@ -89,6 +90,10 @@ public class TaskDetailsActivity extends BaseActivityother {
         popwindow_bargin = new Popwindow_bargin(this, new Interence_bargin() {
             @Override
             public void onResult(String result) {//还价网络请求
+                if(commison>Double.parseDouble(result)){
+                    ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
+                    return;
+                }
                 Map map_bargin = new HashMap();
                 map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                 map_bargin.put("task_id", "" + ID);
@@ -218,6 +223,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_state.setText(mTaskData.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
                 mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
+                commison=mTaskData.getData().getCommission();
                 mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getCreateDate());
                 mTextview_name.setText(mTaskData.getData().getNick_name());
                 mTextview_taskdetails.setText(mTaskData.getData().getTask_description());
@@ -241,6 +247,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                     mButton_help.setVisibility(View.GONE);
                     mTextview_taskmoney.setText("佣金：帮手出价" );
+                    commison=5;
                 }
             }
 
