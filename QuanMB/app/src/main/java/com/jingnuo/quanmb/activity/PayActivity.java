@@ -207,7 +207,6 @@ public class PayActivity extends BaseActivityother {
                     map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_yue.put("pay_money",amount);
                     map_yue.put("task_id",taskid);
-                    map_yue.put("bill_title",title_pay);
                     balancePay(map_yue);
                     return;
                 }

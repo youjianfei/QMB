@@ -355,6 +355,15 @@ public class BargainActivity extends BaseActivityother {
                         mTextview_bargainstate.setText("还价中");
                         mTextview_message.setText("你发布的任务被帮手还价了！");
                     }
+                    if(bargainMessagedetailsBean.getData().getStatus_name().equals("已失效")){
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.GONE);
+                        mTextview_message.setText("此任务已失效");
+                    }else if(bargainMessagedetailsBean.getData().getStatus_name().equals("已接单")){
+                        mLinearlayout_caozuo.setVisibility(View.GONE);
+                        mTextview_bargainstate.setVisibility(View.GONE);
+                        mTextview_message.setText("此任务已被接单");
+                    }
 
                     //由于mark问题  帮手被拒绝改为下面判断
                     if(content.contains("拒绝")){
