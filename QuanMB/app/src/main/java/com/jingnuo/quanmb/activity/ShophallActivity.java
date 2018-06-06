@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -22,6 +25,7 @@ import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 
@@ -34,6 +38,7 @@ public class ShophallActivity extends BaseActivityother {
 //    LinearLayout mLinerlayout_sort;
 //    LinearLayout mLinearlayout_filter;
     PullToRefreshListView mListview;
+    EditText mEdit_search;
 
 
     //对象
@@ -91,6 +96,25 @@ public class ShophallActivity extends BaseActivityother {
 //
 //            }
 //        });
+        mEdit_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                search=Utils.ZhuanMa(s+"");
+                search=s+"";
+                request(1);
+
+            }
+        });
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -131,6 +155,7 @@ public class ShophallActivity extends BaseActivityother {
     protected void initView() {
 //        mLinerlayout_sort = findViewById(R.id.linearlayout_sort);
 //        mLinearlayout_filter = findViewById(R.id.linearlayout_filter);
+        mEdit_search = findViewById(R.id.edit_searchskill);
         mListview = findViewById(R.id.mlistview_shophall);
     }
 

@@ -212,6 +212,10 @@ public class SkillDetailActivity extends BaseActivityother {
 
                 break;
             case R.id.linearlayout_phonenumber:
+                if(!Staticdata.isLogin){
+                    ToastUtils.showToast(SkillDetailActivity.this,"请先登录");
+                    return;
+                }
                 Intent intent = new Intent(Intent.ACTION_CALL);
                 Uri data = Uri.parse("tel:" + mSkilldetailsbean.getData().getDetail().getMobile_no());
                 intent.setData(data);

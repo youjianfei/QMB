@@ -68,23 +68,46 @@
                 android:text="认证身份"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/textview_address"
+            <LinearLayout
+                android:id="@+id/linearlao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_shopname"
                 android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:text="认证地址"
-                android:textColor="@color/white"
-                android:textSize="13dp" />
+                >
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:src="@mipmap/address_white"
+                    android:layout_marginTop="2dp"
+                    />
+                <TextView
+                    android:id="@+id/textview_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="认证地址"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
+                <TextView
+                    android:id="@+id/text_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="13dp"
+                    />
+
+            </LinearLayout>
+
+
 
             <RelativeLayout
                 android:id="@+id/relative_info"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_below="@+id/textview_address"
+                android:layout_below="@+id/linearlao"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"

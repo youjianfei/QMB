@@ -15,6 +15,7 @@ import com.jingnuo.quanmb.entityclass.MyTodoBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class Adapter_mytodo extends  BaseAdapter {
         if(convertView==null){
             holder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.item_mytodo,null,false);
+            holder.mTextview_type=convertView.findViewById(R.id.text_type);
             holder.mTextview_title=convertView.findViewById(R.id.textview_titl);
             holder.mTextview_content=convertView.findViewById(R.id.text_content);
             holder.mTextview_money=convertView.findViewById(R.id.textview_moneyy);
@@ -51,16 +53,20 @@ public class Adapter_mytodo extends  BaseAdapter {
         }else {
             holder= (ViewHolder) convertView.getTag();
         }
+        holder.mTextview_type.setText(mdata.get(position).getSpecialty_name());
         holder.mTextview_title.setText(mdata.get(position).getTask_name());
-        holder.mTextview_content.setText(mdata.get(position).getTask_description());
+        long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+        long ago = Long.parseLong(Utils.getTime(mdata.get(position).getOrder_enddate()));//任务过期时间
+        String time = Utils.getDistanceTime(ago, now);//算出的差值
+
+        holder.mTextview_content.setText("剩余时间："+time);
         holder.mTextview_money.setText("佣金："+mdata.get(position).getOrder_amount()+"元");
         holder.mTextview_state.setText(mdata.get(position).getOrder_status());
         if(mdata.get(position).getOrder_status().equals("已完成")){
             holder.mTextview_complete.setText("任务完成");
             holder.mTextview_complete.setEnabled(false);
-        }else {
-            holder.mTextview_complete.setText("申请完成");
-            holder.mTextview_complete.setEnabled(true);
+        }else if(!mdata.get(position).getOrder_status().equals("待完成")){
+            holder.mTextview_complete.setVisibility(View.GONE);
         }
 
         holder.mTextview_complete.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +108,7 @@ public class Adapter_mytodo extends  BaseAdapter {
     }
     class ViewHolder {
         TextView mTextview_title;
+        TextView mTextview_type;
         TextView mTextview_content;
         TextView mTextview_money;
         TextView mTextview_state;

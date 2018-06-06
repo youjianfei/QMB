@@ -107,6 +107,7 @@ public class Urls {
     public static String setmorenLianxiren = "user/setIsDefault?user_token=";//设为默认联系人
     public static String addLianxiren = "user/addContacts";//新增联系人
     public static String editLianxiren = "user/editContacts";//编辑联系人
+    public static String findMorenlianxiren = "user/getIsDefaultContacts?user_token=";//默认联系人
 
 
     //支付

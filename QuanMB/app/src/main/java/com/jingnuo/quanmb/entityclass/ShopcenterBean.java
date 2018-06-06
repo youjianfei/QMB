@@ -100,6 +100,15 @@ public class ShopcenterBean {
             private String updateName;
             private String introduction;
             private String  commission;
+            private int  business_level;
+
+            public int getBusiness_level() {
+                return business_level;
+            }
+
+            public void setBusiness_level(int business_level) {
+                this.business_level = business_level;
+            }
 
             public String getCommission() {
                 return commission;

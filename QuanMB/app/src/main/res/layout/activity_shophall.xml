@@ -7,7 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.jingnuo.quanmb.activity.ShophallActivity">
-
+    <!--虚假布局，抢走editview的焦点-->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        />
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
@@ -22,14 +30,40 @@
             android:layout_marginLeft="20dp"
             android:src="@mipmap/back_black" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
-            android:text="服务大厅"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:background="@drawable/background_gray_corners"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/search"
+                android:layout_marginLeft="10dp"
+                />
+
+            <EditText
+                android:id="@+id/edit_searchskill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="输入关键字"
+                android:singleLine="true"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/text_title2"
+                android:textColorHint="@color/text_hide_tip"
+                android:textSize="14dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:imeOptions="actionSearch"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

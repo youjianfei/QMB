@@ -87,6 +87,7 @@ public class DatailAddressActivity extends BaseActivityother {
                     intent_lianxiren.putExtra("name", mData_address.get(position).getName());
                     intent_lianxiren.putExtra("phonenumber", mData_address.get(position).getMobile_no());
                     intent_lianxiren.putExtra("sex", mData_address.get(position).getSex());
+                    intent_lianxiren.putExtra("is_default", mData_address.get(position).getIs_default());
                     DatailAddressActivity.this.setResult(20180530, intent_lianxiren);
                     finish();
                 }

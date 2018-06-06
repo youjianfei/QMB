@@ -80,7 +80,7 @@ public class IssueSkillActivity extends BaseActivityother {
     String  specialty_id ="";//专业类形
     String tittle="";//
     String description="";//
-    String release_address="郑州";//发布地点// TODO: 地点实现
+    String release_address="";//
     String detail_address="";//详细地点
     String img_id="";//图片
     Bitmap mBitmap=null;
@@ -225,6 +225,13 @@ public class IssueSkillActivity extends BaseActivityother {
 
             }
         });
+        mTextview_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent_map = new Intent(IssueSkillActivity.this, LocationMapActivity.class);
+                startActivityForResult(mIntent_map, 2018418);
+            }
+        });
     }
 
     @Override
@@ -253,6 +260,11 @@ public class IssueSkillActivity extends BaseActivityother {
         description=mEditview_skilldetail.getText()+"";
         if(description.equals("")){
             ToastUtils.showToast(this,"请填写详细描述");
+            return false;
+        }
+        release_address = mTextview_address.getText()+"";
+        if(release_address.equals("请选择")){
+            ToastUtils.showToast(this, "请选择任务地点");
             return false;
         }
         detail_address=mEditview_addressdetail.getText()+"";
@@ -379,6 +391,14 @@ public class IssueSkillActivity extends BaseActivityother {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2018418 && resultCode == 2018418) {
+            String address = data.getStringExtra("address");
+            String address2 = data.getStringExtra("address2");
+            mTextview_address.setText(address);
+            mEditview_addressdetail.setText(address2);
+        }
+
+
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
 
             // Get Image Path List

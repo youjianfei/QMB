@@ -15,7 +15,13 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/background_account"
         >
-        
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/phonenumber"
+            android:textColor="@color/gray_969696"
+            />
         <EditText
             android:id="@+id/edit_phonenumber"
             android:layout_width="0dp"
@@ -41,7 +47,13 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/background_account"
         >
-        
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/yanzhengma"
+            android:textColor="@color/gray_969696"
+            />
         <EditText
             android:id="@+id/edit_yanzhengma"
             android:layout_width="0dp"
@@ -76,7 +88,7 @@
         android:textColor="@color/white"
         android:text="登  录"
         android:textSize="16dp"
-        android:background="@drawable/button_morph_3dp"
+        android:background="@drawable/button_morph_20dp"
         />
 
 

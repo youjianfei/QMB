@@ -123,7 +123,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 //        }
         mTextview_chengwei.setText(Staticdata.static_userBean.getData().getAppellation_name());
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
-        Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mCircleImage);
 
     }
 

@@ -151,8 +151,8 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent mIntent_map = new Intent(IssueTaskActivity.this, LocationMapActivity.class);
-//                startActivityForResult(mIntent_map, 2018418);
+                Intent mIntent_map = new Intent(IssueTaskActivity.this, LocationMapActivity.class);
+                startActivityForResult(mIntent_map, 2018418);
             }
         });
         mTextview_choose.setOnClickListener(new View.OnClickListener() {
@@ -309,7 +309,7 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请填写任务标题");
             return false;
         }
-        if(task_name.length()>20){
+        if(task_name.length()>15){
             ToastUtils.showToast(this, "任务标题有点长");
             return false;
         }
@@ -318,7 +318,7 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请填写任务说明");
             return false;
         }
-        if(task_description.length()<20){
+        if(task_description.length()<5){
             ToastUtils.showToast(this, "任务说明太短了");
             return false;
         }
@@ -334,7 +334,11 @@ public class IssueTaskActivity extends BaseActivityother {
         }
         task_time = mTextview_time.getTag() + "";
 
-        release_address = "郑州";//TODO
+        release_address = mTextview_taskAddress.getText()+"";
+        if(release_address.equals("请选择")){
+            ToastUtils.showToast(this, "请选择任务地点");
+            return false;
+        }
 
         detailed_address = mEditview_addressDetail.getText() + "";
         if (detailed_address.equals("")) {
@@ -369,7 +373,7 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("commission", commission+"");//由帮手出价
         map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
         map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
-        map_issueTask.put("release_address", "郑州");//TODO 地区
+        map_issueTask.put("release_address", release_address);
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
@@ -427,7 +431,9 @@ public class IssueTaskActivity extends BaseActivityother {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2018418 && resultCode == 2018418) {
             String address = data.getStringExtra("address");
+            String address2 = data.getStringExtra("address2");
             mTextview_taskAddress.setText(address);
+            mEditview_addressDetail.setText(address2);
         }
 
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {

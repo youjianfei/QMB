@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.activity.BaseActivityother;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -73,6 +74,10 @@ public class Adapter_shophall extends BaseAdapter {
         viewholder.mImage_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Staticdata.isLogin){
+                    ToastUtils.showToast(mContext,"请先登录");
+                    return;
+                }
                 Intent intent = new Intent(Intent.ACTION_CALL);
                 Uri data = Uri.parse("tel:" + mData.get(position).getMobile_no());
                 intent.setData(data);

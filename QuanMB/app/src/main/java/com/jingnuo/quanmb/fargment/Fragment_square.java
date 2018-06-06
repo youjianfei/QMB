@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -226,32 +228,59 @@ public class Fragment_square extends Fragment {
                 request_square(map_filter_sort, ++page);
             }
         });
-        //监听键盘确定按钮，以便直接搜索
-        mEdit_serchSquare.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//        //监听键盘确定按钮，以便直接搜索
+//        mEdit_serchSquare.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                //当actionId == XX_SEND 或者 XX_DONE时都触发
+//                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
+//                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
+//                if (actionId == EditorInfo.IME_ACTION_SEND
+//                        || actionId == EditorInfo.IME_ACTION_DONE
+//                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+//                    //处理事件
+//                    LogUtils.LOG("ceshi", "点击了确定按钮", "fragmentsquare");
+//                    String search = "";
+//                    search = mEdit_serchSquare.getText() + "";
+//                    if(search.length()>5){
+//                        ToastUtils.showToast(getContext(),"搜索关键字太长");
+//                        return false;
+//                    }
+//                    String searchhou = Utils.ZhuanMa(search);
+//                    initMap(MinCommission+"",MaxCommission+"",page+"",searchhou,"","");
+//                    request_square(map_filter_sort, page);
+//
+//                }
+//                return false;
+//            }
+//        });
+        mEdit_serchSquare.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                //当actionId == XX_SEND 或者 XX_DONE时都触发
-                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
-                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
-                if (actionId == EditorInfo.IME_ACTION_SEND
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
-                    //处理事件
-                    LogUtils.LOG("ceshi", "点击了确定按钮", "fragmentsquare");
-                    String search = "";
-                    search = mEdit_serchSquare.getText() + "";
-                    if(search.length()>5){
-                        ToastUtils.showToast(getContext(),"搜索关键字太长");
-                        return false;
-                    }
-                    String searchhou = Utils.ZhuanMa(search);
-                    initMap(MinCommission+"",MaxCommission+"",page+"",searchhou,"","");
-                    request_square(map_filter_sort, page);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                LogUtils.LOG("ceshi",s+"","spisup");
+                String search = "";
+                search = mEdit_serchSquare.getText() + "";
+                if(search.length()>5){
+                    ToastUtils.showToast(getContext(),"搜索关键字太长");
+                    return ;
                 }
-                return false;
+//                String searchhou = Utils.ZhuanMa(search);
+                initMap(MinCommission+"",MaxCommission+"",page+"",search,"","");
+                request_square(map_filter_sort, page);
+
             }
         });
+
     }
 
     private void setview() {

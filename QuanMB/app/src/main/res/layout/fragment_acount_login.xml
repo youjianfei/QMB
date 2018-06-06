@@ -15,12 +15,11 @@
     android:layout_marginTop="30dp"
     android:background="@drawable/background_account"
     >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="账号"
-        android:textSize="15dp"
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="20dp"
+        android:src="@mipmap/accout"
         android:textColor="@color/gray_969696"
         />
     <EditText
@@ -47,12 +46,11 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/background_account"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="密码"
-            android:textSize="15dp"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="20dp"
+            android:src="@mipmap/password"
             android:textColor="@color/gray_969696"
             />
         <EditText
@@ -91,7 +89,7 @@
         android:textColor="@color/white"
         android:text="登  录"
         android:textSize="16dp"
-        android:background="@drawable/button_morph_3dp"
+        android:background="@drawable/button_morph_20dp"
         />
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->

@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.utils;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -12,6 +13,11 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.AddAddressActivity;
+import com.jingnuo.quanmb.activity.LoginActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
@@ -41,7 +47,7 @@ public class Volley_Utils {
         this.mInterface = mInterface;
     }
 
-    public void Http(String URL, Context mContext, int Method) {
+    public void Http(String URL, final Context mContext, int Method) {
         mQueue = Volley.newRequestQueue(mContext);
         LogUtils.LOG("ceshi","调用网络请求","vollryUtils");
         mStringRequest = new StringRequest(Method, URL, new Response.Listener<String>() {
@@ -49,7 +55,21 @@ public class Volley_Utils {
             public void onResponse(String response) {
                 LogUtils.LOG("ceshi","网络请求成功","vollryUtils");
                 if (response != null || response.length() != 0) {
-                    mInterface.onSuccesses(response);
+                    int status = 0;
+//                    String msg = "";
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        status = (Integer) object.get("code");
+//                        msg = (String) object.get("msg");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if(status==-1){
+                        ToastUtils.showToast(mContext,"登录过期，请重新登录");
+                        mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                    }else {
+                        mInterface.onSuccesses(response);
+                    }
                 }
 
             }
@@ -82,15 +102,31 @@ public class Volley_Utils {
 
     }
 
-    public void postHttp(String URL, Context mContext, int Method, final Map<String, String> map) {
+    public void postHttp(String URL, final Context mContext, int Method, final Map<String, String> map) {
         LogUtils.LOG("ceshi","post请求触发","vollryUtils");
         mQueue = Volley.newRequestQueue(mContext);
         mStringRequest = new StringRequest(Method, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null || response.length() != 0) {
-                    mInterface.onSuccesses(response);
+
+
                     LogUtils.LOG("ceshi","post成功"+response,"vollryUtils");
+                    int status = 0;
+//                    String msg = "";
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        status = (Integer) object.get("code");
+//                        msg = (String) object.get("msg");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if(status==-1){
+                        ToastUtils.showToast(mContext,"登录过期，请重新登录");
+                        mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                    }else {
+                        mInterface.onSuccesses(response);
+                }
                 }
 
             }

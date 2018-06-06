@@ -67,6 +67,33 @@ public class MyTodoBean {
             private String task_name;
             private int task_order_id;
             private String task_id;
+            private String createDate;
+            private String order_enddate;
+            private String specialty_name;
+
+            public String getSpecialty_name() {
+                return specialty_name;
+            }
+
+            public void setSpecialty_name(String specialty_name) {
+                this.specialty_name = specialty_name;
+            }
+
+            public String getOrder_enddate() {
+                return order_enddate;
+            }
+
+            public void setOrder_enddate(String order_enddate) {
+                this.order_enddate = order_enddate;
+            }
+
+            public String getCreateDate() {
+                return createDate;
+            }
+
+            public void setCreateDate(String createDate) {
+                this.createDate = createDate;
+            }
 
             public String getTask_id() {
                 return task_id;

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_queren;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
@@ -22,6 +23,7 @@ import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.MorenLianxirenBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -47,6 +49,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
     RelativeLayout mRelativelayout_lianxiren;
     RelativeLayout mRelativelayout_showlianxiren;
 
+    TextView mTextview_moren;
     TextView mTextview_title;
     TextView mTextview_taskdetalis;
     TextView mTextview_time;
@@ -56,7 +59,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
     TextView mTextview_lianxirenno;
     MyGridView mGridview_pic;
     Adapter_Gridviewpic_queren adapter_gridviewpic_queren;
-
+    MorenLianxirenBean  morenLianxirenBean;
 
     int sex = 0;   //0男1女
     String lianxiren = "";
@@ -124,6 +127,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
     protected void initData() {
         api = WXAPIFactory.createWXAPI(IssueTaskNextActivity.this, Staticdata.WechatApi);//微信支付用到
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务map集合中的内容");
+        requestMorenLianxiren();
         upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -248,6 +252,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
             mRelativelayout_showlianxiren.setVisibility(View.VISIBLE);
             String name = data.getStringExtra("name");
             phonenumber = data.getStringExtra("phonenumber");
+            String ismoren = data.getStringExtra("is_default");
             int sexw = data.getIntExtra("sex", 0);
             if(sexw==0){
                 mTextview_lianxirensex.setText("男");
@@ -256,6 +261,12 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 mTextview_lianxirensex.setText("女");
                 sex=1;
             }
+            if(ismoren.equals("N")){
+                mTextview_moren.setVisibility(View.INVISIBLE);
+            }else {
+                mTextview_moren.setVisibility(View.VISIBLE);
+            }
+
             mTextview_lianxirenname.setText(name);
             mTextview_lianxirenno.setText(phonenumber);
 
@@ -265,6 +276,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        mTextview_moren = findViewById(R.id.textview_moren);
         mTextview_title = findViewById(R.id.text_tasktitle);
         mTextview_taskdetalis = findViewById(R.id.text_taskdetail);
         mTextview_time = findViewById(R.id.text_time);
@@ -300,8 +312,48 @@ public class IssueTaskNextActivity extends BaseActivityother {
         Staticdata.map_task.put("client_name", lianxiren);
         Staticdata.map_task.put("client_sex", sex + "");
         Staticdata.map_task.put("task_Img_id", "");
+        Staticdata.map_task.put("city_code", "0");
         return true;
     }
+
+    void requestMorenLianxiren(){
+        LogUtils.LOG("ceshi",Urls.Baseurl+Urls.findMorenlianxiren
+                +Staticdata.static_userBean.getData().getUser_token()
+                +"&client_no="+Staticdata.static_userBean.getData().getAppuser().getClient_no(),"获取迷人联系人");
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"获取迷人联系人");
+                morenLianxirenBean=new Gson().fromJson(respose,MorenLianxirenBean.class);
+                if(morenLianxirenBean.getCode()==1){
+                    mRelativelayout_showlianxiren.setVisibility(View.VISIBLE);
+                    int sexw = morenLianxirenBean.getData().getSex();
+                    if(sexw==0){
+                        mTextview_lianxirensex.setText("男");
+                        sex=0;
+                    }else {
+                        mTextview_lianxirensex.setText("女");
+                        sex=1;
+                    }
+                    mTextview_lianxirenname.setText(morenLianxirenBean.getData().getName());
+                    phonenumber=morenLianxirenBean.getData().getMobile_no();
+                    mTextview_lianxirenno.setText(phonenumber);
+                }else {
+                    mRelativelayout_showlianxiren.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl+Urls.findMorenlianxiren
+                +Staticdata.static_userBean.getData().getUser_token()
+                +"&client_no="+Staticdata.static_userBean.getData().getAppuser().getClient_no(),
+                IssueTaskNextActivity.this,0);
+
+    }
+
 
     void requestTaskid() {//请求任务号,成功后跳转支付界面
         LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid

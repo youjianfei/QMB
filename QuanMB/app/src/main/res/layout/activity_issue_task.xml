@@ -265,7 +265,7 @@
                 android:id="@+id/text_chooseaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="郑州"
+                android:text="请选择"
                 android:textSize="14dp"
                 android:textColor="@color/text_hide_tip"
                 android:layout_marginTop="15dp"

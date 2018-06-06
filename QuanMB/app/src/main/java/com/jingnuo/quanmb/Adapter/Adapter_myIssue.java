@@ -45,6 +45,7 @@ public class Adapter_myIssue extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new viewHolde();
             convertView = mInlayout.inflate(R.layout.item_myissue_list, null, false);
+            viewHolder.mTextview_type = convertView.findViewById(R.id.text_type);
             viewHolder.mTextview_title = convertView.findViewById(R.id.textview_titl);
             viewHolder.mTextview_issuetime = convertView.findViewById(R.id.textview_issuename);
             viewHolder.mTextview_money = convertView.findViewById(R.id.textview_moneyy);
@@ -56,6 +57,7 @@ public class Adapter_myIssue extends BaseAdapter {
         } else {
             viewHolder = (viewHolde) convertView.getTag();
         }
+        viewHolder.mTextview_type.setText(mData.get(position).getSpecialty_name());
         viewHolder.mTextview_title.setText(mData.get(position).getTask_name());
         viewHolder.mTextview_issuetime.setText("发布时间：" + mData.get(position).getTask_StartDate());
         viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
@@ -126,6 +128,7 @@ public class Adapter_myIssue extends BaseAdapter {
     }
 
     class viewHolde {
+        TextView mTextview_type;
         TextView mTextview_title;
         TextView mTextview_issuetime;
         TextView mTextview_money;

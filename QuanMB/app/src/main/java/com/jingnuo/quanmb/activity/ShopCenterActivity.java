@@ -29,6 +29,7 @@ public class ShopCenterActivity extends BaseActivityother {
     TextView mTextview_name;  //名字
     TextView mTextview_namenext;//
     TextView mTextview_money;//佣金
+    TextView mTextview_level;//等级
 
     RelativeLayout mRealtivelayout_issue;
     RelativeLayout mRealtivelayout_myissue;
@@ -82,11 +83,13 @@ public class ShopCenterActivity extends BaseActivityother {
         mTextview_name = findViewById(R.id.text_shopname);
         mTextview_namenext = findViewById(R.id.textview_address);
         mTextview_money = findViewById(R.id.textview_money);
+        mTextview_level = findViewById(R.id.text_level);
         mRealtivelayout_issue = findViewById(R.id.relative_issuetask);
         mRealtivelayout_myissue = findViewById(R.id.relative_myissue);
         mRealtivelayout_myorder = findViewById(R.id.myorder);
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
         mButtonCash = findViewById(R.id.button_cash);
+        mTextview_level.setText(" | lv.1");
     }
 
     @Override
@@ -149,6 +152,8 @@ public class ShopCenterActivity extends BaseActivityother {
                     helpterInfoBean = new Gson().fromJson(respose, HelpterInfoBean.class);
 //                    Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList()).into(imageview_head);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
+//                    mTextview_level.setText(helpterInfoBean.getData().getList().geth());
+
                     mTextview_namenext.setText(helpterInfoBean.getData().getList().getHelper_cer_no());
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
 

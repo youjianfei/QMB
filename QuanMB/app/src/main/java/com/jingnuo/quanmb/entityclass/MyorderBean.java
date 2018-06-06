@@ -85,6 +85,15 @@ public class MyorderBean {
         private String task_name;
         private String user_grade;
         private String img_url;
+        private String specialty_name;
+
+        public String getSpecialty_name() {
+            return specialty_name;
+        }
+
+        public void setSpecialty_name(String specialty_name) {
+            this.specialty_name = specialty_name;
+        }
 
         public String getStatus_name() {
             return Status_name;

@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
@@ -32,12 +34,16 @@ import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
 import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.poi.PoiSortType;
 import com.jingnuo.quanmb.Adapter.Adapter_SearchAddress;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 
 import java.util.ArrayList;
@@ -48,7 +54,10 @@ public class LocationMapActivity extends BaseActivityother {
 
     //控件
     EditText mEdit_location;
+    EditText mEdit_search;
     TextView mTextview_nowaddress;
+    Button mBUtton_queding;
+
     private MapView mMapView = null;
     private BaiduMap mBaiduMap;
     private ListView mListview_searchaddress;
@@ -66,7 +75,8 @@ public class LocationMapActivity extends BaseActivityother {
     OnGetPoiSearchResultListener poiListener;
 
 
-    String finallocation;
+    String finallocation;//poi名称
+    String address;//地址
     @Override
     public int setLayoutResID() {
         return R.layout.activity_location_map;
@@ -91,6 +101,7 @@ public class LocationMapActivity extends BaseActivityother {
                 //将marker添加到地图上
                 mBaiduMap.addOverlay(options);
                 bitmap.recycle();//回收bitmap
+
                 mEdit_location.setText("");
 
             }
@@ -112,7 +123,8 @@ public class LocationMapActivity extends BaseActivityother {
                 mBaiduMap.addOverlay(options);
                 bitmap.recycle();//回收bitmap
                 finallocation=poi.getName()+"";
-                mTextview_nowaddress.setText("当前位置："+finallocation);//设置textview文字信息
+                mPoiSearch.searchPoiDetail(new PoiDetailSearchOption().poiUid(poi.getUid()));
+                mTextview_nowaddress.setText(finallocation);//设置textview文字信息
                 return false;
             }
         });
@@ -177,7 +189,9 @@ public class LocationMapActivity extends BaseActivityother {
             }
 
             public void onGetPoiDetailResult(PoiDetailResult result){
+
                 //获取Place详情页检索结果
+                mEdit_location.setText(result.address+"");
                 LogUtils.LOG("ceshi","onGetPoiDetailResult"+result.toString(),"地图检索结果2");
             }
 
@@ -192,7 +206,7 @@ public class LocationMapActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         //监听键盘确定按钮，以便直接搜索
-        mEdit_location.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mEdit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 //当actionId == XX_SEND 或者 XX_DONE时都触发
@@ -203,17 +217,35 @@ public class LocationMapActivity extends BaseActivityother {
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
                     LogUtils.LOG("ceshi", "点击了确定按钮", "百度地图搜索地址");
-                    String address=mEdit_location.getText()+"";
+                    String address=mEdit_search.getText()+"";
                     if(address.equals("")){
                     }else {
-                        mPoiSearch.searchInCity((new PoiCitySearchOption())
-                                .city("郑州")
-                                .keyword(address).pageCapacity(20)
-                                .pageNum(1));
+//                        mPoiSearch.searchInCity((new PoiCitySearchOption())
+//                                .city("郑州")
+//                                .keyword(address).pageCapacity(20)
+//                                .pageNum(1));
+                        mPoiSearch.searchNearby(new PoiNearbySearchOption().location(ll)
+                                .keyword(address).sortType(PoiSortType.distance_from_near_to_far)
+                        .radius(500).pageCapacity(20).pageNum(1));
                     }
 
                 }
                 return false;
+            }
+        });
+        mBUtton_queding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent result=new Intent();
+                result.putExtra("address", mTextview_nowaddress.getText()+"");
+                String add=mEdit_location.getText()+"";
+                if(add.equals("")){
+                    ToastUtils.showToast(LocationMapActivity.this,"请输入自定义名称");
+                    return;
+                }
+                result.putExtra("address2", add);
+                setResult(2018418,result);
+                finish();
             }
         });
         mImageview_cancle.setOnClickListener(new View.OnClickListener() {
@@ -227,10 +259,32 @@ public class LocationMapActivity extends BaseActivityother {
         mListview_searchaddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent result=new Intent();
-                result.putExtra("address", mData_searchaddress.get(i).address);
-                setResult(2018418,result);
-                finish();
+                LatLng point = mData_searchaddress.get(i).location;
+                mBaiduMap.clear();
+                BitmapDescriptor bitmap = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.address);      //构建Marker图标
+                MarkerOptions options = new MarkerOptions()
+                        .position(point)  //设置marker的位置
+                        .icon(bitmap)  //设置marker图标
+                        .zIndex(9);  //设置marker所在层级
+                options.animateType(MarkerOptions.MarkerAnimateType.grow);
+                //将marker添加到地图上
+                mBaiduMap.addOverlay(options);
+
+                //定义地图状态
+                MapStatus mMapStatus = new MapStatus.Builder()
+                        .target(point)
+                        .build();
+                //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+                MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory
+                        .newMapStatus(mMapStatus);
+                //改变地图状态
+                mBaiduMap.setMapStatus(mMapStatusUpdate);
+                bitmap.recycle();//回收bitmap
+                mListview_searchaddress.setVisibility(View.GONE);
+                mEdit_location.setText(mData_searchaddress.get(i).address);
+                mTextview_nowaddress.setText(mData_searchaddress.get(i).name);
+
             }
         });
     }
@@ -239,13 +293,16 @@ public class LocationMapActivity extends BaseActivityother {
     protected void initView() {
         mListview_searchaddress=findViewById(R.id.list_searchaddresslist);
         mEdit_location= findViewById(R.id.textview_location);
+        mEdit_search= findViewById(R.id.edit_searchaddress);
         mMapView = findViewById(R.id.bmapView);
         mImageview_cancle=findViewById(R.id.iamge_cancle);
         mTextview_nowaddress=findViewById(R.id.text_mapget);
+        mBUtton_queding=findViewById(R.id.button_submit);
     }
     /**
      * 定位SDK监听函数
      */
+    LatLng ll;
     public class MyLocationListenner implements BDLocationListener {
 
         @Override
@@ -263,12 +320,13 @@ public class LocationMapActivity extends BaseActivityother {
 //            mBaiduMap.setMyLocationData(locData);
             if (isFirstLoc) {
                 isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(),
+                ll = new LatLng(location.getLatitude(),
                         location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(19.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                finallocation=location.getAddrStr();
+                finallocation=location.getPoiList().get(0).getName();
+                address=location.getStreet()+location.getStreetNumber();
                 LatLng point = new LatLng(location.getLatitude(), location.getLongitude());  //定义Maker坐标点
                 BitmapDescriptor bitmap = BitmapDescriptorFactory
                         .fromResource(R.mipmap.address);      //构建Marker图标
@@ -286,6 +344,8 @@ public class LocationMapActivity extends BaseActivityother {
                     @Override
                     public void run() {
                         mTextview_nowaddress.setText(finallocation);//设置textview文字信息
+                        mEdit_location.setText(address);
+
                     }
                 });
             }
