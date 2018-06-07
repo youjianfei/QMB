@@ -89,7 +89,7 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myorder = findViewById(R.id.myorder);
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
         mButtonCash = findViewById(R.id.button_cash);
-        mTextview_level.setText(" | lv.1");
+        mTextview_level.setText("lv.1");
     }
 
     @Override
@@ -150,18 +150,18 @@ public class ShopCenterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", "商户中心：" + respose, "ShopCenterActivity");
                 if (type == 1) {
                     helpterInfoBean = new Gson().fromJson(respose, HelpterInfoBean.class);
-//                    Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList()).into(imageview_head);
+                    Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getAvatar_url()).into(imageview_head);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
 //                    mTextview_level.setText(helpterInfoBean.getData().getList().geth());
 
-                    mTextview_namenext.setText(helpterInfoBean.getData().getList().getHelper_cer_no());
+                    mTextview_namenext.setVisibility(View.GONE);
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
 
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                     Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getAvatar_url()).into(imageview_head);
                     mTextview_name.setText(shopcenterBean.getData().getList().getBusiness_name());
-                    mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address());
+                    mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address()+" | ");
                     mTextview_money.setText(shopcenterBean.getData().getList().getCommission()+"");
                 }
 

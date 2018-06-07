@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.entityclass.SystemmessageBean;
 import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.List;
 
 public class Adapter_SystemmessageList  extends  BaseAdapter{
-    List<String >  mData;
+    List<SystemmessageBean.DataBean >  mData;
     Context mContext;
     LayoutInflater mInflater;
 
@@ -36,8 +37,8 @@ public class Adapter_SystemmessageList  extends  BaseAdapter{
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-        holder.mTextview_content.setText(mData.get(position));
-
+        holder.mTextview_content.setText(mData.get(position).getTitle());
+        holder.mTextview_time.setText(mData.get(position).getCreateDate());
 
 
         return convertView;

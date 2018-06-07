@@ -4,8 +4,8 @@ public class HelpterInfoBean {
 
     /**
      * code : 1
-     * data : {"list":{"client_no":"90000000003","createDate":"2018-05-03 17:41:50","createName":"root@115.57.138.146","group_photo":"adsadad","helper_birthday":"1995-09-09 00:00:00","helper_cer_no":"123","helper_cer_type":"11","helper_grade":"1","helper_id":1,"helper_mobile_no":"18539931923","helper_name":"星星","helper_no":"1","helper_reputation":100,"helper_sex":"0","protrait_photo":"asdfasfd","reverse_photo":"sadad","status":"1","updateDate":"2018-05-07 19:21:17","updateName":"root@115.57.138.21"}}
-     * message : 查看信息成功
+     * data : {"list":{"avatar_url":"https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/helper.png","client_no":"90000000005","commission":"0.00","createDate":"2018-06-07 17:51:48","createName":"root@115.57.136.96","group_photo":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/85f12e4d-f9d0-4f40-8bbe-81a3a950f8a6S80428-165557.jpg.jpg","helper_age":26,"helper_avatar":7,"helper_birthday":"1992-09-20 00:00:00","helper_cer_no":"410185199209202516","helper_cer_type":"1","helper_id":51,"helper_level":0,"helper_mobile_no":"18539931923","helper_name":"监控","helper_no":"1","helper_reputation":100,"helper_sex":"0","protrait_photo":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/ada97dfc-a706-4fe3-bfd3-8911d3f8a7c5S80428-165557.jpg.jpg","reverse_photo":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/711d4985-088a-41e7-a1c9-8ca90b2ebf0fS80428-165557.jpg.jpg","status":"2","updateDate":"2018-06-07 17:56:17","updateName":"root@115.57.136.96"}}
+     * message : 查看帮手信息成功
      */
 
     private int code;
@@ -38,7 +38,7 @@ public class HelpterInfoBean {
 
     public static class DataBean {
         /**
-         * list : {"client_no":"90000000003","createDate":"2018-05-03 17:41:50","createName":"root@115.57.138.146","group_photo":"adsadad","helper_birthday":"1995-09-09 00:00:00","helper_cer_no":"123","helper_cer_type":"11","helper_grade":"1","helper_id":1,"helper_mobile_no":"18539931923","helper_name":"星星","helper_no":"1","helper_reputation":100,"helper_sex":"0","protrait_photo":"asdfasfd","reverse_photo":"sadad","status":"1","updateDate":"2018-05-07 19:21:17","updateName":"root@115.57.138.21"}
+         * list : {"avatar_url":"https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/helper.png","client_no":"90000000005","commission":"0.00","createDate":"2018-06-07 17:51:48","createName":"root@115.57.136.96","group_photo":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/85f12e4d-f9d0-4f40-8bbe-81a3a950f8a6S80428-165557.jpg.jpg","helper_age":26,"helper_avatar":7,"helper_birthday":"1992-09-20 00:00:00","helper_cer_no":"410185199209202516","helper_cer_type":"1","helper_id":51,"helper_level":0,"helper_mobile_no":"18539931923","helper_name":"监控","helper_no":"1","helper_reputation":100,"helper_sex":"0","protrait_photo":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/ada97dfc-a706-4fe3-bfd3-8911d3f8a7c5S80428-165557.jpg.jpg","reverse_photo":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/711d4985-088a-41e7-a1c9-8ca90b2ebf0fS80428-165557.jpg.jpg","status":"2","updateDate":"2018-06-07 17:56:17","updateName":"root@115.57.136.96"}
          */
 
         private ListBean list;
@@ -53,36 +53,44 @@ public class HelpterInfoBean {
 
         public static class ListBean {
             /**
-             * client_no : 90000000003
-             * createDate : 2018-05-03 17:41:50
-             * createName : root@115.57.138.146
-             * group_photo : adsadad
-             * helper_birthday : 1995-09-09 00:00:00
-             * helper_cer_no : 123
-             * helper_cer_type : 11
-             * helper_grade : 1
-             * helper_id : 1
+             * avatar_url : https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/helper.png
+             * client_no : 90000000005
+             * commission : 0.00
+             * createDate : 2018-06-07 17:51:48
+             * createName : root@115.57.136.96
+             * group_photo : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/85f12e4d-f9d0-4f40-8bbe-81a3a950f8a6S80428-165557.jpg.jpg
+             * helper_age : 26
+             * helper_avatar : 7
+             * helper_birthday : 1992-09-20 00:00:00
+             * helper_cer_no : 410185199209202516
+             * helper_cer_type : 1
+             * helper_id : 51
+             * helper_level : 0
              * helper_mobile_no : 18539931923
-             * helper_name : 星星
+             * helper_name : 监控
              * helper_no : 1
              * helper_reputation : 100
              * helper_sex : 0
-             * protrait_photo : asdfasfd
-             * reverse_photo : sadad
-             * status : 1
-             * updateDate : 2018-05-07 19:21:17
-             * updateName : root@115.57.138.21
+             * protrait_photo : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/ada97dfc-a706-4fe3-bfd3-8911d3f8a7c5S80428-165557.jpg.jpg
+             * reverse_photo : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/711d4985-088a-41e7-a1c9-8ca90b2ebf0fS80428-165557.jpg.jpg
+             * status : 2
+             * updateDate : 2018-06-07 17:56:17
+             * updateName : root@115.57.136.96
              */
 
+            private String avatar_url;
             private String client_no;
+            private String commission;
             private String createDate;
             private String createName;
             private String group_photo;
+            private int helper_age;
+            private int helper_avatar;
             private String helper_birthday;
             private String helper_cer_no;
             private String helper_cer_type;
-            private String helper_grade;
             private int helper_id;
+            private int helper_level;
             private String helper_mobile_no;
             private String helper_name;
             private String helper_no;
@@ -93,14 +101,13 @@ public class HelpterInfoBean {
             private String status;
             private String updateDate;
             private String updateName;
-            private String commission;
 
-            public String getCommission() {
-                return commission;
+            public String getAvatar_url() {
+                return avatar_url;
             }
 
-            public void setCommission(String commission) {
-                this.commission = commission;
+            public void setAvatar_url(String avatar_url) {
+                this.avatar_url = avatar_url;
             }
 
             public String getClient_no() {
@@ -109,6 +116,14 @@ public class HelpterInfoBean {
 
             public void setClient_no(String client_no) {
                 this.client_no = client_no;
+            }
+
+            public String getCommission() {
+                return commission;
+            }
+
+            public void setCommission(String commission) {
+                this.commission = commission;
             }
 
             public String getCreateDate() {
@@ -135,6 +150,22 @@ public class HelpterInfoBean {
                 this.group_photo = group_photo;
             }
 
+            public int getHelper_age() {
+                return helper_age;
+            }
+
+            public void setHelper_age(int helper_age) {
+                this.helper_age = helper_age;
+            }
+
+            public int getHelper_avatar() {
+                return helper_avatar;
+            }
+
+            public void setHelper_avatar(int helper_avatar) {
+                this.helper_avatar = helper_avatar;
+            }
+
             public String getHelper_birthday() {
                 return helper_birthday;
             }
@@ -159,20 +190,20 @@ public class HelpterInfoBean {
                 this.helper_cer_type = helper_cer_type;
             }
 
-            public String getHelper_grade() {
-                return helper_grade;
-            }
-
-            public void setHelper_grade(String helper_grade) {
-                this.helper_grade = helper_grade;
-            }
-
             public int getHelper_id() {
                 return helper_id;
             }
 
             public void setHelper_id(int helper_id) {
                 this.helper_id = helper_id;
+            }
+
+            public int getHelper_level() {
+                return helper_level;
+            }
+
+            public void setHelper_level(int helper_level) {
+                this.helper_level = helper_level;
             }
 
             public String getHelper_mobile_no() {

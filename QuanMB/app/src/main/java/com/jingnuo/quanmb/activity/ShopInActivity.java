@@ -80,8 +80,11 @@ public class ShopInActivity extends BaseActivityother {
 
                                 if(status==1){
                                     ToastUtils.showToast(ShopInActivity.this,msg);
-                                    Intent  intent_shopIn_next=new Intent(ShopInActivity.this,ShopInNextActivity.class);
-                                    startActivity(intent_shopIn_next);
+//                                    Intent  intent_shopIn_next=new Intent(ShopInActivity.this,ShopInNextActivity.class);
+//                                    startActivity(intent_shopIn_next);
+                                    Intent intent_submit=new Intent(ShopInActivity.this,SubmitSuccessActivity.class);
+                                    intent_submit.putExtra("state","1");
+                                    startActivity(intent_submit);
                                     finish();
                                 }else {
                                     ToastUtils.showToast(ShopInActivity.this,"提交申请失败，请稍候重试");

@@ -157,6 +157,9 @@ public class AuthenticationActivity extends BaseActivityother {
                                 msg = (String) object.get("msg");//登录返回信息
 
                                 if (status == 1) {
+                                    Intent intent_submit=new Intent(AuthenticationActivity.this,SubmitSuccessActivity.class);
+                                    intent_submit.putExtra("state","1");
+                                    startActivity(intent_submit);
                                     ToastUtils.showToast(AuthenticationActivity.this,msg);//todo 帮手认证逻辑待调整，还需要审核不应该直接成功
                                     finish();
                                 }else {

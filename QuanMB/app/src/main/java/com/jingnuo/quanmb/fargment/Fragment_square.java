@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.fargment;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,11 +24,16 @@ import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_SquareList;
+import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
+import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationaddressActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
+import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
+import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
 import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -41,6 +47,7 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InterfaceAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +74,8 @@ public class Fragment_square extends Fragment {
     //对象
     Adapter_SquareList mAdapter_SquareList;
 
+    private IntentFilter intentFilter_bauduaddress;//定义广播过滤器；
+    private BaiduAddressBroadcastReciver baiduAddressBroadcastReciver;
 
     //数据
     Map map_filter_sort;
@@ -83,11 +92,28 @@ public class Fragment_square extends Fragment {
         rootview = inflater.inflate(R.layout.fragment_square, container, false);
         initview();
         initdata();
+        setdata();
         setview();
         initlistenner();
         request_square(map_filter_sort, page);//首页默认请求 page==1
 
         return rootview;
+    }
+    void  setdata(){
+        intentFilter_bauduaddress = new IntentFilter();
+        intentFilter_bauduaddress.addAction("com.jingnuo.quanmb.ADDRESS");
+        baiduAddressBroadcastReciver=new BaiduAddressBroadcastReciver(new InterfaceBaiduAddress() {
+            @Override
+            public void onResult(final String address) {
+               getActivity(). runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                       mTextview_address.setText(address);
+                    }
+                });
+            }
+        });
+        getActivity(). registerReceiver(baiduAddressBroadcastReciver, intentFilter_bauduaddress); //将广播监听器和过滤器注册在一起；
     }
 
     private void request_square(Map map_filterOrsort, final int page) {
@@ -319,5 +345,11 @@ public class Fragment_square extends Fragment {
         page = 1;
         request_square(map_filter_sort, 1);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       getActivity(). unregisterReceiver(baiduAddressBroadcastReciver);
     }
 }

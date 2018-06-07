@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.activity.ShopInNextActivity;
+import com.jingnuo.quanmb.activity.SubmitSuccessActivity;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -58,25 +60,21 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     private UMShareAPI mShareAPI;//第三方登录登录
 
     //控件
-    TextView mTextview_banghsou,mTextview_shopcenter;
-    TextView mTextview_address;
+    RelativeLayout mTextview_shopcenter;
+    RelativeLayout mTextview_address;
+    RelativeLayout mTextview_banghsou;
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
     ImageView mimage_chengwei;
     TextView mTextview_nickname;
     TextView mTextview_moneycount;
     TextView mTextview_chengwei;
-    TextView mTextview_myorder;
-    TextView mTextview_mycollect;
-    TextView mTextview_aboutus;
-    TextView mTextview_logout;
+    RelativeLayout mTextview_myorder;
+    RelativeLayout mTextview_mycollect;
+    RelativeLayout mTextview_aboutus;
+    RelativeLayout mTextview_logout;
     Button mButton_rechange;//充值
     Button mButton_cashout;//提现
-
-
-
-    private IWXAPI api;
-
 
 
     @Nullable
@@ -253,9 +251,12 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                                 getActivity().startActivity(intent_shopin);
 
                             }else if(state.equals("1")){//正在审核
-                                Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
-                                getActivity().startActivity(intent_shopinext);
+//                                Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
+//                                getActivity().startActivity(intent_shopinext);
 
+                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                                intent_submit.putExtra("state","2");
+                                startActivity(intent_submit);
 
                             }else if(state.equals("3")){//审核失败
                                 Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
@@ -317,8 +318,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                             getActivity().startActivity(intent_shopin);
 
                         }else if(state.equals("02")){//正在审核
-                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
-                            getActivity().startActivity(intent_shopinext);
+//                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
+//                            getActivity().startActivity(intent_shopinext);
+                            Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                            intent_submit.putExtra("state","2");
+                            startActivity(intent_submit);
 
                         }else if(state.equals("03")){//没提交审核
                             Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);

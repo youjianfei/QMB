@@ -5,12 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_SystemmessageList;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.SystemmessageBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -28,13 +32,13 @@ public class SystemMessageActivity extends BaseActivityother {
     //数据
     Map map_message;
 
-    List<String >  mData;
+    List<SystemmessageBean.DataBean>mData;
 
     int page=1;
 
     //对象
     Adapter_SystemmessageList adapter_systemmessageList;
-
+    SystemmessageBean systemmessageBean;
 
     @Override
     public int setLayoutResID() {
@@ -49,16 +53,13 @@ public class SystemMessageActivity extends BaseActivityother {
     @Override
     protected void initData() {
         mData=new ArrayList<>();
-        mData.add("xitong同好值");
-        mData.add("sadfsdfsd");
-        mData.add("xitong同好sdafsaf值");
         adapter_systemmessageList=new Adapter_SystemmessageList(mData,this);
         mListview.setAdapter(adapter_systemmessageList);
 
         map_message=new HashMap();
         map_message.put("pageNo",page+"");
         map_message.put("type","1");
-        map_message.put("receive_client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//        map_message.put("receive_client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());//获取系统消息不用客户号
         map_message.put("user_token",Staticdata.static_userBean.getData().getUser_token());
         LogUtils.LOG("ceshi","系统消息内容map"+map_message,"SystemMessageActivity");
         requestSystermyMessage(map_message);
@@ -70,10 +71,29 @@ public class SystemMessageActivity extends BaseActivityother {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent_messagedetail=new Intent(SystemMessageActivity.this,SystemmessageDetailActivity.class);
+                intent_messagedetail.putExtra("title",mData.get(position-1).getTitle());
+                intent_messagedetail.putExtra("content",mData.get(position-1).getContent());
+                intent_messagedetail.putExtra("time",mData.get(position-1).getCreateDate());
                 startActivity(intent_messagedetail);
             }
         });
+        //下拉  上拉 加载刷新
+        mListview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page = 1;
+                map_message.put("pageNo",page+"");
+                requestSystermyMessage(map_message);
 
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page++;
+                map_message.put("pageNo",page+"");
+                requestSystermyMessage(map_message);
+            }
+        });
     }
 
     @Override
@@ -85,9 +105,19 @@ public class SystemMessageActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                if (mListview.isRefreshing()) {
+                    mListview.onRefreshComplete();
+                }
+                systemmessageBean=new Gson().fromJson(respose,SystemmessageBean.class);
+                if(page==1){
+                    mData.clear();
+                    mData.addAll(systemmessageBean.getData());
+                    adapter_systemmessageList.notifyDataSetChanged();
 
-                LogUtils.LOG("ceshi","系统消息内容"+respose,"SystemMessageActivity");
-
+                }else {
+                    mData.addAll(systemmessageBean.getData());
+                    adapter_systemmessageList.notifyDataSetChanged();
+                }
             }
 
             @Override

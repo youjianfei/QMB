@@ -1,9 +1,11 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.AllCityBean;
 import com.jingnuo.quanmb.entityclass.LocationAddressListBean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PinyinUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
@@ -28,6 +31,7 @@ public class LocationaddressActivity extends BaseActivityother {
 
     //控件
     ListView mListview;
+    TextView mTextnowaddress;
     private SideBar mSideBar;
     private TextView dialog;
 
@@ -107,6 +111,25 @@ public class LocationaddressActivity extends BaseActivityother {
                 }
             }
         });
+        mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi",mdata.get(position).getName()+"","选择地址");
+                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                intent.putExtra("address",mdata.get(position).getName());
+                sendBroadcast(intent);
+                finish();
+            }
+        });
+        mTextnowaddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                intent.putExtra("address",mTextnowaddress.getText().subSequence(5,mTextnowaddress.getText().length()));
+                sendBroadcast(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -114,6 +137,7 @@ public class LocationaddressActivity extends BaseActivityother {
         mListview=findViewById(R.id.mylistview);
         mSideBar=findViewById(R.id.sidebar);
         dialog=findViewById(R.id.dialog);
+        mTextnowaddress=findViewById(R.id.textview_nowaddress);
     }
 
 

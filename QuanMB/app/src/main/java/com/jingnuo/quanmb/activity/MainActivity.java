@@ -20,6 +20,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.class_.Popwindow_Issue;
 import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.fargment.Fragment_person;
@@ -52,7 +53,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //百度地图相关
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
-
 
     @SuppressLint("ResourceType")
     @Override
@@ -99,7 +99,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //可选，设置发起定位请求的间隔，int类型，单位ms
         //如果设置为0，则代表单次定位，即仅定位一次，默认为0
         //如果设置非0，需设置1000ms以上才有效
-
+        option.setIsNeedAddress(true);//是否显示地址
         option.setOpenGps(true);
         //可选，设置是否使用gps，默认false
         //使用高精度和仅用设备两种定位模式的，参数必须设置为true
@@ -318,7 +318,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             int errorCode = location.getLocType();
             //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
 
-            LogUtils.LOG("ceshi", "纬度信息" + latitude + "经度信息" + longitude + "定位精度" + radius + "经纬度坐标类型" + coorType + "错误返回码" + errorCode, "mainactivity");
+            LogUtils.LOG("baidu", "纬度信息" + latitude + "经度信息" + longitude + "定位精度" + radius + "经纬度坐标类型" + coorType + "错误返回码" + errorCode, "mainactivity");
+
+//            String addr = location.getAddrStr();    //获取详细地址信息
+//            String country = location.getCountry();    //获取国家
+//            String province = location.getProvince();    //获取省份
+            String city = location.getCity();    //获取城市
+//            String district = location.getDistrict();    //获取区县
+//            String street = location.getStreet();
+            LogUtils.LOG("baidu", "纬度信息" + city + "经度信息" + longitude + "定位精度" + radius + "经纬度坐标类型" + coorType + "错误返回码" + errorCode, "mainactivity");
+
+                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                intent.putExtra("address",city);
+                sendBroadcast(intent);
+
         }
     }
 

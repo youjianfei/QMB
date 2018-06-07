@@ -150,7 +150,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.RechargeActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.CashoutActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopCenterInfoActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShopinfoEditActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.ShopinfoEditActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.SubmitSuccessActivity"></activity>
     </application>
 
 </manifest>
