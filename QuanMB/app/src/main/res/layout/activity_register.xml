@@ -129,7 +129,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/phonenumber"
+            android:src="@mipmap/password"
             android:textColor="@color/gray_969696"
             />
 
@@ -159,7 +159,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/phonenumber"
+            android:src="@mipmap/password"
             android:textColor="@color/gray_969696"
             />
 
@@ -214,11 +214,11 @@
     <Button
         android:id="@+id/button_register"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/button_morph_3dp"
+        android:background="@drawable/button_morph_20dp"
         android:text="注  册"
         android:textColor="@color/white"
         android:textSize="16dp" />
