@@ -56,6 +56,7 @@ public class SkillDetailActivity extends BaseActivityother {
     MyGridView imageGridview;
     ImageView mImageView_Suggest;
     ImageView mImageview_collect;
+    ImageView mImageview_shopPic;
 
 
 
@@ -113,6 +114,7 @@ public class SkillDetailActivity extends BaseActivityother {
         mLinearlayout_phonenumber=findViewById(R.id.linearlayout_phonenumber);
         imageGridview=findViewById(R.id.GridView_PIC);
         mImageView_Suggest=findViewById(R.id.image_complain);
+        mImageview_shopPic=findViewById(R.id.image_shoppic);
         mLinearlayout_collection=findViewById(R.id.linearlayout_collection);
         mImageview_collect=findViewById(R.id.imageview_collect);
     }
@@ -162,7 +164,12 @@ public class SkillDetailActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()){
             case R.id.image_complain:
+                if(Staticdata.static_userBean.getData()==null){
+                    ToastUtils.showToast(SkillDetailActivity.this,"请先登录！");
+                    return;
+                }
                 Intent intent_suggest=new Intent(SkillDetailActivity.this,SuggestActivity.class);
+                intent_suggest.putExtra("release_specialty_id",mSkilldetailsbean.getData().getDetail().getRelease_specialty_id()+"");
                 startActivity(intent_suggest);
                 break;
             case R.id.text_more:
@@ -294,7 +301,8 @@ public class SkillDetailActivity extends BaseActivityother {
                 mTextview_name.setText(mSkilldetailsbean.getData().getDetail().getContacts());
                 mTextview_shopaddress.setText(mSkilldetailsbean.getData().getDetail().getRelease_address());
                 mTextview_content.setText(mSkilldetailsbean.getData().getDetail().getDescription());
-                mTextview_shopname.setText(mSkilldetailsbean.getData().getDetail().getBusiness_name());
+                mTextview_shopname.setText(mSkilldetailsbean.getData().getDetail().getAuth_name());
+                Glide.with(SkillDetailActivity.this).load(mSkilldetailsbean.getData().getDetail().getAvatar_url()).into(mImageview_shopPic);
                 image_url=mSkilldetailsbean.getData().getDetail().getImg_url();
                 setImage(image_url);
                 collrctID=mSkilldetailsbean.getData().getDetail().getCollection_status()==0?1:2;
@@ -306,8 +314,6 @@ public class SkillDetailActivity extends BaseActivityother {
 
             }
         }).Http(URL,SkillDetailActivity.this,0);
-
-
 
     }
     @Override

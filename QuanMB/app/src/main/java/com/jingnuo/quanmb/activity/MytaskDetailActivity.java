@@ -196,6 +196,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails, "MytaskDetailActivity");
                 LogUtils.LOG("ceshi", respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());

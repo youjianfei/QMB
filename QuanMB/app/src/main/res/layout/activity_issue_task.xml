@@ -68,7 +68,7 @@
         <RelativeLayout
             android:id="@+id/relative_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_below="@+id/text1"
             android:background="@color/white">
 
@@ -81,26 +81,31 @@
                 android:text="类型："
                 android:textColor="@color/text_title2"
                 android:textSize="15dp"
-
                 />
-            <ImageView
-                android:id="@+id/imageqq"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="15dp"
-                android:src="@mipmap/more" />
-            <TextView
-                android:id="@+id/text_chooce"
+            <RelativeLayout
+                android:id="@+id/relative_chose"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请选择"
-                android:textColor="@color/black_text2"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/imageqq"
-                android:layout_marginRight="5dp"
-                />
+                android:layout_height="match_parent"
+                >
+                <ImageView
+                    android:id="@+id/imageqq"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="17dp"
+                    android:src="@mipmap/more" />
+                <TextView
+                    android:id="@+id/text_chooce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请选择"
+                    android:textColor="@color/black_text2"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/imageqq"
+                    />
+            </RelativeLayout>
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -126,9 +131,12 @@
                 android:hint="一句话描述你的任务"
                 android:textColorHint="@color/text_hide_tip"
                 android:textSize="14dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
                 android:background="@null"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"
                 android:singleLine="true"
                 android:layout_marginLeft="110dp"
@@ -139,7 +147,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/edit_tasktitle"
                 android:background="@color/gray_dbdbdb"
                 />
@@ -179,7 +187,7 @@
                 android:id="@+id/edit_detailtask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请描述你的任务，不少于20字"
+                android:hint="请描述你的任务，不少于5字"
                 android:textColorHint="@color/text_hide_tip"
                 android:textSize="14dp"
                 android:background="@null"
@@ -205,7 +213,7 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="155dp"
             android:layout_below="@+id/relative_1"
             android:layout_marginTop="8dp"
             android:background="@color/white">
@@ -220,6 +228,11 @@
                 android:textColor="@color/text_title2"
                 android:textSize="15dp"
                 />
+        <RelativeLayout
+            android:id="@+id/relative_chosetime"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            >
             <TextView
                 android:id="@+id/edit_tasktime"
                 android:layout_width="wrap_content"
@@ -236,18 +249,20 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@mipmap/more"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="17dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
                 />
+
+        </RelativeLayout>
+
             <ImageView
                 android:id="@+id/image_line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/edit_tasktime"
+                android:layout_below="@+id/relative_chosetime"
                 android:background="@color/gray_dbdbdb"
                 />
             <TextView
@@ -268,8 +283,11 @@
                 android:text="请选择"
                 android:textSize="14dp"
                 android:textColor="@color/text_hide_tip"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="45dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:layout_marginRight="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="110dp"
                 android:layout_below="@+id/image_line2"
@@ -278,7 +296,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@mipmap/more"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="17dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
                 android:layout_below="@+id/image_line2"
@@ -289,7 +307,6 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_below="@+id/text_chooseaddress"
                 android:background="@color/gray_dbdbdb"
                 />
@@ -332,27 +349,27 @@
             <LinearLayout
                 android:id="@+id/linearlayout_yongjin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="15dp"
                 >
                 <ImageView
                     android:id="@+id/image_chooseme"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
+
                     android:src="@drawable/select_duigou"
                     android:layout_marginRight="5dp"
                     />
                 <TextView
+                    android:id="@+id/textview_chooseme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="由我出价"
-                    android:layout_marginRight="10dp"
-                    />
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"/>
 
                 <ImageView
                     android:id="@+id/image_choosehelper"
@@ -360,13 +377,17 @@
                     android:layout_height="15dp"
                     android:src="@drawable/select_duigou"
                     android:layout_marginRight="5dp"
+                    android:layout_marginLeft="10dp"
                     />
 
                 <TextView
+                    android:id="@+id/text_choosehelper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="由帮手出价"
                     android:layout_marginRight="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     />
 
 
@@ -403,13 +424,13 @@
                     android:textColorHint="@color/text_hide_tip"
                     android:textSize="14dp"
                     android:background="@null"
-                    android:layout_marginTop="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:layout_marginRight="30dp"
                     android:layout_alignParentRight="true"
                     android:singleLine="true"
                     android:digits="1234567890."
                     android:layout_marginLeft="110dp"
-                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/image_line10"
                     />
                 <ImageView
@@ -450,6 +471,7 @@
                         android:layout_marginRight="5dp"
                         />
                     <TextView
+                        android:id="@+id/text_choosejieshou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="接受"
@@ -465,6 +487,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/text_choosejujue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="拒绝"

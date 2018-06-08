@@ -68,7 +68,9 @@ public class IssueTaskActivity extends BaseActivityother {
     //控件
     TextView mTextview_taskAddress;//地图返回地点
     TextView mTextview_choose;
+    RelativeLayout mRelativelayout_chose;//xuan 泽 类型
     TextView mTextview_time;
+    RelativeLayout mRelativelayout_chosetime;//选择时间
     EditText mEditview_addressDetail;//详细地址
     EditText mEditview_title;
     EditText mEditview_taskdetails;
@@ -76,8 +78,12 @@ public class IssueTaskActivity extends BaseActivityother {
     EditText mEditview_taskmoney;
     ImageView mImage_choosejieshou;
     ImageView mImage_choosejujue;
+    TextView mText_choosejieshou;
+    TextView mText_choosejujue;
     ImageView mImage_chooseme;
     ImageView mImage_choosehelper;
+    TextView  mtextview_choseme;
+    TextView  mtextview_chosehelper;
     RelativeLayout relativelayout_chujia;
 
 
@@ -155,7 +161,7 @@ public class IssueTaskActivity extends BaseActivityother {
                 startActivityForResult(mIntent_map, 2018418);
             }
         });
-        mTextview_choose.setOnClickListener(new View.OnClickListener() {
+        mRelativelayout_chose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mPopwindow_skilltype = new Popwindow_SkillType(IssueTaskActivity.this, new InterfacePopwindow_SkillType() {
@@ -168,7 +174,7 @@ public class IssueTaskActivity extends BaseActivityother {
                 mPopwindow_skilltype.showPopwindow();
             }
         });
-        mTextview_time.setOnClickListener(new View.OnClickListener() {
+        mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popwindow_completeTime.showPopwindow();
@@ -236,41 +242,21 @@ public class IssueTaskActivity extends BaseActivityother {
                 }
             }
         });
-        mImage_choosejieshou.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mImage_choosejieshou.isSelected()) {
-                    mImage_choosejieshou.setSelected(true);
-                    mImage_choosejujue.setSelected(false);
-                    is_counteroffer = 1;
-                }
-            }
-        });
-        mImage_choosejujue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mImage_choosejujue.isSelected()) {
-                    mImage_choosejieshou.setSelected(false);
-                    mImage_choosejujue.setSelected(true);
-                    is_counteroffer = 0;
-                }
-            }
-        });
+        mImage_choosejieshou.setOnClickListener(this);
+        mImage_choosejujue.setOnClickListener(this);
+        mText_choosejieshou.setOnClickListener(this);
+        mText_choosejujue.setOnClickListener(this);
+        mImage_chooseme.setOnClickListener(this);
+        mImage_choosehelper.setOnClickListener(this);
+        mtextview_choseme.setOnClickListener(this);
+        mtextview_chosehelper.setOnClickListener(this);
+    }
 
-        mImage_chooseme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mImage_chooseme.isSelected()) {
-                    mImage_chooseme.setSelected(true);
-                    mImage_choosehelper.setSelected(false);
-                    isMEchujia = 1;
-                    relativelayout_chujia.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        mImage_choosehelper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.text_choosehelper:
                 if (!mImage_choosehelper.isSelected()) {
                     mImage_choosehelper.setSelected(true);
                     mImage_chooseme.setSelected(false);
@@ -279,8 +265,63 @@ public class IssueTaskActivity extends BaseActivityother {
                     mEditview_taskmoney.setText("");
                     is_counteroffer = 1;
                 }
-            }
-        });
+            break;
+            case R.id.textview_chooseme:
+                if (!mImage_chooseme.isSelected()) {
+                    mImage_chooseme.setSelected(true);
+                    mImage_choosehelper.setSelected(false);
+                    isMEchujia = 1;
+                    relativelayout_chujia.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.image_choosehelper:
+                if (!mImage_choosehelper.isSelected()) {
+                    mImage_choosehelper.setSelected(true);
+                    mImage_chooseme.setSelected(false);
+                    isMEchujia = 2;
+                    relativelayout_chujia.setVisibility(View.GONE);
+                    mEditview_taskmoney.setText("");
+                    is_counteroffer = 1;
+                }
+                break;
+            case R.id.image_chooseme:
+                if (!mImage_chooseme.isSelected()) {
+                    mImage_chooseme.setSelected(true);
+                    mImage_choosehelper.setSelected(false);
+                    isMEchujia = 1;
+                    relativelayout_chujia.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.image_choosejieshou:
+                if (!mImage_choosejieshou.isSelected()) {
+                    mImage_choosejieshou.setSelected(true);
+                    mImage_choosejujue.setSelected(false);
+                    is_counteroffer = 1;
+                }
+                break;
+            case R.id.text_choosejujue:
+                if (!mImage_choosejujue.isSelected()) {
+                    mImage_choosejieshou.setSelected(false);
+                    mImage_choosejujue.setSelected(true);
+                    is_counteroffer = 0;
+                }
+                break;
+            case R.id.text_choosejieshou:
+                if (!mImage_choosejieshou.isSelected()) {
+                    mImage_choosejieshou.setSelected(true);
+                    mImage_choosejujue.setSelected(false);
+                    is_counteroffer = 1;
+                }
+                break;
+            case R.id.image_choosejujue:
+                if (!mImage_choosejujue.isSelected()) {
+                    mImage_choosejieshou.setSelected(false);
+                    mImage_choosejujue.setSelected(true);
+                    is_counteroffer = 0;
+                }
+                break;
+
+        }
     }
 
     @Override
@@ -289,6 +330,8 @@ public class IssueTaskActivity extends BaseActivityother {
         mTextview_choose = findViewById(R.id.text_chooce);
         mEditview_title = findViewById(R.id.edit_tasktitle);
         mTextview_time = findViewById(R.id.edit_tasktime);
+        mRelativelayout_chose=findViewById(R.id.relative_chose);
+        mRelativelayout_chosetime=findViewById(R.id.relative_chosetime);
         mEditview_addressDetail = findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = findViewById(R.id.edit_detailtask);
         imageGridview = findViewById(R.id.GridView_PIC);
@@ -297,8 +340,12 @@ public class IssueTaskActivity extends BaseActivityother {
         mImage_choosejieshou = findViewById(R.id.image_choosejieshou);
         mImage_choosejieshou.setSelected(true);
         mImage_choosejujue = findViewById(R.id.image_choosejujue);
+        mText_choosejieshou = findViewById(R.id.text_choosejieshou);
+        mText_choosejujue = findViewById(R.id.text_choosejujue);
         mImage_chooseme = findViewById(R.id.image_chooseme);
         mImage_chooseme.setSelected(true);
+        mtextview_choseme = findViewById(R.id.textview_chooseme);
+        mtextview_chosehelper = findViewById(R.id.text_choosehelper);
         mImage_choosehelper = findViewById(R.id.image_choosehelper);
         relativelayout_chujia = findViewById(R.id.relativelayout_chujia);
     }

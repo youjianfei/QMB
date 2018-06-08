@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-//        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -49,6 +49,8 @@ public class Urls {
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号
 
     //专业/商家模块
+
+    public static String hotbackImage = "https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/icon/";//热门图片写在本地
     public static String Skillmenu_one = "major/searchOne";//找专业一级菜单
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
@@ -108,6 +110,7 @@ public class Urls {
     public static String addLianxiren = "user/addContacts";//新增联系人
     public static String editLianxiren = "user/editContacts";//编辑联系人
     public static String findMorenlianxiren = "user/getIsDefaultContacts?user_token=";//默认联系人
+    public static String mySuggest = "user/myComplaints";//投诉和建议
 
 
     //支付

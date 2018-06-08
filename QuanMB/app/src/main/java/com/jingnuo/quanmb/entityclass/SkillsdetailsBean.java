@@ -80,7 +80,7 @@ public class SkillsdetailsBean {
              * updateName : root@192.168.1.184
              */
 
-            private String business_name;
+            private String auth_name;
             private String business_no;
             private String client_no;
             private String contacts;
@@ -101,6 +101,15 @@ public class SkillsdetailsBean {
             private String title;
             private long updateDate;
             private String updateName;
+            private String avatar_url;
+
+            public String getAvatar_url() {
+                return avatar_url;
+            }
+
+            public void setAvatar_url(String avatar_url) {
+                this.avatar_url = avatar_url;
+            }
 
             public int getCollection_status() {
                 return collection_status;
@@ -110,12 +119,12 @@ public class SkillsdetailsBean {
                 this.collection_status = collection_status;
             }
 
-            public String getBusiness_name() {
-                return business_name;
+            public String getAuth_name() {
+                return auth_name;
             }
 
-            public void setBusiness_name(String business_name) {
-                this.business_name = business_name;
+            public void setAuth_name(String auth_name) {
+                this.auth_name = auth_name;
             }
 
             public String getBusiness_no() {
