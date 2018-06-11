@@ -321,7 +321,7 @@
                 android:layout_marginRight="30dp"
                 android:orientation="horizontal"
                 android:layout_below="@+id/re2"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginBottom="20dp"
                 >
                 <Button
@@ -358,6 +358,18 @@
                     android:layout_alignParentBottom="true"
                     android:text="撤消任务"
                     android:visibility="visible"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+                <Button
+                    android:id="@+id/button_again"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_green_20dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="重新发布"
+                    android:visibility="gone"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
 

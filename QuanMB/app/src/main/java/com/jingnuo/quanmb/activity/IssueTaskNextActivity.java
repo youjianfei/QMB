@@ -323,7 +323,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose,"获取迷人联系人");
+                LogUtils.LOG("ceshi",respose,"获取默认联系人");
                 morenLianxirenBean=new Gson().fromJson(respose,MorenLianxirenBean.class);
                 if(morenLianxirenBean.getCode()==1){
                     mRelativelayout_showlianxiren.setVisibility(View.VISIBLE);

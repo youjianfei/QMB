@@ -6,13 +6,13 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+//        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -47,6 +47,7 @@ public class Urls {
     public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布任务
     public static String checkissuetask = "task/querySpecialty/checkAnnouncementList";//检验任务内容是否有违规
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号
+    public static String Issue_again = "task/taskBackon?user_token=";//重新上架任务
 
     //专业/商家模块
 

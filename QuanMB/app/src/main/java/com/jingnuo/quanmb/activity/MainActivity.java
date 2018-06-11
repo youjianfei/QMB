@@ -1,10 +1,13 @@
 package com.jingnuo.quanmb.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +24,9 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
+import com.jingnuo.quanmb.Interface.InterfacePermission;
+import com.jingnuo.quanmb.class_.GlideLoader;
+import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_Issue;
 import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.fargment.Fragment_person;
@@ -29,6 +35,9 @@ import com.jingnuo.quanmb.fargment.Fragment_still;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.master.permissionhelper.PermissionHelper;
+import com.yancy.imageselector.ImageConfig;
+import com.yancy.imageselector.ImageSelector;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
@@ -49,7 +58,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     ImageView image_reddot;
 
 
-
+    PermissionHelper permissionHelper;
     //百度地图相关
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
@@ -138,6 +147,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     public void initdata() {
         mainActivity=this;
+        permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                LogUtils.LOG("ceshi", result + "", "");
+                if (result) {//定位权限
+
+                } else {
+                    ToastUtils.showToast(MainActivity.this, "请允许开启定位功能");
+                }
+            }
+        });
+        permissionmanage.requestpermission();
+
+
         mLocationClient.start();//百度地图获取当前位置经纬度
         mFragment_square = new Fragment_square();
         fragmetnmanager = getSupportFragmentManager();
@@ -334,7 +358,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissionHelper != null) {
+            permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 }
 
 

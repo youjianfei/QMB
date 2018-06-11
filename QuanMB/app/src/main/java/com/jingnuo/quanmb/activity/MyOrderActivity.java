@@ -119,7 +119,7 @@ public class MyOrderActivity extends BaseActivityother {
         mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01,08"));
         mTablayout.addTab(mTablayout.newTab().setText("进行中").setTag("02,03,05"));
         mTablayout.addTab(mTablayout.newTab().setText("已完成").setTag("06"));
-        mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("07,13"));
+        mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("07,13,09"));
 
         mListView=findViewById(R.id.list_myorder);
 
