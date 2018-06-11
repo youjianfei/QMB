@@ -3,6 +3,7 @@ package com.jingnuo.quanmb.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
     Button mButton_getyanzhengma;
     Button mButton_complte;
     TextView mTextview_bindnow;
+    ImageView mImageview_hide;
 
     //数据
     UserBean userBean;
@@ -93,7 +95,20 @@ public class ThreeRegisterActivity extends BaseActivityother {
                 }
             }
         });
-
+        mImageview_hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mImageview_hide.isSelected()) {
+                    mImageview_hide.setSelected(false);
+                    //选择状态 --设置为不可见的密码
+                    mEdit_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                } else {
+                    mImageview_hide.setSelected(true);
+                    //未选择状态 显示明文--设置为可见的密码
+                    mEdit_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
+            }
+        });
 
         mButton_complte.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +169,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
 //        mImage_choose = findViewById(R.id.image_choose);
         mButton_complte = findViewById(R.id.button_register);
         mTextview_bindnow=findViewById(R.id.textview_bind);
+        mImageview_hide=findViewById(R.id.image_hide);
     }
 
     boolean initmap() {

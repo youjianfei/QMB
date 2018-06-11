@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
+import com.jingnuo.quanmb.class_.RegularYanzheng;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -42,6 +44,7 @@ public class RegisterActivity extends BaseActivityother {
     EditText mEdit_phonenumber, mEdit_yanzhengma, mEdit_password, mEdit_passwordAgain;
     Button mButton_yanzhegnma, mButton_register;
     ImageView mImage_choose;
+    ImageView mImage_hide;
     TextView mTextview_xieyi, mTextview_login;
 
     //数据
@@ -76,6 +79,7 @@ public class RegisterActivity extends BaseActivityother {
         mButton_yanzhegnma.setOnClickListener(this);
         mButton_register.setOnClickListener(this);
         mImage_choose.setOnClickListener(this);
+        mImage_hide.setOnClickListener(this);
     }
 
     @Override
@@ -89,22 +93,43 @@ public class RegisterActivity extends BaseActivityother {
         mImage_choose = findViewById(R.id.image_choose);
         mTextview_xieyi = findViewById(R.id.textview_xieyi);
         mTextview_login = findViewById(R.id.textview_login);
-
+        mImage_hide=findViewById(R.id.image_hide);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.image_hide:
+                if (mImage_hide.isSelected()) {
+                    mImage_hide.setSelected(false);
+                    //选择状态 --设置为不可见的密码
+                    mEdit_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                } else {
+                    mImage_hide.setSelected(true);
+                    //未选择状态 显示明文--设置为可见的密码
+                    mEdit_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
+                break;
             case R.id.button_register://注册
                 phonenumber = mEdit_phonenumber.getText().toString();
                 yanzhengma = mEdit_yanzhengma.getText().toString();
                 password = mEdit_password.getText().toString();
                 passwordagain = mEdit_passwordAgain.getText().toString();
+                if (phonenumber.equals("") ) {
+                    ToastUtils.showToast(this, "信息填写不完整");
+                    return;
+                }
+                if (! RegularYanzheng.ispassword(password)||password.length()<6||password.length()>18){
+                    ToastUtils.showToast(this, "密码必须为6~18位且包含字母");
+                    return;
+                }
                 if (phonenumber.equals("") || yanzhengma.equals("") || password.equals("") || passwordagain.equals("")) {
                     ToastUtils.showToast(this, "信息填写不完整");
                     return;
                 }
+
+                LogUtils.LOG("ceshi",RegularYanzheng.ispassword(password)+"","a");
                 if(!password.equals(passwordagain)){
                     ToastUtils.showToast(this, "两次密码填写不一致");
                     return;

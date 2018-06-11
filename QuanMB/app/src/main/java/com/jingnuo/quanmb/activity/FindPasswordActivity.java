@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
+import com.jingnuo.quanmb.class_.RegularYanzheng;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
@@ -29,11 +30,11 @@ import java.util.TimerTask;
 
 public class FindPasswordActivity extends BaseActivityother {
     //控件
-    EditText mEdit_phonenumber, mEdit_yanzhengma, mEdit_password;
+    EditText mEdit_phonenumber, mEdit_yanzhengma, mEdit_password,mEdit_fpassword_again;
     Button mButton_getyanzhengma, mButton_submit;
     ImageView mImageview_hide;
     //数据
-    String phonenumber = "", yanzhengma = "", password = "";
+    String phonenumber = "", yanzhengma = "", password = "",passwordagain = "";
     Map findpasswordMap;
 
 
@@ -63,6 +64,7 @@ public class FindPasswordActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mEdit_phonenumber = findViewById(R.id.edit_phonenumber_find);
+        mEdit_fpassword_again = findViewById(R.id.edit_password_find_again);
         mEdit_yanzhengma = findViewById(R.id.edit_yanzhengma_find);
         mEdit_password = findViewById(R.id.edit_password_find);
         mButton_getyanzhengma = findViewById(R.id.button_yanzhengma_find);
@@ -70,23 +72,50 @@ public class FindPasswordActivity extends BaseActivityother {
         mImageview_hide = findViewById(R.id.image_hide);
     }
 
+    boolean initmap(){
+        phonenumber = mEdit_phonenumber.getText().toString();
+        if(phonenumber.equals("")){
+            ToastUtils.showToast(this,"请输入手机号");
+            return false;
+        }
+        yanzhengma = mEdit_yanzhengma.getText().toString();
+        if(yanzhengma.equals("")){
+            ToastUtils.showToast(this,"请输入验证码");
+            return false;
+        }
+        password=mEdit_password.getText()+"";
+        if(password.equals("")){
+            ToastUtils.showToast(this,"请输入新密码");
+            return false;
+        }
+        if (! RegularYanzheng.ispassword(password)||password.length()<6||password.length()>18){
+            ToastUtils.showToast(this, "密码必须为6~18位且包含字母");
+            return false;
+        }
+        passwordagain=mEdit_fpassword_again.getText()+"";
+        if(!passwordagain.equals("password")){
+            ToastUtils.showToast(this,"两次密码不一致");
+            return false;
+        }
+
+
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.button_submit://提交
-                phonenumber = mEdit_phonenumber.getText().toString();
-                yanzhengma = mEdit_yanzhengma.getText().toString();
-                password = mEdit_password.getText().toString();
-                if (phonenumber.equals("") || yanzhengma.equals("") || password.equals("")) {
-                    ToastUtils.showToast(this, "信息填写不完整");
-                    return;
+
+                if(initmap()){
+                    String passwordMM= PasswordJiami.passwordjiami(password);
+                    findpasswordMap.put("phoneNumbers",phonenumber);
+                    findpasswordMap.put("ValidateCode",yanzhengma);
+                    findpasswordMap.put("newPassword",passwordMM);
+                    changePasswordQuester(findpasswordMap);//修改密码请求
                 }
-                String passwordMM= PasswordJiami.passwordjiami(password);
-                findpasswordMap.put("phoneNumbers",phonenumber);
-                findpasswordMap.put("ValidateCode",yanzhengma);
-                findpasswordMap.put("newPassword",passwordMM);
-                changePasswordQuester(findpasswordMap);//修改密码请求
+
                 break;
             case R.id.button_yanzhengma_find://获取验证码
                 phonenumber = mEdit_phonenumber.getText().toString();

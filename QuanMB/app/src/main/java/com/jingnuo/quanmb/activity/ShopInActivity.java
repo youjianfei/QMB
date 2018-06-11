@@ -30,12 +30,12 @@ public class ShopInActivity extends BaseActivityother {
     private Button mButton_submit;
     EditText mEditview_name;
     EditText mEditview_phonenumber;
-    TextView mTextview_address;
+    EditText textview_shopaddress;
 
     //数据
     String name="";
     String phonenumber="";
-    String address="郑州";//todo  地址待完成
+    String shopName="";//
 
     Map map_submit;
 
@@ -114,7 +114,7 @@ public class ShopInActivity extends BaseActivityother {
         mButton_submit=findViewById(R.id.button_submit);
         mEditview_name=findViewById(R.id.edit_shopname);
         mEditview_phonenumber=findViewById(R.id.edit_shopphonenumber);
-        mTextview_address=findViewById(R.id.textview_shopaddress);
+        textview_shopaddress=findViewById(R.id.textview_shopaddress);
     }
     boolean initmap(){
         name=mEditview_name.getText()+"";
@@ -127,9 +127,14 @@ public class ShopInActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请输入联系电话");
             return false;
         }
+        shopName=mEditview_phonenumber.getText()+"";
+        if(phonenumber.equals("")){
+            ToastUtils.showToast(this,"请输入商铺名称");
+            return false;
+        }
         map_submit.put("name",name);
         map_submit.put("mobile_no",phonenumber);
-        map_submit.put("business_address",address);
+        map_submit.put("business_name",shopName);
         map_submit.put("user_token",Staticdata.static_userBean.getData().getUser_token());
         return true;
     }

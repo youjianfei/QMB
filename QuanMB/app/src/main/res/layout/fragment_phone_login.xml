@@ -69,11 +69,11 @@
             android:id="@+id/button_yanzhengma"
             android:layout_width="70dp"
             android:layout_height="27dp"
-            android:background="@drawable/button_chunse"
+            android:background="@drawable/button_yanzhengma"
             android:text="获取验证码"
             android:textSize="11dp"
             android:layout_marginRight="10dp"
-            android:textColor="@color/white"
+            android:textColor="@color/yellow_jianbian_end"
             />
 
     </LinearLayout>
