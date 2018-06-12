@@ -107,29 +107,36 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/background_person">
+                <LinearLayout
+                    android:id="@+id/linearlayout_wallete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/textview_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="金额：(元)"
+                        android:textColor="@color/black_text"
+                        android:textSize="13dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="18dp"
+                        />
+                    <TextView
+                        android:id="@+id/textview_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="@color/yellow_jianbian_end"
+                        android:layout_alignParentBottom="true"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        />
 
-                <TextView
-                    android:id="@+id/textview_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="金额：(元)"
-                    android:textColor="@color/black_text"
-                    android:textSize="13dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="18dp"
-                    />
-                <TextView
-                    android:id="@+id/textview_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.00"
-                    android:textColor="@color/yellow_jianbian_end"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="18dp"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    />
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/button_recharge"
                     android:layout_width="60dp"

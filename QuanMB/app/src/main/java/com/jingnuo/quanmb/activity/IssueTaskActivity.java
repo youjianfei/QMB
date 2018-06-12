@@ -77,14 +77,13 @@ public class IssueTaskActivity extends BaseActivityother {
     MyGridView imageGridview;
     EditText mEditview_taskmoney;
     ImageView mImage_choosejieshou;
-    ImageView mImage_choosejujue;
     TextView mText_choosejieshou;
-    TextView mText_choosejujue;
     ImageView mImage_chooseme;
     ImageView mImage_choosehelper;
     TextView  mtextview_choseme;
     TextView  mtextview_chosehelper;
     RelativeLayout relativelayout_chujia;
+    ImageView image_chosePIC;
 
 
     Button mButton_sub;
@@ -239,17 +238,19 @@ public class IssueTaskActivity extends BaseActivityother {
                     mList_PicPath_down.remove(position);//删除图片地址以便上传；
                     PIC_mix = 3 - mList_PicPath_down.size();
                     adapter_gridviewpic_upLoad.notifyDataSetChanged();
+                    if(Staticdata.mlistdata_pic.size()<=1){
+                        imageGridview.setVisibility(View.GONE);
+                    }
                 }
             }
         });
         mImage_choosejieshou.setOnClickListener(this);
-        mImage_choosejujue.setOnClickListener(this);
         mText_choosejieshou.setOnClickListener(this);
-        mText_choosejujue.setOnClickListener(this);
         mImage_chooseme.setOnClickListener(this);
         mImage_choosehelper.setOnClickListener(this);
         mtextview_choseme.setOnClickListener(this);
         mtextview_chosehelper.setOnClickListener(this);
+        image_chosePIC.setOnClickListener(this);
     }
 
     @Override
@@ -295,32 +296,26 @@ public class IssueTaskActivity extends BaseActivityother {
             case R.id.image_choosejieshou:
                 if (!mImage_choosejieshou.isSelected()) {
                     mImage_choosejieshou.setSelected(true);
-                    mImage_choosejujue.setSelected(false);
                     is_counteroffer = 1;
-                }
-                break;
-            case R.id.text_choosejujue:
-                if (!mImage_choosejujue.isSelected()) {
+                }else {
                     mImage_choosejieshou.setSelected(false);
-                    mImage_choosejujue.setSelected(true);
-                    is_counteroffer = 0;
-                }
-                break;
-            case R.id.text_choosejieshou:
-                if (!mImage_choosejieshou.isSelected()) {
-                    mImage_choosejieshou.setSelected(true);
-                    mImage_choosejujue.setSelected(false);
-                    is_counteroffer = 1;
-                }
-                break;
-            case R.id.image_choosejujue:
-                if (!mImage_choosejujue.isSelected()) {
-                    mImage_choosejieshou.setSelected(false);
-                    mImage_choosejujue.setSelected(true);
                     is_counteroffer = 0;
                 }
                 break;
 
+            case R.id.text_choosejieshou:
+                if (!mImage_choosejieshou.isSelected()) {
+                    mImage_choosejieshou.setSelected(true);
+                    is_counteroffer = 1;
+                }else {
+                    mImage_choosejieshou.setSelected(false);
+                    is_counteroffer = 0;
+                }
+                break;
+            case R.id.image_chosePIC:
+                choosePIC();
+
+                break;
         }
     }
 
@@ -339,15 +334,14 @@ public class IssueTaskActivity extends BaseActivityother {
         mButton_sub = findViewById(R.id.button_submitsave);
         mImage_choosejieshou = findViewById(R.id.image_choosejieshou);
         mImage_choosejieshou.setSelected(true);
-        mImage_choosejujue = findViewById(R.id.image_choosejujue);
         mText_choosejieshou = findViewById(R.id.text_choosejieshou);
-        mText_choosejujue = findViewById(R.id.text_choosejujue);
         mImage_chooseme = findViewById(R.id.image_chooseme);
         mImage_chooseme.setSelected(true);
         mtextview_choseme = findViewById(R.id.textview_chooseme);
         mtextview_chosehelper = findViewById(R.id.text_choosehelper);
         mImage_choosehelper = findViewById(R.id.image_choosehelper);
         relativelayout_chujia = findViewById(R.id.relativelayout_chujia);
+        image_chosePIC=findViewById(R.id.image_chosePIC);
     }
 
     boolean initmap() {
@@ -506,6 +500,9 @@ public class IssueTaskActivity extends BaseActivityother {
             }
             PIC_mix = 3 - mList_PicPath_down.size();
             adapter_gridviewpic_upLoad.notifyDataSetChanged();
+            if(Staticdata.mlistdata_pic.size()>1){
+                imageGridview.setVisibility(View.VISIBLE);
+            }
         }
 
     }

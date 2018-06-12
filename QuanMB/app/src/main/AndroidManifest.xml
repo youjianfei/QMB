@@ -151,7 +151,9 @@
         <activity android:name="com.jingnuo.quanmb.activity.CashoutActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopCenterInfoActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopinfoEditActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SubmitSuccessActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SubmitSuccessActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.WalletActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MonryMingxiActivity"></activity>
     </application>
 
 </manifest>

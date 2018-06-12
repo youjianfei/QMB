@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -28,6 +29,7 @@ import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.activity.ShopInNextActivity;
 import com.jingnuo.quanmb.activity.SubmitSuccessActivity;
+import com.jingnuo.quanmb.activity.WalletActivity;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -75,6 +77,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     RelativeLayout mTextview_logout;
     Button mButton_rechange;//充值
     Button mButton_cashout;//提现
+    LinearLayout mLearlayout_wallet;
 
 
     @Nullable
@@ -104,6 +107,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mTextview_aboutus.setOnClickListener(this);
         mButton_rechange.setOnClickListener(this);
         mButton_cashout.setOnClickListener(this);
+        mLearlayout_wallet.setOnClickListener(this);
     }
 
     private void setdata() {
@@ -187,6 +191,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         mButton_rechange=rootview.findViewById(R.id.button_recharge);
         mButton_cashout=rootview.findViewById(R.id.button_tixian);
         mimage_chengwei=rootview.findViewById(R.id.image_chengwei);
+        mLearlayout_wallet=rootview.findViewById(R.id.linearlayout_wallete);
     }
 
 
@@ -194,6 +199,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.linearlayout_wallete://钱包
+                Intent intent_wallet=new Intent(getActivity(), WalletActivity.class);
+                intent_wallet.putExtra("money",Staticdata.static_userBean.getData().getAppuser().getBalance()+"");
+                startActivity(intent_wallet);
+                break;
             case R.id.button_tixian://提现
                 Intent intent_cash=new Intent(getActivity(), CashoutActivity.class);
                 startActivity(intent_cash);

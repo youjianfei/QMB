@@ -78,7 +78,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
-                android:text="类型："
+                android:text="任务类型："
                 android:textColor="@color/text_title2"
                 android:textSize="15dp"
                 />
@@ -99,7 +99,7 @@
                     android:id="@+id/text_chooce"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请选择"
+                    android:text="请选择类型"
                     android:textColor="@color/black_text2"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imageqq"
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
-                android:text="标题："
+                android:text="任务标题："
                 android:textColor="@color/text_title2"
                 android:textSize="15dp"
                 />
@@ -149,7 +149,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/edit_tasktitle"
-                android:background="@color/gray_dbdbdb"
+                android:background="@color/gray_background"
                 />
             <ImageView
                 android:id="@+id/image2"
@@ -160,29 +160,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_below="@+id/image_line1"
                 />
-            <TextView
-                android:id="@+id/text6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="说明"
-                android:textColor="@color/text_title2"
-                android:layout_toRightOf="@+id/image2"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="15dp"
-                android:textSize="15dp"
-                android:layout_below="@+id/image_line1"
 
-                />
-            <ImageView
-                android:id="@+id/image_line4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/text6"
-                android:background="@color/gray_dbdbdb"
-                />
             <EditText
                 android:id="@+id/edit_detailtask"
                 android:layout_width="match_parent"
@@ -192,13 +170,23 @@
                 android:textSize="14dp"
                 android:background="@null"
                 android:gravity="top"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="50dp"
                 android:layout_alignParentRight="true"
                 android:lines="3"
-                android:layout_marginLeft="30dp"
-                android:layout_below="@+id/image_line4"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/image2"
+                android:layout_below="@+id/image_line1"
                 android:layout_marginBottom="15dp"
+                />
+            <ImageView
+                android:id="@+id/image_chosePIC"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/phonenumber"
+                android:layout_alignBottom="@+id/edit_detailtask"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
                 />
             <com.jingnuo.quanmb.customview.MyGridView
                 android:id="@+id/GridView_PIC"
@@ -209,15 +197,17 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
+                android:visibility="gone"
                 android:numColumns="3"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="155dp"
-            android:layout_below="@+id/relative_1"
-            android:layout_marginTop="8dp"
-            android:background="@color/white">
-
+            <ImageView
+                android:id="@+id/image_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/gray_background"
+                android:layout_below="@+id/GridView_PIC"
+                />
             <TextView
                 android:id="@+id/text3"
                 android:layout_width="wrap_content"
@@ -226,61 +216,57 @@
                 android:layout_marginTop="15dp"
                 android:text="希望完成时间："
                 android:textColor="@color/text_title2"
+                android:layout_below="@+id/image_line2"
                 android:textSize="15dp"
                 />
-        <RelativeLayout
-            android:id="@+id/relative_chosetime"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            >
-            <TextView
-                android:id="@+id/edit_tasktime"
+            <RelativeLayout
+                android:id="@+id/relative_chosetime"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请选择希望完成时间"
-                android:textSize="14dp"
-                android:textColor="@color/text_hide_tip"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="45dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="110dp"
-                />
+                android:layout_height="50dp"
+                android:layout_below="@+id/image_line2"
+                >
+                <TextView
+                    android:id="@+id/edit_tasktime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请选择希望完成时间"
+                    android:textSize="14dp"
+                    android:textColor="@color/text_hide_tip"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="110dp"
+                    />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/more"
+                    android:layout_marginTop="17dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_below="@+id/relative_1"
+            android:layout_marginTop="8dp"
+            android:background="@color/white">
+
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@mipmap/more"
-                android:layout_marginTop="17dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
-                />
-
-        </RelativeLayout>
-
-            <ImageView
-                android:id="@+id/image_line2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/relative_chosetime"
-                android:background="@color/gray_dbdbdb"
-                />
-            <TextView
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@mipmap/address_blue"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
-                android:text="地点："
-                android:textColor="@color/text_title2"
-                android:layout_below="@+id/image_line2"
-                android:textSize="15dp"
                 />
             <TextView
                 android:id="@+id/text_chooseaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="请选择"
+                android:text="选择地址"
                 android:textSize="14dp"
                 android:textColor="@color/text_hide_tip"
                 android:paddingTop="15dp"
@@ -288,38 +274,7 @@
                 android:paddingRight="15dp"
                 android:paddingBottom="15dp"
                 android:layout_marginRight="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="110dp"
-                android:layout_below="@+id/image_line2"
-                />
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/more"
-                android:layout_marginTop="17dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
-                android:layout_below="@+id/image_line2"
-                />
-            <ImageView
-                android:id="@+id/image_line3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/text_chooseaddress"
-                android:background="@color/gray_dbdbdb"
-                />
-            <TextView
-                android:id="@+id/text5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="详细地址："
-                android:textColor="@color/text_title2"
-                android:layout_below="@+id/image_line3"
-                android:textSize="15dp"
+                android:layout_marginLeft="40dp"
                 />
             <EditText
                 android:id="@+id/edit_detailaddress"
@@ -334,7 +289,6 @@
                 android:layout_alignParentRight="true"
                 android:singleLine="true"
                 android:layout_marginLeft="110dp"
-                android:layout_below="@+id/image_line3"
                 android:layout_marginBottom="15dp"
                 />
         </RelativeLayout>
@@ -405,53 +359,21 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@color/gray_background" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp"
-                    android:text="佣金："
-                    android:textColor="@color/text_title2"
-                    android:textSize="15dp"
-                    android:layout_below="@+id/image_line10"
-                    />
+
                 <EditText
                     android:id="@+id/edit_charges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="填写金额"
+                    android:hint="请输入佣金"
                     android:textColorHint="@color/text_hide_tip"
                     android:textSize="14dp"
                     android:background="@null"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
                     android:layout_marginRight="30dp"
-                    android:layout_alignParentRight="true"
                     android:singleLine="true"
                     android:digits="1234567890."
-                    android:layout_marginLeft="110dp"
-                    android:layout_below="@+id/image_line10"
-                    />
-                <ImageView
-                    android:id="@+id/image_line8"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/edit_charges"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@color/gray_background" />
-                <TextView
-                    android:id="@+id/textview_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp"
-                    android:text="是否接受议价："
-                    android:layout_below="@+id/image_line8"
-                    android:textColor="@color/text_title2"
-                    android:textSize="15dp"
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -474,28 +396,28 @@
                         android:id="@+id/text_choosejieshou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="接受"
-                        android:layout_marginRight="10dp"
+                        android:text="接受议价"
                         />
 
-                    <ImageView
-                        android:id="@+id/image_choosejujue"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/select_duigou"
-                        android:layout_marginRight="5dp"
-                        />
+                    <!--<ImageView-->
+                        <!--android:id="@+id/image_choosejujue"-->
+                        <!--android:layout_width="15dp"-->
+                        <!--android:layout_height="15dp"-->
+                        <!--android:src="@drawable/select_duigou"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:id="@+id/text_choosejujue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="拒绝"
-                        android:layout_marginRight="5dp"
-                        />
+                    <!--<TextView-->
+                        <!--android:id="@+id/text_choosejujue"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="拒绝"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--/>-->
 
 
                 </LinearLayout>
+
             </RelativeLayout>
 
 

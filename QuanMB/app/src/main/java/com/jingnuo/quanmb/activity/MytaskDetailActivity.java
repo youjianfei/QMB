@@ -338,6 +338,8 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                 mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
                 String imageURL = taskDetailBean.getData().getAvatar_imgUrl().substring(0, taskDetailBean.getData().getAvatar_imgUrl().length() - 1);
+
+                LogUtils.LOG("ceshi","调用glide","wode renwu");
                 Glide.with(MytaskDetailActivity.this).load(imageURL).into(mImageview_head);
 //                mTextview_helplevle.setText(taskDetailBean.getData().getUser_grade());
                 image_url=taskDetailBean.getData().getTask_ImgUrl();
@@ -381,7 +383,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     }
     void setImage(String  image){
         if(image==null||image.equals("")){
-            request(map_taskdetail);
+//            request(map_taskdetail);
         }else {
             String []images=image.split(",");
             int len=images.length;
@@ -395,6 +397,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         }
 
     }
+
     @Override
     protected void onPostResume() {
         super.onPostResume();
