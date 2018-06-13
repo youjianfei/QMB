@@ -85,6 +85,7 @@ public class Fragment_still extends Fragment {
                 position = i;
                 int ID = mListData_left.get(i).getSpecialty_id();
                 LogUtils.LOG("ceshi", "一级菜单对应的id:" + ID, "找专业frament");
+                mtextview_classification_title.setText(mListData_left.get(i).getSpecialty_name());
                 if(ID==0){
                     getHotRightmenu();
                 }else {
@@ -168,7 +169,7 @@ public class Fragment_still extends Fragment {
                 mListData_left.clear();
                 listBean = new Skillmenu_oneBean.DataBean.ListBean();//热门 类目  本地手动添加的
                 listBean.setSpecialty_id(0);
-                listBean.setSpecialty_name("热门");
+                listBean.setSpecialty_name("热门任务");
                 mListData_left.add(0, listBean);
 
                 mListData_left.addAll(skillmenu_oneBean.getData().getList());

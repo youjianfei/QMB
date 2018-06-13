@@ -19,6 +19,7 @@ import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
+import com.jingnuo.quanmb.class_.RegularYanzheng;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -47,6 +48,7 @@ public class AuthenticationActivity extends BaseActivityother {
     ImageView mImageview_zheng;
     ImageView mImageview_fan;
     ImageView mImageview_shouchi;
+    ImageView mImage_choose;
     Button mBitton_submit;
 
     //对象
@@ -140,6 +142,16 @@ public class AuthenticationActivity extends BaseActivityother {
                 chooseIDcard();
             }
         });
+        mImage_choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mImage_choose.isSelected()) {
+                    mImage_choose.setSelected(false);
+                } else {
+                    mImage_choose.setSelected(true);
+                }
+            }
+        });
 
         mBitton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +172,7 @@ public class AuthenticationActivity extends BaseActivityother {
                                     Intent intent_submit=new Intent(AuthenticationActivity.this,SubmitSuccessActivity.class);
                                     intent_submit.putExtra("state","1");
                                     startActivity(intent_submit);
-                                    ToastUtils.showToast(AuthenticationActivity.this,msg);//todo 帮手认证逻辑待调整，还需要审核不应该直接成功
+                                    ToastUtils.showToast(AuthenticationActivity.this,msg);//
                                     finish();
                                 }else {
                                     ToastUtils.showToast(AuthenticationActivity.this,"审核提交失败");
@@ -192,6 +204,7 @@ public class AuthenticationActivity extends BaseActivityother {
         mImageview_fan = findViewById(R.id.image_idcardfan);
         mImageview_shouchi = findViewById(R.id.image_idcardshou);
         mBitton_submit = findViewById(R.id.button_submit);
+        mImage_choose = findViewById(R.id.image_choose);
     }
     boolean setmap(){
         name=mEditview_name.getText()+"";
@@ -200,7 +213,7 @@ public class AuthenticationActivity extends BaseActivityother {
             return false;
         }
         idcacardnumber=mEditview_idcardnumber.getText()+"";
-        if(idcacardnumber.equals("")){
+        if(idcacardnumber.equals("")|| !RegularYanzheng.is18ByteIdCardComplex(idcacardnumber)){
             ToastUtils.showToast(this,"请填写正确证件号码");
             return false;
         }
@@ -216,6 +229,11 @@ public class AuthenticationActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请重新上传手持身份证照片");
             return false;
         }
+        if (!mImage_choose.isSelected()) {
+            ToastUtils.showToast(this, "请阅读全民帮用户协议并同意");
+            return false;
+        }
+
         map_submit.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_submit.put("helper_name",name);
         map_submit.put("idCard",idcacardnumber);
@@ -224,7 +242,6 @@ public class AuthenticationActivity extends BaseActivityother {
         map_submit.put("hand_imgID",idcacardPICID_shouchi);
         LogUtils.LOG("ceshi",map_submit.toString(),"身份认证");
         return true;
-
 
     }
 

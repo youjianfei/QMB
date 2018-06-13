@@ -153,7 +153,9 @@
         <activity android:name="com.jingnuo.quanmb.activity.ShopinfoEditActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.SubmitSuccessActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.WalletActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MonryMingxiActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.MonryMingxiActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.PayBaozhengmoneyActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MoneyMingxiDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -93,7 +93,7 @@ public class FindPasswordActivity extends BaseActivityother {
             return false;
         }
         passwordagain=mEdit_fpassword_again.getText()+"";
-        if(!passwordagain.equals("password")){
+        if(!passwordagain.equals(password)){
             ToastUtils.showToast(this,"两次密码不一致");
             return false;
         }

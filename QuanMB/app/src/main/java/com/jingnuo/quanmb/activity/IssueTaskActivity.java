@@ -376,7 +376,7 @@ public class IssueTaskActivity extends BaseActivityother {
         task_time = mTextview_time.getTag() + "";
 
         release_address = mTextview_taskAddress.getText()+"";
-        if(release_address.equals("请选择")){
+        if(release_address.equals("选择地址")){
             ToastUtils.showToast(this, "请选择任务地点");
             return false;
         }

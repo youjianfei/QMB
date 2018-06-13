@@ -248,11 +248,12 @@
 
             </RelativeLayout>
         </RelativeLayout>
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:layout_below="@+id/relative_1"
             android:layout_marginTop="8dp"
+            android:orientation="horizontal"
             android:background="@color/white">
 
             <ImageView
@@ -264,34 +265,35 @@
                 />
             <TextView
                 android:id="@+id/text_chooseaddress"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="选择地址"
                 android:textSize="14dp"
                 android:textColor="@color/text_hide_tip"
                 android:paddingTop="15dp"
-                android:paddingLeft="15dp"
+                android:paddingLeft="8dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="15dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginLeft="40dp"
                 />
             <EditText
                 android:id="@+id/edit_detailaddress"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="输入详细地址"
+                android:gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1.5"
                 android:textColorHint="@color/text_hide_tip"
                 android:textSize="14dp"
                 android:background="@null"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="30dp"
                 android:layout_alignParentRight="true"
                 android:singleLine="true"
-                android:layout_marginLeft="110dp"
                 android:layout_marginBottom="15dp"
                 />
-        </RelativeLayout>
+        </LinearLayout>
 
 
         <RelativeLayout

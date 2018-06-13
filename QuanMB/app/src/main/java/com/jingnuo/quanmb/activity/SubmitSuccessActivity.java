@@ -17,6 +17,7 @@ public class SubmitSuccessActivity extends BaseActivityother {
     RelativeLayout mRelativelayout_back;
     Button mButton_close;
     TextView mtextview_bar;
+    TextView mtextview_tip;
 
     String state="";
 
@@ -35,7 +36,18 @@ public class SubmitSuccessActivity extends BaseActivityother {
             image.setBackgroundResource(R.mipmap.shenhe2);
             mtextview_bar.setText("正在审核");
         }
-        LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*0.68));
+        else if(state.equals("3")){
+            image.setBackgroundResource(R.mipmap.shenhe2);
+            mtextview_bar.setText("审核通过");
+            mButton_close.setVisibility(View.VISIBLE);
+            mtextview_tip.setText("认证通过，缴纳保证金即可接受任务赚钱");
+        }else if(state.equals("4")){
+            image.setBackgroundResource(R.mipmap.shenhe3);
+            mtextview_bar.setText("审核失败");
+            mButton_close.setText("重新认证");
+            mButton_close.setVisibility(View.VISIBLE);
+        }
+        LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*0.57));
         image.setLayoutParams(mLayoutparams);
         mRelativelayout_back.addView(image);
     }
@@ -52,7 +64,15 @@ public class SubmitSuccessActivity extends BaseActivityother {
         mButton_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(state.equals("3")){
+                    Intent intent_payBanzheng=new Intent(SubmitSuccessActivity.this,PayBaozhengmoneyActivity.class);
+                    startActivity(intent_payBanzheng);
+                    finish();
+                }else if(state.equals("4")){
+                    Intent intent_again=new Intent(SubmitSuccessActivity.this,AuthenticationActivity.class);
+                    startActivity(intent_again);
+                    finish();
+                }
             }
         });
     }
@@ -62,6 +82,6 @@ public class SubmitSuccessActivity extends BaseActivityother {
         mtextview_bar=findViewById(R.id.text_bar);
         mButton_close=findViewById(R.id.button_close);
         mRelativelayout_back=findViewById(R.id.relativelayout_back);
-
+        mtextview_tip=findViewById(R.id.text_state);
     }
 }

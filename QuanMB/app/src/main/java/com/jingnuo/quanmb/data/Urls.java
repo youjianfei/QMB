@@ -7,12 +7,12 @@ package com.jingnuo.quanmb.data;
 public class Urls {
 
         public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-//    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
+    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
 //    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -87,6 +87,7 @@ public class Urls {
     public static String helperIssueSkill = "helper/releaseSpecialty";//发布专业    post
     public static String helperSkilldetail = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String orderthink = "order/orderEvaluate";//评价帮手
+    public static String BaoSuccess = "helper/after_PayMargin?user_token=";//缴纳保证金成功之后调用
 
 
     //消息模块
@@ -119,6 +120,8 @@ public class Urls {
     public static String wechatPay = "AppPay/WeChatPreOrder";//微信支付
     public static String zhifubaoPay = "ALiPay/doAlipay";//支付宝支付
     public static String getBalance = "balance/getUserBalance?user_token=";//查询钱包余额
+    public static String cashmoney = "ALiPay/AliTransfer";//提现
+    public static String jiaoyiMingxi = "balance/getTradeDetails";//查询交易明细
 
 
     //省市县

@@ -206,6 +206,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 break;
             case R.id.button_tixian://提现
                 Intent intent_cash=new Intent(getActivity(), CashoutActivity.class);
+                intent_cash.putExtra("money",Staticdata.static_userBean.getData().getAppuser().getBalance()+"");
                 startActivity(intent_cash);
 
                 break;
@@ -253,24 +254,24 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                                 e.printStackTrace();
                             }
                             if (state.equals("2")){//审核通过
-                                Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-                                intent_shopcenter.putExtra("type",1);//2  商户
-                                getActivity().startActivity(intent_shopcenter);
+
+                                Intent intent_submit=new Intent(getActivity(), SubmitSuccessActivity.class);
+                                intent_submit.putExtra("state","3");
+                                getActivity().startActivity(intent_submit);
                             }else if(status==0){//没提交
                                 Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
                                 getActivity().startActivity(intent_shopin);
 
                             }else if(state.equals("1")){//正在审核
-//                                Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
-//                                getActivity().startActivity(intent_shopinext);
 
                                 Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
                                 intent_submit.putExtra("state","2");
                                 startActivity(intent_submit);
 
                             }else if(state.equals("3")){//审核失败
-                                Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
-                                getActivity().startActivity(intent_shopin);
+                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                                intent_submit.putExtra("state","4");
+                                startActivity(intent_submit);
                             }
 
                         }
@@ -363,6 +364,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         }
 
     }
+
     public void  logout(){//登出注销微信授权
         mShareAPI = UMShareAPI.get(getActivity());
         mShareAPI.deleteOauth(getActivity(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
