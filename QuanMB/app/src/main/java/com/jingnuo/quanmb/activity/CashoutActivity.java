@@ -61,7 +61,7 @@ public class CashoutActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mEdit_cash.addTextChangedListener(new MoneyTextWatcher(mEdit_cash).setDigits(2));
+        mEdit_cash.addTextChangedListener(new MoneyTextWatcher(mEdit_cash).setDigits(1));
         mTextview_allcash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

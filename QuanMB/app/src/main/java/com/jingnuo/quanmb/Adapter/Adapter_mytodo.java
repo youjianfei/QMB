@@ -47,6 +47,7 @@ public class Adapter_mytodo extends  BaseAdapter {
             holder.mTextview_content=convertView.findViewById(R.id.text_content);
             holder.mTextview_money=convertView.findViewById(R.id.textview_moneyy);
             holder.mTextview_state=convertView.findViewById(R.id.textview_state2);
+            holder.mTextview_issuename=convertView.findViewById(R.id.textview_issuename);
 //            holder.mTextview_bargain=convertView.findViewById(R.id.text_bargain);
             holder.mTextview_complete=convertView.findViewById(R.id.text_taskscomplete);
             convertView.setTag(holder);
@@ -55,6 +56,7 @@ public class Adapter_mytodo extends  BaseAdapter {
         }
         holder.mTextview_type.setText(mdata.get(position).getSpecialty_name());
         holder.mTextview_title.setText(mdata.get(position).getTask_name());
+        holder.mTextview_issuename.setText(mdata.get(position).getCreateDate());
         long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
         long ago = Long.parseLong(Utils.getTime(mdata.get(position).getOrder_enddate()));//任务过期时间
         String time = Utils.getDistanceTime(ago, now);//算出的差值
@@ -112,6 +114,7 @@ public class Adapter_mytodo extends  BaseAdapter {
         TextView mTextview_content;
         TextView mTextview_money;
         TextView mTextview_state;
+        TextView mTextview_issuename;
 //        TextView mTextview_bargain;
         TextView mTextview_complete;
     }
