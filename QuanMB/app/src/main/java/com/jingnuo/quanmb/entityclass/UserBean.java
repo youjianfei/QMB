@@ -150,6 +150,7 @@ public class UserBean {
             private String user_reputation;
             private String balance;
             private String push_register;
+            private String security_code;
 
             public String getPush_register() {
                 return push_register;
@@ -157,6 +158,14 @@ public class UserBean {
 
             public void setPush_register(String push_register) {
                 this.push_register = push_register;
+            }
+
+            public String getSecurity_code() {
+                return security_code;
+            }
+
+            public void setSecurity_code(String security_code) {
+                this.security_code = security_code;
             }
 
             public String getBalance() {

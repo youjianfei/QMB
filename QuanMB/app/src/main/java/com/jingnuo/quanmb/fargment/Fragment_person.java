@@ -214,7 +214,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 Intent intent_recharge=new Intent(getActivity(), RechargeActivity.class);
                 startActivity(intent_recharge);
 
-
                 break;
             case R.id.textview_aboutus://关于我们
 

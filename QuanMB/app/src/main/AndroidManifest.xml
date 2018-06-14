@@ -155,7 +155,9 @@
         <activity android:name="com.jingnuo.quanmb.activity.WalletActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.MonryMingxiActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PayBaozhengmoneyActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MoneyMingxiDetailsActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.MoneyMingxiDetailsActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword1Activity" />
+        <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword2Activity"></activity>
     </application>
 
 </manifest>

@@ -102,6 +102,7 @@ public class ChangephoneNumberNextActivity extends BaseActivityother {
                             return;
                         }
                         ToastUtils.showToast(ChangephoneNumberNextActivity.this, msg);
+                        Staticdata.Userphonenumber=phonenumber;
                         finish();
 
                     }

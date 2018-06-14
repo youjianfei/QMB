@@ -40,6 +40,7 @@ import java.util.Map;
 public class PersonInfoActivity extends BaseActivityother {
     //控件
     TextView mtextview_phonenumber,mTextview_changepassword,mTextview_setsafepassword;
+    TextView mTextview_issetsafepassword;
     TextView mtextview_nickname;
     ImageView mImageview_headPIC;
 
@@ -91,6 +92,10 @@ public class PersonInfoActivity extends BaseActivityother {
         mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_headPIC);
+        if(!Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
+            mTextview_setsafepassword.setText("修改安全密码");
+            mTextview_issetsafepassword.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -100,6 +105,10 @@ public class PersonInfoActivity extends BaseActivityother {
         LogUtils.LOG("ceshi","onRestart","personinfoactivity");
         mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
+        if(!Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
+            mTextview_setsafepassword.setText("修改安全密码");
+            mTextview_issetsafepassword.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -108,6 +117,7 @@ public class PersonInfoActivity extends BaseActivityother {
         mtextview_nickname.setOnClickListener(this);
         mtextview_phonenumber.setOnClickListener(this);
         mImageview_headPIC.setOnClickListener(this);
+        mTextview_setsafepassword.setOnClickListener(this);
     }
 
     @Override
@@ -116,6 +126,8 @@ public class PersonInfoActivity extends BaseActivityother {
         mTextview_changepassword=findViewById(R.id.text_changephonenumber);
         mtextview_nickname=findViewById(R.id.text_name);
         mImageview_headPIC=findViewById(R.id.image_userpic);
+        mTextview_setsafepassword=findViewById(R.id.text_setsafepassword);
+        mTextview_issetsafepassword=findViewById(R.id.text_issetsafepassword);
     }
 
     @Override
@@ -137,7 +149,10 @@ public class PersonInfoActivity extends BaseActivityother {
         case R.id.image_userpic:
             chooseHeadPic();
 
-
+            break;
+        case R.id.text_setsafepassword:
+            Intent intent_setsafe=new Intent(PersonInfoActivity.this,SetSafepassword1Activity.class);
+            startActivity(intent_setsafe);
             break;
 
     }
