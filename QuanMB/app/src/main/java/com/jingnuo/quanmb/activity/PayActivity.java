@@ -17,6 +17,8 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.class_.ZhifubaoPay;
+import com.jingnuo.quanmb.customview.PayFragment;
+import com.jingnuo.quanmb.customview.PayPwdView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
@@ -34,7 +36,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PayActivity extends BaseActivityother {
+public class PayActivity extends BaseActivityother implements PayPwdView.InputCallBack{
 
     //控件
     CircleImageView mImageview_head;
@@ -53,6 +55,7 @@ public class PayActivity extends BaseActivityother {
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
     private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
 
+    PayFragment fragment;
 
     double balance=0;//余额
     double intend_amount=0;//要付的金额
@@ -201,13 +204,17 @@ public class PayActivity extends BaseActivityother {
                 break;
             case R.id.button_submit:
                 if(pay==1){
+                    if(Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
+                        ToastUtils.showToast(this,"请先设置安全密码");
+                        return;
+                    }
                     //余额支付
-                    Map map_yue=new HashMap();
-                    map_yue.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                    map_yue.put("pay_money",amount);
-                    map_yue.put("task_id",taskid);
-                    balancePay(map_yue);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(PayFragment.EXTRA_CONTENT, title_pay+"：¥ " + amount);
+                     fragment = new PayFragment();
+                    fragment.setArguments(bundle);
+                    fragment.setPaySuccessCallBack(PayActivity.this);
+                    fragment.show(this.getFragmentManager(), "Pay");
                     return;
                 }
                 if(pay==2){
@@ -263,6 +270,9 @@ public class PayActivity extends BaseActivityother {
                     }else {
                         intent.putExtra("pay","erro");
                         PayActivity.this. sendBroadcast(intent);
+                        if (fragment!=null){
+                            fragment.dismiss();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -281,5 +291,20 @@ public class PayActivity extends BaseActivityother {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(paysuccess_BroadcastReciver);
+    }
+
+    @Override
+    public void onInputFinish(String result) {
+        if(result.equals("1")){
+            Map map_yue=new HashMap();
+            map_yue.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+            map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+            map_yue.put("pay_money",amount);
+            map_yue.put("task_id",taskid);
+            balancePay(map_yue);
+        }else {
+            ToastUtils.showToast(this,"支付密码错误");
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -294,25 +296,32 @@ public class AuthenticationActivity extends BaseActivityother {
             // Get Image Path List
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
 //            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
+            List<String> mList_picpath = new ArrayList<>();
+
             Bitmap bitmap;
             Bitmap mBitmap = null;
             for (String path : pathList) {
                 bitmap = BitmapFactory.decodeFile(path);
                 mBitmap = Bitmap.createScaledBitmap(bitmap, 525, 350, true);
+
+                String src_path = path;//原图片的路径
+                String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
+                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
 //                dataPictrue.add(mBitmap);
+                mList_picpath.add(compressImage);
             }
             switch (PICposition) {
                 case 1:
                     mImageview_zheng.setImageBitmap(mBitmap);
-                    upLoadImage.uploadImg(pathList, 1);//上传图片
+                    upLoadImage.uploadImg(mList_picpath, 1);//上传图片
                     break;
                 case 2:
                     mImageview_fan.setImageBitmap(mBitmap);
-                    upLoadImage.uploadImg(pathList, 1);//上传图片
+                    upLoadImage.uploadImg(mList_picpath, 1);//上传图片
                     break;
                 case 3:
                     mImageview_shouchi.setImageBitmap(mBitmap);
-                    upLoadImage.uploadImg(pathList, 1);//上传图片
+                    upLoadImage.uploadImg(mList_picpath, 1);//上传图片
                     break;
             }
         }

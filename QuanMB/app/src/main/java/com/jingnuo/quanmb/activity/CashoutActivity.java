@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.customview.PayFragment;
+import com.jingnuo.quanmb.customview.PayPwdView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
@@ -23,7 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CashoutActivity extends BaseActivityother {
+public class CashoutActivity extends BaseActivityother implements PayPwdView.InputCallBack {
     //控件
     EditText mEdit_cash;
     EditText mEdit_realname;
@@ -39,7 +41,7 @@ public class CashoutActivity extends BaseActivityother {
 
     Map map_cash;
 
-
+    PayFragment fragment;
 
     @Override
     public int setLayoutResID() {
@@ -71,37 +73,22 @@ public class CashoutActivity extends BaseActivityother {
         mButton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
+                    ToastUtils.showToast(CashoutActivity.this,"请先设置安全密码");
+                    return;
+                }
                 if(initmap()){
                 if(Double.parseDouble(money)<Double.parseDouble(amount)){
                     ToastUtils.showToast(CashoutActivity.this,"提现金额有误");
                     return;
                 }
-                    LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.cashmoney,"tixian金额网址");
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
-                            LogUtils.LOG("ceshi",respose,"tixian金额");
-                            int status = 0;
-                            String msg = "";
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//登录状态
-                                msg = (String) object.get("msg");//登录返回信息
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if(status==1){
-                                ToastUtils.showToast(CashoutActivity.this,msg);
-                            }else {
-                                ToastUtils.showToast(CashoutActivity.this,msg);
-                            }
-                        }
+                    Bundle bundle = new Bundle();
+                    bundle.putString(PayFragment.EXTRA_CONTENT, "提现"+"：¥ " + amount);
+                    fragment = new PayFragment();
+                    fragment.setArguments(bundle);
+                    fragment.setPaySuccessCallBack(CashoutActivity.this);
+                    fragment.show(getFragmentManager(), "Pay");
 
-                        @Override
-                        public void onError(int error) {
-
-                        }
-                    }).postHttp(Urls.Baseurl_hu+Urls.cashmoney,CashoutActivity.this,1,map_cash);
                 }
 
             }
@@ -139,5 +126,48 @@ public class CashoutActivity extends BaseActivityother {
         map_cash.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_cash.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         return true;
+    }
+
+    @Override
+    public void onInputFinish(String result) {
+        if(result.equals("1")){
+
+            LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.cashmoney,"tixian金额网址");
+            new Volley_Utils(new Interface_volley_respose() {
+                @Override
+                public void onSuccesses(String respose) {
+                    LogUtils.LOG("ceshi",respose,"tixian金额");
+                    int status = 0;
+                    String msg = "";
+                    try {
+                        JSONObject object = new JSONObject(respose);
+                        status = (Integer) object.get("code");//登录状态
+                        msg = (String) object.get("msg");//登录返回信息
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if(status==1){
+                        ToastUtils.showToast(CashoutActivity.this,msg);
+                        if (fragment!=null){
+                            fragment.dismiss();
+                        }
+                        finish();
+
+                    }else {
+                        ToastUtils.showToast(CashoutActivity.this,msg);
+                        if (fragment!=null){
+                            fragment.dismiss();
+                        }
+                    }
+                }
+
+                @Override
+                public void onError(int error) {
+
+                }
+            }).postHttp(Urls.Baseurl_hu+Urls.cashmoney,CashoutActivity.this,1,map_cash);
+        }else {
+            ToastUtils.showToast(this,"安全密码错误");
+        }
     }
 }

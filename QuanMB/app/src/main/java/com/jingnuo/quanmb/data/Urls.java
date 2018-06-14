@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-//        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -114,6 +114,7 @@ public class Urls {
     public static String findMorenlianxiren = "user/getIsDefaultContacts?user_token=";//默认联系人
     public static String mySuggest = "user/myComplaints";//投诉和建议
     public static String setSafepassword = "user/setSecurityCode";//设置支付密码
+    public static String checkSafepassword = "user/checkSecurityCode";//校验支付密码
 
 
     //支付

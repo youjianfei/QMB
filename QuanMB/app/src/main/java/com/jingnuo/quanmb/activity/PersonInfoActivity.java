@@ -6,12 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
@@ -19,6 +17,8 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.UpLoadImage;
+import com.jingnuo.quanmb.customview.PayFragment;
+import com.jingnuo.quanmb.customview.PayPwdView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
@@ -122,7 +122,7 @@ public class PersonInfoActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mtextview_phonenumber=findViewById(R.id.text_phonrnumber);
+        mtextview_phonenumber=  findViewById(R.id.text_phonrnumber);
         mTextview_changepassword=findViewById(R.id.text_changephonenumber);
         mtextview_nickname=findViewById(R.id.text_name);
         mImageview_headPIC=findViewById(R.id.image_userpic);
@@ -148,7 +148,6 @@ public class PersonInfoActivity extends BaseActivityother {
             break;
         case R.id.image_userpic:
             chooseHeadPic();
-
             break;
         case R.id.text_setsafepassword:
             Intent intent_setsafe=new Intent(PersonInfoActivity.this,SetSafepassword1Activity.class);
@@ -247,4 +246,6 @@ public class PersonInfoActivity extends BaseActivityother {
 
         }
     }
+
+
 }

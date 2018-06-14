@@ -183,7 +183,7 @@
                 android:id="@+id/image_chosePIC"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/phonenumber"
+                android:src="@mipmap/chosepic"
                 android:layout_alignBottom="@+id/edit_detailtask"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"

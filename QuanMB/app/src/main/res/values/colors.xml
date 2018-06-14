@@ -41,4 +41,12 @@
 
 
 
+
+
+    <!--安全码输入-->
+    <color name="gray_text">#919191</color>
+    <color name="gray_btn">#EBEBEB</color>
+    <color name="gray_bg">#f0eff5</color>
+    <color name="gray_line">#ebebeb</color>
+
 </resources>

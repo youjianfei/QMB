@@ -50,11 +50,6 @@ public class HelperOrderActivity extends BaseActivityother {
     int type=0;  //1帮手  2  商户
 
 
-
-
-
-
-
     @Override
     public int setLayoutResID() {
         return R.layout.activity_helper_order;
@@ -145,16 +140,16 @@ public class HelperOrderActivity extends BaseActivityother {
                 mTextview_taskDetail.setText(helpOrderBean.getData().getDetail().getTask_description());
                 mTextview_address.setText(helpOrderBean.getData().getDetail().getTask_description());
                 mTextview_phonenumber.setText(helpOrderBean.getData().getDetail().getMobile_no());
-                if (helpOrderBean.getData().getDetail().getOrder_status().equals("06")){
+                if (helpOrderBean.getData().getDetail().getOrder_status().equals("待确认")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("等待雇主确认");
-                }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("00")){
+                }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("已完成")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("已完成");
-                }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("02")){
+                }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("已关闭")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText(helpOrderBean.getData().getDetail().getOrder_status_name());
-                } else if(helpOrderBean.getData().getDetail().getOrder_status().equals("01")){
+                } else if(helpOrderBean.getData().getDetail().getOrder_status().equals("已关闭")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("逾期未完成");
                 }

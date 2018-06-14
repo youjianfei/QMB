@@ -45,6 +45,7 @@ public class SubmitSuccessActivity extends BaseActivityother {
             image.setBackgroundResource(R.mipmap.shenhe3);
             mtextview_bar.setText("审核失败");
             mButton_close.setText("重新认证");
+            mtextview_tip.setText("认证失败，请重新提交认证");
             mButton_close.setVisibility(View.VISIBLE);
         }
         LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*0.57));
