@@ -182,7 +182,7 @@ public class SkillDetailActivity extends BaseActivityother {
                 }
                 break;
             case R.id.linearlayout_collection:
-                if(Staticdata.static_userBean.getData().getUser_token()==null){
+                if(Staticdata.static_userBean.getData()==null){
                     ToastUtils.showToast(SkillDetailActivity.this,"请先登录！");
                     return;
                 }

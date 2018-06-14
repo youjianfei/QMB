@@ -43,6 +43,8 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
 
     PayFragment fragment;
 
+    String TransferType="";  //提现类型  1  余额提现    2帮手提现   3   商户提现
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_cashout2;
@@ -57,6 +59,7 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
     protected void initData() {
         Intent intent=getIntent();
         money=intent.getStringExtra("money");
+        TransferType=intent.getStringExtra("TransferType");
         mTextview_amount.setText("可提现金额 "+money);
         map_cash=new HashMap();
     }
@@ -123,6 +126,7 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
         map_cash.put("payee_account",zhifubao);
         map_cash.put("amount",amount);
         map_cash.put("payee_real_name",name);
+        map_cash.put("TransferType",TransferType);
         map_cash.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_cash.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         return true;

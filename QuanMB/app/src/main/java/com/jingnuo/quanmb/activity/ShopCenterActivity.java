@@ -105,6 +105,14 @@ public class ShopCenterActivity extends BaseActivityother {
 
             case R.id.button_cash:
                 Intent intent_cash = new Intent(this, CashoutActivity.class);
+                if(type==1){
+                    intent_cash.putExtra("money",helpterInfoBean.getData().getList().getCommission()+"");
+                    intent_cash.putExtra("TransferType","2");
+                }
+                if(type==2){
+                    intent_cash.putExtra("money",shopcenterBean.getData().getList().getCommission()+"");
+                    intent_cash.putExtra("TransferType","3");
+                }
                 startActivity(intent_cash);
                 break;
             case R.id.relative_issuetask:

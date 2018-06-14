@@ -64,6 +64,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     Map map_taskdetail;
 
     String newID="";
+    boolean isIssueAgain=false;
 
     String image_url="";
     List<String> imageview_urllist;
@@ -249,7 +250,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                     status = (Integer) object.get("code");//
                     msg = (String) object.get("message");//
                     if (status == 1) {
-
+                        isIssueAgain=true;
                         Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
                         intentpay.putExtra("title", "全民帮—任务付款");
 
@@ -300,6 +301,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                     map_taskdetail.put("id", newID + "");
                     mButton_again.setVisibility(View.GONE);
                     request(map_taskdetail);
+                    LogUtils.LOG("ceshi1","request(map_taskdetail)","request");
                     ToastUtils.showToast(MytaskDetailActivity.this,msg);
                 }else {
                     ToastUtils.showToast(MytaskDetailActivity.this,msg);
@@ -347,6 +349,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                 if (taskDetailBean.getData().getTask_Status_code().equals("02") || taskDetailBean.getData().getTask_Status_code().equals("01") || taskDetailBean.getData().getTask_Status_code().equals("08")) {
                     mButton_cancle.setVisibility(View.VISIBLE);
+                    mButton_again.setVisibility(View.GONE);
                 }else {
                     mButton_cancle.setVisibility(View.GONE);
                 }
@@ -401,7 +404,11 @@ public class MytaskDetailActivity extends BaseActivityother {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        request(map_taskdetail);
+        if(!isIssueAgain){
+            request(map_taskdetail);
+            LogUtils.LOG("ceshi1","onPostResume","onPostResume");
+        }
+
     }
 
     @Override

@@ -207,6 +207,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
             case R.id.button_tixian://提现
                 Intent intent_cash=new Intent(getActivity(), CashoutActivity.class);
                 intent_cash.putExtra("money",Staticdata.static_userBean.getData().getAppuser().getBalance()+"");
+                intent_cash.putExtra("TransferType","1");
                 startActivity(intent_cash);
 
                 break;

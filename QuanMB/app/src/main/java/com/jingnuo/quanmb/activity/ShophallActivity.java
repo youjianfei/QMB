@@ -109,8 +109,8 @@ public class ShophallActivity extends BaseActivityother {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                search=Utils.ZhuanMa(s+"");
-                search=s+"";
+                search=Utils.ZhuanMa(s+"");
+//                search=s+"";
                 request(1);
 
             }
