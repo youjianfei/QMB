@@ -225,11 +225,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 startActivity(intent_collect);
                 break;
             case R.id.textview_bangshou:
-                if(Staticdata.static_userBean.getData().getHelper_status()==1){
+                if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("1")){
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
                     intent_shopcenter.putExtra("type",1);//1  帮手
                     getActivity().startActivity(intent_shopcenter);
-                }else if(Staticdata.static_userBean.getData().getHelper_status()==2) {//即时帮手也是商户
+                }else if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {//即时帮手也是商户
                     ToastUtils.showToast(getContext(),"你已经是商户啦！");
                 }
                 else {//申请帮手界面
@@ -299,53 +299,58 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 break;
             case  R.id.textview_shopcenter://1  商户  0  不是商户
                 LogUtils.LOG("ceshi",Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),"检测商户审核状态接口");
-                if(Staticdata.static_userBean.getData().getBusiness_status()==1){
+                if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")){
+                    LogUtils.LOG("ceshi","检测商户审核状态dfgdfsgfd","检测商户审核状态");
+
                     Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
                     intent_shopcenter.putExtra("type",2);//2  商户
                     getActivity().startActivity(intent_shopcenter);
-                    return;
-                }
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi",respose,"检测商户审核状态");
-                        int status = 0;
-                        String msg = "";
-                        String state = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//
-                            msg = (String) object.get("message");//
-                            state = (String) object.get("status");//
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (state.equals("00")){//审核通过
-                            Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-                            intent_shopcenter.putExtra("type",2);//2  商户
-                            getActivity().startActivity(intent_shopcenter);
-                        }else if(state.equals("01")){//没提交
-                            Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-                            getActivity().startActivity(intent_shopin);
 
-                        }else if(state.equals("02")){//正在审核
+                }else {
+                    LogUtils.LOG("ceshi","检测商户审核状态"+Staticdata.static_userBean.getData().getAppuser().getRole(),"检测商户审核状态");
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+
+                            int status = 0;
+                            String msg = "";
+                            String state = "";
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//
+                                msg = (String) object.get("message");//
+                                state = (String) object.get("status");//
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            if (state.equals("00")){//审核通过
+                                Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                                intent_shopcenter.putExtra("type",2);//2  商户
+                                getActivity().startActivity(intent_shopcenter);
+                            }else if(state.equals("01")){//没提交
+                                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                                getActivity().startActivity(intent_shopin);
+
+                            }else if(state.equals("02")){//正在审核
 //                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
 //                            getActivity().startActivity(intent_shopinext);
-                            Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
-                            intent_submit.putExtra("state","2");
-                            startActivity(intent_submit);
+                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                                intent_submit.putExtra("state","2");
+                                startActivity(intent_submit);
 
-                        }else if(state.equals("03")){//没提交审核
-                            Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-                            getActivity().startActivity(intent_shopin);
+                            }else if(state.equals("03")){//没提交审核
+                                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                                getActivity().startActivity(intent_shopin);
+                            }
                         }
-                    }
-                    @Override
-                    public void onError(int error) {
+                        @Override
+                        public void onError(int error) {
 
-                    }
-                }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
-                break;
+                        }
+                    }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
+
+                }
+                 break;
             case R.id.text_myorder:
                 Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);
                 getActivity().startActivity(intent_myorder);

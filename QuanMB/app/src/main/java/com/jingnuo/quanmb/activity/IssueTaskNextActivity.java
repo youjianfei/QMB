@@ -368,7 +368,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 int data = 0;
                 try {
                     JSONObject object = new JSONObject(respose);
-                    data = (Integer) object.get("date");//
+                    data = (Integer) object.get("data");//
                     status = (Integer) object.get("code");//
                     msg = (String) object.get("message");//
                     if (status == 1) {

@@ -121,7 +121,7 @@ public class Volley_Utils {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if(status==-1){
+                    if(status==-5){
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));
                     }else {

@@ -148,7 +148,7 @@ public class HelperOrderActivity extends BaseActivityother {
                     mButton_queren.setText("已完成");
                 }else if(helpOrderBean.getData().getDetail().getOrder_status().equals("已关闭")){
                     mButton_queren.setEnabled(false);
-                    mButton_queren.setText(helpOrderBean.getData().getDetail().getOrder_status_name());
+                    mButton_queren.setText("已关闭");
                 } else if(helpOrderBean.getData().getDetail().getOrder_status().equals("已关闭")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("逾期未完成");

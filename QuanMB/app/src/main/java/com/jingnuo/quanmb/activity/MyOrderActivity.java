@@ -36,7 +36,7 @@ public class MyOrderActivity extends BaseActivityother {
     MyorderBean myorderBean;
 
     //数据
-    List<MyorderBean.DateBean>mData;
+    List<MyorderBean.DataBean>mData;
     Map map_myorder;
 
     int page=1;
@@ -135,13 +135,13 @@ public class MyOrderActivity extends BaseActivityother {
                 myorderBean=new Gson().fromJson(respose,MyorderBean.class);
                 if(page==1){
                     mData.clear();
-                    if(myorderBean.getDate()!=null){
-                        mData.addAll(myorderBean.getDate());
+                    if(myorderBean.getData()!=null){
+                        mData.addAll(myorderBean.getData());
                         adapter_myIssue.notifyDataSetChanged();
                     }
                 }else {
-                    if (myorderBean.getDate()!=null){
-                        mData.addAll(myorderBean.getDate());
+                    if (myorderBean.getData()!=null){
+                        mData.addAll(myorderBean.getData());
                         adapter_myIssue.notifyDataSetChanged();
                     }
 

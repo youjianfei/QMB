@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Adapter_myIssue extends BaseAdapter {
-    List<MyorderBean.DateBean> mData;
+    List<MyorderBean.DataBean> mData;
     Context mContext;
     LayoutInflater mInlayout;
 

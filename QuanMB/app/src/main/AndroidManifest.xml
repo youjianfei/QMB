@@ -75,7 +75,9 @@
         <activity
             android:name="com.jingnuo.quanmb.activity.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name="com.jingnuo.quanmb.activity.LoginActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.LoginActivity"
+            android:launchMode="singleTask"
+            />
         <activity android:name="com.jingnuo.quanmb.activity.RegisterActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.FindPasswordActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.AuthenticationActivity" />

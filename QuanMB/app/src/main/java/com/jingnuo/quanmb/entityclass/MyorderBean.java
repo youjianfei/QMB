@@ -27,7 +27,7 @@ public class MyorderBean {
 
     private int code;
     private String message;
-    private List<DateBean> date;
+    private List<DataBean> data;
 
     public int getCode() {
         return code;
@@ -45,15 +45,15 @@ public class MyorderBean {
         this.message = message;
     }
 
-    public List<DateBean> getDate() {
-        return date;
+    public List<DataBean> getData() {
+        return data;
     }
 
-    public void setDate(List<DateBean> date) {
-        this.date = date;
+    public void setData(List<DataBean> date) {
+        this.data = data;
     }
 
-    public static class DateBean {
+    public static class DataBean {
         /**
          * Status_name : 待帮助
          * commission : 23

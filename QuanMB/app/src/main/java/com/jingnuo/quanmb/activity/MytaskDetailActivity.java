@@ -245,7 +245,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 int data = 0;
                 try {
                     JSONObject object = new JSONObject(respose);
-                    data = (Integer) object.get("date");//
+                    data = (Integer) object.get("data");//
                     newID=data+"";
                     status = (Integer) object.get("code");//
                     msg = (String) object.get("message");//
