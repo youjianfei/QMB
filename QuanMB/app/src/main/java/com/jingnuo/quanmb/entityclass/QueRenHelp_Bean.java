@@ -1,22 +1,24 @@
 package com.jingnuo.quanmb.entityclass;
 
 public class QueRenHelp_Bean {
+
+
     /**
-     * date : {"Status_name":"已接单","client_no":"2147483680","counteroffer_Amount":36,"createDate":"2018-05-09 09:25:52","detailed_address":"你以为上午","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525915582&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=26NdcEb%2B9lCn%2Foq028dYH26FlHA%3D","is_counteroffer":"1","mobile_no":"1368","nick_name":"中单亚索  不给就送","order_Amount":36,"order_EndDate":"2018-05-12 09:26:21","order_no":"QMB180509100000127","specialty_name":"家具","task_Status_code":"02","task_description":"孩子我继续我我","task_name":"你以为继续我","user_grade":"1"}
+     * data : {"Status_name":"已接单","client_no":"90000000061","counteroffer_Amount":50,"createDate":"2018-06-19 09:08:59","detailed_address":"南阳路与宋寨北街升龙汇金广场2楼中庭","headUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/1e60e99d-02a5-4962-a681-a59c1b11d3a10002.png","is_counteroffer":"1","mobile_no":"13526988096","nick_name":"18338772983","order_Amount":50,"order_EndDate":"2018-06-20 09:09:26","order_no":"QMB180619100000390","specialty_name":"帮送","task_Status_code":"02","task_description":"帮送快递到东区","task_id":439,"task_name":"帮送快递","user_level":1}
      * message : 确认帮助成功
      * status : 1
      */
 
-    private DateBean date;
+    private DataBean data;
     private String message;
     private int status;
 
-    public DateBean getDate() {
-        return date;
+    public DataBean getData() {
+        return data;
     }
 
-    public void setDate(DateBean date) {
-        this.date = date;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
     public String getMessage() {
@@ -35,25 +37,26 @@ public class QueRenHelp_Bean {
         this.status = status;
     }
 
-    public static class DateBean {
+    public static class DataBean {
         /**
          * Status_name : 已接单
-         * client_no : 2147483680
-         * counteroffer_Amount : 36
-         * createDate : 2018-05-09 09:25:52
-         * detailed_address : 你以为上午
-         * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/2785a352-30d4-46ef-928a-4366ac6ea734hdImg_c196266f837d14e0b693f961bee37b661525346391833.jpg?Expires=1525915582&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=26NdcEb%2B9lCn%2Foq028dYH26FlHA%3D
+         * client_no : 90000000061
+         * counteroffer_Amount : 50.0
+         * createDate : 2018-06-19 09:08:59
+         * detailed_address : 南阳路与宋寨北街升龙汇金广场2楼中庭
+         * headUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/1e60e99d-02a5-4962-a681-a59c1b11d3a10002.png
          * is_counteroffer : 1
-         * mobile_no : 1368
-         * nick_name : 中单亚索  不给就送
-         * order_Amount : 36
-         * order_EndDate : 2018-05-12 09:26:21
-         * order_no : QMB180509100000127
-         * specialty_name : 家具
+         * mobile_no : 13526988096
+         * nick_name : 18338772983
+         * order_Amount : 50.0
+         * order_EndDate : 2018-06-20 09:09:26
+         * order_no : QMB180619100000390
+         * specialty_name : 帮送
          * task_Status_code : 02
-         * task_description : 孩子我继续我我
-         * task_name : 你以为继续我
-         * user_grade : 1
+         * task_description : 帮送快递到东区
+         * task_id : 439
+         * task_name : 帮送快递
+         * user_level : 1
          */
 
         private String Status_name;
@@ -71,17 +74,9 @@ public class QueRenHelp_Bean {
         private String specialty_name;
         private String task_Status_code;
         private String task_description;
+        private int task_id;
         private String task_name;
-        private String user_grade;
-        private String  task_id;
-
-        public String getTask_id() {
-            return task_id;
-        }
-
-        public void setTask_id(String task_id) {
-            this.task_id = task_id;
-        }
+        private int user_level;
 
         public String getStatus_name() {
             return Status_name;
@@ -203,6 +198,14 @@ public class QueRenHelp_Bean {
             this.task_description = task_description;
         }
 
+        public int getTask_id() {
+            return task_id;
+        }
+
+        public void setTask_id(int task_id) {
+            this.task_id = task_id;
+        }
+
         public String getTask_name() {
             return task_name;
         }
@@ -211,14 +214,12 @@ public class QueRenHelp_Bean {
             this.task_name = task_name;
         }
 
-        public String getUser_grade() {
-            return user_grade;
+        public int getUser_level() {
+            return user_level;
         }
 
-        public void setUser_grade(String user_grade) {
-            this.user_grade = user_grade;
+        public void setUser_level(int user_level) {
+            this.user_level = user_level;
         }
     }
-
-
 }

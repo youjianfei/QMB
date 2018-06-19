@@ -60,6 +60,7 @@ public class MoneyTextWatcher implements TextWatcher {
                 return;
             }
         }
+
     }
 
     @Override

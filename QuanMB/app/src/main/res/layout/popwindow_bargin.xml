@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="请输入还价金额"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:textColor="@color/text_title2"
@@ -30,10 +30,11 @@
              android:gravity="center"
             android:hint="点击输入金额"
             android:lines="1"
-            android:textSize="15dp"
+            android:maxLength="6"
+            android:textSize="18dp"
             android:digits="123456789.0"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:background="@null"
              />
         <ImageView

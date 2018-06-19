@@ -66,7 +66,7 @@ public class Popwindow_SquareSort {
     FilterAdapter mAdapter_filter_task;
     FilterAdapter mAdapter_filter_level;
     MyGridView mGridview_filter_task;
-    List<TaskTypeBean.DateBean.ListBean> listdata_tasktype;//接口返回的任务类型列表
+    List<TaskTypeBean.DataBean.ListBean> listdata_tasktype;//接口返回的任务类型列表
 //    List<PopwindowGridBean.FilterBean> mData_filter_level;
 
     TextView mText_filter_left, mText_filter_right;
@@ -129,7 +129,7 @@ public class Popwindow_SquareSort {
             @Override
             public void onSuccesses(String respose) {
                 listdata_tasktype.clear();
-                listdata_tasktype.addAll(new Gson().fromJson(respose, TaskTypeBean.class).getDate().getList());
+                listdata_tasktype.addAll(new Gson().fromJson(respose, TaskTypeBean.class).getData().getList());
                 if(Staticdata. mData_filter_task.size()!=listdata_tasktype.size()){
                     for (int i = 0; i < listdata_tasktype.size(); i++) {
                         PopwindowGridBean.FilterBean bean = new PopwindowGridBean.FilterBean();

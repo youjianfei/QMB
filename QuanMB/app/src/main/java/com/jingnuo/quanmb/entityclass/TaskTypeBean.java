@@ -14,16 +14,16 @@ public class TaskTypeBean {
      * status : 1
      */
 
-    private DateBean date;
+    private  DataBean data;
     private String message;
     private int status;
 
-    public DateBean getDate() {
-        return date;
+    public DataBean getData() {
+        return data;
     }
 
-    public void setDate(DateBean date) {
-        this.date = date;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
     public String getMessage() {
@@ -42,7 +42,7 @@ public class TaskTypeBean {
         this.status = status;
     }
 
-    public static class DateBean {
+    public static class DataBean {
         private List<ListBean> list;
 
         public List<ListBean> getList() {

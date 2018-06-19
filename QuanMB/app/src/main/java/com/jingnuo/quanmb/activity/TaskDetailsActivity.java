@@ -114,7 +114,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         if (status == 1) {
                             ToastUtils.showToast(TaskDetailsActivity.this, "还价申请已发出");
                         } else {
-                            ToastUtils.showToast(TaskDetailsActivity.this, "请重新还价");
+                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
                         }
                     }
                     @Override
@@ -155,7 +155,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                             QueRenHelp_Bean queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
                             if (queRenHelp_bean.getStatus() == 1) {
                                 Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
-                                intent_querenhelp.putExtra("order_no", queRenHelp_bean.getDate().getOrder_no());
+                                intent_querenhelp.putExtra("order_no", queRenHelp_bean.getData().getOrder_no());
                                 startActivity(intent_querenhelp);
                                 finish();
                             } else {
