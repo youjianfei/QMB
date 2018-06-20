@@ -101,7 +101,15 @@ public class HelpterInfoBean {
             private String status;
             private String updateDate;
             private String updateName;
+            private int  spread_b;
 
+            public int getSpread_b() {
+                return spread_b;
+            }
+
+            public void setSpread_b(int spread_b) {
+                this.spread_b = spread_b;
+            }
             public String getAvatar_url() {
                 return avatar_url;
             }

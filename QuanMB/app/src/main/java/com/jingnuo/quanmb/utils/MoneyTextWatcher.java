@@ -60,6 +60,16 @@ public class MoneyTextWatcher implements TextWatcher {
                 return;
             }
         }
+        //最大99999.99
+        if(s.length()>2&&Double.parseDouble(s.toString())>99999.99){
+            editText.setText(s.subSequence(0, 5));
+            if(s.length()>5){
+                editText.setSelection(5); //光标移到最后
+            }
+
+            return;
+        }
+
 
     }
 

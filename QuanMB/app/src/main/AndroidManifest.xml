@@ -75,9 +75,9 @@
         <activity
             android:name="com.jingnuo.quanmb.activity.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name="com.jingnuo.quanmb.activity.LoginActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name="com.jingnuo.quanmb.activity.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name="com.jingnuo.quanmb.activity.RegisterActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.FindPasswordActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.AuthenticationActivity" />
@@ -159,7 +159,10 @@
         <activity android:name="com.jingnuo.quanmb.activity.PayBaozhengmoneyActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.MoneyMingxiDetailsActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword1Activity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword2Activity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword2Activity" />
+        <activity android:name="com.jingnuo.quanmb.activity.TuiguangbiWalletActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.HuiyuanRechargeActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.PaytuiguangbiActivity"></activity>
     </application>
 
 </manifest>

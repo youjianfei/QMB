@@ -30,7 +30,6 @@
              android:gravity="center"
             android:hint="点击输入金额"
             android:lines="1"
-            android:maxLength="6"
             android:textSize="18dp"
             android:digits="123456789.0"
             android:layout_centerHorizontal="true"

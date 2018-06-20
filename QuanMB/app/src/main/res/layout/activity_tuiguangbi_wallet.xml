@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_background"
+    tools:context="com.jingnuo.quanmb.activity.TuiguangbiWalletActivity">
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/back_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="推广币"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的推广币"
+            android:textSize="14dp"
+            android:textColor="@color/black_text"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/text_tuiCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1920"
+            android:textSize="30dp"
+            android:textColor="@color/red"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推广币充值"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/blue2"
+            android:layout_marginBottom="20dp"
+            />
+        <com.jingnuo.quanmb.customview.MyGridView
+            android:id="@+id/mygrid_recharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:numColumns="3"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推广币用于发布服务"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/blue2"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推广币：人民币=1：1，即1元=1推广币"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/blue2"
+            android:layout_marginBottom="20dp"
+            />
+        <Button
+            android:id="@+id/button_queren"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/button_yellow_20dp"
+            android:text="确  认"
+            android:textColor="@color/white"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

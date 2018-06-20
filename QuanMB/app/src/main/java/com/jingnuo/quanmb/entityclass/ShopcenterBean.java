@@ -101,6 +101,15 @@ public class ShopcenterBean {
             private String introduction;
             private String  commission;
             private int  business_level;
+            private int  spread_b;
+
+            public int getSpread_b() {
+                return spread_b;
+            }
+
+            public void setSpread_b(int spread_b) {
+                this.spread_b = spread_b;
+            }
 
             public int getBusiness_level() {
                 return business_level;

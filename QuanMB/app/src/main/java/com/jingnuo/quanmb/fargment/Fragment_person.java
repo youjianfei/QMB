@@ -1,12 +1,15 @@
 package com.jingnuo.quanmb.fargment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jingnuo.quanmb.Adapter.Adapter_menu;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.CashoutActivity;
@@ -31,8 +35,10 @@ import com.jingnuo.quanmb.activity.ShopInNextActivity;
 import com.jingnuo.quanmb.activity.SubmitSuccessActivity;
 import com.jingnuo.quanmb.activity.WalletActivity;
 import com.jingnuo.quanmb.class_.WechatPay;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.MenuBean;
 import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -48,7 +54,9 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -61,23 +69,28 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     View rootview;
     private UMShareAPI mShareAPI;//第三方登录登录
 
-    //控件
-    RelativeLayout mTextview_shopcenter;
-    RelativeLayout mTextview_address;
-    RelativeLayout mTextview_banghsou;
+ //控件
+//    RelativeLayout mTextview_shopcenter;
+//    RelativeLayout mTextview_address;
+//    RelativeLayout mTextview_banghsou;
+//    RelativeLayout mTextview_myorder;
+//    RelativeLayout mTextview_mycollect;
+//    RelativeLayout mTextview_aboutus;
+//    RelativeLayout mTextview_logout;
     ImageView mImageview_setting;
     CircleImageView  mCircleImage;
     ImageView mimage_chengwei;
     TextView mTextview_nickname;
     TextView mTextview_moneycount;
     TextView mTextview_chengwei;
-    RelativeLayout mTextview_myorder;
-    RelativeLayout mTextview_mycollect;
-    RelativeLayout mTextview_aboutus;
-    RelativeLayout mTextview_logout;
+
     Button mButton_rechange;//充值
     Button mButton_cashout;//提现
     LinearLayout mLearlayout_wallet;
+
+    MyGridView  myGridview_menu;
+    List<MenuBean> menuList;
+    Adapter_menu  mAdapter_menu;
 
 
     @Nullable
@@ -96,25 +109,231 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     }
 
     private void initlistener() {
-        mTextview_banghsou.setOnClickListener(this);
-        mTextview_address.setOnClickListener(this);
+//        mTextview_banghsou.setOnClickListener(this);
+//        mTextview_address.setOnClickListener(this);
+//        mTextview_shopcenter.setOnClickListener(this);
+//        mTextview_logout.setOnClickListener(this);
+//        mTextview_myorder.setOnClickListener(this);
+//        mTextview_mycollect.setOnClickListener(this);
+//        mTextview_aboutus.setOnClickListener(this);
         mImageview_setting.setOnClickListener(this);
         mCircleImage.setOnClickListener(this);
-        mTextview_shopcenter.setOnClickListener(this);
-        mTextview_logout.setOnClickListener(this);
-        mTextview_myorder.setOnClickListener(this);
-        mTextview_mycollect.setOnClickListener(this);
-        mTextview_aboutus.setOnClickListener(this);
         mButton_rechange.setOnClickListener(this);
         mButton_cashout.setOnClickListener(this);
         mLearlayout_wallet.setOnClickListener(this);
+        myGridview_menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0://我的发布
+                        Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);
+                        getActivity().startActivity(intent_myorder);
+                        break;
+                    case 1://常用联系人
+                        Intent intent_datiladdress = new Intent(getActivity(), DatailAddressActivity.class);
+                        getActivity().startActivity(intent_datiladdress);
+                        break;
+                    case 2://我是帮手
+                        if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("1")){
+                            Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                            intent_shopcenter.putExtra("type",1);//1  帮手
+                            getActivity().startActivity(intent_shopcenter);
+                        }else if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {//即时帮手也是商户
+                            ToastUtils.showToast(getContext(),"你已经是商户啦！");
+                        }
+                        else {//申请帮手界面
+//                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
+//                    getActivity().startActivity(intent_anthentication);
+                            Map map=new HashMap();
+                            map.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                            map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    LogUtils.LOG("ceshi",respose,"帮手审核状态");
+                                    int status = 0;
+                                    String msg = "";
+                                    String state = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//
+                                        msg = (String) object.get("msg");//
+                                        state = (String) object.get("status");//
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (state.equals("2")){//审核通过
+
+                                        Intent intent_submit=new Intent(getActivity(), SubmitSuccessActivity.class);
+                                        intent_submit.putExtra("state","3");
+                                        getActivity().startActivity(intent_submit);
+                                    }else if(status==0){//没提交
+                                        Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
+                                        getActivity().startActivity(intent_shopin);
+
+                                    }else if(state.equals("1")){//正在审核
+
+                                        Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                                        intent_submit.putExtra("state","2");
+                                        startActivity(intent_submit);
+
+                                    }else if(state.equals("3")){//审核失败
+                                        Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                                        intent_submit.putExtra("state","4");
+                                        startActivity(intent_submit);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_hu+Urls.helpIn_state,getActivity(),1,map);
+                            LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.helpIn_state,"帮手审核状态");
+                            LogUtils.LOG("ceshi",map.toString(),"帮手审核状态map");
+                        }
+                        break;
+                    case 3://商户中心
+                        LogUtils.LOG("ceshi",Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),"检测商户审核状态接口");
+                        if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")){
+                            LogUtils.LOG("ceshi","检测商户审核状态dfgdfsgfd","检测商户审核状态");
+
+                            Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                            intent_shopcenter.putExtra("type",2);//2  商户
+                            getActivity().startActivity(intent_shopcenter);
+
+                        }else {
+                            LogUtils.LOG("ceshi","检测商户审核状态"+Staticdata.static_userBean.getData().getAppuser().getRole(),"检测商户审核状态");
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+
+                                    int status = 0;
+                                    String msg = "";
+                                    String state = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//
+                                        msg = (String) object.get("message");//
+                                        state = (String) object.get("status");//
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (state.equals("00")){//审核通过
+                                        Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+                                        intent_shopcenter.putExtra("type",2);//2  商户
+                                        getActivity().startActivity(intent_shopcenter);
+                                    }else if(state.equals("01")){//没提交
+                                        Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                                        getActivity().startActivity(intent_shopin);
+
+                                    }else if(state.equals("02")){//正在审核
+//                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
+//                            getActivity().startActivity(intent_shopinext);
+                                        Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+                                        intent_submit.putExtra("state","2");
+                                        startActivity(intent_submit);
+
+                                    }else if(state.equals("03")){//没提交审核
+                                        Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+                                        getActivity().startActivity(intent_shopin);
+                                    }
+                                }
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
+
+                        }
+                        break;
+                    case 4://我的收藏
+                        Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
+                        startActivity(intent_collect);
+                        break;
+                    case 5://关于我们
+
+                        break;
+                    case 6://退出登录
+                        logout();
+                        SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
+                        Staticdata.isLogin=false;
+                        Staticdata.static_userBean.setData(null);//用户信息清空
+                        Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
+                        startActivity(intent_logout);
+                        getActivity().finish();
+                        break;
+                }
+            }
+        });
     }
 
     private void setdata() {
 
     }
 
-    private void initdata() {
+    private void initdata() {//初始化个人中心菜单
+        menuList=new ArrayList<>();
+        for(int i=0;i<7;i++){
+            switch (i){
+                case 0://我的发布
+                    MenuBean menuBean0=new MenuBean();
+                    menuBean0.setMenu_name("我的发布");
+                    Bitmap bitmap0 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.myrelease);
+                    menuBean0.setmBitmap(bitmap0);
+                    menuList.add(menuBean0);
+                    break;
+                case 1://常用联系人
+                    MenuBean menuBean1=new MenuBean();
+                    menuBean1.setMenu_name("常用联系人");
+                    Bitmap bitmap1 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.lianxiren);
+                    menuBean1.setmBitmap(bitmap1);
+                    menuList.add(menuBean1);
+                    break;
+                case 2://我是帮手
+                    MenuBean menuBean2=new MenuBean();
+                    menuBean2.setMenu_name("我是帮手");
+                    Bitmap bitmap2 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.people);
+                    menuBean2.setmBitmap(bitmap2);
+                    menuList.add(menuBean2);
+                    break;
+                case 3://商户中心
+                    MenuBean menuBean3=new MenuBean();
+                    menuBean3.setMenu_name("商户中心");
+                    Bitmap bitmap3 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.shopcenter);
+                    menuBean3.setmBitmap(bitmap3);
+                    menuList.add(menuBean3);
+                    break;
+                case 4://我的收藏
+                    MenuBean menuBean4=new MenuBean();
+                    menuBean4.setMenu_name("我的收藏");
+                    Bitmap bitmap4 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.xingxingblue);
+                    menuBean4.setmBitmap(bitmap4);
+                    menuList.add(menuBean4);
+                    break;
+                case 5://关于我们
+                    MenuBean menuBean5=new MenuBean();
+                    menuBean5.setMenu_name("关于我们");
+                    Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.aboutus);
+                    menuBean5.setmBitmap(bitmap5);
+                    menuList.add(menuBean5);
+                    break;
+                case 6://退出登录
+                    MenuBean menuBean6=new MenuBean();
+                    menuBean6.setMenu_name("退出登录");
+                    Bitmap bitmap6 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.logout);
+                    menuBean6.setmBitmap(bitmap6);
+                    menuList.add(menuBean6);
+                    break;
+            }
+        }
+        mAdapter_menu=new Adapter_menu(menuList,getActivity());
+        myGridview_menu.setAdapter(mAdapter_menu);
+
+
+
+
         mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
 //        if(Staticdata.static_userBean.getData().getBusiness_status()==1){
 //            mTextview_chengwei.setText("商户");
@@ -176,22 +395,23 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     }
 
     private void initview() {
-        mTextview_banghsou = rootview.findViewById(R.id.textview_bangshou);
-        mTextview_address=rootview.findViewById(R.id.textview_address);
+//        mTextview_banghsou = rootview.findViewById(R.id.textview_bangshou);
+//        mTextview_address=rootview.findViewById(R.id.textview_address);
+//        mTextview_myorder=rootview.findViewById(R.id.text_myorder);
+//        mTextview_logout=rootview.findViewById(R.id.textview_logout);
+//        mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
+//        mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
+//        mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
         mTextview_moneycount=rootview.findViewById(R.id.textview_2);
         mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
-        mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
         mTextview_nickname=rootview.findViewById(R.id.text_username);
         mTextview_chengwei=rootview.findViewById(R.id.textview_phonenumber);
-        mTextview_myorder=rootview.findViewById(R.id.text_myorder);
-        mTextview_logout=rootview.findViewById(R.id.textview_logout);
-        mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
-        mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
         mButton_rechange=rootview.findViewById(R.id.button_recharge);
         mButton_cashout=rootview.findViewById(R.id.button_tixian);
         mimage_chengwei=rootview.findViewById(R.id.image_chengwei);
         mLearlayout_wallet=rootview.findViewById(R.id.linearlayout_wallete);
+        myGridview_menu=rootview.findViewById(R.id.mygridview_menu);
     }
 
 
@@ -216,79 +436,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 startActivity(intent_recharge);
 
                 break;
-            case R.id.textview_aboutus://关于我们
-
-                break;
-
-            case R.id.textview_colllect:
-                Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
-                startActivity(intent_collect);
-                break;
-            case R.id.textview_bangshou:
-                if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("1")){
-                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-                    intent_shopcenter.putExtra("type",1);//1  帮手
-                    getActivity().startActivity(intent_shopcenter);
-                }else if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {//即时帮手也是商户
-                    ToastUtils.showToast(getContext(),"你已经是商户啦！");
-                }
-                else {//申请帮手界面
-//                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
-//                    getActivity().startActivity(intent_anthentication);
-                    Map map=new HashMap();
-                    map.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
-                            LogUtils.LOG("ceshi",respose,"帮手审核状态");
-                            int status = 0;
-                            String msg = "";
-                            String state = "";
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//
-                                msg = (String) object.get("msg");//
-                                state = (String) object.get("status");//
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (state.equals("2")){//审核通过
-
-                                Intent intent_submit=new Intent(getActivity(), SubmitSuccessActivity.class);
-                                intent_submit.putExtra("state","3");
-                                getActivity().startActivity(intent_submit);
-                            }else if(status==0){//没提交
-                                Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
-                                getActivity().startActivity(intent_shopin);
-
-                            }else if(state.equals("1")){//正在审核
-
-                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
-                                intent_submit.putExtra("state","2");
-                                startActivity(intent_submit);
-
-                            }else if(state.equals("3")){//审核失败
-                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
-                                intent_submit.putExtra("state","4");
-                                startActivity(intent_submit);
-                            }
-
-                        }
-
-                        @Override
-                        public void onError(int error) {
-
-                        }
-                    }).postHttp(Urls.Baseurl_hu+Urls.helpIn_state,getActivity(),1,map);
-                    LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.helpIn_state,"帮手审核状态");
-                    LogUtils.LOG("ceshi",map.toString(),"帮手审核状态map");
-                }
-                break;
-            case R.id.textview_address:
-                Intent intent_datiladdress = new Intent(getActivity(), DatailAddressActivity.class);
-                getActivity().startActivity(intent_datiladdress);
-                break;
             case R.id.image_setting:
                 Intent intent_setting=new Intent(getActivity(), SettingActivity.class);
                 getActivity().startActivity(intent_setting);
@@ -297,75 +444,149 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 Intent intent_personInfo=new Intent(getActivity(), PersonInfoActivity.class);
                 getActivity().startActivity(intent_personInfo);
                 break;
-            case  R.id.textview_shopcenter://1  商户  0  不是商户
-                LogUtils.LOG("ceshi",Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),"检测商户审核状态接口");
-                if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")){
-                    LogUtils.LOG("ceshi","检测商户审核状态dfgdfsgfd","检测商户审核状态");
+//            case R.id.textview_aboutus://关于我们
+//
+//                break;
 
-                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-                    intent_shopcenter.putExtra("type",2);//2  商户
-                    getActivity().startActivity(intent_shopcenter);
+//            case R.id.textview_colllect:
+//                Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
+//                startActivity(intent_collect);
+//                break;
+//            case R.id.textview_bangshou:
+//                if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("1")){
+//                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+//                    intent_shopcenter.putExtra("type",1);//1  帮手
+//                    getActivity().startActivity(intent_shopcenter);
+//                }else if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {//即时帮手也是商户
+//                    ToastUtils.showToast(getContext(),"你已经是商户啦！");
+//                }
+//                else {//申请帮手界面
+////                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
+////                    getActivity().startActivity(intent_anthentication);
+//                    Map map=new HashMap();
+//                    map.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                    map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                    new Volley_Utils(new Interface_volley_respose() {
+//                        @Override
+//                        public void onSuccesses(String respose) {
+//                            LogUtils.LOG("ceshi",respose,"帮手审核状态");
+//                            int status = 0;
+//                            String msg = "";
+//                            String state = "";
+//                            try {
+//                                JSONObject object = new JSONObject(respose);
+//                                status = (Integer) object.get("code");//
+//                                msg = (String) object.get("msg");//
+//                                state = (String) object.get("status");//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                            if (state.equals("2")){//审核通过
+//
+//                                Intent intent_submit=new Intent(getActivity(), SubmitSuccessActivity.class);
+//                                intent_submit.putExtra("state","3");
+//                                getActivity().startActivity(intent_submit);
+//                            }else if(status==0){//没提交
+//                                Intent intent_shopin=new Intent(getActivity(), AuthenticationActivity.class);
+//                                getActivity().startActivity(intent_shopin);
+//
+//                            }else if(state.equals("1")){//正在审核
+//
+//                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+//                                intent_submit.putExtra("state","2");
+//                                startActivity(intent_submit);
+//
+//                            }else if(state.equals("3")){//审核失败
+//                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+//                                intent_submit.putExtra("state","4");
+//                                startActivity(intent_submit);
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(int error) {
+//
+//                        }
+//                    }).postHttp(Urls.Baseurl_hu+Urls.helpIn_state,getActivity(),1,map);
+//                    LogUtils.LOG("ceshi",Urls.Baseurl_hu+Urls.helpIn_state,"帮手审核状态");
+//                    LogUtils.LOG("ceshi",map.toString(),"帮手审核状态map");
+//                }
+//                break;
+//            case R.id.textview_address:
+//                Intent intent_datiladdress = new Intent(getActivity(), DatailAddressActivity.class);
+//                getActivity().startActivity(intent_datiladdress);
+//                break;
 
-                }else {
-                    LogUtils.LOG("ceshi","检测商户审核状态"+Staticdata.static_userBean.getData().getAppuser().getRole(),"检测商户审核状态");
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
+//            case  R.id.textview_shopcenter://1  商户  0  不是商户
+//                LogUtils.LOG("ceshi",Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),"检测商户审核状态接口");
+//                if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")){
+//                    LogUtils.LOG("ceshi","检测商户审核状态dfgdfsgfd","检测商户审核状态");
+//
+//                    Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+//                    intent_shopcenter.putExtra("type",2);//2  商户
+//                    getActivity().startActivity(intent_shopcenter);
+//
+//                }else {
+//                    LogUtils.LOG("ceshi","检测商户审核状态"+Staticdata.static_userBean.getData().getAppuser().getRole(),"检测商户审核状态");
+//                    new Volley_Utils(new Interface_volley_respose() {
+//                        @Override
+//                        public void onSuccesses(String respose) {
+//
+//                            int status = 0;
+//                            String msg = "";
+//                            String state = "";
+//                            try {
+//                                JSONObject object = new JSONObject(respose);
+//                                status = (Integer) object.get("code");//
+//                                msg = (String) object.get("message");//
+//                                state = (String) object.get("status");//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                            if (state.equals("00")){//审核通过
+//                                Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
+//                                intent_shopcenter.putExtra("type",2);//2  商户
+//                                getActivity().startActivity(intent_shopcenter);
+//                            }else if(state.equals("01")){//没提交
+//                                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+//                                getActivity().startActivity(intent_shopin);
+//
+//                            }else if(state.equals("02")){//正在审核
+////                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
+////                            getActivity().startActivity(intent_shopinext);
+//                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
+//                                intent_submit.putExtra("state","2");
+//                                startActivity(intent_submit);
+//
+//                            }else if(state.equals("03")){//没提交审核
+//                                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
+//                                getActivity().startActivity(intent_shopin);
+//                            }
+//                        }
+//                        @Override
+//                        public void onError(int error) {
+//
+//                        }
+//                    }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
+//
+//                }
+//                 break;
+//            case R.id.text_myorder:
+//                Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);
+//                getActivity().startActivity(intent_myorder);
+//
+//                break;
 
-                            int status = 0;
-                            String msg = "";
-                            String state = "";
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//
-                                msg = (String) object.get("message");//
-                                state = (String) object.get("status");//
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (state.equals("00")){//审核通过
-                                Intent intent_shopcenter=new Intent(getActivity(), ShopCenterActivity.class);
-                                intent_shopcenter.putExtra("type",2);//2  商户
-                                getActivity().startActivity(intent_shopcenter);
-                            }else if(state.equals("01")){//没提交
-                                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-                                getActivity().startActivity(intent_shopin);
-
-                            }else if(state.equals("02")){//正在审核
-//                            Intent intent_shopinext=new Intent(getActivity(), ShopInNextActivity.class);
-//                            getActivity().startActivity(intent_shopinext);
-                                Intent intent_submit=new Intent(getActivity(),SubmitSuccessActivity.class);
-                                intent_submit.putExtra("state","2");
-                                startActivity(intent_submit);
-
-                            }else if(state.equals("03")){//没提交审核
-                                Intent intent_shopin=new Intent(getActivity(), ShopInActivity.class);
-                                getActivity().startActivity(intent_shopin);
-                            }
-                        }
-                        @Override
-                        public void onError(int error) {
-
-                        }
-                    }).Http(Urls.Baseurl+Urls.shopIn_state+Staticdata.static_userBean.getData().getUser_token(),getContext(),0);
-
-                }
-                 break;
-            case R.id.text_myorder:
-                Intent intent_myorder=new Intent(getActivity(), MyOrderActivity.class);
-                getActivity().startActivity(intent_myorder);
-
-                break;
-
-            case R.id.textview_logout:
-                logout();
-                SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
-                Staticdata.isLogin=false;
-                Staticdata.static_userBean.setData(null);//用户信息清空
-                Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
-                startActivity(intent_logout);
-                getActivity().finish();
-                break;
+//            case R.id.textview_logout:
+//                logout();
+//                SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
+//                Staticdata.isLogin=false;
+//                Staticdata.static_userBean.setData(null);//用户信息清空
+//                Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
+//                startActivity(intent_logout);
+//                getActivity().finish();
+//                break;
         }
 
     }
@@ -393,6 +614,9 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
             }
         });
     }
+
+
+
 
 
 }

@@ -32,6 +32,7 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
     EditText mEdit_zhiAcount;
     TextView mTextview_amount;
     TextView mTextview_allcash;
+    TextView mTextview_cash_tip;
     Button mButton_submit;
 
     String name="";
@@ -61,6 +62,17 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
         money=intent.getStringExtra("money");
         TransferType=intent.getStringExtra("TransferType");
         mTextview_amount.setText("可提现金额 "+money);
+        if(TransferType.equals("1")){
+            mTextview_cash_tip.setText("注：用户余额可以随时提现");
+        }
+        if(TransferType.equals("2")){
+            mTextview_cash_tip.setText("注：帮手余额每周二可以提现，提现金额最低50元");
+        }
+        if(TransferType.equals("3")){
+            mTextview_cash_tip.setText("注：商户余额每周二可以提现，提现金额最低50元");
+        }
+
+
         map_cash=new HashMap();
     }
 
@@ -105,6 +117,7 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
         mEdit_zhiAcount=findViewById(R.id.medit_zhiacount);
         mTextview_amount=findViewById(R.id.text_iscash);
         mTextview_allcash=findViewById(R.id.text_allcash);
+        mTextview_cash_tip=findViewById(R.id.text_cash_tip);
         mButton_submit=findViewById(R.id.button_queren);
     }
     boolean initmap(){
@@ -121,6 +134,10 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
         amount=mEdit_cash.getText()+"";
         if(amount.equals("")){
             ToastUtils.showToast(CashoutActivity.this,"请输入金额");
+            return false;
+        }
+        if(!TransferType.equals("1")&&Double.parseDouble(amount)<50){
+            ToastUtils.showToast(CashoutActivity.this,"最低限额50元");
             return false;
         }
         map_cash.put("payee_account",zhifubao);

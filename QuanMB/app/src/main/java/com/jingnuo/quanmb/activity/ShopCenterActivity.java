@@ -30,11 +30,14 @@ public class ShopCenterActivity extends BaseActivityother {
     TextView mTextview_namenext;//
     TextView mTextview_money;//佣金
     TextView mTextview_level;//等级
+    TextView mTextview_text_tui_count;//推广币个数
 
     RelativeLayout mRealtivelayout_issue;
     RelativeLayout mRealtivelayout_myissue;
     RelativeLayout mRealtivelayout_myorder;
+    RelativeLayout mRealtivelayout_mytuiguangbi;
     RelativeLayout mRealtivelayout_myauthentication;
+    RelativeLayout mRealtivelayout_huiyuan;
     Button mButtonCash;
 
     //对象
@@ -71,6 +74,8 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myissue.setOnClickListener(this);
         mRealtivelayout_myorder.setOnClickListener(this);
         mRealtivelayout_myauthentication.setOnClickListener(this);
+        mRealtivelayout_mytuiguangbi.setOnClickListener(this);
+        mRealtivelayout_huiyuan.setOnClickListener(this);
         mButtonCash.setOnClickListener(this);
         imageview_head.setOnClickListener(this);
 
@@ -82,12 +87,15 @@ public class ShopCenterActivity extends BaseActivityother {
         mTextview_tt = findViewById(R.id.textview_tt);
         mTextview_name = findViewById(R.id.text_shopname);
         mTextview_namenext = findViewById(R.id.textview_address);
+        mTextview_text_tui_count = findViewById(R.id.text_tui_count);
         mTextview_money = findViewById(R.id.textview_money);
         mTextview_level = findViewById(R.id.text_level);
         mRealtivelayout_issue = findViewById(R.id.relative_issuetask);
         mRealtivelayout_myissue = findViewById(R.id.relative_myissue);
         mRealtivelayout_myorder = findViewById(R.id.myorder);
+        mRealtivelayout_mytuiguangbi = findViewById(R.id.mytuiguangbi);
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
+        mRealtivelayout_huiyuan = findViewById(R.id.huiyuan);
         mButtonCash = findViewById(R.id.button_cash);
         mTextview_level.setText("lv.1");
     }
@@ -96,14 +104,18 @@ public class ShopCenterActivity extends BaseActivityother {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
-            case R.id.image_shoppeoplepic:
+            case R.id.huiyuan://会员充值
+                Intent intent_huiyuan = new Intent(ShopCenterActivity.this, MyAuthenticationActivity.class);
+                startActivity(intent_huiyuan);
+                break;
+            case R.id.image_shoppeoplepic://商户信息更改
                 if (type == 2) {
                     Intent intent_shopcenterinfo = new Intent(ShopCenterActivity.this, ShopCenterInfoActivity.class);
                     startActivity(intent_shopcenterinfo);
                 }
                 break;
 
-            case R.id.button_cash:
+            case R.id.button_cash://提现
                 Intent intent_cash = new Intent(this, CashoutActivity.class);
                 if(type==1){
                     intent_cash.putExtra("money",helpterInfoBean.getData().getList().getCommission()+"");
@@ -115,28 +127,34 @@ public class ShopCenterActivity extends BaseActivityother {
                 }
                 startActivity(intent_cash);
                 break;
-            case R.id.relative_issuetask:
+            case R.id.relative_issuetask://发布服务
                 Intent intend_issue_skill = new Intent(ShopCenterActivity.this, IssueSkillActivity.class);
                 intend_issue_skill.putExtra("type", type);
                 ShopCenterActivity.this.startActivity(intend_issue_skill);
                 break;
 
-            case R.id.relative_myissue:
+            case R.id.relative_myissue://我的发布
                 Intent intent_myorder = new Intent(ShopCenterActivity.this, MySkillActivity.class);
                 intent_myorder.putExtra("type", type);
                 startActivity(intent_myorder);
 
                 break;
 
-            case R.id.myorder:
+            case R.id.myorder://我的订单
                 Intent intent_mytodo = new Intent(ShopCenterActivity.this, MyTodoActivity.class);
                 intent_mytodo.putExtra("type", type);
                 startActivity(intent_mytodo);
                 break;
 
-            case R.id.myauthentication:
+            case R.id.myauthentication://我的认证
                 Intent intent_myrenzheng = new Intent(ShopCenterActivity.this, MyAuthenticationActivity.class);
                 startActivity(intent_myrenzheng);
+                break;
+            case R.id.mytuiguangbi://我的推广币  充值
+                Intent intent_mytuiguangbi = new Intent(ShopCenterActivity.this, TuiguangbiWalletActivity.class);
+                intent_mytuiguangbi.putExtra("type", type);
+                intent_mytuiguangbi.putExtra("tuiguangbi", mTextview_text_tui_count.getText()+"");
+                startActivity(intent_mytuiguangbi);
                 break;
         }
 
@@ -161,7 +179,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getAvatar_url()).into(imageview_head);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
 //                    mTextview_level.setText(helpterInfoBean.getData().getList().geth());
-
+                    mTextview_text_tui_count.setText(helpterInfoBean.getData().getList().getSpread_b()+"");
                     mTextview_namenext.setVisibility(View.GONE);
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
 
@@ -171,6 +189,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     mTextview_name.setText(shopcenterBean.getData().getList().getBusiness_name());
                     mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address()+" | ");
                     mTextview_money.setText(shopcenterBean.getData().getList().getCommission()+"");
+                    mTextview_text_tui_count.setText(shopcenterBean.getData().getList().getSpread_b()+"个");
                 }
 
             }

@@ -233,7 +233,6 @@
                     android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-
                     >
 
                     <ImageView
@@ -256,7 +255,75 @@
                         android:layout_marginRight="20dp"
                         android:src="@mipmap/more" />
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/mytuiguangbi"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    >
 
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="35dp"
+                        android:src="@mipmap/tuiguangbi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="我的推广币"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/text_tui_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/yellow_jianbian_end"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="40dp"
+                        android:textSize="15dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@mipmap/more" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/huiyuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="35dp"
+                        android:src="@mipmap/myrenzheng" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="会员充值"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@mipmap/more" />
+                </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/myauthentication"
                     android:layout_width="match_parent"
