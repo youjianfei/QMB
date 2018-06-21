@@ -120,7 +120,7 @@ public class PaytuiguangbiActivity extends BaseActivityother {
                         Map map_zpay=new HashMap();
                         map_zpay.put("isrecharge","Y");
                         map_zpay.put("subject","推广币套餐");
-                        map_zpay.put("total_fee",amount);
+                        map_zpay.put("total_fee","0.01");
                         map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                         map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                         map_zpay.put("task_id",Task_id);

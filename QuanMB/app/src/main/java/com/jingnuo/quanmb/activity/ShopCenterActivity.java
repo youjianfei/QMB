@@ -105,7 +105,7 @@ public class ShopCenterActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.huiyuan://会员充值
-                Intent intent_huiyuan = new Intent(ShopCenterActivity.this, MyAuthenticationActivity.class);
+                Intent intent_huiyuan = new Intent(ShopCenterActivity.this, HuiyuanRechargeActivity.class);
                 startActivity(intent_huiyuan);
                 break;
             case R.id.image_shoppeoplepic://商户信息更改
