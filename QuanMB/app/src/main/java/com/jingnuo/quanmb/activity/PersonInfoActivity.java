@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -33,6 +35,7 @@ import com.yancy.imageselector.ImageSelectorActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -233,15 +236,23 @@ public class PersonInfoActivity extends BaseActivityother {
             // Get Image Path List
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
 //            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
+            List<String> mList_picpath = new ArrayList<>();
             Bitmap bitmap = null;
             Bitmap mBitmap = null;
             for (String path : pathList) {
                 bitmap = BitmapFactory.decodeFile(path);
                 mBitmap = Bitmap.createScaledBitmap(bitmap, 525, 350, true);
 //                dataPictrue.add(mBitmap);
+
+                //调用压缩图片的方法，返回压缩后的图片path
+                String src_path = path;//原图片的路径
+                String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
+                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
+                mList_picpath.add(compressImage);
+
             }
             mImageview_headPIC.setImageBitmap(bitmap);
-            upLoadImage.uploadImg(pathList,3);
+            upLoadImage.uploadImg(mList_picpath,3);
 
 
         }
