@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShopcenterBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -161,7 +163,9 @@ public class ShopCenterInfoActivity extends BaseActivityother {
         myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                popwindow_lookpic.showPopwindow(position,imageview_urllist);
+//                popwindow_lookpic.showPopwindow(position,imageview_urllist);
+
+
             }
         });
         mTextview_edit.setOnClickListener(new View.OnClickListener() {
@@ -272,18 +276,23 @@ public class ShopCenterInfoActivity extends BaseActivityother {
 
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
 
-            // Get Image Path List
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
 //            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
+            List<String> mList_picpath = new ArrayList<>();
             Bitmap bitmap = null;
             Bitmap mBitmap = null;
             for (String path : pathList) {
                 bitmap = BitmapFactory.decodeFile(path);
                 mBitmap = Bitmap.createScaledBitmap(bitmap, 525, 350, true);
 //                dataPictrue.add(mBitmap);
+                //调用压缩图片的方法，返回压缩后的图片path
+                String src_path = path;//原图片的路径
+                String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
+                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
+                mList_picpath.add(compressImage);
             }
             mImageview_head.setImageBitmap(bitmap);
-            upLoadImage.uploadImg(pathList, 3);
+            upLoadImage.uploadImg(mList_picpath, 3);
         }
     }
 

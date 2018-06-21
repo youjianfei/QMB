@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +34,8 @@ public class HuiyuanRechargeActivity extends BaseActivityother {
     Adapter_recharge_huiyuan adapter_recharge_huiyuan;
 
     int select=0;
-
+    double price=0;   //选择的充值de钱数
+    String VIP_unique="";
 
     @Override
     public int setLayoutResID() {
@@ -61,10 +63,22 @@ public class HuiyuanRechargeActivity extends BaseActivityother {
                 select=position;
                 adapter_recharge_huiyuan.setSeclection(position);
                 adapter_recharge_huiyuan.notifyDataSetInvalidated();
+                price=mdata.get(position).getPrice();
+                VIP_unique=mdata.get(position).getMember_id()+"";
             }
         });
 
+        mButton_queren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_payhuiyuan=new Intent(HuiyuanRechargeActivity.this,PaytuiguangbiActivity.class);
+                intent_payhuiyuan.putExtra("neirong","会员");
+                intent_payhuiyuan.putExtra("amount",price+"");
+                intent_payhuiyuan.putExtra("VIP_unique",VIP_unique);
+                startActivity(intent_payhuiyuan);
 
+            }
+        });
     }
 
     @Override
@@ -81,8 +95,8 @@ public class HuiyuanRechargeActivity extends BaseActivityother {
                 mdata.addAll(new Gson().fromJson(respose,HuiyuanTaocanBean.class).getData());
                 adapter_recharge_huiyuan.notifyDataSetChanged();
 //                //默认选择第一个
-//                total_spreadcoin= mdata.get(0).getSpread_b();
-//                price=mdata.get(0).getPrice();
+                price=mdata.get(0).getPrice();
+                VIP_unique=mdata.get(0).getMember_id()+"";
             }
 
             @Override

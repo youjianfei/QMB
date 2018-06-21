@@ -100,8 +100,17 @@ public class ShopcenterBean {
             private String updateName;
             private String introduction;
             private String  commission;
+            private String  member_enddate;
             private int  business_level;
             private int  spread_b;
+
+            public String getMember_enddate() {
+                return member_enddate;
+            }
+
+            public void setMember_enddate(String member_enddate) {
+                this.member_enddate = member_enddate;
+            }
 
             public int getSpread_b() {
                 return spread_b;

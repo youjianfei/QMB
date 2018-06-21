@@ -35,9 +35,12 @@ public class PaytuiguangbiActivity extends BaseActivityother {
     //数据
     int pay=1;   //1  wechat    2  zhifubao
 
+    String neirong=""; //会员    推广币
+
     String amount="";//金额
     String Task_id="";
-    String total_spreadcoin="";//发送推广币个数
+    String total_spreadcoin="";//发送推广币个数  充值推广币使用
+    String VIP_unique="";//  充值会员套餐使用
 
 
     private IWXAPI api;
@@ -51,10 +54,18 @@ public class PaytuiguangbiActivity extends BaseActivityother {
     protected void setData() {
         mEditview_amount.setText(amount);
         if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("1")){//帮手
-            Task_id=2+"";
+            if(neirong.equals("推广币")){
+                Task_id=2+"";
+            }else  if(neirong.equals("会员")){
+                Task_id=4+"";
+            }
         }
         if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")){//商户
-            Task_id=3+"";
+            if(neirong.equals("推广币")){
+                Task_id=3+"";
+            }else  if(neirong.equals("会员")){
+                Task_id=5+"";
+            }
         }
 
     }
@@ -62,8 +73,15 @@ public class PaytuiguangbiActivity extends BaseActivityother {
     @Override
     protected void initData() {
         Intent intent=getIntent();
-        amount=intent.getStringExtra("amount");
-        total_spreadcoin=intent.getStringExtra("total_spreadcoin");
+        neirong=intent.getStringExtra("neirong");
+        if(neirong.equals("推广币")){
+            amount=intent.getStringExtra("amount");
+            total_spreadcoin=intent.getStringExtra("total_spreadcoin");
+        }else  if(neirong.equals("会员")){
+            amount=intent.getStringExtra("amount");
+            VIP_unique=intent.getStringExtra("VIP_unique");
+        }
+
         api = WXAPIFactory.createWXAPI(PaytuiguangbiActivity.this, Staticdata.WechatApi);//微信支付用到
         mImageview_weixin.setSelected(true);
     }
@@ -104,13 +122,24 @@ public class PaytuiguangbiActivity extends BaseActivityother {
                     if(pay==1){
                         //微信支付
                         Map map_pay=new HashMap();
-                        map_pay.put("isrecharge","Y");
-                        map_pay.put("body","推广币套餐");
-                        map_pay.put("total_fee",amount);
-                        map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                        map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                        map_pay.put("task_id",Task_id);//充值推广币  2
-                        map_pay.put("total_spreadcoin",total_spreadcoin);//推广币的个数
+                        if(neirong.equals("推广币")){
+                            map_pay.put("isrecharge","Y");
+                            map_pay.put("body","推广币套餐");
+                            map_pay.put("total_fee",amount);
+                            map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                            map_pay.put("task_id",Task_id);//充值推广币
+                            map_pay.put("total_spreadcoin",total_spreadcoin);//推广币的个数
+                        }else if(neirong.equals("会员")){
+                            map_pay.put("isrecharge","N");
+                            map_pay.put("body","会员套餐");
+                            map_pay.put("total_fee",amount);
+                            map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                            map_pay.put("task_id",Task_id);//充值会员
+                            map_pay.put("VIP_unique",VIP_unique);//会员套餐
+                        }
+
                         LogUtils.LOG("ceshi",map_pay.toString(),"充值");
                         new WechatPay(PaytuiguangbiActivity.this,api,map_pay).wepay();
                         return;
@@ -118,13 +147,24 @@ public class PaytuiguangbiActivity extends BaseActivityother {
                     if(pay==2){
                         //支付宝支付
                         Map map_zpay=new HashMap();
-                        map_zpay.put("isrecharge","Y");
-                        map_zpay.put("subject","推广币套餐");
-                        map_zpay.put("total_fee","0.01");
-                        map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                        map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                        map_zpay.put("task_id",Task_id);
-                        map_zpay.put("total_spreadcoin",total_spreadcoin);
+                        if(neirong.equals("推广币")){
+                            map_zpay.put("isrecharge","Y");
+                            map_zpay.put("subject","推广币套餐");
+                            map_zpay.put("total_fee","0.01");
+                            map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                            map_zpay.put("task_id",Task_id);
+                            map_zpay.put("total_spreadcoin",total_spreadcoin);
+                        }else if(neirong.equals("会员")){
+                            map_zpay.put("isrecharge","N");
+                            map_zpay.put("subject","会员套餐");
+                            map_zpay.put("total_fee","0.01");
+                            map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                            map_zpay.put("task_id",Task_id);
+                            map_zpay.put("VIP_unique",VIP_unique);
+                        }
+
                         LogUtils.LOG("ceshi",map_zpay.toString(),"支付宝推广币接口");
                         LogUtils.LOG("ceshi", Urls.Baseurl_hu+Urls.zhifubaoPay,"支付宝qingqiu接口");
                         new ZhifubaoPay(PaytuiguangbiActivity.this,map_zpay).zhifubaoPay();

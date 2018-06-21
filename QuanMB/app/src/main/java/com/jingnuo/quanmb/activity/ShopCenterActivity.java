@@ -31,6 +31,7 @@ public class ShopCenterActivity extends BaseActivityother {
     TextView mTextview_money;//佣金
     TextView mTextview_level;//等级
     TextView mTextview_text_tui_count;//推广币个数
+    TextView mTextview_text_huiyuan;//会员到期时间
 
     RelativeLayout mRealtivelayout_issue;
     RelativeLayout mRealtivelayout_myissue;
@@ -94,6 +95,7 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myissue = findViewById(R.id.relative_myissue);
         mRealtivelayout_myorder = findViewById(R.id.myorder);
         mRealtivelayout_mytuiguangbi = findViewById(R.id.mytuiguangbi);
+        mTextview_text_huiyuan = findViewById(R.id.text_huiyuan);
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
         mRealtivelayout_huiyuan = findViewById(R.id.huiyuan);
         mButtonCash = findViewById(R.id.button_cash);
@@ -179,7 +181,8 @@ public class ShopCenterActivity extends BaseActivityother {
                     Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getAvatar_url()).into(imageview_head);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
 //                    mTextview_level.setText(helpterInfoBean.getData().getList().geth());
-                    mTextview_text_tui_count.setText(helpterInfoBean.getData().getList().getSpread_b()+"");
+                    mTextview_text_tui_count.setText(helpterInfoBean.getData().getList().getSpread_b()+"个");
+                    mTextview_text_huiyuan.setText(helpterInfoBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
                     mTextview_namenext.setVisibility(View.GONE);
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
 
@@ -190,6 +193,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address()+" | ");
                     mTextview_money.setText(shopcenterBean.getData().getList().getCommission()+"");
                     mTextview_text_tui_count.setText(shopcenterBean.getData().getList().getSpread_b()+"个");
+                    mTextview_text_huiyuan.setText(shopcenterBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
                 }
 
             }

@@ -75,6 +75,7 @@ public class TuiguangbiWalletActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 Intent intent_paytuiguangbi=new Intent(TuiguangbiWalletActivity.this,PaytuiguangbiActivity.class);
+                intent_paytuiguangbi.putExtra("neirong","推广币");
                 intent_paytuiguangbi.putExtra("amount",price+"");
                 intent_paytuiguangbi.putExtra("total_spreadcoin",total_spreadcoin+"");
                 startActivity(intent_paytuiguangbi);

@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/gray_background"
     tools:context="com.jingnuo.quanmb.activity.ShopCenterInfoActivity">
-    <!--虚假布局，抢走editview的焦点-->
-    <LinearLayout
-        android:id="@+id/linearLayout_focus"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        />
+    <!--&lt;!&ndash;虚假布局，抢走editview的焦点&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/linearLayout_focus"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--/>-->
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
@@ -245,12 +245,13 @@
                 android:layout_below="@+id/image_line5"
                 android:textColor="@color/text_title2"
                 />
-            <TextView
+            <EditText
                 android:id="@+id/edit_jianjie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_11"
-                android:text="这家商铺什么也没有留"
+                android:hint="这家商铺什么也没有留"
+                android:text=""
                 android:background="@null"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"

@@ -101,7 +101,16 @@ public class HelpterInfoBean {
             private String status;
             private String updateDate;
             private String updateName;
+            private String member_enddate;
             private int  spread_b;
+
+            public String getMember_enddate() {
+                return member_enddate;
+            }
+
+            public void setMember_enddate(String member_enddate) {
+                this.member_enddate = member_enddate;
+            }
 
             public int getSpread_b() {
                 return spread_b;

@@ -308,7 +308,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myrenzheng" />
+                        android:src="@mipmap/huiyuan" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -316,7 +316,16 @@
                         android:layout_marginLeft="65dp"
                         android:text="会员充值"
                         android:textSize="15dp" />
-
+                    <TextView
+                        android:id="@+id/text_huiyuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="到期"
+                        android:textColor="@color/yellow_jianbian_end"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="40dp"
+                        android:textSize="13dp"
+                        />
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
