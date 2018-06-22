@@ -101,8 +101,17 @@ public class ShopcenterBean {
             private String introduction;
             private String  commission;
             private String  member_enddate;
+            private String  business_img;//(id,id,id)
             private int  business_level;
             private int  spread_b;
+
+            public String getBusiness_img() {
+                return business_img;
+            }
+
+            public void setBusiness_img(String business_img) {
+                this.business_img = business_img;
+            }
 
             public String getMember_enddate() {
                 return member_enddate;

@@ -100,7 +100,6 @@ public class ShopinfoEditActivity extends BaseActivityother {
                     mList_picID.clear();
                     return;
                 }
-                LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
                 int status = 0;
                 String msg = "";
                 String imageID="";

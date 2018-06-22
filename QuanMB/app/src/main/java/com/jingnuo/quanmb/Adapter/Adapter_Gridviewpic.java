@@ -1,6 +1,8 @@
 package com.jingnuo.quanmb.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 
 import java.util.List;
@@ -42,7 +45,20 @@ public class Adapter_Gridviewpic extends BaseAdapter{
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Glide.with(context).load(shareImgs.get(position)).into(holder.mImageView);
+
+        if (shareImgs.get(position).equals("add")){
+
+            holder.mImageView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.mipmap.addpic));
+        }else if(shareImgs.get(position).contains("http")){
+            Glide.with(context).load(shareImgs.get(position)).into(holder.mImageView);
+        }else {
+            LogUtils.LOG("ceshi", shareImgs.get(position), "dizhi");
+            Bitmap bitmap = BitmapFactory.decodeFile(shareImgs.get(position));
+            Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
+            LogUtils.LOG("ceshi", shareImgs.get(position)+mBitmap.toString(), "dizhi");
+            holder.mImageView.setImageBitmap(mBitmap);
+        }
+
         ViewGroup.LayoutParams para;
         para = holder.mImageView.getLayoutParams();
         para.height = weight;
@@ -51,7 +67,15 @@ public class Adapter_Gridviewpic extends BaseAdapter{
 
         return convertView;
     }
+    @Override
+    public int getCount() {
+        if(mDatas.size()>3){
+            return 3;
+        }else {
+            return super.getCount();
+        }
 
+    }
     class ViewHolder {
         ImageView mImageView;
         RelativeLayout mRelativeLayout;
