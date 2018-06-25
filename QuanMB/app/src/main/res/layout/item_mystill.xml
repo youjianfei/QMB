@@ -76,5 +76,48 @@
             android:layout_alignParentRight="true"
             android:textColor="@color/text_gray" />
 
+        <TextView
+            android:id="@+id/text_zhuanyezhiding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_01"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:textSize="12dp"
+            android:background="@drawable/text_green2"
+            android:text="服务置顶"
+            android:layout_toLeftOf="@+id/text_cancle"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_zhinengshuaxin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_01"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:textSize="12dp"
+            android:background="@drawable/text_green2"
+            android:text="智能刷新"
+            android:layout_toLeftOf="@+id/text_zhuanyezhiding"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/text_putongshuaxin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_01"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:textSize="12dp"
+            android:background="@drawable/text_green2"
+            android:text="普通刷新"
+            android:layout_toLeftOf="@+id/text_zhinengshuaxin"
+            android:textColor="@color/white" />
     </RelativeLayout>
 </RelativeLayout>

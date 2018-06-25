@@ -245,6 +245,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 }
                 if(mTaskData.getData().getIs_helper_bid().equals("Y")){
                     mButton_counteroffer.setVisibility(View.VISIBLE);
+                    mButton_counteroffer.setText("出价");
                     mButton_help.setVisibility(View.GONE);
                     mTextview_taskmoney.setText("佣金：帮手出价" );
                     commison=5;

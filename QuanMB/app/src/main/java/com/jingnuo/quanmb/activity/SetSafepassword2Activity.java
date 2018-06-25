@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.RegularYanzheng;
@@ -26,6 +27,7 @@ import java.util.Map;
 public class SetSafepassword2Activity extends BaseActivityother {
 
     //控件
+    TextView mTextview_textview_title;
     EditText mEdit_newpassword;
     EditText mEdit_newpasswordagain;
     ImageView mImageview_hide;
@@ -35,6 +37,8 @@ public class SetSafepassword2Activity extends BaseActivityother {
     String newpasswordagain="";
     Map map_setsafepassword;
 
+
+    String change="";
     @Override
     public int setLayoutResID() {
         return R.layout.activity_set_safepassword2;
@@ -69,7 +73,10 @@ public class SetSafepassword2Activity extends BaseActivityother {
     }
     @Override
     protected void initData() {
-
+        change=getIntent().getStringExtra("change");
+        if(change.equals("change")){
+            mTextview_textview_title.setText("修改安全密码");
+        }
     }
 
     @Override
@@ -105,6 +112,7 @@ public class SetSafepassword2Activity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        mTextview_textview_title=findViewById(R.id.textview_title);
         mButton=findViewById(R.id.button_password);
         mEdit_newpassword=findViewById(R.id.edit_newpassword);
         mEdit_newpasswordagain=findViewById(R.id.edit_newpasswordagain);

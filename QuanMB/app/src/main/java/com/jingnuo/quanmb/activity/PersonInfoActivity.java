@@ -139,6 +139,7 @@ public class PersonInfoActivity extends BaseActivityother {
     switch (v.getId()){
         case R.id.text_changephonenumber:
             Intent intent_change=new Intent(this,ChangepasswordActivity.class);
+
             startActivity(intent_change);
             break;
         case R.id.text_name:
@@ -154,6 +155,11 @@ public class PersonInfoActivity extends BaseActivityother {
             break;
         case R.id.text_setsafepassword:
             Intent intent_setsafe=new Intent(PersonInfoActivity.this,SetSafepassword1Activity.class);
+            if(mTextview_setsafepassword.getText().equals("修改安全密码")){
+                intent_setsafe.putExtra("change","change");
+            }else {
+                intent_setsafe.putExtra("change","nochange");
+            }
             startActivity(intent_setsafe);
             break;
 

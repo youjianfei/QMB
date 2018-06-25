@@ -182,7 +182,9 @@ public class ShopCenterActivity extends BaseActivityother {
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
 //                    mTextview_level.setText(helpterInfoBean.getData().getList().geth());
                     mTextview_text_tui_count.setText(helpterInfoBean.getData().getList().getSpread_b()+"个");
-                    mTextview_text_huiyuan.setText(helpterInfoBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
+                    if(helpterInfoBean.getData().getList().getMember_enddate()!=null){
+                        mTextview_text_huiyuan.setText(helpterInfoBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
+                    }
                     mTextview_namenext.setVisibility(View.GONE);
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
 

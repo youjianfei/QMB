@@ -364,7 +364,7 @@
 
                 <EditText
                     android:id="@+id/edit_charges"
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:hint="请输入佣金"
                     android:textColorHint="@color/text_hide_tip"

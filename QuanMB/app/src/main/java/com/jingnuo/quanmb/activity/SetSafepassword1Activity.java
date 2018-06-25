@@ -25,12 +25,15 @@ import java.util.Map;
 
 public class SetSafepassword1Activity extends BaseActivityother {
     //控件
+    TextView textview_titile;
     Button mButton_submit;
     Button mButton_getyanzhengma;
     TextView mtextview_phonenumber;
     EditText mEdit_yanchengma;
 
     Map map_oldphonenumber;
+
+    String change="";
 
     @Override
     public int setLayoutResID() {
@@ -44,6 +47,10 @@ public class SetSafepassword1Activity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        change=getIntent().getStringExtra("change");
+        if(change.equals("change")){
+            textview_titile.setText("修改安全密码");
+        }
         mtextview_phonenumber.setText(Staticdata.Userphonenumber);
         map_oldphonenumber  =new HashMap();
         map_oldphonenumber.put("phoneNumbers",Staticdata.Userphonenumber);
@@ -88,6 +95,7 @@ public class SetSafepassword1Activity extends BaseActivityother {
         mButton_submit=findViewById(R.id.buttion_bind);
         mButton_getyanzhengma=findViewById(R.id.button_yanzhengma);
         mtextview_phonenumber=findViewById(R.id.text_oldphonenumber);
+        textview_titile=findViewById(R.id.textview_title);
         mEdit_yanchengma=findViewById(R.id.edit_yanzhengma);
     }
     void  request(Map map){
@@ -107,6 +115,12 @@ public class SetSafepassword1Activity extends BaseActivityother {
 
                 if(status==1){
                     Intent intent=new Intent(SetSafepassword1Activity.this,SetSafepassword2Activity.class);
+                    if(change.equals("change")){
+                        intent.putExtra("change","change");
+                    }else {
+                        intent.putExtra("change","nochange");
+                    }
+
                     startActivity(intent);
                     finish();
 

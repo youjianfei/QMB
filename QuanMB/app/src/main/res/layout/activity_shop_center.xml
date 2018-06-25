@@ -320,7 +320,7 @@
                         android:id="@+id/text_huiyuan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="到期"
+                        android:text=""
                         android:textColor="@color/yellow_jianbian_end"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="40dp"
