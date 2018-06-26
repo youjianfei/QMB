@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_white_corners"
     >
-<TextView
-    android:id="@+id/textview_text"
-    android:layout_width="wrap_content"
-    android:layout_height="50dp"
-    android:text="你已经完成该任务？"
-    android:gravity="center"
-    android:textColor="@color/text_title2"
-    android:textSize="15dp"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="20dp"
-    />
+    <TextView
+        android:id="@+id/textview_text"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="你已完成该任务？"
+        android:gravity="center"
+        android:textColor="@color/text_title2"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
     <ImageView
         android:id="@+id/image_q"
         android:layout_width="match_parent"
@@ -39,9 +39,10 @@
             android:gravity="center"
             />
         <ImageView
-            android:layout_width="0.5dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
-            tools:ignore="Suspicious0dp" />
+            android:background="@color/gray_background"
+             />
         <TextView
             android:id="@+id/textview_submit"
             android:layout_width="0dp"

@@ -122,7 +122,7 @@ public class ShophallActivity extends BaseActivityother {
 
                 mIntent_shopskillDetail.putExtra("id",mData.get(i-1).getRelease_specialty_id());
                 LogUtils.LOG("ceshi",mData.get(i-1).getBusiness_no(),"ShophallActivity");
-                if(mData.get(i-1).getBusiness_no().equals("")){
+                if(mData.get(i-1).getBusiness_no()==null||mData.get(i-1).getBusiness_no().equals("")){
                     mIntent_shopskillDetail.putExtra("role",1+"");
                     LogUtils.LOG("ceshi",mData.get(i-1).getBusiness_no(),"ShophallActivity1");
                 }else {

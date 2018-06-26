@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/background_white_corners"
+    >
+<TextView
+    android:id="@+id/textview_text"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:text="智能刷新"
+    android:gravity="center"
+    android:textColor="@color/text_title2"
+    android:textSize="15dp"
+    android:layout_marginLeft="20dp"
+    />
+
+<TextView
+    android:id="@+id/textview_text_title"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:text="标题"
+    android:gravity="center"
+    android:textColor="@color/text_title2"
+    android:textSize="15dp"
+    android:layout_marginLeft="20dp"
+    android:layout_below="@+id/textview_text"
+    />
+<com.jingnuo.quanmb.customview.MyGridView
+    android:id="@+id/grid_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/textview_text_title"
+    android:numColumns="2"
+    android:horizontalSpacing="10dp"
+    android:verticalSpacing="3dp"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
+    android:layout_marginBottom="5dp"
+    />
+
+<ImageView
+    android:id="@+id/image_q"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/gray_background"
+    android:layout_below="@id/grid_view"
+    />
+    <TextView
+        android:id="@+id/text11"
+        android:layout_below="@+id/image_q"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注：每天9点、12点、14点刷新"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:layout_below="@+id/text11"
+    android:layout_marginTop="10dp"
+    android:gravity="center"
+    android:layout_marginBottom="10dp"
+    >
+    <TextView
+        android:id="@+id/textview_cancle"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:text="取 消"
+        android:textColor="@color/blue_green"
+        android:gravity="center"
+        android:background="@drawable/text_green_miaobian"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:id="@+id/textview_submit"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:text="确 认"
+        android:gravity="center"
+        android:background="@drawable/text_green2"
+        android:textColor="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
+
+</LinearLayout>
+
+
+
+
+
+</RelativeLayout>

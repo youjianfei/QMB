@@ -35,7 +35,16 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/notice" />
-
+        <ImageView
+            android:id="@+id/image_reddot1"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@mipmap/red_dot"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
         <TextView
             android:id="@+id/text_1"
             android:layout_width="wrap_content"
@@ -86,7 +95,16 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/price" />
-
+        <ImageView
+            android:id="@+id/image_reddot2"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@mipmap/red_dot"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
         <TextView
             android:id="@+id/text_2"
             android:layout_width="wrap_content"
@@ -109,7 +127,6 @@
             android:layout_toRightOf="@+id/image_2"
             android:text="暂时没有新消息"
             android:lines="1"
-
             android:textColor="@color/text_hide_tip"
             android:textSize="15dp"
 
@@ -135,7 +152,16 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/money" />
-
+        <ImageView
+            android:id="@+id/image_reddot3"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@mipmap/red_dot"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
         <TextView
             android:id="@+id/text_3"
             android:layout_width="wrap_content"

@@ -56,6 +56,7 @@ public class Urls {
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
+    public  static String putongshuaxin="business/handRefresh?user_token=";//普通刷新   服务
 
 
     public static String setColltctSkill = "user/myCollection";//收藏、取消收藏接口
@@ -75,6 +76,7 @@ public class Urls {
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String setshophead = "business/setBusinessAvatar";//设置商户头像
     public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
+    public static String choseDays="business/choiceDayList?user_token=";//置顶  智能刷新选择的天数
 
 
     //帮手模块

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.class_.Popwindow_lookpic;
@@ -51,6 +52,8 @@ public class SkillDetailActivity extends BaseActivityother {
     TextView mTextview_shopaddress;
     TextView mTextview_content;
     TextView mTextview_shopname;
+    TextView mTextview_shopIN_time;//加入时长
+    TextView mTextview_relseaCount;//发布帖子的数量
     LinearLayout mLinearlayout_phonenumber;
     LinearLayout mLinearlayout_collection;
     MyGridView imageGridview;
@@ -64,7 +67,7 @@ public class SkillDetailActivity extends BaseActivityother {
     SkillsdetailsBean   mSkilldetailsbean;
     PermissionHelper mPermission;//动态申请权限
     Popwindow_lookpic popwindow_lookpic;
-    Adapter_Gridviewpic adapter_gridviewpic;
+    Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
 
 
 
@@ -96,12 +99,14 @@ public class SkillDetailActivity extends BaseActivityother {
     @Override
     protected void setData() {
         imageview_urllist=new ArrayList<>();
-        adapter_gridviewpic=new Adapter_Gridviewpic(imageview_urllist,this);
+        adapter_gridviewpic=new Adapter_Gridviewpic_skillsdetails(imageview_urllist,this);
         imageGridview.setAdapter(adapter_gridviewpic);
         popwindow_lookpic=new Popwindow_lookpic(this);
     }
     @Override
     protected void initView() {
+        mTextview_shopIN_time=findViewById(R.id.text_shopin_time);
+        mTextview_relseaCount=findViewById(R.id.text_releaseCounts);
         mTextview_more=findViewById(R.id.text_more);
         mTextview_title=findViewById(R.id.text_shopskilltitel);
         mTextview_issuetime=findViewById(R.id.text_skillIssueTime);
@@ -270,7 +275,6 @@ public class SkillDetailActivity extends BaseActivityother {
             }
             adapter_gridviewpic.notifyDataSetChanged();
 
-
         }
 
     }
@@ -307,6 +311,12 @@ public class SkillDetailActivity extends BaseActivityother {
                 setImage(image_url);
                 collrctID=mSkilldetailsbean.getData().getDetail().getCollection_status()==0?1:2;
                 mImageview_collect.setSelected(mSkilldetailsbean.getData().getDetail().getCollection_status()==0?false:true);
+                mTextview_relseaCount.setText(mSkilldetailsbean.getData().getDetail().getRelease_num()+"个");
+
+                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+                long ago = Long.parseLong(mSkilldetailsbean.getData().getDetail().getCreateDate()+"");//
+                String time = Utils.getDistanceTime(ago, now);//算出的差值
+                mTextview_shopIN_time.setText(time);
             }
 
             @Override

@@ -17,12 +17,12 @@ import com.jingnuo.quanmb.utils.SizeUtils;
 
 import java.util.List;
 
-public class Adapter_Gridviewpic extends BaseAdapter{
+public class Adapter_Gridviewpic_skillsdetails extends BaseAdapter{
     private Context context;
     private List<String> shareImgs;
     private LayoutInflater inflater;
     int weight;
-    public Adapter_Gridviewpic(List<String> shareImgs, Context mContext) {
+    public Adapter_Gridviewpic_skillsdetails(List<String> shareImgs, Context mContext) {
         super(shareImgs, mContext);
         this.shareImgs = shareImgs;
         this.context = mContext;
@@ -39,6 +39,7 @@ public class Adapter_Gridviewpic extends BaseAdapter{
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_lookic_gridview_nocha, parent, false);
             holder.mImageView = (ImageView) convertView.findViewById(R.id.share_picture);
+            holder.mImageView_image_cancel = (ImageView) convertView.findViewById(R.id.image_cancel);
             holder.mRelativeLayout = (RelativeLayout) convertView.findViewById(R.id.REL_shareimg);
             convertView.setTag(holder);
         } else {
@@ -57,7 +58,7 @@ public class Adapter_Gridviewpic extends BaseAdapter{
             LogUtils.LOG("ceshi", shareImgs.get(position)+mBitmap.toString(), "dizhi");
             holder.mImageView.setImageBitmap(mBitmap);
         }
-
+        holder.mImageView_image_cancel.setVisibility(View.GONE);
         ViewGroup.LayoutParams para;
         para = holder.mImageView.getLayoutParams();
         para.height = weight;
@@ -77,6 +78,7 @@ public class Adapter_Gridviewpic extends BaseAdapter{
     }
     class ViewHolder {
         ImageView mImageView;
+        ImageView mImageView_image_cancel;
         RelativeLayout mRelativeLayout;
     }
 }

@@ -96,12 +96,21 @@ public class SkillsdetailsBean {
             private String service_area;
             private int specialty_id;
             private int collection_status;
+            private int release_num;
             private String specialty_name;
             private String status;
             private String title;
             private long updateDate;
             private String updateName;
             private String avatar_url;
+
+            public int getRelease_num() {
+                return release_num;
+            }
+
+            public void setRelease_num(int release_num) {
+                this.release_num = release_num;
+            }
 
             public String getAvatar_url() {
                 return avatar_url;

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.NewMessage_Bean;
 import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.HashMap;
@@ -31,8 +33,8 @@ import java.util.Map;
 
 public class Fragment_message extends Fragment {
     View rootview;
+    public static Fragment_message mFragment_message;
     //控件
-
     RelativeLayout mRelativelayout_bargain;
     RelativeLayout mRelativelayout_systemmessage;
     RelativeLayout mRelativelayout_dealmessage;
@@ -40,6 +42,11 @@ public class Fragment_message extends Fragment {
     TextView mTextview_systemmessage;
     TextView mTextview_bargainmessage;
     TextView mTextview_jiaoyimeaage;
+
+    static ImageView mImageView_dot1;
+    static ImageView mImageView_dot2;
+    static ImageView mImageView_dot3;
+
 
     //数据
     Map map_getnewmessage;
@@ -60,6 +67,7 @@ public class Fragment_message extends Fragment {
     }
 
     private void setdata() {
+        mFragment_message=this;
         map_getnewmessage=new HashMap();
         map_getnewmessage.put("receive_client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_getnewmessage.put("user_token",Staticdata.static_userBean.getData().getUser_token());
@@ -71,6 +79,7 @@ public class Fragment_message extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intend_bargain=new Intent(getActivity(), BarginmessageListActivity.class);
+                mImageView_dot2.setVisibility(View.GONE);
                 getActivity().startActivity(intend_bargain);
             }
         });
@@ -78,6 +87,7 @@ public class Fragment_message extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent_system=new Intent(getActivity(), SystemMessageActivity.class);
+                mImageView_dot1.setVisibility(View.GONE);
                 getActivity().startActivity(intent_system);
             }
         });
@@ -85,9 +95,24 @@ public class Fragment_message extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent_deal=new Intent(getActivity(), DealActivity.class);
+                mImageView_dot3.setVisibility(View.GONE);
                 getActivity().startActivity(intent_deal);
             }
         });
+    }
+    public   void setDot(int num){
+        LogUtils.LOG("ceshi",num+"","推送3");
+        switch (num){
+            case 1:
+                mImageView_dot1.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                mImageView_dot2.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                mImageView_dot3.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     private void initview() {
@@ -97,6 +122,9 @@ public class Fragment_message extends Fragment {
         mTextview_systemmessage=rootview.findViewById(R.id.text_systemnotice);
         mTextview_bargainmessage=rootview.findViewById(R.id.text_moneynotice);
         mTextview_jiaoyimeaage=rootview.findViewById(R.id.text_jiaoyitixing);
+        mImageView_dot1=rootview.findViewById(R.id.image_reddot1);
+        mImageView_dot2=rootview.findViewById(R.id.image_reddot2);
+        mImageView_dot3=rootview.findViewById(R.id.image_reddot3);
     }
     void request(){
         new Volley_Utils(new Interface_volley_respose() {
@@ -106,7 +134,6 @@ public class Fragment_message extends Fragment {
                 mTextview_systemmessage.setText(newMessage_bean.getData().get(0).getContent());
                 mTextview_bargainmessage.setText(newMessage_bean.getData().get(1).getContent());
                 mTextview_jiaoyimeaage.setText(newMessage_bean.getData().get(2).getContent());
-
             }
 
             @Override

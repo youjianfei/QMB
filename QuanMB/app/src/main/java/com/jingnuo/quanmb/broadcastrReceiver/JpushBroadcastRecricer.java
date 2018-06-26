@@ -11,12 +11,15 @@ import com.jingnuo.quanmb.activity.LaunchActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
+import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.utils.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
+
+import static com.jingnuo.quanmb.fargment.Fragment_message.mFragment_message;
 
 public class JpushBroadcastRecricer extends BroadcastReceiver{
     @Override
@@ -39,6 +42,21 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
                 type = (String) object.get("type");
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+        }
+        LogUtils.LOG("ceshi",type,"推送1");
+        if(type.equals("1")){
+            if(mFragment_message!=null){
+                mFragment_message.setDot(1);
+                LogUtils.LOG("ceshi",type,"推送2");
+            }
+        }else if (type.equals("2")){
+            if(mFragment_message!=null){
+                mFragment_message.setDot(2);
+            }
+        }else if(type.equals("3")){
+            if(mFragment_message!=null){
+                mFragment_message.setDot(3);
             }
         }
 
