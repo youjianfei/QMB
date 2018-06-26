@@ -1,6 +1,9 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -11,13 +14,28 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.CameraUpdate;
+import com.amap.api.maps2d.CameraUpdateFactory;
+import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.CameraPosition;
+import com.amap.api.maps2d.model.CircleOptions;
+import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.maps2d.model.MyLocationStyle;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeQuery;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.jingnuo.quanmb.Adapter.Adapter_SearchAddress;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 
 
-public class LocationMapActivity extends BaseActivityother {
+public class LocationMapActivity extends BaseActivityother implements AMap.OnCameraChangeListener, GeocodeSearch.OnGeocodeSearchListener {
 
 
     //控件
@@ -26,18 +44,42 @@ public class LocationMapActivity extends BaseActivityother {
     TextView mTextview_nowaddress;
     Button mBUtton_queding;
 
+    MapView mMapview;
     private ListView mListview_searchaddress;
     ImageView mImageview_cancle;
     //数据
-    Adapter_SearchAddress  mAdapter_address;
+    Adapter_SearchAddress mAdapter_address;
     // 定位相关
     boolean isFirstLoc = true; // 是否首次定位
 
     //POI城市检索
 
-
+    AMap aMap;
     String finallocation;//poi名称
     String address;//地址
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mMapview = findViewById(R.id.map);
+        mMapview.onCreate(savedInstanceState);
+        if (aMap == null) {
+            aMap = mMapview.getMap();
+        }
+        MyLocationStyle myLocationStyle;
+        myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE) ;//定位一次，且将视角移动到地图中心点。
+//        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
+        aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);
+        aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+        aMap.setOnCameraChangeListener(this);
+        LogUtils.LOG("ceshi","11111111111111","skdafjskafjsadf");
+        geocoderSearch = new GeocodeSearch(this);
+        geocoderSearch.setOnGeocodeSearchListener(this);
+    }
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_location_map;
@@ -50,6 +92,7 @@ public class LocationMapActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+
 //        mAdapter_address=new Adapter_SearchAddress(mData_searchaddress,this);
 //        mListview_searchaddress.setAdapter(mAdapter_address);
 
@@ -69,9 +112,9 @@ public class LocationMapActivity extends BaseActivityother {
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
                     LogUtils.LOG("ceshi", "点击了确定按钮", "百度地图搜索地址");
-                    String address=mEdit_search.getText()+"";
-                    if(address.equals("")){
-                    }else {
+                    String address = mEdit_search.getText() + "";
+                    if (address.equals("")) {
+                    } else {
 
                     }
 
@@ -82,15 +125,15 @@ public class LocationMapActivity extends BaseActivityother {
         mBUtton_queding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent result=new Intent();
-                result.putExtra("address", mTextview_nowaddress.getText()+"");
-                String add=mEdit_location.getText()+"";
-                if(add.equals("")){
-                    ToastUtils.showToast(LocationMapActivity.this,"请输入自定义名称");
+                Intent result = new Intent();
+                result.putExtra("address", mTextview_nowaddress.getText() + "");
+                String add = mEdit_location.getText() + "";
+                if (add.equals("")) {
+                    ToastUtils.showToast(LocationMapActivity.this, "请输入自定义名称");
                     return;
                 }
                 result.putExtra("address2", add);
-                setResult(2018418,result);
+                setResult(2018418, result);
                 finish();
             }
         });
@@ -112,13 +155,15 @@ public class LocationMapActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mListview_searchaddress=findViewById(R.id.list_searchaddresslist);
-        mEdit_location= findViewById(R.id.textview_location);
-        mEdit_search= findViewById(R.id.edit_searchaddress);
-        mImageview_cancle=findViewById(R.id.iamge_cancle);
-        mTextview_nowaddress=findViewById(R.id.text_mapget);
-        mBUtton_queding=findViewById(R.id.button_submit);
+
+        mListview_searchaddress = findViewById(R.id.list_searchaddresslist);
+        mEdit_location = findViewById(R.id.textview_location);
+        mEdit_search = findViewById(R.id.edit_searchaddress);
+        mImageview_cancle = findViewById(R.id.iamge_cancle);
+        mTextview_nowaddress = findViewById(R.id.text_mapget);
+        mBUtton_queding = findViewById(R.id.button_submit);
     }
+
     /**
      * 定位SDK监听函数
      */
@@ -126,13 +171,64 @@ public class LocationMapActivity extends BaseActivityother {
     protected void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-
+        mMapview.onDestroy();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
+        mMapview.onPause();
+        finallocation = mEdit_location.getText() + "";
+    }
 
-        finallocation=mEdit_location.getText()+"";
+    GeocodeSearch geocoderSearch;
+
+    @Override
+    public void onCameraChange(CameraPosition cameraPosition) {//地图移动
+        LatLng latLng = cameraPosition.target;
+//泥逆地理
+
+
+// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
+
+        aMap.clear();
+        aMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));//将定位图标移动到当前屏幕中心位置
+        aMap.addMarker(new MarkerOptions().position(cameraPosition.target).icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                .decodeResource(getResources(),R.mipmap.address_blue))));
+        RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude,latLng.longitude), 200,GeocodeSearch.AMAP);
+        geocoderSearch.getFromLocationAsyn(query);
+//执行搜索方法
+//        doSearchQuery("北京",latLng.latitude,latLng.longitude);
+    }
+    @Override
+    public void onCameraChangeFinish(CameraPosition cameraPosition) {//地图移动结束
+
+    }
+
+
+    @Override
+    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
+//        LogUtils.LOG("ceshi",regeocodeResult.getRegeocodeAddress().getStreetNumber().getStreet()+"1"+
+//                        regeocodeResult.getRegeocodeAddress().getStreetNumber().getNumber()+"1"+
+//                        regeocodeResult.getRegeocodeAddress().getStreetNumber().getDistance()+"1"+
+//                        regeocodeResult.getRegeocodeAddress().getStreetNumber().getLatLonPoint()+"1"+
+//                        regeocodeResult.getRegeocodeAddress().getCity()+"2"+
+//                        regeocodeResult.getRegeocodeAddress().getDistrict()+"3"+
+//                        regeocodeResult.getRegeocodeAddress().getFormatAddress()+"4"+
+//                        regeocodeResult.getRegeocodeAddress().getNeighborhood()+"5"
+//                ,"skdafjskafjsadf");
+
+        mTextview_nowaddress.setText(regeocodeResult.getRegeocodeAddress().getCity()+
+                regeocodeResult.getRegeocodeAddress().getDistrict()+
+                regeocodeResult.getRegeocodeAddress().getStreetNumber().getStreet()+
+                regeocodeResult.getRegeocodeAddress().getStreetNumber().getNumber()
+        );
+        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
+    }
+
+    @Override
+    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+
     }
 }

@@ -44,14 +44,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="pbtu2nPYB1zCaaoOB3xy6hLGKCM19OKB" />
-        <!-- 百度地图用到的service组件 -->
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
+
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="5f44a6cf8d64182033741d5b546a4ef0">
+
+        </meta-data>
+        <service android:name="com.amap.api.location.APSService"></service>
         <service
             android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"

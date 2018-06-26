@@ -59,12 +59,10 @@
             android:layout_marginRight="15dp"
             />
     </RelativeLayout>
-    <!--<com.baidu.mapapi.map.MapView-->
-        <!--android:id="@+id/bmapView"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:layout_below="@+id/re_title"-->
-        <!--android:clickable="true" />-->
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <Button
         android:id="@+id/button_submit"
         android:layout_width="match_parent"
