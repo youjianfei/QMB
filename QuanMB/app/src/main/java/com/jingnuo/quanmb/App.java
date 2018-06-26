@@ -2,7 +2,6 @@ package com.jingnuo.quanmb;
 
 import android.app.Application;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -24,7 +23,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(getApplicationContext());//初始化Baidu地图
         UMConfigure.init(this,"5ad55925f43e4835c1000064"
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         UMConfigure.setLogEnabled(true);

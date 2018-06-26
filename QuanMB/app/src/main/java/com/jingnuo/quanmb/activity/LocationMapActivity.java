@@ -1,9 +1,6 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
-import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,41 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapPoi;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
-import com.baidu.mapapi.search.poi.PoiIndoorResult;
-import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
-import com.baidu.mapapi.search.poi.PoiSortType;
 import com.jingnuo.quanmb.Adapter.Adapter_SearchAddress;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
-import com.jingnuo.quanmb.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class LocationMapActivity extends BaseActivityother {
 
@@ -58,21 +26,14 @@ public class LocationMapActivity extends BaseActivityother {
     TextView mTextview_nowaddress;
     Button mBUtton_queding;
 
-    private MapView mMapView = null;
-    private BaiduMap mBaiduMap;
     private ListView mListview_searchaddress;
     ImageView mImageview_cancle;
     //数据
-    List<PoiInfo> mData_searchaddress;
     Adapter_SearchAddress  mAdapter_address;
     // 定位相关
-    LocationClient mLocClient;
-    public MyLocationListenner myListener = new MyLocationListenner();
     boolean isFirstLoc = true; // 是否首次定位
 
     //POI城市检索
-    PoiSearch mPoiSearch;
-    OnGetPoiSearchResultListener poiListener;
 
 
     String finallocation;//poi名称
@@ -84,123 +45,14 @@ public class LocationMapActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
-            public void onMapClick(LatLng point) {
-                //在此处理点击事件
-                mBaiduMap.clear();
-                LogUtils.LOG("ceshi","onMapClick"+point.toString(),"locationmapActivity");
-                BitmapDescriptor bitmap = BitmapDescriptorFactory
-                        .fromResource(R.mipmap.address);      //构建Marker图标
 
-                MarkerOptions options = new MarkerOptions()
-                        .position(point)  //设置marker的位置
-                        .icon(bitmap)  //设置marker图标
-                        .zIndex(9)  //设置marker所在层级
-                        .draggable(true);  //设置手势拖拽
-                options.animateType(MarkerOptions.MarkerAnimateType.grow);
-                //将marker添加到地图上
-                mBaiduMap.addOverlay(options);
-                bitmap.recycle();//回收bitmap
-
-                mEdit_location.setText("");
-
-            }
-            public boolean onMapPoiClick(MapPoi poi) {
-                //在此处理底图标注点击事件
-                //在此处理点击事件
-                mBaiduMap.clear();
-                LogUtils.LOG("ceshi","onMapClick"+poi.getName(),"locationmapActivity");
-                BitmapDescriptor bitmap = BitmapDescriptorFactory
-                        .fromResource(R.mipmap.address);      //构建Marker图标
-
-                MarkerOptions options = new MarkerOptions()
-                        .position(poi.getPosition())  //设置marker的位置
-                        .icon(bitmap)  //设置marker图标
-                        .zIndex(9)  //设置marker所在层级
-                        .draggable(true);  //设置手势拖拽
-                options.animateType(MarkerOptions.MarkerAnimateType.grow);
-                //将marker添加到地图上
-                mBaiduMap.addOverlay(options);
-                bitmap.recycle();//回收bitmap
-                finallocation=poi.getName()+"";
-                mPoiSearch.searchPoiDetail(new PoiDetailSearchOption().poiUid(poi.getUid()));
-                mTextview_nowaddress.setText(finallocation);//设置textview文字信息
-                return false;
-            }
-        });
     }
 
     @Override
     protected void initData() {
-        mPoiSearch = PoiSearch.newInstance();//poi检索实例化
-        mData_searchaddress=new ArrayList<>();
-        mAdapter_address=new Adapter_SearchAddress(mData_searchaddress,this);
-        mListview_searchaddress.setAdapter(mAdapter_address);
+//        mAdapter_address=new Adapter_SearchAddress(mData_searchaddress,this);
+//        mListview_searchaddress.setAdapter(mAdapter_address);
 
-        mBaiduMap = mMapView.getMap();
-        //普通地图
-        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(10000);
-
-        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-
-        option.setOpenGps(true);//可选，默认false,设置是否使用gps
-
-        option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-
-        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-
-        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-
-        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-
-        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-
-        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
-
-        mLocClient.setLocOption(option);
-        mLocClient.start();
-
-        poiListener = new OnGetPoiSearchResultListener(){
-
-            public void onGetPoiResult(PoiResult result){
-//                获取POI检索结果
-                LogUtils.LOG("ceshi","onGetPoiResult"+result.toString(),"地图检索结果1");
-                //如果搜索到的结果不为空，并且没有错误
-                if (result != null && result.error == PoiResult.ERRORNO.NO_ERROR) {
-                    LogUtils.LOG("ceshi","onGetPoiResult"+result.getAllPoi(),"地图检索结果1");
-                    mListview_searchaddress.setVisibility(View.VISIBLE);
-                    mImageview_cancle.setVisibility(View.VISIBLE);
-                    mData_searchaddress.clear();
-                    mData_searchaddress.addAll(result.getAllPoi());
-                    mAdapter_address.notifyDataSetChanged();
-
-                } else {
-                    Toast.makeText(getApplication(), "搜索不到你需要的信息！", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            public void onGetPoiDetailResult(PoiDetailResult result){
-
-                //获取Place详情页检索结果
-                mEdit_location.setText(result.address+"");
-                LogUtils.LOG("ceshi","onGetPoiDetailResult"+result.toString(),"地图检索结果2");
-            }
-
-            @Override
-            public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-                LogUtils.LOG("ceshi","onGetPoiDetailResult"+poiIndoorResult.toString(),"地图检索结果3");
-            }
-        };
-        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
     }
 
     @Override
@@ -220,13 +72,7 @@ public class LocationMapActivity extends BaseActivityother {
                     String address=mEdit_search.getText()+"";
                     if(address.equals("")){
                     }else {
-//                        mPoiSearch.searchInCity((new PoiCitySearchOption())
-//                                .city("郑州")
-//                                .keyword(address).pageCapacity(20)
-//                                .pageNum(1));
-                        mPoiSearch.searchNearby(new PoiNearbySearchOption().location(ll)
-                                .keyword(address).sortType(PoiSortType.distance_from_near_to_far)
-                        .radius(500).pageCapacity(20).pageNum(1));
+
                     }
 
                 }
@@ -259,31 +105,6 @@ public class LocationMapActivity extends BaseActivityother {
         mListview_searchaddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                LatLng point = mData_searchaddress.get(i).location;
-                mBaiduMap.clear();
-                BitmapDescriptor bitmap = BitmapDescriptorFactory
-                        .fromResource(R.mipmap.address);      //构建Marker图标
-                MarkerOptions options = new MarkerOptions()
-                        .position(point)  //设置marker的位置
-                        .icon(bitmap)  //设置marker图标
-                        .zIndex(9);  //设置marker所在层级
-                options.animateType(MarkerOptions.MarkerAnimateType.grow);
-                //将marker添加到地图上
-                mBaiduMap.addOverlay(options);
-
-                //定义地图状态
-                MapStatus mMapStatus = new MapStatus.Builder()
-                        .target(point)
-                        .build();
-                //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
-                MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory
-                        .newMapStatus(mMapStatus);
-                //改变地图状态
-                mBaiduMap.setMapStatus(mMapStatusUpdate);
-                bitmap.recycle();//回收bitmap
-                mListview_searchaddress.setVisibility(View.GONE);
-                mEdit_location.setText(mData_searchaddress.get(i).address);
-                mTextview_nowaddress.setText(mData_searchaddress.get(i).name);
 
             }
         });
@@ -294,7 +115,6 @@ public class LocationMapActivity extends BaseActivityother {
         mListview_searchaddress=findViewById(R.id.list_searchaddresslist);
         mEdit_location= findViewById(R.id.textview_location);
         mEdit_search= findViewById(R.id.edit_searchaddress);
-        mMapView = findViewById(R.id.bmapView);
         mImageview_cancle=findViewById(R.id.iamge_cancle);
         mTextview_nowaddress=findViewById(R.id.text_mapget);
         mBUtton_queding=findViewById(R.id.button_submit);
@@ -302,71 +122,17 @@ public class LocationMapActivity extends BaseActivityother {
     /**
      * 定位SDK监听函数
      */
-    LatLng ll;
-    public class MyLocationListenner implements BDLocationListener {
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            // map view 销毁后不在处理新接收的位置
-            if (location == null || mMapView == null) {
-                return;
-            }
-
-//            MyLocationData locData = new MyLocationData.Builder()
-//                    .accuracy(location.getRadius())
-//                    // 此处设置开发者获取到的方向信息，顺时针0-360
-//                    .direction(100).latitude(location.getLatitude())
-//                    .longitude(location.getLongitude()).build();
-//            mBaiduMap.setMyLocationData(locData);
-            if (isFirstLoc) {
-                isFirstLoc = false;
-                ll = new LatLng(location.getLatitude(),
-                        location.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(19.0f);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                finallocation=location.getPoiList().get(0).getName();
-                address=location.getStreet()+location.getStreetNumber();
-                LatLng point = new LatLng(location.getLatitude(), location.getLongitude());  //定义Maker坐标点
-                BitmapDescriptor bitmap = BitmapDescriptorFactory
-                        .fromResource(R.mipmap.address);      //构建Marker图标
-                LogUtils.LOG("ceshi","getAddrStr"+location.getAddrStr(),"locationmapActivity");
-                MarkerOptions options = new MarkerOptions()
-                        .position(point)  //设置marker的位置
-                        .icon(bitmap)  //设置marker图标
-                        .zIndex(9);  //设置marker所在层级
-                options.animateType(MarkerOptions.MarkerAnimateType.grow);
-                //将marker添加到地图上
-                mBaiduMap.addOverlay(options);
-                bitmap.recycle();//回收bitmap
-
-                LocationMapActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTextview_nowaddress.setText(finallocation);//设置textview文字信息
-                        mEdit_location.setText(address);
-
-                    }
-                });
-            }
-        }
-    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-        mMapView.onDestroy();
-        mLocClient.stop();
-        mPoiSearch.destroy();
+
     }
     @Override
     protected void onPause() {
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
 
-        mMapView.onPause();
-        mLocClient.stop();
-        mPoiSearch.destroy();
         finallocation=mEdit_location.getText()+"";
     }
 }
