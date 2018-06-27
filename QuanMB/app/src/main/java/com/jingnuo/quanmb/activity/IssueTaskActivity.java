@@ -20,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
@@ -131,9 +135,54 @@ public class IssueTaskActivity extends BaseActivityother {
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, this);
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-
+        setmapdata();
     }
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+//可在其中解析amapLocation获取相应内容。
+                    LogUtils.LOG("ceshi","定位成功"+aMapLocation.getAddress(),"发布任务");
+                    aMapLocation.getLatitude();//获取纬度
+                    aMapLocation.getLongitude();//获取经度
+                    aMapLocation.getCity();//城市信息
+                    mTextview_taskAddress.setText(aMapLocation.getAddress()
+                            .replace(aMapLocation.getProvince()+aMapLocation.getCity(),""));
 
+
+
+
+                }else {
+                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                }
+            }
+        }
+    };
+    private void setmapdata() {
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationOption.setOnceLocation(true);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+    }
     @Override
     protected void initData() {
 
@@ -345,6 +394,11 @@ public class IssueTaskActivity extends BaseActivityother {
     }
 
     boolean initmap() {
+        String task_type = mTextview_choose.getText() + "";
+        if (task_type.equals("请选择")) {
+            ToastUtils.showToast(this, "请选择任务类型");
+            return false;
+        }
         task_name = mEditview_title.getText() + "";
         if (task_name.equals("")) {
             ToastUtils.showToast(this, "请填写任务标题");
@@ -363,11 +417,7 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "任务说明太短了");
             return false;
         }
-        String task_type = mTextview_choose.getText() + "";
-        if (task_type.equals("请选择")) {
-            ToastUtils.showToast(this, "请选择任务类型");
-            return false;
-        }
+
         task_time = mTextview_time.getText() + "";
         if (task_time.equals("请选择希望完成时间")) {
             ToastUtils.showToast(this, "请选择希望完成时间");

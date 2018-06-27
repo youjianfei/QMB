@@ -85,7 +85,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         initview();
         initdata();
-
         initlinstenner();
         setview();
         setdata();

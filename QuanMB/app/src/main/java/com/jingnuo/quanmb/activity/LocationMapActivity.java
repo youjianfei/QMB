@@ -151,10 +151,10 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                 Intent result = new Intent();
                 result.putExtra("address", mTextview_nowaddress.getText() + "");
                 String add = mEdit_location.getText() + "";
-                if (add.equals("")) {
-                    ToastUtils.showToast(LocationMapActivity.this, "请输入自定义名称");
-                    return;
-                }
+//                if (add.equals("")) {
+//                    ToastUtils.showToast(LocationMapActivity.this, "请输入自定义名称");
+//                    return;
+//                }
                 result.putExtra("address2", add);
                 setResult(2018418, result);
                 finish();
@@ -252,13 +252,12 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                        regeocodeResult.getRegeocodeAddress().getFormatAddress()+"4"+
 //                        regeocodeResult.getRegeocodeAddress().getNeighborhood()+"5"
 //                ,"skdafjskafjsadf");
+        String tichu=regeocodeResult.getRegeocodeAddress().getProvince()+regeocodeResult.getRegeocodeAddress().getCity();
+        String all=regeocodeResult.getRegeocodeAddress().getFormatAddress();
+        String xianshi=all.replace(tichu,"");
+        mTextview_nowaddress.setText(xianshi);
 
-        mTextview_nowaddress.setText(regeocodeResult.getRegeocodeAddress().getCity()+
-                regeocodeResult.getRegeocodeAddress().getDistrict()+
-                regeocodeResult.getRegeocodeAddress().getStreetNumber().getStreet()+
-                regeocodeResult.getRegeocodeAddress().getStreetNumber().getNumber()
-        );
-        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
+//        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
     }
 
     @Override
