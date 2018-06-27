@@ -338,7 +338,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_hope());
 
 
-                mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
+                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address()+"-"+taskDetailBean.getData().getDetailed_address());
                 String imageURL = taskDetailBean.getData().getAvatar_imgUrl().substring(0, taskDetailBean.getData().getAvatar_imgUrl().length() - 1);
 
                 LogUtils.LOG("ceshi","调用glide","wode renwu");

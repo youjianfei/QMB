@@ -80,6 +80,15 @@ public class TaskDetailBean {
         private String task_ImgUrl;
         private String user_grade;
         private String order_no;
+        private String release_address;
+
+        public String getRelease_address() {
+            return release_address;
+        }
+
+        public void setRelease_address(String release_address) {
+            this.release_address = release_address;
+        }
 
         public String getIs_helper_bid() {
             return is_helper_bid;

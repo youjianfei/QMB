@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -41,16 +42,16 @@ public class Popwindow_zhinengshuaxin {
     TextView mTextview_textview_type;
 
     Adater_chooce adater_chooce;
-    List<String> mdata;
+    List<ZhidingBean.DataBean.ListBean> mdata;
     String title = "";
-    int  type=0;  //1  智能刷新   2  服务置顶
+    int  fangshi=0;  //1  智能刷新   2  服务置顶
 
 
 
     Interence_shuaxinzhiding interence_shuaxinzhiding;
 
-    public Popwindow_zhinengshuaxin(int type,   String title, Activity activity, Interence_shuaxinzhiding interence_shuaxinzhiding) {
-       this.type=type;
+    public Popwindow_zhinengshuaxin(int fangshi,   String title, Activity activity, Interence_shuaxinzhiding interence_shuaxinzhiding) {
+       this.fangshi=fangshi;
         this.title = title;
         this.activity = activity;
         this.interence_shuaxinzhiding = interence_shuaxinzhiding;
@@ -78,11 +79,14 @@ public class Popwindow_zhinengshuaxin {
     }
 
     private void initdata() {
+        String URLLL="";
         mTextview_textview_text_title.setText(title);
-        if(type==1){
+        if(fangshi==1){
             mTextview_textview_type.setText("智能刷新");
+            URLLL=Urls.Baseurl + Urls.shuaxinchoseDays + Staticdata.static_userBean.getData().getUser_token();
         }else {
             mTextview_textview_type.setText("服务置顶");
+            URLLL=Urls.Baseurl + Urls.zhidingchoseDays + Staticdata.static_userBean.getData().getUser_token();
         }
         mdata = new ArrayList<>();
         adater_chooce = new Adater_chooce(mdata, activity);
@@ -100,10 +104,10 @@ public class Popwindow_zhinengshuaxin {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl + Urls.choseDays + Staticdata.static_userBean.getData().getUser_token(), activity, 0);
-        LogUtils.LOG("ceshi", Urls.Baseurl + Urls.choseDays + Staticdata.static_userBean.getData().getUser_token(), "选择天数");
+        }).Http(URLLL, activity, 0);
+        LogUtils.LOG("ceshi", URLLL, "选择天数");
     }
-
+    int  chose=0;
     private void initlistenner() {
         mTextview_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +119,8 @@ public class Popwindow_zhinengshuaxin {
         mTextview_queren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//点击确认
+                interence_shuaxinzhiding.onResult(mdata.get(chose).getDay());
+                mPopupWindow.dismiss();
 
             }
         });
@@ -127,6 +133,7 @@ public class Popwindow_zhinengshuaxin {
         myGridView_chooce.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                chose=position;
                 adater_chooce.setSeclection(position);
                 adater_chooce.notifyDataSetInvalidated();
             }
@@ -134,9 +141,9 @@ public class Popwindow_zhinengshuaxin {
     }
 
     class Adater_chooce extends BaseAdapter {
-        List<String> mdata;
+        List<ZhidingBean.DataBean.ListBean> mdata;
         LayoutInflater mInflater;
-        int select;
+        int select=0;
 
         public Adater_chooce(List mDatas, Context mContext) {
             super(mDatas, mContext);
@@ -151,16 +158,23 @@ public class Popwindow_zhinengshuaxin {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = mInflater.inflate(R.layout.item_choocedays, null, false);
+            LinearLayout mLinearlayout_background=convertView.findViewById(R.id.linearlayout);
             TextView mTextview_days = convertView.findViewById(R.id.text_days);
             TextView mTextview_count = convertView.findViewById(R.id.text_needbiNum);
             if (select == position) {
                 LogUtils.LOG("ceshi", "选择" + select, "位置");
+                mLinearlayout_background.setBackgroundResource(R.drawable.background_text_type2);
+                mTextview_days.setTextColor(activity.getResources().getColor(R.color.white));
+                mTextview_count.setTextColor(activity.getResources().getColor(R.color.white));
             }
 
-            if(type==1){
-                mTextview_days.setText(mdata.get(position) + "天刷新");
+            if(fangshi==1){
+                mTextview_days.setText(mdata.get(position).getDay() + "天刷新");
+                mTextview_count.setText(mdata.get(position).getConsume() + "个推广币");
             }else {
-                mTextview_days.setText(mdata.get(position) + "天置顶");
+                mTextview_days.setText(mdata.get(position).getDay() + "天置顶");
+                mTextview_count.setText(mdata.get(position).getConsume() + "个推广币");
+
             }
 
 

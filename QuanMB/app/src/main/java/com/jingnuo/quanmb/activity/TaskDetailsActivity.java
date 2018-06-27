@@ -232,7 +232,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
                 mTextview_tasktime.setText(mTaskData.getData().getTask_hope());
 
-                mTextview_taskaddress.setText(mTaskData.getData().getDetailed_address());
+                mTextview_taskaddress.setText(mTaskData.getData().getRelease_address()+"-"+mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
                 String imageURL = mTaskData.getData().getAvatar_imgUrl().substring(0, mTaskData.getData().getAvatar_imgUrl().length() - 1);

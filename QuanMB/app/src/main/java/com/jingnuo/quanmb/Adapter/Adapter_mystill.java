@@ -30,9 +30,11 @@ public class Adapter_mystill extends BaseAdapter {
     Activity mContext;
     LayoutInflater mInfalter;
     InterfaceAdapterSuccess interfaceAdapterSuccess;
+    int type;//1 帮手   2商家
 
-    public Adapter_mystill(List mDatas, Activity mContext, InterfaceAdapterSuccess interfaceAdapterSuccess) {
+    public Adapter_mystill(int type,  List mDatas, Activity mContext, InterfaceAdapterSuccess interfaceAdapterSuccess) {
         super(mDatas, mContext);
+        this.type=type;
         this.mContext = mContext;
         this.mData = mDatas;
         this.interfaceAdapterSuccess = interfaceAdapterSuccess;
@@ -93,10 +95,20 @@ public class Adapter_mystill extends BaseAdapter {
         holder.mTextview_putongshuxin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.LOG("ceshi", Urls.Baseurl + Urls.putongshuaxin +
-                        Staticdata.static_userBean.getData().getUser_token() +
-                        "&release_id=" + mData.get(position).getRelease_specialty_id(), "普通刷新");
+
+              String URLL="";
+                if(type==1){//帮手刷新
+                    URLL=Urls.Baseurl + Urls.helperputongshuaxin +
+                            Staticdata.static_userBean.getData().getUser_token() +
+                            "&release_id=" + mData.get(position).getRelease_specialty_id();
+                }else {//商户刷新
+                    URLL=Urls.Baseurl + Urls.businessputongshuaxin +
+                            Staticdata.static_userBean.getData().getUser_token() +
+                            "&release_id=" + mData.get(position).getRelease_specialty_id();
+                }
+                LogUtils.LOG("ceshi", URLL, "普通刷新");
                 new Volley_Utils(new Interface_volley_respose() {
+
                     @Override
                     public void onSuccesses(String respose) {
                         int status = 0;
@@ -122,9 +134,7 @@ public class Adapter_mystill extends BaseAdapter {
                     public void onError(int error) {
 
                     }
-                }).Http(Urls.Baseurl + Urls.putongshuaxin +
-                        Staticdata.static_userBean.getData().getUser_token() +
-                        "&release_id=" + mData.get(position).getRelease_specialty_id(), mContext, 0);
+                }).Http(URLL, mContext, 0);
 
             }
         });
@@ -132,10 +142,51 @@ public class Adapter_mystill extends BaseAdapter {
         holder.mTextview_zhinengshuxin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String URLL="";
+                if(type==1){//帮手智能刷新
+                    URLL=Urls.Baseurl + Urls.helperzhinengshuaxin +
+                            Staticdata.static_userBean.getData().getUser_token() +
+                            "&release_id=" + mData.get(position).getRelease_specialty_id()+
+                    "&is_auto_refresh=Y&auto_refresh_day="
+                    ;
+                }else {//商户智能刷新
+                    URLL=Urls.Baseurl + Urls.businesszhinengshuaxin +
+                            Staticdata.static_userBean.getData().getUser_token() +
+                            "&release_id=" + mData.get(position).getRelease_specialty_id()+
+                            "&is_auto_refresh=Y&auto_refresh_day=";
+                }
+                LogUtils.LOG("ceshi", URLL, "智能刷新");
+                final String finalURLL = URLL;
                 new Popwindow_zhinengshuaxin(1,mData.get(position).getTitle(),mContext, new Interence_shuaxinzhiding() {
                     @Override
                     public void onResult(String result) {
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
+                                LogUtils.LOG("ceshi", respose, "智能刷新respose");
+                                int status = 0;
+                                String msg = "";
+                                try {
+                                    JSONObject object = new JSONObject(respose);
+                                    status = (Integer) object.get("code");//
+                                    msg = (String) object.get("msg");//
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (status == 1) {
+                                    interfaceAdapterSuccess.onResult(true);
+                                    ToastUtils.showToast(mContext, "设置智能刷新成功");
+                                } else {
+                                    ToastUtils.showToast(mContext, msg);
+                                }
+                            }
 
+                            @Override
+                            public void onError(int error) {
+
+                            }
+                        }).Http(finalURLL +result,mContext,0);
+                        LogUtils.LOG("ceshi", finalURLL, "智能刷新");
                     }
                 }).showpop();
 
@@ -144,9 +195,52 @@ public class Adapter_mystill extends BaseAdapter {
         holder.mTextview_zhuanyezhiding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String URLL="";
+                if(type==1){//帮手智能刷新
+                    URLL=Urls.Baseurl + Urls.helperzhiding +
+                            Staticdata.static_userBean.getData().getUser_token() +
+                            "&release_id=" + mData.get(position).getRelease_specialty_id()+
+                            "&is_top=Y&top_day="
+                    ;
+                }else {//商户智能刷新
+                    URLL=Urls.Baseurl + Urls.businesszhiding +
+                            Staticdata.static_userBean.getData().getUser_token() +
+                            "&release_id=" + mData.get(position).getRelease_specialty_id()+
+                            "&is_top=Y&top_day=";
+                }
+                LogUtils.LOG("ceshi", URLL, "置顶");
+                final String finalURLL = URLL;
                 new Popwindow_zhinengshuaxin(2,mData.get(position).getTitle(),mContext, new Interence_shuaxinzhiding() {
                     @Override
                     public void onResult(String result) {
+
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
+                                LogUtils.LOG("ceshi", respose, "置顶服务respose");
+                                int status = 0;
+                                String msg = "";
+                                try {
+                                    JSONObject object = new JSONObject(respose);
+                                    status = (Integer) object.get("code");//
+                                    msg = (String) object.get("msg");//
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (status == 1) {
+                                    interfaceAdapterSuccess.onResult(true);
+                                    ToastUtils.showToast(mContext, "设置置顶服务成功");
+                                } else {
+                                    ToastUtils.showToast(mContext, msg);
+                                }
+                            }
+
+                            @Override
+                            public void onError(int error) {
+
+                            }
+                        }).Http(finalURLL +result,mContext,0);
+                        LogUtils.LOG("ceshi", finalURLL, "置顶服务");
 
                     }
                 }).showpop();

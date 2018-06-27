@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
+//        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -56,7 +56,7 @@ public class Urls {
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
-    public  static String putongshuaxin="business/handRefresh?user_token=";//普通刷新   服务
+
 
 
     public static String setColltctSkill = "user/myCollection";//收藏、取消收藏接口
@@ -76,8 +76,13 @@ public class Urls {
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String setshophead = "business/setBusinessAvatar";//设置商户头像
     public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
-    public static String choseDays="business/choiceDayList?user_token=";//置顶  智能刷新选择的天数
 
+    public  static String businessputongshuaxin="business/handRefresh?user_token=";//普通刷新   服务
+    public  static String businesszhinengshuaxin="business/autoRefresh?user_token=";//智能刷新   服务
+    public  static String businesszhiding="business/setTopSpecialty?user_token=";//置顶   服务
+
+    public static String shuaxinchoseDays="major/choiceRefreshDayList?user_token=";// 智能刷新选择的天数
+    public static String zhidingchoseDays="major/choiceTopDayList?user_token=";// 智能刷新选择的天数
 
     //帮手模块
     public static String authenticationHelper = "helper/helperReal";//帮手认证
@@ -90,7 +95,9 @@ public class Urls {
     public static String helperSkilldetail = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String orderthink = "order/orderEvaluate";//评价帮手
     public static String BaoSuccess = "helper/after_PayMargin?user_token=";//缴纳保证金成功之后调用
-
+    public  static String helperputongshuaxin="helper/handRefresh?user_token=";//普通刷新   服务
+    public  static String helperzhinengshuaxin="helper/autoRefresh?user_token=";//智能刷新   服务
+    public  static String helperzhiding="helper/setTopSpecialty?user_token=";//置顶   服务
 
     //消息模块
 
@@ -128,6 +135,7 @@ public class Urls {
     public static String jiaoyiMingxi = "balance/getTradeDetails";//查询交易明细
     public static String tui_taocan = "balance/getAllSpreadPags?user_token=";//充值推广币套餐列表接口
     public static String huiyuan_taocan = "balance/getAllVIPPackages?user_token=";//购买会员套餐接口
+
 
 
     //省市县

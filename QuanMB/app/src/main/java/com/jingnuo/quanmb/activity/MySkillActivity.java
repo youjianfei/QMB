@@ -54,7 +54,7 @@ public class MySkillActivity extends BaseActivityother {
         Intent intent=getIntent();
         type=intent.getIntExtra("type",0);
         mData=new ArrayList();
-        adapter_mystill=new Adapter_mystill(mData, this, new InterfaceAdapterSuccess() {
+        adapter_mystill=new Adapter_mystill(type,mData, this, new InterfaceAdapterSuccess() {
             @Override
             public void onResult(boolean result) {
                 request(release_status,1);

@@ -5,6 +5,7 @@
     android:background="@drawable/background_text_type"
     android:gravity="center"
     android:orientation="vertical"
+    android:id="@+id/linearlayout"
     >
 
     <TextView
@@ -26,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/yellow_jianbian_end"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:text="300推广币"
         android:layout_toRightOf="@+id/image_shoppic"
         android:layout_toLeftOf="@+id/image_call"
