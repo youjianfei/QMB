@@ -25,17 +25,24 @@ import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
+import com.amap.api.services.poisearch.PoiResult;
+import com.amap.api.services.poisearch.PoiSearch;
 import com.jingnuo.quanmb.Adapter.Adapter_SearchAddress;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class LocationMapActivity extends BaseActivityother implements AMap.OnCameraChangeListener, GeocodeSearch.OnGeocodeSearchListener {
+
+public class LocationMapActivity extends BaseActivityother implements AMap.OnCameraChangeListener,
+        GeocodeSearch.OnGeocodeSearchListener ,PoiSearch.OnPoiSearchListener{
 
 
     //控件
@@ -49,10 +56,13 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     ImageView mImageview_cancle;
     //数据
     Adapter_SearchAddress mAdapter_address;
+    List<PoiItem>  mData_searchaddress;
     // 定位相关
     boolean isFirstLoc = true; // 是否首次定位
 
     //POI城市检索
+    PoiSearch.Query query;
+    PoiSearch poiSearch;
 
     AMap aMap;
     String finallocation;//poi名称
@@ -78,6 +88,11 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         LogUtils.LOG("ceshi","11111111111111","skdafjskafjsadf");
         geocoderSearch = new GeocodeSearch(this);
         geocoderSearch.setOnGeocodeSearchListener(this);
+
+
+        mData_searchaddress=new ArrayList<>();
+        mAdapter_address=new Adapter_SearchAddress(mData_searchaddress,this);
+        mListview_searchaddress.setAdapter(mAdapter_address);
     }
 
     @Override
@@ -93,8 +108,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     @Override
     protected void initData() {
 
-//        mAdapter_address=new Adapter_SearchAddress(mData_searchaddress,this);
-//        mListview_searchaddress.setAdapter(mAdapter_address);
 
     }
 
@@ -111,11 +124,21 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
-                    LogUtils.LOG("ceshi", "点击了确定按钮", "百度地图搜索地址");
+                    LogUtils.LOG("ceshi", "点击了确定按钮", "高德地图搜索地址");
                     String address = mEdit_search.getText() + "";
                     if (address.equals("")) {
                     } else {
+                        query = new PoiSearch.Query(address, "", "");
+                        //keyWord表示搜索字符串，
+                        //第二个参数表示POI搜索类型，二者选填其一，选用POI搜索类型时建议填写类型代码，码表可以参考下方（而非文字）
+                        //cityCode表示POI搜索区域，可以是城市编码也可以是城市名称，也可以传空字符串，空字符串代表全国在全国范围内进行搜索
+                        query.setPageSize(20);// 设置每页最多返回多少条poiitem
+                        query.setPageNum(0);//设置查询页码
 
+                        poiSearch = new PoiSearch(LocationMapActivity.this, query);
+                        poiSearch.setOnPoiSearchListener(LocationMapActivity.this);
+
+                        poiSearch.searchPOIAsyn();
                     }
 
                 }
@@ -148,7 +171,18 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mListview_searchaddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                mTextview_nowaddress.setText(mData_searchaddress.get(i).getCityName()+mData_searchaddress.get(i).getSnippet());
+                mEdit_location.setText(mData_searchaddress.get(i).getTitle());
+//                Intent result = new Intent();
+//                result.putExtra("address", mTextview_nowaddress.getText() + "");
+//                String add = mEdit_location.getText() + "";
+//                if (add.equals("")) {
+//                    ToastUtils.showToast(LocationMapActivity.this, "请输入自定义名称");
+//                    return;
+//                }
+//                result.putExtra("address2", add);
+//                setResult(2018418, result);
+//                finish();
             }
         });
     }
@@ -229,6 +263,45 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
     @Override
     public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+
+    }
+
+
+
+    @Override
+    public void onPoiSearched(PoiResult poiResult, int i) {
+
+        LogUtils.LOG("ceshi",i+"","poi检索接货");
+
+
+        if(poiResult.getPois().size()==0){
+            mData_searchaddress.clear();
+            mAdapter_address.notifyDataSetChanged();
+            mListview_searchaddress.setVisibility(View.GONE);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ToastUtils.showToast(LocationMapActivity.this,"没有此数据");
+                }
+            });
+
+        }else {
+//            LogUtils.LOG("ceshi",poiResult.getPois().get(1).getSnippet().toString()+"&"+
+//                            poiResult.getPois().get(1).getTitle().toString()+"&"+
+//                            poiResult.getPois().get(1).getCityName()+"&"+
+//                            poiResult.getPois().get(1).getProvinceName()+"&"
+//
+//                    ,"poi检索接货222");
+            mData_searchaddress.clear();
+            mData_searchaddress.addAll(poiResult.getPois());
+            mAdapter_address.notifyDataSetChanged();
+            mListview_searchaddress.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void onPoiItemSearched(PoiItem poiItem, int i) {
 
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amap.api.services.core.PoiItem;
 import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class Adapter_SearchAddress extends BaseAdapter{
 //    List<PoiInfo> mdata;
-    List<String> mdata;
+    List<PoiItem> mdata;
     Context mContext;
     LayoutInflater mLayoutinflater;
 
@@ -40,8 +41,8 @@ public class Adapter_SearchAddress extends BaseAdapter{
         }else {
             viewholder= (Viewholder) convertView.getTag();
         }
-        viewholder.mTextview_name.setText(mdata.get(position));
-        viewholder.mTextview_address.setText(mdata.get(position));
+        viewholder.mTextview_name.setText(mdata.get(position).getTitle());
+        viewholder.mTextview_address.setText(mdata.get(position).getSnippet());
 
         return convertView;
     }

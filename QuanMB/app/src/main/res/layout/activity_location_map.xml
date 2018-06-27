@@ -62,7 +62,8 @@
     <com.amap.api.maps2d.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/re_title"/>
     <Button
         android:id="@+id/button_submit"
         android:layout_width="match_parent"
@@ -101,6 +102,7 @@
             android:layout_toRightOf="@+id/image_address"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             />
         <ImageView
             android:id="@+id/image_line"
@@ -111,6 +113,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/text_mapget"
             android:background="@color/gray_dfdfdf"
+            android:visibility="gone"
             />
         <EditText
             android:id="@+id/textview_location"
@@ -125,7 +128,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:background="@null"
-
+            android:visibility="gone"
             />
 
     </RelativeLayout>

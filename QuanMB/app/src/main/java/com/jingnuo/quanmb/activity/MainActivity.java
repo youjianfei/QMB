@@ -12,12 +12,17 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
@@ -57,6 +62,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     PermissionHelper permissionHelper;
     //百度地图相关
 
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +82,63 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 //        ActionBar actionBar = getActionBar();
 //        actionBar.setCustomView(R.mipmap.aboutus);
-        setmapdata();// 百度地图配置参数
+
         initview();
         initdata();
+
         initlinstenner();
         setview();
         setdata();
 
     }
 
-    private void setmapdata() {
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+//可在其中解析amapLocation获取相应内容。
+                    LogUtils.LOG("ceshi","定位成功"+aMapLocation.getCity(),"zhuyr");
+                    aMapLocation.getLatitude();//获取纬度
+                    aMapLocation.getLongitude();//获取经度
+                    aMapLocation.getCity();//城市信息
+                    Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                    intent.putExtra("address",aMapLocation.getCity());
+                    sendBroadcast(intent);
 
+
+                }else {
+                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                }
+            }
+        }
+    };
+
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+
+
+    private void setmapdata() {
+    //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+    //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationOption.setOnceLocation(true);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
     }
 
     public void initview() {
@@ -106,6 +158,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void onResult(boolean result) {
                 LogUtils.LOG("ceshi", result + "", "");
                 if (result) {//定位权限
+                    setmapdata();// 百度地图配置参数
 
                 } else {
                     ToastUtils.showToast(MainActivity.this, "请允许开启定位功能");
