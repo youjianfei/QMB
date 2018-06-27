@@ -172,6 +172,10 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
                         if (fragment!=null){
                             fragment.dismiss();
                         }
+                        Intent intent=new Intent(CashoutActivity.this,PaySuccessActivity.class);
+                        intent.putExtra("title","提现成功");
+                        intent.putExtra("typesuccess","提现成功");
+                        startActivity(intent);
                         finish();
 
                     }else {

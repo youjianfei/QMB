@@ -1,5 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
+import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.class_.ZhifubaoPay;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -32,6 +36,10 @@ public class RechargeActivity extends BaseActivityother {
     ImageView mImageview_zhidubao;
     Button mbutton_queren;
 
+    private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
+    private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
+
+
     //数据
     int pay=1;   //1  wechat    2  zhifubao
 
@@ -47,7 +55,32 @@ public class RechargeActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        intentFilter_paysuccess = new IntentFilter();
+        intentFilter_paysuccess.addAction("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
+        paysuccess_BroadcastReciver=new PaySuccessOrErroBroadcastReciver(new Interface_paySuccessOrerro() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "payResult");
+                if(respose.equals("success")){//支付成功
+                    Intent intent=new Intent(RechargeActivity.this,PaySuccessActivity.class);
+                    intent.putExtra("title","充值成功");
+                    intent.putExtra("typesuccess","充值成功");
+                    startActivity(intent);
+                    finish();
+                }
+            }
 
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showToast(RechargeActivity.this, "支付失败");
+                    }
+                });
+            }
+        });
+        registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
     }
 
     @Override
@@ -127,5 +160,10 @@ public class RechargeActivity extends BaseActivityother {
                 break;
 
         }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(paysuccess_BroadcastReciver);
     }
 }

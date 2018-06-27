@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.Button;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_recharge_huiyuan;
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
+import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -18,6 +21,7 @@ import com.jingnuo.quanmb.entityclass.HuiyuanTaocanBean;
 import com.jingnuo.quanmb.entityclass.TuiguangbiTaocanBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.ArrayList;
@@ -37,6 +41,10 @@ public class HuiyuanRechargeActivity extends BaseActivityother {
     double price=0;   //选择的充值de钱数
     String VIP_unique="";
 
+
+    private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
+    private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_huiyuan_recharge;
@@ -44,7 +52,32 @@ public class HuiyuanRechargeActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        intentFilter_paysuccess = new IntentFilter();
+        intentFilter_paysuccess.addAction("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
+        paysuccess_BroadcastReciver=new PaySuccessOrErroBroadcastReciver(new Interface_paySuccessOrerro() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "payResult");
+                if(respose.equals("success")){//支付成功
+                    Intent intent=new Intent(HuiyuanRechargeActivity.this,PaySuccessActivity.class);
+                    intent.putExtra("title","支付成功");
+                    intent.putExtra("typesuccess","支付成功");
+                    startActivity(intent);
+                    finish();
+                }
+            }
 
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showToast(HuiyuanRechargeActivity.this, "支付失败");
+                    }
+                });
+            }
+        });
+        registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
     }
 
     @Override
@@ -104,5 +137,10 @@ public class HuiyuanRechargeActivity extends BaseActivityother {
 
             }
         }).Http(Urls.Baseurl_hu+Urls.huiyuan_taocan+ Staticdata.static_userBean.getData().getUser_token(),HuiyuanRechargeActivity.this,0);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(paysuccess_BroadcastReciver);
     }
 }

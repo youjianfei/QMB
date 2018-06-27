@@ -314,6 +314,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     relativelayout_chujia.setVisibility(View.GONE);
                     mEditview_taskmoney.setText("");
                     is_counteroffer = 1;
+                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
                 }
             break;
             case R.id.textview_chooseme:
@@ -332,6 +333,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     relativelayout_chujia.setVisibility(View.GONE);
                     mEditview_taskmoney.setText("");
                     is_counteroffer = 1;
+                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
                 }
                 break;
             case R.id.image_chooseme:

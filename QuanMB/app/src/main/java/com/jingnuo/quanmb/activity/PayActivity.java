@@ -80,6 +80,10 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if(respose.equals("success")){//支付成功
+                    Intent intent=new Intent(PayActivity.this,PaySuccessActivity.class);
+                    intent.putExtra("title","支付成功");
+                    intent.putExtra("typesuccess","支付成功");
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -266,7 +270,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                         Staticdata.map_task.put("payResult","1");
                         intent.putExtra("pay","success");
                         PayActivity.this. sendBroadcast(intent);
-                        finish();
+
                     }else {
                         intent.putExtra("pay","erro");
                         PayActivity.this. sendBroadcast(intent);

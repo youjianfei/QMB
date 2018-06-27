@@ -90,7 +90,7 @@
         android:layout_below="@+id/text_square_task"
         android:layout_toRightOf="@+id/image1"
         android:layout_marginTop="17dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="2dp"
         />
     <TextView
         android:id="@+id/textyuan"
