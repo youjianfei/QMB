@@ -76,13 +76,19 @@ public class Urls {
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String setshophead = "business/setBusinessAvatar";//设置商户头像
     public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
-
     public  static String businessputongshuaxin="business/handRefresh?user_token=";//普通刷新   服务
     public  static String businesszhinengshuaxin="business/autoRefresh?user_token=";//智能刷新   服务
     public  static String businesszhiding="business/setTopSpecialty?user_token=";//置顶   服务
 
+
+    //商户 帮手通用
     public static String shuaxinchoseDays="major/choiceRefreshDayList?user_token=";// 智能刷新选择的天数
     public static String zhidingchoseDays="major/choiceTopDayList?user_token=";// 智能刷新选择的天数
+    public static String woderenzheng="business/queryAuthInfo?user_token=";// 我的认证
+
+
+
+
 
     //帮手模块
     public static String authenticationHelper = "helper/helperReal";//帮手认证
