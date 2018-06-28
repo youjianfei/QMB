@@ -133,6 +133,7 @@ public class SetSafepassword2Activity extends BaseActivityother {
                 }
                 if(status==1){
                     ToastUtils.showToast(SetSafepassword2Activity.this,msg);
+                    Staticdata.static_userBean.getData().getAppuser().setSecurity_code("00000000");
                     finish();
                 }else {
                     ToastUtils.showToast(SetSafepassword2Activity.this,msg);

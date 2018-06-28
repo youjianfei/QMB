@@ -1,4 +1,4 @@
-package com.jingnuo.quanmb.class_;
+package com.jingnuo.quanmb.popwinow;
 
 import android.app.Activity;
 import android.content.Intent;

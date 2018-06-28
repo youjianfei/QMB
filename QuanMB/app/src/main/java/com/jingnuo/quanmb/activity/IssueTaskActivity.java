@@ -6,12 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -24,23 +20,15 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
-import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
-import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
-import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
-import com.jingnuo.quanmb.class_.Popwindow_CompleteTime;
-import com.jingnuo.quanmb.class_.Popwindow_SkillType;
-import com.jingnuo.quanmb.class_.Popwindow_complatetask;
-import com.jingnuo.quanmb.class_.ProgressDlog;
-import com.jingnuo.quanmb.class_.UpLoadImage;
+import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
+import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -62,10 +50,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import retrofit2.http.Url;
-
-import static com.jingnuo.quanmb.data.Staticdata.map_task;
 
 public class IssueTaskActivity extends BaseActivityother {
 

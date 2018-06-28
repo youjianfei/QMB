@@ -150,6 +150,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
             case R.id.myauthentication://我的认证
                 Intent intent_myrenzheng = new Intent(ShopCenterActivity.this, MyAuthenticationActivity.class);
+                intent_myrenzheng.putExtra("type", type);
                 startActivity(intent_myrenzheng);
                 break;
             case R.id.mytuiguangbi://我的推广币  充值

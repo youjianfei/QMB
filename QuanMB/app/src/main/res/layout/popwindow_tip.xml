@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_white_corners"
+    >
+    <TextView
+        android:id="@+id/textview_text"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text=""
+        android:gravity="center"
+        android:textColor="@color/text_title2"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+    <ImageView
+        android:id="@+id/image_q"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_background"
+        android:layout_below="@id/textview_text"
+        android:layout_marginTop="20dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/image_q"
+        >
+        <TextView
+            android:id="@+id/textview_cancle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="取消"
+            android:gravity="center"
+            />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray_background"
+             />
+        <TextView
+            android:id="@+id/textview_submit"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="确认"
+            android:gravity="center"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

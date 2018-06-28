@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_menu;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.AboutUsActivity;
 import com.jingnuo.quanmb.activity.AuthenticationActivity;
 import com.jingnuo.quanmb.activity.CashoutActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
@@ -253,7 +254,8 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                         startActivity(intent_collect);
                         break;
                     case 5://关于我们
-
+                        Intent intent_aboutus=new Intent(getActivity(), AboutUsActivity.class);
+                        startActivity(intent_aboutus);
                         break;
                     case 6://退出登录
                         logout();

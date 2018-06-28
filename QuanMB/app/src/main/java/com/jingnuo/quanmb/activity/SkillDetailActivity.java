@@ -16,11 +16,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.class_.Permissionmanage;
-import com.jingnuo.quanmb.class_.Popwindow_lookpic;
+import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -267,6 +265,7 @@ public class SkillDetailActivity extends BaseActivityother {
         if(image==null||image.equals("")){
 
         }else {
+            imageview_urllist.clear();
             String []images=image.split(",");
             int len=images.length;
             LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");

@@ -36,9 +36,11 @@
         android:overScrollMode="never"
         android:scrollbars="vertical"
         android:visibility="visible">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
             <RelativeLayout
                 android:id="@+id/RelativeLayout_background"
                 android:layout_width="match_parent"
@@ -71,7 +73,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/RelativeLayout_background"
                 android:background="@color/white">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -79,7 +80,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:src="@mipmap/user_pic" />
 
                 <TextView
@@ -99,7 +100,7 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/text_tasktitle"
+                    android:id="@+id/text_taskmoney"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -107,21 +108,21 @@
                     android:layout_marginTop="13dp"
                     android:layout_toRightOf="@+id/text_taskstate"
                     android:text=""
-                    android:textColor="#333333"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/text_taskmoney"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/text_tasktitle"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/image_task"
-                    android:text="佣金：0.00元"
                     android:textColor="@color/yellow_button"
                     android:textSize="15dp" />
+
+                <!--<TextView-->
+                    <!--android:id="@+id/text_taskmoney"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/text_tasktitle"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginRight="30dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_toRightOf="@+id/image_task"-->
+                    <!--android:text="佣金：0.00元"-->
+                    <!--android:textColor="@color/yellow_button"-->
+                    <!--android:textSize="15dp" />-->
 
                 <TextView
                     android:id="@+id/text_tasktime"
@@ -138,29 +139,144 @@
                     android:textSize="13dp" />
 
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:visibility="gone"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_touxiang"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/user_pic" />
+
+                <TextView
+                    android:id="@+id/text_vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_toRightOf="@+id/image_touxiang"
+                    android:background="@drawable/button_red_20dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:text="VIP1"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/text_todoname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_toRightOf="@+id/text_vip"
+                    android:text=""
+                    android:textColor="@color/yellow_button"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/image_phonenumber"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:src="@mipmap/tel_gray"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/text_shenfen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_todoname"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/image_touxiang"
+                    android:text="个人帮手"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/yellow_button"
+                    android:background="@drawable/background_text_type"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/re2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/re1"
-                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
                 android:background="@color/white">
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:src="@mipmap/taskdetail"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="23dp"
+                    android:src="@mipmap/title2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="18dp"
                     />
+                <TextView
+                    android:id="@+id/text11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line1"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="15dp"
+                    android:text="标题"
+                    android:textColor="#7f7f7f"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/text_tasktittt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="标题"
+                    android:textColor="@color/black_text"
+                    android:layout_toRightOf="@+id/text2"
+                    android:textSize="15dp" />
+                <ImageView
+                    android:id="@+id/line22"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/text_tasktittt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@color/gray_dfdfdf" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/taskdetails2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_below="@+id/line22"
+                    />
+
                 <TextView
                     android:id="@+id/text2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line1"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="15dp"
                     android:text="任务说明"
+                    android:layout_below="@+id/line22"
                     android:textColor="#7f7f7f"
                     android:textSize="15dp" />
 
@@ -168,13 +284,13 @@
                     android:id="@+id/text_taskdetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/text2"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:text=""
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="任务详情"
                     android:textColor="@color/black_text"
+                    android:layout_toRightOf="@+id/text2"
+                    android:layout_below="@+id/line22"
                     android:textSize="15dp" />
 
                 <RelativeLayout
@@ -182,8 +298,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_below="@+id/text_taskdetail"
                     >
                     <com.jingnuo.quanmb.customview.MyGridView
@@ -196,19 +312,63 @@
                 </RelativeLayout>
 
                 <ImageView
-                    android:id="@+id/line2"
+                    android:id="@+id/line222"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
                     android:src="@color/gray_dfdfdf" />
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:src="@mipmap/resttime"
-                    android:layout_marginLeft="30dp"
+                    android:src="@mipmap/people2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_below="@+id/line222"
+                    />
+
+                <TextView
+                    android:id="@+id/text_guzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="15dp"
+                    android:text="雇主"
+                    android:layout_below="@+id/line222"
+                    android:textColor="#7f7f7f"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/text_guzhuname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="雇主名字"
+                    android:textColor="@color/black_text"
+                    android:layout_toRightOf="@+id/text2"
+                    android:layout_below="@+id/line222"
+                    android:textSize="15dp" />
+
+
+                <ImageView
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/text_guzhu"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@color/gray_dfdfdf" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/time2"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
                     android:layout_below="@+id/line2"
                     />
@@ -217,9 +377,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/line2"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="15dp"
-                    android:text="希望完成时间"
+                    android:text="要求时间"
                     android:textColor="#7f7f7f"
                     android:textSize="15dp" />
 
@@ -227,11 +387,11 @@
                     android:id="@+id/text_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_below="@+id/line2"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/text3"
                     android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="15dp" />
@@ -241,15 +401,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/text3"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
                     android:src="@color/gray_dfdfdf" />
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/address_blue"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
                     android:layout_below="@+id/line3"
                     />
@@ -258,7 +418,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/line3"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="15dp"
                     android:text="地点"
                     android:textColor="#7f7f7f"
@@ -275,7 +435,7 @@
                     android:layout_toRightOf="@+id/text4"
                     android:text=""
                     android:textColor="@color/black_text"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="15dp"
                     android:textSize="15dp" />
 
                 <!--<ImageView-->
@@ -320,7 +480,6 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:orientation="horizontal"
-                android:layout_below="@+id/re2"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="20dp"
                 >
@@ -376,7 +535,7 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
 
 

@@ -149,6 +149,9 @@ public class PayBaozhengmoneyActivity extends BaseActivityother implements PayPw
                 if(pay==1){
                     if(Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
                         ToastUtils.showToast(this,"请先设置安全密码");
+                        Intent intent_setsafe=new Intent(PayBaozhengmoneyActivity.this,SetSafepassword1Activity.class);
+                        intent_setsafe.putExtra("change","nochange");
+                        startActivity(intent_setsafe);
                         return;
                     }
                     //余额支付

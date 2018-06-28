@@ -81,6 +81,73 @@ public class TaskDetailBean {
         private String user_grade;
         private String order_no;
         private String release_address;
+        private String helper_name="";
+        private String helper_mobile_no;
+        private String b_h_url;
+        private String business_name="";
+        private String business_mobile_no;
+        private String h_member_level;
+        private String b_member_level;
+
+        public String getB_h_url() {
+            return b_h_url;
+        }
+
+        public void setB_h_url(String b_h_url) {
+            this.b_h_url = b_h_url;
+        }
+
+        public String getB_member_level() {
+            return b_member_level;
+        }
+
+        public void setB_member_level(String b_member_level) {
+            this.b_member_level = b_member_level;
+        }
+
+        public String getH_member_level() {
+            return h_member_level;
+        }
+
+        public void setH_member_level(String h_member_level) {
+            this.h_member_level = h_member_level;
+        }
+
+
+
+        public String getBusiness_mobile_no() {
+            return business_mobile_no;
+        }
+
+        public void setBusiness_mobile_no(String business_mobile_no) {
+            this.business_mobile_no = business_mobile_no;
+        }
+
+        public String getBusiness_name() {
+            return business_name;
+        }
+
+        public void setBusiness_name(String business_name) {
+            this.business_name = business_name;
+        }
+
+
+
+        public String getHelper_mobile_no() {
+            return helper_mobile_no;
+        }
+
+        public void setHelper_mobile_no(String helper_mobile_no) {
+            this.helper_mobile_no = helper_mobile_no;
+        }
+
+        public String getHelper_name() {
+            return helper_name;
+        }
+
+        public void setHelper_name(String helper_name) {
+            this.helper_name = helper_name;
+        }
 
         public String getRelease_address() {
             return release_address;

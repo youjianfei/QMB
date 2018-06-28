@@ -1,7 +1,6 @@
 package com.jingnuo.quanmb.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,18 +8,13 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
@@ -28,8 +22,8 @@ import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
-import com.jingnuo.quanmb.class_.Popwindow_SkillType;
-import com.jingnuo.quanmb.class_.ProgressDlog;
+import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -47,7 +41,6 @@ import com.yancy.imageselector.ImageSelectorActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

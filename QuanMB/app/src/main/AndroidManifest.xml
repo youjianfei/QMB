@@ -46,7 +46,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="5f44a6cf8d64182033741d5b546a4ef0"></meta-data>
+            android:value="5f44a6cf8d64182033741d5b546a4ef0" />
 
         <service android:name="com.amap.api.location.APSService" />
         <service
@@ -160,7 +160,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.TuiguangbiWalletActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.HuiyuanRechargeActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PaytuiguangbiActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.PaySuccessActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.PaySuccessActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.AboutUsActivity"></activity>
     </application>
 
 </manifest>

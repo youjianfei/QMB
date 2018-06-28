@@ -3,8 +3,6 @@ package com.jingnuo.quanmb.fargment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +14,7 @@ import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.activity.MainActivity;
-import com.jingnuo.quanmb.activity.SetPasswordActivity;
-import com.jingnuo.quanmb.class_.ProgressDlog;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -33,8 +30,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;

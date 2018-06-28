@@ -2,8 +2,6 @@ package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -12,11 +10,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
-import com.jingnuo.quanmb.class_.Popwindow_bargin;
-import com.jingnuo.quanmb.class_.WechatPay;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.popwinow.Popwindow_bargin;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.BargainMessagedetailsBean;
@@ -67,7 +66,8 @@ public class BargainActivity extends BaseActivityother {
     Map map_bargainmessagedetail;
     BargainMessagedetailsBean bargainMessagedetailsBean;
 
-    Popwindow_bargin popwindow_bargin;
+//    Popwindow_bargin popwindow_bargin;
+    Popwindow_Tip popwindow_tip;
 
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
     private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
@@ -104,55 +104,56 @@ public class BargainActivity extends BaseActivityother {
             }
         });
         registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
-        popwindow_bargin = new Popwindow_bargin(BargainActivity.this, new Interence_bargin() {
-            @Override
-            public void onResult(String result) {
-                String URL_bargain = "";
-                Map map_goonbargain = new HashMap();
-                if (bargainMessagedetailsBean.getData().getMark().equals("2")) {
-                    URL_bargain = Urls.Baseurl_cui + Urls.kehubargain;
-                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
-                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_goonbargain.put("counteroffer_Amount", result);
-                    map_goonbargain.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
-                } else {
-                    URL_bargain = Urls.Baseurl_cui + Urls.helpterbargain;
-                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
-                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_goonbargain.put("task_id", bargainMessagedetailsBean.getData().getTask_id() + "");
-                    map_goonbargain.put("counteroffer_Amount", result + "");
-                }
-                LogUtils.LOG("ceshi", "map+" + map_goonbargain, "继续还价");
-                LogUtils.LOG("ceshi", URL_bargain, "继续还价");
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi", respose, "继续还价");
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");
-                            msg = (String) object.get("message");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (status == 1) {
-                            ToastUtils.showToast(BargainActivity.this, msg);
-                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
-                        } else {
-                            ToastUtils.showToast(BargainActivity.this, msg);
-                        }
-                    }
 
-                    @Override
-                    public void onError(int error) {
-
-                    }
-                }).postHttp(URL_bargain, BargainActivity.this, 1, map_goonbargain);
-
-            }
-        });
+//        popwindow_bargin = new Popwindow_bargin(BargainActivity.this, new Interence_bargin() {
+//            @Override
+//            public void onResult(String result) {
+//                String URL_bargain = "";
+//                Map map_goonbargain = new HashMap();
+//                if (bargainMessagedetailsBean.getData().getMark().equals("2")) {
+//                    URL_bargain = Urls.Baseurl_cui + Urls.kehubargain;
+//                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
+//                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+//                    map_goonbargain.put("counteroffer_Amount", result);
+//                    map_goonbargain.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
+//                } else {
+//                    URL_bargain = Urls.Baseurl_cui + Urls.helpterbargain;
+//                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
+//                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+//                    map_goonbargain.put("task_id", bargainMessagedetailsBean.getData().getTask_id() + "");
+//                    map_goonbargain.put("counteroffer_Amount", result + "");
+//                }
+//                LogUtils.LOG("ceshi", "map+" + map_goonbargain, "继续还价");
+//                LogUtils.LOG("ceshi", URL_bargain, "继续还价");
+//                new Volley_Utils(new Interface_volley_respose() {
+//                    @Override
+//                    public void onSuccesses(String respose) {
+//                        LogUtils.LOG("ceshi", respose, "继续还价");
+//                        int status = 0;
+//                        String msg = "";
+//                        try {
+//                            JSONObject object = new JSONObject(respose);
+//                            status = (Integer) object.get("code");
+//                            msg = (String) object.get("message");
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        if (status == 1) {
+//                            ToastUtils.showToast(BargainActivity.this, msg);
+//                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
+//                        } else {
+//                            ToastUtils.showToast(BargainActivity.this, msg);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(int error) {
+//
+//                    }
+//                }).postHttp(URL_bargain, BargainActivity.this, 1, map_goonbargain);
+//
+//            }
+//        });
     }
 
     @Override
@@ -250,19 +251,32 @@ public class BargainActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.button_accect://接受还价
-                double amount_need=amount-money;
+                final double amount_need=amount-money;
                 if(amount_need>0){
-                    Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
-                    intentpay.putExtra("title", "任务补差价");
-                    intentpay.putExtra("amount", amount_need+"");
-                    intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
-                    startActivity(intentpay);
+
+                    popwindow_tip=new Popwindow_Tip("需要补差价"+amount_need+"元", BargainActivity.this, new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if(result){
+                                Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
+                                intentpay.putExtra("title", "任务补差价");
+                                intentpay.putExtra("amount", amount_need + "");
+                                intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
+                                startActivity(intentpay);
+                            }
+
+                        }
+                    });
+                    popwindow_tip.showPopwindow();
+
+
+
                 }else {
                     acceptBargain();
                 }
                 break;
             case R.id.button_goon://继续还价
-                popwindow_bargin.showpop();
+//                popwindow_bargin.showpop();
 
 
                 break;

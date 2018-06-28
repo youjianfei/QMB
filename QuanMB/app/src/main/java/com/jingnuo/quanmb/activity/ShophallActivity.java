@@ -3,15 +3,12 @@ package com.jingnuo.quanmb.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -19,7 +16,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_shophall;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.class_.Popwindow_SquareSort;
+import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
 import com.jingnuo.quanmb.quanmb.R;

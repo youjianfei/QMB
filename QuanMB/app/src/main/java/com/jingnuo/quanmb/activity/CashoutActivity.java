@@ -90,6 +90,9 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
             public void onClick(View v) {
                 if(Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
                     ToastUtils.showToast(CashoutActivity.this,"请先设置安全密码");
+                    Intent intent_setsafe=new Intent(CashoutActivity.this,SetSafepassword1Activity.class);
+                    intent_setsafe.putExtra("change","nochange");
+                    startActivity(intent_setsafe);
                     return;
                 }
                 if(initmap()){

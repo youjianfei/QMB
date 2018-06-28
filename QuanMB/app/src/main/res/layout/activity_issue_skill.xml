@@ -208,13 +208,14 @@
 
             <TextView
                 android:id="@+id/textview_skilladdress"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="45dp"
                 android:layout_marginTop="5dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:gravity="right"
                 android:background="@null"
                 android:lines="1"
                 android:text="请选择"

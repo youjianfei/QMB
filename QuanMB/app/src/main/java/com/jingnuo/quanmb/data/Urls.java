@@ -145,7 +145,7 @@ public class Urls {
 
 
     //省市县
-    public static String getallCity = "area/getAllCity?user_token=";//所有城市
+    public static String getallCity = "area/getAllCity";//所有城市
 
 
 }

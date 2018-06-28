@@ -1,17 +1,21 @@
 package com.jingnuo.quanmb.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.class_.Popwindow_complatetask;
+import com.jingnuo.quanmb.popwinow.Popwindow_complatetask;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.HelpOrderBean;
@@ -20,6 +24,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.master.permissionhelper.PermissionHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,9 +42,10 @@ public class HelperOrderActivity extends BaseActivityother {
     TextView mTextview_taskDetail;//任务描述
     TextView mTextview_resttime;//剩余时间
     TextView mTextview_address;//地点
-    TextView mTextview_phonenumber;//客户电话
+//    TextView mTextview_phonenumber;//客户电话
+    LinearLayout mLinearlayout_tel;
 
-    Button mButton_queren;
+    TextView mButton_queren;
 
     //对象
     Popwindow_complatetask popwindow_complatetask;
@@ -49,6 +55,8 @@ public class HelperOrderActivity extends BaseActivityother {
     String order_no="";
     int type=0;  //1帮手  2  商户
 
+    String  tel="";//雇主电话
+    PermissionHelper mPermission;//动态申请权限
 
     @Override
     public int setLayoutResID() {
@@ -105,6 +113,7 @@ public class HelperOrderActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         order_no=getIntent().getStringExtra("order_no");
         type=getIntent().getIntExtra("type",0);
         request();
@@ -139,7 +148,8 @@ public class HelperOrderActivity extends BaseActivityother {
                 mTextview_peoplename.setText(helpOrderBean.getData().getDetail().getNick_name());
                 mTextview_taskDetail.setText(helpOrderBean.getData().getDetail().getTask_description());
                 mTextview_address.setText(helpOrderBean.getData().getDetail().getTask_description());
-                mTextview_phonenumber.setText(helpOrderBean.getData().getDetail().getMobile_no());
+//                mTextview_phonenumber.setText(helpOrderBean.getData().getDetail().getMobile_no());
+                tel=helpOrderBean.getData().getDetail().getMobile_no();
                 if (helpOrderBean.getData().getDetail().getOrder_status().equals("待确认")){
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("等待雇主确认");
@@ -173,6 +183,44 @@ public class HelperOrderActivity extends BaseActivityother {
                 popwindow_complatetask.showPopwindow();
             }
         });
+        mLinearlayout_tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!tel.equals("")){
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    Uri data = Uri.parse("tel:" + tel);
+                    intent.setData(data);
+
+                    if (ActivityCompat.checkSelfPermission(HelperOrderActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+                        mPermission.request(new PermissionHelper.PermissionCallback() {
+                            @Override
+                            public void onPermissionGranted() {
+
+                            }
+
+                            @Override
+                            public void onIndividualPermissionGranted(String[] grantedPermission) {
+
+                            }
+
+                            @Override
+                            public void onPermissionDenied() {
+
+                            }
+
+                            @Override
+                            public void onPermissionDeniedBySystem() {
+
+                            }
+                        });
+                        return;
+                    }
+                    startActivity(intent);//调用具体方法
+                }
+            }
+        });
 
     }
 
@@ -187,11 +235,19 @@ public class HelperOrderActivity extends BaseActivityother {
         mTextview_taskDetail=findViewById(R.id.text_taskdetail);
         mTextview_resttime=findViewById(R.id.text_time);
         mTextview_address=findViewById(R.id.text_address);
-        mTextview_phonenumber=findViewById(R.id.text_number);
+//        mTextview_phonenumber=findViewById(R.id.text_number);
         mButton_queren=findViewById(R.id.button_bargain);
+        mLinearlayout_tel=findViewById(R.id.linearlayout_tel);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (mPermission != null) {
+            mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -1,13 +1,17 @@
 package com.jingnuo.quanmb.activity;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,7 +21,7 @@ import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
-import com.jingnuo.quanmb.class_.Popwindow_lookpic;
+import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -25,8 +29,8 @@ import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
-import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.master.permissionhelper.PermissionHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,16 +46,26 @@ public class MytaskDetailActivity extends BaseActivityother {
     //控件
 
     RelativeLayout mRelativylaout_background;
-    TextView getmTextview_statejieshao;
-    TextView mTextview_taskstate;
-    TextView mTextview_tasktitle;
-    TextView mTextview_taskmoney;
-    TextView mTextview_tasktime;
-    TextView mTextview_taskdetails;
-    TextView mTextview_taskstarttime;
-    TextView mTextview_taskaddress;
-    //    TextView mTextview_helplevle;
-    CircleImageView mImageview_head;
+    RelativeLayout mRelativylaout_re1;
+    RelativeLayout mRelativylaout_re4;
+    TextView getmTextview_statejieshao;//例：正在等待帮手接单
+    TextView mTextview_taskstate;// 任务类型
+    TextView mTextview_tasktitle;//标题
+    TextView mTextview_taskmoney;//佣金
+    TextView mTextview_tasktime;//发布时间
+    TextView mTextview_taskdetails;//任务详情
+    TextView mTextview_taskstarttime;//完成时间
+    TextView mTextview_taskaddress;//地址
+    TextView mTextview_guzhuName;//雇主姓名
+    CircleImageView mImageview_head;//雇主头像
+
+    TextView todoName;//帮手或商家姓名
+    TextView todoVIP;//vip等级
+    TextView todoShenfen;//身份
+    CircleImageView mImageview_todo;//帮手或商家的头像
+    ImageView mImageview_phonenumber;//帮手或商家的电话
+
+
     MyGridView imageGridview;
 
     Button mButton_cancle;
@@ -63,15 +77,20 @@ public class MytaskDetailActivity extends BaseActivityother {
     String ID = "";
     Map map_taskdetail;
 
-    String newID="";
-    boolean isIssueAgain=false;
+    String  phonenumber="";
 
-    String image_url="";
+
+    String newID = "";
+    boolean isIssueAgain = false;
+
+    String image_url = "";
     List<String> imageview_urllist;
     //对象
     TaskDetailBean taskDetailBean;
     Popwindow_lookpic popwindow_lookpic;
     Adapter_Gridviewpic adapter_gridviewpic;
+
+    PermissionHelper mPermission;//动态申请权限
 
 
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
@@ -84,10 +103,10 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        imageview_urllist=new ArrayList<>();
-        adapter_gridviewpic=new Adapter_Gridviewpic(imageview_urllist,this);
+        imageview_urllist = new ArrayList<>();
+        adapter_gridviewpic = new Adapter_Gridviewpic(imageview_urllist, this);
         imageGridview.setAdapter(adapter_gridviewpic);
-        popwindow_lookpic=new Popwindow_lookpic(this);
+        popwindow_lookpic = new Popwindow_lookpic(this);
         intentFilter_paysuccess = new IntentFilter();
         intentFilter_paysuccess.addAction("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
         paysuccess_BroadcastReciver = new PaySuccessOrErroBroadcastReciver(new Interface_paySuccessOrerro() {
@@ -114,6 +133,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         Intent intent = getIntent();
         ID = intent.getStringExtra("id");
         map_taskdetail = new HashMap();
@@ -127,10 +147,49 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mImageview_phonenumber.setOnClickListener(new View.OnClickListener() {//点击拨打电话
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                Uri data = Uri.parse("tel:" + phonenumber);
+                intent.setData(data);
+
+                if (ActivityCompat.checkSelfPermission(MytaskDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+                    mPermission.request(new PermissionHelper.PermissionCallback() {
+                        @Override
+                        public void onPermissionGranted() {
+
+                        }
+
+                        @Override
+                        public void onIndividualPermissionGranted(String[] grantedPermission) {
+
+                        }
+
+                        @Override
+                        public void onPermissionDenied() {
+
+                        }
+
+                        @Override
+                        public void onPermissionDeniedBySystem() {
+
+                        }
+                    });
+                    return;
+                }
+                startActivity(intent);//调用具体方法
+
+
+            }
+        });
+
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                popwindow_lookpic.showPopwindow(position,imageview_urllist);
+                popwindow_lookpic.showPopwindow(position, imageview_urllist);
             }
         });
         mButton_cancle.setOnClickListener(new View.OnClickListener() {
@@ -184,8 +243,8 @@ public class MytaskDetailActivity extends BaseActivityother {
                             if (status == 1) {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
 //                                request(map_taskdetail);
-                                Intent intend_think=new Intent(MytaskDetailActivity.this,OrderThinkActivity.class);
-                                intend_think.putExtra("task_id",taskDetailBean.getData().getTask_id()+"");
+                                Intent intend_think = new Intent(MytaskDetailActivity.this, OrderThinkActivity.class);
+                                intend_think.putExtra("task_id", taskDetailBean.getData().getTask_id() + "");
                                 startActivity(intend_think);
                             } else {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
@@ -215,23 +274,31 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        mImageview_phonenumber = findViewById(R.id.image_phonenumber);
+        mImageview_todo = findViewById(R.id.image_touxiang);
+        todoShenfen = findViewById(R.id.text_shenfen);
+        todoVIP = findViewById(R.id.text_vip);
+        todoName = findViewById(R.id.text_todoname);
+        mTextview_guzhuName = findViewById(R.id.text_guzhuname);
         mTextview_taskstate = findViewById(R.id.text_taskstate);
-        mTextview_tasktitle = findViewById(R.id.text_tasktitle);
+        mTextview_tasktitle = findViewById(R.id.text_tasktittt);//标题
         mTextview_taskmoney = findViewById(R.id.text_taskmoney);
         mTextview_tasktime = findViewById(R.id.text_tasktime);
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
         mTextview_taskstarttime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
         getmTextview_statejieshao = findViewById(R.id.text_state);
-//        mTextview_helplevle = findViewById(R.id.text_tlevel);
         mImageview_head = findViewById(R.id.image_task);
         mButton_cancle = findViewById(R.id.button_cancle);
         mButton_complete = findViewById(R.id.button_complete);
         mButton_completed = findViewById(R.id.button_completed);
         mButton_again = findViewById(R.id.button_again);
-        imageGridview=findViewById(R.id.GridView_PIC);
-        mRelativylaout_background=findViewById(R.id.RelativeLayout_background);
+        imageGridview = findViewById(R.id.GridView_PIC);
+        mRelativylaout_background = findViewById(R.id.RelativeLayout_background);
+        mRelativylaout_re1 = findViewById(R.id.re1);
+        mRelativylaout_re4 = findViewById(R.id.re4);
     }
+
     void requestTaskid() {//请求任务号,成功后跳转支付界面
         LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid
                 + Staticdata.static_userBean.getData().getUser_token(), "获取任务ID");
@@ -246,18 +313,18 @@ public class MytaskDetailActivity extends BaseActivityother {
                 try {
                     JSONObject object = new JSONObject(respose);
                     data = (Integer) object.get("data");//
-                    newID=data+"";
+                    newID = data + "";
                     status = (Integer) object.get("code");//
                     msg = (String) object.get("message");//
                     if (status == 1) {
-                        isIssueAgain=true;
+                        isIssueAgain = true;
                         Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
                         intentpay.putExtra("title", "全民帮—任务付款");
 
-                        if(taskDetailBean.getData().getIs_helper_bid().equals("Y")){
+                        if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                             intentpay.putExtra("amount", "5");
-                        }else {
-                            intentpay.putExtra("amount", taskDetailBean.getData().getCommission()+"");
+                        } else {
+                            intentpay.putExtra("amount", taskDetailBean.getData().getCommission() + "");
                         }
 
                         intentpay.putExtra("taskid", data + "");
@@ -280,13 +347,14 @@ public class MytaskDetailActivity extends BaseActivityother {
         }).Http(Urls.Baseurl_cui + Urls.gettaskid
                 + Staticdata.static_userBean.getData().getUser_token(), MytaskDetailActivity.this, 0);
     }
-    void requestTaskAgain(){
-        LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.Issue_again+Staticdata.static_userBean.getData().getUser_token()+"&task_newid="
-                +newID+"&task_id="+taskDetailBean.getData().getTask_id()+"&payResult="+1,"重新发布");
-        new  Volley_Utils(new Interface_volley_respose() {
+
+    void requestTaskAgain() {
+        LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_newid="
+                + newID + "&task_id=" + taskDetailBean.getData().getTask_id() + "&payResult=" + 1, "重新发布");
+        new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose,"重新发布");
+                LogUtils.LOG("ceshi", respose, "重新发布");
                 int status = 0;
                 String msg = "";
                 try {
@@ -297,24 +365,26 @@ public class MytaskDetailActivity extends BaseActivityother {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(status==1){//重新发布成功
+                if (status == 1) {//重新发布成功
                     map_taskdetail.put("id", newID + "");
                     mButton_again.setVisibility(View.GONE);
                     request(map_taskdetail);
-                    LogUtils.LOG("ceshi1","request(map_taskdetail)","request");
-                    ToastUtils.showToast(MytaskDetailActivity.this,msg);
-                }else {
-                    ToastUtils.showToast(MytaskDetailActivity.this,msg);
+                    LogUtils.LOG("ceshi1", "request(map_taskdetail)", "request");
+                    ToastUtils.showToast(MytaskDetailActivity.this, msg);
+                } else {
+                    ToastUtils.showToast(MytaskDetailActivity.this, msg);
                 }
 
             }
+
             @Override
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui+Urls.Issue_again+Staticdata.static_userBean.getData().getUser_token()+"&task_newid="
-                +newID+"&task_id="+taskDetailBean.getData().getTask_id()+"&payResult="+1,MytaskDetailActivity.this,0);
+        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_newid="
+                + newID + "&task_id=" + taskDetailBean.getData().getTask_id() + "&payResult=" + 1, MytaskDetailActivity.this, 0);
     }
+
     void request(Map map) {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -322,11 +392,39 @@ public class MytaskDetailActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails, "MytaskDetailActivity");
                 LogUtils.LOG("ceshi", respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
+                if (taskDetailBean.getData().getTask_Status_code().equals("01") ||
+                        taskDetailBean.getData().getTask_Status_code().equals("08") ||
+                        taskDetailBean.getData().getTask_Status_code().equals("09") ||
+                        taskDetailBean.getData().getTask_Status_code().equals("07") ||
+                        taskDetailBean.getData().getTask_Status_code().equals("13")
+                        ) {
+                    mRelativylaout_re1.setVisibility(View.VISIBLE);
+                    mRelativylaout_re4.setVisibility(View.GONE);
+                } else {
+                    Glide.with(MytaskDetailActivity.this).load(taskDetailBean.getData().getB_h_url()).into(mImageview_todo);
+
+                    mRelativylaout_re1.setVisibility(View.GONE);
+                    mRelativylaout_re4.setVisibility(View.VISIBLE);
+                    if (taskDetailBean.getData().getBusiness_name().equals("")) {
+                        //没有商户名字   是帮手
+                        todoName.setText(taskDetailBean.getData().getHelper_name());
+                        todoShenfen.setText("个人帮手");
+                        todoVIP.setText(taskDetailBean.getData().getH_member_level());
+                        phonenumber=taskDetailBean.getData().getHelper_mobile_no();
+                    } else {
+                        //商户
+                        todoName.setText(taskDetailBean.getData().getBusiness_name());
+                        todoShenfen.setText("认证商户");
+                        todoVIP.setText(taskDetailBean.getData().getB_member_level());
+                        phonenumber=taskDetailBean.getData().getBusiness_mobile_no();
+                    }
+                }
+                mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
-                if(taskDetailBean.getData().getIs_helper_bid().equals("Y")){
+                if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     mTextview_taskmoney.setText("佣金：" + "帮手出价");
-                }else {
+                } else {
                     mTextview_taskmoney.setText("佣金：" + taskDetailBean.getData().getCommission() + "元");
                 }
                 mTextview_tasktime.setText("发布时间：" + taskDetailBean.getData().getCreateDate());
@@ -338,19 +436,19 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_hope());
 
 
-                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address()+"-"+taskDetailBean.getData().getDetailed_address());
+                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() + "-" + taskDetailBean.getData().getDetailed_address());
                 String imageURL = taskDetailBean.getData().getAvatar_imgUrl().substring(0, taskDetailBean.getData().getAvatar_imgUrl().length() - 1);
 
-                LogUtils.LOG("ceshi","调用glide","wode renwu");
+                LogUtils.LOG("ceshi", "调用glide", "wode renwu");
                 Glide.with(MytaskDetailActivity.this).load(imageURL).into(mImageview_head);
 //                mTextview_helplevle.setText(taskDetailBean.getData().getUser_grade());
-                image_url=taskDetailBean.getData().getTask_ImgUrl();
+                image_url = taskDetailBean.getData().getTask_ImgUrl();
                 setImage(image_url);
 
                 if (taskDetailBean.getData().getTask_Status_code().equals("02") || taskDetailBean.getData().getTask_Status_code().equals("01") || taskDetailBean.getData().getTask_Status_code().equals("08")) {
                     mButton_cancle.setVisibility(View.VISIBLE);
                     mButton_again.setVisibility(View.GONE);
-                }else {
+                } else {
                     mButton_cancle.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("01")) {
@@ -364,7 +462,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                     mButton_completed.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("帮手已经完成任务，快去确认订单");
                 }
-                if (taskDetailBean.getData().getTask_Status_code().equals("07")||taskDetailBean.getData().getTask_Status_code().equals("13")) {
+                if (taskDetailBean.getData().getTask_Status_code().equals("07") || taskDetailBean.getData().getTask_Status_code().equals("13")) {
                     mButton_cancle.setVisibility(View.GONE);
                     mButton_again.setVisibility(View.VISIBLE);
                     getmTextview_statejieshao.setText("任务已失效，请重新发布");
@@ -384,15 +482,16 @@ public class MytaskDetailActivity extends BaseActivityother {
         }).postHttp(Urls.Baseurl_cui + Urls.mytaskdetails, MytaskDetailActivity.this, 1, map);
 
     }
-    void setImage(String  image){
-        if(image==null||image.equals("")){
+
+    void setImage(String image) {
+        if (image == null || image.equals("")) {
 //            request(map_taskdetail);
-        }else {
-            String []images=image.split(",");
-            int len=images.length;
-            LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");
+        } else {
+            String[] images = image.split(",");
+            int len = images.length;
+            LogUtils.LOG("ceshi", "图片的个数" + images.length, "SkillDetailActivity分隔图片");
             imageview_urllist.clear();
-            for(int i=0;i<len;i++){
+            for (int i = 0; i < len; i++) {
                 imageview_urllist.add(images[i]);
             }
             adapter_gridviewpic.notifyDataSetChanged();
@@ -404,9 +503,9 @@ public class MytaskDetailActivity extends BaseActivityother {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        if(!isIssueAgain){
+        if (!isIssueAgain) {
             request(map_taskdetail);
-            LogUtils.LOG("ceshi1","onPostResume","onPostResume");
+            LogUtils.LOG("ceshi1", "onPostResume", "onPostResume");
         }
 
     }
@@ -415,5 +514,13 @@ public class MytaskDetailActivity extends BaseActivityother {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(paysuccess_BroadcastReciver);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (mPermission != null) {
+            mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
     }
 }

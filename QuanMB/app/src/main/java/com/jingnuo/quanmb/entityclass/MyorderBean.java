@@ -73,6 +73,7 @@ public class MyorderBean {
 
         private String Status_name;
         private double commission;
+        private double counteroffer_Amount;
         private int count;
         private String detailed_address;
         private String is_counteroffer;
@@ -86,6 +87,23 @@ public class MyorderBean {
         private String user_grade;
         private String img_url;
         private String specialty_name;
+        private String is_helper_bid;
+
+        public String getIs_helper_bid() {
+            return is_helper_bid;
+        }
+
+        public void setIs_helper_bid(String is_helper_bid) {
+            this.is_helper_bid = is_helper_bid;
+        }
+
+        public double getCounteroffer_Amount() {
+            return counteroffer_Amount;
+        }
+
+        public void setCounteroffer_Amount(double counteroffer_Amount) {
+            this.counteroffer_Amount = counteroffer_Amount;
+        }
 
         public String getSpecialty_name() {
             return specialty_name;

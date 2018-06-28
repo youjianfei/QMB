@@ -2,7 +2,9 @@ package com.jingnuo.quanmb.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,9 +25,13 @@ public class MyAuthenticationActivity extends BaseActivityother {
     TextView mTextview_shop_state;
     TextView mTextview_idcard;
     TextView mTextview_shopname;
-
+    RelativeLayout  relativeLayout_shop;
 
     WoderenzhengBean woderenzhengBean;
+
+
+    int  type=0;
+
 
 
 
@@ -42,6 +48,10 @@ public class MyAuthenticationActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        type=getIntent().getIntExtra("type",0);
+        if(type==1){
+            relativeLayout_shop.setVisibility(View.GONE);
+        }
         request();
 
     }
@@ -53,6 +63,7 @@ public class MyAuthenticationActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        relativeLayout_shop=findViewById(R.id.relativealyout_shop);
         mImageView_helper=findViewById(R.id.iamge_1);
         mImageView_shop=findViewById(R.id.iamge_2);
         mTextview_helper_state=findViewById(R.id.renzheng_state);
@@ -71,6 +82,7 @@ public class MyAuthenticationActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi",respose,"qode认证");
 
                 woderenzhengBean=new Gson().fromJson(respose,WoderenzhengBean.class);
+
                 if(woderenzhengBean.getData().getHelper_auth_status()==1){
                     mTextview_helper_state.setText("已认证");
                     mTextview_idcard.setText(woderenzhengBean.getData().getHelper_cer_no());

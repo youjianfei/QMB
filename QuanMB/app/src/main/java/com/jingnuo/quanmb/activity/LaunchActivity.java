@@ -3,15 +3,12 @@ package com.jingnuo.quanmb.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.class_.Popwindow_Issue;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.UserBean;
@@ -21,7 +18,6 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
-import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;

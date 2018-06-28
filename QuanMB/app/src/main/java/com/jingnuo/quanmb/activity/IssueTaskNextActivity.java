@@ -6,8 +6,6 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,9 +15,8 @@ import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
-import com.jingnuo.quanmb.class_.ProgressDlog;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
-import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -35,7 +32,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

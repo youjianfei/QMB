@@ -60,15 +60,31 @@ public class Adapter_myIssue extends BaseAdapter {
         viewHolder.mTextview_type.setText(mData.get(position).getSpecialty_name());
         viewHolder.mTextview_title.setText(mData.get(position).getTask_name());
         viewHolder.mTextview_issuetime.setText("发布时间：" + mData.get(position).getTask_StartDate());
-        viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
+
         viewHolder.mTextview_taskstate.setText(mData.get(position).getStatus_name());
         if(mData.get(position).getStatus_name().equals("待帮助")){
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_green2);
+            if(mData.get(position).getIs_helper_bid().equals("Y")){//待帮助状态下  判断是否由帮手出价
+                viewHolder.mTextview_money.setText("佣金：帮手出价");
+            }else {
+                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
+            }
+
         }else if(mData.get(position).getStatus_name().equals("已完成")||mData.get(position).getStatus_name().equals("已失效")
                 ||mData.get(position).getStatus_name().equals("取消任务")){
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_gray2);
+            if(mData.get(position).getCounteroffer_Amount()==0){
+                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
+            }else {
+                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCounteroffer_Amount() + "元");
+            }
         }else {
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_red);
+            if(mData.get(position).getCounteroffer_Amount()==0){
+                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
+            }else {
+                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCounteroffer_Amount() + "元");
+            }
         }
 
         if(mData.get(position).getTask_EndDate().equals("")){

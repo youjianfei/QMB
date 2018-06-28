@@ -1,8 +1,6 @@
 package com.jingnuo.quanmb.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -13,11 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.activity.AddAddressActivity;
-import com.jingnuo.quanmb.activity.LoginActivity;
-import com.jingnuo.quanmb.class_.Popwindow_loginAgain;
+import com.jingnuo.quanmb.popwinow.Popwindow_loginAgain;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,23 +1,23 @@
 package com.jingnuo.quanmb.Adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_shuaxinzhiding;
 import com.jingnuo.quanmb.Interface.InterfaceAdapterSuccess;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.class_.Popwindow_zhinengshuaxin;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.popwinow.Popwindow_zhinengshuaxin;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.MySkillBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
-import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;
@@ -95,46 +95,54 @@ public class Adapter_mystill extends BaseAdapter {
         holder.mTextview_putongshuxin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-              String URLL="";
-                if(type==1){//帮手刷新
-                    URLL=Urls.Baseurl + Urls.helperputongshuaxin +
-                            Staticdata.static_userBean.getData().getUser_token() +
-                            "&release_id=" + mData.get(position).getRelease_specialty_id();
-                }else {//商户刷新
-                    URLL=Urls.Baseurl + Urls.businessputongshuaxin +
-                            Staticdata.static_userBean.getData().getUser_token() +
-                            "&release_id=" + mData.get(position).getRelease_specialty_id();
-                }
-                LogUtils.LOG("ceshi", URLL, "普通刷新");
-                new Volley_Utils(new Interface_volley_respose() {
-
+                new Popwindow_Tip("刷新需要5个推广币", mContext, new Interence_complteTask() {
                     @Override
-                    public void onSuccesses(String respose) {
-                        int status = 0;
-                        String msg = "";
-                        LogUtils.LOG("ceshi", respose, "普通刷新");
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//
-                            msg = (String) object.get("message");//
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    public void onResult(boolean result) {
+                        if(result){
+                            String URLL="";
+                            if(type==1){//帮手刷新
+                                URLL=Urls.Baseurl + Urls.helperputongshuaxin +
+                                        Staticdata.static_userBean.getData().getUser_token() +
+                                        "&release_id=" + mData.get(position).getRelease_specialty_id();
+                            }else {//商户刷新
+                                URLL=Urls.Baseurl + Urls.businessputongshuaxin +
+                                        Staticdata.static_userBean.getData().getUser_token() +
+                                        "&release_id=" + mData.get(position).getRelease_specialty_id();
+                            }
+                            LogUtils.LOG("ceshi", URLL, "普通刷新");
+                            new Volley_Utils(new Interface_volley_respose() {
+
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    LogUtils.LOG("ceshi", respose, "普通刷新");
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//
+                                        msg = (String) object.get("message");//
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (status == 1) {
+                                        interfaceAdapterSuccess.onResult(true);
+                                        ToastUtils.showToast(mContext, "刷新成功");
+                                    } else {
+                                        ToastUtils.showToast(mContext, msg);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).Http(URLL, mContext, 0);
                         }
-                        if (status == 1) {
-                            interfaceAdapterSuccess.onResult(true);
-                            ToastUtils.showToast(mContext, "刷新成功");
-                        } else {
-                            ToastUtils.showToast(mContext, msg);
-                        }
-
                     }
+                }).showPopwindow();
 
-                    @Override
-                    public void onError(int error) {
 
-                    }
-                }).Http(URLL, mContext, 0);
 
             }
         });
