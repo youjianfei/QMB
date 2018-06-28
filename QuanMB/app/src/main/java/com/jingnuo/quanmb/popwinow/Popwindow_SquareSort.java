@@ -92,6 +92,7 @@ public class Popwindow_SquareSort {
         conView = LayoutInflater.from(activity).inflate(R.layout.popwindow_square_sort_layout, null, false);
         mPopupWindow = new PopupWindow(conView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
+        mPopupWindow.setFocusable(true);//设置焦点在window上
         mPopupWindow.setAnimationStyle(R.style.popmenu_animation);
         mPopupWindow.showAsDropDown(mLinearLayout, 0, 0, Gravity.BOTTOM);
 

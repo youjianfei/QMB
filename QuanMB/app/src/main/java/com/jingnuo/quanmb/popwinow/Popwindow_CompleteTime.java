@@ -50,6 +50,7 @@ public class Popwindow_CompleteTime {
         mPopupWindow=new PopupWindow(view,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
+        mPopupWindow.setFocusable(true);//设置焦点在window上
         mPopupWindow.setAnimationStyle(R.style.popskilltype_animation);
         mPopupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
         initview();

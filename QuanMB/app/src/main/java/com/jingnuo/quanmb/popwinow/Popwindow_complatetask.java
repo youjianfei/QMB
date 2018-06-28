@@ -40,6 +40,7 @@ public class Popwindow_complatetask {
         view= LayoutInflater.from(activity).inflate(R.layout.popwindow_complatetask,null,false);
         mPopupWindow=new PopupWindow(view, (int) (Staticdata.ScreenWidth*0.8), ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
+        mPopupWindow.setFocusable(true);//设置焦点在window上
         mPopupWindow.setAnimationStyle(R.style.popissue_animation);
         mPopupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
         Utils.setAlpha((float) 0.3,activity);

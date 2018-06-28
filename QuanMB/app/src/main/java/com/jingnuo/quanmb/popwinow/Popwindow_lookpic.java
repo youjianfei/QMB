@@ -42,6 +42,7 @@ public class Popwindow_lookpic {
         mPopupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         mPopupWindow.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.pop_lookpic_background));//// 设置背景图片，不能在布局中设置，要通过代码来设置
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
+        mPopupWindow.setFocusable(true);//设置焦点在window上
         mPopupWindow.setAnimationStyle(R.style.popwindow_anim_style); // 设置动画
         mPopupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.CENTER, 0, 0);//定位pop位置
         mViewpager= (ViewPager) view.findViewById(R.id.viewpager);
