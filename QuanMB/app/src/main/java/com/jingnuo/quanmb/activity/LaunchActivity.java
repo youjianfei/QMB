@@ -83,14 +83,14 @@ public class LaunchActivity extends BaseActivityother {
 
         }
 
-        mTimer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mhandler.sendEmptyMessage(0);
-            }
-        };
-        mTimer.schedule(timerTask, 1500);
+//        mTimer = new Timer();
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                mhandler.sendEmptyMessage(0);
+//            }
+//        };
+//        mTimer.schedule(timerTask, 1500);
     }
 
     @Override
@@ -139,11 +139,8 @@ public class LaunchActivity extends BaseActivityother {
                 if(status==1){//登录成功
                     userBean=new Gson().fromJson(respose,UserBean.class);
                     Staticdata.static_userBean=userBean;
-
                     LogUtils.LOG("ceshi", userBean.getData().getUser_token() , "fragment_account");
                     isLogin = true;
-
-
                     mTimer = new Timer();
                     TimerTask timerTask = new TimerTask() {
                         @Override
@@ -155,6 +152,7 @@ public class LaunchActivity extends BaseActivityother {
                 }else {
                     Intent intent_ = new Intent(LaunchActivity.this, LoginActivity.class);
                     startActivity(intent_);
+                    finish();
                 }
             }
 
@@ -162,6 +160,7 @@ public class LaunchActivity extends BaseActivityother {
             public void onError(int error) {
                 Intent intent_ = new Intent(LaunchActivity.this, LoginActivity.class);
                 startActivity(intent_);
+                finish();
 
             }
         }).postHttp(Urls.Baseurl+Urls.login, LaunchActivity.this, 1, map);
@@ -187,6 +186,7 @@ public class LaunchActivity extends BaseActivityother {
 //                        startActivity(intent);
 //                        finish();
 //                    }
+                    LogUtils.LOG("ceshi","跳转主页","main");
                     Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -200,6 +200,8 @@ public class LaunchActivity extends BaseActivityother {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mTimer.cancel();
+        if(mTimer!=null){
+            mTimer.cancel();
+        }
     }
 }

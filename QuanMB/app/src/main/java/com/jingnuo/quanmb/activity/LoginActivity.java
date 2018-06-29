@@ -272,6 +272,7 @@ public class LoginActivity extends BaseActivityother {
         LogUtils.LOG("ceshi1","点击返回","~~~~login");
         Intent intent_main=new Intent(this,MainActivity.class);
         startActivity(intent_main);
+        finish();
     }
 
 }
