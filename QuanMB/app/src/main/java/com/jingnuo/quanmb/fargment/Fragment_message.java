@@ -155,6 +155,8 @@ public class Fragment_message extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        request();
+        if(Staticdata.isLogin){
+            request();
+        }
     }
 }

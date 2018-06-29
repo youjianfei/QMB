@@ -42,6 +42,7 @@ import java.util.Map;
 public class SkillDetailActivity extends BaseActivityother {
     //控件
     TextView mTextview_more;
+    TextView mTextview_text_peoplelook;
     TextView mTextview_title;
     TextView mTextview_issuetime;
     TextView mTextview_peoplelook;
@@ -103,6 +104,7 @@ public class SkillDetailActivity extends BaseActivityother {
     }
     @Override
     protected void initView() {
+        mTextview_text_peoplelook=findViewById(R.id.text_peoplelook);
         mTextview_shopIN_time=findViewById(R.id.text_shopin_time);
         mTextview_relseaCount=findViewById(R.id.text_releaseCounts);
         mTextview_more=findViewById(R.id.text_more);
@@ -297,7 +299,7 @@ public class SkillDetailActivity extends BaseActivityother {
 
                 LogUtils.LOG("ceshi",respose,"服务详情");
                 mSkilldetailsbean=new Gson().fromJson(respose,SkillsdetailsBean.class);
-
+//                mTextview_text_peoplelook.setText("已有"+mSkilldetailsbean.getData().getDetail().get);
                 mTextview_title.setText(mSkilldetailsbean.getData().getDetail().getTitle());
                 mTextview_issuetime.setText(Utils.getStrTime(mSkilldetailsbean.getData().getDetail().getRelease_date()+""));
                 mTextview_skilltype.setText(mSkilldetailsbean.getData().getDetail().getSpecialty_name());

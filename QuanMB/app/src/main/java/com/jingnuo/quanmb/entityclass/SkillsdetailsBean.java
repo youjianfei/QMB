@@ -9,8 +9,8 @@ public class SkillsdetailsBean {
 
     /**
      * code : 1
-     * data : {"detail":{"business_name":"ad","business_no":"1","client_no":"90000000007","contacts":"李师傅","createDate":1523951173000,"createName":"root@192.168.1.184","description":"买卖外卖","detail_address":"","img_url":"d:aaa,c:ccc,f:fff,","mobile_no":"15729112602","release_address":"afsafsfwsfewfew","release_date":1523951172000,"release_specialty_id":1000000001,"service_area":"郑州","specialty_id":2011,"specialty_name":"帮送","status":"","title":"买卖","updateDate":1524293126000,"updateName":"root@192.168.1.184"}}
-     * message : 获取帖子详情成功
+     * data : {"detail":{"addmission_month":"1","auth_name":"awdawd","auto_refresh_enddate":1531384495000,"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg","business_avatar":1077,"business_no":"60000000060","business_reputation":117,"client_no":"90000000057","collection_status":1,"contacts":"杨腾飞","createDate":1529459124000,"createName":"root@47.95.254.3","description":"帮我修电视","detail_address":"郑州市南阳路192号","img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,","is_auto_refresh":"Y","is_top":"Y","mobile_no":"135","release_address":"升龙汇金\\广场写字楼","release_date":1529459124000,"release_num":20,"release_specialty_id":7,"service_area":"郑州","specialty_id":1203,"specialty_name":"电脑维修","status":"1","title":"修电视","top_enddate":1530530974000,"updateDate":1530234000000,"updateName":"root@47.95.254.3"}}
+     * message : 获取服务详情成功
      */
 
     private int code;
@@ -43,7 +43,7 @@ public class SkillsdetailsBean {
 
     public static class DataBean {
         /**
-         * detail : {"business_name":"ad","business_no":"1","client_no":"90000000007","contacts":"李师傅","createDate":1523951173000,"createName":"root@192.168.1.184","description":"买卖外卖","detail_address":"","img_url":"d:aaa,c:ccc,f:fff,","mobile_no":"15729112602","release_address":"afsafsfwsfewfew","release_date":1523951172000,"release_specialty_id":1000000001,"service_area":"郑州","specialty_id":2011,"specialty_name":"帮送","status":"","title":"买卖","updateDate":1524293126000,"updateName":"root@192.168.1.184"}
+         * detail : {"addmission_month":"1","auth_name":"awdawd","auto_refresh_enddate":1531384495000,"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg","business_avatar":1077,"business_no":"60000000060","business_reputation":117,"client_no":"90000000057","collection_status":1,"contacts":"杨腾飞","createDate":1529459124000,"createName":"root@47.95.254.3","description":"帮我修电视","detail_address":"郑州市南阳路192号","img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,","is_auto_refresh":"Y","is_top":"Y","mobile_no":"135","release_address":"升龙汇金\\广场写字楼","release_date":1529459124000,"release_num":20,"release_specialty_id":7,"service_area":"郑州","specialty_id":1203,"specialty_name":"电脑维修","status":"1","title":"修电视","top_enddate":1530530974000,"updateDate":1530234000000,"updateName":"root@47.95.254.3"}
          */
 
         private DetailBean detail;
@@ -58,74 +58,75 @@ public class SkillsdetailsBean {
 
         public static class DetailBean {
             /**
-             * business_name : ad
-             * business_no : 1
-             * client_no : 90000000007
-             * contacts : 李师傅
-             * createDate : 1523951173000
-             * createName : root@192.168.1.184
-             * description : 买卖外卖
-             * detail_address :
-             * img_url : d:aaa,c:ccc,f:fff,
-             * mobile_no : 15729112602
-             * release_address : afsafsfwsfewfew
-             * release_date : 1523951172000
-             * release_specialty_id : 1000000001
+             * addmission_month : 1
+             * auth_name : awdawd
+             * auto_refresh_enddate : 1531384495000
+             * avatar_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg
+             * business_avatar : 1077
+             * business_no : 60000000060
+             * business_reputation : 117
+             * client_no : 90000000057
+             * collection_status : 1
+             * contacts : 杨腾飞
+             * createDate : 1529459124000
+             * createName : root@47.95.254.3
+             * description : 帮我修电视
+             * detail_address : 郑州市南阳路192号
+             * img_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,
+             * is_auto_refresh : Y
+             * is_top : Y
+             * mobile_no : 135
+             * release_address : 升龙汇金\广场写字楼
+             * release_date : 1529459124000
+             * release_num : 20
+             * release_specialty_id : 7
              * service_area : 郑州
-             * specialty_id : 2011
-             * specialty_name : 帮送
-             * status :
-             * title : 买卖
-             * updateDate : 1524293126000
-             * updateName : root@192.168.1.184
+             * specialty_id : 1203
+             * specialty_name : 电脑维修
+             * status : 1
+             * title : 修电视
+             * top_enddate : 1530530974000
+             * updateDate : 1530234000000
+             * updateName : root@47.95.254.3
              */
 
+            private String addmission_month;
             private String auth_name;
+            private long auto_refresh_enddate;
+            private String avatar_url;
+            private int business_avatar;
             private String business_no;
+            private int business_reputation;
             private String client_no;
+            private int collection_status;
             private String contacts;
             private long createDate;
             private String createName;
             private String description;
             private String detail_address;
             private String img_url;
+            private String is_auto_refresh;
+            private String is_top;
             private String mobile_no;
             private String release_address;
             private long release_date;
+            private int release_num;
             private int release_specialty_id;
             private String service_area;
             private int specialty_id;
-            private int collection_status;
-            private int release_num;
             private String specialty_name;
             private String status;
             private String title;
+            private long top_enddate;
             private long updateDate;
             private String updateName;
-            private String avatar_url;
 
-            public int getRelease_num() {
-                return release_num;
+            public String getAddmission_month() {
+                return addmission_month;
             }
 
-            public void setRelease_num(int release_num) {
-                this.release_num = release_num;
-            }
-
-            public String getAvatar_url() {
-                return avatar_url;
-            }
-
-            public void setAvatar_url(String avatar_url) {
-                this.avatar_url = avatar_url;
-            }
-
-            public int getCollection_status() {
-                return collection_status;
-            }
-
-            public void setCollection_status(int collection_status) {
-                this.collection_status = collection_status;
+            public void setAddmission_month(String addmission_month) {
+                this.addmission_month = addmission_month;
             }
 
             public String getAuth_name() {
@@ -136,6 +137,30 @@ public class SkillsdetailsBean {
                 this.auth_name = auth_name;
             }
 
+            public long getAuto_refresh_enddate() {
+                return auto_refresh_enddate;
+            }
+
+            public void setAuto_refresh_enddate(long auto_refresh_enddate) {
+                this.auto_refresh_enddate = auto_refresh_enddate;
+            }
+
+            public String getAvatar_url() {
+                return avatar_url;
+            }
+
+            public void setAvatar_url(String avatar_url) {
+                this.avatar_url = avatar_url;
+            }
+
+            public int getBusiness_avatar() {
+                return business_avatar;
+            }
+
+            public void setBusiness_avatar(int business_avatar) {
+                this.business_avatar = business_avatar;
+            }
+
             public String getBusiness_no() {
                 return business_no;
             }
@@ -144,12 +169,28 @@ public class SkillsdetailsBean {
                 this.business_no = business_no;
             }
 
+            public int getBusiness_reputation() {
+                return business_reputation;
+            }
+
+            public void setBusiness_reputation(int business_reputation) {
+                this.business_reputation = business_reputation;
+            }
+
             public String getClient_no() {
                 return client_no;
             }
 
             public void setClient_no(String client_no) {
                 this.client_no = client_no;
+            }
+
+            public int getCollection_status() {
+                return collection_status;
+            }
+
+            public void setCollection_status(int collection_status) {
+                this.collection_status = collection_status;
             }
 
             public String getContacts() {
@@ -200,6 +241,22 @@ public class SkillsdetailsBean {
                 this.img_url = img_url;
             }
 
+            public String getIs_auto_refresh() {
+                return is_auto_refresh;
+            }
+
+            public void setIs_auto_refresh(String is_auto_refresh) {
+                this.is_auto_refresh = is_auto_refresh;
+            }
+
+            public String getIs_top() {
+                return is_top;
+            }
+
+            public void setIs_top(String is_top) {
+                this.is_top = is_top;
+            }
+
             public String getMobile_no() {
                 return mobile_no;
             }
@@ -222,6 +279,14 @@ public class SkillsdetailsBean {
 
             public void setRelease_date(long release_date) {
                 this.release_date = release_date;
+            }
+
+            public int getRelease_num() {
+                return release_num;
+            }
+
+            public void setRelease_num(int release_num) {
+                this.release_num = release_num;
             }
 
             public int getRelease_specialty_id() {
@@ -270,6 +335,14 @@ public class SkillsdetailsBean {
 
             public void setTitle(String title) {
                 this.title = title;
+            }
+
+            public long getTop_enddate() {
+                return top_enddate;
+            }
+
+            public void setTop_enddate(long top_enddate) {
+                this.top_enddate = top_enddate;
             }
 
             public long getUpdateDate() {

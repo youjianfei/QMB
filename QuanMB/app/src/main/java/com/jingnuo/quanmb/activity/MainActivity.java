@@ -21,6 +21,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.class_.Permissionmanage;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.fargment.Fragment_person;
 import com.jingnuo.quanmb.fargment.Fragment_square;
@@ -50,7 +51,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     PermissionHelper permissionHelper;
-    //百度地图相关
+
+    //高德定位
+
+
 
 
     @SuppressLint("ResourceType")
@@ -90,7 +94,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
 //可在其中解析amapLocation获取相应内容。
-                    LogUtils.LOG("ceshi","定位成功"+aMapLocation.getCity(),"zhuyr");
+                    LogUtils.LOG("ceshi","定位成功"+aMapLocation.getCity(),"mainactivity");
                     aMapLocation.getLatitude();//获取纬度
                     aMapLocation.getLongitude();//获取经度
                     aMapLocation.getCity();//城市信息
@@ -171,6 +175,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void setview() {
+        LogUtils.LOG("ceshi1","onPostResume222","~~~~main");
         transaction.add(R.id.framelayout_main, mFragment_square).commit();
         ChangeBottomButton(mRelativeLayout_square);//设置帮帮广场为选中状态
 
@@ -325,6 +330,25 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (permissionHelper != null) {
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        LogUtils.LOG("ceshi1","onPostResume111","~~~~main");
+        if(!Staticdata.isLogin){
+            transaction = fragmetnmanager.beginTransaction();
+            ChangeBottomButton(mRelativeLayout_square);
+            hideFragments(transaction);//隐藏所有Fragment,需要哪个显示哪一个
+            if (mFragment_square == null) {
+                mFragment_square = new Fragment_square();
+                transaction.add(R.id.framelayout_main, mFragment_square).commit();
+            } else {
+                transaction.show(mFragment_square).commit();
+            }
         }
     }
 }

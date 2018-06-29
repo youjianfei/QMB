@@ -196,7 +196,40 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@color/white">
+            <TextView
+                android:id="@+id/text444"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:text="服务区域："
+                android:textColor="@color/black_text" />
 
+            <TextView
+                android:id="@+id/textview_service_quyu"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:gravity="right"
+                android:background="@null"
+                android:lines="1"
+                android:text="郑州"
+                android:textColor="@color/black_text2"
+                android:textColorHint="@color/text_hide_tip"
+                android:textSize="14dp" />
+            <ImageView
+                android:id="@+id/image_line22"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/text444"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/gray_background" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -204,12 +237,14 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
                 android:text="所在地点："
+                android:layout_below="@+id/image_line22"
                 android:textColor="@color/black_text" />
 
             <TextView
                 android:id="@+id/textview_skilladdress"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/image_line22"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="45dp"
                 android:layout_marginTop="5dp"
@@ -229,6 +264,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="15dp"
+                android:layout_below="@+id/image_line22"
                 android:src="@mipmap/more" />
 
             <ImageView

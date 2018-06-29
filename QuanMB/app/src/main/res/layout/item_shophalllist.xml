@@ -39,7 +39,7 @@
         />
     <TextView
         android:id="@+id/textview_address"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text="二七万达"
         android:layout_below="@+id/text_shopskills"

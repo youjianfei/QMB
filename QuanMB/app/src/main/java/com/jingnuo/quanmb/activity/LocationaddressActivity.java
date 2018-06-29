@@ -91,7 +91,7 @@ public class LocationaddressActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_hu+Urls.getallCity+ Staticdata.static_userBean.getData().getUser_token(),LocationaddressActivity.this,0);
+        }).Http(Urls.Baseurl_hu+Urls.getallCity,LocationaddressActivity.this,0);
 
     }
 
@@ -103,7 +103,6 @@ public class LocationaddressActivity extends BaseActivityother {
 
             @Override
             public void onTouchingLetterChanged(String s) {
-                // TODO Auto-generated method stub
                 int position = listLocationAddressrAdapter.getPositionForSelection(s.charAt(0));
 
                 if (position != -1) {

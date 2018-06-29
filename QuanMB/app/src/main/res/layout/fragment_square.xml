@@ -65,7 +65,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="35dp"
+                android:layout_centerVertical="true"
                 android:text="定位中"
+                android:singleLine="true"
                 android:textColor="@color/black_text"
                 android:textSize="14sp" />
             <ImageView
@@ -74,7 +76,7 @@
                 android:layout_marginRight="12dp"
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/jiantou_xia"
-                />
+                android:layout_centerVertical="true"/>
 
         </RelativeLayout>
 

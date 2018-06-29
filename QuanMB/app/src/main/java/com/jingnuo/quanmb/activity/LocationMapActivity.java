@@ -171,8 +171,8 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mListview_searchaddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mTextview_nowaddress.setText(mData_searchaddress.get(i).getCityName()+mData_searchaddress.get(i).getSnippet());
-                mEdit_location.setText(mData_searchaddress.get(i).getTitle());
+                mTextview_nowaddress.setText(mData_searchaddress.get(i).getTitle());
+//                mEdit_location.setText("");
 //                Intent result = new Intent();
 //                result.putExtra("address", mTextview_nowaddress.getText() + "");
 //                String add = mEdit_location.getText() + "";

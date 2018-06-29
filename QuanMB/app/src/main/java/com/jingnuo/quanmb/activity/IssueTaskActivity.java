@@ -138,10 +138,6 @@ public class IssueTaskActivity extends BaseActivityother {
                     aMapLocation.getCity();//城市信息
                     mTextview_taskAddress.setText(aMapLocation.getAddress()
                             .replace(aMapLocation.getProvince()+aMapLocation.getCity(),""));
-
-
-
-
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 }
@@ -381,7 +377,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
     boolean initmap() {
         String task_type = mTextview_choose.getText() + "";
-        if (task_type.equals("请选择")) {
+        if (task_type.equals("请选择任务类型")) {
             ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }

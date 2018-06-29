@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
@@ -266,6 +267,11 @@ public class LoginActivity extends BaseActivityother {
         }
 
     }
-
+    @Override
+    public void onBackPressed() {
+        LogUtils.LOG("ceshi1","点击返回","~~~~login");
+        Intent intent_main=new Intent(this,MainActivity.class);
+        startActivity(intent_main);
+    }
 
 }

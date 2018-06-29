@@ -353,11 +353,9 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         LogUtils.LOG("ceshi","onResume","fragmentperson");
-//        mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
-//        LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
-//        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
-//        Glide.with(this).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mimage_chengwei);
-        requestInfo();
+        if(Staticdata.isLogin){
+            requestInfo();
+        }
     }
 
     void requestInfo(){
