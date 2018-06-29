@@ -99,7 +99,7 @@ public class SkillsdetailsBean {
             private String avatar_url;
             private int browse_number;
             private int business_avatar;
-            private String business_no;
+            private String business_no="";
             private int business_reputation;
             private String client_no;
             private int collection_status;
