@@ -9,8 +9,8 @@ public class SkillsdetailsBean {
 
     /**
      * code : 1
-     * data : {"detail":{"addmission_month":"1","auth_name":"awdawd","auto_refresh_enddate":1531384495000,"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg","business_avatar":1077,"business_no":"60000000060","business_reputation":117,"client_no":"90000000057","collection_status":1,"contacts":"杨腾飞","createDate":1529459124000,"createName":"root@47.95.254.3","description":"帮我修电视","detail_address":"郑州市南阳路192号","img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,","is_auto_refresh":"Y","is_top":"Y","mobile_no":"135","release_address":"升龙汇金\\广场写字楼","release_date":1529459124000,"release_num":20,"release_specialty_id":7,"service_area":"郑州","specialty_id":1203,"specialty_name":"电脑维修","status":"1","title":"修电视","top_enddate":1530530974000,"updateDate":1530234000000,"updateName":"root@47.95.254.3"}}
-     * message : 获取服务详情成功
+     * data : {"detail":{"addmissionDate":1528967650000,"addmission_month":"1","auth_name":"awdawd","auto_refresh_enddate":1531384495000,"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg","browse_number":1,"business_avatar":1077,"business_no":"60000000060","business_reputation":117,"client_no":"90000000057","collection_status":1,"contacts":"杨腾飞","createDate":1529459124000,"createName":"root@47.95.254.3","description":"帮我修电视","detail_address":"郑州市南阳路192号","img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,","is_auto_refresh":"Y","is_top":"Y","mobile_no":"135","release_address":"升龙汇金\\广场写字楼","release_date":1529459124000,"release_num":20,"release_specialty_id":7,"service_area":"郑州","specialty_id":1203,"specialty_name":"电脑维修","status":"1","title":"修电视","top_enddate":1530530974000,"updateDate":1530234000000,"updateName":"root@47.95.254.3"}}
+     * message : 查看服务详情成功
      */
 
     private int code;
@@ -43,7 +43,7 @@ public class SkillsdetailsBean {
 
     public static class DataBean {
         /**
-         * detail : {"addmission_month":"1","auth_name":"awdawd","auto_refresh_enddate":1531384495000,"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg","business_avatar":1077,"business_no":"60000000060","business_reputation":117,"client_no":"90000000057","collection_status":1,"contacts":"杨腾飞","createDate":1529459124000,"createName":"root@47.95.254.3","description":"帮我修电视","detail_address":"郑州市南阳路192号","img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,","is_auto_refresh":"Y","is_top":"Y","mobile_no":"135","release_address":"升龙汇金\\广场写字楼","release_date":1529459124000,"release_num":20,"release_specialty_id":7,"service_area":"郑州","specialty_id":1203,"specialty_name":"电脑维修","status":"1","title":"修电视","top_enddate":1530530974000,"updateDate":1530234000000,"updateName":"root@47.95.254.3"}
+         * detail : {"addmissionDate":1528967650000,"addmission_month":"1","auth_name":"awdawd","auto_refresh_enddate":1531384495000,"avatar_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg","browse_number":1,"business_avatar":1077,"business_no":"60000000060","business_reputation":117,"client_no":"90000000057","collection_status":1,"contacts":"杨腾飞","createDate":1529459124000,"createName":"root@47.95.254.3","description":"帮我修电视","detail_address":"郑州市南阳路192号","img_url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/specialtyImg/1a009009-ba0f-4672-bf60-7309b5e53d8953b67e3a84729.jpg.jpg,","is_auto_refresh":"Y","is_top":"Y","mobile_no":"135","release_address":"升龙汇金\\广场写字楼","release_date":1529459124000,"release_num":20,"release_specialty_id":7,"service_area":"郑州","specialty_id":1203,"specialty_name":"电脑维修","status":"1","title":"修电视","top_enddate":1530530974000,"updateDate":1530234000000,"updateName":"root@47.95.254.3"}
          */
 
         private DetailBean detail;
@@ -58,10 +58,12 @@ public class SkillsdetailsBean {
 
         public static class DetailBean {
             /**
+             * addmissionDate : 1528967650000
              * addmission_month : 1
              * auth_name : awdawd
              * auto_refresh_enddate : 1531384495000
              * avatar_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/80bd2a3e-7984-4425-9eaa-839872d5533e201572710478.jpg.jpg
+             * browse_number : 1
              * business_avatar : 1077
              * business_no : 60000000060
              * business_reputation : 117
@@ -90,10 +92,12 @@ public class SkillsdetailsBean {
              * updateName : root@47.95.254.3
              */
 
+            private long addmissionDate;
             private String addmission_month;
             private String auth_name;
             private long auto_refresh_enddate;
             private String avatar_url;
+            private int browse_number;
             private int business_avatar;
             private String business_no;
             private int business_reputation;
@@ -120,6 +124,14 @@ public class SkillsdetailsBean {
             private long top_enddate;
             private long updateDate;
             private String updateName;
+
+            public long getAddmissionDate() {
+                return addmissionDate;
+            }
+
+            public void setAddmissionDate(long addmissionDate) {
+                this.addmissionDate = addmissionDate;
+            }
 
             public String getAddmission_month() {
                 return addmission_month;
@@ -151,6 +163,14 @@ public class SkillsdetailsBean {
 
             public void setAvatar_url(String avatar_url) {
                 this.avatar_url = avatar_url;
+            }
+
+            public int getBrowse_number() {
+                return browse_number;
+            }
+
+            public void setBrowse_number(int browse_number) {
+                this.browse_number = browse_number;
             }
 
             public int getBusiness_avatar() {

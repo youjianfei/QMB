@@ -175,7 +175,6 @@ public class Popwindow_zhinengshuaxin {
             }else {
                 mTextview_days.setText(mdata.get(position).getDay() + "天置顶");
                 mTextview_count.setText(mdata.get(position).getConsume() + "个推广币");
-
             }
 
 

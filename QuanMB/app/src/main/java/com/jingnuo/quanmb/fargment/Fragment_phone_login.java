@@ -98,6 +98,7 @@ public class Fragment_phone_login extends Fragment {
                     isLogin = true;
                     Intent intent_login = new Intent(getActivity(), MainActivity.class);
                     getActivity().startActivity(intent_login);
+                    getActivity().finish();
                 }else {
                     ToastUtils.showToast(getActivity(),msg);
                 }

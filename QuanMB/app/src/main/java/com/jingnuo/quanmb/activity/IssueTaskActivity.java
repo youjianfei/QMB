@@ -377,7 +377,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
     boolean initmap() {
         String task_type = mTextview_choose.getText() + "";
-        if (task_type.equals("请选择任务类型")) {
+        if (task_type.equals("请选择类型")) {
             ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }

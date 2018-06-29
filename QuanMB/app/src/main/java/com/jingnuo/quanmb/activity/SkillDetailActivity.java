@@ -42,7 +42,7 @@ import java.util.Map;
 public class SkillDetailActivity extends BaseActivityother {
     //控件
     TextView mTextview_more;
-    TextView mTextview_text_peoplelook;
+    TextView mTextview_text_peoplelook;//浏览量
     TextView mTextview_title;
     TextView mTextview_issuetime;
     TextView mTextview_peoplelook;
@@ -313,11 +313,11 @@ public class SkillDetailActivity extends BaseActivityother {
                 collrctID=mSkilldetailsbean.getData().getDetail().getCollection_status()==0?1:2;
                 mImageview_collect.setSelected(mSkilldetailsbean.getData().getDetail().getCollection_status()==0?false:true);
                 mTextview_relseaCount.setText(mSkilldetailsbean.getData().getDetail().getRelease_num()+"个");
-
-                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
-                long ago = Long.parseLong(mSkilldetailsbean.getData().getDetail().getCreateDate()+"");//
-                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_shopIN_time.setText(time);
+                mTextview_text_peoplelook.setText("已有"+mSkilldetailsbean.getData().getDetail().getBrowse_number()+"人浏览");
+//                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
+//                long ago = Long.parseLong(mSkilldetailsbean.getData().getDetail().getCreateDate()+"");//
+//                String time = Utils.getDistanceTime(ago, now);//算出的差值
+                mTextview_shopIN_time.setText(mSkilldetailsbean.getData().getDetail().getAddmission_month()+"个月");
             }
 
             @Override
