@@ -100,6 +100,7 @@ public class SkillsdetailsBean {
             private int browse_number;
             private int business_avatar;
             private String business_no="";
+            private String helper_no="";
             private int business_reputation;
             private String client_no;
             private int collection_status;
@@ -124,6 +125,14 @@ public class SkillsdetailsBean {
             private long top_enddate;
             private long updateDate;
             private String updateName;
+
+            public String getHelper_no() {
+                return helper_no;
+            }
+
+            public void setHelper_no(String helper_no) {
+                this.helper_no = helper_no;
+            }
 
             public long getAddmissionDate() {
                 return addmissionDate;

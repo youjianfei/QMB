@@ -34,6 +34,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/re_title"
         android:overScrollMode="never"
+        android:layout_above="@+id/linearlayout_bottom"
         android:scrollbars="vertical"
         android:visibility="visible">
         <LinearLayout
@@ -474,70 +475,111 @@
                 <!--android:textSize="15dp" />-->
 
             </RelativeLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="20dp"
-                >
-                <Button
-                    android:id="@+id/button_complete"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:text="确认完成"
-                    android:textSize="15dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/re2"
-                    android:background="@drawable/button_yellow_20dp"
-                    android:visibility="gone"
-                    />
-                <Button
-                    android:id="@+id/button_completed"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:text="已完成"
-                    android:textSize="15dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/re2"
-                    android:background="@drawable/button_green_20dp"
-                    android:visibility="gone"
-                    />
-                <Button
-                    android:id="@+id/button_cancle"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/button_red_20dp"
-                    android:layout_alignParentBottom="true"
-                    android:text="撤消任务"
-                    android:visibility="visible"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
-                <Button
-                    android:id="@+id/button_again"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/button_green_20dp"
-                    android:layout_alignParentBottom="true"
-                    android:text="重新发布"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
 
-
-            </LinearLayout>
 
         </LinearLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
+    <LinearLayout
+        android:id="@+id/linearlayout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:id="@+id/button_cancle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#d5d2d2"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/chexiao"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:text="撤消任务"
+                android:gravity="center"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/_xiugaijiage"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#ff6b52"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/bianji"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="修改价格"
+                android:textSize="15dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/re2"
+                android:visibility="visible"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/button_complete"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="确认完成"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:layout_below="@+id/re2"
+            android:background="#40ce3b"
+            android:visibility="gone"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/button_completed"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="已完成"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:layout_below="@+id/re2"
+            android:background="#ff6b52"
+            android:visibility="gone"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/button_again"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="#fb1419"
+            android:text="重新发布"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+
+    </LinearLayout>
 
 
 

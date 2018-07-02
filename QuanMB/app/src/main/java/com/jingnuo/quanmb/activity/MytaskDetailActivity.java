@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -68,10 +69,11 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     MyGridView imageGridview;
 
-    Button mButton_cancle;
-    Button mButton_complete;
-    Button mButton_completed;
-    Button mButton_again;
+    LinearLayout mButton_cancle;
+    LinearLayout mText_xiugaijiage;
+    TextView mButton_complete;
+    TextView mButton_completed;
+    TextView mButton_again;
 
     //数据
     String ID = "";
@@ -269,7 +271,12 @@ public class MytaskDetailActivity extends BaseActivityother {
 
             }
         });
-
+        mText_xiugaijiage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(MytaskDetailActivity.this,"修改价格");
+            }
+        });
     }
 
     @Override
@@ -290,6 +297,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         getmTextview_statejieshao = findViewById(R.id.text_state);
         mImageview_head = findViewById(R.id.image_task);
         mButton_cancle = findViewById(R.id.button_cancle);
+        mText_xiugaijiage = findViewById(R.id._xiugaijiage);
         mButton_complete = findViewById(R.id.button_complete);
         mButton_completed = findViewById(R.id.button_completed);
         mButton_again = findViewById(R.id.button_again);
@@ -451,8 +459,11 @@ public class MytaskDetailActivity extends BaseActivityother {
                 } else {
                     mButton_cancle.setVisibility(View.GONE);
                 }
-                if (taskDetailBean.getData().getTask_Status_code().equals("01")) {
+                if (taskDetailBean.getData().getTask_Status_code().equals("01")|| taskDetailBean.getData().getTask_Status_code().equals("08")) {
                     getmTextview_statejieshao.setText("正在等待帮手接单...");
+                    mText_xiugaijiage.setVisibility(View.VISIBLE);//修改价格
+                }else {
+                    mText_xiugaijiage.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("02")) {
                     getmTextview_statejieshao.setText("帮手正在全速完成任务...");

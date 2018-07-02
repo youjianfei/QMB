@@ -145,7 +145,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:divider="@null"
-        android:dividerHeight="8dp"
+        android:dividerHeight="5dp"
         ptr:ptrMode="both"
         />
 

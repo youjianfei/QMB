@@ -20,8 +20,10 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.fargment.Fragment_person;
 import com.jingnuo.quanmb.fargment.Fragment_square;
@@ -29,9 +31,11 @@ import com.jingnuo.quanmb.fargment.Fragment_still;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
+import static com.jingnuo.quanmb.data.Staticdata.static_userBean;
 
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
@@ -94,13 +98,28 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
 //可在其中解析amapLocation获取相应内容。
-                    LogUtils.LOG("ceshi","定位成功"+aMapLocation.getCity(),"mainactivity");
-                    aMapLocation.getLatitude();//获取纬度
-                    aMapLocation.getLongitude();//获取经度
+                    LogUtils.LOG("ceshiqq","定位成功,纬度："+aMapLocation.getLatitude()+"精度："+ aMapLocation.getLongitude(),"mainactivity");
+
+                    String xValue=aMapLocation.getLatitude()+"";//获取纬度
+                    String yValue=aMapLocation.getLongitude()+"";//获取经度
                     aMapLocation.getCity();//城市信息
                     Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
                     intent.putExtra("address",aMapLocation.getCity());
                     sendBroadcast(intent);
+
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).Http(Urls.Baseurl+Urls.updataXYDU+Staticdata.static_userBean.getData().getUser_token()+"&x_value=" +
+                            xValue+"&y_value="+yValue,MainActivity.this,0);
+
 
 
                 }else {
@@ -116,22 +135,27 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void setmapdata() {
     //初始化定位
-        mLocationClient = new AMapLocationClient(getApplicationContext());
-    //设置定位回调监听
-        mLocationClient.setLocationListener(mLocationListener);
+        if(mLocationClient==null){
+            mLocationClient = new AMapLocationClient(getApplicationContext());
+            //设置定位回调监听
+            mLocationClient.setLocationListener(mLocationListener);
 
-        //初始化AMapLocationClientOption对象
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setOnceLocation(true);
-        //设置是否返回地址信息（默认返回地址信息）
-        mLocationOption.setNeedAddress(true);
+            //初始化AMapLocationClientOption对象
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+//        mLocationOption.setOnceLocation(true);
+            //设置是否返回地址信息（默认返回地址信息）
+            mLocationOption.setNeedAddress(true);
+            //设置定位间隔,单位毫秒,默认为2000ms
+            mLocationOption.setInterval(100000);
+            //给定位客户端对象设置定位参数
+            mLocationClient.setLocationOption(mLocationOption);
+            //启动定位
+            mLocationClient.startLocation();
 
-        //给定位客户端对象设置定位参数
-        mLocationClient.setLocationOption(mLocationOption);
-        //启动定位
-        mLocationClient.startLocation();
+        }
+
     }
 
     public void initview() {
@@ -333,7 +357,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mLocationClient!=null){
+            mLocationClient.stopLocation();
+        }
+    }
 
     @Override
     protected void onPostResume() {

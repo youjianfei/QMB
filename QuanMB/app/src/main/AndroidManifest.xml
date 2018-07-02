@@ -161,7 +161,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.HuiyuanRechargeActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PaytuiguangbiActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.PaySuccessActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.AboutUsActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.AboutUsActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.FirstLoginActivity"></activity>
     </application>
 
 </manifest>

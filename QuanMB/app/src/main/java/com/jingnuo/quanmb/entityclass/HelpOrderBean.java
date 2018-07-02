@@ -78,7 +78,6 @@ public class HelpOrderBean {
             private double order_amount;
             private String order_no;
             private String order_status;
-            private String order_status_name;
             private String task_StartDate;
             private String task_description;
             private int task_id;
@@ -163,14 +162,6 @@ public class HelpOrderBean {
 
             public void setOrder_status(String order_status) {
                 this.order_status = order_status;
-            }
-
-            public String getOrder_status_name() {
-                return order_status_name;
-            }
-
-            public void setOrder_status_name(String order_status_name) {
-                this.order_status_name = order_status_name;
             }
 
             public String getTask_StartDate() {

@@ -6,13 +6,13 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-        public static String Baseurl = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/v1.0/";
+//        public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.1.104:8080/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://192.168.1.185:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -56,6 +56,7 @@ public class Urls {
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
+    public static String BHSkissAll = "user/querySpecialtyList";//某个商家或帮手的所有服务
 
 
 
@@ -130,6 +131,7 @@ public class Urls {
     public static String mySuggest = "user/myComplaints";//投诉和建议
     public static String setSafepassword = "user/setSecurityCode";//设置支付密码
     public static String checkSafepassword = "user/checkSecurityCode";//校验支付密码
+    public static String updataXYDU = "user/updateXYDu?user_token=";//更新经纬度
 
 
     //支付

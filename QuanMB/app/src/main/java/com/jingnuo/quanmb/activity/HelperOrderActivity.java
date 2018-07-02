@@ -136,7 +136,7 @@ public class HelperOrderActivity extends BaseActivityother {
                 helpOrderBean=new Gson().fromJson(respose,HelpOrderBean.class);
                 Glide.with(HelperOrderActivity.this).load(helpOrderBean.getData().getDetail().getHeadUrl()).into(mImageview_head);
                 mTextview_titile.setText(helpOrderBean.getData().getDetail().getTask_name());
-                mTextview_state.setText(helpOrderBean.getData().getDetail().getOrder_status_name());
+                mTextview_state.setText(helpOrderBean.getData().getDetail().getOrder_status());
                 mTextview_money.setText("佣金："+helpOrderBean.getData().getDetail().getOrder_amount()+"元");
                 mTextview_time.setText("发布时间："+helpOrderBean.getData().getDetail().getTask_StartDate());
 

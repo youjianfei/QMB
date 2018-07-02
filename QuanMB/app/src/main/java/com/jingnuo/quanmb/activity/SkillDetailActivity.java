@@ -134,6 +134,7 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mImageview_shopPic.setOnClickListener(this);
         mLinearlayout_collection.setOnClickListener(this);
         mImageView_Suggest.setOnClickListener(this);
         mTextview_more.setOnClickListener(this);
@@ -166,6 +167,16 @@ public class SkillDetailActivity extends BaseActivityother {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.image_shoppic:
+                Intent intent_shopskills=new Intent(SkillDetailActivity.this,ShophallActivity.class);
+                if (role.equals("1")){
+                    intent_shopskills.putExtra("NO","H"+mSkilldetailsbean.getData().getDetail().getHelper_no());
+                }else if (role.equals("2")){
+                    intent_shopskills.putExtra("NO","B"+mSkilldetailsbean.getData().getDetail().getBusiness_no());
+                }
+                startActivity(intent_shopskills);
+
+                break;
             case R.id.image_complain:
                 if (Staticdata.static_userBean.getData() == null) {
                     ToastUtils.showToast(SkillDetailActivity.this, "请先登录！");

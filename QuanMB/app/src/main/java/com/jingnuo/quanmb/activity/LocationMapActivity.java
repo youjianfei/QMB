@@ -229,7 +229,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         aMap.clear();
         aMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));//将定位图标移动到当前屏幕中心位置
         aMap.addMarker(new MarkerOptions().position(cameraPosition.target).icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                .decodeResource(getResources(),R.mipmap.address_blue))));
+                .decodeResource(getResources(),R.mipmap.location_icon))));
         RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude,latLng.longitude), 200,GeocodeSearch.AMAP);
         geocoderSearch.getFromLocationAsyn(query);
 //执行搜索方法

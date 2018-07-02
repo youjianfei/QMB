@@ -49,6 +49,8 @@ public class ShophallActivity extends BaseActivityother {
     int page=1;
     List<SkillmentlistBean.DataBean.ListBean> mData;
 
+    String NO="";//查看帮手和商家的所有服务使用
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_shophall;
@@ -66,8 +68,11 @@ public class ShophallActivity extends BaseActivityother {
         mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         specialty_id=getIntent().getIntExtra("specialty_id",0);
         search=getIntent().getStringExtra("search");
-        mData = new ArrayList<>();
 
+        NO=getIntent().getStringExtra("NO");
+
+
+        mData = new ArrayList<>();
         mAdapter_shophall = new Adapter_shophall(mData, this,mPermission);
         mListview.setAdapter(mAdapter_shophall);
     }
@@ -157,10 +162,16 @@ public class ShophallActivity extends BaseActivityother {
     }
 
     void request( final int page) {
+        LogUtils.LOG("ceshi","接口："+NO,"找专业列表");
         String URL="";
-        if(specialty_id==0){
+        if(NO!=null&&NO.startsWith("H")){
+            URL=Urls.Baseurl+Urls.BHSkissAll+"?helper_no="+NO.substring(1)+"&type="+1+"&curPageNo="+page;
+        }else   if(NO!=null&&NO.startsWith("B")){
+            URL=Urls.Baseurl+Urls.BHSkissAll+"?business_no="+NO.substring(1)+"&type="+2+"&curPageNo="+page;
+        }
+        if(specialty_id==0&&NO==null){
             URL=Urls.Baseurl+Urls.searchSkill+"?title="+search+"&curPageNo="+page;
-        }else {
+        }else if(specialty_id!=0&&NO==null){
             URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&curPageNo="+page;
         }
         LogUtils.LOG("ceshi","接口："+URL,"找专业列表");

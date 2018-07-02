@@ -41,12 +41,14 @@ public class LaunchActivity extends BaseActivityother {
     int Screenhight = 0;
     int Screenwidth = 0;
 
-    String phonenumber="";
-    String password="";
+    String phonenumber = "";
+    String password = "";
     String publicEncryptedResult = "";//加密的密码
 
 
     UserBean userBean;
+
+    boolean isFirstlogin = true;
 
 
     @Override
@@ -57,10 +59,10 @@ public class LaunchActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        phonenumber= SharedPreferencesUtils.getString(LaunchActivity.this,"QMB","phonenumber");
-        password= SharedPreferencesUtils.getString(LaunchActivity.this,"QMB","password");
+        phonenumber = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "phonenumber");
+        password = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "password");
 
-        if(phonenumber.equals("")||password.equals("")){
+        if (phonenumber.equals("") || password.equals("")) {
             mTimer = new Timer();
             TimerTask timerTask = new TimerTask() {
                 @Override
@@ -69,11 +71,11 @@ public class LaunchActivity extends BaseActivityother {
                 }
             };
             mTimer.schedule(timerTask, 1500);
-        }else {
-            Map map_autoLogind=new HashMap();
-            publicEncryptedResult= PasswordJiami.passwordjiami(password);//对密码加密
+        } else {
+            Map map_autoLogind = new HashMap();
+            publicEncryptedResult = PasswordJiami.passwordjiami(password);//对密码加密
             LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
-            Userphonenumber=phonenumber;//将电话号设为全局变量
+            Userphonenumber = phonenumber;//将电话号设为全局变量
             map_autoLogind.put("username", phonenumber);
             map_autoLogind.put("password", publicEncryptedResult);
             map_autoLogind.put("Jpush_id", Staticdata.JpushID);
@@ -96,14 +98,14 @@ public class LaunchActivity extends BaseActivityother {
     @Override
     protected void initData() {
         UUID = InstalltionId.id(this);//第一次运行生成一个id
-
+//        isFirstlogin = SharedPreferencesUtils.getBoolean(this, "QMB", "isfirstlogin");
         Screenhight = SizeUtils.getScreenHeightPx(this);
         Screenwidth = SizeUtils.getScreenWidthPx(this);
         Staticdata.ScreenHight = Screenhight;
         ScreenWidth = Screenwidth;
-        ImageView image=new ImageView(this);
+        ImageView image = new ImageView(this);
         image.setBackgroundResource(R.mipmap.launchpic);
-        LinearLayout.LayoutParams mLayoutparams=new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth*1.77));
+        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 1.77));
         image.setLayoutParams(mLayoutparams);
         mLinearlauout_root.addView(image);
 
@@ -121,25 +123,25 @@ public class LaunchActivity extends BaseActivityother {
 
     }
 
-    void request(Map map){
-        LogUtils.LOG("ceshi", "登录MAP+"+map , "fragment_account");
+    void request(Map map) {
+        LogUtils.LOG("ceshi", "登录MAP+" + map, "fragment_account");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
 
-                int  status=0;
-                String msg="";
+                int status = 0;
+                String msg = "";
                 try {
-                    JSONObject object=new JSONObject(respose);
+                    JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");//登录状态
                     msg = (String) object.get("message");//登录返回信息
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(status==1){//登录成功
-                    userBean=new Gson().fromJson(respose,UserBean.class);
-                    Staticdata.static_userBean=userBean;
-                    LogUtils.LOG("ceshi", userBean.getData().getUser_token() , "fragment_account");
+                if (status == 1) {//登录成功
+                    userBean = new Gson().fromJson(respose, UserBean.class);
+                    Staticdata.static_userBean = userBean;
+                    LogUtils.LOG("ceshi", userBean.getData().getUser_token(), "fragment_account");
                     isLogin = true;
                     mTimer = new Timer();
                     TimerTask timerTask = new TimerTask() {
@@ -149,7 +151,7 @@ public class LaunchActivity extends BaseActivityother {
                         }
                     };
                     mTimer.schedule(timerTask, 1000);
-                }else {
+                } else {
                     Intent intent_ = new Intent(LaunchActivity.this, LoginActivity.class);
                     startActivity(intent_);
                     finish();
@@ -163,8 +165,7 @@ public class LaunchActivity extends BaseActivityother {
                 finish();
 
             }
-        }).postHttp(Urls.Baseurl+Urls.login, LaunchActivity.this, 1, map);
-
+        }).postHttp(Urls.Baseurl + Urls.login, LaunchActivity.this, 1, map);
 
 
     }
@@ -186,21 +187,24 @@ public class LaunchActivity extends BaseActivityother {
 //                        startActivity(intent);
 //                        finish();
 //                    }
-                    LogUtils.LOG("ceshi","跳转主页","main");
-                    Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+                    LogUtils.LOG("ceshi", "跳转主页", "main");
+                    if (isFirstlogin) {
+                        Intent intent = new Intent(LaunchActivity.this, FirstLoginActivity.class);
                         startActivity(intent);
-                        finish();
+                    } else {
+                        Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    finish();
                     break;
             }
         }
-
-
     };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mTimer!=null){
+        if (mTimer != null) {
             mTimer.cancel();
         }
     }
