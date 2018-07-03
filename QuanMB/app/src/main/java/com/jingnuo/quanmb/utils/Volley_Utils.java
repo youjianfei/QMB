@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
@@ -120,6 +121,7 @@ public class Volley_Utils {
     public void postHttp(String URL, final Context mContext, int Method, final Map<String, String> map) {
         LogUtils.LOG("ceshi","post请求触发","vollryUtils");
         mQueue = Volley.newRequestQueue(mContext);
+
         mStringRequest = new StringRequest(Method, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -174,7 +176,7 @@ public class Volley_Utils {
                 return map;
             }
         };
-
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         mQueue.add(mStringRequest);
 
     }

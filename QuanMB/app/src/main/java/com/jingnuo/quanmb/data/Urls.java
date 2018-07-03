@@ -6,12 +6,12 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
-//        public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+        public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
-    public static String Baseurl = "http://192.168.1.185:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://192.168.1.185:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -48,6 +48,9 @@ public class Urls {
     public static String checkissuetask = "task/querySpecialty/checkAnnouncementList";//检验任务内容是否有违规
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号
     public static String Issue_again = "task/taskBackon?user_token=";//重新上架任务
+    public static String apply_longtime = "order/applyforDelay";//帮手商家申请延时
+    public static String agreeOrrefuse_longtime = "task/delayAcceptOrNo";//雇主同意或者拒接延时
+    public static String taskaddCommission = "task/addCommission";//任务加价
 
     //专业/商家模块
 

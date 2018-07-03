@@ -57,8 +57,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     //数据
     Adapter_SearchAddress mAdapter_address;
     List<PoiItem>  mData_searchaddress;
-    // 定位相关
-    boolean isFirstLoc = true; // 是否首次定位
 
     //POI城市检索
     PoiSearch.Query query;
@@ -67,6 +65,10 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     AMap aMap;
     String finallocation;//poi名称
     String address;//地址
+
+    String xValue="";//纬度
+    String yValue="";//经度
+    String citycode="";//城市名
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         aMap.setOnCameraChangeListener(this);
-        LogUtils.LOG("ceshi","11111111111111","skdafjskafjsadf");
         geocoderSearch = new GeocodeSearch(this);
         geocoderSearch.setOnGeocodeSearchListener(this);
 
@@ -124,7 +125,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                     //处理事件
-                    LogUtils.LOG("ceshi", "点击了确定按钮", "高德地图搜索地址");
                     String address = mEdit_search.getText() + "";
                     if (address.equals("")) {
                     } else {
@@ -156,6 +156,9 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                    return;
 //                }
                 result.putExtra("address2", add);
+                result.putExtra("xValue", xValue);
+                result.putExtra("yValue", yValue);
+                result.putExtra("citycode", citycode);
                 setResult(2018418, result);
                 finish();
             }
@@ -172,6 +175,10 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mTextview_nowaddress.setText(mData_searchaddress.get(i).getTitle());
+                xValue=mData_searchaddress.get(i).getLatLonPoint().getLatitude()+"";
+                yValue=mData_searchaddress.get(i).getLatLonPoint().getLongitude()+"";
+                citycode=mData_searchaddress.get(i).getCityName()+"";
+
 //                mEdit_location.setText("");
 //                Intent result = new Intent();
 //                result.putExtra("address", mTextview_nowaddress.getText() + "");
@@ -222,8 +229,8 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     public void onCameraChange(CameraPosition cameraPosition) {//地图移动
         LatLng latLng = cameraPosition.target;
 //泥逆地理
-
-
+        xValue=latLng.latitude+"";//纬度
+        yValue=latLng.longitude+"";//经度
 // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
 
         aMap.clear();
@@ -256,6 +263,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         String all=regeocodeResult.getRegeocodeAddress().getFormatAddress();
         String xianshi=all.replace(tichu,"");
         mTextview_nowaddress.setText(xianshi);
+        citycode=regeocodeResult.getRegeocodeAddress().getCity();
 
 //        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
     }

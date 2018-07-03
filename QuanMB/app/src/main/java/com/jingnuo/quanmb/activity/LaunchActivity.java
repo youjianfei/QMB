@@ -98,7 +98,7 @@ public class LaunchActivity extends BaseActivityother {
     @Override
     protected void initData() {
         UUID = InstalltionId.id(this);//第一次运行生成一个id
-//        isFirstlogin = SharedPreferencesUtils.getBoolean(this, "QMB", "isfirstlogin");
+        isFirstlogin = SharedPreferencesUtils.getBoolean(this, "QMB", "isfirstlogin");
         Screenhight = SizeUtils.getScreenHeightPx(this);
         Screenwidth = SizeUtils.getScreenWidthPx(this);
         Staticdata.ScreenHight = Screenhight;

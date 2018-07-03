@@ -83,6 +83,24 @@ public class HelpOrderBean {
             private int task_id;
             private String task_name;
             private String task_EndDate;
+            private String order_enddate;
+            private String task_Img_Url;
+
+            public String getTask_Img_Url() {
+                return task_Img_Url;
+            }
+
+            public void setTask_Img_Url(String task_Img_Url) {
+                this.task_Img_Url = task_Img_Url;
+            }
+
+            public String getOrder_enddate() {
+                return order_enddate;
+            }
+
+            public void setOrder_enddate(String order_enddate) {
+                this.order_enddate = order_enddate;
+            }
 
             public String getTask_EndDate() {
                 return task_EndDate;

@@ -187,6 +187,15 @@
             android:layout_marginRight="30dp"
             android:textColor="@color/black_text"
             />
+        <com.jingnuo.quanmb.customview.MyGridView
+            android:id="@+id/GridView_PIC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/white"
+            android:layout_below="@+id/text_taskdetail"
+            android:numColumns="3"/>
         <ImageView
             android:id="@+id/line2"
             android:layout_width="match_parent"
@@ -194,7 +203,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:src="@color/gray_dfdfdf"
-            android:layout_below="@+id/text_taskdetail"
+            android:layout_below="@+id/GridView_PIC"
             />
         <ImageView
             android:layout_width="15dp"
@@ -203,6 +212,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="18dp"
             android:layout_below="@+id/line2"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/text3"
@@ -210,6 +220,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/line2"
             android:text="剩余完成时间"
+            android:visibility="gone"
             android:textSize="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="50dp"
@@ -221,6 +232,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="15dp"
+            android:visibility="gone"
             android:textColor="@color/black_text"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
@@ -235,6 +247,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:src="@color/gray_dfdfdf"
+            android:visibility="gone"
             android:layout_below="@+id/text3"
             android:layout_marginTop="16dp"
             />
@@ -272,52 +285,41 @@
             android:layout_marginBottom="15dp"
             android:gravity="right"
             />
-        <!--<ImageView-->
-            <!--android:id="@+id/line4"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:src="@color/gray_dfdfdf"-->
-            <!--android:layout_below="@+id/text_address"-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--/>-->
-        <!--<ImageView-->
-            <!--android:layout_width="15dp"-->
-            <!--android:layout_height="15dp"-->
-            <!--android:src="@mipmap/phone_green"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginTop="18dp"-->
-            <!--android:layout_below="@+id/line4"-->
-            <!--/>-->
-        <!--<TextView-->
-            <!--android:id="@+id/text5"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/line4"-->
-            <!--android:text="客户电话"-->
-            <!--android:textSize="15dp"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:layout_marginLeft="50dp"-->
-            <!--android:textColor="#7f7f7f"-->
-            <!--/>-->
-        <!--<TextView-->
-            <!--android:id="@+id/text_number"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text=""-->
-            <!--android:textSize="15dp"-->
-            <!--android:textColor="@color/black_text"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:layout_below="@+id/line4"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--android:visibility="visible"-->
-            <!--/>-->
+
 
     </RelativeLayout>
+       <LinearLayout
+           android:id="@+id/linearlayout_timecancle"
+           android:layout_width="120dp"
+           android:layout_height="120dp"
+           android:orientation="vertical"
+           android:layout_below="@+id/re2"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="20dp"
+           android:layout_marginBottom="20dp"
+           android:gravity="center"
+           android:background="@mipmap/time_orange">
+           <TextView
+               android:id="@+id/resttime_tip"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="剩余时间"
+               android:textColor="@color/white"
+               android:textSize="15dp"
+               />
+           <TextView
+               android:id="@+id/text_timecancle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="2天12小时23分"
+               android:textSize="12dp"
+               android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+               />
+       </LinearLayout>
+
+
+
         </RelativeLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
     <LinearLayout

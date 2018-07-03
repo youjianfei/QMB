@@ -50,6 +50,7 @@ public class Popwindow_Tip {
         mTextview_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                interence_complteTask.onResult(false);
                 mPopupWindow.dismiss();
             }
         });

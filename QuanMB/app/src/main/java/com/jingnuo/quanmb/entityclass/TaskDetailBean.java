@@ -88,6 +88,33 @@ public class TaskDetailBean {
         private String business_mobile_no;
         private String h_member_level;
         private String b_member_level;
+        private String delay="";
+        private String is_delay="";
+        private String delay_time;
+
+        public String getDelay() {
+            return delay;
+        }
+
+        public void setDelay(String delay) {
+            this.delay = delay;
+        }
+
+        public String getIs_delay() {
+            return is_delay;
+        }
+
+        public void setIs_delay(String is_delay) {
+            this.is_delay = is_delay;
+        }
+
+        public String getDelay_time() {
+            return delay_time;
+        }
+
+        public void setDelay_time(String delay_time) {
+            this.delay_time = delay_time;
+        }
 
         public String getB_h_url() {
             return b_h_url;

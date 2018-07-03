@@ -308,7 +308,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
         Staticdata.map_task.put("client_name", lianxiren);
         Staticdata.map_task.put("client_sex", sex + "");
         Staticdata.map_task.put("task_Img_id", "");
-        Staticdata.map_task.put("city_code", "0");
         return true;
     }
 

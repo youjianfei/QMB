@@ -221,10 +221,10 @@ public class LoginActivity extends BaseActivityother {
     void wechatLogin(Map map){
         LogUtils.LOG("ceshi", "微信map" + map.toString(),"三方登录回调");
         LogUtils.LOG("ceshi", "微信mapURL" +Urls.Baseurl+Urls.wechatlogin,"三方登录回调");
-
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+
                 LogUtils.LOG("ceshi", "微信登录结果" + respose,"三方登录回调");
                 int status = 0;
                 String msg = "";

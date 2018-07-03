@@ -94,6 +94,10 @@ public class IssueTaskActivity extends BaseActivityother {
     String commission = "";
     Bitmap mBitmap = null;
 
+    String xValue="";//纬度
+    String yValue="";//经度
+    String citycode="";//城市名字
+
     String detailed_address = "";
     String task_Status_code = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
@@ -133,9 +137,9 @@ public class IssueTaskActivity extends BaseActivityother {
                 if (aMapLocation.getErrorCode() == 0) {
 //可在其中解析amapLocation获取相应内容。
                     LogUtils.LOG("ceshi","定位成功"+aMapLocation.getAddress(),"发布任务");
-                    aMapLocation.getLatitude();//获取纬度
-                    aMapLocation.getLongitude();//获取经度
-                    aMapLocation.getCity();//城市信息
+                    xValue=aMapLocation.getLatitude()+"";//获取纬度
+                    yValue=aMapLocation.getLongitude()+"";//获取经度
+                    citycode=aMapLocation.getCity();//城市信息
                     mTextview_taskAddress.setText(aMapLocation.getAddress()
                             .replace(aMapLocation.getProvince()+aMapLocation.getCity(),""));
                 }else {
@@ -449,6 +453,9 @@ public class IssueTaskActivity extends BaseActivityother {
         map_issueTask.put("release_address", release_address);
         map_issueTask.put("detailed_address", detailed_address + "");
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
+        map_issueTask.put("city_code", citycode + "");
+        map_issueTask.put("x_value", xValue + "");
+        map_issueTask.put("y_value", yValue + "");
         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
         Staticdata.map_task.put("tasktypename", task_type);
 
@@ -505,6 +512,9 @@ public class IssueTaskActivity extends BaseActivityother {
         if (requestCode == 2018418 && resultCode == 2018418) {
             String address = data.getStringExtra("address");
             String address2 = data.getStringExtra("address2");
+            xValue = data.getStringExtra("xValue");
+            yValue = data.getStringExtra("yValue");
+            citycode = data.getStringExtra("citycode");
             mTextview_taskAddress.setText(address);
             mEditview_addressDetail.setText(address2);
         }

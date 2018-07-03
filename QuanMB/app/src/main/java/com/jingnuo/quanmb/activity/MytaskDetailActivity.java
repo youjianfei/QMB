@@ -19,9 +19,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
+import com.jingnuo.quanmb.Interface.Interence_bargin;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.broadcastrReceiver.PaySuccessOrErroBroadcastReciver;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.popwinow.Popwindow_addPrice;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -81,6 +85,8 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     String  phonenumber="";
 
+    String addprice="";//加价的金额
+
 
     String newID = "";
     boolean isIssueAgain = false;
@@ -93,6 +99,9 @@ public class MytaskDetailActivity extends BaseActivityother {
     Adapter_Gridviewpic adapter_gridviewpic;
 
     PermissionHelper mPermission;//动态申请权限
+
+    Popwindow_Tip popwindow_tip;
+    Popwindow_addPrice popwindow_addPrice;
 
 
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
@@ -115,8 +124,36 @@ public class MytaskDetailActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
-                if (respose.equals("success")) {//支付成功
+                if (respose.equals("success")&&isIssueAgain) {//重新发布任务支付成功
                     requestTaskAgain();
+                }else {//增加价格支付成功
+                    Map map_addprice=new HashMap();
+                    map_addprice.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                    map_addprice.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                    map_addprice.put("task_id",taskDetailBean.getData().getTask_id()+"");
+                    map_addprice.put("money",addprice+"");
+                new Volley_Utils(new Interface_volley_respose() {
+                    @Override
+                    public void onSuccesses(String respose) {
+                        int status = 0;
+                        String msg = "";
+                        try {
+                            JSONObject object = new JSONObject(respose);
+                            status = (Integer) object.get("code");//
+                            msg = (String) object.get("message");//
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        ToastUtils.showToast(MytaskDetailActivity.this,msg);
+
+                    }
+
+                    @Override
+                    public void onError(int error) {
+
+                    }
+                }).postHttp(Urls.Baseurl_cui+Urls.taskaddCommission,MytaskDetailActivity.this,1,map_addprice);
                 }
             }
 
@@ -274,7 +311,18 @@ public class MytaskDetailActivity extends BaseActivityother {
         mText_xiugaijiage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(MytaskDetailActivity.this,"修改价格");
+                popwindow_addPrice=new Popwindow_addPrice(MytaskDetailActivity.this, new Interence_bargin() {
+                    @Override
+                    public void onResult(String result) {
+                        addprice=result;
+                        Intent intentaddprice = new Intent(MytaskDetailActivity.this, PayActivity.class);
+                        intentaddprice.putExtra("title", "全民帮—任务加价");
+                        intentaddprice.putExtra("amount", result + "");
+                        intentaddprice.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
+                        startActivity(intentaddprice);
+                    }
+                });
+                popwindow_addPrice.showpop();
             }
         });
     }
@@ -430,6 +478,78 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
+                if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")){
+                    String Tip="";
+                    switch (taskDetailBean.getData().getDelay_time()){
+                        case "1" :
+                            Tip="帮手申请延时3小时完成任务";
+                            break;
+                        case "2" :
+                            Tip="帮手申请延时一天完成任务";
+                            break;
+                        case "3" :
+                            Tip="帮手申请延时三天完成任务";
+                            break;
+                        case "4" :
+                            Tip="帮手申请延时七天完成任务";
+                            break;
+                        case "5" :
+                            Tip="帮手申请延时十五天完成任务";
+                            break;
+                        case "6" :
+                            Tip="帮手申请延时三十天完成任务";
+                            break;
+                    }
+                    if(popwindow_tip==null){
+                    popwindow_tip=new Popwindow_Tip(Tip, MytaskDetailActivity.this, new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            Map map_agreeorefuse =new HashMap();
+                            map_agreeorefuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+                            map_agreeorefuse.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_agreeorefuse.put("task_id",taskDetailBean.getData().getTask_id()+"");
+                            map_agreeorefuse.put("order_no",taskDetailBean.getData().getOrder_no()+"");
+                            if(result){
+                                map_agreeorefuse.put("delay","Y");
+                            }else {
+                                map_agreeorefuse.put("delay","N");
+                            }
+
+                            map_agreeorefuse.put("delay_time",taskDetailBean.getData().getDelay_time()+"");
+                            LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,"申请延时接口");
+                            LogUtils.LOG("ceshi",map_agreeorefuse.toString(),"申请延时接口");
+                            new  Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//
+                                        msg = (String) object.get("message");//
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    ToastUtils.showToast(MytaskDetailActivity.this,msg);
+
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,MytaskDetailActivity.this,1,map_agreeorefuse);
+                            }
+
+
+                    });
+                    popwindow_tip.showPopwindow();
+                    }
+                }
+
+
+
+
                 if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     mTextview_taskmoney.setText("佣金：" + "帮手出价");
                 } else {
