@@ -62,6 +62,15 @@ public class Skillmenu_twoBean {
             private String img_url;
             private int specialty_id;
             private String specialty_name;
+            private  boolean is_select=false;
+
+            public boolean isIs_select() {
+                return is_select;
+            }
+
+            public void setIs_select(boolean is_select) {
+                this.is_select = is_select;
+            }
 
             public String getImg_url() {
                 return img_url;

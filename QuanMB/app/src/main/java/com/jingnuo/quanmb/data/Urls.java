@@ -108,6 +108,8 @@ public class Urls {
     public  static String helperputongshuaxin="helper/handRefresh?user_token=";//普通刷新   服务
     public  static String helperzhinengshuaxin="helper/autoRefresh?user_token=";//智能刷新   服务
     public  static String helperzhiding="helper/setTopSpecialty?user_token=";//置顶   服务
+    public  static String helper_type="helper/updateHelperType?user_token=";//更新帮手服务类型
+    public  static String helper_isHavehelper="helper/getStatuAboutHelperType?user_token=";//帮手是否选择过服务类型
 
     //消息模块
 
