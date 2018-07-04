@@ -155,7 +155,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                                 startActivity(intent_querenhelp);
                                 finish();
                             } else {
-//                                ToastUtils.showToast(TaskDetailsActivity.this, Staticdata.queRenHelp_bean.getMessage());
+                                ToastUtils.showToast(TaskDetailsActivity.this, queRenHelp_bean.getMessage());
                             }
                         }
 

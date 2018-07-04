@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.activity.BargainActivity;
 import com.jingnuo.quanmb.activity.BarginmessageListActivity;
 import com.jingnuo.quanmb.activity.DealActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
+import com.jingnuo.quanmb.activity.TuijianrenwuActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.NewMessage_Bean;
@@ -38,23 +39,23 @@ public class Fragment_message extends Fragment {
     RelativeLayout mRelativelayout_bargain;
     RelativeLayout mRelativelayout_systemmessage;
     RelativeLayout mRelativelayout_dealmessage;
+    RelativeLayout mRelativelayout_tuijianrenwu;
 
     TextView mTextview_systemmessage;
     TextView mTextview_bargainmessage;
     TextView mTextview_jiaoyimeaage;
+    TextView mTextview_tuijianrenwu;
 
     static ImageView mImageView_dot1;
     static ImageView mImageView_dot2;
     static ImageView mImageView_dot3;
+    static ImageView mImageView_dot4;
 
 
     //数据
     Map map_getnewmessage;
 
     NewMessage_Bean newMessage_bean;
-
-
-
 
     @Nullable
     @Override
@@ -99,6 +100,14 @@ public class Fragment_message extends Fragment {
                 getActivity().startActivity(intent_deal);
             }
         });
+        mRelativelayout_tuijianrenwu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_tuijian=new Intent(getActivity(), TuijianrenwuActivity.class);
+                mImageView_dot4.setVisibility(View.GONE);
+                getActivity().startActivity(intent_tuijian);
+            }
+        });
     }
     public   void setDot(int num){
         LogUtils.LOG("ceshi",num+"","推送3");
@@ -112,6 +121,9 @@ public class Fragment_message extends Fragment {
             case 3:
                 mImageView_dot3.setVisibility(View.VISIBLE);
                 break;
+            case 4:
+                mImageView_dot4.setVisibility(View.VISIBLE);
+                break;
         }
     }
 
@@ -119,12 +131,15 @@ public class Fragment_message extends Fragment {
         mRelativelayout_bargain=rootview.findViewById(R.id.relativelayout_Kanprice);
         mRelativelayout_systemmessage=rootview.findViewById(R.id.relativelayout_systemnotice);
         mRelativelayout_dealmessage=rootview.findViewById(R.id.relativelayout_Jiaoyinotice);
+        mRelativelayout_tuijianrenwu=rootview.findViewById(R.id.relativelayout_tuijianrenwu);
         mTextview_systemmessage=rootview.findViewById(R.id.text_systemnotice);
         mTextview_bargainmessage=rootview.findViewById(R.id.text_moneynotice);
         mTextview_jiaoyimeaage=rootview.findViewById(R.id.text_jiaoyitixing);
+        mTextview_tuijianrenwu=rootview.findViewById(R.id.text_tujianrenwu);
         mImageView_dot1=rootview.findViewById(R.id.image_reddot1);
         mImageView_dot2=rootview.findViewById(R.id.image_reddot2);
         mImageView_dot3=rootview.findViewById(R.id.image_reddot3);
+        mImageView_dot4=rootview.findViewById(R.id.image_reddot4);
     }
     void request(){
         new Volley_Utils(new Interface_volley_respose() {
@@ -134,6 +149,7 @@ public class Fragment_message extends Fragment {
                 mTextview_systemmessage.setText(newMessage_bean.getData().get(0).getContent());
                 mTextview_bargainmessage.setText(newMessage_bean.getData().get(1).getContent());
                 mTextview_jiaoyimeaage.setText(newMessage_bean.getData().get(2).getContent());
+                mTextview_tuijianrenwu.setText(newMessage_bean.getData().get(3).getContent());
             }
 
             @Override

@@ -163,9 +163,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.PaySuccessActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.AboutUsActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.FirstLoginActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.HelperType">
-
-        </activity>
+        <activity android:name="com.jingnuo.quanmb.activity.HelperType"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.TuijianrenwuActivity"></activity>
     </application>
 
 </manifest>

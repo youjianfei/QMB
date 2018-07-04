@@ -37,7 +37,7 @@ public class Adapter_Gridviewpic extends BaseAdapter{
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.item_lookic_gridview_nocha, parent, false);
+            convertView = inflater.inflate(R.layout.item_lookic_gridview, parent, false);
             holder.mImageView = (ImageView) convertView.findViewById(R.id.share_picture);
             holder.mRelativeLayout = (RelativeLayout) convertView.findViewById(R.id.REL_shareimg);
             convertView.setTag(holder);

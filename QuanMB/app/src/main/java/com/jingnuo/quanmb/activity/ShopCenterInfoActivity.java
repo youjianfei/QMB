@@ -292,6 +292,10 @@ public class ShopCenterInfoActivity extends BaseActivityother {
         if( mList_PicPath_down.size()>=1){
             upLoadImage.uploadImg(mList_PicPath_down.get(0),6);
         }else {
+            for (String image : imageIDList) {//遍  线上图片删除之后剩下了 ID
+                img_id=img_id+image+",";
+            }
+            map_edit.put("img_id",img_id);
             request_edit(map_edit);
         }
 
@@ -456,9 +460,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
                             // 多选时的最大数量   （默认 9 张）
                             //这里只允许上传3张
                             .mutiSelectMaxSize(PIC_mix)
-                            .showCamera()
-                            // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
-                            .filePath("/ImageSelector/Pictures")
+
                             .build();
                     ImageSelector.open(ShopCenterInfoActivity.this, imageConfig);   // 开启图片选择器
                 } else {

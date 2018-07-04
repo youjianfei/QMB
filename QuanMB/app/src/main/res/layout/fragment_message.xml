@@ -188,5 +188,59 @@
             android:textSize="15dp" />
 
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/image_line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_dbdbdb" />
+    <RelativeLayout
+        android:id="@+id/relativelayout_tuijianrenwu"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/image_4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/tuijianrenwu" />
+        <ImageView
+            android:id="@+id/image_reddot4"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@mipmap/red_dot"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
+        <TextView
+            android:id="@+id/text_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/image_4"
+            android:text="推荐任务"
+            android:textColor="@color/text_title2"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/text_tujianrenwu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_4"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/image_4"
+            android:lines="1"
+            android:text="暂无新的推荐任务"
+            android:textColor="@color/text_hide_tip"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
 
 </LinearLayout>

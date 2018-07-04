@@ -56,6 +56,7 @@ public class SkillDetailActivity extends BaseActivityother {
     TextView mTextview_relseaCount;//发布帖子的数量
     LinearLayout mLinearlayout_phonenumber;
     LinearLayout mLinearlayout_collection;
+    LinearLayout linearlayout_bottom;
     MyGridView imageGridview;
     ImageView mImageView_Suggest;
     ImageView mImageview_collect;
@@ -114,6 +115,7 @@ public class SkillDetailActivity extends BaseActivityother {
         mTextview_content = findViewById(R.id.text_servicedetail);
         mTextview_shopname = findViewById(R.id.text_shopname);
         mLinearlayout_phonenumber = findViewById(R.id.linearlayout_phonenumber);
+        linearlayout_bottom = findViewById(R.id.linearlayout_bottom);
         imageGridview = findViewById(R.id.GridView_PIC);
         mImageView_Suggest = findViewById(R.id.image_complain);
         mImageview_shopPic = findViewById(R.id.image_shoppic);
@@ -327,6 +329,11 @@ public class SkillDetailActivity extends BaseActivityother {
 //                long ago = Long.parseLong(mSkilldetailsbean.getData().getDetail().getCreateDate()+"");//
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
                 mTextview_shopIN_time.setText(mSkilldetailsbean.getData().getDetail().getAddmission_month() + "个月");
+                if(mSkilldetailsbean.getData().getDetail().getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
+                    linearlayout_bottom.setVisibility(View.GONE);
+                }else {
+                    linearlayout_bottom.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

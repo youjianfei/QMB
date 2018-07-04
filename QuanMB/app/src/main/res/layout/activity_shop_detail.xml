@@ -524,6 +524,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
+        android:visibility="gone"
         >
         <LinearLayout
             android:id="@+id/linearlayout_collection"

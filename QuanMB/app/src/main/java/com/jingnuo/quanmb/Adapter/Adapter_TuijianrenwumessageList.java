@@ -7,16 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.entityclass.DealMessageBean;
+import com.jingnuo.quanmb.entityclass.Message_tujianrenwu;
 import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.List;
 
-public class Adapter_DealmessageList extends  BaseAdapter{
-    List<DealMessageBean.DataBean >  mData;
+public class Adapter_TuijianrenwumessageList extends  BaseAdapter{
+    List<Message_tujianrenwu.DataBean >  mData;
     Context mContext;
     LayoutInflater mInflater;
 
-    public Adapter_DealmessageList(List mDatas, Context mContext) {
+    public Adapter_TuijianrenwumessageList(List mDatas, Context mContext) {
         super(mDatas, mContext);
         this.mContext=mContext;
         this.mData=mDatas;

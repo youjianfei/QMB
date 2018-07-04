@@ -71,7 +71,7 @@ public class SkillCollectBean {
              * updateDate : 2018-05-11 16:52:22
              */
 
-            private String business_no;
+            private String business_no="";
             private String client_no;
             private String contacts;
             private String createDate;
