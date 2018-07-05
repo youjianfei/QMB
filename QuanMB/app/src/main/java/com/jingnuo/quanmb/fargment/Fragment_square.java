@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import com.youth.banner.Banner;
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -69,6 +69,10 @@ public class Fragment_square extends Fragment {
     RelativeLayout mRelayout_address;
 
     Popwindow_SquareSort mPopwindow_square_sort;
+
+
+
+
 
 
     //对象
@@ -409,6 +413,8 @@ public class Fragment_square extends Fragment {
         mRelayout_address=rootview.findViewById(R.id.relayout_address);
         listheadView=LayoutInflater.from(getContext()).inflate(R.layout.list_headview_square,null,false);
         mListview_square.getRefreshableView().addHeaderView(listheadView);
+
+
     }
 
     @Override

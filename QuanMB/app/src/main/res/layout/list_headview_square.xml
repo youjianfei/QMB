@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="300dp"
+    xmlns:youth="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/yellow"
+
+        />
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@color/white"
+        youth:indicator_width="8dp"
+        youth:indicator_height="8dp"
+        youth:indicator_drawable_selected="@drawable/dop_select"
+        youth:indicator_drawable_unselected="@drawable/dop_unselect"
+        youth:indicator_margin="5dp"
+        android:layout_alignParentBottom="true"
         />
 
-</LinearLayout>
+</RelativeLayout>
