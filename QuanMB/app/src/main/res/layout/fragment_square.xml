@@ -19,8 +19,6 @@
         android:id="@+id/list_square"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:divider="@null"
         android:dividerHeight="5dp"
         ptr:ptrMode="both"
@@ -95,6 +93,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relative_shaixuan"
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

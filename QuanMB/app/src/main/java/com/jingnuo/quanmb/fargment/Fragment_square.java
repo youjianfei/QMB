@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.youth.banner.Banner;
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -32,6 +31,8 @@ import com.jingnuo.quanmb.activity.LocationaddressActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
+import com.jingnuo.quanmb.class_.GlideLoader;
+import com.jingnuo.quanmb.class_.GlideLoader22;
 import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -42,6 +43,8 @@ import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoaderInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,6 +70,7 @@ public class Fragment_square extends Fragment {
     TextView mTextview_address;
     RelativeLayout mRelativelayout_sort;
     RelativeLayout mRelayout_address;
+    RelativeLayout relative_shaixuan;
 
     Popwindow_SquareSort mPopwindow_square_sort;
 
@@ -324,6 +328,7 @@ public class Fragment_square extends Fragment {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if(firstVisibleItem==1){
                     mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
+
                 }
                 if(isScroll())
                 {
@@ -335,6 +340,9 @@ public class Fragment_square extends Fragment {
                         LogUtils.LOG("ceshi",alpha+"alpha"+firstVisibleItem,"透明度");
 //                        mRelativelayout_sort.setAlpha(alpha);
                         mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+                        relative_shaixuan.setVisibility(View.INVISIBLE);
+                    }else {
+                        relative_shaixuan.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -411,10 +419,21 @@ public class Fragment_square extends Fragment {
         mRelativelayout_sort = rootview.findViewById(R.id.relative_sort);
         mTextview_address=rootview.findViewById(R.id.textview_login);
         mRelayout_address=rootview.findViewById(R.id.relayout_address);
+        relative_shaixuan=rootview.findViewById(R.id.relative_shaixuan);
         listheadView=LayoutInflater.from(getContext()).inflate(R.layout.list_headview_square,null,false);
         mListview_square.getRefreshableView().addHeaderView(listheadView);
 
-
+        Banner banner = listheadView. findViewById(R.id.banner);
+        //设置图片加载器
+        banner.setImageLoader(new GlideLoader22());
+        List<String> images=new ArrayList<>();
+        images.add("http://a1.att.hudong.com/02/52/300001202343130274523014865_950.jpg");
+        images.add("http://pic19.nipic.com/20120210/9335935_195635332170_2.jpg");
+        images.add("http://a2.att.hudong.com/53/51/16300000178518124461515846560_950.jpg");
+        //设置图片集合
+        banner.setImages(images);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
     }
 
     @Override
