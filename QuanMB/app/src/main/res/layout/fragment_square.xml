@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
-        android:dividerHeight="5dp"
         ptr:ptrMode="both"
         />
     <RelativeLayout
@@ -76,7 +75,7 @@
                 android:layout_centerVertical="true"
                 android:text="定位中"
                 android:singleLine="true"
-                android:textColor="@color/black_text"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
             <ImageView
                 android:layout_width="15dp"

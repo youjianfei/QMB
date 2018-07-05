@@ -326,10 +326,10 @@ public class Fragment_square extends Fragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if(firstVisibleItem==1){
-                    mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
-
-                }
+//                if(firstVisibleItem==1){
+//                    mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
+//
+//                }
                 if(isScroll())
                 {
                     float scrollY = getScrollY();
@@ -341,8 +341,11 @@ public class Fragment_square extends Fragment {
 //                        mRelativelayout_sort.setAlpha(alpha);
                         mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
                         relative_shaixuan.setVisibility(View.INVISIBLE);
+                        mTextview_address.setTextColor(getActivity().getResources().getColor(R.color.white));
                     }else {
                         relative_shaixuan.setVisibility(View.VISIBLE);
+                        mTextview_address.setTextColor(getActivity().getResources().getColor(R.color.black));
+                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
                     }
                 }
 
