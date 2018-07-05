@@ -517,6 +517,12 @@
 
         </RelativeLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_background"
+        android:layout_above="@+id/linearlayout_bottom"
+        />
     <LinearLayout
         android:id="@+id/linearlayout_bottom"
         android:layout_width="match_parent"
@@ -531,7 +537,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:gravity="center"
             >
 
@@ -544,7 +550,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收藏"
-                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/gray_969696"
                 />
 
@@ -553,7 +559,7 @@
             android:id="@+id/linearlayout_phonenumber"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center"
             android:background="@color/yellow_jianbian_start"
@@ -569,8 +575,7 @@
                 android:text="电话"
                 android:textSize="14dp"
                 android:textColor="@color/white"
-                android:layout_marginLeft="5dp"
-
+                android:layout_marginLeft="10dp"
                 />
 
         </LinearLayout>
@@ -579,6 +584,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2.5"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:gravity="center"
             android:background="@color/yellow_jianbian_end"
             >

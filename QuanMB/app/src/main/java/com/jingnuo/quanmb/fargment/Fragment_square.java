@@ -12,8 +12,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,7 +37,9 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.json.JSONException;
@@ -191,6 +195,10 @@ public class Fragment_square extends Fragment {
 
             }
         });
+
+
+
+
         //智能排序文字点击  type=1
         mTextview_sort.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -299,7 +307,31 @@ public class Fragment_square extends Fragment {
 
             }
         });
+        //listview的滑动距离监听
+        mListview_square.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
 
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+
+
+            }
+        });
+    }
+    /**
+     * 判断是否是第一行
+     * @return
+     */
+    private boolean isScroll()
+    {
+        if(mListview_square.getRefreshableView().getFirstVisiblePosition() == 1 || mListview_square.getRefreshableView().getFirstVisiblePosition() == 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void setview() {

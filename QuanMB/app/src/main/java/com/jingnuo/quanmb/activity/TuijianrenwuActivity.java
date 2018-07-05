@@ -74,8 +74,8 @@ public class TuijianrenwuActivity extends BaseActivityother {
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.LOG("ceshi","点击了"+position,"交易信息");
-                    String binding_id=mData.get(position-1).getId()+"";
+                LogUtils.LOG("ceshi","点击了"+position,"");
+                    String binding_id=mData.get(position-1).getBinding_id()+"";
                     Intent intent=new Intent(TuijianrenwuActivity.this,TaskDetailsActivity.class);
                     intent.putExtra("id",binding_id);
                     startActivity(intent);

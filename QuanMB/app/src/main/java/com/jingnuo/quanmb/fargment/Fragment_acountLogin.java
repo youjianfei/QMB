@@ -153,7 +153,8 @@ public class Fragment_acountLogin extends Fragment {
 
             @Override
             public void onError(int error) {
-
+                progressDlog.cancelPD();
+                ToastUtils.showToast(getActivity(),"网络连接失败");
             }
         }).postHttp(Urls.Baseurl+Urls.login, getActivity(), 1, map);
     }

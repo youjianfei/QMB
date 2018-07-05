@@ -100,8 +100,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //可在其中解析amapLocation获取相应内容。
                     LogUtils.LOG("ceshiqq","定位成功,纬度："+aMapLocation.getLatitude()+"精度："+ aMapLocation.getLongitude(),"mainactivity");
 
-                    String xValue=aMapLocation.getLatitude()+"";//获取纬度
-                    String yValue=aMapLocation.getLongitude()+"";//获取经度
+                    Staticdata.xValue =aMapLocation.getLatitude()+"";//获取纬度
+                    Staticdata.yValue=aMapLocation.getLongitude()+"";//获取经度
                     aMapLocation.getCity();//城市信息
                     Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
                     intent.putExtra("address",aMapLocation.getCity());
@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                         }
                     }).Http(Urls.Baseurl+Urls.updataXYDU+Staticdata.static_userBean.getData().getUser_token()+"&x_value=" +
-                            xValue+"&y_value="+yValue,MainActivity.this,0);
+                            Staticdata.xValue+"&y_value="+Staticdata.yValue,MainActivity.this,0);
 
 
 
