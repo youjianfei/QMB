@@ -257,7 +257,12 @@ public class ShopCenterInfoActivity extends BaseActivityother {
                     chooseShopPic();
                 } else {//点击图片  就删除图片
                     if (imageview_urllist.get(position).contains("http")) {//如果是删除线上图片   就删除idList中的  ID；
-                        imageIDList.remove(position);
+                        if(mList_PicPath_down.size()==0){
+                            imageIDList.remove(position);
+                        }else {
+                            imageIDList.remove(position-mList_PicPath_down.size());
+                        }
+
                     }
                     imageview_urllist.remove(position);
                     adapter_gridviewpic.notifyDataSetChanged();

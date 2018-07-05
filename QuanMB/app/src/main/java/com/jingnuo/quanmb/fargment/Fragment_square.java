@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.fargment;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -57,6 +58,8 @@ import java.util.Map;
 public class Fragment_square extends Fragment {
 
     View rootview;
+
+    View listheadView;
     //控件
     EditText mEdit_serchSquare;
     PullToRefreshListView mListview_square;
@@ -315,8 +318,21 @@ public class Fragment_square extends Fragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(firstVisibleItem==1){
+                    mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
+                }
+                if(isScroll())
+                {
+                    float scrollY = getScrollY();
+                    if(scrollY <= 1)
+                    {
+                        int alpha = (int) (255 * scrollY);
 
-
+                        LogUtils.LOG("ceshi",alpha+"alpha"+firstVisibleItem,"透明度");
+//                        mRelativelayout_sort.setAlpha(alpha);
+                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+                    }
+                }
 
             }
         });
@@ -333,7 +349,36 @@ public class Fragment_square extends Fragment {
         }
         return false;
     }
+    /**
+     * 得到高度比例
+     * @return
+     */
+    private float getScrollY()
+    {
+        View c = mListview_square.getRefreshableView().getChildAt(0);
+        if (c == null)
+        {
+            return 0;
+        }
+        int firstVisiblePosition = mListview_square.getRefreshableView().getFirstVisiblePosition();
+        if(firstVisiblePosition == 1 || firstVisiblePosition == 0)
+        {
+            //如果可见的是第一行或第二行，那么开始计算距离比例
+            float top = c.getTop();
+            //当第一行已经开始消失的时候，top是为负数的，所以取正
+            top = Math.abs(top);
+            //48为菜单栏的高度，单位为dp
+            //得到的高度为ViewPager的高度减去菜单栏高度，即为最大可滑动距离
+            float height = c.getHeight() - SizeUtils.dip2px(getContext(),70);
 
+            float y = top / height;
+
+            return y;
+        }else
+        {
+            return 0;
+        }
+    }
     private void setview() {
 
     }
@@ -362,6 +407,8 @@ public class Fragment_square extends Fragment {
         mRelativelayout_sort = rootview.findViewById(R.id.relative_sort);
         mTextview_address=rootview.findViewById(R.id.textview_login);
         mRelayout_address=rootview.findViewById(R.id.relayout_address);
+        listheadView=LayoutInflater.from(getContext()).inflate(R.layout.list_headview_square,null,false);
+        mListview_square.getRefreshableView().addHeaderView(listheadView);
     }
 
     @Override
