@@ -431,7 +431,7 @@ public class Fragment_square extends Fragment {
          * headview  控件
          */
         RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
-        AbsListView.LayoutParams mLayoutparams = new AbsListView.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.7));
+        AbsListView.LayoutParams mLayoutparams = new AbsListView.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.6));
 
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
         Banner banner = listheadView. findViewById(R.id.banner);

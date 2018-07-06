@@ -78,8 +78,17 @@ public class Square_defaultBean {
             private String task_Name;
             private String task_description;
             private String is_helper_bid;
+            private String nick_name="全民帮";
             private int user_reputation;
             private int distance=0;
+
+            public String getNick_name() {
+                return nick_name;
+            }
+
+            public void setNick_name(String nick_name) {
+                this.nick_name = nick_name;
+            }
 
             public int getDistance() {
                 return distance;
