@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -76,9 +77,6 @@ public class Fragment_square extends Fragment {
 
 
 
-
-
-
     //对象
     Adapter_SquareList mAdapter_SquareList;
 
@@ -117,6 +115,8 @@ public class Fragment_square extends Fragment {
                     @Override
                     public void run() {
                        mTextview_address.setText(address);
+                        map_filter_sort.put("x_value", Staticdata.xValue);
+                        map_filter_sort.put("y_value", Staticdata.yValue);
                     }
                 });
             }
@@ -124,7 +124,7 @@ public class Fragment_square extends Fragment {
         getActivity(). registerReceiver(baiduAddressBroadcastReciver, intentFilter_bauduaddress); //将广播监听器和过滤器注册在一起；
     }
 
-    private void request_square(Map map_filterOrsort, final int page) {
+    private void request_square(final Map map_filterOrsort, final int page) {
         map_filterOrsort.put("pageNum", page + "");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -132,7 +132,7 @@ public class Fragment_square extends Fragment {
                 if (mListview_square.isRefreshing()) {
                     mListview_square.onRefreshComplete();
                 }
-                LogUtils.LOG("ceshi", "" + respose, "fragmentsquare");
+                LogUtils.LOG("ceshi", "" + map_filterOrsort.toString(), "fragmentsquare");
 
                 int status = 0;
                 String msg = "";
@@ -192,14 +192,14 @@ public class Fragment_square extends Fragment {
         mListview_square.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                LogUtils.LOG("ceshi", "" + i, "fragmentsquare");
-                if(Staticdata.isLogin&&mListDate_square.get(i-1).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
+                LogUtils.LOG("ceshi", "" , "fragmentsquare");
+                if(Staticdata.isLogin&&mListDate_square.get(i-2).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
                     intend_taskdrtails = new Intent(getActivity(), MytaskDetailActivity.class);
-                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID()+"");
+                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-2).getTask_ID()+"");
                     getActivity().startActivity(intend_taskdrtails);
                 }else {
                     intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
-                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-1).getTask_ID()+"");
+                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-2).getTask_ID()+"");
                     getActivity().startActivity(intend_taskdrtails);
                 }
 
@@ -402,7 +402,7 @@ public class Fragment_square extends Fragment {
         map_filter_sort = new HashMap();
         initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
         mListDate_square = new ArrayList<>();
-        mAdapter_SquareList = new Adapter_SquareList(mListDate_square, getContext());
+        mAdapter_SquareList = new Adapter_SquareList(mListDate_square, getActivity());
         mListview_square.setAdapter(mAdapter_SquareList);
     }
     void initMap(String  minCommission,String  maxCommission,String  pageNum,String  name,String  task_type,String  code){
@@ -412,6 +412,8 @@ public class Fragment_square extends Fragment {
         map_filter_sort.put("name", name);//关键字搜索
         map_filter_sort.put("task_type", task_type);//条件筛选
         map_filter_sort.put("code", code);//排序方式筛选
+        map_filter_sort.put("x_value", Staticdata.xValue);
+        map_filter_sort.put("y_value", Staticdata.yValue);
     }
 
     private void initview() {
@@ -425,7 +427,13 @@ public class Fragment_square extends Fragment {
         relative_shaixuan=rootview.findViewById(R.id.relative_shaixuan);
         listheadView=LayoutInflater.from(getContext()).inflate(R.layout.list_headview_square,null,false);
         mListview_square.getRefreshableView().addHeaderView(listheadView);
+        /**
+         * headview  控件
+         */
+        RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
+        AbsListView.LayoutParams mLayoutparams = new AbsListView.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.7));
 
+        relativeLayout_headbackground.setLayoutParams(mLayoutparams);
         Banner banner = listheadView. findViewById(R.id.banner);
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
@@ -442,8 +450,8 @@ public class Fragment_square extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        page = 1;
-        request_square(map_filter_sort, 1);
+//        page = 1;
+//        request_square(map_filter_sort, 1);
 
     }
 

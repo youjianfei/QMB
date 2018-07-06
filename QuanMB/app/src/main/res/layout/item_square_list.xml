@@ -1,146 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_person">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_square_person"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:src="@mipmap/user_pic" />
-
-    <TextView
-        android:id="@+id/text_square_personname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/image_square_person"
-        android:text="全民帮"
-        android:textColor="@color/black"
-        android:textSize="14dp" />
-
-    <TextView
-        android:id="@+id/text_square_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_square_personname"
-        android:layout_toRightOf="@+id/image_square_person"
-        android:background="@drawable/background_text_type"
-        android:padding="3dp"
-        android:text="维 修"
-        android:textColor="@color/yellow_button"
-        android:textSize="12dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"
-        />
-    <TextView
-        android:id="@+id/text_square_time"
-        android:text="03.29 12:22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#666666"
-        android:textSize="12dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="30dp"
-        />
-
-    <ImageView
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:src="@color/gray_dfdfdf"
-        android:layout_below="@+id/image_square_person"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:id="@+id/text_square_task"
+    android:orientation="vertical"
+   >
+    <RelativeLayout
+        android:id="@+id/relative_shaixuan"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="这里是用户发布的需要被帮助的信息"
-        android:textSize="14dp"
-        android:textColor="#030303"
-        android:layout_below="@+id/line1"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        />
-    <ImageView
-        android:id="@+id/image1"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
-        android:src="@mipmap/address"
-        android:layout_below="@+id/text_square_task"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="15dp"
-        />
-    <TextView
-        android:id="@+id/text_square_address"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:text="地址信息"
-        android:textSize="12dp"
-        android:textColor="#7f7f7f"
-        android:layout_below="@+id/text_square_task"
-        android:layout_toRightOf="@+id/image1"
-        android:layout_marginTop="13dp"
-        android:layout_marginLeft="2dp"
-        />
-    <TextView
-        android:id="@+id/textyuan"
+        android:layout_below="@+id/relative_sort"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/text_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="130dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="筛选"
+            android:textColor="#888888"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="17dp"
+            android:src="@mipmap/jiantou_xia1" />
+
+        <TextView
+            android:id="@+id/text_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:text="智能排序"
+            android:textColor="#888888"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="110dp"
+            android:layout_marginTop="17dp"
+            android:src="@mipmap/jiantou_xia1" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_numberperson"
+            android:background="@color/gray_background" />
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="元"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/text_square_address"
-        android:textColor="#fb1419"
-        android:textSize="13dp"
-        android:layout_marginRight="13dp"
-        />
-    <TextView
-        android:id="@+id/text_square_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="23.68"
-        android:layout_alignBottom="@+id/text_square_address"
-        android:textColor="#fb1419"
-        android:textSize="20dp"
-        android:layout_toLeftOf="@+id/textyuan"
-        android:layout_marginRight="5dp"
-        />
-    <ImageView
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/gray_dfdfdf"
-        android:layout_below="@+id/text_square_address"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="帮 助"
-        android:background="@drawable/background_text_type"
-        android:layout_below="@+id/line2"
-        android:layout_marginTop="8dp"
-        android:textSize="12dp"
-        android:padding="3dp"
-        android:layout_marginRight="16dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        />
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="5dp"
-    android:background="@color/gray_background"
-    android:layout_alignParentBottom="true"
-    />
-</RelativeLayout>
+        android:background="@drawable/background_person"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_square_person"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/user_pic" />
+
+        <TextView
+            android:id="@+id/text_square_personname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/image_square_person"
+            android:text="全民帮"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/text_square_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_square_personname"
+            android:layout_toRightOf="@+id/image_square_person"
+            android:background="@drawable/background_text_type"
+            android:padding="3dp"
+            android:text="维 修"
+            android:textColor="@color/yellow_button"
+            android:textSize="12dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            />
+        <TextView
+            android:id="@+id/text_square_time"
+            android:text="03.29 12:22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:textSize="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="30dp"
+            />
+
+        <ImageView
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@color/gray_dfdfdf"
+            android:layout_below="@+id/image_square_person"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/text_square_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="这里是用户发布的需要被帮助的信息"
+            android:textSize="14dp"
+            android:textColor="#030303"
+            android:layout_below="@+id/line1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            />
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@mipmap/address"
+            android:layout_below="@+id/text_square_task"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:id="@+id/text_square_address"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:text="地址信息"
+            android:textSize="12dp"
+            android:textColor="#7f7f7f"
+            android:layout_below="@+id/text_square_task"
+            android:layout_toRightOf="@+id/image1"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="2dp"
+            />
+        <TextView
+            android:id="@+id/textyuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/text_square_address"
+            android:textColor="#fb1419"
+            android:textSize="13dp"
+            android:layout_marginRight="13dp"
+            />
+        <TextView
+            android:id="@+id/text_square_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23.68"
+            android:layout_alignBottom="@+id/text_square_address"
+            android:textColor="#fb1419"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@+id/textyuan"
+            android:layout_marginRight="5dp"
+            />
+        <ImageView
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/gray_dfdfdf"
+            android:layout_below="@+id/text_square_address"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="帮 助"
+            android:background="@drawable/background_text_type"
+            android:layout_below="@+id/line2"
+            android:layout_marginTop="8dp"
+            android:textSize="12dp"
+            android:padding="3dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/gray_background"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

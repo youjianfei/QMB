@@ -347,7 +347,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
     }
     void setImage(String image) {
         if (image == null || image.equals("")) {
-
+            imageview_urllist.add("add");
         } else {
             String[] images = image.split(",");
             int len = images.length;

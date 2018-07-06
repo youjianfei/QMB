@@ -356,52 +356,37 @@ public class MytaskDetailActivity extends BaseActivityother {
     }
 
     void requestTaskid() {//请求任务号,成功后跳转支付界面
-        LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid
-                + Staticdata.static_userBean.getData().getUser_token(), "获取任务ID");
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi", respose, "获取任务ID");
-//                {"code":1,"date":151,"message":"获取成功"}
-                int status = 0;
-                String msg = "";
-                int data = 0;
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    data = (Integer) object.get("data");//
-                    newID = data + "";
-                    status = (Integer) object.get("code");//
-                    msg = (String) object.get("message");//
-                    if (status == 1) {
-                        isIssueAgain = true;
-                        Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
-                        intentpay.putExtra("title", "全民帮—任务付款");
+//        LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid
+//                + Staticdata.static_userBean.getData().getUser_token(), "获取任务ID");
+//        new Volley_Utils(new Interface_volley_respose() {
+//            @Override
+//            public void onSuccesses(String respose) {
+//
+//
+//            }
+//
+//            @Override
+//            public void onError(int error) {
+//
+//            }
+//        }).Http(Urls.Baseurl_cui + Urls.gettaskid
+//                + Staticdata.static_userBean.getData().getUser_token(), MytaskDetailActivity.this, 0);
 
-                        if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
-                            intentpay.putExtra("amount", "5");
-                        } else {
-                            intentpay.putExtra("amount", taskDetailBean.getData().getCommission() + "");
-                        }
+                isIssueAgain = true;
+                Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
+                intentpay.putExtra("title", "全民帮—任务付款");
 
-                        intentpay.putExtra("taskid", data + "");
-                        startActivity(intentpay);
-
-                    } else {
-                        ToastUtils.showToast(MytaskDetailActivity.this, msg);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
+                    intentpay.putExtra("amount", "5");
+                } else {
+                    intentpay.putExtra("amount", taskDetailBean.getData().getCommission() + "");
                 }
 
-            }
+                intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
+                startActivity(intentpay);
 
-            @Override
-            public void onError(int error) {
 
-            }
-        }).Http(Urls.Baseurl_cui + Urls.gettaskid
-                + Staticdata.static_userBean.getData().getUser_token(), MytaskDetailActivity.this, 0);
+
     }
 
     void requestTaskAgain() {
@@ -422,7 +407,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 if (status == 1) {//重新发布成功
-                    map_taskdetail.put("id", newID + "");
+                    map_taskdetail.put("id", taskDetailBean.getData().getTask_id() + "");
                     mButton_again.setVisibility(View.GONE);
                     request(map_taskdetail);
                     LogUtils.LOG("ceshi1", "request(map_taskdetail)", "request");
@@ -437,8 +422,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_newid="
-                + newID + "&task_id=" + taskDetailBean.getData().getTask_id() + "&payResult=" + 1, MytaskDetailActivity.this, 0);
+        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_id=" + taskDetailBean.getData().getTask_id() + "&payResult=" + 1, MytaskDetailActivity.this, 0);
     }
 
     void request(Map map) {

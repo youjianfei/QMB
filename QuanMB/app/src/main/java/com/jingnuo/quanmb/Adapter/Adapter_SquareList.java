@@ -1,15 +1,21 @@
 package com.jingnuo.quanmb.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.class_.Task_type;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
@@ -21,11 +27,11 @@ import java.util.List;
  */
 
 public class Adapter_SquareList extends  BaseAdapter {
-    private Context mContext;
+    private Activity mContext;
     private List<Square_defaultBean.DataBean.ListBean> mData;
     private LayoutInflater mInflater;
-
-    public Adapter_SquareList(List<Square_defaultBean.DataBean.ListBean> mDatas, Context mContext) {
+    Popwindow_SquareSort mPopwindow_square_sort;
+    public Adapter_SquareList(List<Square_defaultBean.DataBean.ListBean> mDatas, Activity mContext) {
         super(mDatas, mContext);
         this.mData=mDatas;
         this.mContext=mContext;
@@ -47,11 +53,41 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mText_task_price=convertView.findViewById(R.id.text_square_price);
             holder.mTextview_yuan=convertView.findViewById(R.id.textyuan);
             holder.mImage_view=convertView.findViewById(R.id.image_square_person);
+
+
+
+
+            holder.relative_shaixuan=convertView.findViewById(R.id.relative_shaixuan);
+
             convertView.setTag(holder);
 
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
+        if(position ==0){
+            holder.relative_shaixuan.setVisibility(View.VISIBLE);
+        }else {
+            holder.relative_shaixuan.setVisibility(View.GONE);
+        }
+        final ViewHolder finalHolder = holder;
+        holder.relative_shaixuan.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                mPopwindow_square_sort = new Popwindow_SquareSort(mContext, new InterfacePopwindow_square_sort() {
+                    @Override
+                    public void onSuccesses(String address, String id) {
+//                        page=1;
+//                        LogUtils.LOG("ceshi",address+id,"排序方式");
+//                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
+//                        request_square(map_filter_sort,page);
+
+                    }
+                }, finalHolder.relative_shaixuan, 1);
+                mPopwindow_square_sort.showPopwindow();
+
+            }
+        });
 
         holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
 
@@ -84,5 +120,8 @@ public class Adapter_SquareList extends  BaseAdapter {
         TextView mText_task_price ;//任务的佣金
         TextView mTextview_yuan;
         ImageView mImage_view;//头像
+
+
+        RelativeLayout relative_shaixuan;
     }
 }

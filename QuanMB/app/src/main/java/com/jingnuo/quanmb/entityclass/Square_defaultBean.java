@@ -79,6 +79,15 @@ public class Square_defaultBean {
             private String task_description;
             private String is_helper_bid;
             private int user_reputation;
+            private int distance=0;
+
+            public int getDistance() {
+                return distance;
+            }
+
+            public void setDistance(int distance) {
+                this.distance = distance;
+            }
 
             public String getIs_helper_bid() {
                 return is_helper_bid;
