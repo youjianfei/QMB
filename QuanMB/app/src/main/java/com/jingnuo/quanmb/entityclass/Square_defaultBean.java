@@ -71,6 +71,7 @@ public class Square_defaultBean {
             private String client_no;
             private double commission;
             private String createDate;
+            private String task_Startdate;
             private String headUrl;
             private String release_Address;
             private String specialty_name;
@@ -81,6 +82,14 @@ public class Square_defaultBean {
             private String nick_name="全民帮";
             private int user_reputation;
             private int distance=0;
+
+            public String getTask_Startdate() {
+                return task_Startdate;
+            }
+
+            public void setTask_Startdate(String task_Startdate) {
+                this.task_Startdate = task_Startdate;
+            }
 
             public String getNick_name() {
                 return nick_name;

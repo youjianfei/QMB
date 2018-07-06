@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -53,9 +54,8 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mText_task_price=convertView.findViewById(R.id.text_square_price);
             holder.mTextview_distance=convertView.findViewById(R.id.text_taskdistance);
             holder.mImage_view=convertView.findViewById(R.id.image_square_person);
-
-
-
+            holder.shaixuan=convertView.findViewById(R.id.text_filter);
+            holder.paixu=convertView.findViewById(R.id.text_sort);
 
             holder.relative_shaixuan=convertView.findViewById(R.id.relative_shaixuan);
 
@@ -69,30 +69,27 @@ public class Adapter_SquareList extends  BaseAdapter {
         }else {
             holder.relative_shaixuan.setVisibility(View.GONE);
         }
-        final ViewHolder finalHolder = holder;
-        holder.relative_shaixuan.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        holder.shaixuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPopwindow_square_sort = new Popwindow_SquareSort(mContext, new InterfacePopwindow_square_sort() {
-                    @Override
-                    public void onSuccesses(String address, String id) {
-//                        page=1;
-//                        LogUtils.LOG("ceshi",address+id,"排序方式");
-//                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
-//                        request_square(map_filter_sort,page);
-
-                    }
-                }, finalHolder.relative_shaixuan, 1);
-                mPopwindow_square_sort.showPopwindow();
-
+                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                intent.putExtra("address","筛选");
+                mContext.sendBroadcast(intent);
+            }
+        });
+        holder.paixu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                intent.putExtra("address","排序");
+                mContext.sendBroadcast(intent);
             }
         });
 
         holder.mText_task_des.setText(mData.get(position).getTask_Name()+"");
 
         long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
-        long ago = Long.parseLong(Utils.getTime(mData.get(position).getCreateDate()));//任务发布时间
+        long ago = Long.parseLong(Utils.getTime(mData.get(position).getTask_Startdate()));//任务发布时间
         String time = Utils.getDistanceTime2(ago, now);//算出的差值
         holder.mText_task_creattime.setText(time);
 //        holder.mText_task_creattime.setText(mData.get(position).getCreateDate()+"");
@@ -121,5 +118,7 @@ public class Adapter_SquareList extends  BaseAdapter {
 
 
         RelativeLayout relative_shaixuan;
+        TextView shaixuan;
+        TextView paixu;
     }
 }

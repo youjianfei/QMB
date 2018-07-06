@@ -220,7 +220,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
                 mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
                 commison=mTaskData.getData().getCommission();
-                mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getCreateDate());
+                mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getTask_Startdate());
                 mTextview_name.setText(mTaskData.getData().getNick_name());
                 mTextview_taskdetails.setText(mTaskData.getData().getTask_description());
 //                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间

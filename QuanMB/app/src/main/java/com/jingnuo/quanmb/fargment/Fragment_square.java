@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.fargment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -66,6 +67,7 @@ public class Fragment_square extends Fragment {
     View listheadView;
     //控件
     EditText mEdit_serchSquare;
+    ImageView mImageview_jiantou;
     PullToRefreshListView mListview_square;
     TextView mTextview_sort, mTextview_filter;
     TextView mTextview_address;
@@ -112,11 +114,48 @@ public class Fragment_square extends Fragment {
             @Override
             public void onResult(final String address) {
                getActivity(). runOnUiThread(new Runnable() {
+                    @SuppressLint("NewApi")
                     @Override
                     public void run() {
-                       mTextview_address.setText(address);
-                        map_filter_sort.put("x_value", Staticdata.xValue);
-                        map_filter_sort.put("y_value", Staticdata.yValue);
+                        if(address.equals("筛选")){
+                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
+                            mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+                                @Override
+                                public void onSuccesses(String address, String id) {
+                                    page=1;
+                                    LogUtils.LOG("ceshi",address+id,"条件筛选");
+                                    String [] Q = id.split("%");
+                                    initMap(Q[0],Q[1],page+"","",address,"");
+                                    request_square(map_filter_sort,page);
+
+                                }
+                            }, mRelativelayout_sort, 0);
+                            mPopwindow_square_sort.showPopwindow();
+
+                        }else if(address.equals("排序")){
+
+                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
+
+                                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+                                    @Override
+                                    public void onSuccesses(String address, String id) {
+                                        page=1;
+                                        LogUtils.LOG("ceshi",address+id,"排序方式");
+                                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
+                                        request_square(map_filter_sort,page);
+
+                                    }
+                                }, mRelativelayout_sort, 1);
+                                mPopwindow_square_sort.showPopwindow();
+                        } else {
+                            mTextview_address.setText(address);
+                            map_filter_sort.put("city_code",address);
+                            map_filter_sort.put("x_value", Staticdata.xValue);
+                            map_filter_sort.put("y_value", Staticdata.yValue);
+                            page = 1;
+                            request_square(map_filter_sort, 1);
+                        }
+
                     }
                 });
             }
@@ -192,6 +231,7 @@ public class Fragment_square extends Fragment {
         mListview_square.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 LogUtils.LOG("ceshi", "" , "fragmentsquare");
                 if(Staticdata.isLogin&&mListDate_square.get(i-2).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
                     intend_taskdrtails = new Intent(getActivity(), MytaskDetailActivity.class);
@@ -341,9 +381,11 @@ public class Fragment_square extends Fragment {
 //                        mRelativelayout_sort.setAlpha(alpha);
                         mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
                         relative_shaixuan.setVisibility(View.INVISIBLE);
+                        mImageview_jiantou.setImageResource(R.mipmap.jiantou_xiabai);
                         mTextview_address.setTextColor(getActivity().getResources().getColor(R.color.white));
                     }else {
                         relative_shaixuan.setVisibility(View.VISIBLE);
+                        mImageview_jiantou.setImageResource(R.mipmap.jiantou_xia);
                         mTextview_address.setTextColor(getActivity().getResources().getColor(R.color.black));
                         mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
                     }
@@ -419,6 +461,7 @@ public class Fragment_square extends Fragment {
     private void initview() {
         mEdit_serchSquare = rootview.findViewById(R.id.edit_searchSquare);
         mListview_square = rootview.findViewById(R.id.list_square);
+        mImageview_jiantou = rootview.findViewById(R.id.iamge_jiantou);
         mTextview_sort = rootview.findViewById(R.id.text_sort);
         mTextview_filter = rootview.findViewById(R.id.text_filter);
         mRelativelayout_sort = rootview.findViewById(R.id.relative_sort);

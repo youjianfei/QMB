@@ -539,7 +539,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 } else {
                     mTextview_taskmoney.setText("佣金：" + taskDetailBean.getData().getCommission() + "元");
                 }
-                mTextview_tasktime.setText("发布时间：" + taskDetailBean.getData().getCreateDate());
+                mTextview_tasktime.setText("发布时间：" + taskDetailBean.getData().getTask_Startdate());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
 
 //                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间

@@ -57,7 +57,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     PermissionHelper permissionHelper;
 
     //高德定位
-
+    int locationtime=0;
 
 
 
@@ -103,10 +103,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Staticdata.xValue =aMapLocation.getLatitude()+"";//获取纬度
                     Staticdata.yValue=aMapLocation.getLongitude()+"";//获取经度
                     aMapLocation.getCity();//城市信息
-                    Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
-                    intent.putExtra("address",aMapLocation.getCity());
-                    sendBroadcast(intent);
-
+                    ++locationtime;
+                    LogUtils.LOG("ceshiqq","定位次数："+locationtime,"mainactivity");
+                    if(locationtime==1){
+                        Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
+                        intent.putExtra("address",aMapLocation.getCity());
+                        sendBroadcast(intent);
+                    }
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
