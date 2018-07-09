@@ -59,6 +59,11 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
                 mFragment_message.setDot(3);
             }
         }
+        else if(type.equals("4")){
+            if(mFragment_message!=null){
+                mFragment_message.setDot(4);
+            }
+        }
 
         if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             if (type.equals("2")){

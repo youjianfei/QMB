@@ -33,6 +33,7 @@ public class Urls {
 
     public static String setnickname = "user/setNickName";//更换昵称
     public static String setheadPic = "user/setheadimage";//设置头像
+    public static String shouyePic = "plaza/getSlideShow";//首页轮播广告
 
     //任务模块
     public static String square_default = "task/querySpecialty/search";//帮帮广场

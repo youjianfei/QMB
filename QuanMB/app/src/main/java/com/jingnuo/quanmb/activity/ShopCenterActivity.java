@@ -189,7 +189,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     }else {
                         mTextview.setVisibility(View.VISIBLE);
                         mImageview_vip.setVisibility(View.VISIBLE);
-                        Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(imageview_head);
+                        Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(mImageview_vip);
                     }
                     Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getAvatar_url()).into(imageview_head);
                     Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getIconImgUrl()).error(R.mipmap.lv1).into(mImageview_lv);
@@ -210,7 +210,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     }else {
                         mTextview.setVisibility(View.VISIBLE);
                         mImageview_vip.setVisibility(View.VISIBLE);
-                        Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(imageview_head);
+                        Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(mImageview_vip);
                     }
                     Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getAvatar_url()).into(imageview_head);
                     Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getIconImgUrl()).error(R.mipmap.lv1).into(mImageview_lv);

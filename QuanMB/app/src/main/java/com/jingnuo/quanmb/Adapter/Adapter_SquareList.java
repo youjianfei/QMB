@@ -22,6 +22,7 @@ import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -32,7 +33,6 @@ public class Adapter_SquareList extends  BaseAdapter {
     private Activity mContext;
     private List<Square_defaultBean.DataBean.ListBean> mData;
     private LayoutInflater mInflater;
-    Popwindow_SquareSort mPopwindow_square_sort;
     public Adapter_SquareList(List<Square_defaultBean.DataBean.ListBean> mDatas, Activity mContext) {
         super(mDatas, mContext);
         this.mData=mDatas;
@@ -103,7 +103,14 @@ public class Adapter_SquareList extends  BaseAdapter {
         String time = Utils.getDistanceTime2(ago, now);//算出的差值
         holder.mText_task_creattime.setText(time);
 //        holder.mText_task_creattime.setText(mData.get(position).getCreateDate()+"");
-        holder.mTextview_distance.setText("距你 "+(double)mData.get(position).getDistance()/1000+"km");
+         double d = (double)mData.get(position).getDistance()/1000;
+         if(d<0.1){
+             holder.mTextview_distance.setText("距你 0.1km");
+         }else {
+             DecimalFormat df = new DecimalFormat("#.0");
+             holder.mTextview_distance.setText("距你 "+df.format(d)+"km");
+         }
+
         holder.mText_task_username.setText(mData.get(position).getNick_name()+"");
         holder.mText_task_address.setText(mData.get(position).getRelease_Address()+"");
         if(mData.get(position).getIs_helper_bid().equals("Y")){

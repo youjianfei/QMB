@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.GlideLoader22;
+import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -77,7 +78,7 @@ public class Fragment_square extends Fragment {
 
     Popwindow_SquareSort mPopwindow_square_sort;
 
-
+    Banner banner;
 
     //对象
     Adapter_SquareList mAdapter_SquareList;
@@ -92,6 +93,7 @@ public class Fragment_square extends Fragment {
     int page = 1;//分页加载；
     int MinCommission=0,MaxCommission=1000;
 
+    List<GuanggaoBean.DataBean>mdata_image_GG;
 
 
     @Nullable
@@ -104,7 +106,7 @@ public class Fragment_square extends Fragment {
         setview();
         initlistenner();
         request_square(map_filter_sort, page);//首页默认请求 page==1
-
+        request_GGLB();//请求轮播图
         return rootview;
     }
     void  setdata(){
@@ -220,7 +222,30 @@ public class Fragment_square extends Fragment {
 
 
     }
+    private void request_GGLB(){//请求网络轮播图
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshiddd", "轮播图片：" + respose, "ShopCenterActivity");
+                mdata_image_GG.clear();
+                mdata_image_GG.addAll(new Gson().fromJson(respose,GuanggaoBean.class).getData());
+                List<String> images=new ArrayList<>();
+              for(int i=0;i<mdata_image_GG.size();i++){
+                  images.add(mdata_image_GG.get(i).getImg_url());
+              }
+                //设置图片集合
+                banner.setImages(images);
+                //banner设置方法全部调用完毕时最后调用
+                banner.start();
+            }
 
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.shouyePic,getActivity(),0);
+        LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui+Urls.shouyePic, "fragment_square");
+    }
     Intent intend_taskdrtails;
 
     private void initlistenner() {
@@ -444,6 +469,7 @@ public class Fragment_square extends Fragment {
     }
 
     private void initdata() {
+        mdata_image_GG=new ArrayList<>();
         map_filter_sort = new HashMap();
         initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
         mListDate_square = new ArrayList<>();
@@ -480,15 +506,10 @@ public class Fragment_square extends Fragment {
         AbsListView.LayoutParams mLayoutparams = new AbsListView.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.6));
 
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
-        Banner banner = listheadView. findViewById(R.id.banner);
+        banner = listheadView. findViewById(R.id.banner);
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
-        List<String> images=new ArrayList<>();
-        images.add("http:/");
-        //设置图片集合
-        banner.setImages(images);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
+
     }
 
     @Override

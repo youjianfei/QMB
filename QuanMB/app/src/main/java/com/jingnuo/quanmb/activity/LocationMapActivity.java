@@ -214,6 +214,16 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mMapview.onDestroy();
     }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mMapview.onSaveInstanceState(outState);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapview.onResume();
+    }
 
     @Override
     protected void onPause() {
@@ -228,10 +238,10 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {//地图移动
         LatLng latLng = cameraPosition.target;
-//泥逆地理
+        //泥逆地理
         xValue=latLng.latitude+"";//纬度
         yValue=latLng.longitude+"";//经度
-// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
+            // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
 
         aMap.clear();
         aMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));//将定位图标移动到当前屏幕中心位置
@@ -239,8 +249,8 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                 .decodeResource(getResources(),R.mipmap.location_icon))));
         RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude,latLng.longitude), 200,GeocodeSearch.AMAP);
         geocoderSearch.getFromLocationAsyn(query);
-//执行搜索方法
-//        doSearchQuery("北京",latLng.latitude,latLng.longitude);
+        //执行搜索方法
+            //        doSearchQuery("北京",latLng.latitude,latLng.longitude);
     }
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {//地图移动结束
