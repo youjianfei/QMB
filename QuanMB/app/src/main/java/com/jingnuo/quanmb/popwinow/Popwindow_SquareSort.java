@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class Popwindow_SquareSort {
     PopupWindow mPopupWindow;
     View mInclude_sort;
     View mInclude_filter;
-    TextView mText_sort_title, mText_filter_title;
+    LinearLayout mText_sort_title, mText_filter_title;
 
 
     //sort_pop用到的布局 数据

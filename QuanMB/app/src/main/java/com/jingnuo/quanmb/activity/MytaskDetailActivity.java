@@ -462,7 +462,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
                 mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
-                if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")){
+                if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")&&taskDetailBean.getData().getTask_Status_code().equals("02")){
                     String Tip="";
                     switch (taskDetailBean.getData().getDelay_time()){
                         case "1" :

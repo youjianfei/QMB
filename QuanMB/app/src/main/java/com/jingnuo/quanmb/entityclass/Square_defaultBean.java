@@ -68,7 +68,7 @@ public class Square_defaultBean {
              * user_reputation : 100
              */
 
-            private String client_no;
+            private String client_no="";
             private double commission;
             private String createDate;
             private String task_Startdate;

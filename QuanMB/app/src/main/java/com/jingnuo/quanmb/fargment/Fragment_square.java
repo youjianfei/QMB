@@ -69,7 +69,7 @@ public class Fragment_square extends Fragment {
     EditText mEdit_serchSquare;
     ImageView mImageview_jiantou;
     PullToRefreshListView mListview_square;
-    TextView mTextview_sort, mTextview_filter;
+    LinearLayout mTextview_sort, mTextview_filter;
     TextView mTextview_address;
     RelativeLayout mRelativelayout_sort;
     RelativeLayout mRelayout_address;
@@ -193,6 +193,11 @@ public class Fragment_square extends Fragment {
                     if (page == 1 && mSquare_default_DataBean.getList() != null) {
                         mListDate_square.clear();
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
+                        if(mListDate_square.size()==0){
+                            Square_defaultBean.DataBean.ListBean data=new Square_defaultBean.DataBean.ListBean();
+                            data.setNick_name("000");
+                            mListDate_square.add(data);
+                        }
 
                         mAdapter_SquareList.notifyDataSetChanged();
                     } else if (page != 1 && mSquare_default_DataBean.getList() != null) {
@@ -232,23 +237,21 @@ public class Fragment_square extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                LogUtils.LOG("ceshi", "" , "fragmentsquare");
-                if(Staticdata.isLogin&&mListDate_square.get(i-2).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
-                    intend_taskdrtails = new Intent(getActivity(), MytaskDetailActivity.class);
-                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-2).getTask_ID()+"");
-                    getActivity().startActivity(intend_taskdrtails);
-                }else {
-                    intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
-                    intend_taskdrtails.putExtra("id", mListDate_square.get(i-2).getTask_ID()+"");
-                    getActivity().startActivity(intend_taskdrtails);
+                if (!mListDate_square.get(i - 2).getClient_no().equals("")) {//传过来假数据的判断
+
+                    LogUtils.LOG("ceshi", "", "fragmentsquare");
+                    if (Staticdata.isLogin && mListDate_square.get(i - 2).getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())) {
+                        intend_taskdrtails = new Intent(getActivity(), MytaskDetailActivity.class);
+                        intend_taskdrtails.putExtra("id", mListDate_square.get(i - 2).getTask_ID() + "");
+                        getActivity().startActivity(intend_taskdrtails);
+                    } else {
+                        intend_taskdrtails = new Intent(getActivity(), TaskDetailsActivity.class);
+                        intend_taskdrtails.putExtra("id", mListDate_square.get(i - 2).getTask_ID() + "");
+                        getActivity().startActivity(intend_taskdrtails);
+                    }
                 }
-
-
             }
         });
-
-
-
 
         //智能排序文字点击  type=1
         mTextview_sort.setOnClickListener(new View.OnClickListener() {

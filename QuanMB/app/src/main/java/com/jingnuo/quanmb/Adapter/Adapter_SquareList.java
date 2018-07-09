@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,16 +59,24 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.paixu=convertView.findViewById(R.id.text_sort);
 
             holder.relative_shaixuan=convertView.findViewById(R.id.relative_shaixuan);
+            holder.relative_content=convertView.findViewById(R.id.relativelayout_content);
 
             convertView.setTag(holder);
 
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
+
         if(position ==0){
             holder.relative_shaixuan.setVisibility(View.VISIBLE);
         }else {
             holder.relative_shaixuan.setVisibility(View.GONE);
+        }
+        if(mData.get(position).getNick_name().equals("000")){
+            holder.relative_content.setVisibility(View.INVISIBLE);
+            return convertView;
+        }else {
+            holder.relative_content.setVisibility(View.VISIBLE);
         }
         holder.shaixuan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +94,7 @@ public class Adapter_SquareList extends  BaseAdapter {
                 mContext.sendBroadcast(intent);
             }
         });
+
 
         holder.mText_task_des.setText(mData.get(position).getTask_Name()+"");
 
@@ -118,7 +128,8 @@ public class Adapter_SquareList extends  BaseAdapter {
 
 
         RelativeLayout relative_shaixuan;
-        TextView shaixuan;
-        TextView paixu;
+        RelativeLayout relative_content;
+        LinearLayout shaixuan;
+        LinearLayout paixu;
     }
 }

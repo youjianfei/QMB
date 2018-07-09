@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="修改用户名"
+            android:text="修改昵称"
             android:textColor="@color/black"
             android:textSize="18sp" />
         <TextView
@@ -68,7 +68,7 @@
             android:layout_marginRight="30dp"
             android:layout_toRightOf="@+id/text"
             android:background="@null"
-            android:hint="请输入用户名"
+            android:hint="请输入昵称"
             android:maxLength="12"
             android:minLines="4"
             android:lines="1"
