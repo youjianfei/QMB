@@ -76,27 +76,30 @@
                 android:layout_centerHorizontal="true"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 >
                 <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:src="@mipmap/address_white"
+                    android:id="@+id/image_lv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/lv1"
                     android:layout_marginTop="2dp"
                     />
                 <TextView
                     android:id="@+id/textview_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="认证地址"
+                    android:text="|"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textColor="@color/white"
-                    android:textSize="13dp" />
-                <TextView
-                    android:id="@+id/text_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="13dp"
+                    android:textSize="15dp" />
+                <ImageView
+                    android:id="@+id/image_vip"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/vip1"
+                    android:layout_marginTop="2dp"
                     />
 
             </LinearLayout>

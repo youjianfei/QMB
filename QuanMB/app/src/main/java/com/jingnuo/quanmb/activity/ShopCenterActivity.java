@@ -4,6 +4,7 @@ package com.jingnuo.quanmb.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,11 +26,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ShopCenterActivity extends BaseActivityother {
     //控件
     CircleImageView imageview_head;
+    ImageView mImageview_lv;
+    ImageView mImageview_vip;
+    TextView mTextview;//
     TextView mTextview_tt;
     TextView mTextview_name;  //名字
-    TextView mTextview_namenext;//
+//
     TextView mTextview_money;//佣金
-    TextView mTextview_level;//等级
+//    TextView mTextview_level;//等级
     TextView mTextview_text_tui_count;//推广币个数
     TextView mTextview_text_huiyuan;//会员到期时间
 
@@ -85,12 +89,13 @@ public class ShopCenterActivity extends BaseActivityother {
     @Override
     protected void initView() {
         imageview_head = findViewById(R.id.image_shoppeoplepic);
+        mImageview_lv=findViewById(R.id.image_lv);
+        mImageview_vip=findViewById(R.id.image_vip);
+        mTextview = findViewById(R.id.textview_address);//等级和vip分隔符
         mTextview_tt = findViewById(R.id.textview_tt);
         mTextview_name = findViewById(R.id.text_shopname);
-        mTextview_namenext = findViewById(R.id.textview_address);
         mTextview_text_tui_count = findViewById(R.id.text_tui_count);
         mTextview_money = findViewById(R.id.textview_money);
-        mTextview_level = findViewById(R.id.text_level);
         mRealtivelayout_issue = findViewById(R.id.relative_issuetask);
         mRealtivelayout_myissue = findViewById(R.id.relative_myissue);
         mRealtivelayout_myorder = findViewById(R.id.myorder);
@@ -99,7 +104,6 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
         mRealtivelayout_huiyuan = findViewById(R.id.huiyuan);
         mButtonCash = findViewById(R.id.button_cash);
-        mTextview_level.setText("lv.1");
     }
 
     @Override
@@ -179,21 +183,39 @@ public class ShopCenterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", "商户中心：" + respose, "ShopCenterActivity");
                 if (type == 1) {
                     helpterInfoBean = new Gson().fromJson(respose, HelpterInfoBean.class);
+                    if(helpterInfoBean.getData().getList().getMemberImgUrl().equals("")){
+                        mTextview.setVisibility(View.GONE);
+                        mImageview_vip.setVisibility(View.GONE);
+                    }else {
+                        mTextview.setVisibility(View.VISIBLE);
+                        mImageview_vip.setVisibility(View.VISIBLE);
+                        Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(imageview_head);
+                    }
                     Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getAvatar_url()).into(imageview_head);
+                    Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getIconImgUrl()).error(R.mipmap.lv1).into(mImageview_lv);
                     mTextview_name.setText(helpterInfoBean.getData().getList().getHelper_name());
 //                    mTextview_level.setText(helpterInfoBean.getData().getList().geth());
                     mTextview_text_tui_count.setText(helpterInfoBean.getData().getList().getSpread_b()+"个");
                     if(helpterInfoBean.getData().getList().getMember_enddate()!=null){
                         mTextview_text_huiyuan.setText(helpterInfoBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
                     }
-                    mTextview_namenext.setVisibility(View.GONE);
+//                    mTextview_namenext.setVisibility(View.GONE);
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
 
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
+                    if(shopcenterBean.getData().getList().getMemberImgUrl().equals("")){
+                        mTextview.setVisibility(View.GONE);
+                        mImageview_vip.setVisibility(View.GONE);
+                    }else {
+                        mTextview.setVisibility(View.VISIBLE);
+                        mImageview_vip.setVisibility(View.VISIBLE);
+                        Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(imageview_head);
+                    }
                     Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getAvatar_url()).into(imageview_head);
+                    Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getIconImgUrl()).error(R.mipmap.lv1).into(mImageview_lv);
                     mTextview_name.setText(shopcenterBean.getData().getList().getBusiness_name());
-                    mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address()+" | ");
+//                    mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address()+" | ");
                     mTextview_money.setText(shopcenterBean.getData().getList().getCommission()+"");
                     mTextview_text_tui_count.setText(shopcenterBean.getData().getList().getSpread_b()+"个");
                     mTextview_text_huiyuan.setText(shopcenterBean.getData().getList().getMember_enddate().substring(0,10)+"到期");

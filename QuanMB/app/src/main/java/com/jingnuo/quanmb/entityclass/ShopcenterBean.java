@@ -78,6 +78,8 @@ public class ShopcenterBean {
              */
 
             private String avatar_url;
+            private String iconImgUrl="";//等级图片
+            private String memberImgUrl="";//vip等级图片
             private String business_address;
             private String business_grade;
             private int business_id;
@@ -104,6 +106,22 @@ public class ShopcenterBean {
             private String  business_img;//(id,id,id)
             private int  business_level;
             private int  spread_b;
+
+            public String getMemberImgUrl() {
+                return memberImgUrl;
+            }
+
+            public void setMemberImgUrl(String memberImgUrl) {
+                this.memberImgUrl = memberImgUrl;
+            }
+
+            public String getIconImgUrl() {
+                return iconImgUrl;
+            }
+
+            public void setIconImgUrl(String iconImgUrl) {
+                this.iconImgUrl = iconImgUrl;
+            }
 
             public String getBusiness_img() {
                 return business_img;

@@ -484,9 +484,7 @@ public class Fragment_square extends Fragment {
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
         List<String> images=new ArrayList<>();
-        images.add("http://a1.att.hudong.com/02/52/300001202343130274523014865_950.jpg");
-        images.add("http://pic19.nipic.com/20120210/9335935_195635332170_2.jpg");
-        images.add("http://a2.att.hudong.com/53/51/16300000178518124461515846560_950.jpg");
+        images.add("http:/");
         //设置图片集合
         banner.setImages(images);
         //banner设置方法全部调用完毕时最后调用

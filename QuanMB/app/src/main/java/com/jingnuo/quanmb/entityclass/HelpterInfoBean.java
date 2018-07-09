@@ -79,6 +79,8 @@ public class HelpterInfoBean {
              */
 
             private String avatar_url;
+            private String iconImgUrl="";//等级图片
+            private String memberImgUrl="";//vip等级图片
             private String client_no;
             private String commission;
             private String createDate;
@@ -103,6 +105,22 @@ public class HelpterInfoBean {
             private String updateName;
             private String member_enddate;
             private int  spread_b;
+
+            public String getMemberImgUrl() {
+                return memberImgUrl;
+            }
+
+            public void setMemberImgUrl(String memberImgUrl) {
+                this.memberImgUrl = memberImgUrl;
+            }
+
+            public String getIconImgUrl() {
+                return iconImgUrl;
+            }
+
+            public void setIconImgUrl(String iconImgUrl) {
+                this.iconImgUrl = iconImgUrl;
+            }
 
             public String getMember_enddate() {
                 return member_enddate;
