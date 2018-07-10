@@ -329,7 +329,7 @@ public class SkillDetailActivity extends BaseActivityother {
 //                long ago = Long.parseLong(mSkilldetailsbean.getData().getDetail().getCreateDate()+"");//
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
                 mTextview_shopIN_time.setText(mSkilldetailsbean.getData().getDetail().getAddmission_month() + "个月");
-                if(mSkilldetailsbean.getData().getDetail().getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
+                if(Staticdata.isLogin&&mSkilldetailsbean.getData().getDetail().getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
                     linearlayout_bottom.setVisibility(View.GONE);
                 }else {
                     linearlayout_bottom.setVisibility(View.VISIBLE);

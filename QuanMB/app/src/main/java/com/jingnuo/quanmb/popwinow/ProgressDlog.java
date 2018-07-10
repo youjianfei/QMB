@@ -3,6 +3,8 @@ package com.jingnuo.quanmb.popwinow;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 public class ProgressDlog {
     ProgressDialog pd;
     Activity activity;
@@ -23,5 +25,14 @@ public class ProgressDlog {
         }
 
     }
+
+    public static void showProgress(KProgressHUD mKProgressHUD) {
+        mKProgressHUD.setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+    }
+
 
 }

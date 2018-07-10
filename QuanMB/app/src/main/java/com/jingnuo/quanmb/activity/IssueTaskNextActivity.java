@@ -25,6 +25,7 @@ import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -67,7 +68,9 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
 
     UpLoadImage upLoadImage;
-    ProgressDlog progressDlog;
+//    ProgressDlog progressDlog;
+    KProgressHUD mKProgressHUD;
+
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
     private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
 
@@ -81,7 +84,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        progressDlog = new ProgressDlog(this);
+//        progressDlog = new ProgressDlog(this);
         mList_picID = new ArrayList<>();
         intentFilter_paysuccess = new IntentFilter();
         intentFilter_paysuccess.addAction("com.jingnuo.quanmb.PAYSUCCESS_ERRO");
@@ -97,7 +100,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
             @Override
             public void onError(String error) {
-                progressDlog.cancelPD();
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -121,6 +125,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        mKProgressHUD = new KProgressHUD(IssueTaskNextActivity.this);
         api = WXAPIFactory.createWXAPI(IssueTaskNextActivity.this, Staticdata.WechatApi);//微信支付用到
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务map集合中的内容");
         requestMorenLianxiren();
@@ -129,7 +134,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "发布技能上传图片返回respose");
                 if (respose.equals("erro")) {
-                    progressDlog.cancelPD();
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -165,7 +171,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
 //                            requast(Staticdata.map_task);//正式发布任务
                         }
                     } else {
-                        progressDlog.cancelPD();
+//                        progressDlog.cancelPD();
+                        mKProgressHUD.dismiss();
                         mList_picID.clear();
                         final String finalMsg = msg;
                         runOnUiThread(new Runnable() {
@@ -223,10 +230,12 @@ public class IssueTaskNextActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (initmap()) {
-                    progressDlog.showPD("正在发布，请稍等");
+//                    progressDlog.showPD("正在发布，请稍等");
+                    ProgressDlog.showProgress(mKProgressHUD);
                     mList_picID.clear();
                     count = 0;
                     uploadimg();
+
                 }
             }
         });
@@ -386,7 +395,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
                     } else {
                         ToastUtils.showToast(IssueTaskNextActivity.this, msg);
-                        progressDlog.cancelPD();
+//                        progressDlog.cancelPD();
+                        mKProgressHUD.dismiss();
                     }
 
                 } catch (JSONException e) {
@@ -408,7 +418,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                progressDlog.cancelPD();
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
                 LogUtils.LOG("ceshi", "发布任务返回json", "发布任务");
                 int status = 0;
                 String msg = "";
@@ -428,7 +439,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 } else {
                     count = 0;
                     mList_picID.clear();
-                    progressDlog.cancelPD();
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
                     ToastUtils.showToast(IssueTaskNextActivity.this, msg);
                 }
 
@@ -436,7 +448,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-                progressDlog.cancelPD();
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
                 count = 0;
                 mList_picID.clear();
             }
@@ -447,16 +460,18 @@ public class IssueTaskNextActivity extends BaseActivityother {
     protected void onPostResume() {
         super.onPostResume();
 
-        progressDlog.cancelPD();
+//        progressDlog.cancelPD();
+        mKProgressHUD.dismiss();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(paysuccess_BroadcastReciver);
-        if (progressDlog != null) {
-            progressDlog.cancelPD();
-            mList_picID.clear();
-        }
+//        if (progressDlog != null) {
+//            progressDlog.cancelPD();
+////            mList_picID.clear();
+//        }
+        mList_picID.clear();
     }
 }

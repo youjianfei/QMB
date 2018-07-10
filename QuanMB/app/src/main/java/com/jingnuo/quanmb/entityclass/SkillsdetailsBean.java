@@ -102,7 +102,7 @@ public class SkillsdetailsBean {
             private String business_no="";
             private String helper_no="";
             private int business_reputation;
-            private String client_no;
+            private String client_no="";
             private int collection_status;
             private String contacts;
             private long createDate;

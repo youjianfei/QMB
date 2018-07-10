@@ -117,4 +117,5 @@ dependencies {
     compile 'com.amap.api:location:latest.integration'
     //高德地图
     compile 'com.youth.banner:banner:1.4.10'  //最新版本
+    compile 'com.kaopiz:kprogresshud:1.1.0'
 }

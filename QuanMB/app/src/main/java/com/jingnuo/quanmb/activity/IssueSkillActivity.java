@@ -33,6 +33,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -68,7 +69,8 @@ public class IssueSkillActivity extends BaseActivityother {
     Popwindow_SkillType mPopwindow_skilltype;
     UpLoadImage upLoadImage;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
-    ProgressDlog progressDlog;
+//    ProgressDlog progressDlog;
+    KProgressHUD mKProgressHUD;
     //数据
     String  specialty_id ="";//专业类形
     String tittle="";//
@@ -111,7 +113,8 @@ public class IssueSkillActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 if(respose.equals("erro")){
-                    progressDlog.cancelPD();
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -147,7 +150,8 @@ public class IssueSkillActivity extends BaseActivityother {
                         }
 
                     }else {
-                        progressDlog.cancelPD();
+//                        progressDlog.cancelPD();
+                        mKProgressHUD.dismiss();
                         mList_picID.clear();
                         final String finalMsg = msg;
                         runOnUiThread(new Runnable() {
@@ -168,7 +172,8 @@ public class IssueSkillActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        progressDlog=new ProgressDlog(this);
+        mKProgressHUD = new KProgressHUD(IssueSkillActivity.this);
+//        progressDlog=new ProgressDlog(this);
         type=getIntent().getIntExtra("type",0);
         permissionHelper=new PermissionHelper(IssueSkillActivity.this,new  String []{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},100);
         map_issueSkill=new HashMap();
@@ -196,7 +201,8 @@ public class IssueSkillActivity extends BaseActivityother {
             public void onClick(View view) {
                boolean Nonull= checknull();//判空方法
                 if(Nonull){
-                    progressDlog.showPD("正在发布，请稍等");
+//                    progressDlog.showPD("正在发布，请稍等");
+                    mKProgressHUD.show();
                     uploadimg();//上传图片
 
                 }
@@ -321,13 +327,15 @@ public class IssueSkillActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 if(status==1){
-                    progressDlog.cancelPD();
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
                     ToastUtils.showToast(IssueSkillActivity.this,msg);
                     finish();
                 }else {
                     mList_PicPath_down.clear();
                     mList_picID.clear();
-                    progressDlog.cancelPD();
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
                     ToastUtils.showToast(IssueSkillActivity.this,msg);
                 }
 
@@ -337,7 +345,8 @@ public class IssueSkillActivity extends BaseActivityother {
             public void onError(int error) {
                 mList_PicPath_down.clear();
                 mList_picID.clear();
-                progressDlog.cancelPD();
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
             }
         }).postHttp(URL,this,1,map);
     }
@@ -427,8 +436,9 @@ public class IssueSkillActivity extends BaseActivityother {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(progressDlog!=null){
-            progressDlog.cancelPD();
-        }
+//        if(progressDlog!=null){
+//            progressDlog.cancelPD();
+//        }
+        mKProgressHUD.dismiss();
     }
 }
