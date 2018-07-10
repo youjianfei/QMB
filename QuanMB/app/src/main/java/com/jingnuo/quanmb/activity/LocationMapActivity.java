@@ -45,6 +45,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         GeocodeSearch.OnGeocodeSearchListener ,PoiSearch.OnPoiSearchListener{
 
 
+
     //控件
     EditText mEdit_location;
     EditText mEdit_search;
@@ -54,6 +55,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     MapView mMapview;
     private ListView mListview_searchaddress;
     ImageView mImageview_cancle;
+    ImageView mImageview_location;
     //数据
     Adapter_SearchAddress mAdapter_address;
     List<PoiItem>  mData_searchaddress;
@@ -86,7 +88,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         aMap.getUiSettings().setMyLocationButtonEnabled(true);
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
-        aMap.setOnCameraChangeListener(this);
+        aMap.setOnCameraChangeListener(this);// 对amap添加移动地图事件监听器
         geocoderSearch = new GeocodeSearch(this);
         geocoderSearch.setOnGeocodeSearchListener(this);
 
@@ -128,7 +130,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                     String address = mEdit_search.getText() + "";
                     if (address.equals("")) {
                     } else {
-                        query = new PoiSearch.Query(address, "", "");
+                        query = new PoiSearch.Query(address, "", citycode);
                         //keyWord表示搜索字符串，
                         //第二个参数表示POI搜索类型，二者选填其一，选用POI搜索类型时建议填写类型代码，码表可以参考下方（而非文字）
                         //cityCode表示POI搜索区域，可以是城市编码也可以是城市名称，也可以传空字符串，空字符串代表全国在全国范围内进行搜索
@@ -201,6 +203,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mEdit_location = findViewById(R.id.textview_location);
         mEdit_search = findViewById(R.id.edit_searchaddress);
         mImageview_cancle = findViewById(R.id.iamge_cancle);
+        mImageview_location = findViewById(R.id.iamge_location);
         mTextview_nowaddress = findViewById(R.id.text_mapget);
         mBUtton_queding = findViewById(R.id.button_submit);
     }
@@ -237,26 +240,40 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {//地图移动
-        LatLng latLng = cameraPosition.target;
-        //泥逆地理
-        xValue=latLng.latitude+"";//纬度
-        yValue=latLng.longitude+"";//经度
-            // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
-
-        aMap.clear();
-        aMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));//将定位图标移动到当前屏幕中心位置
-        aMap.addMarker(new MarkerOptions().position(cameraPosition.target).icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                .decodeResource(getResources(),R.mipmap.location_icon))));
-        RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude,latLng.longitude), 200,GeocodeSearch.AMAP);
-        geocoderSearch.getFromLocationAsyn(query);
+        mImageview_location.setImageResource(R.mipmap.location_icon2);
         //执行搜索方法
             //        doSearchQuery("北京",latLng.latitude,latLng.longitude);
     }
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {//地图移动结束
+        mImageview_location.setImageResource(R.mipmap.location_icon);
 
+        LatLng latLng = cameraPosition.target;
+        //泥逆地理
+        xValue=latLng.latitude+"";//纬度
+        yValue=latLng.longitude+"";//经度
+        // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
+
+        aMap.clear();
+////        aMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));//将定位图标移动到当前屏幕中心位置
+//        aMap.addMarker(new MarkerOptions().position(cameraPosition.target).icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+//                .decodeResource(getResources(),R.mipmap.location_icon))));
+        RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude,latLng.longitude), 200,GeocodeSearch.AMAP);
+        geocoderSearch.getFromLocationAsyn(query);
+//        doSearchQuery();
     }
+    protected void doSearchQuery() {
+        query = new PoiSearch.Query("", "", citycode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+        query.setPageSize(20);// 设置每页最多返回多少条poiitem
+        query.setPageNum(0);// 设置查第一页
 
+            poiSearch = new PoiSearch(this, query);
+            poiSearch.setOnPoiSearchListener(this);
+            poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(Double.parseDouble(xValue),
+                    Double.parseDouble(yValue)), 1000,true));//
+            // 设置搜索区域为以lp点为圆心，其周围5000米范围
+            poiSearch.searchPOIAsyn();// 异步搜索
+    }
 
     @Override
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
@@ -309,6 +326,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                            poiResult.getPois().get(1).getProvinceName()+"&"
 //
 //                    ,"poi检索接货222");
+            mImageview_cancle.setVisibility(View.VISIBLE);
             mData_searchaddress.clear();
             mData_searchaddress.addAll(poiResult.getPois());
             mAdapter_address.notifyDataSetChanged();

@@ -59,11 +59,26 @@
             android:layout_marginRight="15dp"
             />
     </RelativeLayout>
-    <com.amap.api.maps2d.MapView
-        android:id="@+id/map"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/re_title"/>
+        android:layout_below="@+id/re_title"
+        >
+        <com.amap.api.maps2d.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           />
+        <ImageView
+            android:id="@+id/iamge_location"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/location_icon"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/button_submit"
         android:layout_width="match_parent"
@@ -148,7 +163,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@mipmap/canll"
-        android:layout_below="@+id/address"
+        android:layout_below="@+id/re_title"
         android:layout_alignParentRight="true"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
