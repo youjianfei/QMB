@@ -150,7 +150,7 @@ public class PaytuiguangbiActivity extends BaseActivityother {
                         if(neirong.equals("推广币")){
                             map_zpay.put("isrecharge","Y");
                             map_zpay.put("subject","推广币套餐");
-                            map_zpay.put("total_fee","0.01");
+                            map_zpay.put("total_fee",amount);
                             map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                             map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                             map_zpay.put("task_id",Task_id);
@@ -158,7 +158,7 @@ public class PaytuiguangbiActivity extends BaseActivityother {
                         }else if(neirong.equals("会员")){
                             map_zpay.put("isrecharge","N");
                             map_zpay.put("subject","会员套餐");
-                            map_zpay.put("total_fee","0.01");
+                            map_zpay.put("total_fee",amount);
                             map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                             map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                             map_zpay.put("task_id",Task_id);
