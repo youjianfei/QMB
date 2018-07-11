@@ -42,10 +42,10 @@ import java.util.List;
 
 
 public class LocationMapActivity extends BaseActivityother implements AMap.OnCameraChangeListener,
-        GeocodeSearch.OnGeocodeSearchListener ,PoiSearch.OnPoiSearchListener{
+        GeocodeSearch.OnGeocodeSearchListener,PoiSearch.OnPoiSearchListener{
 
 
-
+//    GeocodeSearch.OnGeocodeSearchListener ,
     //控件
     EditText mEdit_location;
     EditText mEdit_search;
@@ -54,12 +54,13 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
     MapView mMapview;
     private ListView mListview_searchaddress;
-    ImageView mImageview_cancle;
+    TextView mTextview_cancle;
     ImageView mImageview_location;
     //数据
     Adapter_SearchAddress mAdapter_address;
     List<PoiItem>  mData_searchaddress;
 
+    CameraUpdate cameraUpdate;
     //POI城市检索
     PoiSearch.Query query;
     PoiSearch poiSearch;
@@ -84,6 +85,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE) ;//定位一次，且将视角移动到地图中心点。
 //        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
+
         aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         aMap.getUiSettings().setMyLocationButtonEnabled(true);
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
@@ -134,7 +136,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                         //keyWord表示搜索字符串，
                         //第二个参数表示POI搜索类型，二者选填其一，选用POI搜索类型时建议填写类型代码，码表可以参考下方（而非文字）
                         //cityCode表示POI搜索区域，可以是城市编码也可以是城市名称，也可以传空字符串，空字符串代表全国在全国范围内进行搜索
-                        query.setPageSize(20);// 设置每页最多返回多少条poiitem
+                        query.setPageSize(30);// 设置每页最多返回多少条poiitem
                         query.setPageNum(0);//设置查询页码
 
                         poiSearch = new PoiSearch(LocationMapActivity.this, query);
@@ -165,11 +167,11 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                 finish();
             }
         });
-        mImageview_cancle.setOnClickListener(new View.OnClickListener() {
+        mTextview_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mImageview_cancle.setVisibility(View.GONE);
                 mListview_searchaddress.setVisibility(View.GONE);
+                mBUtton_queding.setVisibility(View.VISIBLE);
             }
         });
 
@@ -181,6 +183,17 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                 yValue=mData_searchaddress.get(i).getLatLonPoint().getLongitude()+"";
                 citycode=mData_searchaddress.get(i).getCityName()+"";
 
+
+
+                LatLng latLng=new LatLng(Double.parseDouble(xValue),Double.parseDouble(yValue));
+                //改变可视区域为指定位置
+                //CameraPosition4个参数分别为位置，缩放级别，目标可视区域倾斜度，可视区域指向方向（正北逆时针算起，0-360）
+//                cameraUpdate= CameraUpdateFactory.newCameraPosition(new CameraPosition(latLng,16,0,30));
+                cameraUpdate= CameraUpdateFactory.newCameraPosition(new CameraPosition(latLng,16,0,0));
+                aMap.animateCamera(cameraUpdate);//地图移向指定区域  带动画
+//                aMap.moveCamera(cameraUpdate);//地图移向指定区域  不带动画
+                mListview_searchaddress.setVisibility(View.GONE);
+                mBUtton_queding.setVisibility(View.VISIBLE);
 //                mEdit_location.setText("");
 //                Intent result = new Intent();
 //                result.putExtra("address", mTextview_nowaddress.getText() + "");
@@ -202,7 +215,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mListview_searchaddress = findViewById(R.id.list_searchaddresslist);
         mEdit_location = findViewById(R.id.textview_location);
         mEdit_search = findViewById(R.id.edit_searchaddress);
-        mImageview_cancle = findViewById(R.id.iamge_cancle);
+        mTextview_cancle = findViewById(R.id.iamge_cancle);
         mImageview_location = findViewById(R.id.iamge_location);
         mTextview_nowaddress = findViewById(R.id.text_mapget);
         mBUtton_queding = findViewById(R.id.button_submit);
@@ -292,7 +305,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mTextview_nowaddress.setText(xianshi);
         citycode=regeocodeResult.getRegeocodeAddress().getCity();
 
-//        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
+        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
     }
 
     @Override
@@ -326,11 +339,11 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                            poiResult.getPois().get(1).getProvinceName()+"&"
 //
 //                    ,"poi检索接货222");
-            mImageview_cancle.setVisibility(View.VISIBLE);
             mData_searchaddress.clear();
             mData_searchaddress.addAll(poiResult.getPois());
             mAdapter_address.notifyDataSetChanged();
             mListview_searchaddress.setVisibility(View.VISIBLE);
+            mBUtton_queding.setVisibility(View.INVISIBLE);
         }
 
     }

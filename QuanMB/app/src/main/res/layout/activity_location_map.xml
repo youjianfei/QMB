@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="输入关键字"
+                android:hint="搜索地址"
                 android:singleLine="true"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/text_title2"
@@ -51,6 +51,7 @@
 
         </LinearLayout>
         <TextView
+            android:id="@+id/iamge_cancle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消"
@@ -153,23 +154,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/re_title"
-        android:layout_above="@+id/address"
-        android:layout_margin="10dp"
         android:background="@drawable/background_text_type"
         android:visibility="gone"
         />
-    <ImageView
-        android:id="@+id/iamge_cancle"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@mipmap/canll"
-        android:layout_below="@+id/re_title"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"
 
-        />
     <Button
         android:id="@+id/button_addresssubmit"
         android:layout_width="match_parent"

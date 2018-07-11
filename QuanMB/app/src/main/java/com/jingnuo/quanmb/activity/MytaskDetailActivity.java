@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_paySuccessOrerro;
@@ -96,7 +97,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     //对象
     TaskDetailBean taskDetailBean;
     Popwindow_lookpic popwindow_lookpic;
-    Adapter_Gridviewpic adapter_gridviewpic;
+    Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
 
     PermissionHelper mPermission;//动态申请权限
 
@@ -115,7 +116,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     @Override
     protected void setData() {
         imageview_urllist = new ArrayList<>();
-        adapter_gridviewpic = new Adapter_Gridviewpic(imageview_urllist, this);
+        adapter_gridviewpic = new Adapter_Gridviewpic_skillsdetails(imageview_urllist, this);
         imageGridview.setAdapter(adapter_gridviewpic);
         popwindow_lookpic = new Popwindow_lookpic(this);
         intentFilter_paysuccess = new IntentFilter();

@@ -11,6 +11,7 @@ import com.jingnuo.quanmb.activity.LaunchActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
+import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.utils.LogUtils;
 
@@ -84,6 +85,14 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
                 Intent mainIntent = new Intent(context, MainActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Intent intent_system=new Intent(context, SystemMessageActivity.class);
+                intent_system.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent[] intents = {mainIntent, intent_system};
+                context.startActivities(intents);
+            }
+            else if(type.equals("4")){
+                Intent mainIntent = new Intent(context, MainActivity.class);
+                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent_system=new Intent(context, TaskDetailsActivity.class);
                 intent_system.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Intent[] intents = {mainIntent, intent_system};
                 context.startActivities(intents);

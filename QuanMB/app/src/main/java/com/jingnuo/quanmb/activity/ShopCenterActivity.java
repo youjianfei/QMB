@@ -183,7 +183,7 @@ public class ShopCenterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", "商户中心：" + respose, "ShopCenterActivity");
                 if (type == 1) {
                     helpterInfoBean = new Gson().fromJson(respose, HelpterInfoBean.class);
-                    if(helpterInfoBean.getData().getList().getMemberImgUrl().equals("")){
+                    if(helpterInfoBean.getData().getList().getMemberImgUrl()==null||helpterInfoBean.getData().getList().getMemberImgUrl().equals("")){
                         mTextview.setVisibility(View.GONE);
                         mImageview_vip.setVisibility(View.GONE);
                     }else {
@@ -204,7 +204,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
-                    if(shopcenterBean.getData().getList().getMemberImgUrl().equals("")){
+                    if(shopcenterBean.getData().getList().getMemberImgUrl()==null||shopcenterBean.getData().getList().getMemberImgUrl().equals("")){
                         mTextview.setVisibility(View.GONE);
                         mImageview_vip.setVisibility(View.GONE);
                     }else {
@@ -218,7 +218,10 @@ public class ShopCenterActivity extends BaseActivityother {
 //                    mTextview_namenext.setText(shopcenterBean.getData().getList().getBusiness_address()+" | ");
                     mTextview_money.setText(shopcenterBean.getData().getList().getCommission()+"");
                     mTextview_text_tui_count.setText(shopcenterBean.getData().getList().getSpread_b()+"个");
-                    mTextview_text_huiyuan.setText(shopcenterBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
+                    if(shopcenterBean.getData().getList().getMember_enddate()!=null){
+                        mTextview_text_huiyuan.setText(shopcenterBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
+                    }
+
                 }
 
             }

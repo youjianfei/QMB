@@ -516,7 +516,7 @@ public class IssueTaskActivity extends BaseActivityother {
             yValue = data.getStringExtra("yValue");
             citycode = data.getStringExtra("citycode");
             mTextview_taskAddress.setText(address);
-            mEditview_addressDetail.setText(address2);
+//            mEditview_addressDetail.setText(address2);
         }
 
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
