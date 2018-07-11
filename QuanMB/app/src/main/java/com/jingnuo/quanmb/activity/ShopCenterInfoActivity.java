@@ -505,7 +505,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
 //                dataPictrue.add(mBitmap);
                     //调用压缩图片的方法，返回压缩后的图片path
                     String src_path = path;//原图片的路径
-                    String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
+                    String targetPath = Environment.getExternalStorageDirectory() + "/picyasuo/"+System.currentTimeMillis()+".png";//压缩后图片的路径
                     final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
                     mList_picpath.add(compressImage);
                 }
@@ -522,7 +522,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
 //                    mlistdata_pic.add(0,mBitmap);
                     //调用压缩图片的方法，返回压缩后的图片path
                     String src_path = path;//原图片的路径
-                    String targetPath = Environment.getExternalStorageDirectory() + "/download/" + path + ".jpg";//压缩后图片的路径
+                    String targetPath = Environment.getExternalStorageDirectory()+ "/picyasuo/"+System.currentTimeMillis()+".png";//压缩后图片的路径
                     final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
                     imageview_urllist.add(0, path);
                     List<String> mList_picpath = new ArrayList<>();

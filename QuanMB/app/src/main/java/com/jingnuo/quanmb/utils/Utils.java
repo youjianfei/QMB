@@ -3,6 +3,7 @@ package com.jingnuo.quanmb.utils;
 import android.app.Activity;
 import android.view.WindowManager;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
@@ -15,6 +16,35 @@ import java.util.Date;
  */
 
 public class Utils {
+
+
+
+    /**
+     * //删除某个文件夹下面所有文件
+     *
+     * @param file
+     */
+    public static void deleteAllFiles(File file) {
+        File files[] = file.listFiles();
+        if (files != null)
+            for (File f : files) {
+                if (f.isDirectory()) { // 判断是否为文件夹
+                    deleteAllFiles(f);
+                    try {
+                        f.delete();
+                    } catch (Exception e) {
+                    }
+                } else {
+                    if (f.exists()) { // 判断是否存在
+                        deleteAllFiles(f);
+                        try {
+                            f.delete();
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+            }
+    }
 
     //设置背景遮罩颜色
     public static void setAlpha(float bgAlpha, Activity activity) {

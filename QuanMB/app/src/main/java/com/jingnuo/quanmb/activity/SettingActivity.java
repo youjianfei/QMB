@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,10 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+
+import java.io.File;
+
+import static com.jingnuo.quanmb.utils.Utils.deleteAllFiles;
 
 public class SettingActivity extends BaseActivityother {
     //控件
@@ -46,7 +51,7 @@ public class SettingActivity extends BaseActivityother {
         mTextview_cleancache=findViewById(R.id.textview_cleancache);
         mTextview_suggest=findViewById(R.id.textview_suggest);
     }
-
+    File root;//分享的图片要放的文件夹
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -62,6 +67,12 @@ public class SettingActivity extends BaseActivityother {
 
             case R.id.textview_cleancache:
                 ToastUtils.showToast(this,"清除缓存成功");
+                root = new File(Environment.getExternalStorageDirectory() + "/picyasuo/");//找到根目录下DICM文件夹
+                if (!root.exists()) {
+                    root.mkdirs();
+                }
+                deleteAllFiles(root);//删除上次分享的残余图片
+
             break;
             case R.id.textview_suggest:
                 Intent intend_suggest=new Intent(this,SuggestActivity.class);
