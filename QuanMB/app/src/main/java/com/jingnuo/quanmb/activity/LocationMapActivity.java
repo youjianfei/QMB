@@ -141,7 +141,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
                         poiSearch = new PoiSearch(LocationMapActivity.this, query);
                         poiSearch.setOnPoiSearchListener(LocationMapActivity.this);
-
                         poiSearch.searchPOIAsyn();
                     }
 
@@ -342,6 +341,9 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
             mData_searchaddress.clear();
             mData_searchaddress.addAll(poiResult.getPois());
             mAdapter_address.notifyDataSetChanged();
+            if(mData_searchaddress.size()>0){
+                mListview_searchaddress.setSelection(0);
+            }
             mListview_searchaddress.setVisibility(View.VISIBLE);
             mBUtton_queding.setVisibility(View.INVISIBLE);
         }
