@@ -110,20 +110,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         intent.putExtra("address",aMapLocation.getCity());
                         sendBroadcast(intent);
                     }
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
+                    if(Staticdata.isLogin){
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
 
-                        }
+                            }
 
-                        @Override
-                        public void onError(int error) {
+                            @Override
+                            public void onError(int error) {
 
-                        }
-                    }).Http(Urls.Baseurl+Urls.updataXYDU+Staticdata.static_userBean.getData().getUser_token()+"&x_value=" +
-                            Staticdata.xValue+"&y_value="+Staticdata.yValue,MainActivity.this,0);
+                            }
+                        }).Http(Urls.Baseurl+Urls.updataXYDU+Staticdata.static_userBean.getData().getUser_token()+"&x_value=" +
+                                Staticdata.xValue+"&y_value="+Staticdata.yValue,MainActivity.this,0);
 
-
+                    }
 
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。

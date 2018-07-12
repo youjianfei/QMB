@@ -78,11 +78,28 @@ public class Utils {
         Calendar calendar = Calendar.getInstance();
         return df.format(calendar.getTime());
     }
+    public static long getCurTimeLong(){
+        long time=System.currentTimeMillis();
+        return time;
+    }
+
+    public static long getStringToDate(String dateString, String pattern) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateString);
+        } catch(ParseException e) {
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
+
+
 
     //字符串转时间戳
     public static String getTime(String timeString) {
         String timeStamp = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d;
         try {
             d = sdf.parse(timeString);
@@ -97,7 +114,7 @@ public class Utils {
     //时间戳转字符串
     public static String getStrTime(String timeStamp) {
         String timeString = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         long l = Long.valueOf(timeStamp);
         timeString = sdf.format(new Date(l));//单位秒
         return timeString;
