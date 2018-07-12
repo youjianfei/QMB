@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.popwinow.Popwindow_bargin;
@@ -62,7 +63,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     TaskDetailBean mTaskData;
     Popwindow_lookpic popwindow_lookpic;
     Popwindow_bargin popwindow_bargin;
-    Adapter_Gridviewpic adapter_gridviewpic;
+    Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
 
 
     @Override
@@ -73,7 +74,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     @Override
     protected void setData() {
         imageview_urllist=new ArrayList<>();
-        adapter_gridviewpic=new Adapter_Gridviewpic(imageview_urllist,this);
+        adapter_gridviewpic=new Adapter_Gridviewpic_skillsdetails(imageview_urllist,this);
         imageGridview.setAdapter(adapter_gridviewpic);
         popwindow_lookpic=new Popwindow_lookpic(this);
         requestTaseDetail();
@@ -232,7 +233,9 @@ public class TaskDetailsActivity extends BaseActivityother {
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
                 String imageURL = mTaskData.getData().getAvatar_imgUrl().substring(0, mTaskData.getData().getAvatar_imgUrl().length() - 1);
-                Glide.with(TaskDetailsActivity.this).load(imageURL).into(imageView_head);
+               if(TaskDetailsActivity.this!=null){
+                   Glide.with(TaskDetailsActivity.this).load(imageURL).into(imageView_head);
+               }
                 image_url=mTaskData.getData().getTask_ImgUrl();
                 setImage(image_url);
 
