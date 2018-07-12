@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -69,7 +70,7 @@ public class SkillDetailActivity extends BaseActivityother {
     Popwindow_lookpic popwindow_lookpic;
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
 
-
+    RequestManager glide;
     //数据
     private final int MAX_LINE_COUNT = 3;
     private final int STATE_UNKNOW = -1;
@@ -125,6 +126,7 @@ public class SkillDetailActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        glide=Glide.with(this);
         mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
@@ -318,7 +320,7 @@ public class SkillDetailActivity extends BaseActivityother {
                 mTextview_shopaddress.setText(mSkilldetailsbean.getData().getDetail().getRelease_address());
                 mTextview_content.setText(mSkilldetailsbean.getData().getDetail().getDescription());
                 mTextview_shopname.setText(mSkilldetailsbean.getData().getDetail().getAuth_name());
-                Glide.with(SkillDetailActivity.this).load(mSkilldetailsbean.getData().getDetail().getAvatar_url()).into(mImageview_shopPic);
+                glide.load(mSkilldetailsbean.getData().getDetail().getAvatar_url()).into(mImageview_shopPic);
                 image_url = mSkilldetailsbean.getData().getDetail().getImg_url();
                 setImage(image_url);
                 collrctID = mSkilldetailsbean.getData().getDetail().getCollection_status() == 0 ? 1 : 2;

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
@@ -65,7 +66,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     Popwindow_bargin popwindow_bargin;
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
 
-
+    RequestManager glide;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_task_details;
@@ -82,6 +83,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        glide=Glide.with(TaskDetailsActivity.this);
         Intent intend_id = getIntent();
         ID = intend_id.getStringExtra("id");
         popwindow_bargin = new Popwindow_bargin(this, new Interence_bargin() {
@@ -234,7 +236,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 is_counteroffer = mTaskData.getData().getIs_counteroffer();
                 String imageURL = mTaskData.getData().getAvatar_imgUrl().substring(0, mTaskData.getData().getAvatar_imgUrl().length() - 1);
                if(TaskDetailsActivity.this!=null){
-                   Glide.with(TaskDetailsActivity.this).load(imageURL).into(imageView_head);
+                   glide.load(imageURL).into(imageView_head);
                }
                 image_url=mTaskData.getData().getTask_ImgUrl();
                 setImage(image_url);

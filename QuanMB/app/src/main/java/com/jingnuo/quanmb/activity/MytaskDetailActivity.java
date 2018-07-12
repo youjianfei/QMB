@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
@@ -104,7 +105,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     Popwindow_Tip popwindow_tip;
     Popwindow_addPrice popwindow_addPrice;
 
-
+    RequestManager glidee;
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
     private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
 
@@ -173,6 +174,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        glidee=Glide.with(MytaskDetailActivity.this);
         mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         Intent intent = getIntent();
         ID = intent.getStringExtra("id");
@@ -442,7 +444,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                     mRelativylaout_re1.setVisibility(View.VISIBLE);
                     mRelativylaout_re4.setVisibility(View.GONE);
                 } else {
-                    Glide.with(MytaskDetailActivity.this).load(taskDetailBean.getData().getB_h_url()).into(mImageview_todo);
+                   glidee.load(taskDetailBean.getData().getB_h_url()).into(mImageview_todo);
 
                     mRelativylaout_re1.setVisibility(View.GONE);
                     mRelativylaout_re4.setVisibility(View.VISIBLE);

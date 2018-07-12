@@ -172,7 +172,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void initdata() {
-        mainActivity=this;
+        if(mainActivity==null){
+            mainActivity=this;
+        }
         permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
             @Override
