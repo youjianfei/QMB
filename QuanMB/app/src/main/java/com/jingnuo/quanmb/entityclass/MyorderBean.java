@@ -71,23 +71,23 @@ public class MyorderBean {
          * img_url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/idcard/eb247f1e-ab6c-48c2-ab11-7b11f8514767upload_57474945_162f04d8770__8000_00000000.tmp?Expires=1524453636&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=b7ZGRCFBcxQZAs%2BAru4bL1j8vNc%3D
          */
 
-        private String Status_name;
+        private String Status_name="";
         private double commission;
         private double counteroffer_Amount;
         private int count;
-        private String detailed_address;
-        private String is_counteroffer;
-        private String name;
-        private String task_EndDate;
-        private String task_StartDate;
-        private String task_Status_code;
-        private String task_description;
+        private String detailed_address="";
+        private String is_counteroffer="";
+        private String name="";
+        private String task_EndDate="";
+        private String task_StartDate="";
+        private String task_Status_code="";
+        private String task_description="";
         private int task_id;
-        private String task_name;
-        private String user_grade;
-        private String img_url;
-        private String specialty_name;
-        private String is_helper_bid;
+        private String task_name="";
+        private String user_grade="";
+        private String img_url="";
+        private String specialty_name="";
+        private String is_helper_bid="";
 
         public String getIs_helper_bid() {
             return is_helper_bid;

@@ -73,15 +73,6 @@ public class Volley_Utils {
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;//将登录状态改为未登录
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));
-//                        if(popwindow_loginAgain==null){
-//                            popwindow_loginAgain =new Popwindow_loginAgain((Activity) mContext, new Interence_complteTask() {
-//                                @Override
-//                                public void onResult(boolean result) {
-//
-//                                }
-//                            });
-//                        }
-//                        popwindow_loginAgain.showPopwindow();
                     }else {
 
                         mInterface.onSuccesses(response);
@@ -119,7 +110,7 @@ public class Volley_Utils {
     }
 
     public void postHttp(String URL, final Context mContext, int Method, final Map<String, String> map) {
-        LogUtils.LOG("ceshi","post请求触发","vollryUtils");
+        LogUtils.LOG("ceshi","post请求触发"+URL+map.toString(),"vollryUtils");
         mQueue = Volley.newRequestQueue(mContext);
 
         mStringRequest = new StringRequest(Method, URL, new Response.Listener<String>() {
@@ -143,15 +134,6 @@ public class Volley_Utils {
                         Staticdata.isLogin=false;
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));
 
-//                        if(popwindow_loginAgain==null){
-//                            popwindow_loginAgain =new Popwindow_loginAgain((Activity) mContext, new Interence_complteTask() {
-//                                @Override
-//                                public void onResult(boolean result) {
-//
-//                                }
-//                            });
-//                        }
-//                        popwindow_loginAgain.showPopwindow();
 
                     }else {
                         mInterface.onSuccesses(response);
