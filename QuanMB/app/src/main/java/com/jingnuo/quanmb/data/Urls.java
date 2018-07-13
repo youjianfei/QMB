@@ -164,8 +164,8 @@ public class Urls {
 
     //支付
     public static String balancePay = "balance/payByBalance";//余额支付
-    public static String wechatPay = "AppPay/WeChatPreOrder";//微信支付
-    public static String zhifubaoPay = "ALiPay/doAlipay";//支付宝支付
+    public static String wechatPay = "AppPay/WexinChatPay";//微信支付
+    public static String zhifubaoPay = "ALiPay/dozhiAlipay";//支付宝支付
     public static String getBalance = "balance/getUserBalance?user_token=";//查询钱包余额
     public static String cashmoney = "ALiPay/aliTiZhuan";//提现
     public static String jiaoyiMingxi = "balance/getTradeDetails";//查询交易明细

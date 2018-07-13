@@ -133,7 +133,7 @@ public class RechargeActivity extends BaseActivityother {
                         Map map_pay=new HashMap();
                         map_pay.put("isrecharge","Y");
                         map_pay.put("body","充值");
-                        map_pay.put("total_fee","0.01");
+                        map_pay.put("total_fee",amount);
                         map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                         map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                         map_pay.put("task_id","0");
@@ -146,7 +146,7 @@ public class RechargeActivity extends BaseActivityother {
                         Map map_zpay=new HashMap();
                         map_zpay.put("isrecharge","Y");
                         map_zpay.put("subject","充值");
-                        map_zpay.put("total_fee","0.01");
+                        map_zpay.put("total_fee",amount);
                         map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                         map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                         map_zpay.put("task_id","0");
