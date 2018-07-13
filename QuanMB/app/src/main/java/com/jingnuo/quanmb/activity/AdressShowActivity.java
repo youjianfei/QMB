@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdate;
@@ -19,8 +21,9 @@ import com.jingnuo.quanmb.quanmb.R;
 
 import java.util.ArrayList;
 
-public class AdressShowActivity extends Activity {
+public class AdressShowActivity extends Activity implements View.OnClickListener{
 
+    ImageView mImageview;
     MapView mMapview;
 
     AMap aMap;
@@ -35,6 +38,9 @@ public class AdressShowActivity extends Activity {
         setContentView(R.layout.activity_adress_show);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         mMapview = findViewById(R.id.map);
+        mImageview=findViewById(R.id.iv_back);
+        mImageview.setOnClickListener(this);
+
         mMapview.onCreate(savedInstanceState);
         if (aMap == null) {
             aMap = mMapview.getMap();
@@ -54,6 +60,37 @@ public class AdressShowActivity extends Activity {
         aMap.animateCamera(cameraUpdate);//地图移向指定区域  带动画
 //                aMap.moveCamera(cameraUpdate);//地图移向指定区域  不带动画
     }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
 
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
+        mMapview.onDestroy();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mMapview.onSaveInstanceState(outState);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapview.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
+        mMapview.onPause();
+    }
 }
 

@@ -69,7 +69,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     String finallocation;//poi名称
     String address;//地址
     MyLocationStyle myLocationStyle;
-
     String xValue="";//纬度
     String yValue="";//经度
     String citycode="";//城市名
