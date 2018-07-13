@@ -145,7 +145,7 @@ public class Urls {
     public static String wechatPay = "AppPay/WeChatPreOrder";//微信支付
     public static String zhifubaoPay = "ALiPay/doAlipay";//支付宝支付
     public static String getBalance = "balance/getUserBalance?user_token=";//查询钱包余额
-    public static String cashmoney = "ALiPay/AliTransfer";//提现
+    public static String cashmoney = "ALiPay/aliTiZhuan";//提现
     public static String jiaoyiMingxi = "balance/getTradeDetails";//查询交易明细
     public static String tui_taocan = "balance/getAllSpreadPags?user_token=";//充值推广币套餐列表接口
     public static String huiyuan_taocan = "balance/getAllVIPPackages?user_token=";//购买会员套餐接口

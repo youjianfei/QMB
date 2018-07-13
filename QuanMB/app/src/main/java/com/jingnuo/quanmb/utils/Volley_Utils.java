@@ -70,6 +70,7 @@ public class Volley_Utils {
                         e.printStackTrace();
                     }
                     if(status==-5){
+                        SharedPreferencesUtils.putString(mContext,"QMB","password","");
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;//将登录状态改为未登录
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));
@@ -130,6 +131,7 @@ public class Volley_Utils {
                         e.printStackTrace();
                     }
                     if(status==-5){
+                        SharedPreferencesUtils.putString(mContext,"QMB","password","");
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));

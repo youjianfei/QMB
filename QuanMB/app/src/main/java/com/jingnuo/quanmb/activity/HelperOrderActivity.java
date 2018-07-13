@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
+import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -67,7 +68,7 @@ public class HelperOrderActivity extends BaseActivityother {
     MyGridView imageGridview;
     String image_url = "";
     List<String> imageview_urllist;
-    Adapter_Gridviewpic adapter_gridviewpic;
+    Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
 
 
     //对象
@@ -91,7 +92,7 @@ public class HelperOrderActivity extends BaseActivityother {
     @Override
     protected void setData() {
         imageview_urllist = new ArrayList<>();
-        adapter_gridviewpic = new Adapter_Gridviewpic(imageview_urllist, this);
+        adapter_gridviewpic = new Adapter_Gridviewpic_skillsdetails(imageview_urllist, this);
         imageGridview.setAdapter(adapter_gridviewpic);
 
         popwindow_complatetask = new Popwindow_complatetask(this, new Interence_complteTask() {
@@ -225,7 +226,7 @@ public class HelperOrderActivity extends BaseActivityother {
                 if (now < ago) {
                     chazhi = ago - now;
                 } else {
-                    chazhi = now - ago;
+                    chazhi = 0;
                 }
                 if (chazhi > 0) {
                     timer = new Timer();

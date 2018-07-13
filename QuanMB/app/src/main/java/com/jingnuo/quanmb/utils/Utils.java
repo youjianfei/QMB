@@ -131,8 +131,7 @@ public class Utils {
         long diff ;
         String flag;
         if(time1<time2) {
-            diff = time2 - time1;
-            flag="前";
+            return "0小时0分";
         } else {
             diff = time1 - time2;
             flag="后";
