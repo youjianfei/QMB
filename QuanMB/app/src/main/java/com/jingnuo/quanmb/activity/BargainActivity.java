@@ -105,55 +105,6 @@ public class BargainActivity extends BaseActivityother {
         });
         registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
 
-//        popwindow_bargin = new Popwindow_bargin(BargainActivity.this, new Interence_bargin() {
-//            @Override
-//            public void onResult(String result) {
-//                String URL_bargain = "";
-//                Map map_goonbargain = new HashMap();
-//                if (bargainMessagedetailsBean.getData().getMark().equals("2")) {
-//                    URL_bargain = Urls.Baseurl_cui + Urls.kehubargain;
-//                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
-//                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-//                    map_goonbargain.put("counteroffer_Amount", result);
-//                    map_goonbargain.put("send_client_no", bargainMessagedetailsBean.getData().getSend_client_no());
-//                } else {
-//                    URL_bargain = Urls.Baseurl_cui + Urls.helpterbargain;
-//                    map_goonbargain.put("binding_id", bargainMessagedetailsBean.getData().getBinding_id());
-//                    map_goonbargain.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-//                    map_goonbargain.put("task_id", bargainMessagedetailsBean.getData().getTask_id() + "");
-//                    map_goonbargain.put("counteroffer_Amount", result + "");
-//                }
-//                LogUtils.LOG("ceshi", "map+" + map_goonbargain, "继续还价");
-//                LogUtils.LOG("ceshi", URL_bargain, "继续还价");
-//                new Volley_Utils(new Interface_volley_respose() {
-//                    @Override
-//                    public void onSuccesses(String respose) {
-//                        LogUtils.LOG("ceshi", respose, "继续还价");
-//                        int status = 0;
-//                        String msg = "";
-//                        try {
-//                            JSONObject object = new JSONObject(respose);
-//                            status = (Integer) object.get("code");
-//                            msg = (String) object.get("message");
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                        if (status == 1) {
-//                            ToastUtils.showToast(BargainActivity.this, msg);
-//                            requestBargainmessage(map_bargainmessagedetail);//刷新状态
-//                        } else {
-//                            ToastUtils.showToast(BargainActivity.this, msg);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(int error) {
-//
-//                    }
-//                }).postHttp(URL_bargain, BargainActivity.this, 1, map_goonbargain);
-//
-//            }
-//        });
     }
 
     @Override

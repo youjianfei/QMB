@@ -370,22 +370,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mRelativylaout_re4 = findViewById(R.id.re4);
     }
 
-    void requestTaskid() {//请求任务号,成功后跳转支付界面
-//        LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid
-//                + Staticdata.static_userBean.getData().getUser_token(), "获取任务ID");
-//        new Volley_Utils(new Interface_volley_respose() {
-//            @Override
-//            public void onSuccesses(String respose) {
-//
-//
-//            }
-//
-//            @Override
-//            public void onError(int error) {
-//
-//            }
-//        }).Http(Urls.Baseurl_cui + Urls.gettaskid
-//                + Staticdata.static_userBean.getData().getUser_token(), MytaskDetailActivity.this, 0);
+    void requestTaskid() {
 
                 isIssueAgain = true;
                 Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
@@ -601,6 +586,10 @@ public class MytaskDetailActivity extends BaseActivityother {
                     mButton_completed.setVisibility(View.VISIBLE);
                     mButton_complete.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("很好的一次合作");
+                }
+                if (taskDetailBean.getData().getTask_Status_code().equals("09")) {
+                    mButton_complete.setVisibility(View.GONE);
+                    getmTextview_statejieshao.setText("抱歉，帮手未完成任务");
                 }
 
             }

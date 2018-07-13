@@ -299,6 +299,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         });
     }
 
+
     private void setdata() {
 
     }
@@ -423,13 +424,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     }
 
     private void initview() {
-//        mTextview_banghsou = rootview.findViewById(R.id.textview_bangshou);
-//        mTextview_address=rootview.findViewById(R.id.textview_address);
-//        mTextview_myorder=rootview.findViewById(R.id.text_myorder);
-//        mTextview_logout=rootview.findViewById(R.id.textview_logout);
-//        mTextview_mycollect=rootview.findViewById(R.id.textview_colllect);
-//        mTextview_aboutus=rootview.findViewById(R.id.textview_aboutus);
-//        mTextview_shopcenter=rootview.findViewById(R.id.textview_shopcenter);
         mTextview_moneycount=rootview.findViewById(R.id.textview_2);
         mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
@@ -476,7 +470,20 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 
     }
 
-    public void  logout(){//登出注销微信授权
+    public void  logout(){
+
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"退出登录");
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl+Urls.logout+Staticdata.static_userBean.getData().getUser_token(),getActivity(),0);
+        //登出注销微信授权
         mShareAPI = UMShareAPI.get(getActivity());
         mShareAPI.deleteOauth(getActivity(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
             @Override

@@ -19,21 +19,46 @@ public class Urls {
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
     public static String upLoadImage = "uploadIge/headImgUpload";//上传图片  1.证件图片 2.任务图片 3.头像图片 4.商户证件图片 5.图标 6.发布专业图片
 
-
+    /**
+     * 登录注册相关
+     */
     public static String login = "login/doLogin";//登陆  post
     public static String wechatlogin = "login/weChatLogin";//微信登陆  post
     public static String phoneLogin = "login/moblieLogin";//手机号验证登陆
     public static String phoneRegister = "register/Register";//注册
     public static String registerBind = "login/registerBind";//三方登录注册绑定
     public static String existsBind = "login/existsBind";//三方登录已有账号绑定
-    public static String findpassword = "login/forgetPwd";//找回密码
+    public static String logout = "login/LoginOut?user_token=";//退出登录
+    /**
+     * 用户资料设置  商户资料设置更改
+     */
+    public static String setnickname = "user/setNickName";//更换昵称
+    public static String setheadPic = "user/setheadimage";//设置头像
     public static String changephonenumber = "user/modifyPhone1";//更换绑定手机号第一步
     public static String bindphonenumber = "user/modifyPhone2";//更换绑定手机号第er步,绑定手机号
     public static String changepassword = "user/changePwd";//更换密码
+    public static String findpassword = "login/forgetPwd";//找回密码
+    public static String setshophead = "business/setBusinessAvatar";//设置商户头像
+    public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
 
-    public static String setnickname = "user/setNickName";//更换昵称
-    public static String setheadPic = "user/setheadimage";//设置头像
+    /**
+     * 审核
+     */
+    public static String shopIn = "business/commitApply";//商家入驻审核    post
+    public static String shopIn_state = "business/queryBusinessStatus?user_token=";//商家入驻审核状态
+    public static String woderenzheng="business/queryAuthInfo?user_token=";// 我的认证
+    public static String authenticationHelper = "helper/helperReal";//帮手认证
+    public static String helpIn_state = "helper/getHelperAuditState";//帮手认证审核状态
+
+
+
+
+
+
+
+
     public static String shouyePic = "plaza/getSlideShow";//首页轮播广告
+
 
     //任务模块
     public static String square_default = "task/querySpecialty/search";//帮帮广场
@@ -69,8 +94,7 @@ public class Urls {
 
 
     //商户
-    public static String shopIn = "business/commitApply";//商家入驻审核    post
-    public static String shopIn_state = "business/queryBusinessStatus?user_token=";//商家入驻审核状态
+
 
     public static String shopcenter = "business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
     public static String shoporder = "business/queryBusinessOrder?user_token=";//商家接收的任务
@@ -79,8 +103,7 @@ public class Urls {
     public static String shopCancleSkill = "business/cancelPost?user_token=";//撤消发布专业
     public static String shopIssueSkill = "business/releaseSpecialty";//发布专业    post
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
-    public static String setshophead = "business/setBusinessAvatar";//设置商户头像
-    public static String editshopinfo = "business/editBusinessInfo";//编辑商户信息
+
     public  static String businessputongshuaxin="business/handRefresh?user_token=";//普通刷新   服务
     public  static String businesszhinengshuaxin="business/autoRefresh?user_token=";//智能刷新   服务
     public  static String businesszhiding="business/setTopSpecialty?user_token=";//置顶   服务
@@ -89,15 +112,14 @@ public class Urls {
     //商户 帮手通用
     public static String shuaxinchoseDays="major/choiceRefreshDayList?user_token=";// 智能刷新选择的天数
     public static String zhidingchoseDays="major/choiceTopDayList?user_token=";// 智能刷新选择的天数
-    public static String woderenzheng="business/queryAuthInfo?user_token=";// 我的认证
+
 
 
 
 
 
     //帮手模块
-    public static String authenticationHelper = "helper/helperReal";//帮手认证
-    public static String helpIn_state = "helper/getHelperAuditState";//帮手认证审核状态
+
     public static String helperInfo = "helper/queryHelperInfo?user_token=";//帮手信息
     public static String helporder = "helper/queryHelperOrder?user_token=";//帮手接收的任务
     public static String helporderdetail = "helper/queryOrderDetail?user_token=";//商家接收的任务详情
