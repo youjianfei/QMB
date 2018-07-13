@@ -68,6 +68,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     AMap aMap;
     String finallocation;//poi名称
     String address;//地址
+    MyLocationStyle myLocationStyle;
 
     String xValue="";//纬度
     String yValue="";//经度
@@ -81,7 +82,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         if (aMap == null) {
             aMap = mMapview.getMap();
         }
-        MyLocationStyle myLocationStyle;
+
         myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE) ;//定位一次，且将视角移动到地图中心点。
 //        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。

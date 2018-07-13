@@ -128,6 +128,17 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mTextview_taskaddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mTaskData.getData().getX_value().equals("")){
+                    Intent intentAddressshow= new Intent(TaskDetailsActivity.this,AdressShowActivity.class);
+                    intentAddressshow.putExtra("x_vlaue",mTaskData.getData().getX_value());
+                    intentAddressshow.putExtra("y_vlaue",mTaskData.getData().getY_value());
+                    startActivity(intentAddressshow);
+                }
+            }
+        });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -92,6 +92,24 @@ public class TaskDetailBean {
         private String is_delay="";
         private String delay_time;
         private String task_Startdate;
+        private String x_value="";
+        private String y_value="";
+
+        public String getX_value() {
+            return x_value;
+        }
+
+        public void setX_value(String x_value) {
+            this.x_value = x_value;
+        }
+
+        public String getY_value() {
+            return y_value;
+        }
+
+        public void setY_value(String y_value) {
+            this.y_value = y_value;
+        }
 
         public String getTask_Startdate() {
             return task_Startdate;

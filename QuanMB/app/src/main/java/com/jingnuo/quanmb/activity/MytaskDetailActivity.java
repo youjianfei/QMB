@@ -189,6 +189,18 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mTextview_taskaddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!taskDetailBean.getData().getX_value().equals("")){
+                    Intent intentAddressshow= new Intent(MytaskDetailActivity.this,AdressShowActivity.class);
+                    intentAddressshow.putExtra("x_vlaue",taskDetailBean.getData().getX_value());
+                    intentAddressshow.putExtra("y_vlaue",taskDetailBean.getData().getY_value());
+                    startActivity(intentAddressshow);
+                }
+            }
+        });
+
         mImageview_phonenumber.setOnClickListener(new View.OnClickListener() {//点击拨打电话
             @Override
             public void onClick(View v) {
