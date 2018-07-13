@@ -93,6 +93,7 @@ public class Fragment_phone_login extends Fragment {
                 }
                 if(status==1){//登录成功
                     userBean=new Gson().fromJson(respose,UserBean.class);
+                    Staticdata. static_userBean=null;
                     Staticdata. static_userBean=userBean;
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;

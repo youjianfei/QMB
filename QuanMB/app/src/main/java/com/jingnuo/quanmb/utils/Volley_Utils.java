@@ -54,7 +54,7 @@ public class Volley_Utils {
 
     public void Http(String URL, final Context mContext, int Method) {
         mQueue = Volley.newRequestQueue(mContext);
-        LogUtils.LOG("ceshi","调用网络请求","vollryUtils");
+        LogUtils.LOG("ceshi","调用网络请求"+URL,"vollryUtils");
         mStringRequest = new StringRequest(Method, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -71,7 +71,7 @@ public class Volley_Utils {
                     }
                     if(status==-5){
                         SharedPreferencesUtils.putString(mContext,"QMB","password","");
-                        Staticdata.static_userBean.setData(null);//用户信息清空
+                        Staticdata. static_userBean=null;
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;//将登录状态改为未登录
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));
@@ -133,7 +133,7 @@ public class Volley_Utils {
                     }
                     if(status==-5){
                         SharedPreferencesUtils.putString(mContext,"QMB","password","");
-                        Staticdata.static_userBean.setData(null);//用户信息清空
+                        Staticdata. static_userBean=null;
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;
                         mContext.startActivity(new Intent(mContext, LoginActivity.class));

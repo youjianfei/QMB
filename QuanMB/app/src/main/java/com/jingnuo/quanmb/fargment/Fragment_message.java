@@ -174,6 +174,8 @@ public class Fragment_message extends Fragment {
     public void onResume() {
         super.onResume();
         if(Staticdata.isLogin){
+            map_getnewmessage.put("receive_client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+            map_getnewmessage.put("user_token",Staticdata.static_userBean.getData().getUser_token());
             request();
         }
     }
