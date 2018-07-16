@@ -93,7 +93,7 @@ public class OrderThinkActivity extends BaseActivityother {
     }
     void request(){
         LogUtils.LOG("ceshi",map_think.toString(),"评价");
-        LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.orderthink,"评价");
+//        LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.orderthink,"评价");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {

@@ -257,12 +257,15 @@ public class HelperOrderActivity extends BaseActivityother {
                 } else if (helpOrderBean.getData().getDetail().getOrder_status().equals("已完成")) {
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("已完成");
+                    mLinearlayout_linearlayout_timecancle.setVisibility(View.GONE);
                 } else if (helpOrderBean.getData().getDetail().getOrder_status().equals("已关闭")) {
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("已关闭");
+                    mLinearlayout_linearlayout_timecancle.setVisibility(View.GONE);
                 } else if (helpOrderBean.getData().getDetail().getOrder_status().equals("已关闭")) {
                     mButton_queren.setEnabled(false);
                     mButton_queren.setText("逾期未完成");
+                    mLinearlayout_linearlayout_timecancle.setVisibility(View.GONE);
                 } else {
                     mButton_queren.setEnabled(true);
                 }

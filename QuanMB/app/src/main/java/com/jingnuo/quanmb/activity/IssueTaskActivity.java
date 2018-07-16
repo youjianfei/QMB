@@ -135,13 +135,18 @@ public class IssueTaskActivity extends BaseActivityother {
         public void onLocationChanged(AMapLocation aMapLocation) {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
-//可在其中解析amapLocation获取相应内容。
+    //可在其中解析amapLocation获取相应内容。
                     LogUtils.LOG("ceshi","定位成功"+aMapLocation.getAddress(),"发布任务");
                     xValue=aMapLocation.getLatitude()+"";//获取纬度
                     yValue=aMapLocation.getLongitude()+"";//获取经度
                     citycode=aMapLocation.getCity();//城市信息
-                    mTextview_taskAddress.setText(aMapLocation.getAddress()
-                            .replace(aMapLocation.getProvince()+aMapLocation.getCity(),""));
+                    String Aoi=aMapLocation.getAoiName()+"";
+                    if (Aoi.equals("")){
+                        mTextview_taskAddress.setText(aMapLocation.getDescription().replace(aMapLocation.getProvince()+aMapLocation.getCity(),""));
+                    }else {
+                        mTextview_taskAddress.setText(Aoi);
+                    }
+
                 }else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 }
@@ -422,6 +427,8 @@ public class IssueTaskActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请填写详细地址");
             return false;
         }
+        detailed_address=address_right+detailed_address;
+
 
         commission = mEditview_taskmoney.getText() + "";
         if (!commission.equals("")) {
@@ -505,18 +512,18 @@ public class IssueTaskActivity extends BaseActivityother {
         });
         permissionmanage.requestpermission();
     }
-
+    String address_left="";
+    String address_right="";
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2018418 && resultCode == 2018418) {
-            String address = data.getStringExtra("address");
-            String address2 = data.getStringExtra("address2");
+            address_left= data.getStringExtra("address");
+            address_right = data.getStringExtra("address2");
             xValue = data.getStringExtra("xValue");
             yValue = data.getStringExtra("yValue");
             citycode = data.getStringExtra("citycode");
-            mTextview_taskAddress.setText(address);
-//            mEditview_addressDetail.setText(address2);
+            mTextview_taskAddress.setText(address_left);
         }
 
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {

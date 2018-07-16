@@ -283,7 +283,7 @@
                 android:id="@+id/edit_detailaddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="输入详细地址"
+                android:hint="输入门牌号"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp"
                 android:gravity="right"

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -47,7 +49,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
 //    GeocodeSearch.OnGeocodeSearchListener ,
     //控件
-    EditText mEdit_location;
+    TextView mText_location;
     EditText mEdit_search;
     TextView mTextview_nowaddress;
     Button mBUtton_queding;
@@ -72,6 +74,8 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     String xValue="";//纬度
     String yValue="";//经度
     String citycode="";//城市名
+
+    boolean isSearch=true;//因为搜索后会走 地图移动方法，这里判断 不让走地图移动方法
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,46 +122,63 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
     @Override
     protected void initListener() {
-        //监听键盘确定按钮，以便直接搜索
-        mEdit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mEdit_search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                //当actionId == XX_SEND 或者 XX_DONE时都触发
-                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
-                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
-                if (actionId == EditorInfo.IME_ACTION_SEND
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
-                    //处理事件
-                    String address = mEdit_search.getText() + "";
-                    if (address.equals("")) {
-                    } else {
-                        query = new PoiSearch.Query(address, "", citycode);
-                        //keyWord表示搜索字符串，
-                        //第二个参数表示POI搜索类型，二者选填其一，选用POI搜索类型时建议填写类型代码，码表可以参考下方（而非文字）
-                        //cityCode表示POI搜索区域，可以是城市编码也可以是城市名称，也可以传空字符串，空字符串代表全国在全国范围内进行搜索
-                        query.setPageSize(30);// 设置每页最多返回多少条poiitem
-                        query.setPageNum(0);//设置查询页码
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                        poiSearch = new PoiSearch(LocationMapActivity.this, query);
-                        poiSearch.setOnPoiSearchListener(LocationMapActivity.this);
-                        poiSearch.searchPOIAsyn();
-                    }
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String search = "";
+                search = mEdit_search.getText() + "";
+                if (search.equals("")) {
+                } else {
+                    query = new PoiSearch.Query(search, "", citycode);
+                    //keyWord表示搜索字符串，
+                    //第二个参数表示POI搜索类型，二者选填其一，选用POI搜索类型时建议填写类型代码，码表可以参考下方（而非文字）
+                    //cityCode表示POI搜索区域，可以是城市编码也可以是城市名称，也可以传空字符串，空字符串代表全国在全国范围内进行搜索
+                    query.setPageSize(30);// 设置每页最多返回多少条poiitem
+                    query.setPageNum(0);//设置查询页码
+
+                    poiSearch = new PoiSearch(LocationMapActivity.this, query);
+                    poiSearch.setOnPoiSearchListener(LocationMapActivity.this);
+                    poiSearch.searchPOIAsyn();
+                    isSearch=false;
                 }
-                return false;
+
             }
         });
+        //监听键盘确定按钮，以便直接搜索
+//        mEdit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                //当actionId == XX_SEND 或者 XX_DONE时都触发
+//                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
+//                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
+//                if (actionId == EditorInfo.IME_ACTION_SEND
+//                        || actionId == EditorInfo.IME_ACTION_DONE
+//                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+//                    //处理事件
+//                    String address = mEdit_search.getText() + "";
+//
+//
+//                }
+//                return false;
+//            }
+//        });
         mBUtton_queding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent result = new Intent();
                 result.putExtra("address", mTextview_nowaddress.getText() + "");
-                String add = mEdit_location.getText() + "";
-//                if (add.equals("")) {
-//                    ToastUtils.showToast(LocationMapActivity.this, "请输入自定义名称");
-//                    return;
-//                }
+                String add = mText_location.getText() + "";
+
                 result.putExtra("address2", add);
                 result.putExtra("xValue", xValue);
                 result.putExtra("yValue", yValue);
@@ -177,7 +198,9 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mListview_searchaddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mEdit_search.setText("");
                 mTextview_nowaddress.setText(mData_searchaddress.get(i).getTitle());
+                mText_location.setText(mData_searchaddress.get(i).getSnippet());
                 xValue=mData_searchaddress.get(i).getLatLonPoint().getLatitude()+"";
                 yValue=mData_searchaddress.get(i).getLatLonPoint().getLongitude()+"";
                 citycode=mData_searchaddress.get(i).getCityName()+"";
@@ -212,7 +235,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     protected void initView() {
 
         mListview_searchaddress = findViewById(R.id.list_searchaddresslist);
-        mEdit_location = findViewById(R.id.textview_location);
+        mText_location = findViewById(R.id.textview_location);
         mEdit_search = findViewById(R.id.edit_searchaddress);
         mTextview_cancle = findViewById(R.id.iamge_cancle);
         mImageview_location = findViewById(R.id.iamge_location);
@@ -245,7 +268,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapview.onPause();
-        finallocation = mEdit_location.getText() + "";
+        finallocation = mText_location.getText() + "";
     }
 
     GeocodeSearch geocoderSearch;
@@ -296,15 +319,22 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                        regeocodeResult.getRegeocodeAddress().getCity()+"2"+
 //                        regeocodeResult.getRegeocodeAddress().getDistrict()+"3"+
 //                        regeocodeResult.getRegeocodeAddress().getFormatAddress()+"4"+
-//                        regeocodeResult.getRegeocodeAddress().getNeighborhood()+"5"
+//                        regeocodeResult.getRegeocodeAddress().getAois().get(0).getAoiName()+"5"
 //                ,"skdafjskafjsadf");
-        String tichu=regeocodeResult.getRegeocodeAddress().getProvince()+regeocodeResult.getRegeocodeAddress().getCity();
-        String all=regeocodeResult.getRegeocodeAddress().getFormatAddress();
-        String xianshi=all.replace(tichu,"");
-        mTextview_nowaddress.setText(xianshi);
-        citycode=regeocodeResult.getRegeocodeAddress().getCity();
+        LogUtils.LOG("ceshi",isSearch+"","bbbbbbbbbbbbbbbbbbbbbbb");
+        if(isSearch){
+            String AOi=regeocodeResult.getRegeocodeAddress().getAois().get(0).getAoiName();
+            String tichu=regeocodeResult.getRegeocodeAddress().getProvince()+regeocodeResult.getRegeocodeAddress().getCity();
+            String all=regeocodeResult.getRegeocodeAddress().getFormatAddress();
+            String xianshi=all.replace(tichu,"");
+            mTextview_nowaddress.setText(AOi);
+            citycode=regeocodeResult.getRegeocodeAddress().getCity();
+            mText_location.setText(xianshi);
+            LogUtils.LOG("ceshi",isSearch+"","ssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+        }
+       isSearch=true;
 
-        mEdit_location.setText(regeocodeResult.getRegeocodeAddress().getFormatAddress());
+
     }
 
     @Override
@@ -327,7 +357,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtils.showToast(LocationMapActivity.this,"没有此数据");
+                    ToastUtils.showToast(LocationMapActivity.this,"没有该地点");
                 }
             });
 
