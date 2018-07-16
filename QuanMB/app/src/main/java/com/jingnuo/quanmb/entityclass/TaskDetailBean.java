@@ -86,8 +86,7 @@ public class TaskDetailBean {
         private String b_h_url;
         private String business_name="";
         private String business_mobile_no;
-        private String h_member_level;
-        private String b_member_level;
+        private String level="";
         private String delay="";
         private String is_delay="";
         private String delay_time;
@@ -151,23 +150,13 @@ public class TaskDetailBean {
             this.b_h_url = b_h_url;
         }
 
-        public String getB_member_level() {
-            return b_member_level;
+        public String getLevel() {
+            return level;
         }
 
-        public void setB_member_level(String b_member_level) {
-            this.b_member_level = b_member_level;
+        public void setLevel(String level) {
+            this.level = level;
         }
-
-        public String getH_member_level() {
-            return h_member_level;
-        }
-
-        public void setH_member_level(String h_member_level) {
-            this.h_member_level = h_member_level;
-        }
-
-
 
         public String getBusiness_mobile_no() {
             return business_mobile_no;

@@ -445,17 +445,21 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                     mRelativylaout_re1.setVisibility(View.GONE);
                     mRelativylaout_re4.setVisibility(View.VISIBLE);
+                    String vip=""+taskDetailBean.getData().getLevel();
+                    if (vip.equals("")){
+                        todoVIP.setVisibility(View.GONE);
+                    }else {
+                        todoVIP.setText(vip);
+                    }
                     if (taskDetailBean.getData().getBusiness_name().equals("")) {
                         //没有商户名字   是帮手
                         todoName.setText(taskDetailBean.getData().getHelper_name());
                         todoShenfen.setText("个人帮手");
-                        todoVIP.setText(taskDetailBean.getData().getH_member_level());
                         phonenumber=taskDetailBean.getData().getHelper_mobile_no();
                     } else {
                         //商户
                         todoName.setText(taskDetailBean.getData().getBusiness_name());
                         todoShenfen.setText("认证商户");
-                        todoVIP.setText(taskDetailBean.getData().getB_member_level());
                         phonenumber=taskDetailBean.getData().getBusiness_mobile_no();
                     }
                 }

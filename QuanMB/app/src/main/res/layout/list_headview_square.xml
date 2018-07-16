@@ -1,26 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout_headbackground"
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/gray_background"
     >
-    <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="250dp"-->
-        <!--android:background="@mipmap/banner1"-->
-        <!--/>-->
-    <com.youth.banner.Banner
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/banner"
+    <RelativeLayout
+        android:id="@+id/relativeLayout_headbackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.youth.banner.Banner
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/gray_background"
-        android:layout_below="@+id/banner"
-        />
+        android:layout_height="100dp"
+        android:background="@drawable/background_person"
+        android:layout_below="@+id/relativeLayout_headbackground"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <RelativeLayout
+            android:id="@+id/chengweibangshou"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/iv_chengweibangshou"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/chengweibangshou" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_chengweibangshou"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="成为帮手"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_wodeshequ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/iv_relative_wodeshequ"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/shequ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_relative_wodeshequ"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="我的社区"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_remenrenwu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/iv_relative_remenrenwu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/remenrenwu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_relative_remenrenwu"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="热门任务"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_aixinbang"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:id="@+id/iv_relative_aixinbang"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/aixinbang" />
+
+            <TextView
+                android:id="@+id/tv_guangchang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_relative_aixinbang"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="爱心帮"
+                android:textColor="@drawable/text_main"
+                android:textSize="12dp" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

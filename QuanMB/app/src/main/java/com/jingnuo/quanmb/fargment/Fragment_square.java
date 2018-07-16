@@ -33,6 +33,7 @@ import com.jingnuo.quanmb.activity.LocationaddressActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
+import com.jingnuo.quanmb.class_.Chengweibangshou;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.GlideLoader22;
 import com.jingnuo.quanmb.entityclass.GuanggaoBean;
@@ -78,7 +79,15 @@ public class Fragment_square extends Fragment {
 
     Popwindow_SquareSort mPopwindow_square_sort;
 
+    //头视图
     Banner banner;
+    RelativeLayout relativeLayout_chengweibangshou;
+
+
+    Chengweibangshou chengweibangshou;
+
+
+
 
     //对象
     Adapter_SquareList mAdapter_SquareList;
@@ -469,6 +478,7 @@ public class Fragment_square extends Fragment {
     }
 
     private void initdata() {
+        chengweibangshou=new Chengweibangshou(getActivity());
         mdata_image_GG=new ArrayList<>();
         map_filter_sort = new HashMap();
         initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
@@ -503,12 +513,21 @@ public class Fragment_square extends Fragment {
          * headview  控件
          */
         RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
-        AbsListView.LayoutParams mLayoutparams = new AbsListView.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.6));
+        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.6));
 
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
         banner = listheadView. findViewById(R.id.banner);
+        relativeLayout_chengweibangshou=listheadView.findViewById(R.id.chengweibangshou);
+
+
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
+        relativeLayout_chengweibangshou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chengweibangshou.chengweibangshou();
+            }
+        });
 
     }
 
