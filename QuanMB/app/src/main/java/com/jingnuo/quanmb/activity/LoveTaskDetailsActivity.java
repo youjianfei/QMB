@@ -2,6 +2,8 @@ package com.jingnuo.quanmb.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,6 +14,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.LoveTaskDetailsBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -39,6 +42,7 @@ public class LoveTaskDetailsActivity extends BaseActivityother {
     List<String> imageview_urllist;
 
     RequestManager glide;
+    Popwindow_lookpic popwindow_lookpic;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_love_task_details;
@@ -46,7 +50,7 @@ public class LoveTaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-
+        popwindow_lookpic=new Popwindow_lookpic(this);
     }
 
     @Override
@@ -58,10 +62,14 @@ public class LoveTaskDetailsActivity extends BaseActivityother {
         myGridView.setAdapter(adapter_gridviewpic);
         request();
     }
-
     @Override
     protected void initListener() {
-
+        myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popwindow_lookpic.showPopwindow(position,imageview_urllist);
+            }
+        });
     }
 
     @Override
