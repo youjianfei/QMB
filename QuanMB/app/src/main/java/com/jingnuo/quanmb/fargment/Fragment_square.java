@@ -84,6 +84,9 @@ public class Fragment_square extends Fragment {
     Banner banner;
     RelativeLayout relativeLayout_chengweibangshou;
     RelativeLayout relativeLayout_aixinbang;
+    RelativeLayout relativeLayout_hottask;
+
+    boolean hottask=true;
 
     Chengweibangshou chengweibangshou;
 
@@ -138,6 +141,7 @@ public class Fragment_square extends Fragment {
                                     LogUtils.LOG("ceshi",address+id,"条件筛选");
                                     String [] Q = id.split("%");
                                     initMap(Q[0],Q[1],page+"","",address,"");
+                                    map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
                                     request_square(map_filter_sort,page);
 
                                 }
@@ -321,6 +325,7 @@ public class Fragment_square extends Fragment {
                         LogUtils.LOG("ceshi",address+id,"条件筛选");
                         String [] Q = id.split("%");
                         initMap(Q[0],Q[1],page+"","",address,"");
+                        map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
                         request_square(map_filter_sort,page);
 
                     }
@@ -344,32 +349,6 @@ public class Fragment_square extends Fragment {
                 request_square(map_filter_sort, ++page);
             }
         });
-//        //监听键盘确定按钮，以便直接搜索
-//        mEdit_serchSquare.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                //当actionId == XX_SEND 或者 XX_DONE时都触发
-//                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
-//                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
-//                if (actionId == EditorInfo.IME_ACTION_SEND
-//                        || actionId == EditorInfo.IME_ACTION_DONE
-//                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
-//                    //处理事件
-//                    LogUtils.LOG("ceshi", "点击了确定按钮", "fragmentsquare");
-//                    String search = "";
-//                    search = mEdit_serchSquare.getText() + "";
-//                    if(search.length()>5){
-//                        ToastUtils.showToast(getContext(),"搜索关键字太长");
-//                        return false;
-//                    }
-//                    String searchhou = Utils.ZhuanMa(search);
-//                    initMap(MinCommission+"",MaxCommission+"",page+"",searchhou,"","");
-//                    request_square(map_filter_sort, page);
-//
-//                }
-//                return false;
-//            }
-//        });
         mEdit_serchSquare.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -522,6 +501,7 @@ public class Fragment_square extends Fragment {
         banner = listheadView. findViewById(R.id.banner);
         relativeLayout_chengweibangshou=listheadView.findViewById(R.id.chengweibangshou);
         relativeLayout_aixinbang=listheadView.findViewById(R.id.relative_aixinbang);
+        relativeLayout_hottask=listheadView.findViewById(R.id.relative_remenrenwu);
 
 
         //设置图片加载器
@@ -537,6 +517,24 @@ public class Fragment_square extends Fragment {
             public void onClick(View v) {
                 Intent intent_aixinbang=new Intent(getActivity(), LoveTaskActivity.class);
                 startActivity(intent_aixinbang);
+            }
+        });
+        relativeLayout_hottask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hottask){
+                    page=1;
+                    initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
+                    map_filter_sort.put("hotTask","1");
+                    request_square(map_filter_sort, page);
+                    hottask=false;
+                }else {
+                    page=1;
+                    initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
+                    map_filter_sort.remove("hotTask");
+                    request_square(map_filter_sort, page);
+                    hottask=true;
+                }
             }
         });
 
