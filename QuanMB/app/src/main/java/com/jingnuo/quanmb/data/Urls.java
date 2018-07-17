@@ -11,7 +11,7 @@ public class Urls {
     public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
-//    public static String Baseurl = "http://192.168.1.185:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
@@ -57,7 +57,7 @@ public class Urls {
 
 
 
-    public static String shouyePic = "plaza/getSlideShow";//首页轮播广告
+    public static String shouyePic = "plaza/getSlideShow?type=";//首页轮播广告  type=1广成首页   2爱心帮
 
 
     //任务模块
@@ -172,7 +172,10 @@ public class Urls {
     public static String tui_taocan = "balance/getAllSpreadPags?user_token=";//充值推广币套餐列表接口
     public static String huiyuan_taocan = "balance/getAllVIPPackages?user_token=";//购买会员套餐接口
 
-
+    //爱心帮
+    public static String IssueLovetask = "loveTask/addLoveTask";//发布爱心帮
+    public static String LovetaskList = "loveTask/search";//爱心帮列表
+    public static String LovetaskDetails = "loveTask/loveTaskDetail?task_id=";//爱心帮任务详情
 
     //省市县
     public static String getallCity = "area/getAllCity";//所有城市

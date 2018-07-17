@@ -102,7 +102,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                     Staticdata.xValue =aMapLocation.getLatitude()+"";//获取纬度
                     Staticdata.yValue=aMapLocation.getLongitude()+"";//获取经度
-                    aMapLocation.getCity();//城市信息
+                    Staticdata. city_location=aMapLocation.getCity();//城市信息
                     ++locationtime;
                     LogUtils.LOG("ceshiqq","定位次数："+locationtime,"mainactivity");
                     if(locationtime==1){
@@ -255,10 +255,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.image_release:
                 if (isLogin) {
-//                    Intent intent_issue = new Intent(this, IssueTaskActivity.class);
-//                    startActivity(intent_issue);
-//                    Popwindow_Issue popwindow_issue=new Popwindow_Issue(MainActivity.this);
-//                    popwindow_issue.showpopwindow();
                     Intent intend_issue_task = new Intent(this, IssueTaskActivity.class);
                     this.startActivity(intend_issue_task);
                 } else {

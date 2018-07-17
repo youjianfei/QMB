@@ -45,6 +45,7 @@ public class Adapter_Gridviewpic_UPLoad extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
         holder.mImageView.setImageBitmap(shareImgs.get(position));
+        holder.mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ViewGroup.LayoutParams para;
         para = holder.mImageView.getLayoutParams();
         para.height = weight;

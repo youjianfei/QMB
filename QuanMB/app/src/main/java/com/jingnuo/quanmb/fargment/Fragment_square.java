@@ -30,6 +30,7 @@ import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.LocationaddressActivity;
+import com.jingnuo.quanmb.activity.LoveTaskActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
@@ -82,7 +83,7 @@ public class Fragment_square extends Fragment {
     //头视图
     Banner banner;
     RelativeLayout relativeLayout_chengweibangshou;
-
+    RelativeLayout relativeLayout_aixinbang;
 
     Chengweibangshou chengweibangshou;
 
@@ -252,7 +253,7 @@ public class Fragment_square extends Fragment {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui+Urls.shouyePic,getActivity(),0);
+        }).Http(Urls.Baseurl_cui+Urls.shouyePic+"1",getActivity(),0);
         LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui+Urls.shouyePic, "fragment_square");
     }
     Intent intend_taskdrtails;
@@ -507,17 +508,20 @@ public class Fragment_square extends Fragment {
         mTextview_address=rootview.findViewById(R.id.textview_login);
         mRelayout_address=rootview.findViewById(R.id.relayout_address);
         relative_shaixuan=rootview.findViewById(R.id.relative_shaixuan);
+
         listheadView=LayoutInflater.from(getContext()).inflate(R.layout.list_headview_square,null,false);
         mListview_square.getRefreshableView().addHeaderView(listheadView);
         /**
          * headview  控件
          */
+
         RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
         RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.6));
-
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
+
         banner = listheadView. findViewById(R.id.banner);
         relativeLayout_chengweibangshou=listheadView.findViewById(R.id.chengweibangshou);
+        relativeLayout_aixinbang=listheadView.findViewById(R.id.relative_aixinbang);
 
 
         //设置图片加载器
@@ -526,6 +530,13 @@ public class Fragment_square extends Fragment {
             @Override
             public void onClick(View v) {
                 chengweibangshou.chengweibangshou();
+            }
+        });
+        relativeLayout_aixinbang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_aixinbang=new Intent(getActivity(), LoveTaskActivity.class);
+                startActivity(intent_aixinbang);
             }
         });
 

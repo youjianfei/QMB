@@ -31,6 +31,7 @@ public class Staticdata {
     //设备定位
     public static String  xValue="";
     public static String  yValue="";
+    public static String  city_location="";
 
     //用户是否已经登陆  true表示登录   flase表示未登录    待解决   退出程序后还为true
     public static boolean isLogin = false;//默认为未登录

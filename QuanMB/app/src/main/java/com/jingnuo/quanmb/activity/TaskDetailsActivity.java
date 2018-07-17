@@ -44,7 +44,6 @@ public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_taskdetails;
     TextView mTextview_tasktime;
     TextView mTextview_taskaddress;
-    //    TextView mTextview_peoplelevel;
     CircleImageView imageView_head;
     MyGridView imageGridview;
 

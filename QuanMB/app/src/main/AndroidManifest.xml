@@ -165,11 +165,12 @@
         <activity android:name="com.jingnuo.quanmb.activity.FirstLoginActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.HelperType" />
         <activity android:name="com.jingnuo.quanmb.activity.TuijianrenwuActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.AdressShowActivity">
-
-
-
-        </activity>
+        <activity android:name="com.jingnuo.quanmb.activity.AdressShowActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.LoveTaskActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.LoveTaskDetailsActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MessageWallEditActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.IssuelovetaskActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.MyShequActivity"></activity>
     </application>
 
 </manifest>
