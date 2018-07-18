@@ -12,40 +12,62 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
+import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
+import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
 import com.yancy.imageselector.ImageSelectorActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MessageWallEditActivity extends BaseActivityother {
 //控件
     MyGridView myGridView;
+    TextView mTextview_submit;
+    EditText mEdit_message;
+
+
+    String message="";
+    Map map_addliuyan;
+
 
     Bitmap mBitmap = null;
-
     PermissionHelper permissionHelper;
-
-
     List<Bitmap> mListImage_bitmap;
     List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
+    List<String> mList_picID;// 上传图片返回ID;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic;
-
+    String img_id="";//图片String img_id="";//图片
+    int  count=0;//图片的张数。判断调用几次上传图片接口
     int PIC_mix = 3;//选择图片得张数
+
+    UpLoadImage upLoadImage;
+    KProgressHUD mKProgressHUD;
 
     @Override
     public int setLayoutResID() {
@@ -54,15 +76,77 @@ public class MessageWallEditActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        upLoadImage=new UpLoadImage(this, new Interface_loadImage_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                if(respose.equals("erro")){
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showToast(MessageWallEditActivity.this,"网络开小差儿，请重新提交");
+                        }
+                    });
+                    mList_picID.clear();
+                    return;
+                }
+                LogUtils.LOG("ceshi",respose,"发布技能上传图片返回respose");
+                int status = 0;
+                String msg = "";
+                String imageID="";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
 
+                    if(status==1){
+                        count++;
+                        imageID=(String) object.get("imgID");
+                        LogUtils.LOG("ceshi","单张图片ID"+imageID,"发布技能上传图片返回imageID");
+                        mList_picID.add(0,imageID);
+                        if(count!=mList_PicPath_down.size()){
+                            uploadimgagain(count);
+                        }else {
+                            for (String image : mList_picID) {
+                                img_id=img_id+image+",";
+                            }
+                            map_addliuyan.put("images",img_id);
+                            request(map_addliuyan);
+                            LogUtils.LOG("ceshi","上传图片完成","发布技能上传图片");
+                        }
+
+                    }else {
+//                        progressDlog.cancelPD();
+                        mKProgressHUD.dismiss();
+                        mList_picID.clear();
+                        final String finalMsg = msg;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.showToast(MessageWallEditActivity.this, finalMsg);
+                            }
+                        });
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-
+    void uploadimgagain(int  count){
+        upLoadImage.uploadImg(mList_PicPath_down.get(count),6);
+    }
     @Override
     protected void initData() {
+        mKProgressHUD = new KProgressHUD(MessageWallEditActivity.this);
+        map_addliuyan=new HashMap();
         permissionHelper = new PermissionHelper(MessageWallEditActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         mListImage_bitmap=new ArrayList<>();
+        mList_picID=new ArrayList<>();
         mList_PicPath_down=new ArrayList<>();
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic2);
         mListImage_bitmap.add(bitmap);
         adapter_gridviewpic=new Adapter_Gridviewpic_UPLoad(mListImage_bitmap,this);
         myGridView.setAdapter(adapter_gridviewpic);
@@ -70,6 +154,17 @@ public class MessageWallEditActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mTextview_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean Nonull= checknull();//判空方法
+                if(Nonull){
+//                    progressDlog.showPD("正在发布，请稍等");
+                    mKProgressHUD.show();
+                    uploadimg();//上传图片
+                }
+            }
+        });
         myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,6 +186,69 @@ public class MessageWallEditActivity extends BaseActivityother {
                 }
             }
         });
+    }
+    boolean checknull(){
+        message=mEdit_message.getText()+"";
+        if(message.equals("")){
+            ToastUtils.showToast(this,"请输入留言内容");
+            return false;
+        }
+        if(message.length()>300){
+            ToastUtils.showToast(this,"最多支持300个字");
+            return false;
+        }
+
+        map_addliuyan.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+        map_addliuyan.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+        map_addliuyan.put("content",message);
+        return true;
+    }
+    void uploadimg(){
+        if( mList_PicPath_down.size()>=1){
+            upLoadImage.uploadImg(mList_PicPath_down.get(0),6);
+        }else {
+            request(map_addliuyan);
+        }
+    }
+    void request (Map map){
+        String URL="";
+        URL=  Urls.Baseurl_cui+Urls.addLiuyan;
+        LogUtils.LOG("ceshi",map.toString(),"发布留言墙的map参数");
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("msg");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(status==1){
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
+                    ToastUtils.showToast(MessageWallEditActivity.this,msg);
+                    finish();
+                }else {
+                    mList_PicPath_down.clear();
+                    mList_picID.clear();
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
+                    ToastUtils.showToast(MessageWallEditActivity.this,msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+                mList_PicPath_down.clear();
+                mList_picID.clear();
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
+            }
+        }).postHttp(URL,this,1,map);
     }
     void choosePIC() {
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
@@ -135,8 +293,8 @@ public class MessageWallEditActivity extends BaseActivityother {
     @Override
     protected void initView() {
         myGridView=findViewById(R.id.GridView_PIC);
-
-
+        mTextview_submit=findViewById(R.id.textview_tijiao);
+        mEdit_message=findViewById(R.id.edit_suggest);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

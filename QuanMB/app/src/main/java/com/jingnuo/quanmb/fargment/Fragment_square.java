@@ -31,6 +31,7 @@ import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.LocationaddressActivity;
 import com.jingnuo.quanmb.activity.LoveTaskActivity;
+import com.jingnuo.quanmb.activity.MyShequActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
@@ -85,6 +86,7 @@ public class Fragment_square extends Fragment {
     RelativeLayout relativeLayout_chengweibangshou;
     RelativeLayout relativeLayout_aixinbang;
     RelativeLayout relativeLayout_hottask;
+    RelativeLayout relativeLayout_wodeshequ;
 
     boolean hottask=true;
 
@@ -502,6 +504,7 @@ public class Fragment_square extends Fragment {
         relativeLayout_chengweibangshou=listheadView.findViewById(R.id.chengweibangshou);
         relativeLayout_aixinbang=listheadView.findViewById(R.id.relative_aixinbang);
         relativeLayout_hottask=listheadView.findViewById(R.id.relative_remenrenwu);
+        relativeLayout_wodeshequ=listheadView.findViewById(R.id.relative_wodeshequ);
 
 
         //设置图片加载器
@@ -510,6 +513,13 @@ public class Fragment_square extends Fragment {
             @Override
             public void onClick(View v) {
                 chengweibangshou.chengweibangshou();
+            }
+        });
+        relativeLayout_wodeshequ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_myShequ=new Intent(getActivity(), MyShequActivity.class);
+                startActivity(intent_myShequ);
             }
         });
         relativeLayout_aixinbang.setOnClickListener(new View.OnClickListener() {
