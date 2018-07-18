@@ -151,6 +151,15 @@ public class UserBean {
             private String balance;
             private String push_register;
             private String security_code;
+            private String community_code="";
+
+            public String getCommunity_code() {
+                return community_code;
+            }
+
+            public void setCommunity_code(String community_code) {
+                this.community_code = community_code;
+            }
 
             public String getPush_register() {
                 return push_register;

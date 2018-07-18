@@ -322,7 +322,7 @@ public class IssueSkillActivity extends BaseActivityother {
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");//
-                    msg = (String) object.get("msg");//
+                    msg = (String) object.get("message");//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

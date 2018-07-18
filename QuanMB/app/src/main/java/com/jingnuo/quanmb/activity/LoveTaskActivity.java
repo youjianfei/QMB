@@ -160,7 +160,6 @@ public class LoveTaskActivity extends BaseActivityother {
 
             }
         }).Http(Urls.Baseurl_cui+Urls.shouyePic+"2",LoveTaskActivity.this,0);
-        LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui+Urls.shouyePic+"2", "LoveTaskActivity");
     }
     void request(final int page){
         map_lovetask.put("pageNum",page+"");

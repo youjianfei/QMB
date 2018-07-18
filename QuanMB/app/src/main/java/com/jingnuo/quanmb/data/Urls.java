@@ -12,7 +12,7 @@ public class Urls {
 
 
 //    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http ://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -176,8 +176,9 @@ public class Urls {
     public static String IssueLovetask = "loveTask/addLoveTask";//发布爱心帮
     public static String LovetaskList = "loveTask/search";//爱心帮列表
     public static String LovetaskDetails = "loveTask/loveTaskDetail?task_id=";//爱心帮任务详情
-    //留言墙
+    //社区
     public  static String addLiuyan="communityMsg/saveWallMsg";
+    public  static String getliuyan="communityMsg/getAllMsg?user_token=";
 
     //省市县
     public static String getallCity = "area/getAllCity";//所有城市

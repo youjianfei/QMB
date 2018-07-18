@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_touxiang"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/user_pic"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昵称"
+            android:layout_toRightOf="@+id/circle_touxiang"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:textColor="@color/text_title2"
+            />
+        <TextView
+            android:id="@+id/text_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="留言墙内容"
+            android:layout_toRightOf="@+id/circle_touxiang"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/text_title2"
+            android:layout_below="@+id/text_name"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iamge_one"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="10dp"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        android:layout_marginBottom="10dp"
+        />
+
+
+
+
+</LinearLayout>
