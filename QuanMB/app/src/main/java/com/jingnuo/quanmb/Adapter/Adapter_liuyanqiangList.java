@@ -68,6 +68,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag0,null,false);
                 viewHolder0.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder0.mTextview_name=convertView.findViewById(R.id.text_name);
+                viewHolder0.mTextview_time=convertView.findViewById(R.id.text_name);
                 viewHolder0.mTextview_content=convertView.findViewById(R.id.text_content);
                 convertView.setTag(viewHolder0);
             }else {
@@ -77,6 +78,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder0.imageView_touxiang);
             viewHolder0.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
             viewHolder0.mTextview_content.setText(mList_liuyan.get(position).getContent());
+            viewHolder0.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
         }
         if (type==1){
             if(convertView==null){
@@ -84,6 +86,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag1,null,false);
                 viewHolder1.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder1.mTextview_name=convertView.findViewById(R.id.text_name);
+                viewHolder1.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder1.mTextview_content=convertView.findViewById(R.id.text_content);
                 viewHolder1.mImageview_one=convertView.findViewById(R.id.iamge_one);
                 convertView.setTag(viewHolder1);
@@ -94,6 +97,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder1.imageView_touxiang);
             viewHolder1.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
             viewHolder1.mTextview_content.setText(mList_liuyan.get(position).getContent());
+            viewHolder1.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(0)).into(viewHolder1.mImageview_one);
         }
         if (type==2){
@@ -102,6 +106,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag2,null,false);
                 viewHolder2.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder2.mTextview_name=convertView.findViewById(R.id.text_name);
+                viewHolder2.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder2.mTextview_content=convertView.findViewById(R.id.text_content);
                 viewHolder2.mImageview_1=convertView.findViewById(R.id.iamge_1);
                 viewHolder2.mImageview_2=convertView.findViewById(R.id.iamge_2);
@@ -113,6 +118,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder2.imageView_touxiang);
             viewHolder2.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
             viewHolder2.mTextview_content.setText(mList_liuyan.get(position).getContent());
+            viewHolder2.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(0)).into(viewHolder2.mImageview_1);
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(1)).into(viewHolder2.mImageview_2);
         }
@@ -122,6 +128,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag3,null,false);
                 viewHolder3.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder3.mTextview_name=convertView.findViewById(R.id.text_name);
+                viewHolder3.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder3.mTextview_content=convertView.findViewById(R.id.text_content);
                 viewHolder3.mImageview_111=convertView.findViewById(R.id.iamge_11);
                 viewHolder3.mImageview_222=convertView.findViewById(R.id.iamge_22);
@@ -134,9 +141,10 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder3.imageView_touxiang);
             viewHolder3.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
             viewHolder3.mTextview_content.setText(mList_liuyan.get(position).getContent());
+            viewHolder3.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(0)).into(viewHolder3.mImageview_111);
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(1)).into(viewHolder3.mImageview_222);
-            Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(1)).into(viewHolder3.mImageview_333);
+            Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(2)).into(viewHolder3.mImageview_333);
         }
         return convertView;
     }
@@ -144,17 +152,20 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
         CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
+        TextView mTextview_time;
     }
     class  ViewHolder1 {
         CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
+        TextView mTextview_time;
         ImageView mImageview_one;
     }
     class  ViewHolder2 {
         CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
+        TextView mTextview_time;
         ImageView mImageview_1;
         ImageView mImageview_2;
     }
@@ -162,6 +173,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
         CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
+        TextView mTextview_time;
         ImageView mImageview_111;
         ImageView mImageview_222;
         ImageView mImageview_333;

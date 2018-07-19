@@ -28,39 +28,46 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/back_black" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/background_gray_corners"
-            android:gravity="center_vertical"
-            android:layout_toRightOf="@+id/iv_back"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/search"
-                android:layout_marginLeft="10dp"
-                />
-            <EditText
-                android:id="@+id/edit_searchSquare"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="输入关键字"
-                android:singleLine="true"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/text_title2"
-                android:textColorHint="@color/text_hide_tip"
-                android:textSize="14dp"
-                android:imeOptions="actionSearch"
-                android:layout_marginLeft="10dp"
-                />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:background="@drawable/background_gray_corners"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_toRightOf="@+id/iv_back"-->
+            <!--android:orientation="horizontal">-->
+            <!--<ImageView-->
+                <!--android:layout_width="15dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:src="@mipmap/search"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--/>-->
+            <!--<EditText-->
+                <!--android:id="@+id/edit_searchSquare"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:hint="输入关键字"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:textColor="@color/text_title2"-->
+                <!--android:textColorHint="@color/text_hide_tip"-->
+                <!--android:textSize="14dp"-->
+                <!--android:imeOptions="actionSearch"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--/>-->
 
-        </LinearLayout>
-
+        <!--</LinearLayout>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="定位城市"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/relativelayout_now"
