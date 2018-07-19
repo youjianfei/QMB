@@ -258,7 +258,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Intent intend_issue_task = new Intent(this, IssueTaskActivity.class);
                     this.startActivity(intend_issue_task);
                 } else {
-
                     Intent intent_login = new Intent(this, LoginActivity.class);
                     startActivity(intent_login);
                 }
@@ -363,7 +362,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         if (mLocationClient!=null){
-            mLocationClient.stopLocation();
+            mLocationClient.onDestroy();//调用定位结束方法
         }
     }
 

@@ -80,7 +80,9 @@
         <activity android:name="com.jingnuo.quanmb.activity.AuthenticationActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.DatailAddressActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.AddAddressActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssueTaskActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.IssueTaskActivity"
+            android:launchMode="singleTask"
+            />
         <activity android:name="com.jingnuo.quanmb.activity.SettingActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ChangepasswordActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ChangephoneNumberActivity" />

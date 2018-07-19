@@ -366,4 +366,5 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     public void onPoiItemSearched(PoiItem poiItem, int i) {
 
     }
+
 }

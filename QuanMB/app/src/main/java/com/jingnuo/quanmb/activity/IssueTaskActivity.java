@@ -155,7 +155,7 @@ public class IssueTaskActivity extends BaseActivityother {
     };
     private void setmapdata() {
         //初始化定位
-        mLocationClient = new AMapLocationClient(getApplicationContext());
+        mLocationClient = new AMapLocationClient(IssueTaskActivity.this);
         //设置定位回调监听
         mLocationClient.setLocationListener(mLocationListener);
 
@@ -564,5 +564,10 @@ public class IssueTaskActivity extends BaseActivityother {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+         LogUtils.LOG("ceshi","onDestroy","faburenwu");
+        mLocationClient.onDestroy();//调用定位结束方法
+    }
 }
