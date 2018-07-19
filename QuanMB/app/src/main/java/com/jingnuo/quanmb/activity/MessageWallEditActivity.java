@@ -10,6 +10,8 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -50,7 +52,7 @@ public class MessageWallEditActivity extends BaseActivityother {
     MyGridView myGridView;
     TextView mTextview_submit;
     EditText mEdit_message;
-
+    TextView mTextview_text_moretext;
 
     String message="";
     Map map_addliuyan;
@@ -154,6 +156,32 @@ public class MessageWallEditActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mEdit_message.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            String text=s+"";
+            int i=300-text.length();
+                LogUtils.LOG("ceshi", "输入+" + text.length(), "");
+
+            if(i<0){
+                mEdit_message.setText(text.substring(0,299));
+                mTextview_text_moretext.setText("还可以输入0字");
+                mEdit_message.setSelection(mEdit_message.getText().length());//将光标移至文字末尾
+            }else {
+                mTextview_text_moretext.setText("还可以输入"+i+"字");
+            }
+            }
+        });
         mTextview_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -295,6 +323,7 @@ public class MessageWallEditActivity extends BaseActivityother {
     protected void initView() {
         myGridView=findViewById(R.id.GridView_PIC);
         mTextview_submit=findViewById(R.id.textview_tijiao);
+        mTextview_text_moretext=findViewById(R.id.text_moretext);
         mEdit_message=findViewById(R.id.edit_suggest);
     }
     @Override

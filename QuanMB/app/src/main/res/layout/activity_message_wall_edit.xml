@@ -47,7 +47,9 @@
         android:id="@+id/edit_suggest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/background_text_white"
         android:lines="10"
         android:maxLines="10"
@@ -55,6 +57,19 @@
         android:padding="10dp"
         android:textSize="15dp"
         android:gravity="top"
+        />
+    <TextView
+        android:id="@+id/text_moretext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="还可以输入300字"
+        android:textColor="@color/text_gray"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:gravity="right"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
         />
     <TextView
         android:layout_width="wrap_content"

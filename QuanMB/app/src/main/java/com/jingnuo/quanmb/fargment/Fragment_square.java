@@ -30,7 +30,9 @@ import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.LocationaddressActivity;
+import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.LoveTaskActivity;
+import com.jingnuo.quanmb.activity.MessageWallEditActivity;
 import com.jingnuo.quanmb.activity.MyShequActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
@@ -49,6 +51,7 @@ import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoaderInterface;
 
@@ -92,7 +95,7 @@ public class Fragment_square extends Fragment {
 
     Chengweibangshou chengweibangshou;
 
-
+    KProgressHUD mKProgressHUD;
 
 
     //对象
@@ -186,6 +189,7 @@ public class Fragment_square extends Fragment {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                mKProgressHUD.dismiss();
                 if (mListview_square.isRefreshing()) {
                     mListview_square.onRefreshComplete();
                 }
@@ -232,7 +236,7 @@ public class Fragment_square extends Fragment {
 
             @Override
             public void onError(int error) {
-
+                mKProgressHUD.dismiss();
             }
         }).postHttp(Urls.Baseurl_cui + Urls.square_default, getActivity(), 1, map_filterOrsort);
 
@@ -460,6 +464,7 @@ public class Fragment_square extends Fragment {
     }
 
     private void initdata() {
+        mKProgressHUD = new KProgressHUD(getContext());
         chengweibangshou=new Chengweibangshou(getActivity());
         mdata_image_GG=new ArrayList<>();
         map_filter_sort = new HashMap();
@@ -512,14 +517,29 @@ public class Fragment_square extends Fragment {
         relativeLayout_chengweibangshou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chengweibangshou.chengweibangshou();
+                if (Staticdata.isLogin){
+                    chengweibangshou.chengweibangshou();
+                }else {
+                    Intent intent_login = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent_login);
+                }
             }
         });
         relativeLayout_wodeshequ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_myShequ=new Intent(getActivity(), MyShequActivity.class);
-                startActivity(intent_myShequ);
+
+                if (Staticdata.isLogin){
+                    if(Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
+                        ToastUtils.showToast(getContext(),"还没有加入社区");
+                        return;
+                    }
+                    Intent intent_myShequ=new Intent(getActivity(), MyShequActivity.class);
+                    startActivity(intent_myShequ);
+                }else {
+                    Intent intent_login = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent_login);
+                }
             }
         });
         relativeLayout_aixinbang.setOnClickListener(new View.OnClickListener() {
@@ -537,12 +557,14 @@ public class Fragment_square extends Fragment {
                     initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
                     map_filter_sort.put("hotTask","1");
                     request_square(map_filter_sort, page);
+                    mKProgressHUD.show();
                     hottask=false;
                 }else {
                     page=1;
                     initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
                     map_filter_sort.remove("hotTask");
                     request_square(map_filter_sort, page);
+                    mKProgressHUD.show();
                     hottask=true;
                 }
             }

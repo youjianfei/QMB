@@ -170,7 +170,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.LoveTaskDetailsActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.MessageWallEditActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.IssuelovetaskActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MyShequActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.MyShequActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ShuidianfeiActivity"></activity>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ public class Urls {
 
 
 //    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http ://192.168.1.103:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://192.168.1.103:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -179,6 +179,7 @@ public class Urls {
     //社区
     public  static String addLiuyan="communityMsg/saveWallMsg";
     public  static String getliuyan="communityMsg/getAllMsg?user_token=";
+    public  static String shuidianfeidaijiao="Community/PayCommunityFee";
 
     //省市县
     public static String getallCity = "area/getAllCity";//所有城市

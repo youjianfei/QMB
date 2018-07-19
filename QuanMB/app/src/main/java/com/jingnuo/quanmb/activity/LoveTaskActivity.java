@@ -204,5 +204,7 @@ public class LoveTaskActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl_cui+Urls.LovetaskList,LoveTaskActivity.this,1,map_lovetask);
 
+        LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.LovetaskList,"爱心帮列表");
+        LogUtils.LOG("ceshi",map_lovetask.toString(),"爱心帮列表");
     }
 }
