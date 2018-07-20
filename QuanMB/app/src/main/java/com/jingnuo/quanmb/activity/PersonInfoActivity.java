@@ -45,6 +45,8 @@ public class PersonInfoActivity extends BaseActivityother {
     TextView mtextview_phonenumber,mTextview_changepassword,mTextview_setsafepassword;
     TextView mTextview_issetsafepassword;
     TextView mtextview_nickname;
+    TextView mtextview_setshequ;
+    TextView mtextview_text_issetshequ;
     ImageView mImageview_headPIC;
 
     //对象
@@ -99,7 +101,10 @@ public class PersonInfoActivity extends BaseActivityother {
             mTextview_setsafepassword.setText("修改安全密码");
             mTextview_issetsafepassword.setVisibility(View.VISIBLE);
         }
-
+        if (!Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
+            mtextview_text_issetshequ.setText(Staticdata.static_userBean.getData().getAppuser().getCommunity_name());
+            mtextview_text_issetshequ.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -121,6 +126,7 @@ public class PersonInfoActivity extends BaseActivityother {
         mtextview_phonenumber.setOnClickListener(this);
         mImageview_headPIC.setOnClickListener(this);
         mTextview_setsafepassword.setOnClickListener(this);
+        mtextview_setshequ.setOnClickListener(this);
     }
 
     @Override
@@ -131,6 +137,8 @@ public class PersonInfoActivity extends BaseActivityother {
         mImageview_headPIC=findViewById(R.id.image_userpic);
         mTextview_setsafepassword=findViewById(R.id.text_setsafepassword);
         mTextview_issetsafepassword=findViewById(R.id.text_issetsafepassword);
+        mtextview_setshequ=findViewById(R.id.text_setshequ);
+        mtextview_text_issetshequ=findViewById(R.id.text_issetshequ);
     }
 
     @Override
@@ -152,6 +160,10 @@ public class PersonInfoActivity extends BaseActivityother {
             break;
         case R.id.image_userpic:
             chooseHeadPic();
+            break;
+        case R.id.text_setshequ:
+            Intent intent_shequ=new Intent(this,ShezhishequActivity.class);
+            startActivity(intent_shequ);
             break;
         case R.id.text_setsafepassword:
             Intent intent_setsafe=new Intent(PersonInfoActivity.this,SetSafepassword1Activity.class);

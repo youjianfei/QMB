@@ -177,9 +177,13 @@ public class Urls {
     public static String LovetaskList = "loveTask/search";//爱心帮列表
     public static String LovetaskDetails = "loveTask/loveTaskDetail?task_id=";//爱心帮任务详情
     //社区
-    public  static String addLiuyan="communityMsg/saveWallMsg";
-    public  static String getliuyan="communityMsg/getAllMsg?user_token=";
-    public  static String shuidianfeidaijiao="Community/PayCommunityFee";
+    public  static String addLiuyan="communityMsg/saveWallMsg";//添加留言
+    public  static String getliuyan="communityMsg/getAllMsg?user_token=";//获取留言墙列表
+    public  static String shuidianfeidaijiao="Community/PayCommunityFee";//教水电费
+    public  static String getCommunityList="Community/getMyCommunity";//模糊查询所有社区
+    public  static String bindCommunity="Community/RequiredCom";//绑定社区
+    public  static String CommunityNotice="Community/getCommunityNotice?user_token=";//社区公告
+
 
     //省市县
     public static String getallCity = "area/getAllCity";//所有城市

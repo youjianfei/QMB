@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -24,6 +25,7 @@ import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.CommunityNoticeBean;
 import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.LiuyanqiangListBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
@@ -41,6 +43,7 @@ public class MyShequActivity extends BaseActivityother {
     LinearLayout mLinearlayout_fabbu;
     RelativeLayout mRelayout_banner;
     Banner banner;
+    TextView mTextview_text_notice;
     MyGridView mygrid_mokuai;
     ImageView mImageview_image_shuidian;
     PullToRefreshListView myListView;
@@ -50,6 +53,7 @@ public class MyShequActivity extends BaseActivityother {
     Adapter_shequ8kuai adapter_shequ8kuai;
     LiuyanqiangListBean liuyanqiangListBean;
     Adapter_liuyanqiangList adapter_liuyanqiangList;
+    CommunityNoticeBean communityNoticeBean;
 
     //数据
     List<GuanggaoBean.DataBean>mdata_image_GG;
@@ -86,6 +90,7 @@ public class MyShequActivity extends BaseActivityother {
         myListView.setAdapter(adapter_liuyanqiangList);
         request_GGLB();
         request(1);
+        requestNotic();
     }
 
     @Override
@@ -137,12 +142,13 @@ public class MyShequActivity extends BaseActivityother {
          * headview  控件
          */
         mRelayout_banner=listheadView.findViewById(R.id.relativelayout_banner);
+        mTextview_text_notice=listheadView.findViewById(R.id.text_notice);
         banner =  listheadView.findViewById(R.id.banner_myshequ);
         mygrid_mokuai=listheadView.findViewById(R.id.mygrid_mokuai);
         mImageview_image_shuidian=listheadView.findViewById(R.id.image_shuidian);
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.44));
         mRelayout_banner.setLayoutParams(mLayoutparams);
-
+        mTextview_text_notice.setSelected(true);
 
     }
     private void request_GGLB() {//请求网络轮播图
@@ -166,6 +172,24 @@ public class MyShequActivity extends BaseActivityother {
 
             }
         }).Http(Urls.Baseurl_cui + Urls.shouyePic + "3", MyShequActivity.this, 0);
+    }
+    void requestNotic(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshiaaa", "社区公告：" + respose, " 社区公告");
+                communityNoticeBean=new Gson().fromJson(respose,CommunityNoticeBean.class);
+                if(communityNoticeBean.getData().size()>0){
+                    mTextview_text_notice.setText(communityNoticeBean.getData().get(0).getNotice_content());
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_hu+Urls.CommunityNotice+Staticdata.static_userBean.getData().getUser_token()+"&community_code="
+                +Staticdata.static_userBean.getData().getAppuser().getCommunity_code(),MyShequActivity.this,0);
     }
     private  void  request(final int  page){
         LogUtils.LOG("ceshiddd", "留言墙：" + Urls.Baseurl+Urls.getliuyan+Staticdata.static_userBean.getData().getUser_token()+"&pageNo="+page, " 社区轮播");
@@ -197,7 +221,6 @@ public class MyShequActivity extends BaseActivityother {
                 +"&pageNo="+page,MyShequActivity.this,0);
 
     }
-
 
 
     @Override

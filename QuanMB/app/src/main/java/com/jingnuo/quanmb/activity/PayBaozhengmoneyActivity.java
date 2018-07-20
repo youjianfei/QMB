@@ -69,6 +69,16 @@ public class PayBaozhengmoneyActivity extends BaseActivityother implements PayPw
                         @Override
                         public void onSuccesses(String respose) {
                         LogUtils.LOG("ceshi",respose,"缴纳保证金成功");
+                            int status = 0;
+                            String msg = "";
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//
+                                msg = (String) object.get("msg");//
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            ToastUtils.showToast(PayBaozhengmoneyActivity.this,msg);
                         }
 
                         @Override

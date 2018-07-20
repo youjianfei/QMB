@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.activity.LoveTaskActivity;
 import com.jingnuo.quanmb.activity.MessageWallEditActivity;
 import com.jingnuo.quanmb.activity.MyShequActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
+import com.jingnuo.quanmb.activity.ShezhishequActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.broadcastrReceiver.BaiduAddressBroadcastReciver;
 import com.jingnuo.quanmb.class_.Chengweibangshou;
@@ -531,7 +532,9 @@ public class Fragment_square extends Fragment {
 
                 if (Staticdata.isLogin){
                     if(Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
-                        ToastUtils.showToast(getContext(),"还没有加入社区");
+                        ToastUtils.showToast(getContext(),"请先绑定社区");
+                        Intent intent=new Intent(getActivity(), ShezhishequActivity.class);
+                        startActivity(intent);
                         return;
                     }
                     Intent intent_myShequ=new Intent(getActivity(), MyShequActivity.class);

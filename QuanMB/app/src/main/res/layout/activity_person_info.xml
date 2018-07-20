@@ -116,6 +116,50 @@
             android:layout_marginTop="15dp"
             android:background="@color/gray_background"
             />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:src="@mipmap/more"
+            android:layout_below="@+id/image_line2"
+            />
+        <TextView
+            android:id="@+id/text_issetshequ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全民帮社区"
+            android:textSize="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:layout_below="@+id/image_line2"
+            android:textColor="@color/black_text2"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/text_setshequ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我的社区"
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/image_line2"
+            android:textColor="@color/text_title2"
+            />
+        <ImageView
+            android:id="@+id/image_line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/text_setshequ"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_background"
+            />
         <TextView
             android:id="@+id/text3"
             android:layout_width="wrap_content"
@@ -124,7 +168,7 @@
             android:textSize="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
-            android:layout_below="@+id/image_line2"
+            android:layout_below="@+id/image_line5"
             android:textColor="@color/text_title2"
             />
         <TextView
@@ -133,8 +177,8 @@
             android:layout_height="wrap_content"
             android:text="1300000000"
             android:textSize="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/image_line2"
+            android:layout_marginTop="13dp"
+            android:layout_below="@+id/image_line5"
             android:layout_alignParentRight="true"
             android:layout_marginRight="50dp"
             android:textColor="@color/text_title2"
@@ -146,7 +190,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:src="@mipmap/more"
-            android:layout_below="@+id/image_line2"
+            android:layout_below="@+id/image_line5"
             />
         <ImageView
             android:id="@+id/image_line3"
