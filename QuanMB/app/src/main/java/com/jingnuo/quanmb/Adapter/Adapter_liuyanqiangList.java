@@ -68,7 +68,7 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag0,null,false);
                 viewHolder0.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder0.mTextview_name=convertView.findViewById(R.id.text_name);
-                viewHolder0.mTextview_time=convertView.findViewById(R.id.text_name);
+                viewHolder0.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder0.mTextview_content=convertView.findViewById(R.id.text_content);
                 convertView.setTag(viewHolder0);
             }else {

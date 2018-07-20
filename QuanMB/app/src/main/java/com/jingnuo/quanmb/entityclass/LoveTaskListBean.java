@@ -50,18 +50,21 @@ public class LoveTaskListBean {
         private int distance;
         private String headUrl;
         private String task_description;
+
+
         private int task_id;
         private String task_name;
         private String nick_name;
         private String createDate;
-        private String specialty_name;
+        private String type_name;
 
-        public String getSpecialty_name() {
-            return specialty_name;
+
+        public String getType_name() {
+            return type_name;
         }
 
-        public void setSpecialty_name(String specialty_name) {
-            this.specialty_name = specialty_name;
+        public void setType_name(String type_name) {
+            this.type_name = type_name;
         }
 
         public String getNick_name() {

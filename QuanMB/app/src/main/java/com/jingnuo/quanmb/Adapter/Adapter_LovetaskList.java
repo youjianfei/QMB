@@ -72,7 +72,7 @@ public class Adapter_LovetaskList extends  BaseAdapter {
          }
 
         holder.mText_task_username.setText(mData.get(position).getNick_name()+"");
-        holder.mText_task_type.setText(mData.get(position).getSpecialty_name()+"");
+        holder.mText_task_type.setText(mData.get(position).getType_name()+"");
         Glide.with(mContext).load(mData.get(position).getHeadUrl()).into(holder.mImage_view);
 
         return convertView;

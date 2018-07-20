@@ -16,6 +16,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_shophall;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
@@ -50,6 +51,8 @@ public class ShophallActivity extends BaseActivityother {
     List<SkillmentlistBean.DataBean.ListBean> mData;
 
     String NO="";//查看帮手和商家的所有服务使用
+    String FromShequ="";//从社区跳转过来的一级查询服务列表
+    String FromShequZuhe="";//从社区跳转过来的二级组合查询服务列表
 
     @Override
     public int setLayoutResID() {
@@ -70,7 +73,8 @@ public class ShophallActivity extends BaseActivityother {
         search=getIntent().getStringExtra("search");
 
         NO=getIntent().getStringExtra("NO");
-
+        FromShequ=getIntent().getStringExtra("FromShequ");
+        FromShequZuhe=getIntent().getStringExtra("FromShequZuhe");
 
         mData = new ArrayList<>();
         mAdapter_shophall = new Adapter_shophall(mData, this,mPermission);
@@ -164,15 +168,21 @@ public class ShophallActivity extends BaseActivityother {
     void request( final int page) {
         LogUtils.LOG("ceshi","接口："+NO,"找专业列表");
         String URL="";
-        if(NO!=null&&NO.startsWith("H")){
+        if(NO!=null&&NO.startsWith("H")){//查看某个帮手的所有服务
             URL=Urls.Baseurl+Urls.BHSkissAll+"?helper_no="+NO.substring(1)+"&type="+1+"&curPageNo="+page;
-        }else   if(NO!=null&&NO.startsWith("B")){
+        }else   if(NO!=null&&NO.startsWith("B")){//查看某个商家的所有服务
             URL=Urls.Baseurl+Urls.BHSkissAll+"?business_no="+NO.substring(1)+"&type="+2+"&curPageNo="+page;
         }
-        if(specialty_id==0&&NO==null){
+        if(specialty_id==0&&NO==null){//查看所有专业  可以搜索
             URL=Urls.Baseurl+Urls.searchSkill+"?title="+search+"&curPageNo="+page;
-        }else if(specialty_id!=0&&NO==null){
+        }else if(specialty_id!=0&&NO==null){//查看某二级专业下所有服务
             URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&curPageNo="+page;
+        }
+        if(FromShequ!=null&&!FromShequ.equals("")){//社区跳转来的
+            URL=Urls.Baseurl+Urls.FromShequSkiss+"?specialty_id="+FromShequ+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
+        }
+        if(FromShequZuhe!=null&&!FromShequZuhe.equals("")){//社区跳转来的
+            URL=Urls.Baseurl+Urls.zhidiengShequSkiss+"?specialtyidlist="+FromShequZuhe+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
         }
         LogUtils.LOG("ceshi","接口："+URL,"找专业列表");
         new Volley_Utils(new Interface_volley_respose() {
@@ -191,7 +201,6 @@ public class ShophallActivity extends BaseActivityother {
                 }else {
                     ToastUtils.showToast(ShophallActivity.this,"没有更多内容");
                 }
-
 
             }
 

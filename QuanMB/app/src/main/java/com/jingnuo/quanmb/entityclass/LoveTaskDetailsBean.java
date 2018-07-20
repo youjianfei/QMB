@@ -55,7 +55,7 @@ public class LoveTaskDetailsBean {
         private int distance;
         private String headUrl;
         private String nick_name;
-        private String specialty_name;
+        private String type_name;
         private String task_ImgUrl;
         private String task_Img_id;
         private String task_description;
@@ -94,12 +94,12 @@ public class LoveTaskDetailsBean {
             this.nick_name = nick_name;
         }
 
-        public String getSpecialty_name() {
-            return specialty_name;
+        public String getType_name() {
+            return type_name;
         }
 
-        public void setSpecialty_name(String specialty_name) {
-            this.specialty_name = specialty_name;
+        public void setType_name(String type_name) {
+            this.type_name = type_name;
         }
 
         public String getTask_ImgUrl() {

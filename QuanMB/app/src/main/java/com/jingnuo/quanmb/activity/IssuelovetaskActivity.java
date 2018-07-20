@@ -29,6 +29,7 @@ import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.popwinow.Popwindow_LoveType;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -66,7 +67,7 @@ public class IssuelovetaskActivity extends BaseActivityother {
 
 
     //对象
-    Popwindow_SkillType mPopwindow_skilltype;
+    Popwindow_LoveType mPopwindow_LoveType;
     PermissionHelper permissionHelper;
     Bitmap mBitmap = null;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
@@ -176,14 +177,14 @@ public class IssuelovetaskActivity extends BaseActivityother {
         mRelativelayout_chose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPopwindow_skilltype = new Popwindow_SkillType(IssuelovetaskActivity.this, new InterfacePopwindow_SkillType() {
+                mPopwindow_LoveType = new Popwindow_LoveType(IssuelovetaskActivity.this, new InterfacePopwindow_SkillType() {
                     @Override
                     public void onSuccesses(String type, int id) {
                         mTextview_choose.setText(type);
                         task_typeID = id + "";
                     }
                 });
-                mPopwindow_skilltype.showPopwindow();
+                mPopwindow_LoveType.showPopwindow();
             }
         });
         image_chosePIC.setOnClickListener(new View.OnClickListener() {
@@ -278,7 +279,7 @@ public class IssuelovetaskActivity extends BaseActivityother {
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");//
-                    msg = (String) object.get("msg");//
+                    msg = (String) object.get("message");//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -86,6 +86,8 @@ public class Urls {
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
     public static String BHSkissAll = "user/querySpecialtyList";//某个商家或帮手的所有服务
+    public static String FromShequSkiss = "major/queryALLServiceByOne";//显示某1级专业下的所有2级专业下的所有服务接口
+    public static String zhidiengShequSkiss = "major/querySpecificService";//显示某几个指定2级专业下的所有服务-电脑，手机，空调，家电维修接口
 
 
 
@@ -176,6 +178,7 @@ public class Urls {
     public static String IssueLovetask = "loveTask/addLoveTask";//发布爱心帮
     public static String LovetaskList = "loveTask/search";//爱心帮列表
     public static String LovetaskDetails = "loveTask/loveTaskDetail?task_id=";//爱心帮任务详情
+    public static String loveTaskType = "loveTask/loveTaskType";//爱心帮任务类型接口
     //社区
     public  static String addLiuyan="communityMsg/saveWallMsg";//添加留言
     public  static String getliuyan="communityMsg/getAllMsg?user_token=";//获取留言墙列表

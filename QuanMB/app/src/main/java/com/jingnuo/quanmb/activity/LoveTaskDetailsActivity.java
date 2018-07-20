@@ -91,7 +91,7 @@ public class LoveTaskDetailsActivity extends BaseActivityother {
                 image_url=loveTaskDetailsBean.getData().getTask_ImgUrl();
                 setImage(image_url);
                 glide.load(loveTaskDetailsBean.getData().getHeadUrl()).into(mImageview_head);
-                mtextview_type.setText(loveTaskDetailsBean.getData().getSpecialty_name());
+                mtextview_type.setText(loveTaskDetailsBean.getData().getType_name());
                 mtextview_title.setText(loveTaskDetailsBean.getData().getTask_name());
                 mtextview_time.setText("发布时间："+loveTaskDetailsBean.getData().getCreateDate());
                 mtextview_peoplename.setText(loveTaskDetailsBean.getData().getNick_name());
@@ -118,7 +118,6 @@ public class LoveTaskDetailsActivity extends BaseActivityother {
                 imageview_urllist.add(images[i]);
             }
             adapter_gridviewpic.notifyDataSetChanged();
-
 
         }
 

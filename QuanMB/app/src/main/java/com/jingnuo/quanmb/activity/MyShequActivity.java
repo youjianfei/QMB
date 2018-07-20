@@ -95,6 +95,51 @@ public class MyShequActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mygrid_mokuai.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi", "点击"+position, "mygrid_mokuai");
+                Intent intent;
+                switch (position){
+                    case 7://福利社
+                        intent=new Intent(MyShequActivity.this,FulisheActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 6://二手市场
+
+                        break;
+                    case 5://家电维修
+                        intent=new Intent(MyShequActivity.this,ShophallActivity.class);
+                        intent.putExtra("FromShequZuhe","1203,1204,1205,1210,");
+                        startActivity(intent);
+                        break;
+                    case 4://搬家运输
+                        intent=new Intent(MyShequActivity.this,ShophallActivity.class);
+                        intent.putExtra("FromShequ",106+"");
+                        startActivity(intent);
+                        break;
+                    case 3://家政服务
+                        intent=new Intent(MyShequActivity.this,ShophallActivity.class);
+                        intent.putExtra("FromShequ",103+"");
+                        startActivity(intent);
+                        break;
+                    case 2://物业缴费
+                        intent=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1://宠物护理
+                        intent=new Intent(MyShequActivity.this,ShophallActivity.class);
+                        intent.putExtra("specialty_id",1105);
+                        startActivity(intent);
+                        break;
+                    case 0://门禁钥匙
+                        intent=new Intent(MyShequActivity.this,ShophallActivity.class);
+                        intent.putExtra("specialty_id",1209);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
         mLinearlayout_fabbu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
