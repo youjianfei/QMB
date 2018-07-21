@@ -203,7 +203,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void setview() {
-        LogUtils.LOG("ceshi1","onPostResume222","~~~~main");
         transaction.add(R.id.framelayout_main, mFragment_square).commit();
         ChangeBottomButton(mRelativeLayout_square);//设置帮帮广场为选中状态
 

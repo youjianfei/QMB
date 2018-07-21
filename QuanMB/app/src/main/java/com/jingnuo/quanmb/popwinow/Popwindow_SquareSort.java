@@ -196,7 +196,7 @@ public class Popwindow_SquareSort {
         mListview_pop_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mInterface.onSuccesses(mData_sort.get(i).getName(), mData_sort.get(i).getCode());
+                mInterface.onSuccesses(mData_sort.get(i).getName(), mData_sort.get(i).getCode(),1);
                 mPopupWindow.dismiss();
 
             }
@@ -276,7 +276,7 @@ public class Popwindow_SquareSort {
                     }
                 }
                 LogUtils.LOG("ceshi", "条件拼接" + TYpe, "任务条件筛选");
-                mInterface.onSuccesses(TYpe, Min + "%" + Max);
+                mInterface.onSuccesses(TYpe, Min + "%" + Max,0);
                 mPopupWindow.dismiss();
             }
         });

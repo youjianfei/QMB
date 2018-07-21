@@ -138,37 +138,39 @@ public class Fragment_square extends Fragment {
                     @SuppressLint("NewApi")
                     @Override
                     public void run() {
-                        if(address.equals("筛选")){
-                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
-                            mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
-                                @Override
-                                public void onSuccesses(String address, String id) {
-                                    page=1;
-                                    LogUtils.LOG("ceshi",address+id,"条件筛选");
-                                    String [] Q = id.split("%");
-                                    initMap(Q[0],Q[1],page+"","",address,"");
-                                    map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
-                                    request_square(map_filter_sort,page);
 
-                                }
-                            }, mRelativelayout_sort, 0);
-                            mPopwindow_square_sort.showPopwindow();
+                        if(address.equals("筛选")){
+                            showPopwindow(0);
+//                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
+//                            mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+//                                @Override
+//                                public void onSuccesses(String address, String id,int type) {
+//                                    page=1;
+//                                    LogUtils.LOG("ceshi",address+id,"条件筛选");
+//                                    String [] Q = id.split("%");
+//                                    initMap(Q[0],Q[1],page+"","",address,"");
+//                                    map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
+//                                    request_square(map_filter_sort,page);
+//
+//                                }
+//                            }, mRelativelayout_sort, 0);
+//                            mPopwindow_square_sort.showPopwindow();
 
                         }else if(address.equals("排序")){
-
-                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
-
-                                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
-                                    @Override
-                                    public void onSuccesses(String address, String id) {
-                                        page=1;
-                                        LogUtils.LOG("ceshi",address+id,"排序方式");
-                                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
-                                        request_square(map_filter_sort,page);
-
-                                    }
-                                }, mRelativelayout_sort, 1);
-                                mPopwindow_square_sort.showPopwindow();
+                            showPopwindow(1);
+//                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
+//
+//                                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+//                                    @Override
+//                                    public void onSuccesses(String address, String id,int type) {
+//                                        page=1;
+//                                        LogUtils.LOG("ceshi",address+id,"排序方式");
+//                                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
+//                                        request_square(map_filter_sort,page);
+//
+//                                    }
+//                                }, mRelativelayout_sort, 1);
+//                                mPopwindow_square_sort.showPopwindow();
                         } else {
                             mTextview_address.setText(address);
                             map_filter_sort.put("city_code",address);
@@ -304,18 +306,18 @@ public class Fragment_square extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-
-                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
-                    @Override
-                    public void onSuccesses(String address, String id) {
-                        page=1;
-                        LogUtils.LOG("ceshi",address+id,"排序方式");
-                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
-                        request_square(map_filter_sort,page);
-
-                    }
-                }, mRelativelayout_sort, 1);
-                mPopwindow_square_sort.showPopwindow();
+                showPopwindow(1);
+//                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+//                    @Override
+//                    public void onSuccesses(String address, String id) {
+//                        page=1;
+//                        LogUtils.LOG("ceshi",address+id,"排序方式");
+//                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
+//                        request_square(map_filter_sort,page);
+//
+//                    }
+//                }, mRelativelayout_sort, 1);
+//                mPopwindow_square_sort.showPopwindow();
 
             }
         });
@@ -324,20 +326,20 @@ public class Fragment_square extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-
-                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
-                    @Override
-                    public void onSuccesses(String address, String id) {
-                        page=1;
-                        LogUtils.LOG("ceshi",address+id,"条件筛选");
-                        String [] Q = id.split("%");
-                        initMap(Q[0],Q[1],page+"","",address,"");
-                        map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
-                        request_square(map_filter_sort,page);
-
-                    }
-                }, mRelativelayout_sort, 0);
-                mPopwindow_square_sort.showPopwindow();
+                showPopwindow(0);
+//                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+//                    @Override
+//                    public void onSuccesses(String address, String id) {
+//                        page=1;
+//                        LogUtils.LOG("ceshi",address+id,"条件筛选");
+//                        String [] Q = id.split("%");
+//                        initMap(Q[0],Q[1],page+"","",address,"");
+//                        map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
+//                        request_square(map_filter_sort,page);
+//
+//                    }
+//                }, mRelativelayout_sort, 0);
+//                mPopwindow_square_sort.showPopwindow();
             }
         });
 
@@ -417,6 +419,31 @@ public class Fragment_square extends Fragment {
 
             }
         });
+    }
+    @SuppressLint("NewApi")
+    void  showPopwindow(final int  leizing){
+
+        mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
+            @Override
+            public void onSuccesses(String address, String id,int type) {
+                if(type==0){//筛选
+                    page=1;
+                    LogUtils.LOG("ceshi",address+id,"条件筛选");
+                    String [] Q = id.split("%");
+                    initMap(Q[0],Q[1],page+"","",address,"");
+                    map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
+                    request_square(map_filter_sort,page);
+                }else {//排序方式
+                    page=1;
+                    LogUtils.LOG("ceshi",address+id,"排序方式");
+                    initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
+                    request_square(map_filter_sort,page);
+                }
+
+            }
+        }, mRelativelayout_sort, leizing);
+        mPopwindow_square_sort.showPopwindow();
+
     }
     /**
      * 判断是否是第一行
