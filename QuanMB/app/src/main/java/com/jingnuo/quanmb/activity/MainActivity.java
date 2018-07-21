@@ -59,8 +59,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //高德定位
     int locationtime=0;
 
-
-
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

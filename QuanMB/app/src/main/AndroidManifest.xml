@@ -175,7 +175,10 @@
         <activity android:name="com.jingnuo.quanmb.activity.MyShequActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShuidianfeiActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShezhishequActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.FulisheActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.FulisheActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ErShoushichangActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.IssueErshoushichangActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.ErshouxinxiDetailsActivity"></activity>
     </application>
 
 </manifest>

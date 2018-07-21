@@ -6,9 +6,16 @@ package com.jingnuo.quanmb.data;
 
 public class Urls {
 
+//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+
+
+
         public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
     public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
     public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+
 
 
 //    public static String Baseurl = "http://192.168.1.184:8080/QuanMinBang/v1.0/";
@@ -179,6 +186,12 @@ public class Urls {
     public static String LovetaskList = "loveTask/search";//爱心帮列表
     public static String LovetaskDetails = "loveTask/loveTaskDetail?task_id=";//爱心帮任务详情
     public static String loveTaskType = "loveTask/loveTaskType";//爱心帮任务类型接口
+
+    //二手市场
+    public static String Ershoushichang = "secondaryMarket/search";//二手市场列表
+    public static String AddErshoushichang = "secondaryMarket/addSecondary";//二手信息
+    public static String ErshoushichangDetails = "secondaryMarket/secondaryDetail?user_token=";//二手信息单挑条详细信息
+
     //社区
     public  static String addLiuyan="communityMsg/saveWallMsg";//添加留言
     public  static String getliuyan="communityMsg/getAllMsg?user_token=";//获取留言墙列表

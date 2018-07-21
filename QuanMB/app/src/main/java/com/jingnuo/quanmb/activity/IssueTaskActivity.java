@@ -238,6 +238,8 @@ public class IssueTaskActivity extends BaseActivityother {
                             int status = 0;
                             String msg = "";
                             boolean data;
+                            LogUtils.LOG("ceshi", "" + respose, "sdfsafdfas ");
+
                             try {
                                 JSONObject object = new JSONObject(respose);
                                 status = (Integer) object.get("code");//

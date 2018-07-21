@@ -106,7 +106,8 @@ public class MyShequActivity extends BaseActivityother {
                         startActivity(intent);
                         break;
                     case 6://二手市场
-
+                        intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+                        startActivity(intent);
                         break;
                     case 5://家电维修
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
