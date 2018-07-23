@@ -200,7 +200,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
         map_relogin.remove("type");
         map_relogin.put("confirm",publicEncryptedResult);
         map_relogin.put("nick_name", Staticdata.map_wechat.get("nick_name"));
-        map_relogin.put("sex",Staticdata.map_wechat.get("sex"));
+//        map_relogin.put("sex",Staticdata.map_wechat.get("sex"));
         map_relogin.put("unionid",Staticdata.map_wechat.get("unionid"));
         map_relogin.put("uuid",Staticdata.UUID);
         map_relogin.put("Jpush_id", Staticdata.JpushID);

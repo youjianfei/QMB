@@ -141,7 +141,7 @@ public class ThreeLoginBindActivity extends BaseActivityother {
         publicEncryptedResult= PasswordJiami.passwordjiami(password);//对密码加密
         map_bind.put("password",publicEncryptedResult);
         map_bind.put("nick_name", Staticdata.map_wechat.get("nick_name"));
-        map_bind.put("sex",Staticdata.map_wechat.get("sex"));
+//        map_bind.put("sex",Staticdata.map_wechat.get("sex"));
         map_bind.put("unionid",Staticdata.map_wechat.get("unionid"));
         map_bind.put("uuid",Staticdata.UUID);
         map_bind.put("Jpush_id", Staticdata.JpushID);

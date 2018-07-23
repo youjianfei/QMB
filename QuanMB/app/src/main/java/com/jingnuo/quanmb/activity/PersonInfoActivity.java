@@ -108,14 +108,18 @@ public class PersonInfoActivity extends BaseActivityother {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onPostResume() {
+        super.onPostResume();
         LogUtils.LOG("ceshi","onRestart","personinfoactivity");
         mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
         if(!Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
             mTextview_setsafepassword.setText("修改安全密码");
             mTextview_issetsafepassword.setVisibility(View.VISIBLE);
+        }
+        if (!Staticdata.static_userBean.getData().getAppuser().getCommunity_name().equals("")){
+            mtextview_text_issetshequ.setText(Staticdata.static_userBean.getData().getAppuser().getCommunity_name());
+            mtextview_text_issetshequ.setVisibility(View.VISIBLE);
         }
     }
 

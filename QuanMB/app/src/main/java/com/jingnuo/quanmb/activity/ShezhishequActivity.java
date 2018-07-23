@@ -2,6 +2,8 @@ package com.jingnuo.quanmb.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -77,9 +79,35 @@ public class ShezhishequActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        mEdit_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                LogUtils.LOG("ceshi",s+"","spisup");
+                String search = "";
+                search = mEdit_search.getText() + "";
+                if(search.length()>5){
+                    ToastUtils.showToast(ShezhishequActivity.this,"搜索关键字太长");
+                    return ;
+                }
+//                String searchhou = Utils.ZhuanMa(search);
+                map_shequ.put("community_name", search);
+                request();
+
+            }
+        });
         mList_shequ.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 LogUtils.LOG("ceshi", position + "", "");
                 map_shequ_bind.put("community_code",mDate.get(position).getCommunity_code()+"");
                 new Volley_Utils(new Interface_volley_respose() {
@@ -96,6 +124,7 @@ public class ShezhishequActivity extends BaseActivityother {
                         }
                         ToastUtils.showToast(ShezhishequActivity.this,msg);
                         if(status==1){
+                            Staticdata.static_userBean.getData().getAppuser().setCommunity_name(mDate.get(position).getCommunity_name());
                             finish();
                         }
 
@@ -127,6 +156,7 @@ public class ShezhishequActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose + "", "");
                 sheQuListBean=new Gson().fromJson(respose,SheQuListBean.class);
+                mDate.clear();
                 if(sheQuListBean.getData()!=null){
                     mDate.addAll(sheQuListBean.getData());
                     adapter_shequList.notifyDataSetChanged();
@@ -139,7 +169,7 @@ public class ShezhishequActivity extends BaseActivityother {
 
             }
         }).postHttp(Urls.Baseurl_hu+Urls.getCommunityList,ShezhishequActivity.this,1,map_shequ);
-        LogUtils.LOG("ceshi", Urls.Baseurl_hu+Urls.getCommunityList + "", "");
+        LogUtils.LOG("ceshi", Urls.Baseurl_hu+Urls.getCommunityList + map_shequ.toString(), "");
 
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -118,6 +119,34 @@ public class LoveTaskActivity extends BaseActivityother {
                Intent intent_lovetaskdetails=new Intent(LoveTaskActivity.this,LoveTaskDetailsActivity.class);
                 intent_lovetaskdetails.putExtra("taskid",mdata.get(i-2).getTask_id()+"");
                startActivity(intent_lovetaskdetails);
+            }
+        });
+        final float[] mFirstY = {0};//按下时获取位置
+        final float[] mCurrentY = {0};//得到滑动的位置
+        mListview.getRefreshableView().setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        mFirstY[0] = event.getY();//按下时获取位置
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mCurrentY[0] = event.getY();//得到滑动的位置
+                        if(mCurrentY[0] - mFirstY[0] > 5){//滑动的位置减去按下的位置大于最小滑动距离  则表示向下滑动
+                            //down
+                            LogUtils.LOG("ceshi", "下", "MyShequActivity");
+                            mLinearlayout_fabu.setVisibility(View.VISIBLE);
+                        }else {//反之向上滑动
+                            //up
+                            LogUtils.LOG("ceshi", "上", "MyShequActivity");
+                            mLinearlayout_fabu.setVisibility(View.INVISIBLE);
+                        }
+                        break;
+
+                }
+
+                return false;
             }
         });
     }
