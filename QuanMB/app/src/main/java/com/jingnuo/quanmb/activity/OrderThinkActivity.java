@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -23,6 +25,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class OrderThinkActivity extends BaseActivityother {
 
@@ -31,10 +35,18 @@ public class OrderThinkActivity extends BaseActivityother {
     String  Taskid="";
     EditText mEdit_think;
     Button mButton_submit;
+    TextView mTextview_name;
+    CircleImageView imageView;
+    TextView textVieworderno;
 
     //数据
     String contenttext="";
     String xingxingcount="5";
+
+
+    String imageurl="";//头像
+    String orderno="";//订单号
+    String name="";//名字
 
 
     Map map_think;
@@ -46,13 +58,21 @@ public class OrderThinkActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-
+        textVieworderno.setText("订单号-"+orderno);
+        mTextview_name.setText(name);
+        Glide.with(this).load(imageurl).error(R.mipmap.user_pic).into(imageView);
     }
 
     @Override
     protected void initData() {
         Intent intent=getIntent();
         Taskid= intent.getStringExtra("task_id");
+        imageurl= intent.getStringExtra("imageurl");
+        name= intent.getStringExtra("helpername");
+        orderno= intent.getStringExtra("orderno");
+
+
+
         map_think=new HashMap();
         initmap();
 
@@ -79,6 +99,9 @@ public class OrderThinkActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textVieworderno=findViewById(R.id.textview_helperorder);
+        mTextview_name=findViewById(R.id.textview_helpername);
+        imageView=findViewById(R.id.imageview_helper);
         mRatinBar=findViewById(R.id.ratingbar);
         mEdit_think=findViewById(R.id.edit_think);
         mButton_submit=findViewById(R.id.button_submit);

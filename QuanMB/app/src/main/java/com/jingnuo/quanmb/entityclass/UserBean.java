@@ -51,8 +51,8 @@ public class UserBean {
          */
 
         private AppuserBean appuser;
-        private int business_status;
-        private int helper_status;
+        private int business_status=0;
+        private int helper_status=0;
         private String img_url;
         private String user_token;
         private String appellation_name;

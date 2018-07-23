@@ -140,6 +140,7 @@ public class Fragment_square extends Fragment {
                     public void run() {
 
                         if(address.equals("筛选")){
+                             mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
                             showPopwindow(0);
 //                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
 //                            mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
@@ -157,6 +158,7 @@ public class Fragment_square extends Fragment {
 //                            mPopwindow_square_sort.showPopwindow();
 
                         }else if(address.equals("排序")){
+                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
                             showPopwindow(1);
 //                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(getActivity(),69));
 //

@@ -299,6 +299,14 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                                request(map_taskdetail);
                                 Intent intend_think = new Intent(MytaskDetailActivity.this, OrderThinkActivity.class);
                                 intend_think.putExtra("task_id", taskDetailBean.getData().getTask_id() + "");
+                                if(taskDetailBean.getData().getBusiness_name().equals("")){
+                                    intend_think.putExtra("helpername", taskDetailBean.getData().getHelper_name() + "");
+                                }else {
+                                    intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
+                                }
+
+                                intend_think.putExtra("orderno", taskDetailBean.getData().getOrder_no() + "");
+                                intend_think.putExtra("imageurl", taskDetailBean.getData().getB_h_url() + "");
                                 startActivity(intend_think);
                             } else {
                                 ToastUtils.showToast(MytaskDetailActivity.this, msg);
