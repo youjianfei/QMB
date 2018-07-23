@@ -170,12 +170,10 @@ public class MessageWallEditActivity extends BaseActivityother {
             @Override
             public void afterTextChanged(Editable s) {
             String text=s+"";
-            int i=300-text.length();
-                LogUtils.LOG("ceshi", "输入+" + text.length(), "");
-
+            int i=30-text.length();
             if(i<0){
-                mEdit_message.setText(text.substring(0,299));
-                mTextview_text_moretext.setText("还可以输入0字");
+                mEdit_message.setText(text.substring(0,29));
+                mTextview_text_moretext.setText("字数超出限制");
                 mEdit_message.setSelection(mEdit_message.getText().length());//将光标移至文字末尾
             }else {
                 mTextview_text_moretext.setText("还可以输入"+i+"字");

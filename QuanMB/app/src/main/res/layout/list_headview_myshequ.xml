@@ -67,5 +67,15 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/jiaoshuidian"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="社区留言墙"
+        android:textSize="15dp"
+        android:textColor="@color/text_title2"
+        />
+
 
 </LinearLayout>

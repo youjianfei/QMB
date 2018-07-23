@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="@color/liuyanqing2"/>
+    <stroke
+        android:dashGap="8dp"
+        android:dashWidth="10dp"
+        android:width="5dp"
+        android:color="@color/liuyanqing2" />
+    <corners android:radius="10dp"/>
+     <!--&lt;!&ndash;描边&ndash;&gt;-->
+    <!--<stroke-->
+        <!--android:width="0.5dp"-->
+        <!--android:color="@color/gray_dfdfdf" />-->
+</shape>

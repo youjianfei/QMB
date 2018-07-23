@@ -33,6 +33,14 @@
     <color name="pink">#ff64b0</color>
 
 
+    <!--留言墙-->
+    <color name="liuyanqing0">#84c9fb</color>
+    <color name="liuyanqing1">#fab4c6</color>
+    <color name="liuyanqing2">#9c9eff</color>
+    <color name="liuyanqing3">#77f577</color>
+
+
+
 
     <color name="zimu_background">#ededed</color>
 

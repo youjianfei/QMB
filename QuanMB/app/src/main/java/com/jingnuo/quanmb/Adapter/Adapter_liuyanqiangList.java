@@ -66,59 +66,102 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             if(convertView==null){
                 viewHolder0=new ViewHolder0();
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag0,null,false);
-                viewHolder0.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
+//                viewHolder0.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder0.mTextview_name=convertView.findViewById(R.id.text_name);
-                viewHolder0.mTextview_time=convertView.findViewById(R.id.text_time);
+//                viewHolder0.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder0.mTextview_content=convertView.findViewById(R.id.text_content);
+                viewHolder0.relayout_liuyan0=convertView.findViewById(R.id.relayout_liuyan0);
                 convertView.setTag(viewHolder0);
             }else {
                 viewHolder0= (ViewHolder0) convertView.getTag();
             }
+            switch (position%4){
+                case 1:
+                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang1);
+                    break;
+                case 2:
+                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang2);
+                    break;
+                case 3:
+                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang3);
+                    break;
+                case 0:
+                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang0);
+                    break;
+            }
 
-            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder0.imageView_touxiang);
-            viewHolder0.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
-            viewHolder0.mTextview_content.setText(mList_liuyan.get(position).getContent());
-            viewHolder0.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
+//            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder0.imageView_touxiang);
+            viewHolder0.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
+            viewHolder0.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());
+//            viewHolder0.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
         }
         if (type==1){
             if(convertView==null){
                 viewHolder1=new ViewHolder1();
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag1,null,false);
-                viewHolder1.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
+//                viewHolder1.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder1.mTextview_name=convertView.findViewById(R.id.text_name);
-                viewHolder1.mTextview_time=convertView.findViewById(R.id.text_time);
+//                viewHolder1.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder1.mTextview_content=convertView.findViewById(R.id.text_content);
                 viewHolder1.mImageview_one=convertView.findViewById(R.id.iamge_one);
+                viewHolder1.relayout_liuyan1=convertView.findViewById(R.id.relayout_liuyan1);
                 convertView.setTag(viewHolder1);
             }else {
                 viewHolder1= (ViewHolder1) convertView.getTag();
             }
-
-            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder1.imageView_touxiang);
-            viewHolder1.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
-            viewHolder1.mTextview_content.setText(mList_liuyan.get(position).getContent());
-            viewHolder1.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
+            switch (position%4){
+                case 1:
+                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang1);
+                    break;
+                case 2:
+                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang2);
+                    break;
+                case 3:
+                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang3);
+                    break;
+                case 0:
+                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang0);
+                    break;
+            }
+//            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder1.imageView_touxiang);
+            viewHolder1.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
+            viewHolder1.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());
+//            viewHolder1.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(0)).into(viewHolder1.mImageview_one);
         }
         if (type==2){
             if(convertView==null){
                 viewHolder2=new ViewHolder2();
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag2,null,false);
-                viewHolder2.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
+//                viewHolder2.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder2.mTextview_name=convertView.findViewById(R.id.text_name);
-                viewHolder2.mTextview_time=convertView.findViewById(R.id.text_time);
+//                viewHolder2.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder2.mTextview_content=convertView.findViewById(R.id.text_content);
                 viewHolder2.mImageview_1=convertView.findViewById(R.id.iamge_1);
                 viewHolder2.mImageview_2=convertView.findViewById(R.id.iamge_2);
+                viewHolder2.relayout_liuyan2=convertView.findViewById(R.id.relayout_liuyan2);
                 convertView.setTag(viewHolder2);
             }else {
                 viewHolder2= (ViewHolder2) convertView.getTag();
             }
-
-            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder2.imageView_touxiang);
-            viewHolder2.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
-            viewHolder2.mTextview_content.setText(mList_liuyan.get(position).getContent());
-            viewHolder2.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
+            switch (position%4){
+                case 1:
+                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang1);
+                    break;
+                case 2:
+                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang2);
+                    break;
+                case 3:
+                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang3);
+                    break;
+                case 0:
+                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang0);
+                    break;
+            }
+//            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder2.imageView_touxiang);
+            viewHolder2.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
+            viewHolder2.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());
+//            viewHolder2.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(0)).into(viewHolder2.mImageview_1);
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(1)).into(viewHolder2.mImageview_2);
         }
@@ -126,22 +169,36 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             if(convertView==null){
                 viewHolder3=new ViewHolder3();
                 convertView=mInflater.inflate(R.layout.item_liuyanqinag3,null,false);
-                viewHolder3.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
+//                viewHolder3.imageView_touxiang=convertView.findViewById(R.id.circle_touxiang);
                 viewHolder3.mTextview_name=convertView.findViewById(R.id.text_name);
-                viewHolder3.mTextview_time=convertView.findViewById(R.id.text_time);
+//                viewHolder3.mTextview_time=convertView.findViewById(R.id.text_time);
                 viewHolder3.mTextview_content=convertView.findViewById(R.id.text_content);
                 viewHolder3.mImageview_111=convertView.findViewById(R.id.iamge_11);
                 viewHolder3.mImageview_222=convertView.findViewById(R.id.iamge_22);
                 viewHolder3.mImageview_333=convertView.findViewById(R.id.iamge_33);
+                viewHolder3.relayout_liuyan3=convertView.findViewById(R.id.relayout_liuyan3);
                 convertView.setTag(viewHolder3);
             }else {
                 viewHolder3= (ViewHolder3) convertView.getTag();
             }
-
-            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder3.imageView_touxiang);
-            viewHolder3.mTextview_name.setText(mList_liuyan.get(position).getNick_name());
-            viewHolder3.mTextview_content.setText(mList_liuyan.get(position).getContent());
-            viewHolder3.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
+            switch (position%4){
+                case 1:
+                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang1);
+                    break;
+                case 2:
+                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang2);
+                    break;
+                case 3:
+                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang3);
+                    break;
+                case 0:
+                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang0);
+                    break;
+            }
+//            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder3.imageView_touxiang);
+            viewHolder3.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
+            viewHolder3.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());
+//            viewHolder3.mTextview_time.setText(mList_liuyan.get(position).getCreateDate());
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(0)).into(viewHolder3.mImageview_111);
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(1)).into(viewHolder3.mImageview_222);
             Glide.with(mcontext).load(mList_liuyan.get(position).getImagesUrlsList().get(2)).into(viewHolder3.mImageview_333);
@@ -149,33 +206,38 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
         return convertView;
     }
     class  ViewHolder0 {
-        CircleImageView imageView_touxiang;
+//        CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
-        TextView mTextview_time;
+        RelativeLayout relayout_liuyan0;
+//        TextView mTextview_time;
     }
     class  ViewHolder1 {
-        CircleImageView imageView_touxiang;
+//        CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
-        TextView mTextview_time;
+//        TextView mTextview_time;
         ImageView mImageview_one;
+        RelativeLayout relayout_liuyan1;
     }
     class  ViewHolder2 {
-        CircleImageView imageView_touxiang;
+//        CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
-        TextView mTextview_time;
+//        TextView mTextview_time;
         ImageView mImageview_1;
         ImageView mImageview_2;
+        RelativeLayout relayout_liuyan2;
     }
     class  ViewHolder3 {
-        CircleImageView imageView_touxiang;
+//        CircleImageView imageView_touxiang;
         TextView mTextview_name;
         TextView mTextview_content;
-        TextView mTextview_time;
+//        TextView mTextview_time;
         ImageView mImageview_111;
         ImageView mImageview_222;
         ImageView mImageview_333;
+        RelativeLayout relayout_liuyan3;
+
     }
 }
