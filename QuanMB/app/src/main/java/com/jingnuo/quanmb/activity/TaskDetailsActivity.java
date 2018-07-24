@@ -12,7 +12,9 @@ import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.popwinow.Popwindow_bargin;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.customview.MyGridView;
@@ -155,28 +157,36 @@ public class TaskDetailsActivity extends BaseActivityother {
                         Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
                         startActivity(intent_renzheng);
                     }
-
-                    LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
-                    new Volley_Utils(new Interface_volley_respose() {
+                    new Popwindow_Tip("确认完成此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
                         @Override
-                        public void onSuccesses(String respose) {
-                            LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
-                            QueRenHelp_Bean queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
-                            if (queRenHelp_bean.getStatus() == 1) {
-                                Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
-                                intent_querenhelp.putExtra("order_no", queRenHelp_bean.getData().getOrder_no());
-                                startActivity(intent_querenhelp);
-                                finish();
-                            } else {
-                                ToastUtils.showToast(TaskDetailsActivity.this, queRenHelp_bean.getMessage());
+                        public void onResult(boolean result) {
+                            if(result){
+                                new Volley_Utils(new Interface_volley_respose() {
+                                    @Override
+                                    public void onSuccesses(String respose) {
+                                        LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
+                                        QueRenHelp_Bean queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
+                                        if (queRenHelp_bean.getStatus() == 1) {
+                                            Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
+                                            intent_querenhelp.putExtra("order_no", queRenHelp_bean.getData().getOrder_no());
+                                            startActivity(intent_querenhelp);
+                                            finish();
+                                        } else {
+                                            ToastUtils.showToast(TaskDetailsActivity.this, queRenHelp_bean.getMessage());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(int error) {
+
+                                    }
+                                }).Http(Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), TaskDetailsActivity.this, 0);
+
                             }
-                        }
-
-                        @Override
-                        public void onError(int error) {
 
                         }
-                    }).Http(Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), TaskDetailsActivity.this, 0);
+                    }).showPopwindow();
+                    LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
 
                 } else {
                     Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);

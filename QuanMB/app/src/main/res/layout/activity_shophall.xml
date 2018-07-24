@@ -24,10 +24,11 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:src="@mipmap/back_black" />
 
         <LinearLayout
@@ -51,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="输入关键字"
+                android:hint="搜索服务"
                 android:singleLine="true"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/text_title2"

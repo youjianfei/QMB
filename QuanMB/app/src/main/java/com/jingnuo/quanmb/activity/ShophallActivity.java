@@ -47,6 +47,7 @@ public class ShophallActivity extends BaseActivityother {
     //数据
     int specialty_id=0;
     String search="";
+    String search2="";
     int page=1;
     List<SkillmentlistBean.DataBean.ListBean> mData;
 
@@ -116,6 +117,7 @@ public class ShophallActivity extends BaseActivityother {
             @Override
             public void afterTextChanged(Editable s) {
                 search=Utils.ZhuanMa(s+"");
+                search2=Utils.ZhuanMa(s+"");
 //                search=s+"";
                 request(1);
 
@@ -176,7 +178,7 @@ public class ShophallActivity extends BaseActivityother {
         if(specialty_id==0&&NO==null){//查看所有专业  可以搜索
             URL=Urls.Baseurl+Urls.searchSkill+"?title="+search+"&curPageNo="+page;
         }else if(specialty_id!=0&&NO==null){//查看某二级专业下所有服务
-            URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&curPageNo="+page;
+            URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&title="+search2+"&curPageNo="+page;
         }
         if(FromShequ!=null&&!FromShequ.equals("")){//社区跳转来的
             URL=Urls.Baseurl+Urls.FromShequSkiss+"?specialty_id="+FromShequ+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
@@ -191,15 +193,15 @@ public class ShophallActivity extends BaseActivityother {
                 if (mListview.isRefreshing()) {
                     mListview.onRefreshComplete();
                 }
-                if(page==1&&new Gson().fromJson(respose,SkillmentlistBean.class).getData().getList()!=null){
+                if(page==1&&new Gson().fromJson(respose,SkillmentlistBean.class).getData()!=null){
                     mData.clear();
                     mData.addAll(new Gson().fromJson(respose,SkillmentlistBean.class).getData().getList());
                     mAdapter_shophall.notifyDataSetChanged();
-                }else if(page!=1&&new Gson().fromJson(respose,SkillmentlistBean.class).getData().getList()!=null) {
+                }else if(page!=1&&new Gson().fromJson(respose,SkillmentlistBean.class).getData()!=null) {
                     mData.addAll(new Gson().fromJson(respose,SkillmentlistBean.class).getData().getList());
                     mAdapter_shophall.notifyDataSetChanged();
                 }else {
-                    ToastUtils.showToast(ShophallActivity.this,"没有更多内容");
+
                 }
 
             }

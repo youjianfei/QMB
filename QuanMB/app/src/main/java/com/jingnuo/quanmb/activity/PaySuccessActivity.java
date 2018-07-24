@@ -1,11 +1,13 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 
 public class PaySuccessActivity extends BaseActivityother {
@@ -41,6 +43,13 @@ public class PaySuccessActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
             finish();
+            if(Staticdata.PayissuetaskSuccess){
+                Intent mainIntent = new Intent(PaySuccessActivity.this, MainActivity.class);
+                Intent intent_bargain=new Intent(PaySuccessActivity.this, MyOrderActivity.class);
+                Intent[] intents = {mainIntent, intent_bargain};
+                Staticdata.PayissuetaskSuccess=false;
+                startActivities(intents);
+            }
             }
         });
 

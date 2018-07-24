@@ -21,6 +21,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
@@ -32,6 +33,7 @@ import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.MoneyTextWatcher;
@@ -141,6 +143,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     yValue=aMapLocation.getLongitude()+"";//获取经度
                     citycode=aMapLocation.getCity();//城市信息
                     String Aoi=aMapLocation.getAoiName()+"";
+//                    address_right=aMapLocation.get;
                     if (Aoi.equals("")){
                         mTextview_taskAddress.setText(aMapLocation.getDescription().replace(aMapLocation.getProvince()+aMapLocation.getCity(),""));
                     }else {
@@ -237,8 +240,6 @@ public class IssueTaskActivity extends BaseActivityother {
                         public void onSuccesses(String respose) {
                             int status = 0;
                             String msg = "";
-                            boolean data;
-                            LogUtils.LOG("ceshi", "" + respose, "sdfsafdfas ");
 
                             try {
                                 JSONObject object = new JSONObject(respose);
@@ -299,13 +300,23 @@ public class IssueTaskActivity extends BaseActivityother {
         switch (v.getId()){
             case R.id.text_choosehelper:
                 if (!mImage_choosehelper.isSelected()) {
-                    mImage_choosehelper.setSelected(true);
-                    mImage_chooseme.setSelected(false);
-                    isMEchujia = 2;
-                    relativelayout_chujia.setVisibility(View.GONE);
-                    mEditview_taskmoney.setText("");
-                    is_counteroffer = 1;
-                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
+
+//                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
+                    new Popwindow_Tip("需缴纳5元押金", IssueTaskActivity.this, new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if(result){
+                                mImage_choosehelper.setSelected(true);
+                                mImage_chooseme.setSelected(false);
+                                isMEchujia = 2;
+                                relativelayout_chujia.setVisibility(View.GONE);
+                                mEditview_taskmoney.setText("");
+                                is_counteroffer = 1;
+                            }
+
+                        }
+                    }).showPopwindow();
+
                 }
             break;
             case R.id.textview_chooseme:
@@ -318,13 +329,22 @@ public class IssueTaskActivity extends BaseActivityother {
                 break;
             case R.id.image_choosehelper:
                 if (!mImage_choosehelper.isSelected()) {
-                    mImage_choosehelper.setSelected(true);
-                    mImage_chooseme.setSelected(false);
-                    isMEchujia = 2;
-                    relativelayout_chujia.setVisibility(View.GONE);
-                    mEditview_taskmoney.setText("");
-                    is_counteroffer = 1;
-                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
+                    new Popwindow_Tip("需缴纳5元押金", IssueTaskActivity.this, new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if(result){
+                                mImage_choosehelper.setSelected(true);
+                                mImage_chooseme.setSelected(false);
+                                isMEchujia = 2;
+                                relativelayout_chujia.setVisibility(View.GONE);
+                                mEditview_taskmoney.setText("");
+                                is_counteroffer = 1;
+                            }
+
+                        }
+                    }).showPopwindow();
+
+
                 }
                 break;
             case R.id.image_chooseme:
@@ -438,7 +458,7 @@ public class IssueTaskActivity extends BaseActivityother {
             map_issueTask.put("is_helper_bid", "N");//由我出价
             LogUtils.LOG("ceshi", min + "", "最低佣金");
             if (min < 5) {
-                ToastUtils.showToast(IssueTaskActivity.this, "佣金最低为5元");
+                ToastUtils.showToast(IssueTaskActivity.this, "佣金不能低于5元");
                 return false;
             }
         } else {

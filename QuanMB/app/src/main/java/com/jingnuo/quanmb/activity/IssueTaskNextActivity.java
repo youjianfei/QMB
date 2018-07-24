@@ -432,10 +432,11 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 }
                 if (status == 1) {
                     ToastUtils.showToast(IssueTaskNextActivity.this, "任务发布成功");
-                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
+//                    startActivity(intent);
                     Staticdata.imagePathlist.clear();
                     Staticdata.map_task.clear();
+                    Staticdata.PayissuetaskSuccess=true;
                 } else {
                     count = 0;
                     mList_picID.clear();

@@ -54,6 +54,9 @@ public class Staticdata {
     //广场弹窗得选择框记录功能，这里写为静态变量
     public  static List<PopwindowGridBean.FilterBean> mData_filter_task=new ArrayList<>();
 
+    //发布任务支付成功
+    public static boolean PayissuetaskSuccess =false;
+
 
 
 }

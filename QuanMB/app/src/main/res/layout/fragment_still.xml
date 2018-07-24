@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="输入关键字"
+                android:hint="搜索服务"
                 android:singleLine="true"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/text_title2"
