@@ -137,7 +137,7 @@ public class LoveTaskActivity extends BaseActivityother {
                             //down
                             LogUtils.LOG("ceshi", "下", "MyShequActivity");
                             mLinearlayout_fabu.setVisibility(View.VISIBLE);
-                        }else {//反之向上滑动
+                        }else if(mFirstY[0] - mCurrentY[0] > 5){//反之向上滑动
                             //up
                             LogUtils.LOG("ceshi", "上", "MyShequActivity");
                             mLinearlayout_fabu.setVisibility(View.INVISIBLE);
