@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.class_.ShareGoodWeb;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.DataCleanManager;
@@ -27,6 +28,12 @@ public class SettingActivity extends BaseActivityother {
     TextView mTextview_cleancache;
     TextView mTextview_suggest;
     TextView mTextview_textview_cleancacheSize;
+    TextView mTextview_share;
+
+
+    //对象
+
+    ShareGoodWeb shareClass;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_setting;
@@ -43,7 +50,7 @@ public class SettingActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        shareClass = new ShareGoodWeb(this);
     }
 
     @Override
@@ -51,6 +58,7 @@ public class SettingActivity extends BaseActivityother {
         mButton_logout.setOnClickListener(this);
         mTextview_cleancache.setOnClickListener(this);
         mTextview_suggest.setOnClickListener(this);
+        mTextview_share.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +67,7 @@ public class SettingActivity extends BaseActivityother {
         mTextview_cleancache=findViewById(R.id.textview_cleancache);
         mTextview_suggest=findViewById(R.id.textview_suggest);
         mTextview_textview_cleancacheSize=findViewById(R.id.textview_cleancacheSize);
+        mTextview_share=findViewById(R.id.textview_shareAPP);
     }
     File root;//分享的图片要放的文件夹
     @Override
@@ -93,7 +102,10 @@ public class SettingActivity extends BaseActivityother {
                 Intent intend_suggest=new Intent(this,SuggestActivity.class);
                 startActivity(intend_suggest);
                 break;
+            case R.id.textview_shareAPP:
+                shareClass.shareapp();
 
+                break;
         }
     }
 }

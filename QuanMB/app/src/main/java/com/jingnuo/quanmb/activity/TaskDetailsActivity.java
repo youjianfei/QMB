@@ -157,7 +157,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
                         startActivity(intent_renzheng);
                     }
-                    new Popwindow_Tip("确认完成此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
+                    new Popwindow_Tip("是否帮助此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
                         @Override
                         public void onResult(boolean result) {
                             if(result){

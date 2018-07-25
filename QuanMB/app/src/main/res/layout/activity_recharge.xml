@@ -75,6 +75,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="20dp"
             android:digits="0123456789."
+            android:inputType="number"
             />
     </RelativeLayout>
     <LinearLayout
