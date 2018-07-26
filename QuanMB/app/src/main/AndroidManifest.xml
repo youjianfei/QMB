@@ -91,7 +91,15 @@
         <activity android:name="com.jingnuo.quanmb.activity.PersonInfoActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.TaskDetailsActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopInActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LaunchActivity" />
+        <activity android:name="com.jingnuo.quanmb.activity.LaunchActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
         <activity android:name="com.jingnuo.quanmb.activity.ShopInNextActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.BargainActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity" />
@@ -177,14 +185,7 @@
         <activity android:name="com.jingnuo.quanmb.activity.MessageActivity">
 
         </activity>
-        <activity android:name="com.jingnuo.quanmb.activity.SkillActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SkillActivity"></activity>
     </application>
 
 </manifest>

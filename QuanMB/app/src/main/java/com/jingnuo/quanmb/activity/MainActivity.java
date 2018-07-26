@@ -13,12 +13,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
@@ -40,19 +42,14 @@ import static com.jingnuo.quanmb.data.Staticdata.static_userBean;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     public static MainActivity mainActivity;
-    //布局
-    Fragment_square mFragment_square;
-    Fragment_still mFragment_stilll;
-    Fragment_message mFragment_menssage;
-    Fragment_person mFragment_person;
-
-    FragmentManager fragmetnmanager;
-    FragmentTransaction transaction;
     //控件
-    private RelativeLayout mRelativeLayout_square, mRelativeLayout_still, mRelativeLayout_message, mRelativeLayout_person;
-    ImageView mImage_release;
-    ImageView image_reddot;
+    ImageView mImageview_message;//消息
+    ImageView mImageview_help;//帮忙
+    ImageView mImageview_needhelp;//求助
 
+    TextView mTextview_neerbytask;//附近任务
+    TextView mTextview_lovetask;//爱心帮
+    TextView mTextview_myshequ;//我的社区
 
     PermissionHelper permissionHelper;
 
@@ -64,15 +61,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         //注册监听函数
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR| View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR| View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(option);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
 
 
 
@@ -161,12 +158,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void initview() {
-        mRelativeLayout_square = findViewById(R.id.relative_square);
-        mRelativeLayout_still = findViewById(R.id.relative_still);
-        mRelativeLayout_message = findViewById(R.id.relative_message);
-        mRelativeLayout_person = findViewById(R.id.relative_person);
-        mImage_release = findViewById(R.id.image_release);
-        image_reddot = findViewById(R.id.image_reddot);
+        mImageview_message=findViewById(R.id.iamge_message);
+        mImageview_help=findViewById(R.id.image_help);
+        mImageview_needhelp=findViewById(R.id.image_needhelp);
+        mTextview_neerbytask=findViewById(R.id.text_neerbytask);
+        mTextview_lovetask=findViewById(R.id.text_lovetask);
+        mTextview_myshequ=findViewById(R.id.text_myshequ);
     }
 
     public void initdata() {
@@ -189,22 +186,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         permissionmanage.requestpermission();
 
 
-        mFragment_square = new Fragment_square();
-        fragmetnmanager = getSupportFragmentManager();
-        transaction = fragmetnmanager.beginTransaction();
     }
 
     public void initlinstenner() {
-        mRelativeLayout_square.setOnClickListener(this);
-        mRelativeLayout_still.setOnClickListener(this);
-        mImage_release.setOnClickListener(this);
-        mRelativeLayout_message.setOnClickListener(this);
-        mRelativeLayout_person.setOnClickListener(this);
+        mImageview_message.setOnClickListener(this);
+        mImageview_help.setOnClickListener(this);
+        mImageview_needhelp.setOnClickListener(this);
+        mTextview_neerbytask.setOnClickListener(this);
+        mTextview_lovetask.setOnClickListener(this);
+        mTextview_myshequ.setOnClickListener(this);
+
     }
 
     public void setview() {
-        transaction.add(R.id.framelayout_main, mFragment_square).commit();
-        ChangeBottomButton(mRelativeLayout_square);//设置帮帮广场为选中状态
+
 
     }
 
@@ -212,118 +207,61 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     }
-    public void setREDDOT(boolean isshow) {
-        if(isshow){
-            image_reddot.setVisibility(View.VISIBLE);
-        }else {
-            image_reddot.setVisibility(View.GONE);
-        }
 
-
-    }
 
     @Override
     public void onClick(View view) {
-        transaction = fragmetnmanager.beginTransaction();
-        hideFragments(transaction);//隐藏所有Fragment,需要哪个显示哪一个
-
+            Intent intent;
         switch (view.getId()) {
-            case R.id.relative_square:
-//                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
-                ChangeBottomButton(mRelativeLayout_square);
-                if (mFragment_square == null) {
-                    mFragment_square = new Fragment_square();
-                    transaction.add(R.id.framelayout_main, mFragment_square).commit();
-                } else {
-                    transaction.show(mFragment_square).commit();
-                }
+            case R.id.image_help://广场列表
+                intent=new Intent(MainActivity.this,SquareActuvity.class);
+                startActivity(intent);
 
                 break;
-            case R.id.relative_still:
-//                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
-                ChangeBottomButton(mRelativeLayout_still);
-                if (mFragment_stilll == null) {
-                    mFragment_stilll = new Fragment_still();
-                    transaction.add(R.id.framelayout_main, mFragment_stilll).commit();
-                } else {
-                    transaction.show(mFragment_stilll).commit();
-                }
-
-                break;
-            case R.id.image_release:
-                if (isLogin) {
-                    Intent intend_issue_task = new Intent(this, IssueTaskActivity.class);
-                    this.startActivity(intend_issue_task);
-                } else {
-                    Intent intent_login = new Intent(this, LoginActivity.class);
-                    startActivity(intent_login);
-                }
-
-                break;
-            case R.id.relative_message:
-//                StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
-                if (isLogin) {
-                    setREDDOT(false);
-                    ChangeBottomButton(mRelativeLayout_message);
-                    if (mFragment_menssage == null) {
-                        mFragment_menssage = new Fragment_message();
-                        transaction.add(R.id.framelayout_main, mFragment_menssage).commit();
-                    } else {
-                        transaction.show(mFragment_menssage).commit();
+            case R.id.text_myshequ://我的社区
+                if (Staticdata.isLogin){
+                    if(Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
+                        ToastUtils.showToast(this,"请先绑定社区");
+                         intent=new Intent(this, ShezhishequActivity.class);
+                        startActivity(intent);
+                        return;
                     }
-                } else {
-                    Intent intent_login = new Intent(this, LoginActivity.class);
-                    startActivity(intent_login);
+                    intent=new Intent(this, MyShequActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
                 }
                 break;
-            case R.id.relative_person:
-//                StatusBarUtil.setColor(this, getResources().getColor(R.color.statebar), 0);//状态栏颜色
+            case R.id.image_needhelp://发布服务
                 if (isLogin) {
-                    ChangeBottomButton(mRelativeLayout_person);
-                    if (mFragment_person == null) {
-                        mFragment_person = new Fragment_person();
-                        transaction.add(R.id.framelayout_main, mFragment_person).commit();
-                    } else {
-                        transaction.show(mFragment_person).commit();
-                    }
+                     intent = new Intent(this, IssueTaskActivity.class);
+                    this.startActivity(intent);
                 } else {
-                    Intent intent_login = new Intent(this, LoginActivity.class);
-                    startActivity(intent_login);
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
                 }
 
+                break;
+            case R.id.iamge_message://消息界面
+                if (isLogin) {
+                    intent=new Intent(MainActivity.this,MessageActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.text_lovetask://爱心帮
+                intent=new Intent(MainActivity.this, LoveTaskActivity.class);
+                startActivity(intent);
 
                 break;
         }
 
     }
 
-    private void hideFragments(FragmentTransaction transaction) {//隐藏Fragment,以便点击时展映相应的Fragment
-        if (mFragment_square != null) {
-            transaction.hide(mFragment_square);
-        }
-        if (mFragment_stilll != null) {
-            transaction.hide(mFragment_stilll);
-        }
-        if (mFragment_menssage != null) {
-            transaction.hide(mFragment_menssage);
-        }
-        if (mFragment_person != null) {
-            transaction.hide(mFragment_person);
-        }
-    }
 
-    private void ChangeBottomButton(RelativeLayout rl) {//控制底部按钮颜色的变化
-        mRelativeLayout_square.getChildAt(0).setSelected(false);
-        mRelativeLayout_square.getChildAt(1).setSelected(false);
-        mRelativeLayout_still.getChildAt(0).setSelected(false);
-        mRelativeLayout_still.getChildAt(1).setSelected(false);
-        mRelativeLayout_message.getChildAt(0).setSelected(false);
-        mRelativeLayout_message.getChildAt(1).setSelected(false);
-        mRelativeLayout_person.getChildAt(0).setSelected(false);
-        mRelativeLayout_person.getChildAt(1).setSelected(false);
-        rl.getChildAt(0).setSelected(true);
-        rl.getChildAt(1).setSelected(true);
-    }
 
 
     /**
@@ -338,10 +276,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
             mLastTime = System.currentTimeMillis();
         } else {
-//                    if(fragment_classification!=null){
-//                        fragment_classification=null;
-//                    }
-            // 两次返回时间小于两秒，可以退出
             finish();
         }
     }
@@ -368,15 +302,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onPostResume();
         LogUtils.LOG("ceshi1","onPostResume111","~~~~main");
         if(!Staticdata.isLogin){
-            transaction = fragmetnmanager.beginTransaction();
-            ChangeBottomButton(mRelativeLayout_square);
-            hideFragments(transaction);//隐藏所有Fragment,需要哪个显示哪一个
-            if (mFragment_square == null) {
-                mFragment_square = new Fragment_square();
-                transaction.add(R.id.framelayout_main, mFragment_square).commit();
-            } else {
-                transaction.show(mFragment_square).commit();
-            }
         }
     }
 }

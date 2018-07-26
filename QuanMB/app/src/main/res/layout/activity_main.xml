@@ -4,169 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.jingnuo.quanmb.activity.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/framelayout_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/main_buttons">
-
-    </FrameLayout>
-
-
-
+    <ImageView
+        android:id="@+id/iamge_message"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:src="@mipmap/message1" />
+    <ImageView
+        android:id="@+id/iamge_person"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="15dp"
+        android:src="@mipmap/personinfo" />
     <LinearLayout
-        android:id="@+id/main_buttons"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/relative_square"
+        <ImageView
+            android:id="@+id/image_help"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            >
+            android:layout_height="100dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/help" />
 
-            <ImageView
-                android:id="@+id/iv_Square"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/selsect_main_square" />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="100dp"
+            android:background="@color/gray_dfdfdf" />
 
-            <TextView
-                android:id="@+id/tv_guangchang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv_Square"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
-                android:text="帮帮广场"
-                android:textColor="@drawable/text_main"
-                android:textSize="12dp" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relative_still"
+        <ImageView
+            android:id="@+id/image_needhelp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            >
-
-            <ImageView
-                android:id="@+id/iv_findStill"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/selsect_main_stills" />
-
-            <TextView
-                android:id="@+id/tv_findStill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv_findStill"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
-                android:text="找专业"
-                android:textColor="@drawable/text_main"
-                android:textSize="12dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relative_release"
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_weight="1"
-            >
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relative_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            >
-            <ImageView
-                android:id="@+id/iv_message"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/selsect_main_message" />
-            <ImageView
-                android:id="@+id/image_reddot"
-                android:layout_width="6dp"
-                android:layout_height="6dp"
-                android:src="@mipmap/red_dot"
-                android:layout_toRightOf="@+id/iv_message"
-                android:visibility="gone"
-                />
-            <TextView
-                android:id="@+id/tv_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv_message"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
-                android:text="消息"
-                android:textColor="@drawable/text_main"
-                android:textSize="12dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relative_person"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-           >
-
-            <ImageView
-                android:id="@+id/iv_person"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/selsect_main_person" />
-
-            <TextView
-                android:id="@+id/tv_person"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv_person"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
-                android:text="个人"
-                android:textColor="@drawable/text_main"
-                android:textSize="12dp" />
-
-        </RelativeLayout>
-
+            android:layout_height="100dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/needhelp" />
 
     </LinearLayout>
-    <ImageView
-        android:id="@+id/image_line1"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@+id/main_buttons"
-        android:background="@color/gray_dbdbdb"
-        />
-    <ImageView
-        android:id="@+id/image_release"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:src="@mipmap/submit"
-        android:layout_marginBottom="5dp"
-        />
+        android:orientation="horizontal"
+        android:background="@drawable/background_mainbelow"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        >
+        <TextView
+            android:id="@+id/text_neerbytask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="附近任务"
+            android:textSize="13dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            />
+        <ImageView
+            android:layout_width="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray_dfdfdf"
+            tools:ignore="Suspicious0dp" />
+        <TextView
+            android:id="@+id/text_lovetask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13dp"
+            android:text="爱心帮"
+            android:gravity="center"
+            />
+        <ImageView
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_dfdfdf" />
+        <TextView
+            android:id="@+id/text_myshequ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13dp"
+            android:text="我的社区"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
 
 </RelativeLayout>

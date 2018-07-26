@@ -32,7 +32,6 @@ public class JpushBroadcastRecricer extends BroadcastReceiver{
         String title = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
         if(bundle.getString(JPushInterface.EXTRA_EXTRA)!=null){
             if(MainActivity.mainActivity!=null){
-                MainActivity.mainActivity.setREDDOT(true);
             }
         }
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);

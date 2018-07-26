@@ -172,8 +172,6 @@ public class SquareActuvity extends BaseActivityother {
 
 
 
-
-
         mKProgressHUD = new KProgressHUD(this);
         chengweibangshou=new Chengweibangshou(this);
         mdata_image_GG=new ArrayList<>();
@@ -421,10 +419,6 @@ public class SquareActuvity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
-        ScreenWidth = SizeUtils.getScreenWidthPx(this);
-
-
         mEdit_serchSquare =findViewById(R.id.edit_searchSquare);
         mListview_square = findViewById(R.id.list_square);
         mImageview_jiantou = findViewById(R.id.iamge_jiantou);
