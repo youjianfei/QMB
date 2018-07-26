@@ -39,6 +39,7 @@ import com.jingnuo.quanmb.activity.WalletActivity;
 import com.jingnuo.quanmb.class_.Chengweibangshou;
 import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.customview.MyGridView;
+import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.MenuBean;
@@ -80,18 +81,18 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
 //    RelativeLayout mTextview_mycollect;
 //    RelativeLayout mTextview_aboutus;
 //    RelativeLayout mTextview_logout;
-    ImageView mImageview_setting;
     CircleImageView  mCircleImage;
     ImageView mimage_chengwei;
     TextView mTextview_nickname;
     TextView mTextview_moneycount;
     TextView mTextview_chengwei;
 
-    Button mButton_rechange;//充值
-    Button mButton_cashout;//提现
-    LinearLayout mLearlayout_wallet;
+    TextView mButton_rechange;//充值
+    TextView mButton_cashout;//提现
+    TextView mTextview_logout;//退出
+//    LinearLayout mLearlayout_wallet;
 
-    MyGridView  myGridview_menu;
+    MyListView myGridview_menu;
     List<MenuBean> menuList;
     Adapter_menu  mAdapter_menu;
 
@@ -110,23 +111,14 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         setdata();
         initlistener();
 
-
         return rootview;
     }
 
     private void initlistener() {
-//        mTextview_banghsou.setOnClickListener(this);
-//        mTextview_address.setOnClickListener(this);
-//        mTextview_shopcenter.setOnClickListener(this);
-//        mTextview_logout.setOnClickListener(this);
-//        mTextview_myorder.setOnClickListener(this);
-//        mTextview_mycollect.setOnClickListener(this);
-//        mTextview_aboutus.setOnClickListener(this);
-        mImageview_setting.setOnClickListener(this);
+        mTextview_logout.setOnClickListener(this);
         mCircleImage.setOnClickListener(this);
         mButton_rechange.setOnClickListener(this);
         mButton_cashout.setOnClickListener(this);
-        mLearlayout_wallet.setOnClickListener(this);
         myGridview_menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -201,19 +193,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                         Intent intent_collect=new Intent(getActivity(),MySkillCollectActivity.class);
                         startActivity(intent_collect);
                         break;
-                    case 5://关于我们
-                        Intent intent_aboutus=new Intent(getActivity(), AboutUsActivity.class);
+                    case 5://设置
+                        Intent intent_aboutus=new Intent(getActivity(), SettingActivity.class);
                         startActivity(intent_aboutus);
                         break;
-                    case 6://退出登录
-                        logout();
-                        SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
-                        Staticdata.isLogin=false;
-                        Staticdata.static_userBean.setData(null);//用户信息清空
-                        Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
-                        startActivity(intent_logout);
-                        getActivity().finish();
-                        break;
+
                 }
             }
         });
@@ -227,7 +211,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     private void initdata() {//初始化个人中心菜单
         chengweibangshou=new Chengweibangshou(getActivity());
         menuList=new ArrayList<>();
-        for(int i=0;i<7;i++){
+        for(int i=0;i<6;i++){
             switch (i){
                 case 0://我的发布
                     MenuBean menuBean0=new MenuBean();
@@ -246,28 +230,28 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 case 2://我是帮手
                     MenuBean menuBean2=new MenuBean();
                     menuBean2.setMenu_name("我是帮手");
-                    Bitmap bitmap2 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.people);
+                    Bitmap bitmap2 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.people11);
                     menuBean2.setmBitmap(bitmap2);
                     menuList.add(menuBean2);
                     break;
                 case 3://商户中心
                     MenuBean menuBean3=new MenuBean();
                     menuBean3.setMenu_name("商户中心");
-                    Bitmap bitmap3 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.shopcenter);
+                    Bitmap bitmap3 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.shopiii);
                     menuBean3.setmBitmap(bitmap3);
                     menuList.add(menuBean3);
                     break;
                 case 4://我的收藏
                     MenuBean menuBean4=new MenuBean();
                     menuBean4.setMenu_name("我的收藏");
-                    Bitmap bitmap4 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.xingxingblue);
+                    Bitmap bitmap4 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.shoucang11);
                     menuBean4.setmBitmap(bitmap4);
                     menuList.add(menuBean4);
                     break;
                 case 5://关于我们
                     MenuBean menuBean5=new MenuBean();
-                    menuBean5.setMenu_name("关于我们");
-                    Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.aboutus);
+                    menuBean5.setMenu_name("设置");
+                    Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.setttt);
                     menuBean5.setmBitmap(bitmap5);
                     menuList.add(menuBean5);
                     break;
@@ -282,21 +266,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         }
         mAdapter_menu=new Adapter_menu(menuList,getActivity());
         myGridview_menu.setAdapter(mAdapter_menu);
-
-
-
-
-        mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
-//        if(Staticdata.static_userBean.getData().getBusiness_status()==1){
-//            mTextview_chengwei.setText("商户");
-//        }else if(Staticdata.static_userBean.getData().getHelper_status()==1){
-//            mTextview_chengwei.setText("帮手");
-//        }else {
-//            mTextview_chengwei.setText("未认证");
-//        }
-        mTextview_chengwei.setText(Staticdata.static_userBean.getData().getAppellation_name());
-        Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
-
     }
 
     @Override
@@ -326,6 +295,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                     LogUtils.LOG("ceshi",respose,"个人中心");
                     Staticdata.static_userBean=new Gson().fromJson(respose, UserBean.class);
                     mTextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
+                    mTextview_chengwei.setText(Staticdata.static_userBean.getData().getAppellation_name());
                     LogUtils.LOG("ceshi",Staticdata.static_userBean.getData().getImg_url(),"touxaing");
                     Glide.with(getActivity()).load(Staticdata.static_userBean.getData().getImg_url()).into(mCircleImage);
                     Glide.with(getActivity()).load(Staticdata.static_userBean.getData().getIconImgUrl()).into(mimage_chengwei);
@@ -341,19 +311,19 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
         }).Http(Urls.Baseurl+Urls.personinfo+Staticdata.static_userBean.getData().getUser_token(),getActivity(),0);
     }
     private void setview() {
-        requestInfo();
+//        requestInfo();
     }
 
     private void initview() {
         mTextview_moneycount=rootview.findViewById(R.id.textview_2);
-        mImageview_setting=rootview.findViewById(R.id.image_setting);
         mCircleImage=rootview.findViewById(R.id.image_userpic);
         mTextview_nickname=rootview.findViewById(R.id.text_username);
         mTextview_chengwei=rootview.findViewById(R.id.textview_phonenumber);
         mButton_rechange=rootview.findViewById(R.id.button_recharge);
         mButton_cashout=rootview.findViewById(R.id.button_tixian);
         mimage_chengwei=rootview.findViewById(R.id.image_chengwei);
-        mLearlayout_wallet=rootview.findViewById(R.id.linearlayout_wallete);
+        mTextview_logout=rootview.findViewById(R.id.text_logout);
+//        mLearlayout_wallet=rootview.findViewById(R.id.linearlayout_wallete);
         myGridview_menu=rootview.findViewById(R.id.mygridview_menu);
     }
 
@@ -362,10 +332,14 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.linearlayout_wallete://钱包
-                Intent intent_wallet=new Intent(getActivity(), WalletActivity.class);
-                intent_wallet.putExtra("money",Staticdata.static_userBean.getData().getAppuser().getBalance()+"");
-                startActivity(intent_wallet);
+            case R.id.text_logout://退出
+                logout();
+                SharedPreferencesUtils.putString(getActivity(),"QMB","password","");
+                Staticdata.isLogin=false;
+                Staticdata.static_userBean.setData(null);//用户信息清空
+                Intent intent_logout=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent_logout);
+                getActivity().finish();
                 break;
             case R.id.button_tixian://提现
                 Intent intent_cash=new Intent(getActivity(), CashoutActivity.class);
@@ -379,10 +353,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener{
                 startActivity(intent_recharge);
 
                 break;
-            case R.id.image_setting:
-                Intent intent_setting=new Intent(getActivity(), SettingActivity.class);
-                getActivity().startActivity(intent_setting);
-                break;
+
             case  R.id.image_userpic:
                 Intent intent_personInfo=new Intent(getActivity(), PersonInfoActivity.class);
                 getActivity().startActivity(intent_personInfo);

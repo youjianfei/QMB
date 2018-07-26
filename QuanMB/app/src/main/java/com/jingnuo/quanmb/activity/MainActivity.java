@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -43,7 +45,11 @@ import static com.jingnuo.quanmb.data.Staticdata.static_userBean;
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     public static MainActivity mainActivity;
     //控件
+    DrawerLayout drawerlayout_menu;
+
+
     ImageView mImageview_message;//消息
+    ImageView mImageview_iamge_person;//用户中心
     ImageView mImageview_help;//帮忙
     ImageView mImageview_needhelp;//求助
 
@@ -60,7 +66,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_menu);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         //注册监听函数
 //        if (Build.VERSION.SDK_INT >= 21) {
@@ -158,7 +164,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void initview() {
+        drawerlayout_menu=findViewById(R.id.drawerlayout_menu);
         mImageview_message=findViewById(R.id.iamge_message);
+        mImageview_iamge_person=findViewById(R.id.iamge_person);
         mImageview_help=findViewById(R.id.image_help);
         mImageview_needhelp=findViewById(R.id.image_needhelp);
         mTextview_neerbytask=findViewById(R.id.text_neerbytask);
@@ -195,6 +203,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTextview_neerbytask.setOnClickListener(this);
         mTextview_lovetask.setOnClickListener(this);
         mTextview_myshequ.setOnClickListener(this);
+        mImageview_iamge_person.setOnClickListener(this);
+
 
     }
 
@@ -204,7 +214,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void setdata() {
-
+    if(isLogin){
+        drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
+    }else {
+        drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
+    }
 
     }
 
@@ -255,7 +269,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.text_lovetask://爱心帮
                 intent=new Intent(MainActivity.this, LoveTaskActivity.class);
                 startActivity(intent);
+                break;
 
+            case R.id.iamge_person://个人中心
+                if(isLogin){
+                    drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
+                    drawerlayout_menu.openDrawer(Gravity.LEFT);
+                }else {
+                    drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
 
