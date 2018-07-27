@@ -11,23 +11,34 @@
     >
     <ImageView
         android:id="@+id/iamge_message"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="8dp"
         android:layout_alignParentRight="true"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:src="@mipmap/message1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="全民帮"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        />
     <ImageView
         android:id="@+id/iamge_person"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="10dp"
-        android:layout_margin="5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="8dp"
+        android:layout_margin="8dp"
         android:src="@mipmap/personinfo" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
+        android:layout_below="@+id/iamge_message"
+        android:layout_above="@+id/linearlayout_three"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -57,13 +68,17 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearlayout_three"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="40dp"
+        android:layout_above="@+id/linearlayout_notic"
         android:orientation="horizontal"
         android:background="@drawable/background_mainbelow"
         android:gravity="center"
-        android:layout_margin="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
         >
         <TextView
             android:id="@+id/text_neerbytask"
@@ -108,6 +123,30 @@
             android:gravity="center"
             />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearlayout_notic"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/gray_background"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/noticqq"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="附近帮手已经完成空调维修任务，获取佣金300元"
+            android:textSize="12dp"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+
+
 
 </RelativeLayout>
     <fragment
