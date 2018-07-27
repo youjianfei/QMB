@@ -67,7 +67,7 @@ public class MonryMingxiActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi",position+"","jiao易明细列表");
                 Intent intent_moneydetails=new Intent(MonryMingxiActivity.this,MoneyMingxiDetailsActivity.class);
                 intent_moneydetails.putExtra("money",mData.get(position-1).getOrder_amoun()+"");
-                intent_moneydetails.putExtra("type",mData.get(position-1).getType()+"");//zhi'付方式
+                intent_moneydetails.putExtra("type",mData.get(position-1).getPay_method()+"");//zhi'付方式
                 intent_moneydetails.putExtra("time",mData.get(position-1).getCreateDate()+"");
                 intent_moneydetails.putExtra("order",mData.get(position-1).getOrder_no()+"");
                 intent_moneydetails.putExtra("title",mData.get(position-1).getBill_title()+"");

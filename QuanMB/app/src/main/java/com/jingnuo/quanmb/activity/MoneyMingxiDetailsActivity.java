@@ -34,9 +34,9 @@ public class MoneyMingxiDetailsActivity extends BaseActivityother {
         mTextview_order.setText(order);
         mTextview_time.setText(time);
         mTextview_state.setText(title);
-        if(type.equals("1")){
+        if(type.equals("QMB")){
             mTextview_type.setText("余额支付");
-        }else  if(type.equals("2")){
+        }else  if(type.equals("WX")){
             mTextview_type.setText("微信支付");
         }else {
             mTextview_type.setText("支付宝支付");
