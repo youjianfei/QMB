@@ -53,7 +53,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     ImageView mImageview_help;//帮忙
     ImageView mImageview_needhelp;//求助
 
-    TextView mTextview_neerbytask;//附近任务
+    TextView mTextview_neerbytask;//附近服务
     TextView mTextview_lovetask;//爱心帮
     TextView mTextview_myshequ;//我的社区
 
@@ -205,7 +205,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTextview_myshequ.setOnClickListener(this);
         mImageview_iamge_person.setOnClickListener(this);
 
-
     }
 
     public void setview() {
@@ -281,12 +280,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     startActivity(intent);
                 }
                 break;
+            case R.id.text_neerbytask:
+                intent=new Intent(this,SkillActivity.class);
+                startActivity(intent);
+                break;
         }
 
     }
-
-
-
 
     /**
      * 再点一次退出

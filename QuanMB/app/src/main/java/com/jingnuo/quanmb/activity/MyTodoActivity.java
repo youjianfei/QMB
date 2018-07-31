@@ -113,7 +113,7 @@ public class MyTodoActivity extends BaseActivityother {
     protected void initView() {
         mTablayout=findViewById(R.id.tablayout);
         mTablayout.addTab(mTablayout.newTab().setText("全部").setTag(""));
-        mTablayout.addTab(mTablayout.newTab().setText("进行中").setTag("05,"));
+        mTablayout.addTab(mTablayout.newTab().setText("进行中").setTag("05,06"));
         mTablayout.addTab(mTablayout.newTab().setText("已完成").setTag("00,"));
         mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("01,02"));
 
