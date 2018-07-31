@@ -23,10 +23,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.IssueTaskActivity;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
 import com.jingnuo.quanmb.class_.GlideLoader;
@@ -36,6 +38,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
@@ -56,7 +59,7 @@ import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickListener {
+public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickListener{
     View rootview;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
@@ -70,6 +73,19 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     MyGridView imageGridview;
     ImageView image_chosePIC;
     Button mButton_sub;
+
+
+    EditText mEditview_taskmoney;
+    ImageView mImage_choosejieshou;
+    TextView mText_choosejieshou;
+    ImageView mImage_chooseme;
+    ImageView mImage_choosehelper;
+    TextView  mtextview_choseme;
+    TextView  mtextview_chosehelper;
+    RelativeLayout relativelayout_chujia;
+
+
+
 
     //对象
     Popwindow_SkillType mPopwindow_skilltype;
@@ -87,6 +103,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     String task_time = "";
     String release_address = "";
     Bitmap mBitmap = null;
+    String commission = "";
 
     String detailed_address = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
@@ -97,11 +114,10 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
     Map map_issueTask;
 
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.fragment_task_zhaoshanghu, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        rootview = inflater.inflate(R.layout.fragment_task_zhaorenshou, container, false);
         initview();
         initdata();
         setdata();
@@ -111,7 +127,6 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
         return rootview;
     }
-
     private void initview() {
         //找商户模块
         mLinearlayout_zhaoshanghu = rootview.findViewById(R.id.linearlayout_zhaoshanghu);
@@ -125,6 +140,18 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         imageGridview = rootview.findViewById(R.id.GridView_PIC);
         image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
+
+        mEditview_taskmoney =rootview. findViewById(R.id.edit_charges);
+        mImage_choosejieshou =rootview. findViewById(R.id.image_choosejieshou);
+        mImage_choosejieshou.setSelected(true);
+        mText_choosejieshou = rootview.findViewById(R.id.text_choosejieshou);
+        mImage_chooseme = rootview.findViewById(R.id.image_chooseme);
+        mImage_chooseme.setSelected(true);
+        mtextview_choseme = rootview.findViewById(R.id.textview_chooseme);
+        mtextview_chosehelper = rootview.findViewById(R.id.text_choosehelper);
+        mImage_choosehelper = rootview.findViewById(R.id.image_choosehelper);
+        relativelayout_chujia = rootview.findViewById(R.id.relativelayout_chujia);
+
 
     }
 
@@ -159,6 +186,13 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     }
 
     private void initlistenner() {
+        mImage_choosejieshou.setOnClickListener(this);
+        mText_choosejieshou.setOnClickListener(this);
+        mImage_chooseme.setOnClickListener(this);
+        mImage_choosehelper.setOnClickListener(this);
+        mtextview_choseme.setOnClickListener(this);
+        mtextview_chosehelper.setOnClickListener(this);
+
         mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -260,11 +294,88 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.text_choosehelper:
+                if (!mImage_choosehelper.isSelected()) {
+
+//                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
+                    new Popwindow_Tip("需缴纳5元押金", getActivity(), new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if(result){
+                                mImage_choosehelper.setSelected(true);
+                                mImage_chooseme.setSelected(false);
+                                isMEchujia = 2;
+                                relativelayout_chujia.setVisibility(View.GONE);
+                                mEditview_taskmoney.setText("");
+                                is_counteroffer = 1;
+                            }
+
+                        }
+                    }).showPopwindow();
+
+                }
+                break;
+            case R.id.textview_chooseme:
+                if (!mImage_chooseme.isSelected()) {
+                    mImage_chooseme.setSelected(true);
+                    mImage_choosehelper.setSelected(false);
+                    isMEchujia = 1;
+                    relativelayout_chujia.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.image_choosehelper:
+                if (!mImage_choosehelper.isSelected()) {
+                    new Popwindow_Tip("需缴纳5元押金", getActivity(), new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if(result){
+                                mImage_choosehelper.setSelected(true);
+                                mImage_chooseme.setSelected(false);
+                                isMEchujia = 2;
+                                relativelayout_chujia.setVisibility(View.GONE);
+                                mEditview_taskmoney.setText("");
+                                is_counteroffer = 1;
+                            }
+
+                        }
+                    }).showPopwindow();
+
+
+                }
+                break;
+            case R.id.image_chooseme:
+                if (!mImage_chooseme.isSelected()) {
+                    mImage_chooseme.setSelected(true);
+                    mImage_choosehelper.setSelected(false);
+                    isMEchujia = 1;
+                    relativelayout_chujia.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.image_choosejieshou:
+                if (!mImage_choosejieshou.isSelected()) {
+                    mImage_choosejieshou.setSelected(true);
+                    is_counteroffer = 1;
+                }else {
+                    mImage_choosejieshou.setSelected(false);
+                    is_counteroffer = 0;
+                }
+                break;
+
+            case R.id.text_choosejieshou:
+                if (!mImage_choosejieshou.isSelected()) {
+                    mImage_choosejieshou.setSelected(true);
+                    is_counteroffer = 1;
+                }else {
+                    mImage_choosejieshou.setSelected(false);
+                    is_counteroffer = 0;
+                }
+                break;
             case R.id.image_chosePIC:
                 choosePIC();
 
                 break;
         }
+
     }
 
     boolean initmap_zhaoshanghu() {
@@ -302,10 +413,30 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
             return false;
         }
         detailed_address = address_right + detailed_address;
+        commission = mEditview_taskmoney.getText() + "";
+        if (!commission.equals("")) {
+            float min = Float.parseFloat(commission);
+            map_issueTask.put("is_helper_bid", "N");//由我出价
+            LogUtils.LOG("ceshi", min + "", "最低佣金");
+            if (min < 5) {
+                ToastUtils.showToast(getActivity(), "佣金不能低于5元");
+                return false;
+            }
+        } else {
+            if (isMEchujia == 1) {
+                map_issueTask.put("is_helper_bid", "N");
+                ToastUtils.showToast(getActivity(), "请填写佣金");
+                return false;
+            }else{
+                commission="5";
+                map_issueTask.put("is_helper_bid", "Y");//由帮手出价
 
+            }
+        }
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
+        map_issueTask.put("commission", commission+"");//由帮手出价
         map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
         map_issueTask.put("release_address", release_address);
         map_issueTask.put("detailed_address", detailed_address + "");
@@ -360,7 +491,6 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
     String address_left = "";
     String address_right = "";
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -409,4 +539,5 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 }

@@ -425,7 +425,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("status");//
+                    status = (Integer) object.get("code");//
                     msg = (String) object.get("msg");//
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -440,7 +440,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 } else {
                     count = 0;
                     mList_picID.clear();
-//                    progressDlog.cancelPD();
                     mKProgressHUD.dismiss();
                     ToastUtils.showToast(IssueTaskNextActivity.this, msg);
                 }

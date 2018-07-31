@@ -65,28 +65,11 @@
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/yellow_jianbian_start"
                 app:tabTextColor="@color/text_title2" />
-            <include
-                layout="@layout/include_zhaoshanghu"
-                />
-            <include
-                layout="@layout/include_zhaorenshou"
-                android:visibility="gone"
-                />
-
-
-            <Button
-                android:id="@+id/button_submitsave"
+            <FrameLayout
+                android:id="@+id/framelayout_main"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_morph_20dp"
-                android:text="下一步"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
 
     </com.jingnuo.quanmb.customview.CustomerScrollView>
