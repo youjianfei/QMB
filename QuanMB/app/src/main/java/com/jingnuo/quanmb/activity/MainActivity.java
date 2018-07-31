@@ -37,7 +37,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //控件
     DrawerLayout drawerlayout_menu;
 
-
     ImageView mImageview_message;//消息
     ImageView mImageview_iamge_person;//用户中心
     ImageView mImageview_help;//帮忙
@@ -208,7 +207,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     }
-
 
     @Override
     public void onClick(View view) {

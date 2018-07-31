@@ -181,11 +181,16 @@
         <activity android:name="com.jingnuo.quanmb.activity.ErShoushichangActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.IssueErshoushichangActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ErshouxinxiDetailsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SquareActuvity"></activity>
-        <activity android:name="com.jingnuo.quanmb.activity.MessageActivity">
-
+        <activity android:name="com.jingnuo.quanmb.activity.SquareActuvity"
+            android:launchMode="singleTask"
+            ></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.MessageActivity"
+            android:launchMode="singleTask"
+            >
         </activity>
-        <activity android:name="com.jingnuo.quanmb.activity.SkillActivity"></activity>
+        <activity android:name="com.jingnuo.quanmb.activity.SkillActivity"
+            android:launchMode="singleTask"
+            ></activity>
     </application>
 
 </manifest>

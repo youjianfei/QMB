@@ -64,8 +64,8 @@ public class Adapter_LovetaskList extends  BaseAdapter {
         holder.mText_task_creattime.setText(time);
         holder.mText_task_des.setText(mData.get(position).getTask_description());
          double d = (double)mData.get(position).getDistance()/1000;
-         if(d<0.1){
-             holder.mTextview_distance.setText("距你 0.1km");
+         if(d<1){
+             holder.mTextview_distance.setText("距你 "+mData.get(position).getDistance()+"m");
          }else {
              DecimalFormat df = new DecimalFormat("#.0");
              holder.mTextview_distance.setText("距你 "+df.format(d)+"km");
