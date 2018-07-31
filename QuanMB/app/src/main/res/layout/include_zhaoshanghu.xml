@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linearlayout_zhaoshanghu"
+    >
+    <RelativeLayout
+        android:id="@+id/relative_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text1"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="任务类型："
+            android:textColor="@color/text_title2"
+            android:textSize="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/relative_chose"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageqq"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="17dp"
+                android:src="@mipmap/more" />
+
+            <TextView
+                android:id="@+id/text_chooce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageqq"
+                android:text="请选择类型"
+                android:textColor="@color/black_text2" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_2"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/taskexplain" />
+
+        <EditText
+            android:id="@+id/edit_detailtask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/image_line1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/image2"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="请描述你的任务，不少于5字"
+            android:lines="3"
+            android:textColorHint="@color/text_hide_tip"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/image_chosePIC"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/edit_detailtask"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:src="@mipmap/chosepic" />
+
+        <com.jingnuo.quanmb.customview.MyGridView
+            android:id="@+id/GridView_PIC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_detailtask"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/white"
+            android:numColumns="3"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/image_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/GridView_PIC"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/gray_background" />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_line2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="预约时间："
+            android:textColor="@color/text_title2"
+            android:textSize="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/relative_chosetime"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/image_line2">
+
+            <TextView
+                android:id="@+id/edit_tasktime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="110dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="15dp"
+                android:text="请选择预约时间"
+                android:textColor="@color/text_hide_tip"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="17dp"
+                android:src="@mipmap/more" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_below="@+id/relative_1"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/address_blue" />
+
+        <TextView
+            android:id="@+id/text_chooseaddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            android:paddingTop="15dp"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:text="选择地址"
+            android:textColor="@color/text_hide_tip"
+            android:textSize="14dp" />
+
+        <EditText
+            android:id="@+id/edit_detailaddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1.2"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="输入详细地址"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:singleLine="true"
+            android:textColorHint="@color/text_hide_tip"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -9,25 +9,27 @@
     <!--虚假布局，抢走editview的焦点-->
     <LinearLayout
         android:id="@+id/linearLayout_focus"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        />
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" />
+
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
+
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="10dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:padding="10dp"
             android:src="@mipmap/back_black" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,400 +50,44 @@
         android:scrollbars="vertical"
         android:visibility="visible">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/re_title"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="29dp"
-            android:layout_marginRight="29dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/text_tip"
-            android:textColor="@color/gray_969696"
-            android:textSize="11dp" />
-
-        <RelativeLayout
-            android:id="@+id/relative_1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/text1"
-            android:background="@color/white">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="任务类型："
-                android:textColor="@color/text_title2"
-                android:textSize="15dp"
-                />
-            <RelativeLayout
-                android:id="@+id/relative_chose"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                >
-                <ImageView
-                    android:id="@+id/imageqq"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:src="@mipmap/more" />
-                <TextView
-                    android:id="@+id/text_chooce"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="请选择类型"
-                    android:textColor="@color/black_text2"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imageqq"
-                    />
-            </RelativeLayout>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_below="@+id/relative_2"
-            android:layout_marginTop="8dp"
-            >
-            <TextView
-                android:id="@+id/text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="任务标题："
-                android:textColor="@color/text_title2"
-                android:textSize="15dp"
-                />
-            <EditText
-                android:id="@+id/edit_tasktitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="一句话描述你的任务"
-                android:textColorHint="@color/text_hide_tip"
-                android:textSize="14dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:background="@null"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentRight="true"
-                android:singleLine="true"
-                android:layout_marginLeft="110dp"
-                />
-            <ImageView
-                android:id="@+id/image_line1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/edit_tasktitle"
-                android:background="@color/gray_background"
-                />
-            <ImageView
-                android:id="@+id/image2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/taskexplain"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_below="@+id/image_line1"
-                />
-
-            <EditText
-                android:id="@+id/edit_detailtask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请描述你的任务，不少于5字"
-                android:textColorHint="@color/text_hide_tip"
-                android:textSize="14dp"
-                android:background="@null"
-                android:gravity="top"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:layout_alignParentRight="true"
-                android:lines="3"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/image2"
-                android:layout_below="@+id/image_line1"
-                android:layout_marginBottom="15dp"
-                />
-            <ImageView
-                android:id="@+id/image_chosePIC"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/chosepic"
-                android:layout_alignBottom="@+id/edit_detailtask"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
-                />
-            <com.jingnuo.quanmb.customview.MyGridView
-                android:id="@+id/GridView_PIC"
-                android:layout_below="@+id/edit_detailtask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/white"
-                android:visibility="gone"
-                android:numColumns="3"/>
-            <ImageView
-                android:id="@+id/image_line2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/gray_background"
-                android:layout_below="@+id/GridView_PIC"
-                />
-            <TextView
-                android:id="@+id/text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="希望完成时间："
-                android:textColor="@color/text_title2"
-                android:layout_below="@+id/image_line2"
-                android:textSize="15dp"
-                />
-            <RelativeLayout
-                android:id="@+id/relative_chosetime"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_below="@+id/image_line2"
-                >
-                <TextView
-                    android:id="@+id/edit_tasktime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="请选择希望完成时间"
-                    android:textSize="14dp"
-                    android:textColor="@color/text_hide_tip"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="110dp"
-                    />
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@mipmap/more"
-                    android:layout_marginTop="17dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="30dp"
-                    />
-
-            </RelativeLayout>
-        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:layout_below="@+id/relative_1"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:background="@color/white">
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/address_blue"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                />
-            <TextView
-                android:id="@+id/text_chooseaddress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="选择地址"
-                android:textSize="14dp"
-                android:textColor="@color/text_hide_tip"
-                android:paddingTop="15dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="15dp"
-                android:layout_marginRight="10dp"
-                android:singleLine="true"
-                android:scrollbars="horizontal"
-                />
-            <EditText
-                android:id="@+id/edit_detailaddress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="输入门牌号"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:gravity="right"
-                android:layout_weight="1.2"
-                android:textColorHint="@color/text_hide_tip"
-                android:textSize="14dp"
-                android:background="@null"
-                android:layout_marginRight="30dp"
-                android:singleLine="true"
-                />
-        </LinearLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relative_3"
-            android:layout_marginTop="8dp"
-            android:background="@color/white">
-            <LinearLayout
-                android:id="@+id/linearlayout_yongjin"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                >
-                <ImageView
-                    android:id="@+id/image_chooseme"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+            android:orientation="vertical">
 
-                    android:src="@drawable/select_duigou"
-                    android:layout_marginRight="5dp"
-                    />
-                <TextView
-                    android:id="@+id/textview_chooseme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="由我出价"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"/>
-
-                <ImageView
-                    android:id="@+id/image_choosehelper"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/select_duigou"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="10dp"
-                    />
-
-                <TextView
-                    android:id="@+id/text_choosehelper"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="由帮手出价"
-                    android:layout_marginRight="5dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-
-            </LinearLayout>
-            <RelativeLayout
-                android:id="@+id/relativelayout_chujia"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linearlayout_yongjin"
-                >
-                <ImageView
-                    android:id="@+id/image_line10"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@color/gray_background" />
-
-                <EditText
-                    android:id="@+id/edit_charges"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="请输入佣金(不少于5元)"
-                    android:textColorHint="@color/text_hide_tip"
-                    android:textSize="14dp"
-                    android:background="@null"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:layout_marginRight="30dp"
-                    android:singleLine="true"
-                    android:digits="1234567890."
-                    android:inputType="number"
-                    android:layout_marginLeft="30dp"
-                    />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/image_line8"
-                    android:orientation="horizontal"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="30dp"
-                    >
-                    <ImageView
-                        android:id="@+id/image_choosejieshou"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/select_duigou"
-                        android:layout_marginRight="5dp"
-                        />
-                    <TextView
-                        android:id="@+id/text_choosejieshou"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="接受议价"
-                        />
-
-                    <!--<ImageView-->
-                        <!--android:id="@+id/image_choosejujue"-->
-                        <!--android:layout_width="15dp"-->
-                        <!--android:layout_height="15dp"-->
-                        <!--android:src="@drawable/select_duigou"-->
-                        <!--android:layout_marginRight="5dp"-->
-                        <!--/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/text_choosejujue"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="拒绝"-->
-                        <!--android:layout_marginRight="5dp"-->
-                        <!--/>-->
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/yellow_jianbian_start"
+                app:tabTextColor="@color/text_title2" />
+            <include
+                layout="@layout/include_zhaoshanghu"
+                />
+            <include
+                layout="@layout/include_zhaorenshou"
+                android:visibility="gone"
+                />
 
 
-                </LinearLayout>
+            <Button
+                android:id="@+id/button_submitsave"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_morph_20dp"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
 
-            </RelativeLayout>
-
-
-        </RelativeLayout>
-        <Button
-            android:id="@+id/button_submitsave"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="下一步"
-            android:textSize="15dp"
-            android:textColor="@color/white"
-            android:background="@drawable/button_morph_20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"
-            />
-
-    </LinearLayout>
+        </LinearLayout>
 
     </com.jingnuo.quanmb.customview.CustomerScrollView>
 

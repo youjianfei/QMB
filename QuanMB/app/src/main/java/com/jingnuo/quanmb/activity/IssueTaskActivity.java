@@ -8,12 +8,15 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -55,16 +58,41 @@ import java.util.Map;
 
 public class IssueTaskActivity extends BaseActivityother {
 
-    //控件
+    /**
+     * 公用
+     */
+    TabLayout mTablayout_task;
+
+    private int[] images = new int[]{
+            R.drawable.tablayout_image,
+            R.drawable.tablayout_image,
+            R.drawable.tablayout_image};
+    private String[] tabs = new String[]{"找商户", "找人手", "家政维修"};
+
+    String xValue="";//纬度
+    String yValue="";//经度
+    String citycode="";//城市名字
+
+    /**
+     * 找商户
+     */
+    LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
     TextView mTextview_taskAddress;//地图返回地点
     TextView mTextview_choose;
-    RelativeLayout mRelativelayout_chose;//xuan 泽 类型
+    RelativeLayout mRelativelayout_chose;//选择类型
     TextView mTextview_time;
     RelativeLayout mRelativelayout_chosetime;//选择时间
     EditText mEditview_addressDetail;//详细地址
-    EditText mEditview_title;
     EditText mEditview_taskdetails;
     MyGridView imageGridview;
+    ImageView image_chosePIC;
+
+
+
+
+    LinearLayout mLinearlayout_zhaorenshou;//找人手模块
+
+
     EditText mEditview_taskmoney;
     ImageView mImage_choosejieshou;
     TextView mText_choosejieshou;
@@ -73,7 +101,9 @@ public class IssueTaskActivity extends BaseActivityother {
     TextView  mtextview_choseme;
     TextView  mtextview_chosehelper;
     RelativeLayout relativelayout_chujia;
-    ImageView image_chosePIC;
+
+
+
 
 
     Button mButton_sub;
@@ -86,22 +116,20 @@ public class IssueTaskActivity extends BaseActivityother {
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
 
     //数据
-    String task_name = "";
+
+
+
     String task_description = "";
     String task_typeID = "";
-    String task_StartDate = "";
     String task_time = "";
     String client_no = "";
     String release_address = "";
     String commission = "";
     Bitmap mBitmap = null;
 
-    String xValue="";//纬度
-    String yValue="";//经度
-    String citycode="";//城市名字
+
 
     String detailed_address = "";
-    String task_Status_code = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
     int isMEchujia = 1;//1  由我出价   2  由帮手出价
     boolean ceshi = true;
@@ -225,14 +253,17 @@ public class IssueTaskActivity extends BaseActivityother {
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (initmap()) {
+                map_issueTask.put("city_code", citycode + "");
+                map_issueTask.put("x_value", xValue + "");
+                map_issueTask.put("y_value", yValue + "");
+                map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
+                if (initmap_zhaoshanghu()) {
+                    Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
                     Staticdata.imagePathlist = mList_PicPath_down;
-
-
                     Map map_check = new HashMap();
                     map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_check.put("task_name", map_issueTask.get("task_name"));
+                    map_check.put("task_name", "假装有标题");
                     map_check.put("task_description", map_issueTask.get("task_description"));
                     map_check.put("detailed_address", map_issueTask.get("detailed_address"));
                     new Volley_Utils(new Interface_volley_respose() {
@@ -292,6 +323,38 @@ public class IssueTaskActivity extends BaseActivityother {
         mtextview_choseme.setOnClickListener(this);
         mtextview_chosehelper.setOnClickListener(this);
         image_chosePIC.setOnClickListener(this);
+
+
+        mTablayout_task.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                LogUtils.LOG("ceshi",tab.getTag()+"","MyOrderActivity");
+                if(tab.getTag().equals("找商户")){
+                mLinearlayout_zhaoshanghu.setVisibility(View.VISIBLE);
+                mLinearlayout_zhaorenshou.setVisibility(View.GONE);
+                }
+                if(tab.getTag().equals("找人手")){
+                    mLinearlayout_zhaoshanghu.setVisibility(View.GONE);
+                    mLinearlayout_zhaorenshou.setVisibility(View.VISIBLE);
+                }
+                if(tab.getTag().equals("家政维修")){
+
+                }
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     @Override
@@ -383,17 +446,27 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        mTablayout_task=findViewById(R.id.tablayout);
+        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[0]).setText(tabs[0]).setTag("找商户"),true);
+        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[1]).setText(tabs[1]).setTag("找人手"),false);
+        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[2]).setText(tabs[2]).setTag("家政维修"),false);
+        //找商户模块
+        mLinearlayout_zhaoshanghu=findViewById(R.id.linearlayout_zhaoshanghu);
         mTextview_taskAddress = findViewById(R.id.text_chooseaddress);
         mTextview_choose = findViewById(R.id.text_chooce);
-        mEditview_title = findViewById(R.id.edit_tasktitle);
         mTextview_time = findViewById(R.id.edit_tasktime);
         mRelativelayout_chose=findViewById(R.id.relative_chose);
         mRelativelayout_chosetime=findViewById(R.id.relative_chosetime);
         mEditview_addressDetail = findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = findViewById(R.id.edit_detailtask);
         imageGridview = findViewById(R.id.GridView_PIC);
+        image_chosePIC=findViewById(R.id.image_chosePIC);
+        //找人手模块
+        mLinearlayout_zhaorenshou=findViewById(R.id.linearlayout_zhaorenshou);
+
+
+
         mEditview_taskmoney = findViewById(R.id.edit_charges);
-        mButton_sub = findViewById(R.id.button_submitsave);
         mImage_choosejieshou = findViewById(R.id.image_choosejieshou);
         mImage_choosejieshou.setSelected(true);
         mText_choosejieshou = findViewById(R.id.text_choosejieshou);
@@ -403,22 +476,65 @@ public class IssueTaskActivity extends BaseActivityother {
         mtextview_chosehelper = findViewById(R.id.text_choosehelper);
         mImage_choosehelper = findViewById(R.id.image_choosehelper);
         relativelayout_chujia = findViewById(R.id.relativelayout_chujia);
-        image_chosePIC=findViewById(R.id.image_chosePIC);
+
+        //公用
+        mButton_sub = findViewById(R.id.button_submitsave);
     }
 
-    boolean initmap() {
+    boolean initmap_zhaoshanghu() {
         String task_type = mTextview_choose.getText() + "";
         if (task_type.equals("请选择类型")) {
             ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }
-        task_name = mEditview_title.getText() + "";
-        if (task_name.equals("")) {
-            ToastUtils.showToast(this, "请填写任务标题");
+        task_description = mEditview_taskdetails.getText() + "";
+        if (task_description.equals("")) {
+            ToastUtils.showToast(this, "请填写任务说明");
             return false;
         }
-        if(task_name.length()>15){
-            ToastUtils.showToast(this, "任务标题有点长");
+        if(task_description.length()<5){
+            ToastUtils.showToast(this, "任务说明太短了");
+            return false;
+        }
+
+        task_time = mTextview_time.getText() + "";
+        if (task_time.equals("请选择希望完成时间")) {
+            ToastUtils.showToast(this, "请选择希望完成时间");
+            return false;
+        }
+        task_time = mTextview_time.getTag() + "";
+
+        release_address = mTextview_taskAddress.getText()+"";
+        if(release_address.equals("选择地址")){
+            ToastUtils.showToast(this, "请选择任务地点");
+            return false;
+        }
+
+        detailed_address = mEditview_addressDetail.getText() + "";
+        if (detailed_address.equals("")) {
+            ToastUtils.showToast(this, "请填写详细地址");
+            return false;
+        }
+        detailed_address=address_right+detailed_address;
+
+        map_issueTask.put("task_description", task_description + "");
+        map_issueTask.put("task_type", task_typeID + "");
+        map_issueTask.put("task_time", task_time);
+        map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
+        map_issueTask.put("release_address", release_address);
+        map_issueTask.put("detailed_address", detailed_address + "");
+
+        Staticdata.map_task.put("tasktypename", task_type);
+
+        LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
+
+
+        return true;
+    }
+    boolean initmap_zhaorenshou() {
+        String task_type = mTextview_choose.getText() + "";
+        if (task_type.equals("请选择类型")) {
+            ToastUtils.showToast(this, "请选择任务类型");
             return false;
         }
         task_description = mEditview_taskdetails.getText() + "";
@@ -472,7 +588,6 @@ public class IssueTaskActivity extends BaseActivityother {
 
             }
         }
-        map_issueTask.put("task_name", task_name + "");
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
@@ -493,7 +608,6 @@ public class IssueTaskActivity extends BaseActivityother {
 
         return true;
     }
-
 
     void choosePIC() {
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
