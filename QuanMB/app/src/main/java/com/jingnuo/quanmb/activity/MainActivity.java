@@ -3,18 +3,13 @@ package com.jingnuo.quanmb.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +23,6 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
-import com.jingnuo.quanmb.fargment.Fragment_message;
-import com.jingnuo.quanmb.fargment.Fragment_person;
-import com.jingnuo.quanmb.fargment.Fragment_square;
-import com.jingnuo.quanmb.fargment.Fragment_still;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -39,7 +30,6 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
-import static com.jingnuo.quanmb.data.Staticdata.static_userBean;
 
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
@@ -77,8 +67,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
 //        }
 
-
-
 //        ActionBar actionBar = getActionBar();
 //        actionBar.setCustomView(R.mipmap.aboutus);
 
@@ -98,7 +86,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         public void onLocationChanged(AMapLocation aMapLocation) {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
-//可在其中解析amapLocation获取相应内容。
+                //可在其中解析amapLocation获取相应内容。
                     LogUtils.LOG("ceshiqq","定位成功,纬度："+aMapLocation.getLatitude()+"精度："+ aMapLocation.getLongitude(),"mainactivity");
 
                     Staticdata.xValue =aMapLocation.getLatitude()+"";//获取纬度

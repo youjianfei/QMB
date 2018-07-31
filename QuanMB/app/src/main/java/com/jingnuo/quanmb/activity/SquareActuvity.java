@@ -141,7 +141,9 @@ public class SquareActuvity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        if(!Staticdata.city_location.equals("")){
+            mTextview_address.setText(Staticdata.city_location);
+        }
 
 
 
@@ -276,17 +278,6 @@ public class SquareActuvity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 showPopwindow(1);
-//                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
-//                    @Override
-//                    public void onSuccesses(String address, String id) {
-//                        page=1;
-//                        LogUtils.LOG("ceshi",address+id,"排序方式");
-//                        initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
-//                        request_square(map_filter_sort,page);
-//
-//                    }
-//                }, mRelativelayout_sort, 1);
-//                mPopwindow_square_sort.showPopwindow();
 
             }
         });
@@ -296,19 +287,6 @@ public class SquareActuvity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 showPopwindow(0);
-//                mPopwindow_square_sort = new Popwindow_SquareSort(getActivity(), new InterfacePopwindow_square_sort() {
-//                    @Override
-//                    public void onSuccesses(String address, String id) {
-//                        page=1;
-//                        LogUtils.LOG("ceshi",address+id,"条件筛选");
-//                        String [] Q = id.split("%");
-//                        initMap(Q[0],Q[1],page+"","",address,"");
-//                        map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
-//                        request_square(map_filter_sort,page);
-//
-//                    }
-//                }, mRelativelayout_sort, 0);
-//                mPopwindow_square_sort.showPopwindow();
             }
         });
 
@@ -376,12 +354,8 @@ public class SquareActuvity extends BaseActivityother {
 //                        mRelativelayout_sort.setAlpha(alpha);
                         mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
                         relative_shaixuan.setVisibility(View.INVISIBLE);
-                        mImageview_jiantou.setImageResource(R.mipmap.jiantou_xiabai);
-                        mTextview_address.setTextColor(SquareActuvity.this.getResources().getColor(R.color.white));
                     }else {
                         relative_shaixuan.setVisibility(View.VISIBLE);
-                        mImageview_jiantou.setImageResource(R.mipmap.jiantou_xia);
-                        mTextview_address.setTextColor(getResources().getColor(R.color.black));
                         mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
                     }
                 }
@@ -409,7 +383,7 @@ public class SquareActuvity extends BaseActivityother {
          */
 
         RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
-        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.6));
+        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.45));
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
 
         banner = listheadView. findViewById(R.id.banner);
@@ -523,7 +497,7 @@ public class SquareActuvity extends BaseActivityother {
             top = Math.abs(top);
             //48为菜单栏的高度，单位为dp
             //得到的高度为ViewPager的高度减去菜单栏高度，即为最大可滑动距离
-            float height = c.getHeight() - SizeUtils.dip2px(this,70);
+            float height = c.getHeight() - SizeUtils.dip2px(this,40);
 
             float y = top / height;
 

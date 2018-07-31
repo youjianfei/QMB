@@ -132,6 +132,7 @@ public class Popwindow_SquareSort {
             public void onSuccesses(String respose) {
                 listdata_tasktype.clear();
                 listdata_tasktype.addAll(new Gson().fromJson(respose, TaskTypeBean.class).getData().getList());
+                Staticdata. mData_filter_task.clear();
                 if(Staticdata. mData_filter_task.size()!=listdata_tasktype.size()){
                     for (int i = 0; i < listdata_tasktype.size(); i++) {
                         PopwindowGridBean.FilterBean bean = new PopwindowGridBean.FilterBean();

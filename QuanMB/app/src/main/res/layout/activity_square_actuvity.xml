@@ -16,27 +16,86 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         />
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/back_black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="帮帮广场"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/relayout_address"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            >
+            <TextView
+                android:id="@+id/textview_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
+                android:layout_centerVertical="true"
+                android:text="定位中"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/iamge_jiantou"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/jiantou_xia"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_background"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/list_square"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
         ptr:ptrMode="both"
+        android:layout_below="@+id/re_title"
         />
     <RelativeLayout
         android:id="@+id/relative_sort"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/re_title"
         android:background="@color/white">
-        <!--android:background="@drawable/background_logintitle"-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="80dp"
+            android:layout_marginLeft="40dp"
             android:background="@drawable/background_gray_corners"
             android:gravity="center_vertical"
+            android:layout_centerInParent="true"
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="15dp"
@@ -60,35 +119,6 @@
                 />
 
         </LinearLayout>
-        <RelativeLayout
-            android:id="@+id/relayout_address"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            >
-            <TextView
-                android:id="@+id/textview_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="35dp"
-                android:layout_centerVertical="true"
-                android:text="定位中"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-            <ImageView
-                android:id="@+id/iamge_jiantou"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="12dp"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/jiantou_xiabai"
-                android:layout_centerVertical="true"/>
-
-        </RelativeLayout>
-
 
 
     </RelativeLayout>
