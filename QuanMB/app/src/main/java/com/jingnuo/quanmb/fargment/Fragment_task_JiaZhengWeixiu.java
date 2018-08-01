@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
+import com.jingnuo.quanmb.popwinow.Popwindow_JiazhengweixiuTYpe;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -54,16 +55,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static android.app.Activity.RESULT_OK;
-
-public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickListener {
-    public  static Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
+public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
+    public  static Fragment_task_JiaZhengWeixiu fragmentTaskZhaoShangHu;
     View rootview;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
     TextView mTextview_taskAddress;//地图返回地点
     TextView mTextview_choose;
-    RelativeLayout mRelativelayout_chose;//选择类型
     TextView mTextview_time;
     RelativeLayout mRelativelayout_chosetime;//选择时间
     EditText mEditview_addressDetail;//详细地址
@@ -102,7 +100,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.fragment_task_zhaoshanghu, container, false);
+        rootview = inflater.inflate(R.layout.fragment_task_jiazhengweixiu, container, false);
         fragmentTaskZhaoShangHu=this;
         initview();
         initdata();
@@ -119,7 +117,6 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         mTextview_taskAddress = rootview.findViewById(R.id.text_chooseaddress);
         mTextview_choose = rootview.findViewById(R.id.text_chooce);
         mTextview_time = rootview.findViewById(R.id.edit_tasktime);
-        mRelativelayout_chose = rootview.findViewById(R.id.relative_chose);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
         mEditview_addressDetail = rootview.findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
@@ -184,24 +181,12 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     }
 
     private void initlistenner() {
+        mTextview_choose.setOnClickListener(this);
         mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent_map = new Intent(getActivity(), LocationMapActivity.class);
                 startActivityForResult(mIntent_map, 2018418);
-            }
-        });
-        mRelativelayout_chose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPopwindow_skilltype = new Popwindow_SkillType(getActivity(), new InterfacePopwindow_SkillType() {
-                    @Override
-                    public void onSuccesses(String type, int id) {
-                        mTextview_choose.setText(type);
-                        task_typeID = id + "";
-                    }
-                });
-                mPopwindow_skilltype.showPopwindow();
             }
         });
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
@@ -287,6 +272,16 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         switch (v.getId()){
             case R.id.image_chosePIC:
                 choosePIC();
+
+                break;
+            case R.id.text_chooce://选择家政维修类型
+            new Popwindow_JiazhengweixiuTYpe(getActivity(), new InterfacePopwindow_SkillType() {
+                @Override
+                public void onSuccesses(String type, int id) {
+                    mTextview_choose.setText(type);
+                    task_typeID=id+"";
+                }
+            }).showPopwindow();
 
                 break;
         }

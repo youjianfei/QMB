@@ -69,13 +69,6 @@ public class ZhifubaoPay {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //                Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap("2018052260224087", true);
-//                //构造支付订单参数信息
-//                String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-//                //对支付参数信息进行签名
-//                String sign = OrderInfoUtil2_0.getSign(params, RSA_PRIVATE, true);
-//                //订单信息
-//                final String orderInfo = "alipay_sdk=alipay-sdk-java-3.0.52.ALL&app_id=2018052260224087&biz_content=%7B%22out_trade_no%22%3A%22QMB20180529135512336000%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22%E5%85%A8%E6%B0%91%E5%B8%AE%E2%80%94%E5%85%85%E5%80%BC%22%2C%22total_amount%22%3A%220.01%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay¬ify_url=http%3A%2F%2Fwww.quanminbang.top%2Fv1.0%2FALiPay%2FaliPay_notify&sign=tDRvt%2BroTI9Tjw1IZgQJdgu0Sm6e5prACJW6tPR0aCB%2FZr1JJ0PViJtSxJjBJbD52S24zto8PIsOBi1GSKg%2BCVsofLONjMuryLWsfIG0uvFYat5vUHlpEvCjPFn0u%2BzYop2zygkLEPfYp9DAL6JNoU8iPWtv1yaYmvIWTZKEbfxDuGugM%2FnO2Y8nr4T5oihS9BlJ1pKRBXNcZLSWWSrdJeGsb6QiABqgpoOTUvBEWoua1jee5ujzM%2FtqsyjiCOulzKaTd8huFiAs0PWa84AUptKdhelXEDEoSjfsvEHIaeaM9q9vZVolP338Yaa715FwNVV77ckVZ%2FMbzPpkLyVX7g%3D%3D&sign_type=RSA2×tamp=2018-05-29+13%3A55%3A12&version=1.0";
                 //异步处理
                 if (status == 1) {
 

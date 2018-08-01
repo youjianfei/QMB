@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/background_task_zhaorenshou_selrct" android:state_selected="true"></item>
+    <item android:drawable="@drawable/background_task_zhaorenshou_unselrct" android:state_selected="false"></item>
+
+</selector>

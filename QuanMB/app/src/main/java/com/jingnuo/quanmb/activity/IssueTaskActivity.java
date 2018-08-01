@@ -3,9 +3,6 @@ package com.jingnuo.quanmb.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 
@@ -13,17 +10,15 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
 import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
-import com.jingnuo.quanmb.utils.ReducePIC;
 import com.yancy.imageselector.ImageSelector;
-import com.yancy.imageselector.ImageSelectorActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import static com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou.fragment_tsk_zhaoRenShou;
 
 public class IssueTaskActivity extends BaseActivityother {
 
@@ -33,9 +28,9 @@ public class IssueTaskActivity extends BaseActivityother {
     TabLayout mTablayout_task;
 
     private int[] images = new int[]{
-            R.drawable.tablayout_image,
-            R.drawable.tablayout_image,
-            R.drawable.tablayout_image};
+            R.drawable.tablayout_image_zhaoshanghu,
+            R.drawable.tablayout_image_zhaorenshou,
+            R.drawable.tablayout_image_zhaojiazheng};
     private String[] tabs = new String[]{"找商户", "找人手", "家政维修"};
 
     String xValue = "";//纬度
@@ -45,9 +40,12 @@ public class IssueTaskActivity extends BaseActivityother {
 
     Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
     Fragment_tsk_ZhaoRenShou  fragmentTskZhaoRenShou;
+    Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;
 
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
+
+    int Tag=0;//   0找商户  1  找人手   2   家政维修
 
 
     @Override
@@ -128,6 +126,7 @@ public class IssueTaskActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", tab.getTag() + "", "MyOrderActivity");
                 transaction = fragmetnmanager.beginTransaction();
                 if (tab.getTag().equals("找商户")) {
+                    Tag=0;
                     if (fragmentTaskZhaoShangHu == null) {
                         fragmentTaskZhaoShangHu = new Fragment_task_ZhaoShangHu();
                         transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
@@ -136,6 +135,7 @@ public class IssueTaskActivity extends BaseActivityother {
                     }
                 }
                 if (tab.getTag().equals("找人手")) {
+                    Tag=1;
                     if (fragmentTskZhaoRenShou == null) {
                         fragmentTskZhaoRenShou = new Fragment_tsk_ZhaoRenShou();
                         transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
@@ -144,7 +144,13 @@ public class IssueTaskActivity extends BaseActivityother {
                     }
                 }
                 if (tab.getTag().equals("家政维修")) {
-
+                    Tag=2;
+                    if (fragment_task_jiaZhengWeixiu == null) {
+                        fragment_task_jiaZhengWeixiu = new Fragment_task_JiaZhengWeixiu();
+                        transaction.replace(R.id.framelayout_main, fragment_task_jiaZhengWeixiu).commit();
+                    } else {
+                        transaction.replace(R.id.framelayout_main, fragment_task_jiaZhengWeixiu).commit();
+                    }
                 }
 
 
@@ -180,6 +186,15 @@ public class IssueTaskActivity extends BaseActivityother {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            if(Tag==0&&fragmentTaskZhaoShangHu!=null){
+                fragmentTaskZhaoShangHu.setview(data);
+            }
+
+            if(Tag==1&&fragment_tsk_zhaoRenShou!=null){
+                fragment_tsk_zhaoRenShou.setview(data);
+            }
+        }
 
     }
     @Override

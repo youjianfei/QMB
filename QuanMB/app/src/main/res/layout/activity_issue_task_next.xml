@@ -141,25 +141,7 @@
                 android:layout_below="@+id/re1"
                 android:layout_marginTop="10dp"
                 android:background="@color/white">
-                <TextView
-                    android:id="@+id/text_tasktitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="我需要一名配送员"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:textColor="@color/black_text"
-                    />
-                <ImageView
-                    android:id="@+id/line5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_below="@+id/text_tasktitle"
-                    android:src="@color/gray_dfdfdf" />
+
 
                 <ImageView
                     android:layout_width="15dp"
@@ -167,13 +149,11 @@
                     android:src="@mipmap/taskdetail"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="13dp"
-                    android:layout_below="@+id/line5"
                     />
                 <TextView
                     android:id="@+id/text2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line5"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="10dp"
                     android:text="任务说明"

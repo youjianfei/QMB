@@ -25,12 +25,14 @@ import android.widget.TextView;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
+import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskActivity;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
+import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.customview.MyGridView;
@@ -59,14 +61,13 @@ import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickListener{
+public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickListener {
     View rootview;
+    public static Fragment_tsk_ZhaoRenShou fragment_tsk_zhaoRenShou;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
     TextView mTextview_taskAddress;//地图返回地点
-    TextView mTextview_choose;
-    RelativeLayout mRelativelayout_chose;//选择类型
-    TextView mTextview_time;
+    TextView mTextview_time;//预约时间
     RelativeLayout mRelativelayout_chosetime;//选择时间
     EditText mEditview_addressDetail;//详细地址
     EditText mEditview_taskdetails;
@@ -74,23 +75,42 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     ImageView image_chosePIC;
     Button mButton_sub;
 
+    LinearLayout linearLayout_banyungong;
+    LinearLayout linearLayout_qingjie;
+    LinearLayout linearLayout_bangmai;
+    LinearLayout linearLayout_yuyue;
+    LinearLayout linearLayout_daijia;
+    LinearLayout linearLayout_dingzhi;
+
+    ImageView imageView_banyungong;
+    ImageView imageView_qingjie;
+    ImageView imageView_bangmai;
+    ImageView imageView_yuyue;
+    ImageView imageView_daijia;
+    ImageView imageView_dingzhi;
+
+    TextView textView_banyungong;
+    TextView textView_qingjie;
+    TextView textView_bangmai;
+    TextView textView_yuyue;
+    TextView textView_daijia;
+    TextView textView_dingzhi;
+
 
     EditText mEditview_taskmoney;
     ImageView mImage_choosejieshou;
     TextView mText_choosejieshou;
     ImageView mImage_chooseme;
     ImageView mImage_choosehelper;
-    TextView  mtextview_choseme;
-    TextView  mtextview_chosehelper;
+    TextView mtextview_choseme;
+    TextView mtextview_chosehelper;
     RelativeLayout relativelayout_chujia;
 
 
-
-
     //对象
-    Popwindow_SkillType mPopwindow_skilltype;
     PermissionHelper permissionHelper;
-    Popwindow_CompleteTime popwindow_completeTime;
+//    Popwindow_CompleteTime popwindow_completeTime;
+    DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
 
 
@@ -99,11 +119,11 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     String citycode = "";//城市名字
 
     String task_description = "";
-    String task_typeID = "";
     String task_time = "";
     String release_address = "";
     Bitmap mBitmap = null;
     String commission = "";
+    int task_typeID=2200;
 
     String detailed_address = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
@@ -118,22 +138,21 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_zhaorenshou, container, false);
+        fragment_tsk_zhaoRenShou = this;
+
         initview();
         initdata();
         setdata();
-        setview();
         initlistenner();
 
 
         return rootview;
     }
+
     private void initview() {
-        //找商户模块
         mLinearlayout_zhaoshanghu = rootview.findViewById(R.id.linearlayout_zhaoshanghu);
         mTextview_taskAddress = rootview.findViewById(R.id.text_chooseaddress);
-        mTextview_choose = rootview.findViewById(R.id.text_chooce);
         mTextview_time = rootview.findViewById(R.id.edit_tasktime);
-        mRelativelayout_chose = rootview.findViewById(R.id.relative_chose);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
         mEditview_addressDetail = rootview.findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
@@ -141,8 +160,34 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
 
-        mEditview_taskmoney =rootview. findViewById(R.id.edit_charges);
-        mImage_choosejieshou =rootview. findViewById(R.id.image_choosejieshou);
+
+        linearLayout_banyungong = rootview.findViewById(R.id.lin_banyungong);
+        linearLayout_banyungong.setSelected(true);
+        linearLayout_qingjie = rootview.findViewById(R.id.lin_qingjie);
+        linearLayout_bangmai = rootview.findViewById(R.id.lin_bangmai);
+        linearLayout_yuyue = rootview.findViewById(R.id.lin_yuyue);
+        linearLayout_daijia = rootview.findViewById(R.id.lin_daijia);
+        linearLayout_dingzhi = rootview.findViewById(R.id.lin_dingzhi);
+
+        imageView_banyungong = rootview.findViewById(R.id.image_banyungong);
+        imageView_banyungong.setSelected(true);
+        imageView_qingjie = rootview.findViewById(R.id.image_qingjie);
+        imageView_bangmai = rootview.findViewById(R.id.image_bangmai);
+        imageView_yuyue = rootview.findViewById(R.id.image_yuyue);
+        imageView_daijia = rootview.findViewById(R.id.image_daijia);
+        imageView_dingzhi = rootview.findViewById(R.id.image_dingzhi);
+
+        textView_banyungong = rootview.findViewById(R.id.text_banyungong);
+        textView_banyungong.setSelected(true);
+        textView_qingjie = rootview.findViewById(R.id.text_qingjie);
+        textView_bangmai = rootview.findViewById(R.id.text_bangmai);
+        textView_yuyue = rootview.findViewById(R.id.text_yuyue);
+        textView_daijia = rootview.findViewById(R.id.text_daijia);
+        textView_dingzhi = rootview.findViewById(R.id.text_dingzhi);
+
+
+        mEditview_taskmoney = rootview.findViewById(R.id.edit_charges);
+        mImage_choosejieshou = rootview.findViewById(R.id.image_choosejieshou);
         mImage_choosejieshou.setSelected(true);
         mText_choosejieshou = rootview.findViewById(R.id.text_choosejieshou);
         mImage_chooseme = rootview.findViewById(R.id.image_chooseme);
@@ -159,14 +204,14 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
         //完成任务期限  弹窗
-        popwindow_completeTime = new Popwindow_CompleteTime(getActivity(), new Interence_complteTask_time() {
-            @Override
-            public void onResult(String result, int tag) {
-                LogUtils.LOG("ceshi", result, "IssueTaskActivity");
-                mTextview_time.setText(result);
-                mTextview_time.setTag(tag);
-            }
-        });
+//        popwindow_completeTime = new Popwindow_CompleteTime(getActivity(), new Interence_complteTask_time() {
+//            @Override
+//            public void onResult(String result, int tag) {
+//                LogUtils.LOG("ceshi", result, "IssueTaskActivity");
+//                mTextview_time.setText(result);
+//                mTextview_time.setTag(tag);
+//            }
+//        });
     }
 
     private void setdata() {
@@ -178,14 +223,52 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
 //        setmapdata();
-
+        dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
+            @Override
+            public void onResult(String time) {
+                LogUtils.LOG("ceshi","时间选择器返回的结果"+time,"zhaorenshou");
+                mTextview_time.setText(time);
+            }
+        });
 
     }
 
-    private void setview() {
+    public void setview(Intent data) {
+        // Get Image Path List
+        List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+
+//            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
+        for (String path : pathList) {
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
+//                dataPictrue.add(mBitmap);
+            Staticdata.mlistdata_pic.add(0, mBitmap);
+//                upLoadImage.uploadImg(pathList, 2);
+
+            //调用压缩图片的方法，返回压缩后的图片path
+            String src_path = path;//原图片的路径
+            String targetPath = Environment.getExternalStorageDirectory() + "/picyasuo/" + System.currentTimeMillis() + ".png";//压缩后图片的路径
+            final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
+            List<String> mList_picpath = new ArrayList<>();
+            mList_picpath.add(compressImage);
+            mList_PicPath_down.add(0, mList_picpath);
+        }
+        PIC_mix = 3 - mList_PicPath_down.size();
+        adapter_gridviewpic_upLoad.notifyDataSetChanged();
+        if (Staticdata.mlistdata_pic.size() > 1) {
+            imageGridview.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initlistenner() {
+        linearLayout_banyungong.setOnClickListener(this);
+        linearLayout_qingjie.setOnClickListener(this);
+        linearLayout_bangmai.setOnClickListener(this);
+        linearLayout_yuyue.setOnClickListener(this);
+        linearLayout_daijia.setOnClickListener(this);
+        linearLayout_dingzhi.setOnClickListener(this);
+
+
         mImage_choosejieshou.setOnClickListener(this);
         mText_choosejieshou.setOnClickListener(this);
         mImage_chooseme.setOnClickListener(this);
@@ -200,23 +283,12 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 startActivityForResult(mIntent_map, 2018418);
             }
         });
-        mRelativelayout_chose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPopwindow_skilltype = new Popwindow_SkillType(getActivity(), new InterfacePopwindow_SkillType() {
-                    @Override
-                    public void onSuccesses(String type, int id) {
-                        mTextview_choose.setText(type);
-                        task_typeID = id + "";
-                    }
-                });
-                mPopwindow_skilltype.showPopwindow();
-            }
-        });
+
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popwindow_completeTime.showPopwindow();
+//                popwindow_completeTime.showPopwindow();
+                dataTimeSelect.timeSelect(getActivity());
 
             }
         });
@@ -234,7 +306,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                     Staticdata.imagePathlist = mList_PicPath_down;
                     Map map_check = new HashMap();
                     map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_check.put("task_name", "假装有标题");//todo
                     map_check.put("task_description", map_issueTask.get("task_description"));
                     map_check.put("detailed_address", map_issueTask.get("detailed_address"));
                     new Volley_Utils(new Interface_volley_respose() {
@@ -290,10 +361,74 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         image_chosePIC.setOnClickListener(this);
 
     }
-
+    void  setunselect(){
+        linearLayout_banyungong.setSelected(false);
+        linearLayout_qingjie.setSelected(false);
+        linearLayout_bangmai.setSelected(false);
+        linearLayout_yuyue.setSelected(false);
+        linearLayout_daijia.setSelected(false);
+        linearLayout_dingzhi.setSelected(false);
+        imageView_banyungong.setSelected(false);
+        imageView_qingjie.setSelected(false);
+        imageView_bangmai.setSelected(false);
+        imageView_yuyue.setSelected(false);
+        imageView_daijia.setSelected(false);
+        imageView_dingzhi.setSelected(false);
+        textView_banyungong.setSelected(false);
+        textView_qingjie.setSelected(false);
+        textView_bangmai.setSelected(false);
+        textView_yuyue.setSelected(false);
+        textView_daijia.setSelected(false);
+        textView_dingzhi.setSelected(false);
+    }
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        setunselect();
+        switch (v.getId()) {
+
+            case R.id.lin_banyungong:
+                task_typeID=2200;
+                linearLayout_banyungong.setSelected(true);
+                imageView_banyungong.setSelected(true);
+                textView_banyungong.setSelected(true);
+                break;
+            case R.id.lin_qingjie:
+                task_typeID=2201;
+
+                linearLayout_qingjie.setSelected(true);
+                imageView_qingjie.setSelected(true);
+                textView_qingjie.setSelected(true);
+
+                break;
+            case R.id.lin_bangmai:
+                task_typeID=2202;
+
+                linearLayout_bangmai.setSelected(true);
+                imageView_bangmai.setSelected(true);
+                textView_bangmai.setSelected(true);
+
+                break;
+            case R.id.lin_yuyue:
+                task_typeID=2203;
+
+                linearLayout_yuyue.setSelected(true);
+                imageView_yuyue.setSelected(true);
+                textView_yuyue.setSelected(true);
+
+                break;
+            case R.id.lin_daijia:
+                task_typeID=2204;
+                linearLayout_daijia.setSelected(true);
+                imageView_daijia.setSelected(true);
+                textView_daijia.setSelected(true);
+
+                break;
+            case R.id.lin_dingzhi:
+                task_typeID=2205;
+                linearLayout_dingzhi.setSelected(true);
+                imageView_dingzhi.setSelected(true);
+                textView_dingzhi.setSelected(true);
+                break;
             case R.id.text_choosehelper:
                 if (!mImage_choosehelper.isSelected()) {
 
@@ -301,7 +436,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                     new Popwindow_Tip("需缴纳5元押金", getActivity(), new Interence_complteTask() {
                         @Override
                         public void onResult(boolean result) {
-                            if(result){
+                            if (result) {
                                 mImage_choosehelper.setSelected(true);
                                 mImage_chooseme.setSelected(false);
                                 isMEchujia = 2;
@@ -328,7 +463,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                     new Popwindow_Tip("需缴纳5元押金", getActivity(), new Interence_complteTask() {
                         @Override
                         public void onResult(boolean result) {
-                            if(result){
+                            if (result) {
                                 mImage_choosehelper.setSelected(true);
                                 mImage_chooseme.setSelected(false);
                                 isMEchujia = 2;
@@ -355,7 +490,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 if (!mImage_choosejieshou.isSelected()) {
                     mImage_choosejieshou.setSelected(true);
                     is_counteroffer = 1;
-                }else {
+                } else {
                     mImage_choosejieshou.setSelected(false);
                     is_counteroffer = 0;
                 }
@@ -365,7 +500,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 if (!mImage_choosejieshou.isSelected()) {
                     mImage_choosejieshou.setSelected(true);
                     is_counteroffer = 1;
-                }else {
+                } else {
                     mImage_choosejieshou.setSelected(false);
                     is_counteroffer = 0;
                 }
@@ -379,11 +514,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
 
     boolean initmap_zhaoshanghu() {
-        String task_type = mTextview_choose.getText() + "";
-        if (task_type.equals("请选择类型")) {
-            ToastUtils.showToast(getActivity(), "请选择任务类型");
-            return false;
-        }
+
         task_description = mEditview_taskdetails.getText() + "";
         if (task_description.equals("")) {
             ToastUtils.showToast(getActivity(), "请填写任务说明");
@@ -395,11 +526,10 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         }
 
         task_time = mTextview_time.getText() + "";
-        if (task_time.equals("请选择希望完成时间")) {
-            ToastUtils.showToast(getActivity(), "请选择希望完成时间");
+        if (task_time.equals("请选择预约时间")) {
+            ToastUtils.showToast(getActivity(), "请选择预约时间");
             return false;
         }
-        task_time = mTextview_time.getTag() + "";
 
         release_address = mTextview_taskAddress.getText() + "";
         if (release_address.equals("选择地址")) {
@@ -427,8 +557,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 map_issueTask.put("is_helper_bid", "N");
                 ToastUtils.showToast(getActivity(), "请填写佣金");
                 return false;
-            }else{
-                commission="5";
+            } else {
+                commission = "5";
                 map_issueTask.put("is_helper_bid", "Y");//由帮手出价
 
             }
@@ -436,12 +566,12 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
-        map_issueTask.put("commission", commission+"");//由帮手出价
-        map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
+        map_issueTask.put("commission", commission + "");//由帮手出价
+        map_issueTask.put("is_counteroffer", is_counteroffer + "");
         map_issueTask.put("release_address", release_address);
         map_issueTask.put("detailed_address", detailed_address + "");
 
-        Staticdata.map_task.put("tasktypename", task_type);
+//        Staticdata.map_task.put("tasktypename", task_type);
 
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
@@ -491,6 +621,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
     String address_left = "";
     String address_right = "";
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -505,30 +636,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
         if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
 
-            // Get Image Path List
-            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
 
-//            ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();
-            for (String path : pathList) {
-                Bitmap bitmap = BitmapFactory.decodeFile(path);
-                mBitmap = Bitmap.createScaledBitmap(bitmap, 350, 350, true);
-//                dataPictrue.add(mBitmap);
-                Staticdata.mlistdata_pic.add(0, mBitmap);
-//                upLoadImage.uploadImg(pathList, 2);
-
-                //调用压缩图片的方法，返回压缩后的图片path
-                String src_path = path;//原图片的路径
-                String targetPath = Environment.getExternalStorageDirectory() + "/picyasuo/" + System.currentTimeMillis() + ".png";//压缩后图片的路径
-                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
-                List<String> mList_picpath = new ArrayList<>();
-                mList_picpath.add(compressImage);
-                mList_PicPath_down.add(0, mList_picpath);
-            }
-            PIC_mix = 3 - mList_PicPath_down.size();
-            adapter_gridviewpic_upLoad.notifyDataSetChanged();
-            if (Staticdata.mlistdata_pic.size() > 1) {
-                imageGridview.setVisibility(View.VISIBLE);
-            }
         }
     }
 

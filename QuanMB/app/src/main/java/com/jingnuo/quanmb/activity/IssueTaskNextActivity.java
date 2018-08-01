@@ -47,7 +47,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
     RelativeLayout mRelativelayout_showlianxiren;
 
     TextView mTextview_moren;
-    TextView mTextview_title;
     TextView mTextview_taskdetalis;
     TextView mTextview_time;
     TextView mTextview_address;
@@ -112,9 +111,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
         });
         registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
 
-        mTextview_title.setText(Staticdata.map_task.get("task_name") + "");
         mTextview_taskdetalis.setText(Staticdata.map_task.get("task_description") + "");
-        mTextview_time.setText(Staticdata.map_task.get("task_time_no") + "");
+        mTextview_time.setText(Staticdata.map_task.get("task_time") + "");
         mTextview_address.setText(Staticdata.map_task.get("release_address") + "—" + Staticdata.map_task.get("detailed_address"));
         bitmaps = new ArrayList<>();
         bitmaps.addAll(Staticdata.mlistdata_pic);
@@ -206,26 +204,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-//        mImage_nan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (!mImage_nan.isSelected()) {
-//                    mImage_nan.setSelected(true);
-//                    mImage_nv.setSelected(false);
-//                    sex = 0;
-//                }
-//            }
-//        });
-//        mImage_nv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (!mImage_nv.isSelected()) {
-//                    mImage_nan.setSelected(false);
-//                    mImage_nv.setSelected(true);
-//                    sex = 0;
-//                }
-//            }
-//        });
         mButton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -282,7 +260,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mTextview_moren = findViewById(R.id.textview_moren);
-        mTextview_title = findViewById(R.id.text_tasktitle);
         mTextview_taskdetalis = findViewById(R.id.text_taskdetail);
         mTextview_time = findViewById(R.id.text_time);
         mTextview_address = findViewById(R.id.text_address);
@@ -384,14 +361,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
                         intentpay.putExtra("taskid", data + "");
                         startActivity(intentpay);
 
-//                        Map map_pay=new HashMap();
-//                        map_pay.put("body","全民帮—任务付款");
-//                        map_pay.put("total_fee","0.01");
-//                        map_pay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                        map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-//                        map_pay.put("task_id",data+"");
-//                        LogUtils.LOG("ceshi",map_pay.toString(),"充值");
-//                        new WechatPay(IssueTaskNextActivity.this,api,map_pay).wepay();
 
                     } else {
                         ToastUtils.showToast(IssueTaskNextActivity.this, msg);
@@ -426,7 +395,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");//
-                    msg = (String) object.get("msg");//
+                    msg = (String) object.get("message");//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
