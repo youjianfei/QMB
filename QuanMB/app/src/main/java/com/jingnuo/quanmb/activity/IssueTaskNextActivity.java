@@ -269,10 +269,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
         mTextview_address = findViewById(R.id.text_address);
         mGridview_pic = findViewById(R.id.GridView_PIC);
         mButton_submit = findViewById(R.id.button_submit);
-//        mEdit_name = findViewById(R.id.edit_lianxiren);
-//        mEdit_phonenumber = findViewById(R.id.edit_phonenumber);
-//        mImage_nan = findViewById(R.id.image_choosenan);
-//        mImage_nv = findViewById(R.id.image_choosenv);
         mRelativelayout_lianxiren = findViewById(R.id.relayout_choselianxiren);
         mTextview_lianxirenname = findViewById(R.id.textview_name);
         mTextview_lianxirensex = findViewById(R.id.textview_sex);
@@ -434,7 +430,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl_cui + Urls.issuetask, this, 1, map);
     }
-    void requast_zhaoshanghu(Map map) {//正式发布个性任务
+    void requast_zhaoshanghu(Map map) {//正式发布匹配任务
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -453,8 +449,8 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 }
                 if (status == 1) {
                     ToastUtils.showToast(IssueTaskNextActivity.this, msg);
-//                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(IssueTaskNextActivity.this, MatchShopActivity.class);
+                    startActivity(intent);
 
                     Staticdata.imagePathlist.clear();
                     Staticdata.map_task.clear();
