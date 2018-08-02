@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_background"
     tools:context=".activity.MatchShopActivity">
+
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
+
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="10dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:padding="10dp"
             android:src="@mipmap/back_black" />
 
         <TextView
@@ -28,33 +31,63 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
     </RelativeLayout>
+
     <com.jingnuo.quanmb.customview.CustomerScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/linearlayout_bottom"
         android:layout_below="@+id/re_title"
         android:overScrollMode="never"
-        android:layout_above="@+id/linearlayout_bottom"
-        android:scrollbars="vertical"
-        android:visibility="visible">
+        android:scrollbars="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:clipChildren="false"
             android:fitsSystemWindows="true"
-            >
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_matchCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="已为你匹配到最合适的商家" />
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="190dp"
                 android:layout_gravity="bottom"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
                 android:paddingEnd="60dp"
                 android:paddingLeft="60dp"
                 android:paddingRight="60dp"
-                android:paddingStart="60dp"
-                 />
+                android:paddingStart="60dp" />
+
+            <LinearLayout
+                android:id="@+id/textview_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="换一组" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/refresh"
+                    android:layout_marginLeft="5dp"
+                    />
+
+            </LinearLayout>
+
 
             <RelativeLayout
                 android:id="@+id/re2"
@@ -67,10 +100,9 @@
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:src="@mipmap/taskdetails2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
-                    />
+                    android:src="@mipmap/taskdetails2" />
 
                 <TextView
                     android:id="@+id/text2"
@@ -89,26 +121,26 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/text2"
                     android:text="任务详情"
                     android:textColor="@color/black_text"
-                    android:layout_toRightOf="@+id/text2"
                     android:textSize="15dp" />
 
                 <RelativeLayout
                     android:id="@+id/skill_pic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:layout_below="@+id/text_taskdetail"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_below="@+id/text_taskdetail"
-                    >
+                    android:background="@color/white">
+
                     <com.jingnuo.quanmb.customview.MyGridView
                         android:id="@+id/GridView_PIC"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:numColumns="3"/>
+                        android:numColumns="3" />
 
                 </RelativeLayout>
 
@@ -121,23 +153,23 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:src="@color/gray_dfdfdf" />
+
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:src="@mipmap/people2"
+                    android:layout_below="@+id/line222"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line222"
-                    />
+                    android:src="@mipmap/people2" />
 
                 <TextView
                     android:id="@+id/text_guzhu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/line222"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="15dp"
                     android:text="雇主"
-                    android:layout_below="@+id/line222"
                     android:textColor="#7f7f7f"
                     android:textSize="15dp" />
 
@@ -145,14 +177,14 @@
                     android:id="@+id/text_guzhuname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/line222"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/text2"
                     android:text="雇主名字"
                     android:textColor="@color/black_text"
-                    android:layout_toRightOf="@+id/text2"
-                    android:layout_below="@+id/line222"
                     android:textSize="15dp" />
 
 
@@ -165,14 +197,15 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:src="@color/gray_dfdfdf" />
+
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:src="@mipmap/time2"
+                    android:layout_below="@+id/line2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line2"
-                    />
+                    android:src="@mipmap/time2" />
+
                 <TextView
                     android:id="@+id/text3"
                     android:layout_width="wrap_content"
@@ -206,14 +239,15 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:src="@color/gray_dfdfdf" />
+
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:src="@mipmap/address_blue"
+                    android:layout_below="@+id/line3"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line3"
-                    />
+                    android:src="@mipmap/address_blue" />
+
                 <TextView
                     android:id="@+id/text4"
                     android:layout_width="wrap_content"
@@ -230,13 +264,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/line3"
+                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="35dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/text4"
                     android:text=""
                     android:textColor="@color/black_text"
-                    android:layout_marginBottom="15dp"
                     android:textSize="15dp" />
 
 

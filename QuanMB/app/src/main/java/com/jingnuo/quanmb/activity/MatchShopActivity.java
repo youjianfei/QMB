@@ -1,32 +1,42 @@
 package com.jingnuo.quanmb.activity;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.Adapter.AdapterFragment;
 import com.jingnuo.quanmb.R;
-import com.jingnuo.quanmb.matchshopviewpager.CardFragmentPagerAdapter;
-import com.jingnuo.quanmb.matchshopviewpager.CardItem;
-import com.jingnuo.quanmb.matchshopviewpager.CardPagerAdapter;
-import com.jingnuo.quanmb.matchshopviewpager.ShadowTransformer;
+import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
+import com.jingnuo.quanmb.fargment.Fragment_shopdetail;
+import com.jingnuo.quanmb.utils.ToastUtils;
 
-public class MatchShopActivity extends AppCompatActivity implements View.OnClickListener,
-        CompoundButton.OnCheckedChangeListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MatchShopActivity extends AppCompatActivity  {
 
     //控件
     private ViewPager mViewPager;
+    LinearLayout mtextview_change;
 
-    private CardPagerAdapter mCardAdapter;
-    private ShadowTransformer mCardShadowTransformer;
-    private CardFragmentPagerAdapter mFragmentCardAdapter;
-    private ShadowTransformer mFragmentCardShadowTransformer;
-    private boolean mShowingFragments = false;
+
+
+    //数据
+    String respose="";
+    List<Fragment> list_myfragments;
+    List<Matchshoplistbean.DataBean.MatchingBean>list_matchbea;
+
+
+    //对象
+    AdapterFragment adapterFragment;
+    Matchshoplistbean  matchshoplistbean;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,46 +46,66 @@ public class MatchShopActivity extends AppCompatActivity implements View.OnClick
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-        mViewPager = findViewById(R.id.viewPager);
-
-        mCardAdapter = new CardPagerAdapter();
-        mCardAdapter.addCardItem(new CardItem("sf","sdf"));
-        mCardAdapter.addCardItem(new CardItem("dsf", "dsf"));
-        mCardAdapter.addCardItem(new CardItem("dsf", "sdf"));
-        mFragmentCardAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(),
-                dpToPixels(2, this));
-
-        mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
-        mFragmentCardShadowTransformer = new ShadowTransformer(mViewPager, mFragmentCardAdapter);
-
-        mViewPager.setAdapter(mCardAdapter);
-        mViewPager.setPageTransformer(false, mCardShadowTransformer);
-        mViewPager.setOffscreenPageLimit(3);
-
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+        respose=getIntent().getStringExtra("respose");
+        matchshoplistbean=new Gson().fromJson(respose,Matchshoplistbean.class);
+        list_matchbea=new ArrayList<>();
+        list_matchbea.clear();
+        list_matchbea.addAll(matchshoplistbean.getData().getMatching());
+        initview();
+        initdata();
+        initlistenner();
     }
 
-    public static float dpToPixels(int dp, Context context) {
-        return dp * (context.getResources().getDisplayMetrics().density);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (!mShowingFragments) {
-//            mButton.setText("Views");
-            mViewPager.setAdapter(mFragmentCardAdapter);
-            mViewPager.setPageTransformer(false, mFragmentCardShadowTransformer);
-        } else {
-//            mButton.setText("Fragments");
-            mViewPager.setAdapter(mCardAdapter);
-            mViewPager.setPageTransformer(false, mCardShadowTransformer);
+    private void initdata() {
+        list_myfragments=new ArrayList<>();
+        for (int i=0;i<list_matchbea.size();i++){
+            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
+            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
+            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
         }
-
-        mShowingFragments = !mShowingFragments;
+        adapterFragment=new AdapterFragment(getSupportFragmentManager(),list_myfragments);
+        mViewPager.setAdapter(adapterFragment);
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean b) {
-        mCardShadowTransformer.enableScaling(b);
-        mFragmentCardShadowTransformer.enableScaling(b);
+    private void initview() {
+        mViewPager = findViewById(R.id.viewPager);
+        mtextview_change=findViewById(R.id.textview_change);
     }
+    private  void  initlistenner(){
+
+        mtextview_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(MatchShopActivity.this,"点击抓新");
+                list_myfragments.clear();
+                list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(0)));
+                adapterFragment.setFragments(list_myfragments);
+
+            }
+        });
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ToastUtils.showToast(MatchShopActivity.this,"weizhi"+position);
+                if(position==2){
+
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+
+
 }
