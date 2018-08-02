@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
-
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="40dp"
@@ -42,6 +41,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                 />
 
             <RelativeLayout
                 android:id="@+id/re2"

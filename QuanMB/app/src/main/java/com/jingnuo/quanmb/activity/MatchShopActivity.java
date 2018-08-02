@@ -1,12 +1,11 @@
 package com.jingnuo.quanmb.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.jingnuo.quanmb.R;
 
 public class MatchShopActivity extends BaseActivityother {
 
+    //控件
 
     @Override
     public int setLayoutResID() {
