@@ -29,7 +29,6 @@ public class DataTime_select {
     String stardata;
     String starclock;
     String startime;
-    private  static  DataTime_select dataTime_select;
     private Context context;
     public DataTime_select(Context context, InterfaceDate_select mInterfaceDare){
         this.context=context;
@@ -47,33 +46,34 @@ public class DataTime_select {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month=month+1;
                     stardata= year+"-"+month+"-"+dayOfMonth;
+                mDatePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+
+                        mTimePicker=new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                                String h= hourOfDay>9? hourOfDay+"":"0"+hourOfDay;
+                                String m= minute>9? minute+"":"0"+minute;
+                                starclock=h+":"+m+":00";
+                                startime=stardata+" "+starclock;
+                                LogUtils.LOG("ceshi",startime+"","时间选择器class");
+                                mInterfaceDare.onResult(startime);
+
+                            }
+                        },10,00,true);
+
+                        mTimePicker.show();
+
+
+                    }
+                });
             }
         },YEAR,MONTH,DAY);
         mDatePicker.show();
-        mDatePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
 
-                mTimePicker=new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                            String h= hourOfDay>9? hourOfDay+"":"0"+hourOfDay;
-                            String m= minute>9? minute+"":"0"+minute;
-                            starclock=h+":"+m+":00";
-                            startime=stardata+" "+starclock;
-                        LogUtils.LOG("ceshi",startime+"","时间选择器class");
-                        mInterfaceDare.onResult(startime);
-
-                    }
-                },10,00,true);
-
-                mTimePicker.show();
-
-
-            }
-        });
 
     }
 

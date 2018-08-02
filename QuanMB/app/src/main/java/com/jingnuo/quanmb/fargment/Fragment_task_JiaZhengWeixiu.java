@@ -24,11 +24,13 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
+import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
+import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.customview.MyGridView;
@@ -56,7 +58,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
-    public  static Fragment_task_JiaZhengWeixiu fragmentTaskZhaoShangHu;
+    public static Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;
     View rootview;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
@@ -73,7 +75,8 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     //对象
     Popwindow_SkillType mPopwindow_skilltype;
     PermissionHelper permissionHelper;
-    Popwindow_CompleteTime popwindow_completeTime;
+    //    Popwindow_CompleteTime popwindow_completeTime;
+    DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
 
 
@@ -101,7 +104,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_jiazhengweixiu, container, false);
-        fragmentTaskZhaoShangHu=this;
+        fragment_task_jiaZhengWeixiu = this;
         initview();
         initdata();
         setdata();
@@ -129,15 +132,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     private void initdata() {
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-        //完成任务期限  弹窗
-        popwindow_completeTime = new Popwindow_CompleteTime(getActivity(), new Interence_complteTask_time() {
-            @Override
-            public void onResult(String result, int tag) {
-                LogUtils.LOG("ceshi", result, "IssueTaskActivity");
-                mTextview_time.setText(result);
-                mTextview_time.setTag(tag);
-            }
-        });
+
     }
 
     private void setdata() {
@@ -148,9 +143,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-//        setmapdata();
 
-
+        dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
+            @Override
+            public void onResult(String time) {
+                LogUtils.LOG("ceshi","时间选择器返回的结果"+time,"zhaorenshou");
+                mTextview_time.setText(time);
+            }
+        });
     }
 
     public void setview(Intent data) {
@@ -192,7 +192,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popwindow_completeTime.showPopwindow();
+                dataTimeSelect.timeSelect(getActivity());
 
             }
         });
@@ -231,6 +231,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                                 Staticdata.map_task.put("check", 1 + "");
                                 LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
                                 Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
+                                intent.putExtra("issuetask","zhaoshanghu");
                                 startActivity(intent);
                             } else {
                                 ToastUtils.showToast(getActivity(), msg);
@@ -269,19 +270,19 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.image_chosePIC:
                 choosePIC();
 
                 break;
             case R.id.text_chooce://选择家政维修类型
-            new Popwindow_JiazhengweixiuTYpe(getActivity(), new InterfacePopwindow_SkillType() {
-                @Override
-                public void onSuccesses(String type, int id) {
-                    mTextview_choose.setText(type);
-                    task_typeID=id+"";
-                }
-            }).showPopwindow();
+                new Popwindow_JiazhengweixiuTYpe(getActivity(), new InterfacePopwindow_SkillType() {
+                    @Override
+                    public void onSuccesses(String type, int id) {
+                        mTextview_choose.setText(type);
+                        task_typeID = id + "";
+                    }
+                }).showPopwindow();
 
                 break;
         }
@@ -308,7 +309,6 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
             ToastUtils.showToast(getActivity(), "请选择希望完成时间");
             return false;
         }
-        task_time = mTextview_time.getTag() + "";
 
         release_address = mTextview_taskAddress.getText() + "";
         if (release_address.equals("选择地址")) {
@@ -326,7 +326,6 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
-        map_issueTask.put("task_time_no", mTextview_time.getText() + "");//发布任务不用  确认界面使用该参数
         map_issueTask.put("release_address", release_address);
         map_issueTask.put("detailed_address", detailed_address + "");
 

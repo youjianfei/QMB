@@ -194,6 +194,10 @@ public class IssueTaskActivity extends BaseActivityother {
             if(Tag==1&&fragment_tsk_zhaoRenShou!=null){
                 fragment_tsk_zhaoRenShou.setview(data);
             }
+
+            if(Tag==2&&fragment_task_jiaZhengWeixiu!=null){
+                fragment_task_jiaZhengWeixiu.setview(data);
+            }
         }
 
     }

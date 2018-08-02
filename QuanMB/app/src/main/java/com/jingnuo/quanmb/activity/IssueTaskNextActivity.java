@@ -38,6 +38,9 @@ import java.util.Map;
 
 public class IssueTaskNextActivity extends BaseActivityother {
 
+
+    String issuetasktype="";
+
     //控件
     Button mButton_submit;
 //    EditText mEdit_phonenumber;
@@ -93,7 +96,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if (respose.equals("success")) {//支付成功
                     Staticdata.map_task.put("payResult", "1");
-                    requast(Staticdata.map_task);//正式发布任务
+
                 }
             }
 
@@ -123,6 +126,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        issuetasktype=getIntent().getStringExtra("issuetask");
         mKProgressHUD = new KProgressHUD(IssueTaskNextActivity.this);
         api = WXAPIFactory.createWXAPI(IssueTaskNextActivity.this, Staticdata.WechatApi);//微信支付用到
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务map集合中的内容");
@@ -336,7 +340,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
     }
 
 
-    void requestTaskid() {//请求任务号,成功后跳转支付界面
+    void requestTaskid() {//请求任务号,
         LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid
                 + Staticdata.static_userBean.getData().getUser_token(), "获取任务ID");
         new Volley_Utils(new Interface_volley_respose() {
@@ -355,12 +359,11 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     if (status == 1) {
                         Staticdata.map_task.put("task_id", data + "");
 
-                        Intent intentpay = new Intent(IssueTaskNextActivity.this, PayActivity.class);
-                        intentpay.putExtra("title", "全民帮—任务付款");
-                        intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
-                        intentpay.putExtra("taskid", data + "");
-                        startActivity(intentpay);
-
+                        if(issuetasktype.equals("zhaorenshou")) {
+                            requast(Staticdata.map_task);//个性单发布任务
+                        }else {
+                            requast_zhaoshanghu(Staticdata.map_task);
+                        }
 
                     } else {
                         ToastUtils.showToast(IssueTaskNextActivity.this, msg);
@@ -382,7 +385,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                 + Staticdata.static_userBean.getData().getUser_token(), IssueTaskNextActivity.this, 0);
     }
 
-    void requast(Map map) {//正式发布任务
+    void requast(Map map) {//正式发布个性任务
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -400,9 +403,16 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 if (status == 1) {
-                    ToastUtils.showToast(IssueTaskNextActivity.this, "任务发布成功");
+                    ToastUtils.showToast(IssueTaskNextActivity.this, msg);
 //                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
 //                    startActivity(intent);
+
+                    Intent intentpay = new Intent(IssueTaskNextActivity.this, PayActivity.class);
+                    intentpay.putExtra("title", "全民帮—任务付款");
+                    intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
+                    intentpay.putExtra("taskid", Staticdata.map_task.get("task_id")+"");
+                    startActivity(intentpay);
+
                     Staticdata.imagePathlist.clear();
                     Staticdata.map_task.clear();
                     Staticdata.PayissuetaskSuccess=true;
@@ -424,7 +434,49 @@ public class IssueTaskNextActivity extends BaseActivityother {
             }
         }).postHttp(Urls.Baseurl_cui + Urls.issuetask, this, 1, map);
     }
+    void requast_zhaoshanghu(Map map) {//正式发布个性任务
+        LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
+                LogUtils.LOG("ceshi", "发布任务返回json"+respose, "发布任务");
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    ToastUtils.showToast(IssueTaskNextActivity.this, msg);
+//                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
+//                    startActivity(intent);
 
+                    Staticdata.imagePathlist.clear();
+                    Staticdata.map_task.clear();
+                    Staticdata.PayissuetaskSuccess=true;
+                } else {
+                    count = 0;
+                    mList_picID.clear();
+                    mKProgressHUD.dismiss();
+                    ToastUtils.showToast(IssueTaskNextActivity.this, msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
+                count = 0;
+                mList_picID.clear();
+            }
+        }).postHttp(Urls.Baseurl_cui + Urls.issuetask_zhaoshanghu, this, 1, map);
+    }
     @Override
     protected void onPostResume() {
         super.onPostResume();

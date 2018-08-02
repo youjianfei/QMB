@@ -77,14 +77,15 @@ public class Urls {
     public static String barginmonry = "bargain/taskBargain";//还价
     public static String applycompletetask = "order/requestOk?user_token=";//申请任务完成
     public static String completetask = "order/affirmOk?user_token=";//确认任务完成
-    public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布任务
     public static String checkissuetask = "task/querySpecialty/checkAnnouncementList";//检验任务内容是否有违规
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号
     public static String Issue_again = "task/taskBackon?user_token=";//重新上架任务
     public static String apply_longtime = "order/applyforDelay";//帮手商家申请延时
     public static String agreeOrrefuse_longtime = "task/delayAcceptOrNo";//雇主同意或者拒接延时
     public static String taskaddCommission = "task/addCommission";//任务加价
-    public static String jiazhengweixiuTYpe = "task/querySpecialty/getMaintainType?user_token=";//发布任务 家政维修子专业
+    public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布个性任务
+    public static String jiazhengweixiuTYpe = "task/querySpecialty/getMaintainType?user_token=";//发布任务   家政维修子专业
+    public static String issuetask_zhaoshanghu = "task/querySpecialty/addMatchingTask";//发布任务 找商户
     //专业/商家模块
 
     public static String hotbackImage = "https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/icon/";//热门图片写在本地

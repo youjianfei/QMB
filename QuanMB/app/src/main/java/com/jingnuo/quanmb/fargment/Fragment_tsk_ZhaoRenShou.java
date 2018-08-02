@@ -203,15 +203,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     private void initdata() {
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-        //完成任务期限  弹窗
-//        popwindow_completeTime = new Popwindow_CompleteTime(getActivity(), new Interence_complteTask_time() {
-//            @Override
-//            public void onResult(String result, int tag) {
-//                LogUtils.LOG("ceshi", result, "IssueTaskActivity");
-//                mTextview_time.setText(result);
-//                mTextview_time.setTag(tag);
-//            }
-//        });
+
     }
 
     private void setdata() {
@@ -222,7 +214,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-//        setmapdata();
         dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
             @Override
             public void onResult(String time) {
@@ -326,6 +317,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                                 Staticdata.map_task.put("check", 1 + "");
                                 LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
                                 Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
+                                intent.putExtra("issuetask","zhaorenshou");
                                 startActivity(intent);
                             } else {
                                 ToastUtils.showToast(getActivity(), msg);
