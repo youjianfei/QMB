@@ -6,24 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jingnuo.quanmb.Interface.Interence_complteTask;
-import com.jingnuo.quanmb.Interface.Interence_shuaxinzhiding;
-import com.jingnuo.quanmb.Interface.InterfaceAdapterSuccess;
-import com.jingnuo.quanmb.Interface.Interface_volley_respose;
-import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.data.Urls;
-import com.jingnuo.quanmb.entityclass.MySkillBean;
 import com.jingnuo.quanmb.entityclass.SheQuListBean;
-import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
-import com.jingnuo.quanmb.popwinow.Popwindow_zhinengshuaxin;
-import com.jingnuo.quanmb.quanmb.R;
-import com.jingnuo.quanmb.utils.LogUtils;
-import com.jingnuo.quanmb.utils.ToastUtils;
-import com.jingnuo.quanmb.utils.Volley_Utils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 public class Adapter_ShequList extends BaseAdapter {

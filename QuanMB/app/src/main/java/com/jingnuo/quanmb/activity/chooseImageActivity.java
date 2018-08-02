@@ -3,7 +3,7 @@ package com.jingnuo.quanmb.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
 
 
 public class chooseImageActivity extends AppCompatActivity {

@@ -28,11 +28,10 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
 import com.jingnuo.quanmb.entityclass.Spuare_sortBean;
 import com.jingnuo.quanmb.entityclass.TaskTypeBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
-
+import com.jingnuo.quanmb.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;

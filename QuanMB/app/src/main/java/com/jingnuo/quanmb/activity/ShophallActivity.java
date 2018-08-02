@@ -20,13 +20,12 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
-
+import com.jingnuo.quanmb.R;
 import java.util.ArrayList;
 import java.util.List;
 

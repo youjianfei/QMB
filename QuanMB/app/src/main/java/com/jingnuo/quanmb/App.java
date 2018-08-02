@@ -1,26 +1,11 @@
 package com.jingnuo.quanmb;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.StrictMode;
 
-import com.jingnuo.quanmb.activity.LaunchActivity;
-import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.umeng.commonsdk.BuildConfig;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareConfig;
 
 import cn.jpush.android.api.JPushInterface;
 

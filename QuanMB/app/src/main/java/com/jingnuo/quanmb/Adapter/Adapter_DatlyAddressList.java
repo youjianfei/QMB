@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.entityclass.LianxirenBean;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 /**

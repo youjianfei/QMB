@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
 
 /**
  * Created by Laiyimin on 2017/4/20.

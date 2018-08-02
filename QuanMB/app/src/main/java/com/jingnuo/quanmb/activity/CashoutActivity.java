@@ -13,7 +13,7 @@ import com.jingnuo.quanmb.customview.PayFragment;
 import com.jingnuo.quanmb.customview.PayPwdView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ToastUtils;

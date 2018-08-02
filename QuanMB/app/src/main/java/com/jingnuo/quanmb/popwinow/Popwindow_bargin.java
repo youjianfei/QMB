@@ -12,11 +12,10 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
-
+import com.jingnuo.quanmb.R;
 public class Popwindow_bargin {
     View view;
     PopupWindow mPopupWindow;

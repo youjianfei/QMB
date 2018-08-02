@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
+import com.jingnuo.quanmb.R;
 import com.bumptech.glide.Glide;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 

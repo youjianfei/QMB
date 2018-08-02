@@ -11,8 +11,7 @@ import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.SheQuListBean;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 public class Adapter_FulisheList extends BaseAdapter {

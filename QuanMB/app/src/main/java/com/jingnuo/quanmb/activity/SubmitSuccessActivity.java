@@ -11,8 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 public class SubmitSuccessActivity extends BaseActivityother {
     RelativeLayout mRelativelayout_back;
     Button mButton_close;

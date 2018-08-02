@@ -13,10 +13,9 @@ import com.amap.api.location.AMapLocationListener;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.yancy.imageselector.ImageSelector;
-
+import com.jingnuo.quanmb.R;
 
 import static com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou.fragment_tsk_zhaoRenShou;
 

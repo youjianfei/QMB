@@ -35,10 +35,9 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.jingnuo.quanmb.Adapter.Adapter_SearchAddress;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
-
+import com.jingnuo.quanmb.R;
 import java.util.ArrayList;
 import java.util.List;
 

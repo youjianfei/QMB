@@ -30,11 +30,10 @@ import com.jingnuo.quanmb.entityclass.CommunityNoticeBean;
 import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.LiuyanqiangListBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.youth.banner.Banner;
-
+import com.jingnuo.quanmb.R;
 import java.util.ArrayList;
 import java.util.List;
 

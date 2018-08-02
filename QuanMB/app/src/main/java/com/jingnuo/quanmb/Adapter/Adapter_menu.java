@@ -8,8 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.entityclass.MenuBean;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 public class Adapter_menu  extends BaseAdapter{

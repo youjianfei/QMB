@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.jingnuo.quanmb.R;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_classification_left;
 import com.jingnuo.quanmb.Adapter.Adapter_classification_right;
@@ -16,7 +16,6 @@ import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Skillmenu_oneBean;
 import com.jingnuo.quanmb.entityclass.Skillmenu_twoBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 

@@ -9,8 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.entityclass.SkillCollectBean;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 public class Adapter_myCollect extends BaseAdapter {

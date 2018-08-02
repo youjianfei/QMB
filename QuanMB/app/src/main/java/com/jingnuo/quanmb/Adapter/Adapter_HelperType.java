@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.entityclass.Skillmenu_twoBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 import java.util.Random;
 

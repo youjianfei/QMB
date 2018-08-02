@@ -16,10 +16,9 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.HelpterInfoBean;
 import com.jingnuo.quanmb.entityclass.ShopcenterBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
-
+import com.jingnuo.quanmb.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 

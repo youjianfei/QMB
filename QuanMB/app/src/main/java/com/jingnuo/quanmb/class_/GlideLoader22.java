@@ -5,7 +5,8 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
+
 import com.youth.banner.loader.ImageLoader;
 
 /**

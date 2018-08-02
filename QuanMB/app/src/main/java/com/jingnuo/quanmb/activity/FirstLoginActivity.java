@@ -14,9 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
-
+import com.jingnuo.quanmb.R;
 import java.util.ArrayList;
 import java.util.List;
 

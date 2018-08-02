@@ -16,13 +16,12 @@ import com.jingnuo.quanmb.class_.WechatPay;
 import com.jingnuo.quanmb.class_.ZhifubaoPay;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
+import com.jingnuo.quanmb.R;
 import java.util.HashMap;
 import java.util.Map;
 

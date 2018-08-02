@@ -10,10 +10,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 public class Adapter_Gridviewpic_UPLoad extends BaseAdapter{

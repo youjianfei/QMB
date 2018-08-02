@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
+
 
 public class SetPasswordActivity extends BaseActivityother {
     //控件

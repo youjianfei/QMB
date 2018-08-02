@@ -10,9 +10,8 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.Utils;
-
+import com.jingnuo.quanmb.R;
 /**
  * Created by 飞 on 2018/4/25.
  */

@@ -8,8 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.entityclass.HuiyuanTaocanBean;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 public class Adapter_recharge_huiyuan extends BaseAdapter {

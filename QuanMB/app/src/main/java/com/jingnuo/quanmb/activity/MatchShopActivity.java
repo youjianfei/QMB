@@ -5,13 +5,12 @@ import android.os.Bundle;
 
 import com.jingnuo.quanmb.R;
 
-
-public class AboutUsActivity extends BaseActivityother {
+public class MatchShopActivity extends BaseActivityother {
 
 
     @Override
     public int setLayoutResID() {
-        return R.layout.activity_about_us;
+        return R.layout.activity_match_shop;
     }
 
     @Override

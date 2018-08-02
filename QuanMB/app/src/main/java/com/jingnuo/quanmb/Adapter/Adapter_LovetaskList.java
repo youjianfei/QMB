@@ -13,9 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.entityclass.LoveTaskListBean;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.Utils;
-
+import com.jingnuo.quanmb.R;
 import java.text.DecimalFormat;
 import java.util.List;
 

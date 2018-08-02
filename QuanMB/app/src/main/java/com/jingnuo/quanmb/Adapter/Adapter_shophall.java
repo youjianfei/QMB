@@ -20,11 +20,9 @@ import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.activity.BaseActivityother;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.entityclass.SkillmentlistBean;
-import com.jingnuo.quanmb.quanmb.R;
-import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.master.permissionhelper.PermissionHelper;
-
+import com.jingnuo.quanmb.R;
 import java.util.List;
 
 /**

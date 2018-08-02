@@ -23,7 +23,6 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.fargment.Fragment_acountLogin;
 import com.jingnuo.quanmb.fargment.Fragment_phone_login;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -31,7 +30,7 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-
+import com.jingnuo.quanmb.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 

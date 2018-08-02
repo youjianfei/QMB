@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
 
 
 public class SideBar extends View {

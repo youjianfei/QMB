@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.class_.ShareGoodWeb;
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.DataCleanManager;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;

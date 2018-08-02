@@ -36,14 +36,13 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.youth.banner.Banner;
-
+import com.jingnuo.quanmb.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 

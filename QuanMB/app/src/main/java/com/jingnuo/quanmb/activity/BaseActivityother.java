@@ -11,7 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.jaeger.library.StatusBarUtil;
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
 
 
 /**

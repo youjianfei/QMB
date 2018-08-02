@@ -17,7 +17,7 @@ import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.jaeger.library.StatusBarUtil;
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
 
 import java.util.ArrayList;
 

@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.entityclass.BargainMessageListBean;
-import com.jingnuo.quanmb.quanmb.R;
 import com.jingnuo.quanmb.utils.Utils;
-
+import com.jingnuo.quanmb.R;
 import org.w3c.dom.Text;
 
 import java.util.List;

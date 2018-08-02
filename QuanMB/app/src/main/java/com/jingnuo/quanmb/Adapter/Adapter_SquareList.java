@@ -1,10 +1,7 @@
 package com.jingnuo.quanmb.Adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.jingnuo.quanmb.Interface.InterfacePopwindow_square_sort;
-import com.jingnuo.quanmb.class_.Task_type;
 import com.jingnuo.quanmb.entityclass.Square_defaultBean;
-import com.jingnuo.quanmb.popwinow.Popwindow_SquareSort;
-import com.jingnuo.quanmb.quanmb.R;
-import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
-
+import com.jingnuo.quanmb.R;
 import java.text.DecimalFormat;
 import java.util.List;
 

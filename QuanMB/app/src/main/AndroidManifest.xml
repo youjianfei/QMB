@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.jingnuo.quanmb.quanmb">
+    package="com.jingnuo.quanmb">
 
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -91,15 +91,13 @@
         <activity android:name="com.jingnuo.quanmb.activity.PersonInfoActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.TaskDetailsActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShopInActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LaunchActivity" >
+        <activity android:name="com.jingnuo.quanmb.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity android:name="com.jingnuo.quanmb.activity.ShopInNextActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.BargainActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity" />
@@ -181,16 +179,16 @@
         <activity android:name="com.jingnuo.quanmb.activity.ErShoushichangActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.IssueErshoushichangActivity" />
         <activity android:name="com.jingnuo.quanmb.activity.ErshouxinxiDetailsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SquareActuvity"
-            android:launchMode="singleTask"
-            ></activity>
-        <activity android:name="com.jingnuo.quanmb.activity.MessageActivity"
-            android:launchMode="singleTask"
-            >
-        </activity>
-        <activity android:name="com.jingnuo.quanmb.activity.SkillActivity"
-            android:launchMode="singleTask"
-            ></activity>
+        <activity
+            android:name="com.jingnuo.quanmb.activity.SquareActuvity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.jingnuo.quanmb.activity.MessageActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name="com.jingnuo.quanmb.activity.SkillActivity"
+            android:launchMode="singleTask" />
+        <activity android:name="com.jingnuo.quanmb.activity.MatchShopActivity"></activity>
     </application>
 
 </manifest>

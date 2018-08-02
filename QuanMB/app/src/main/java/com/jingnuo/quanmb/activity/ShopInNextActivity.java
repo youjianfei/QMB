@@ -6,8 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.quanmb.R;
-
+import com.jingnuo.quanmb.R;
 public class ShopInNextActivity extends BaseActivityother {
     //布局
     private LinearLayout mLineatlayout_addview;

@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.jingnuo.quanmb.quanmb.R;
+import com.jingnuo.quanmb.R;
+
 
 /**
  * 输入键盘
