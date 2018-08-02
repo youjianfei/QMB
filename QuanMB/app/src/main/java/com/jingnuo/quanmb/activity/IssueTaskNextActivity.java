@@ -451,6 +451,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     ToastUtils.showToast(IssueTaskNextActivity.this, msg);
                     Intent intent = new Intent(IssueTaskNextActivity.this, MatchShopActivity.class);
                     intent.putExtra("respose",respose);
+                    intent.putExtra("id",Staticdata.map_task.get("task_id")+"");
                     startActivity(intent);
 
                     Staticdata.imagePathlist.clear();

@@ -76,6 +76,7 @@ public class TaskDetailBean {
         private String task_description;
         private String is_helper_bid;
         private String task_name;
+        private String task_Time;
         private String Avatar_imgUrl;
         private String task_ImgUrl;
         private String user_grade;
@@ -93,6 +94,14 @@ public class TaskDetailBean {
         private String task_Startdate;
         private String x_value="";
         private String y_value="";
+
+        public String getTask_Time() {
+            return task_Time;
+        }
+
+        public void setTask_Time(String task_Time) {
+            this.task_Time = task_Time;
+        }
 
         public String getX_value() {
             return x_value;

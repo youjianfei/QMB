@@ -1,9 +1,14 @@
 package com.jingnuo.quanmb.fargment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.activity.SkillDetailActivity;
 import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.master.permissionhelper.PermissionHelper;
@@ -46,6 +52,7 @@ public class Fragment_shopdetail extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_shopdetails, container, false);
+        mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         initview();
         setdata();
         initlistenner();
@@ -58,7 +65,37 @@ public class Fragment_shopdetail extends Fragment{
         imageView_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                Uri data = Uri.parse("tel:" + matchingBean.getBusiness_mobile_no());
+                intent.setData(data);
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
+//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+                    mPermission.request(new PermissionHelper.PermissionCallback() {
+                        @Override
+                        public void onPermissionGranted() {
+
+                        }
+
+                        @Override
+                        public void onIndividualPermissionGranted(String[] grantedPermission) {
+
+                        }
+
+                        @Override
+                        public void onPermissionDenied() {
+
+                        }
+
+                        @Override
+                        public void onPermissionDeniedBySystem() {
+
+                        }
+                    });
+                    return;
+                }
+
+                startActivity(intent);//调用具体方法
             }
         });
         button_choose.setOnClickListener(new View.OnClickListener() {
@@ -86,5 +123,12 @@ public class Fragment_shopdetail extends Fragment{
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (mPermission != null) {
+            mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
+    }
 }

@@ -137,6 +137,7 @@
 
                     <com.jingnuo.quanmb.customview.MyGridView
                         android:id="@+id/GridView_PIC"
+                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
