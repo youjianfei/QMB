@@ -121,6 +121,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         }
                         if (status == 1) {
                             ToastUtils.showToast(TaskDetailsActivity.this, msg);
+                            requestTaseDetail();
                         } else {
                             ToastUtils.showToast(TaskDetailsActivity.this, msg);
                         }
@@ -232,7 +233,6 @@ public class TaskDetailsActivity extends BaseActivityother {
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
         mTextview_tasktime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
-//        mTextview_peoplelevel = findViewById(R.id.text_tlevel);
         imageGridview=findViewById(R.id.GridView_PIC);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
@@ -240,6 +240,12 @@ public class TaskDetailsActivity extends BaseActivityother {
     }
 
     void requestTaseDetail() {
+        String  URL="";
+        if(Staticdata.static_userBean.getData()==null){
+            URL=Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID;
+        }else {
+            URL=Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID+"&user_token="+Staticdata.static_userBean.getData().getUser_token();
+        }
         LogUtils.LOG("ceshi", "任务详情接口+" + Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID, "TaskDetailsActivity");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -273,10 +279,14 @@ public class TaskDetailsActivity extends BaseActivityother {
                 }
                 if(mTaskData.getData().getIs_helper_bid().equals("Y")){
                     mButton_counteroffer.setVisibility(View.VISIBLE);
-                    mButton_counteroffer.setText("出价");
+                    mButton_counteroffer.setText("报价");
                     mButton_help.setVisibility(View.GONE);
                     mTextview_taskmoney.setText("帮手出价" );
                     commison=5;
+                }
+                if(app_type.equals("1")&&mTaskData.getData().getCounteroffer_amount()!=0){
+                    mButton_counteroffer.setText("已报价");
+                    mButton_counteroffer.setEnabled(false);
                 }
             }
 
@@ -285,7 +295,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 
 
             }
-        }).Http(Urls.Baseurl_cui + Urls.taskdetails + "?id=" + ID, this, 0);
+        }).Http(URL, this, 0);
 
 
     }

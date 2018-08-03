@@ -44,7 +44,7 @@ public class TaskDetailBean {
         private String client_sex;
         private String app_type;
         private double commission;
-        private double counteroffer_amount;
+        private double counteroffer_amount=0;
         private String createDate;
         private String detailed_address;
         private String is_counteroffer;

@@ -63,8 +63,9 @@ public class SquareActuvity extends BaseActivityother {
     PullToRefreshListView mListview_square;
     LinearLayout mTextview_sort, mTextview_filter;
     TextView mTextview_address;
-    RelativeLayout mRelativelayout_sort;
+    RelativeLayout re_title;
     RelativeLayout mRelayout_address;
+    LinearLayout relative_sort;
     RelativeLayout relative_shaixuan;
 
     Popwindow_SquareSort mPopwindow_square_sort;
@@ -116,11 +117,12 @@ public class SquareActuvity extends BaseActivityother {
                     public void run() {
 
                         if(address.equals("筛选")){
-                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(SquareActuvity.this,69));
+//                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(SquareActuvity.this,69));
+                            mListview_square.getRefreshableView().setSelection(2);
                             showPopwindow(0);
 
                         }else if(address.equals("排序")){
-                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(SquareActuvity.this,69));
+                            mListview_square.getRefreshableView().setSelection(2);
                             showPopwindow(1);
                         } else {
                             mTextview_address.setText(address);
@@ -130,7 +132,6 @@ public class SquareActuvity extends BaseActivityother {
                             page = 1;
                             request_square(map_filter_sort, 1);
                         }
-
                     }
                 });
             }
@@ -334,30 +335,32 @@ public class SquareActuvity extends BaseActivityother {
         mListview_square.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
+
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                if(firstVisibleItem==1){
-//                    mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
-//
-//                }
-                if(isScroll())
-                {
-                    float scrollY = getScrollY();
-                    if(scrollY <= 1)
-                    {
-                        int alpha = (int) (255 * scrollY);
-
-                        LogUtils.LOG("ceshi",alpha+"alpha"+firstVisibleItem,"透明度");
-//                        mRelativelayout_sort.setAlpha(alpha);
-                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
-                        relative_shaixuan.setVisibility(View.INVISIBLE);
-                    }else {
-                        relative_shaixuan.setVisibility(View.VISIBLE);
-                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
-                    }
+                if(firstVisibleItem>1){
+                    relative_sort.setVisibility(View.VISIBLE);
+                }else {
+                    relative_sort.setVisibility(View.INVISIBLE);
                 }
+//                if(isScroll())
+//                {
+//                    float scrollY = getScrollY();
+//                    if(scrollY <= 1)
+//                    {
+//                        int alpha = (int) (255 * scrollY);
+//
+//                        LogUtils.LOG("ceshi",alpha+"alpha"+firstVisibleItem,"透明度");
+////                        mRelativelayout_sort.setAlpha(alpha);
+//                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+//                        relative_shaixuan.setVisibility(View.INVISIBLE);
+//                    }else {
+//                        relative_shaixuan.setVisibility(View.VISIBLE);
+//                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
+//                    }
+//                }
 
             }
         });
@@ -370,9 +373,10 @@ public class SquareActuvity extends BaseActivityother {
         mImageview_jiantou = findViewById(R.id.iamge_jiantou);
         mTextview_sort = findViewById(R.id.text_sort);
         mTextview_filter =findViewById(R.id.text_filter);
-        mRelativelayout_sort = findViewById(R.id.relative_sort);
+        re_title = findViewById(R.id.re_title);
         mTextview_address=findViewById(R.id.textview_login);
         mRelayout_address=findViewById(R.id.relayout_address);
+        relative_sort=findViewById(R.id.relative_sort);
         relative_shaixuan=findViewById(R.id.relative_shaixuan);
 
         listheadView= LayoutInflater.from(this).inflate(R.layout.list_headview_square,null,false);
@@ -468,8 +472,7 @@ public class SquareActuvity extends BaseActivityother {
      * 判断是否是第一行
      * @return
      */
-    private boolean isScroll()
-    {
+    private boolean isScroll() {
         if(mListview_square.getRefreshableView().getFirstVisiblePosition() == 1 || mListview_square.getRefreshableView().getFirstVisiblePosition() == 0)
         {
             return true;
@@ -480,8 +483,7 @@ public class SquareActuvity extends BaseActivityother {
      * 得到高度比例
      * @return
      */
-    private float getScrollY()
-    {
+    private float getScrollY() {
         View c = mListview_square.getRefreshableView().getChildAt(0);
         if (c == null)
         {
@@ -527,7 +529,7 @@ public class SquareActuvity extends BaseActivityother {
                 }
 
             }
-        }, mRelativelayout_sort, leizing);
+        }, re_title, leizing);
         mPopwindow_square_sort.showPopwindow();
 
     }

@@ -49,7 +49,6 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mImage_view=convertView.findViewById(R.id.image_square_person);
             holder.shaixuan=convertView.findViewById(R.id.text_filter);
             holder.paixu=convertView.findViewById(R.id.text_sort);
-
             holder.relative_shaixuan=convertView.findViewById(R.id.relative_shaixuan);
             holder.relative_content=convertView.findViewById(R.id.relativelayout_content);
 

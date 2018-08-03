@@ -181,7 +181,8 @@
         <activity android:name="com.jingnuo.quanmb.activity.ErshouxinxiDetailsActivity" />
         <activity
             android:name="com.jingnuo.quanmb.activity.SquareActuvity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            />
         <activity
             android:name="com.jingnuo.quanmb.activity.MessageActivity"
             android:launchMode="singleTask"></activity>
