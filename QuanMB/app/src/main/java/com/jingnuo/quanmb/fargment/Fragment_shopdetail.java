@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -20,9 +22,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.master.permissionhelper.PermissionHelper;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,6 +41,7 @@ public class Fragment_shopdetail extends Fragment{
     CircleImageView image_head;
     ImageView imageView_call;
     Button button_choose;
+    TextView text_money;
 
     //对象
     PermissionHelper mPermission;//动态申请权限
@@ -111,6 +118,15 @@ public class Fragment_shopdetail extends Fragment{
         text_type.setText("主营："+matchingBean.getSpecialty_name());
         text_lv.setText(matchingBean.getAppellation_name());
         Glide.with(getActivity()).load(matchingBean.getHeadUrl()).into(image_head);
+
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                mhandler.sendEmptyMessage(0);
+            }
+        };
+        timer.schedule(timerTask, 0, 1000);
     }
 
     private void initview() {
@@ -120,8 +136,10 @@ public class Fragment_shopdetail extends Fragment{
         image_head=rootview.findViewById(R.id.image_head);
         imageView_call=rootview.findViewById(R.id.image_callphone);
         button_choose=rootview.findViewById(R.id.button_choose);
+        text_money=rootview.findViewById(R.id.text_money);
 
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -130,5 +148,25 @@ public class Fragment_shopdetail extends Fragment{
             mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+    }
+    Timer timer;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    text_money.setText(Staticdata.price);
+                    break;
+            }
+        }
+
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+        timer=null;
     }
 }

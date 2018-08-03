@@ -458,6 +458,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     Staticdata.map_task.clear();
                     Staticdata.PayissuetaskSuccess=true;
                 } else {
+                    ToastUtils.showToast(IssueTaskNextActivity.this,"附近没有此类型商户");
                     count = 0;
                     mList_picID.clear();
                     mKProgressHUD.dismiss();

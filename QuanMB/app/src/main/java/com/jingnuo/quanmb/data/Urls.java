@@ -85,7 +85,9 @@ public class Urls {
     public static String taskaddCommission = "task/addCommission";//任务加价
     public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布个性任务
     public static String jiazhengweixiuTYpe = "task/querySpecialty/getMaintainType?user_token=";//发布任务   家政维修子专业
-    public static String issuetask_zhaoshanghu = "task/querySpecialty/addMatchingTask";//发布任务 找商户
+    public static String issuetask_zhaoshanghu = "task/querySpecialty/addMatchingTask";//发布匹配任务
+    public static String issuetask_huanyipi = "task/querySpecialty/switchBusiness?user_token=";//换一批商户   task_id
+    public static String issuetask_getprice = "task/querySpecialty/priceBusiness";//请求商户价格
     //专业/商家模块
 
     public static String hotbackImage = "https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/icon/";//热门图片写在本地

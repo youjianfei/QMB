@@ -83,12 +83,21 @@ public class Matchshoplistbean {
             private String business_name;
             private String business_type_id;
             private String client_no;
+            private String business_no;
             private String headUrl;
             private String push_register;
             private String specialty_name;
             private int user_reputation;
             private String x_value;
             private String y_value;
+
+            public String getBusiness_no() {
+                return business_no;
+            }
+
+            public void setBusiness_no(String business_no) {
+                this.business_no = business_no;
+            }
 
             public String getAppellation_name() {
                 return appellation_name;

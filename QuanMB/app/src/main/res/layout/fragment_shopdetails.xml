@@ -65,7 +65,7 @@
                 android:id="@+id/text_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="等待对方报价"
+                android:text="等待商户报价"
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"
                 android:textSize="14dp"

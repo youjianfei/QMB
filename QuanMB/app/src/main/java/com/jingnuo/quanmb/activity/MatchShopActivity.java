@@ -2,6 +2,8 @@ package com.jingnuo.quanmb.activity;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -36,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MatchShopActivity extends AppCompatActivity  {
 
@@ -52,11 +56,11 @@ public class MatchShopActivity extends AppCompatActivity  {
     String ID = "";
     String respose="";
     List<Fragment> list_myfragments;
-    List<Matchshoplistbean.DataBean.MatchingBean>list_matchbea;
+    List<Matchshoplistbean.DataBean.MatchingBean>list_matchbea;//匹配的商户对象数组
 
-    String image_url = "";
     List<String> imageview_urllist;
-    Map map_taskdetail;
+    Map map_taskdetail;//任务详情map
+    Map map_price;//请求价格map
 
 
 
@@ -93,8 +97,6 @@ public class MatchShopActivity extends AppCompatActivity  {
         list_myfragments=new ArrayList<>();
         for (int i=0;i<list_matchbea.size();i++){
             list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
-            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
-            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
         }
         adapterFragment=new AdapterFragment(getSupportFragmentManager(),list_myfragments);
         mViewPager.setAdapter(adapterFragment);
@@ -104,7 +106,19 @@ public class MatchShopActivity extends AppCompatActivity  {
         map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_taskdetail.put("id", ID + "");
-        request(map_taskdetail);
+        request(map_taskdetail);//请求任务详情
+        map_price=new HashMap();
+        map_price.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+        map_price.put("task_id", ID + "");
+        map_price.put("business_no", list_matchbea.get(0).getBusiness_no());
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                mhandler.sendEmptyMessage(0);
+            }
+        };
+        timer.schedule(timerTask, 0, 3000);
     }
 
     private void initview() {
@@ -123,9 +137,7 @@ public class MatchShopActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 ToastUtils.showToast(MatchShopActivity.this,"点击刷新");
-                list_myfragments.clear();
-                list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(0)));
-                adapterFragment.setFragments(list_myfragments);
+                huanyipi();
 
             }
         });
@@ -138,10 +150,17 @@ public class MatchShopActivity extends AppCompatActivity  {
             @Override
             public void onPageSelected(int position) {
                 ToastUtils.showToast(MatchShopActivity.this,"weizhi"+position);
-                if(position==2){
-
-                }
-
+                map_price.put("business_no", list_matchbea.get(position).getBusiness_no());//确定请求哪一个商户的出价
+//                timer.cancel();
+//                timer=null;
+//                timer = new Timer();
+//                TimerTask timerTask = new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        mhandler.sendEmptyMessage(0);
+//                    }
+//                };
+//                timer.schedule(timerTask, 0, 3000);
             }
 
             @Override
@@ -173,6 +192,58 @@ public class MatchShopActivity extends AppCompatActivity  {
         }).postHttp(Urls.Baseurl_cui + Urls.mytaskdetails, MatchShopActivity.this, 1, map);
 
     }
+    void huanyipi(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"换一批");
+                matchshoplistbean=new Gson().fromJson(respose,Matchshoplistbean.class);
+                if(matchshoplistbean.getCode()==1){
+                    list_matchbea.clear();
+                    list_matchbea.addAll(matchshoplistbean.getData().getMatching());
+                    list_myfragments.clear();
+                    for (int i=0;i<list_matchbea.size();i++){
+                        list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
+                    }
+                    adapterFragment.setFragments(list_myfragments);
+                }else {
+                    ToastUtils.showToast(MatchShopActivity.this,"附近没有此类型商户");
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.issuetask_huanyipi
+                +Staticdata.static_userBean.getData().getUser_token()+"&task_id="
+                +ID,MatchShopActivity.this,0);
+    }
+    void getPrice(Map map){
+        LogUtils.LOG("ceshi","商户出价"+map,"商户出价map");
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","商户出价"+respose,"商户出价");
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("data");//登录返回信息
+                    Staticdata.price=msg;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl_cui+Urls.issuetask_getprice,MatchShopActivity.this,1,map);
+    }
 
     void setImage(String image) {
         if (image == null || image.equals("")) {
@@ -188,5 +259,27 @@ public class MatchShopActivity extends AppCompatActivity  {
 
         }
 
+    }
+
+    Timer timer;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    getPrice(map_price);//请求商户出价
+                    break;
+            }
+        }
+
+
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+        timer=null;
     }
 }

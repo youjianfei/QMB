@@ -57,6 +57,7 @@ public class Staticdata {
     //发布任务支付成功
     public static boolean PayissuetaskSuccess =false;
 
-
+    //商家出价的价格
+    public  static  String price="等待商户出价";
 
 }
