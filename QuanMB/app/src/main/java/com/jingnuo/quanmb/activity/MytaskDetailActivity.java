@@ -56,7 +56,6 @@ public class MytaskDetailActivity extends BaseActivityother {
     RelativeLayout mRelativylaout_re4;
     TextView getmTextview_statejieshao;//例：正在等待帮手接单
     TextView mTextview_taskstate;// 任务类型
-    TextView mTextview_tasktitle;//标题
     TextView mTextview_taskmoney;//佣金
     TextView mTextview_tasktime;//发布时间
     TextView mTextview_taskdetails;//任务详情
@@ -81,6 +80,8 @@ public class MytaskDetailActivity extends BaseActivityother {
     TextView mButton_again;
 
     //数据
+    String app_type="";//判断是否是匹配单
+
     String ID = "";
     Map map_taskdetail;
 
@@ -358,7 +359,6 @@ public class MytaskDetailActivity extends BaseActivityother {
         todoName = findViewById(R.id.text_todoname);
         mTextview_guzhuName = findViewById(R.id.text_guzhuname);
         mTextview_taskstate = findViewById(R.id.text_taskstate);
-        mTextview_tasktitle = findViewById(R.id.text_tasktittt);//标题
         mTextview_taskmoney = findViewById(R.id.text_taskmoney);
         mTextview_tasktime = findViewById(R.id.text_tasktime);
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
@@ -439,6 +439,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails, "MytaskDetailActivity");
                 LogUtils.LOG("ceshi", respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
+                app_type=taskDetailBean.getData().getApp_type();
                 if (taskDetailBean.getData().getTask_Status_code().equals("01") ||
                         taskDetailBean.getData().getTask_Status_code().equals("08") ||
                         taskDetailBean.getData().getTask_Status_code().equals("09") ||
@@ -472,7 +473,6 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
-                mTextview_tasktitle.setText(taskDetailBean.getData().getTask_name());
                 if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")&&taskDetailBean.getData().getTask_Status_code().equals("02")){
                     String Tip="";
                     switch (taskDetailBean.getData().getDelay_time()){
@@ -615,7 +615,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     void setImage(String image) {
         if (image == null || image.equals("")) {
-//            request(map_taskdetail);
+
         } else {
             String[] images = image.split(",");
             int len = images.length;

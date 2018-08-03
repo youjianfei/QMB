@@ -39,7 +39,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_state;
-    TextView mTextview_tasktitle;
     TextView mTextview_taskmoney;
     TextView mTextview_taskissuetime;
     TextView mTextview_name;
@@ -56,6 +55,8 @@ public class TaskDetailsActivity extends BaseActivityother {
     String ID = "";//任务id;
     String is_counteroffer = "";
     double commison=0;
+
+    String app_type="";//判断广场单和匹配单
 
 
     String image_url="";
@@ -90,10 +91,17 @@ public class TaskDetailsActivity extends BaseActivityother {
         popwindow_bargin = new Popwindow_bargin(this, new Interence_bargin() {
             @Override
             public void onResult(String result) {//还价网络请求
-                if(commison>Double.parseDouble(result)){
-                    ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
-                    return;
+                String URL="";
+                if(app_type.equals("1")){//1   匹配单
+                    URL=Urls.Baseurl_cui + Urls.barginPiPei;
+                }else {//广场单
+                    URL=Urls.Baseurl_cui + Urls.barginmonry;
+                    if(commison>Double.parseDouble(result)){
+                        ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
+                        return;
+                    }
                 }
+
                 Map map_bargin = new HashMap();
                 map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                 map_bargin.put("task_id", "" + ID);
@@ -112,7 +120,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                             e.printStackTrace();
                         }
                         if (status == 1) {
-                            ToastUtils.showToast(TaskDetailsActivity.this, "还价申请已发出");
+                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
                         } else {
                             ToastUtils.showToast(TaskDetailsActivity.this, msg);
                         }
@@ -121,7 +129,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                     public void onError(int error) {
 
                     }
-                }).postHttp(Urls.Baseurl_cui + Urls.barginmonry, TaskDetailsActivity.this, 1, map_bargin);
+                }).postHttp(URL, TaskDetailsActivity.this, 1, map_bargin);
             }
         });
 
@@ -218,7 +226,6 @@ public class TaskDetailsActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mTextview_state = findViewById(R.id.text_taskstate);
-        mTextview_tasktitle = findViewById(R.id.text_tasktitle);
         mTextview_taskmoney = findViewById(R.id.text_taskmoney);
         mTextview_taskissuetime = findViewById(R.id.text_tasktime);
         mTextview_name = findViewById(R.id.text_name);
@@ -239,9 +246,9 @@ public class TaskDetailsActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", "任务详情返回信息" + respose, "TaskDetailsActivity");
                 mTaskData = new Gson().fromJson(respose, TaskDetailBean.class);
+                app_type=mTaskData.getData().getApp_type();
                 mTextview_state.setText(mTaskData.getData().getSpecialty_name());
-                mTextview_tasktitle.setText(mTaskData.getData().getTask_name());
-                mTextview_taskmoney.setText("佣金：" + mTaskData.getData().getCommission() + "元");
+                mTextview_taskmoney.setText(mTaskData.getData().getCommission() + "元");
                 commison=mTaskData.getData().getCommission();
                 mTextview_taskissuetime.setText("发布时间：" + mTaskData.getData().getTask_Startdate());
                 mTextview_name.setText(mTaskData.getData().getNick_name());
@@ -249,7 +256,7 @@ public class TaskDetailsActivity extends BaseActivityother {
 //                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
 //                long ago = Long.parseLong(Utils.getTime(mTaskData.getData().getTask_EndDate()));//任务过期时间
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_tasktime.setText(mTaskData.getData().getTask_hope());
+                mTextview_tasktime.setText(mTaskData.getData().getTask_Time());
 
                 mTextview_taskaddress.setText(mTaskData.getData().getRelease_address()+"-"+mTaskData.getData().getDetailed_address());
 //                mTextview_peoplelevel.setText(mTaskData.getData().getUser_grade());
@@ -268,7 +275,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                     mButton_counteroffer.setText("出价");
                     mButton_help.setVisibility(View.GONE);
-                    mTextview_taskmoney.setText("佣金：帮手出价" );
+                    mTextview_taskmoney.setText("帮手出价" );
                     commison=5;
                 }
             }
@@ -293,8 +300,6 @@ public class TaskDetailsActivity extends BaseActivityother {
                 imageview_urllist.add(images[i]);
             }
             adapter_gridviewpic.notifyDataSetChanged();
-
-
         }
 
     }

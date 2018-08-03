@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -96,17 +98,17 @@ public class MatchShopActivity extends AppCompatActivity  {
     }
 
     private void initdata() {
+        ID = getIntent().getStringExtra("id");
         imageview_urllist=new ArrayList<>();//图片展示
         adapter_gridviewpic=new Adapter_Gridviewpic_skillsdetails(imageview_urllist,MatchShopActivity.this);
         imageGridview.setAdapter(adapter_gridviewpic);
         list_myfragments=new ArrayList<>();
         for (int i=0;i<list_matchbea.size();i++){
-            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
+            list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i),ID));
         }
         adapterFragment=new AdapterFragment(getSupportFragmentManager(),list_myfragments);
         mViewPager.setAdapter(adapterFragment);
 
-        ID = getIntent().getStringExtra("id");
         map_taskdetail = new HashMap();
         map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
@@ -141,8 +143,9 @@ public class MatchShopActivity extends AppCompatActivity  {
         mtextview_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(MatchShopActivity.this,"点击刷新");
-                huanyipi();
+//                ToastUtils.showToast(MatchShopActivity.this,"点击刷新");
+                huanyipi();//请求换一批
+
 
             }
         });
@@ -156,16 +159,16 @@ public class MatchShopActivity extends AppCompatActivity  {
             public void onPageSelected(int position) {
                 ProgressDlog.showProgress(mKProgressHUD);
                 map_price.put("business_no", list_matchbea.get(position).getBusiness_no());//确定请求哪一个商户的出价
-//                timer.cancel();
-//                timer=null;
-//                timer = new Timer();
-//                TimerTask timerTask = new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        mhandler.sendEmptyMessage(0);
-//                    }
-//                };
-//                timer.schedule(timerTask, 0, 3000);
+                timer.cancel();
+                timer=null;
+                timer = new Timer();
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        mhandler.sendEmptyMessage(0);
+                    }
+                };
+                timer.schedule(timerTask, 0, 3000);
             }
 
             @Override
@@ -180,13 +183,13 @@ public class MatchShopActivity extends AppCompatActivity  {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails+"re"+respose, "MytaskDetailActivity");
+                LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails+"查订单"+respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
                 mTextview_yuyuetime.setText(taskDetailBean.getData().getTask_Time());
                 mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() + "-" + taskDetailBean.getData().getDetailed_address());
-                String imageURL = taskDetailBean.getData().getAvatar_imgUrl().substring(0, taskDetailBean.getData().getAvatar_imgUrl().length() - 1);
+                String imageURL =taskDetailBean.getData().getTask_ImgUrl();
                 setImage(imageURL);
             }
 
@@ -208,7 +211,7 @@ public class MatchShopActivity extends AppCompatActivity  {
                     list_matchbea.addAll(matchshoplistbean.getData().getMatching());
                     list_myfragments.clear();
                     for (int i=0;i<list_matchbea.size();i++){
-                        list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i)));
+                        list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i),ID));
                     }
                     adapterFragment.setFragments(list_myfragments);
                 }else {
@@ -238,6 +241,9 @@ public class MatchShopActivity extends AppCompatActivity  {
                     status = (Integer) object.get("code");//
                     msg = (String) object.get("data");//
                     Staticdata.price=msg;
+                    if(status==1){
+                        timer.cancel();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -287,5 +293,11 @@ public class MatchShopActivity extends AppCompatActivity  {
         super.onDestroy();
         timer.cancel();
         timer=null;
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(this,MainActivity.class);
+       startActivity(intent);
+       finish();
     }
 }

@@ -58,12 +58,6 @@ public class Urls {
     public static String helpIn_state = "helper/getHelperAuditState";//帮手认证审核状态
 
 
-
-
-
-
-
-
     public static String shouyePic = "plaza/getSlideShow?type=";//首页轮播广告  type=1广成首页   2爱心帮
 
 
@@ -74,9 +68,11 @@ public class Urls {
     public static String taskdetails = "task/taskDetail/getTaskDetail";//任务详情  ?id=
     public static String taskdetailscancle = "task/taskCancel";//撤消任务
     public static String helptask = "order/taskHelp";//确认帮助 ?id=
-    public static String barginmonry = "bargain/taskBargain";//还价
+    public static String barginmonry = "bargain/taskBargain";//广场单还价
+    public static String barginPiPei = "bargain/businessBid";//匹配单出价
     public static String applycompletetask = "order/requestOk?user_token=";//申请任务完成
     public static String completetask = "order/affirmOk?user_token=";//确认任务完成
+    public static String chooseBusiness = "order/chooseBusiness";//选择商户
     public static String checkissuetask = "task/querySpecialty/checkAnnouncementList";//检验任务内容是否有违规
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号
     public static String Issue_again = "task/taskBackon?user_token=";//重新上架任务

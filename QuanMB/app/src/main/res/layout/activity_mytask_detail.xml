@@ -222,51 +222,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@color/white">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@mipmap/title2"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="18dp"
-                    />
-                <TextView
-                    android:id="@+id/text11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/line1"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="15dp"
-                    android:text="标题"
-                    android:textColor="#7f7f7f"
-                    android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/text_tasktittt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:text="标题"
-                    android:textColor="@color/black_text"
-                    android:layout_toRightOf="@+id/text2"
-                    android:textSize="15dp" />
-                <ImageView
-                    android:id="@+id/line22"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/text_tasktittt"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@color/gray_dfdfdf" />
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/taskdetails2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line22"
                     />
 
                 <TextView

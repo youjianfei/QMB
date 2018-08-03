@@ -382,7 +382,7 @@ public class SquareActuvity extends BaseActivityother {
          */
 
         RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
-        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.45));
+        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.27));
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
 
         banner = listheadView. findViewById(R.id.banner);

@@ -65,11 +65,20 @@ public class MyTodoBean {
             private String order_status;
             private String task_description;
             private String task_name;
+            private String task_time;
             private int task_order_id;
             private String task_id;
             private String createDate;
             private String order_enddate;
             private String specialty_name;
+
+            public String getTask_time() {
+                return task_time;
+            }
+
+            public void setTask_time(String task_time) {
+                this.task_time = task_time;
+            }
 
             public String getSpecialty_name() {
                 return specialty_name;

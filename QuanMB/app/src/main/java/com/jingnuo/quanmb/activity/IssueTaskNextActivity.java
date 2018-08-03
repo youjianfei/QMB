@@ -284,16 +284,11 @@ public class IssueTaskNextActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请选择联系人");
             return false;
         }
-//        phonenumber = mEdit_phonenumber.getText() + "";
-//        if (phonenumber.equals("")) {
-//            ToastUtils.showToast(this, "请输入联系电话");
-//            return false;
-//        }
 
         Staticdata.map_task.put("mobile_no", phonenumber);
         Staticdata.map_task.put("client_name", lianxiren);
         Staticdata.map_task.put("client_sex", sex + "");
-        Staticdata.map_task.put("task_Img_id", "");
+//        Staticdata.map_task.put("task_Img_id", "");
         return true;
     }
 

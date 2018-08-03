@@ -56,11 +56,8 @@ public class Adapter_mytodo extends  BaseAdapter {
         holder.mTextview_type.setText(mdata.get(position).getSpecialty_name());
         holder.mTextview_title.setText(mdata.get(position).getTask_name());
         holder.mTextview_issuename.setText(mdata.get(position).getCreateDate());
-        long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
-        long ago = Long.parseLong(Utils.getTime(mdata.get(position).getOrder_enddate()));//任务过期时间
-        String time = Utils.getDistanceTime(ago, now);//算出的差值
 
-        holder.mTextview_content.setText("剩余时间："+time);
+        holder.mTextview_content.setText("预约时间："+mdata.get(position).getTask_time());
         holder.mTextview_money.setText("佣金："+mdata.get(position).getOrder_amount()+"元");
         holder.mTextview_state.setText(mdata.get(position).getOrder_status());
         if(mdata.get(position).getOrder_status().equals("已完成")){

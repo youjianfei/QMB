@@ -20,13 +20,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
+import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,13 +56,17 @@ public class Fragment_shopdetail extends Fragment{
     //对象
     PermissionHelper mPermission;//动态申请权限
 
+    Map map_choosebissness;
+    String task_id="";
+
 
 
     //数据
     Matchshoplistbean.DataBean.MatchingBean matchingBean;
     @SuppressLint("ValidFragment")
-    public Fragment_shopdetail(Matchshoplistbean.DataBean.MatchingBean matchingBean) {
+    public Fragment_shopdetail(Matchshoplistbean.DataBean.MatchingBean matchingBean,String task_id) {
         this.matchingBean = matchingBean;
+        this.task_id = task_id;
     }
 
     @Nullable
@@ -108,7 +122,46 @@ public class Fragment_shopdetail extends Fragment{
         button_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(getContext(),"dainjhie");
+                if(text_money.getText().equals("等待商户出价")){
+                    ToastUtils.showToast(getContext(),"该商户还未出价");
+                }else {
+                    map_choosebissness=new HashMap();
+                    map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                    map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                    map_choosebissness.put("task_id", task_id);
+                    map_choosebissness.put("business_no", matchingBean.getBusiness_no());
+                    map_choosebissness.put("counteroffer_amount", text_money.getText());
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            int status = 0;
+                            String msg = "";
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//
+                                msg = (String) object.get("message");//
+                                if(status==1){
+                                    timer.cancel();
+                                    Intent intentpay = new Intent(getActivity(), PayActivity.class);
+                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
+                                    intentpay.putExtra("amount", text_money.getText());
+                                    intentpay.putExtra("taskid", task_id);
+                                    startActivity(intentpay);
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,getContext(),1,map_choosebissness);
+                }
+
             }
         });
     }

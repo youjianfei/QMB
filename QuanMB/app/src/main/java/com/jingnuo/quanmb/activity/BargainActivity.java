@@ -210,7 +210,7 @@ public class BargainActivity extends BaseActivityother {
                         public void onResult(boolean result) {
                             if(result){
                                 Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
-                                intentpay.putExtra("title", "任务补差价");
+                                intentpay.putExtra("title", "任务补差价");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
                                 intentpay.putExtra("amount", amount_need + "");
                                 intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
                                 startActivity(intentpay);

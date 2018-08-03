@@ -88,7 +88,7 @@ public class Adapter_SquareList extends  BaseAdapter {
         });
 
 
-        holder.mText_task_des.setText(mData.get(position).getTask_Name()+"");
+        holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
 
         long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
         long ago = Long.parseLong(Utils.getTime(mData.get(position).getTask_Startdate()));//任务发布时间

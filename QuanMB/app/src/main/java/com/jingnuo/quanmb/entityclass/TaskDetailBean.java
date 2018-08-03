@@ -36,33 +36,15 @@ public class TaskDetailBean {
     }
 
     public static class DataBean {
-        /**
-         * Status_name : 待帮助
-         * client_name : 看看
-         * client_no : 90000000003
-         * client_sex : 0
-         * commission : 63
-         * createDate : 2018-05-09 09:08:23
-         * detailed_address : 了了了我我
-         * is_counteroffer : 1
-         * mobile_no : 2556
-         * nick_name : 天天
-         * specialty_name : app开发
-         * task_EndDate : 2018-05-12 09:08:23
-         * task_ID : 46
-         * task_Status_code : 01
-         * task_Time : 5
-         * task_description : 开发炸弹
-         * task_name : 我选
-         * url : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/05cdaca5-5fa8-4e99-a439-b3bfb73f3d21dts_featured_ath_clr100.png?Expires=1525919126&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=eLBGuzFvy8PxOb1LSGBnSFOQ0gI%3D,
-         * user_grade : 1
-         */
+
 
         private String Status_name;
         private String client_name;
         private String client_no;
         private String client_sex;
+        private String app_type;
         private double commission;
+        private double counteroffer_amount;
         private String createDate;
         private String detailed_address;
         private String is_counteroffer;
@@ -94,6 +76,22 @@ public class TaskDetailBean {
         private String task_Startdate;
         private String x_value="";
         private String y_value="";
+
+        public double getCounteroffer_amount() {
+            return counteroffer_amount;
+        }
+
+        public void setCounteroffer_amount(double counteroffer_amount) {
+            this.counteroffer_amount = counteroffer_amount;
+        }
+
+        public String getApp_type() {
+            return app_type;
+        }
+
+        public void setApp_type(String app_type) {
+            this.app_type = app_type;
+        }
 
         public String getTask_Time() {
             return task_Time;

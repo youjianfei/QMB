@@ -232,6 +232,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_pay.put("task_id",taskid);
+                    if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
+                        map_pay.put("isBargainPay","Y");
+                    }
                     LogUtils.LOG("ceshi",map_pay.toString(),"充值");
                     new WechatPay(PayActivity.this,api,map_pay).wepay();
                     return;
@@ -245,6 +248,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_zpay.put("task_id",taskid);
+                    if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
+                        map_zpay.put("isBargainPay","Y");
+                    }
                     LogUtils.LOG("ceshi",map_zpay.toString(),"支付宝qingqiu接口");
                     LogUtils.LOG("ceshi", Urls.Baseurl_hu+Urls.zhifubaoPay,"支付宝qingqiu接口");
                     new ZhifubaoPay(PayActivity.this,map_zpay).zhifubaoPay();
@@ -307,6 +313,11 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
             map_yue.put("pay_money",amount);
             map_yue.put("task_id",taskid);
+            LogUtils.LOG("ceshi",title_pay.toString(),"title_pay");
+            if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
+                map_yue.put("isBargainPay","Y");
+                LogUtils.LOG("ceshi",map_yue.toString(),"余额付款");
+            }
             balancePay(map_yue);
         }else {
             ToastUtils.showToast(this,"支付密码错误");
