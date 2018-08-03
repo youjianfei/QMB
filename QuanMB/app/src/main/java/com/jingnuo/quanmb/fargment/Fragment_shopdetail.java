@@ -126,7 +126,7 @@ public class Fragment_shopdetail extends Fragment{
                 mhandler.sendEmptyMessage(0);
             }
         };
-        timer.schedule(timerTask, 0, 1000);
+        timer.schedule(timerTask, 0, 100);
     }
 
     private void initview() {

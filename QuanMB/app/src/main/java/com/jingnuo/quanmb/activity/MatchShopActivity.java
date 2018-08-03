@@ -27,9 +27,11 @@ import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
 import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.fargment.Fragment_shopdetail;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +67,8 @@ public class MatchShopActivity extends AppCompatActivity  {
 
 
     //对象
+    KProgressHUD mKProgressHUD;
+
     AdapterFragment adapterFragment;
     Matchshoplistbean  matchshoplistbean;
 
@@ -81,6 +85,7 @@ public class MatchShopActivity extends AppCompatActivity  {
         }
         StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         respose=getIntent().getStringExtra("respose");
+        mKProgressHUD = new KProgressHUD(MatchShopActivity.this);
         matchshoplistbean=new Gson().fromJson(respose,Matchshoplistbean.class);
         list_matchbea=new ArrayList<>();
         list_matchbea.clear();
@@ -149,7 +154,7 @@ public class MatchShopActivity extends AppCompatActivity  {
 
             @Override
             public void onPageSelected(int position) {
-                ToastUtils.showToast(MatchShopActivity.this,"weizhi"+position);
+                ProgressDlog.showProgress(mKProgressHUD);
                 map_price.put("business_no", list_matchbea.get(position).getBusiness_no());//确定请求哪一个商户的出价
 //                timer.cancel();
 //                timer=null;
@@ -225,12 +230,13 @@ public class MatchShopActivity extends AppCompatActivity  {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi","商户出价"+respose,"商户出价");
+                mKProgressHUD.dismiss();
                 int status = 0;
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("data");//登录返回信息
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("data");//
                     Staticdata.price=msg;
                 } catch (JSONException e) {
                     e.printStackTrace();
