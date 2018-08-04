@@ -84,32 +84,42 @@
         ptr:ptrMode="both"
         android:layout_below="@+id/re_title"
         />
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/relative_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/re_title"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         >
+        <ImageView
+            android:id="@+id/tttt"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/hottask"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="热门任务"
+            android:textSize="15dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/black"
+            android:layout_above="@+id/relative_shaixuan"
             />
-
         <RelativeLayout
             android:id="@+id/relative_shaixuan"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/relative_sort"
+            android:layout_below="@+id/tttt"
             android:background="@color/white">
             <LinearLayout
                 android:layout_width="160dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/background_gray_corners"
+                android:background="@drawable/button_miaobian_gray_20dp"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:orientation="horizontal">
@@ -129,7 +139,7 @@
                     android:layout_marginRight="10dp"
                     android:textColor="@color/text_title2"
                     android:textColorHint="@color/text_hide_tip"
-                    android:textSize="14dp"
+                    android:textSize="13dp"
                     android:imeOptions="actionSearch"
                     android:layout_marginLeft="10dp"
                     />
@@ -199,7 +209,7 @@
 
 
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 

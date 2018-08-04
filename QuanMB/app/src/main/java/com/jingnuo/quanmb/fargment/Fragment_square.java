@@ -535,10 +535,6 @@ public class Fragment_square extends Fragment {
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
 
         banner = listheadView. findViewById(R.id.banner);
-        relativeLayout_chengweibangshou=listheadView.findViewById(R.id.chengweibangshou);
-        relativeLayout_aixinbang=listheadView.findViewById(R.id.relative_aixinbang);
-        relativeLayout_hottask=listheadView.findViewById(R.id.relative_remenrenwu);
-        relativeLayout_wodeshequ=listheadView.findViewById(R.id.relative_wodeshequ);
 
 
         //设置图片加载器

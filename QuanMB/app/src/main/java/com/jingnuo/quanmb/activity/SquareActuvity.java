@@ -8,6 +8,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.youth.banner.Banner;
 import com.jingnuo.quanmb.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,19 +67,16 @@ public class SquareActuvity extends BaseActivityother {
     TextView mTextview_address;
     RelativeLayout re_title;
     RelativeLayout mRelayout_address;
-    LinearLayout relative_sort;
+    RelativeLayout relative_sort;
     RelativeLayout relative_shaixuan;
 
     Popwindow_SquareSort mPopwindow_square_sort;
 
     //头视图
     Banner banner;
-    RelativeLayout relativeLayout_chengweibangshou;
-    RelativeLayout relativeLayout_aixinbang;
-    RelativeLayout relativeLayout_hottask;
-    RelativeLayout relativeLayout_wodeshequ;
-
-    boolean hottask=true;
+    LinearLayout shaixuan;
+    LinearLayout paixu;
+    EditText mEdit_serchSquare_head;
 
     Chengweibangshou chengweibangshou;
 
@@ -95,9 +94,9 @@ public class SquareActuvity extends BaseActivityother {
     Square_defaultBean.DataBean mSquare_default_DataBean;
     List<Square_defaultBean.DataBean.ListBean> mListDate_square;
     int page = 1;//分页加载；
-    int MinCommission=0,MaxCommission=1000;
+    int MinCommission = 0, MaxCommission = 1000;
 
-    List<GuanggaoBean.DataBean>mdata_image_GG;
+    List<GuanggaoBean.DataBean> mdata_image_GG;
 
     @Override
     public int setLayoutResID() {
@@ -108,25 +107,24 @@ public class SquareActuvity extends BaseActivityother {
     protected void setData() {
         intentFilter_bauduaddress = new IntentFilter();
         intentFilter_bauduaddress.addAction("com.jingnuo.quanmb.ADDRESS");
-        baiduAddressBroadcastReciver=new BaiduAddressBroadcastReciver(new InterfaceBaiduAddress() {
+        baiduAddressBroadcastReciver = new BaiduAddressBroadcastReciver(new InterfaceBaiduAddress() {
             @Override
             public void onResult(final String address) {
-                 runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @SuppressLint("NewApi")
                     @Override
                     public void run() {
 
-                        if(address.equals("筛选")){
-//                            mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(SquareActuvity.this,69));
+                        if (address.equals("筛选")) {
                             mListview_square.getRefreshableView().setSelection(2);
                             showPopwindow(0);
 
-                        }else if(address.equals("排序")){
+                        } else if (address.equals("排序")) {
                             mListview_square.getRefreshableView().setSelection(2);
                             showPopwindow(1);
                         } else {
                             mTextview_address.setText(address);
-                            map_filter_sort.put("city_code",address);
+                            map_filter_sort.put("city_code", address);
                             map_filter_sort.put("x_value", Staticdata.xValue);
                             map_filter_sort.put("y_value", Staticdata.yValue);
                             page = 1;
@@ -141,17 +139,15 @@ public class SquareActuvity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        if(!Staticdata.city_location.equals("")){
+        if (!Staticdata.city_location.equals("")) {
             mTextview_address.setText(Staticdata.city_location);
         }
 
-
-
         mKProgressHUD = new KProgressHUD(this);
-        chengweibangshou=new Chengweibangshou(this);
-        mdata_image_GG=new ArrayList<>();
+        chengweibangshou = new Chengweibangshou(this);
+        mdata_image_GG = new ArrayList<>();
         map_filter_sort = new HashMap();
-        initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
+        initMap(MinCommission + "", MaxCommission + "", page + "", "", "", "");//默认展示
         mListDate_square = new ArrayList<>();
         mAdapter_SquareList = new Adapter_SquareList(mListDate_square, this);
         mListview_square.setAdapter(mAdapter_SquareList);
@@ -159,6 +155,7 @@ public class SquareActuvity extends BaseActivityother {
         request_square(map_filter_sort, page);//首页默认请求 page==1
         request_GGLB();//请求轮播图
     }
+
     private void request_square(final Map map_filterOrsort, final int page) {
         map_filterOrsort.put("pageNum", page + "");
         new Volley_Utils(new Interface_volley_respose() {
@@ -187,11 +184,11 @@ public class SquareActuvity extends BaseActivityother {
 //
 //                        return;
 //                    }
-                    if (page == 1 && mSquare_default_DataBean.getList() != null) {
+                    if (page == 1 && mSquare_default_DataBean.getList() != null && mSquare_default_DataBean.getList().size() != 0) {
                         mListDate_square.clear();
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
-                        if(mListDate_square.size()==0){
-                            Square_defaultBean.DataBean.ListBean data=new Square_defaultBean.DataBean.ListBean();
+                        if (mListDate_square.size() == 0) {
+                            Square_defaultBean.DataBean.ListBean data = new Square_defaultBean.DataBean.ListBean();
                             data.setNick_name("000");
                             mListDate_square.add(data);
                         }
@@ -217,15 +214,16 @@ public class SquareActuvity extends BaseActivityother {
 
 
     }
-    private void request_GGLB(){//请求网络轮播图
+
+    private void request_GGLB() {//请求网络轮播图
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshiddd", "轮播图片：" + respose, "ShopCenterActivity");
                 mdata_image_GG.clear();
-                mdata_image_GG.addAll(new Gson().fromJson(respose,GuanggaoBean.class).getData());
-                List<String> images=new ArrayList<>();
-                for(int i=0;i<mdata_image_GG.size();i++){
+                mdata_image_GG.addAll(new Gson().fromJson(respose, GuanggaoBean.class).getData());
+                List<String> images = new ArrayList<>();
+                for (int i = 0; i < mdata_image_GG.size(); i++) {
                     images.add(mdata_image_GG.get(i).getImg_url());
                 }
                 //设置图片集合
@@ -238,16 +236,18 @@ public class SquareActuvity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui+Urls.shouyePic+"1",SquareActuvity.this,0);
-        LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui+Urls.shouyePic, "fragment_square");
+        }).Http(Urls.Baseurl_cui + Urls.shouyePic + "1", SquareActuvity.this, 0);
+        LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui + Urls.shouyePic, "fragment_square");
     }
+
     Intent intend_taskdrtails;
+
     @Override
     protected void initListener() {
         mRelayout_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_address=new Intent(SquareActuvity.this, LocationaddressActivity.class);
+                Intent intent_address = new Intent(SquareActuvity.this, LocationaddressActivity.class);
                 startActivity(intent_address);
             }
         });
@@ -318,15 +318,15 @@ public class SquareActuvity extends BaseActivityother {
 
             @Override
             public void afterTextChanged(Editable s) {
-                LogUtils.LOG("ceshi",s+"","spisup");
+                LogUtils.LOG("ceshi", s + "", "spisup");
                 String search = "";
                 search = mEdit_serchSquare.getText() + "";
-                if(search.length()>5){
-                    ToastUtils.showToast(SquareActuvity.this,"搜索关键字太长");
-                    return ;
+                if (search.length() > 5) {
+                    ToastUtils.showToast(SquareActuvity.this, "搜索关键字太长");
+                    return;
                 }
 //                String searchhou = Utils.ZhuanMa(search);
-                initMap(MinCommission+"",MaxCommission+"",page+"",search,"","");
+                initMap(MinCommission + "", MaxCommission + "", page + "", search, "", "");
                 request_square(map_filter_sort, page);
 
             }
@@ -340,9 +340,9 @@ public class SquareActuvity extends BaseActivityother {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if(firstVisibleItem>1){
+                if (firstVisibleItem > 1) {
                     relative_sort.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     relative_sort.setVisibility(View.INVISIBLE);
                 }
 //                if(isScroll())
@@ -354,11 +354,11 @@ public class SquareActuvity extends BaseActivityother {
 //
 //                        LogUtils.LOG("ceshi",alpha+"alpha"+firstVisibleItem,"透明度");
 ////                        mRelativelayout_sort.setAlpha(alpha);
-//                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+////                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
 //                        relative_shaixuan.setVisibility(View.INVISIBLE);
 //                    }else {
 //                        relative_shaixuan.setVisibility(View.VISIBLE);
-//                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
+////                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
 //                    }
 //                }
 
@@ -368,96 +368,79 @@ public class SquareActuvity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mEdit_serchSquare =findViewById(R.id.edit_searchSquare);
+        mEdit_serchSquare = findViewById(R.id.edit_searchSquare);
         mListview_square = findViewById(R.id.list_square);
         mImageview_jiantou = findViewById(R.id.iamge_jiantou);
         mTextview_sort = findViewById(R.id.text_sort);
-        mTextview_filter =findViewById(R.id.text_filter);
+        mTextview_filter = findViewById(R.id.text_filter);
         re_title = findViewById(R.id.re_title);
-        mTextview_address=findViewById(R.id.textview_login);
-        mRelayout_address=findViewById(R.id.relayout_address);
-        relative_sort=findViewById(R.id.relative_sort);
-        relative_shaixuan=findViewById(R.id.relative_shaixuan);
+        mTextview_address = findViewById(R.id.textview_login);
+        mRelayout_address = findViewById(R.id.relayout_address);
+        relative_sort = findViewById(R.id.relative_sort);
+        relative_shaixuan = findViewById(R.id.relative_shaixuan);
 
-        listheadView= LayoutInflater.from(this).inflate(R.layout.list_headview_square,null,false);
+        listheadView = LayoutInflater.from(this).inflate(R.layout.list_headview_square, null, false);
         mListview_square.getRefreshableView().addHeaderView(listheadView);
         /**
          * headview  控件
          */
 
-        RelativeLayout relativeLayout_headbackground=listheadView.findViewById(R.id.relativeLayout_headbackground);
-        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.27));
+        RelativeLayout relativeLayout_headbackground = listheadView.findViewById(R.id.relativeLayout_headbackground);
+        RelativeLayout.LayoutParams mLayoutparams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 0.26));
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
 
-        banner = listheadView. findViewById(R.id.banner);
-        relativeLayout_chengweibangshou=listheadView.findViewById(R.id.chengweibangshou);
-        relativeLayout_aixinbang=listheadView.findViewById(R.id.relative_aixinbang);
-        relativeLayout_hottask=listheadView.findViewById(R.id.relative_remenrenwu);
-        relativeLayout_wodeshequ=listheadView.findViewById(R.id.relative_wodeshequ);
-
+        banner = listheadView.findViewById(R.id.banner);
+        shaixuan = listheadView.findViewById(R.id.text_filter);
+        paixu = listheadView.findViewById(R.id.text_sort);
+        mEdit_serchSquare_head = listheadView.findViewById(R.id.edit_searchSquare);
 
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
-        relativeLayout_chengweibangshou.setOnClickListener(new View.OnClickListener() {
+        shaixuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Staticdata.isLogin){
-                    chengweibangshou.chengweibangshou();
-                }else {
-                    Intent intent_login = new Intent(SquareActuvity.this, LoginActivity.class);
-                    startActivity(intent_login);
-                }
+//                mListview_square.getRefreshableView().setSelectionFromTop(2, SizeUtils.dip2px(SquareActuvity.this, 80));
+                mListview_square.getRefreshableView().setSelection(2);
+                showPopwindow(0);
             }
         });
-        relativeLayout_wodeshequ.setOnClickListener(new View.OnClickListener() {
+        paixu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                mListview_square.getRefreshableView().setSelectionFromTop(2, SizeUtils.dip2px(SquareActuvity.this, 80));
+                mListview_square.getRefreshableView().setSelection(2);
+                showPopwindow(1);
+            }
+        });
+        mEdit_serchSquare_head.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if (Staticdata.isLogin){
-                    if(Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
-                        ToastUtils.showToast(SquareActuvity.this,"请先绑定社区");
-                        Intent intent=new Intent(SquareActuvity.this, ShezhishequActivity.class);
-                        startActivity(intent);
-                        return;
-                    }
-                    Intent intent_myShequ=new Intent(SquareActuvity.this, MyShequActivity.class);
-                    startActivity(intent_myShequ);
-                }else {
-                    Intent intent_login = new Intent(SquareActuvity.this, LoginActivity.class);
-                    startActivity(intent_login);
-                }
             }
-        });
-        relativeLayout_aixinbang.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                Intent intent_aixinbang=new Intent(SquareActuvity.this, LoveTaskActivity.class);
-                startActivity(intent_aixinbang);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
-        });
-        relativeLayout_hottask.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                if(hottask){
-                    page=1;
-                    initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
-                    map_filter_sort.put("hotTask","1");
-                    request_square(map_filter_sort, page);
-                    mKProgressHUD.show();
-                    hottask=false;
-                }else {
-                    page=1;
-                    initMap(MinCommission+"",MaxCommission+"",page+"","","","");//默认展示
-                    map_filter_sort.remove("hotTask");
-                    request_square(map_filter_sort, page);
-                    mKProgressHUD.show();
-                    hottask=true;
+            public void afterTextChanged(Editable s) {
+                LogUtils.LOG("ceshi", s + "", "spisup");
+                String search = "";
+                search = mEdit_serchSquare_head.getText() + "";
+                if (search.length() > 5) {
+                    ToastUtils.showToast(SquareActuvity.this, "搜索关键字太长");
+                    return;
                 }
+//                String searchhou = Utils.ZhuanMa(search);
+                initMap(MinCommission + "", MaxCommission + "", page + "", search, "", "");
+                request_square(map_filter_sort, page);
+
             }
         });
     }
 
-    void initMap(String  minCommission,String  maxCommission,String  pageNum,String  name,String  task_type,String  code){
+    void initMap(String minCommission, String maxCommission, String pageNum, String name, String task_type, String code) {
         map_filter_sort.put("minCommission", minCommission);
         map_filter_sort.put("maxCommission", maxCommission);
         map_filter_sort.put("pageNum", pageNum);
@@ -470,62 +453,62 @@ public class SquareActuvity extends BaseActivityother {
 
     /**
      * 判断是否是第一行
+     *
      * @return
      */
     private boolean isScroll() {
-        if(mListview_square.getRefreshableView().getFirstVisiblePosition() == 1 || mListview_square.getRefreshableView().getFirstVisiblePosition() == 0)
-        {
+        if (mListview_square.getRefreshableView().getFirstVisiblePosition() == 1 || mListview_square.getRefreshableView().getFirstVisiblePosition() == 0) {
             return true;
         }
         return false;
     }
+
     /**
      * 得到高度比例
+     *
      * @return
      */
     private float getScrollY() {
         View c = mListview_square.getRefreshableView().getChildAt(0);
-        if (c == null)
-        {
+        if (c == null) {
             return 0;
         }
         int firstVisiblePosition = mListview_square.getRefreshableView().getFirstVisiblePosition();
-        if(firstVisiblePosition == 1 || firstVisiblePosition == 0)
-        {
+        if (firstVisiblePosition == 1 || firstVisiblePosition == 0) {
             //如果可见的是第一行或第二行，那么开始计算距离比例
             float top = c.getTop();
             //当第一行已经开始消失的时候，top是为负数的，所以取正
             top = Math.abs(top);
             //48为菜单栏的高度，单位为dp
             //得到的高度为ViewPager的高度减去菜单栏高度，即为最大可滑动距离
-            float height = c.getHeight() - SizeUtils.dip2px(this,40);
+            float height = c.getHeight() - SizeUtils.dip2px(this, 40);
 
             float y = top / height;
 
             return y;
-        }else
-        {
+        } else {
             return 0;
         }
     }
+
     @SuppressLint("NewApi")
-    void  showPopwindow(final int  leizing){
+    void showPopwindow(final int leizing) {
 
         mPopwindow_square_sort = new Popwindow_SquareSort(SquareActuvity.this, new InterfacePopwindow_square_sort() {
             @Override
-            public void onSuccesses(String address, String id,int type) {
-                if(type==0){//筛选
-                    page=1;
-                    LogUtils.LOG("ceshi",address+id,"条件筛选");
-                    String [] Q = id.split("%");
-                    initMap(Q[0],Q[1],page+"","",address,"");
+            public void onSuccesses(String address, String id, int type) {
+                if (type == 0) {//筛选
+                    page = 1;
+                    LogUtils.LOG("ceshi", address + id, "条件筛选");
+                    String[] Q = id.split("%");
+                    initMap(Q[0], Q[1], page + "", "", address, "");
                     map_filter_sort.remove("hotTask");//防止热门任务下双重条件筛选
-                    request_square(map_filter_sort,page);
-                }else {//排序方式
-                    page=1;
-                    LogUtils.LOG("ceshi",address+id,"排序方式");
-                    initMap(MinCommission+"",MaxCommission+"",page+"","","",id+"");
-                    request_square(map_filter_sort,page);
+                    request_square(map_filter_sort, page);
+                } else {//排序方式
+                    page = 1;
+                    LogUtils.LOG("ceshi", address + id, "排序方式");
+                    initMap(MinCommission + "", MaxCommission + "", page + "", "", "", id + "");
+                    request_square(map_filter_sort, page);
                 }
 
             }
@@ -535,11 +518,10 @@ public class SquareActuvity extends BaseActivityother {
     }
 
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-       unregisterReceiver(baiduAddressBroadcastReciver);
+        unregisterReceiver(baiduAddressBroadcastReciver);
     }
 
 }

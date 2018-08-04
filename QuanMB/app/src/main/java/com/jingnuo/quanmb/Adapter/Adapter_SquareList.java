@@ -47,10 +47,6 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mText_task_price=convertView.findViewById(R.id.text_square_price);
             holder.mTextview_distance=convertView.findViewById(R.id.text_taskdistance);
             holder.mImage_view=convertView.findViewById(R.id.image_square_person);
-            holder.shaixuan=convertView.findViewById(R.id.text_filter);
-            holder.paixu=convertView.findViewById(R.id.text_sort);
-            holder.relative_shaixuan=convertView.findViewById(R.id.relative_shaixuan);
-            holder.relative_content=convertView.findViewById(R.id.relativelayout_content);
 
             convertView.setTag(holder);
 
@@ -58,33 +54,7 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
-        if(position ==0){
-            holder.relative_shaixuan.setVisibility(View.VISIBLE);
-        }else {
-            holder.relative_shaixuan.setVisibility(View.GONE);
-        }
-        if(mData.get(position).getNick_name().equals("000")){
-            holder.relative_content.setVisibility(View.INVISIBLE);
-            return convertView;
-        }else {
-            holder.relative_content.setVisibility(View.VISIBLE);
-        }
-        holder.shaixuan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
-                intent.putExtra("address","筛选");
-                mContext.sendBroadcast(intent);
-            }
-        });
-        holder.paixu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
-                intent.putExtra("address","排序");
-                mContext.sendBroadcast(intent);
-            }
-        });
+
 
 
         holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
@@ -125,9 +95,5 @@ public class Adapter_SquareList extends  BaseAdapter {
         ImageView mImage_view;//头像
 
 
-        RelativeLayout relative_shaixuan;
-        RelativeLayout relative_content;
-        LinearLayout shaixuan;
-        LinearLayout paixu;
     }
 }
