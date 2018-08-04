@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
@@ -23,6 +24,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
@@ -198,13 +200,23 @@ public class IssueSkillActivity extends BaseActivityother {
         mButton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               boolean Nonull= checknull();//判空方法
-                if(Nonull){
+                new Popwindow_Tip("需缴纳10个推广币", IssueSkillActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if (result) {
+                            boolean Nonull= checknull();//判空方法
+                            if(Nonull){
 //                    progressDlog.showPD("正在发布，请稍等");
-                    mKProgressHUD.show();
-                    uploadimg();//上传图片
+                                mKProgressHUD.show();
+                                uploadimg();//上传图片
 
-                }
+                            }
+                        }
+
+                    }
+                }).showPopwindow();
+
+
 
             }
         });

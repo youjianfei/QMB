@@ -56,6 +56,7 @@ public class SkillDetailActivity extends BaseActivityother {
     TextView mTextview_relseaCount;//发布帖子的数量
     LinearLayout mLinearlayout_phonenumber;
     LinearLayout mLinearlayout_collection;
+    LinearLayout lineatlayout_count;//发布帖子的数量
     LinearLayout linearlayout_bottom;
     MyGridView imageGridview;
     ImageView mImageView_Suggest;
@@ -116,6 +117,7 @@ public class SkillDetailActivity extends BaseActivityother {
         mTextview_shopname = findViewById(R.id.text_shopname);
         mLinearlayout_phonenumber = findViewById(R.id.linearlayout_phonenumber);
         linearlayout_bottom = findViewById(R.id.linearlayout_bottom);
+        lineatlayout_count = findViewById(R.id.lineatlayout_count);
         imageGridview = findViewById(R.id.GridView_PIC);
         mImageView_Suggest = findViewById(R.id.image_complain);
         mImageview_shopPic = findViewById(R.id.image_shoppic);
@@ -138,6 +140,7 @@ public class SkillDetailActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         mImageview_shopPic.setOnClickListener(this);
+        lineatlayout_count.setOnClickListener(this);
         mLinearlayout_collection.setOnClickListener(this);
         mImageView_Suggest.setOnClickListener(this);
         mTextview_more.setOnClickListener(this);
@@ -178,6 +181,16 @@ public class SkillDetailActivity extends BaseActivityother {
                     intent_shopskills.putExtra("NO","B"+mSkilldetailsbean.getData().getDetail().getBusiness_no());
                 }
                 startActivity(intent_shopskills);
+
+                break;
+            case R.id.lineatlayout_count:
+                Intent intent_shopskills1=new Intent(SkillDetailActivity.this,ShophallActivity.class);
+                if (role.equals("1")){
+                    intent_shopskills1.putExtra("NO","H"+mSkilldetailsbean.getData().getDetail().getHelper_no());
+                }else if (role.equals("2")){
+                    intent_shopskills1.putExtra("NO","B"+mSkilldetailsbean.getData().getDetail().getBusiness_no());
+                }
+                startActivity(intent_shopskills1);
 
                 break;
             case R.id.image_complain:

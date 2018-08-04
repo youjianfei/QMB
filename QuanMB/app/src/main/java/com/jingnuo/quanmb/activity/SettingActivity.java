@@ -24,7 +24,6 @@ import static com.jingnuo.quanmb.utils.Utils.deleteAllFiles;
 public class SettingActivity extends BaseActivityother {
     //控件
 
-    Button mButton_logout;
     TextView mTextview_cleancache;
     TextView mTextview_suggest;
     TextView mTextview_textview_cleancacheSize;
@@ -55,7 +54,6 @@ public class SettingActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-        mButton_logout.setOnClickListener(this);
         mTextview_cleancache.setOnClickListener(this);
         mTextview_suggest.setOnClickListener(this);
         mTextview_share.setOnClickListener(this);
@@ -63,7 +61,6 @@ public class SettingActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mButton_logout=findViewById(R.id.button_logout);
         mTextview_cleancache=findViewById(R.id.textview_cleancache);
         mTextview_suggest=findViewById(R.id.textview_suggest);
         mTextview_textview_cleancacheSize=findViewById(R.id.textview_cleancacheSize);
@@ -75,7 +72,7 @@ public class SettingActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()){
 
-            case R.id.button_logout :
+            case R.id.textview_aboutus :
 //                SharedPreferencesUtils.putString(SettingActivity.this,"QMB","password","");
 //                Staticdata.isLogin=false;
 //                Intent intent_logout=new Intent(SettingActivity.this,LoginActivity.class);

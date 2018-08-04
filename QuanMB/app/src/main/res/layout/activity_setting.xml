@@ -144,17 +144,30 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
         android:id="@+id/imageView" />
-    <Button
-        android:id="@+id/button_logout"
+
+    <TextView
+        android:id="@+id/textview_aboutus"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="退 出 登 录"
-        android:textColor="@color/white"
-        android:background="@drawable/button_red_20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="30dp"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:text="关于我们"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/textview_shareAPP"
+        android:textColor="@color/black_text"
+        android:paddingLeft="20dp"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
         />
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/more"
+        android:layout_below="@+id/textview_shareAPP"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+         />
+
 
 
 </RelativeLayout>
