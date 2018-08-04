@@ -57,7 +57,7 @@ public class Adapter_myIssue extends BaseAdapter {
             viewHolder = (viewHolde) convertView.getTag();
         }
         viewHolder.mTextview_type.setText(mData.get(position).getSpecialty_name());
-        viewHolder.mTextview_title.setText(mData.get(position).getTask_name());
+        viewHolder.mTextview_title.setText(mData.get(position).getTask_description());
         viewHolder.mTextview_issuetime.setText("发布时间：" + mData.get(position).getTask_StartDate());
 
         viewHolder.mTextview_taskstate.setText(mData.get(position).getStatus_name());

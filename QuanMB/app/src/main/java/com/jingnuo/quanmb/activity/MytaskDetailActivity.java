@@ -446,12 +446,12 @@ public class MytaskDetailActivity extends BaseActivityother {
                         taskDetailBean.getData().getTask_Status_code().equals("07") ||
                         taskDetailBean.getData().getTask_Status_code().equals("13")
                         ) {
-                    mRelativylaout_re1.setVisibility(View.VISIBLE);
+//                    mRelativylaout_re1.setVisibility(View.VISIBLE);
                     mRelativylaout_re4.setVisibility(View.GONE);
                 } else {
                    glidee.load(taskDetailBean.getData().getB_h_url()).into(mImageview_todo);
 
-                    mRelativylaout_re1.setVisibility(View.GONE);
+//                    mRelativylaout_re1.setVisibility(View.GONE);
                     mRelativylaout_re4.setVisibility(View.VISIBLE);
                     String vip=""+taskDetailBean.getData().getLevel();
                     if (vip.equals("")){
@@ -556,7 +556,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
 //                long ago = Long.parseLong(Utils.getTime(taskDetailBean.getData().getTask_EndDate()));//任务过期时间
 //                String time = Utils.getDistanceTime(ago, now);//算出的差值
-                mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_hope());
+                mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_Time());
 
 
                 mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() + "-" + taskDetailBean.getData().getDetailed_address());
