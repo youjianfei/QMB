@@ -282,7 +282,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                         task_typeID = id + "";
                     }
                 }).showPopwindow();
-
+//                mPopwindow_skilltype = new Popwindow_SkillType(getActivity(), new InterfacePopwindow_SkillType() {
+//                    @Override
+//                    public void onSuccesses(String type, int id) {
+//                        mTextview_choose.setText(type);
+//                        task_typeID = id + "";
+//                    }
+//                });
+//                mPopwindow_skilltype.showPopwindow();
                 break;
         }
     }

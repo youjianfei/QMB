@@ -38,25 +38,29 @@ public class Popwindow_JiazhengweixiuTYpe {
     private Activity activity;
     PopupWindow mPopupWindow;
 
+
     //控件
     TextView mTextview_one;
+    TextView mTextview_two;
     ImageView mImage_close;
     ListView popListview;
     //对象
     Adapter_choose mAdapter;
     InterfacePopwindow_SkillType mInterface;
     //数据
-    List<JiazhengweixiuTaskType.DataBean> listdata_one;
-
+    List<Skillmenu_oneBean.DataBean.ListBean> listdata_one;
+    List<Skillmenu_twoBean.DataBean.ListBean>listdata_two;
+    int  level=1;
     public Popwindow_JiazhengweixiuTYpe(Activity activity, InterfacePopwindow_SkillType mInterface) {
         this.activity = activity;
         this.mInterface = mInterface;
         listdata_one = new ArrayList<>();
+        listdata_two=new ArrayList<>();
     }
 
     public void showPopwindow() {
         //初始化popwindow；
-        View conView = LayoutInflater.from(activity).inflate(R.layout.popwindow_jiazhengweixiu_type, null, false);
+        View conView = LayoutInflater.from(activity).inflate(R.layout.popwindow_skilltype, null, false);
         mPopupWindow = new PopupWindow(conView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失
@@ -67,10 +71,11 @@ public class Popwindow_JiazhengweixiuTYpe {
         popListview = conView.findViewById(R.id.Listview_addresspopwindow);
         mImage_close = conView.findViewById(R.id.ImageView_close);
         mTextview_one = conView.findViewById(R.id.text_one);
+        mTextview_two=  conView.findViewById(R.id.text_two);
         Utils.setAlpha((float) 0.3, activity);
         initdata();
         initlistennr();
-        request(Urls.Baseurl_cui+ Urls.jiazhengweixiuTYpe+ Staticdata.static_userBean.getData().getUser_token());
+        request(Urls.Baseurl_cui+ Urls.jiazhengweixiuTYpe+ Staticdata.static_userBean.getData().getUser_token(),level);
     }
 
     private void initdata() {
@@ -78,14 +83,14 @@ public class Popwindow_JiazhengweixiuTYpe {
         popListview.setAdapter(mAdapter);
     }
 
-    private void request(String url_list) {
+    private void request(String url_list , final int level_) {
 
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi", respose, "popwindow");
+                LogUtils.LOG("ceshi",respose,"popwindow");
                 listdata_one.clear();
-                listdata_one.addAll(new Gson().fromJson(respose, JiazhengweixiuTaskType.class).getData());
+                listdata_one.addAll(new Gson().fromJson(respose, Skillmenu_oneBean.class).getData().getList());
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -93,15 +98,16 @@ public class Popwindow_JiazhengweixiuTYpe {
             public void onError(int error) {
 
             }
-        }).Http(url_list, activity, 0);
+        }).Http(url_list,activity,0);
 
     }
-
     private void initlistennr() {
         mTextview_one.setOnClickListener(new View.OnClickListener() {//点击一级请选择
             @Override
             public void onClick(View view) {
-                request(Urls.Baseurl_cui + Urls.jiazhengweixiuTYpe+ Staticdata.static_userBean.getData().getUser_token());
+                level=1;
+                request(Urls.Baseurl+Urls.jiazhengweixiuTYpe+ Staticdata.static_userBean.getData().getUser_token(),level);
+                mTextview_two.setVisibility(View.GONE);
             }
         });
 
@@ -114,21 +120,30 @@ public class Popwindow_JiazhengweixiuTYpe {
         mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {//点击一级菜单请求二级菜单
             @Override
             public void onDismiss() {
-                Utils.setAlpha(1, activity);
+                Utils.setAlpha(1,activity);
             }
         });
         popListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mTextview_one.setText(listdata_one.get(i).getSpecialty_name());
-                mInterface.onSuccesses(listdata_one.get(i).getSpecialty_name(), listdata_one.get(i).getSpecialty_id());
-                mPopupWindow.dismiss();
+                if(level==1){
+                    level=2;
+                    int  id=listdata_one.get(i).getSpecialty_id();
+                    mTextview_one.setText(listdata_one.get(i).getSpecialty_name());
+                    request(Urls.Baseurl+Urls.Skillmenu_right+"?specialty_id="+id,level);
+                    mTextview_two.setVisibility(View.VISIBLE);
+                }else {
+                    mTextview_two.setText(listdata_one.get(i).getSpecialty_name());
+                    mInterface.onSuccesses(listdata_one.get(i).getSpecialty_name(),listdata_one.get(i).getSpecialty_id());
+                    mPopupWindow.dismiss();
+                }
+
             }
         });
     }
 
     class Adapter_choose extends BaseAdapter {
-        List<JiazhengweixiuTaskType.DataBean> mData;
+        List<Skillmenu_oneBean.DataBean.ListBean> mData;
         Context mContext;
         LayoutInflater mInflater;
 
