@@ -60,4 +60,7 @@ public class Staticdata {
     //商家出价的价格
     public  static  String price="等待商户出价";
 
+    //判断新消息的类型
+    public  static  String  newmessageTYpe="notype";
+
 }

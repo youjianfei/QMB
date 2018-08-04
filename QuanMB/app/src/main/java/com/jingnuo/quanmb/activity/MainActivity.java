@@ -28,6 +28,9 @@ import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 import com.jingnuo.quanmb.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 
@@ -36,6 +39,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //控件
     DrawerLayout drawerlayout_menu;
 
+    CircleImageView image_dot;
     ImageView mImageview_message;//消息
     ImageView mImageview_iamge_person;//用户中心
     ImageView mImageview_help;//帮忙
@@ -151,6 +155,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     public void initview() {
         drawerlayout_menu=findViewById(R.id.drawerlayout_menu);
+        image_dot=findViewById(R.id.image_dot);
         mImageview_message=findViewById(R.id.iamge_message);
         mImageview_iamge_person=findViewById(R.id.iamge_person);
         mImageview_help=findViewById(R.id.image_help);
@@ -243,8 +248,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.iamge_message://消息界面
                 if (isLogin) {
+                    image_dot.setVisibility(View.INVISIBLE);
                     intent=new Intent(MainActivity.this,MessageActivity.class);
+                    intent.putExtra("newmessageTYpe",Staticdata.newmessageTYpe);
                     startActivity(intent);
+                    Staticdata.newmessageTYpe="notype";//跳转完之后归0
                 } else {
                     intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
@@ -271,6 +279,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
         }
 
+    }
+
+    public  void setdot(){
+        image_dot.setVisibility(View.VISIBLE);
     }
 
     /**

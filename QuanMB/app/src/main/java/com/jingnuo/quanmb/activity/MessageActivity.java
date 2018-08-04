@@ -21,6 +21,8 @@ import java.util.Map;
 
 public class MessageActivity extends BaseActivityother {
 
+    String  newmessageTYpe="";
+
     //控件
     RelativeLayout mRelativelayout_bargain;
     RelativeLayout mRelativelayout_systemmessage;
@@ -57,7 +59,8 @@ public class MessageActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-
+        newmessageTYpe=getIntent().getStringExtra("newmessageTYpe");
+        setDot(newmessageTYpe);
     }
 
     @Override
@@ -111,19 +114,19 @@ public class MessageActivity extends BaseActivityother {
         mImageView_dot3=findViewById(R.id.image_reddot3);
         mImageView_dot4=findViewById(R.id.image_reddot4);
     }
-    public   void setDot(int num){
+    public   void setDot(String num){
         LogUtils.LOG("ceshi",num+"","推送3");
         switch (num){
-            case 1:
+            case "type1":
                 mImageView_dot1.setVisibility(View.VISIBLE);
                 break;
-            case 2:
+            case "type2":
                 mImageView_dot2.setVisibility(View.VISIBLE);
                 break;
-            case 3:
+            case "type3":
                 mImageView_dot3.setVisibility(View.VISIBLE);
                 break;
-            case 4:
+            case "type4":
                 mImageView_dot4.setVisibility(View.VISIBLE);
                 break;
         }
