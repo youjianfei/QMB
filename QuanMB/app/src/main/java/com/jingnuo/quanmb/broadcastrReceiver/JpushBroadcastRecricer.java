@@ -13,7 +13,6 @@ import com.jingnuo.quanmb.activity.SettingActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
 import com.jingnuo.quanmb.activity.TaskDetailsActivity;
 import com.jingnuo.quanmb.activity.TuijianrenwuActivity;
-import com.jingnuo.quanmb.fargment.Fragment_message;
 import com.jingnuo.quanmb.utils.LogUtils;
 
 import org.json.JSONException;

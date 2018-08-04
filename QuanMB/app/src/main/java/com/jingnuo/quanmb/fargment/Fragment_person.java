@@ -119,7 +119,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         getActivity().startActivity(intent_datiladdress);
                         break;
                     case 2://我是帮手
-
                         chengweibangshou.chengweibangshou();
                         break;
                     case 3://商户中心
