@@ -36,6 +36,7 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_JiazhengweixiuTYpe;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
@@ -72,7 +73,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     Button mButton_sub;
 
     //对象
-    Popwindow_SkillType mPopwindow_skilltype;
+    Popwindow_ChooseTime popwindow_chooseTime;
     PermissionHelper permissionHelper;
     //    Popwindow_CompleteTime popwindow_completeTime;
     DataTime_select dataTimeSelect;
@@ -191,8 +192,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dataTimeSelect.timeSelect(getActivity());
-
+//                dataTimeSelect.timeSelect(getActivity());
+                popwindow_chooseTime=new Popwindow_ChooseTime(getActivity(), new InterfaceDate_select() {
+                    @Override
+                    public void onResult(String time) {
+                        mTextview_time.setText(time);
+                    }
+                });
+                popwindow_chooseTime.showPopwindow();
             }
         });
 

@@ -36,6 +36,7 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -75,9 +76,10 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
     //对象
     Popwindow_SkillType mPopwindow_skilltype;
+    Popwindow_ChooseTime popwindow_chooseTime;
     PermissionHelper permissionHelper;
 //    Popwindow_CompleteTime popwindow_completeTime;
-    DataTime_select dataTimeSelect;
+//    DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
 
 
@@ -143,13 +145,13 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
 
-        dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
-            @Override
-            public void onResult(String time) {
-                LogUtils.LOG("ceshi","时间选择器返回的结果"+time,"zhaorenshou");
-                mTextview_time.setText(time);
-            }
-        });
+//        dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
+//            @Override
+//            public void onResult(String time) {
+//                LogUtils.LOG("ceshi","时间选择器返回的结果"+time,"zhaorenshou");
+//                mTextview_time.setText(time);
+//            }
+//        });
 
     }
 
@@ -204,7 +206,14 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dataTimeSelect.timeSelect(getActivity());
+//                dataTimeSelect.timeSelect(getActivity());
+                popwindow_chooseTime=new Popwindow_ChooseTime(getActivity(), new InterfaceDate_select() {
+                    @Override
+                    public void onResult(String time) {
+                        mTextview_time.setText(time);
+                    }
+                });
+                popwindow_chooseTime.showPopwindow();
             }
         });
 
@@ -305,10 +314,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         }
 
         task_time = mTextview_time.getText() + "";
-        if (task_time.equals("请选择希望完成时间")) {
-            ToastUtils.showToast(getActivity(), "请选择希望完成时间");
-            return false;
-        }
+
 
         release_address = mTextview_taskAddress.getText() + "";
         if (release_address.equals("选择地址")) {
