@@ -129,7 +129,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@color/gray_dfdfdf" />
+            android:background="@color/gray_dfdfdf"
+            tools:ignore="Suspicious0dp" />
         <TextView
             android:id="@+id/text_myshequ"
             android:layout_width="0dp"
@@ -148,20 +149,27 @@
         android:background="@color/gray_background"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         >
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@mipmap/noticqq"
+            android:layout_marginLeft="30dp"
             />
-        <TextView
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="附近帮手已经完成空调维修任务，获取佣金300元"-->
+            <!--android:textSize="12dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--/>-->
+        <TextSwitcher
+            android:id="@+id/tv_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="附近帮手已经完成空调维修任务，获取佣金300元"
-            android:textSize="12dp"
-            android:layout_marginLeft="5dp"
-            />
+            android:layout_marginLeft="15dp"
+             />
     </LinearLayout>
 
 

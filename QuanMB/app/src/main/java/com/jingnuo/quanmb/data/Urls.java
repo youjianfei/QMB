@@ -59,6 +59,7 @@ public class Urls {
 
 
     public static String shouyePic = "plaza/getSlideShow?type=";//首页轮播广告  type=1广成首页   2爱心帮
+    public static String shouyeRadios = "radio/getAllRadios";//首页轮播喇叭
 
 
     //任务模块

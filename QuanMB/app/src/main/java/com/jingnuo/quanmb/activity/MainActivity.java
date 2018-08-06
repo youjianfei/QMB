@@ -3,31 +3,43 @@ package com.jingnuo.quanmb.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.ShouyeRadios;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 import com.jingnuo.quanmb.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +56,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     ImageView mImageview_iamge_person;//用户中心
     ImageView mImageview_help;//帮忙
     ImageView mImageview_needhelp;//求助
+    private TextSwitcher tv_notice;//轮播通知文字
 
     TextView mTextview_neerbytask;//附近服务
     TextView mTextview_lovetask;//爱心帮
@@ -51,8 +64,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     PermissionHelper permissionHelper;
 
+
+
     //高德定位
     int locationtime=0;
+
+
+
+    private String[] mAdvertisements ;
 
     @SuppressLint("ResourceType")
     @Override
@@ -163,6 +182,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTextview_neerbytask=findViewById(R.id.text_neerbytask);
         mTextview_lovetask=findViewById(R.id.text_lovetask);
         mTextview_myshequ=findViewById(R.id.text_myshequ);
+        tv_notice = findViewById(R.id.tv_notice);
     }
 
     public void initdata() {
@@ -199,17 +219,64 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void setview() {
-
+        tv_notice.setFactory(new ViewSwitcher.ViewFactory() {
+            // 这里用来创建内部的视图，这里创建TextView，用来显示文字
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            public View makeView() {
+                TextView tv = new TextView(MainActivity.this);
+                // 设置文字的显示单位以及文字的大小
+                tv.setTextSize(12);
+                tv.setTextColor(getColor(R.color.gray_969696));
+                return tv;
+            }
+        });
+        tv_notice.setInAnimation(MainActivity.this,
+                R.anim.slide_in_bottom);
+        tv_notice.setOutAnimation(getApplicationContext(), R.anim.slide_out_up);
 
     }
+    private final int HOME_AD_RESULT = 1;
+    private int mSwitcherCount=0;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                // 广告
+                case HOME_AD_RESULT:
+                    tv_notice.setText(data.get(mSwitcherCount % data.size()).getContent());
+                    mSwitcherCount++;
+                    mHandler.sendEmptyMessageDelayed(HOME_AD_RESULT, 3000);
+                    break;
+            }
 
+        }
+    };
     public void setdata() {
     if(isLogin){
         drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
     }else {
         drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
     }
+        data=new ArrayList<>();
+        requestRadios();
+    }
+    List<ShouyeRadios.DataBean> data;
+    void requestRadios(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose+"喇叭","首页");
+                data.clear();
+                data.addAll(new Gson().fromJson(respose,ShouyeRadios.class).getData());
+                mHandler.sendEmptyMessage(HOME_AD_RESULT);
+            }
 
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_hu+Urls.shouyeRadios,this,0);
     }
 
     @Override
