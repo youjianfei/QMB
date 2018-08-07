@@ -106,7 +106,7 @@
             android:id="@+id/tt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="商铺地址"
+            android:text="商铺名称"
             android:textSize="15dp"
             android:textColor="@color/black_text"
             android:layout_marginLeft="30dp"

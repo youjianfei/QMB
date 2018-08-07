@@ -142,7 +142,6 @@ public class ShopCenterActivity extends BaseActivityother {
                 Intent intent_myorder = new Intent(ShopCenterActivity.this, MySkillActivity.class);
                 intent_myorder.putExtra("type", type);
                 startActivity(intent_myorder);
-
                 break;
 
             case R.id.myorder://我的订单

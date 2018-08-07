@@ -23,13 +23,23 @@
         android:layout_marginTop="30dp"
 
         />
+    <ImageView
+        android:id="@+id/image_zhiding"
+        android:layout_width="32dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/zhiding2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/image_shoppic"
+        android:visibility="invisible"
+        />
     <TextView
         android:id="@+id/text_shopskills"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black_text"
         android:textSize="15dp"
-        android:text="专业灯具上门安装 维修 清洗 养护"
+        android:text="         专业灯具上门安装 维修 清洗 养护"
         android:layout_toRightOf="@+id/image_shoppic"
         android:layout_toLeftOf="@+id/image_call"
         android:layout_marginTop="13dp"

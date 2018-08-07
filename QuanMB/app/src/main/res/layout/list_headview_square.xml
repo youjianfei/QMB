@@ -24,11 +24,13 @@
         android:layout_below="@+id/relativeLayout_headbackground"
         android:background="@color/white"
         android:visibility="visible"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         >
         <ImageView
+            android:id="@+id/image_line"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="5dp"
             android:background="@color/gray_background"
             />
         <ImageView
@@ -139,14 +141,6 @@
                     android:layout_marginLeft="10dp"
                     />
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_background"
-                android:layout_alignParentBottom="true"
-                />
-
 
         </RelativeLayout>
     </RelativeLayout>

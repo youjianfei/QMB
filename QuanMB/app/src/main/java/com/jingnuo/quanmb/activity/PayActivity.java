@@ -40,7 +40,6 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     //控件
     CircleImageView mImageview_head;
     TextView mTextview_amount;
-    TextView mTextview_order;
     RelativeLayout mRelayout_yue;
     RelativeLayout mRelayout_wechat;
     RelativeLayout mRelayout_zhifubao;
@@ -109,11 +108,11 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         taskid=intent.getStringExtra("taskid");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_head);
         mTextview_amount.setText("¥"+amount);
-        if(Staticdata.map_task.get("tasktypename")!=null){
-            mTextview_order.setText(Staticdata.map_task.get("tasktypename").toString()+"-"+Staticdata.map_task.get("task_id"));
-        }else {
-            mTextview_order.setText(title_pay+"-"+taskid);
-        }
+//        if(Staticdata.map_task.get("tasktypename")!=null){
+//            mTextview_order.setText(Staticdata.map_task.get("tasktypename").toString()+"-"+Staticdata.map_task.get("task_id"));
+//        }else {
+//            mTextview_order.setText(title_pay+"-"+taskid);
+//        }
         image_yue.setSelected(true);
         requestYue();//请求实时余额
     }
@@ -168,7 +167,6 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     protected void initView() {
         mImageview_head = findViewById(R.id.image_viewHead);
         mTextview_amount = findViewById(R.id.textview);
-        mTextview_order = findViewById(R.id.textview_order);
         mRelayout_yue = findViewById(R.id.relayoutyue);
         mRelayout_wechat = findViewById(R.id.relayout_wechat);
         mRelayout_zhifubao = findViewById(R.id.relayout_zhifubao);

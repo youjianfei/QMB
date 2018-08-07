@@ -1,7 +1,9 @@
 package com.jingnuo.quanmb;
 
 import android.app.Application;
+import android.content.Intent;
 
+import com.jingnuo.quanmb.activity.LaunchActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.umeng.commonsdk.UMConfigure;
@@ -48,7 +50,19 @@ public class App extends Application {
             PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834", "http://www.sina.com.cn/");
             PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
         }
+        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
     }
+    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread thread, Throwable ex) {
+            restartApp();
+        }
+    };
 
-
-}
+    public void restartApp() {
+        Intent intent = new Intent(getApplicationContext(), LaunchActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+//        RxBus.getDefault().post(RxBusConstant.FINISH);//把你退出APP的代码放在这，我这里使用了rxbus关闭所有Activity
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+    }

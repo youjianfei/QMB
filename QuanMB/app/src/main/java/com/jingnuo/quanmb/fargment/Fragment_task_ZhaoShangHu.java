@@ -59,7 +59,6 @@ import java.util.Map;
 import static android.app.Activity.RESULT_OK;
 
 public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickListener {
-    public  static Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
     View rootview;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
@@ -104,7 +103,6 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_zhaoshanghu, container, false);
-        fragmentTaskZhaoShangHu=this;
         initview();
         initdata();
         setdata();
@@ -133,7 +131,12 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     private void initdata() {
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-
+        if(!Staticdata.aoi.equals("")){
+            mTextview_taskAddress.setText(Staticdata.aoi);
+        }
+        xValue=Staticdata.xValue;
+        yValue=Staticdata.yValue;
+        citycode=Staticdata.city_location;
     }
 
     private void setdata() {
@@ -144,14 +147,6 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-
-//        dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
-//            @Override
-//            public void onResult(String time) {
-//                LogUtils.LOG("ceshi","时间选择器返回的结果"+time,"zhaorenshou");
-//                mTextview_time.setText(time);
-//            }
-//        });
 
     }
 
@@ -180,6 +175,9 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         if (Staticdata.mlistdata_pic.size() > 1) {
             imageGridview.setVisibility(View.VISIBLE);
         }
+    }
+    public void setAddress(String address){
+        mTextview_taskAddress.setText(address);
     }
 
     private void initlistenner() {

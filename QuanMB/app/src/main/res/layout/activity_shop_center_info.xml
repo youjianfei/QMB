@@ -166,18 +166,7 @@
                 android:background="@color/gray_background"
                 />
 
-            <TextView
-                android:id="@+id/text_hangye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="帮送"
-                android:textSize="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/image_line3"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
-                android:textColor="@color/text_title2"
-                />
+
             <TextView
                 android:id="@+id/text_changephonenumber"
                 android:layout_width="wrap_content"
@@ -189,14 +178,27 @@
                 android:layout_below="@+id/image_line3"
                 android:textColor="@color/text_title2"
                 />
-
+            <TextView
+                android:id="@+id/text_hangye"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="帮送"
+                android:textSize="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_below="@+id/image_line3"
+                android:layout_marginRight="30dp"
+                android:gravity="right"
+                android:textColor="@color/text_title2"
+                android:layout_toRightOf="@+id/text_changephonenumber"
+                />
             <ImageView
                 android:id="@+id/image_line4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_below="@+id/text_changephonenumber"
+                android:layout_below="@+id/text_hangye"
                 android:layout_marginTop="15dp"
                 android:background="@color/gray_background"
                 />

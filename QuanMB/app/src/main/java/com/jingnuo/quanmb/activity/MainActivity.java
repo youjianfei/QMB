@@ -226,7 +226,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 TextView tv = new TextView(MainActivity.this);
                 // 设置文字的显示单位以及文字的大小
                 tv.setTextSize(12);
-                tv.setTextColor(getColor(R.color.gray_969696));
+                tv.setTextColor(getResources().getColor(R.color.gray_969696));
                 return tv;
             }
         });

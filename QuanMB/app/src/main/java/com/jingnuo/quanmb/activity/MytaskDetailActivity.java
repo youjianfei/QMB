@@ -59,7 +59,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     TextView mTextview_taskmoney;//佣金
     TextView mTextview_tasktime;//发布时间
     TextView mTextview_taskdetails;//任务详情
-    TextView mTextview_taskstarttime;//完成时间
+    TextView mTextview_taskstarttime;//预约时间
     TextView mTextview_taskaddress;//地址
     TextView mTextview_guzhuName;//雇主姓名
     CircleImageView mImageview_head;//雇主头像
@@ -305,7 +305,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                                     intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
                                 }
 
-                                intend_think.putExtra("orderno", taskDetailBean.getData().getOrder_no() + "");
+                                intend_think.putExtra("orderno", taskDetailBean.getData().getSpecialty_name() + "");
                                 intend_think.putExtra("imageurl", taskDetailBean.getData().getB_h_url() + "");
                                 startActivity(intend_think);
                             } else {
@@ -559,7 +559,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_Time());
 
 
-                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() + "-" + taskDetailBean.getData().getDetailed_address());
+                mTextview_taskaddress.setText( taskDetailBean.getData().getDetailed_address());
                 String imageURL = taskDetailBean.getData().getAvatar_imgUrl().substring(0, taskDetailBean.getData().getAvatar_imgUrl().length() - 1);
 
                 LogUtils.LOG("ceshi", "调用glide", "wode renwu");
@@ -592,6 +592,13 @@ public class MytaskDetailActivity extends BaseActivityother {
                     mButton_cancle.setVisibility(View.GONE);
                     mButton_again.setVisibility(View.VISIBLE);
                     getmTextview_statejieshao.setText("任务已失效，请重新发布");
+                }
+                if(app_type.equals("1")){
+                    if (taskDetailBean.getData().getTask_Status_code().equals("07") || taskDetailBean.getData().getTask_Status_code().equals("13")) {
+                        mButton_cancle.setVisibility(View.GONE);
+                        mButton_again.setVisibility(View.GONE);
+                        getmTextview_statejieshao.setText("任务已失效");
+                    }
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
                     mButton_completed.setVisibility(View.VISIBLE);

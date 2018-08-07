@@ -57,7 +57,7 @@ public class OrderThinkActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        textVieworderno.setText("订单号-"+orderno);
+        textVieworderno.setText("类型-"+orderno);
         mTextview_name.setText(name);
         Glide.with(this).load(imageurl).error(R.mipmap.user_pic).into(imageView);
     }
@@ -69,8 +69,6 @@ public class OrderThinkActivity extends BaseActivityother {
         imageurl= intent.getStringExtra("imageurl");
         name= intent.getStringExtra("helpername");
         orderno= intent.getStringExtra("orderno");
-
-
 
         map_think=new HashMap();
         initmap();

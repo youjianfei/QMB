@@ -283,7 +283,7 @@
                 android:layout_marginLeft="110dp"
                 android:layout_marginRight="45dp"
                 android:layout_marginTop="15dp"
-                android:text="当前"
+                android:text="尽快"
                 android:textColor="@color/text_hide_tip"
                 android:textSize="14dp" />
 

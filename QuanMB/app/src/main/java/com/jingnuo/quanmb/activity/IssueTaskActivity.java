@@ -10,6 +10,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
@@ -17,7 +18,6 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.yancy.imageselector.ImageSelector;
 import com.jingnuo.quanmb.R;
 
-import static com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou.fragment_tsk_zhaoRenShou;
 
 public class IssueTaskActivity extends BaseActivityother {
 
@@ -35,6 +35,7 @@ public class IssueTaskActivity extends BaseActivityother {
     String xValue = "";//纬度
     String yValue = "";//经度
     String citycode = "";//城市名字
+    String Aoi="";
 
 
     Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
@@ -72,11 +73,14 @@ public class IssueTaskActivity extends BaseActivityother {
                     xValue = aMapLocation.getLatitude() + "";//获取纬度
                     yValue = aMapLocation.getLongitude() + "";//获取经度
                     citycode = aMapLocation.getCity();//城市信息
-                    String Aoi = aMapLocation.getAoiName() + "";
+                     Aoi = aMapLocation.getAoiName() + "";
+                    Staticdata.aoi=Aoi;
                     if (Aoi.equals("")) {
 
                     } else {
-
+                        if(fragmentTaskZhaoShangHu!=null){
+                            fragmentTaskZhaoShangHu.setAddress(Aoi);
+                        }
                     }
 
                 } else {
@@ -190,8 +194,8 @@ public class IssueTaskActivity extends BaseActivityother {
                 fragmentTaskZhaoShangHu.setview(data);
             }
 
-            if(Tag==1&&fragment_tsk_zhaoRenShou!=null){
-                fragment_tsk_zhaoRenShou.setview(data);
+            if(Tag==1&&fragmentTskZhaoRenShou!=null){
+                fragmentTskZhaoRenShou.setview(data);
             }
 
             if(Tag==2&&fragment_task_jiaZhengWeixiu!=null){

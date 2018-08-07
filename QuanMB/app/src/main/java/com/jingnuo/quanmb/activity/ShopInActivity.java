@@ -29,7 +29,7 @@ public class ShopInActivity extends BaseActivityother {
     private Button mButton_submit;
     EditText mEditview_name;
     EditText mEditview_phonenumber;
-    EditText textview_shopaddress;
+    EditText textview_shopname;
 
     //数据
     String name="";
@@ -113,7 +113,7 @@ public class ShopInActivity extends BaseActivityother {
         mButton_submit=findViewById(R.id.button_submit);
         mEditview_name=findViewById(R.id.edit_shopname);
         mEditview_phonenumber=findViewById(R.id.edit_shopphonenumber);
-        textview_shopaddress=findViewById(R.id.textview_shopaddress);
+        textview_shopname=findViewById(R.id.textview_shopaddress);
     }
     boolean initmap(){
         name=mEditview_name.getText()+"";
@@ -126,7 +126,7 @@ public class ShopInActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请输入联系电话");
             return false;
         }
-        shopName=mEditview_phonenumber.getText()+"";
+        shopName=textview_shopname.getText()+"";
         if(phonenumber.equals("")){
             ToastUtils.showToast(this,"请输入商铺名称");
             return false;

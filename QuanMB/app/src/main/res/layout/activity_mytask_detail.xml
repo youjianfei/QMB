@@ -222,15 +222,34 @@
                 android:id="@+id/re2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="10dp"
                 android:background="@color/white">
-
+                <TextView
+                    android:id="@+id/sfddf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单详情"
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="15dp"
+                    android:textColor="#7f7f7f"
+                    />
+                <ImageView
+                    android:id="@+id/line111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/sfddf"
+                    android:src="@color/gray_dfdfdf" />
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/taskdetails2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="18dp"
+                    android:layout_below="@+id/line111"
                     />
 
                 <TextView
@@ -241,6 +260,7 @@
                     android:layout_marginTop="15dp"
                     android:text="任务说明"
                     android:textColor="#7f7f7f"
+                    android:layout_below="@+id/line111"
                     android:textSize="15dp" />
 
                 <TextView
@@ -251,6 +271,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:text="任务详情"
+                    android:layout_below="@+id/line111"
                     android:textColor="@color/black_text"
                     android:layout_toRightOf="@+id/text2"
                     android:textSize="15dp" />

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
@@ -50,12 +51,18 @@ public class Adapter_mystill extends BaseAdapter {
             holder.mTextview_cerattime = convertView.findViewById(R.id.textview_issuename);
             holder.mTextview_content = convertView.findViewById(R.id.text_content);
             holder.mTextview_cancle = convertView.findViewById(R.id.text_cancle);
+            holder.image_zhiding = convertView.findViewById(R.id.image_zhiding);
             holder.mTextview_putongshuxin = convertView.findViewById(R.id.text_putongshuaxin);
             holder.mTextview_zhinengshuxin = convertView.findViewById(R.id.text_zhinengshuaxin);
             holder.mTextview_zhuanyezhiding = convertView.findViewById(R.id.text_zhuanyezhiding);
             convertView.setTag(holder);
         } else {
             holder = (Viewholder) convertView.getTag();
+        }
+        if(mData.get(position).getIs_top().equals("Y")){
+            holder.image_zhiding.setVisibility(View.VISIBLE);
+        }else {
+            holder.image_zhiding.setVisibility(View.INVISIBLE);
         }
         holder.mTextview_title.setText(mData.get(position).getTitle());
         holder.mTextview_cerattime.setText("发布时间：" + mData.get(position).getRelease_date());
@@ -266,6 +273,7 @@ public class Adapter_mystill extends BaseAdapter {
         TextView mTextview_putongshuxin;
         TextView mTextview_zhinengshuxin;
         TextView mTextview_zhuanyezhiding;
+        ImageView image_zhiding;
     }
 
 }

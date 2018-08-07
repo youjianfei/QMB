@@ -140,16 +140,35 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/re1"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/white">
-
+                <TextView
+                    android:id="@+id/sfddf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单详情"
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="15dp"
+                    android:textColor="#7f7f7f"
+                    />
+                <ImageView
+                    android:id="@+id/line111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/sfddf"
+                    android:src="@color/gray_dfdfdf" />
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/taskdetail"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="13dp"
+                    android:layout_below="@+id/line111"
                     />
                 <TextView
                     android:id="@+id/text2"
@@ -159,6 +178,7 @@
                     android:layout_marginTop="10dp"
                     android:text="任务说明"
                     android:textColor="#7f7f7f"
+                    android:layout_below="@+id/line111"
                     android:textSize="15dp" />
 
                 <TextView

@@ -61,6 +61,11 @@ public class MessageActivity extends BaseActivityother {
     protected void initData() {
         newmessageTYpe=getIntent().getStringExtra("newmessageTYpe");
         setDot(newmessageTYpe);
+        if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")){
+            mRelativelayout_tuijianrenwu.setVisibility(View.GONE);
+        }else {
+            mRelativelayout_tuijianrenwu.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

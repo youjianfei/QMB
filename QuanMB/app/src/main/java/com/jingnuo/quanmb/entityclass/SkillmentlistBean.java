@@ -90,10 +90,19 @@ public class SkillmentlistBean {
             private String release_specialty_id;
             private String service_area;
             private String specialty_id;
+            private String is_top;
             private String title;
             private String updateDate;
             private String updateName;
             private  String avatar_url;
+
+            public String getIs_top() {
+                return is_top;
+            }
+
+            public void setIs_top(String is_top) {
+                this.is_top = is_top;
+            }
 
             public String getAvatar_url() {
                 return avatar_url;

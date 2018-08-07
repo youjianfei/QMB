@@ -54,7 +54,7 @@ public class Adapter_mytodo extends  BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
         holder.mTextview_type.setText(mdata.get(position).getSpecialty_name());
-        holder.mTextview_title.setText(mdata.get(position).getTask_name());
+        holder.mTextview_title.setText(mdata.get(position).getTask_description());
         holder.mTextview_issuename.setText(mdata.get(position).getCreateDate());
 
         holder.mTextview_content.setText("预约时间："+mdata.get(position).getTask_time());

@@ -197,17 +197,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                aMap.moveCamera(cameraUpdate);//地图移向指定区域  不带动画
                 mListview_searchaddress.setVisibility(View.GONE);
                 mBUtton_queding.setVisibility(View.VISIBLE);
-//                mEdit_location.setText("");
-//                Intent result = new Intent();
-//                result.putExtra("address", mTextview_nowaddress.getText() + "");
-//                String add = mEdit_location.getText() + "";
-//                if (add.equals("")) {
-//                    ToastUtils.showToast(LocationMapActivity.this, "请输入自定义名称");
-//                    return;
-//                }
-//                result.putExtra("address2", add);
-//                setResult(2018418, result);
-//                finish();
             }
         });
     }

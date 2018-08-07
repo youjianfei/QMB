@@ -67,6 +67,15 @@ public class MySkillBean {
             private String status;
             private String title;
             private String image_url;
+            private String is_top;
+
+            public String getIs_top() {
+                return is_top;
+            }
+
+            public void setIs_top(String is_top) {
+                this.is_top = is_top;
+            }
 
             public String getImage_url() {
                 return image_url;

@@ -47,15 +47,13 @@ public class Adapter_SquareList extends  BaseAdapter {
             holder.mText_task_price=convertView.findViewById(R.id.text_square_price);
             holder.mTextview_distance=convertView.findViewById(R.id.text_taskdistance);
             holder.mImage_view=convertView.findViewById(R.id.image_square_person);
-
+            holder.image_line=convertView.findViewById(R.id.image_line);
             convertView.setTag(holder);
 
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
-
-
-
+         holder.image_line.setVisibility(position==3? View.GONE:View.VISIBLE);
 
         holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
 
@@ -93,6 +91,7 @@ public class Adapter_SquareList extends  BaseAdapter {
         TextView mText_task_price ;//任务的佣金
         TextView mTextview_distance;
         ImageView mImage_view;//头像
+        ImageView image_line;//分隔条
 
 
     }

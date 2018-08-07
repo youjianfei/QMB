@@ -58,7 +58,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
-    public static Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;
     View rootview;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
@@ -104,7 +103,6 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_jiazhengweixiu, container, false);
-        fragment_task_jiaZhengWeixiu = this;
         initview();
         initdata();
         setdata();
@@ -132,7 +130,10 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     private void initdata() {
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-
+        mTextview_taskAddress.setText(Staticdata.aoi);
+        xValue=Staticdata.xValue;
+        yValue=Staticdata.yValue;
+        citycode=Staticdata.city_location;
     }
 
     private void setdata() {
@@ -179,7 +180,9 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
             imageGridview.setVisibility(View.VISIBLE);
         }
     }
-
+    public void setAddress(String address){
+        mTextview_taskAddress.setText(address);
+    }
     private void initlistenner() {
         mTextview_choose.setOnClickListener(this);
         mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
@@ -407,6 +410,8 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 
 
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

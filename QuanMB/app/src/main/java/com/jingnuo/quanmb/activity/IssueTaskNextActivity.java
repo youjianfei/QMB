@@ -116,7 +116,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
         mTextview_taskdetalis.setText(Staticdata.map_task.get("task_description") + "");
         mTextview_time.setText(Staticdata.map_task.get("task_time") + "");
-        mTextview_address.setText(Staticdata.map_task.get("release_address") + "—" + Staticdata.map_task.get("detailed_address"));
+        mTextview_address.setText( Staticdata.map_task.get("detailed_address")+"");
         bitmaps = new ArrayList<>();
         bitmaps.addAll(Staticdata.mlistdata_pic);
         bitmaps.remove(Staticdata.mlistdata_pic.size() - 1);
@@ -394,7 +394,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 if (status == 1) {
-                    ToastUtils.showToast(IssueTaskNextActivity.this, msg);
 //                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
 //                    startActivity(intent);
 
@@ -443,7 +442,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     e.printStackTrace();
                 }
                 if (status == 1) {
-                    ToastUtils.showToast(IssueTaskNextActivity.this, msg);
                     Intent intent = new Intent(IssueTaskNextActivity.this, MatchShopActivity.class);
                     intent.putExtra("respose",respose);
                     intent.putExtra("id",Staticdata.map_task.get("task_id")+"");

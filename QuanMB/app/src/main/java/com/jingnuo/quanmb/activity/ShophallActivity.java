@@ -39,7 +39,6 @@ public class ShophallActivity extends BaseActivityother {
 
 
     //对象
-    Popwindow_SquareSort mPopwindow_square_sort;
     Adapter_shophall mAdapter_shophall;
 
     PermissionHelper mPermission;//动态申请权限
@@ -83,25 +82,6 @@ public class ShophallActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-//        mLinerlayout_sort.setOnClickListener(new View.OnClickListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-//            @Override
-//            public void onClick(View view) {
-////                mPopwindow_square_sort = new Popwindow_SquareSort(this, new InterfacePopwindow_square_sort() {
-////                    @Override
-////                    public void onSuccesses(String address, String id) {
-////
-////                    }
-////                }, mRelativelayout_sort, 1);
-////                mPopwindow_square_sort.showPopwindow();
-//            }
-//        });
-//        mLinearlayout_filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
         mEdit_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -189,6 +169,7 @@ public class ShophallActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","接口："+respose,"找专业列表");
                 if (mListview.isRefreshing()) {
                     mListview.onRefreshComplete();
                 }

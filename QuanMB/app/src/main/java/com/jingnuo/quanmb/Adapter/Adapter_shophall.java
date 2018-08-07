@@ -54,18 +54,26 @@ public class Adapter_shophall extends BaseAdapter {
             viewholder.mTextview_skillstitle = convertView.findViewById(R.id.text_shopskills);
             viewholder.mTextview_address = convertView.findViewById(R.id.textview_address);
             viewholder.mTextview_vip = convertView.findViewById(R.id.textview_vip);
+            viewholder.image_zhiding = convertView.findViewById(R.id.image_zhiding);
             viewholder.mImage_call = convertView.findViewById(R.id.image_call);
             convertView.setTag(viewholder);
         } else {
             viewholder = (Viewholder) convertView.getTag();
         }
-        viewholder.mTextview_skillstitle.setText(mData.get(position).getTitle());
+
         viewholder.mTextview_address.setText(mData.get(position).getRelease_address());
         Glide.with(mContext).load(mData.get(position).getAvatar_url()).into(viewholder.mImageview_shoppic);
         if(mData.get(position).getBusiness_no()==null||mData.get(position).getBusiness_no().equals("")){
             viewholder.mTextview_vip.setText("认证帮手");
         }else {
             viewholder.mTextview_vip.setText("认证商户");
+        }
+        if(mData.get(position).getIs_top().equals("Y")){
+            viewholder.mTextview_skillstitle.setText("         "+mData.get(position).getTitle());
+            viewholder.image_zhiding.setVisibility(View.VISIBLE);
+        }else {
+            viewholder.image_zhiding.setVisibility(View.INVISIBLE);
+            viewholder.mTextview_skillstitle.setText(mData.get(position).getTitle());
         }
 
         //点击拨打电话
@@ -119,5 +127,6 @@ public class Adapter_shophall extends BaseAdapter {
         TextView mTextview_address;
         TextView mTextview_vip;
         ImageView mImage_call;
+        ImageView image_zhiding;
     }
 }

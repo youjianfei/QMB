@@ -63,7 +63,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickListener {
     View rootview;
-    public static Fragment_tsk_ZhaoRenShou fragment_tsk_zhaoRenShou;
     //控件
     LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
     TextView mTextview_taskAddress;//地图返回地点
@@ -139,7 +138,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_zhaorenshou, container, false);
-        fragment_tsk_zhaoRenShou = this;
 
         initview();
         initdata();
@@ -204,7 +202,10 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     private void initdata() {
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-
+        mTextview_taskAddress.setText(Staticdata.aoi);
+        xValue=Staticdata.xValue;
+        yValue=Staticdata.yValue;
+        citycode=Staticdata.city_location;
     }
 
     private void setdata() {

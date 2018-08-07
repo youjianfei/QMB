@@ -71,8 +71,17 @@ public class BargainMessagedetailsBean {
         private String send_client_no;
         private String receive_client_no;
         private String is_accept;
+        private String task_description;
 
         private double response_Amount;
+
+        public String getTask_description() {
+            return task_description;
+        }
+
+        public void setTask_description(String task_description) {
+            this.task_description = task_description;
+        }
 
         public String getIs_accept() {
             return is_accept;

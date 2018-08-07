@@ -39,8 +39,8 @@ public class BargainActivity extends BaseActivityother {
     TextView mTextview_time;
     TextView mTextview_1;
     TextView mTextview_name;
+    TextView mTextview_des;
     TextView mTextview_taskstatename;
-    TextView mTextview_tasktitle;
     TextView mTextview_money;
     TextView mTextview_yourmoney;
     TextView mTextview_mymoney;
@@ -184,8 +184,8 @@ public class BargainActivity extends BaseActivityother {
         mTextview_time = findViewById(R.id.text_time);
         mTextview_1 = findViewById(R.id.textview_shenfen);
         mTextview_name = findViewById(R.id.text_name);
+        mTextview_des = findViewById(R.id.taskdes);
         mTextview_taskstatename = findViewById(R.id.text_tasktype);
-        mTextview_tasktitle = findViewById(R.id.text_taskname);
         mTextview_money = findViewById(R.id.taskprice);
         mTextview_yourmoney = findViewById(R.id.text_yourprice);
         mTextview_mymoney = findViewById(R.id.text_needprice);
@@ -340,8 +340,6 @@ public class BargainActivity extends BaseActivityother {
                         mTextview_message.setText("你的还价被雇主拒绝了！");
                     }
 
-
-
                     if (bargainMessagedetailsBean.getData().getMark().equals("1")) {
                         mTextview_1.setText("还价雇主");
                         mTextview_yourmoney.setVisibility(View.GONE);
@@ -358,8 +356,8 @@ public class BargainActivity extends BaseActivityother {
                     }
                     mTextview_time.setText(bargainMessagedetailsBean.getData().getCreateDate());
                     mTextview_name.setText(bargainMessagedetailsBean.getData().getName());
+                    mTextview_des.setText(bargainMessagedetailsBean.getData().getTask_description());
                     mTextview_taskstatename.setText(bargainMessagedetailsBean.getData().getSpecialty_name());
-                    mTextview_tasktitle.setText(bargainMessagedetailsBean.getData().getTask_name());
                     if (bargainMessagedetailsBean.getData().getIs_helper_bid().equals("N")) {
                         money=bargainMessagedetailsBean.getData().getCommission();
                         mTextview_money.setText( money+ "元");

@@ -174,7 +174,7 @@ public class AuthenticationActivity extends BaseActivityother {
                                     Intent intent_submit=new Intent(AuthenticationActivity.this,SubmitSuccessActivity.class);
                                     intent_submit.putExtra("state","1");
                                     startActivity(intent_submit);
-                                    ToastUtils.showToast(AuthenticationActivity.this,msg);//
+                                    ToastUtils.showToast(AuthenticationActivity.this,"审核提交成功");//
                                     finish();
                                 }else {
                                     ToastUtils.showToast(AuthenticationActivity.this,"审核提交失败");
