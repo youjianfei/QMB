@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.XieyZhuceiActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:padding="10dp"
+            android:src="@mipmap/back_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="全民帮协议"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="欢迎您使用全民帮同城服务"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         本条款需由您与全民帮经营者郑州京诺信息科技有限公司（以下简称“京诺科技”）共同缔造，在下载全民帮应用程序/或使用我们的服务之前，请先仔细阅读本《用户协议》，确保您充分理解本协议中各条款。请您审慎阅读并选择接受或不接受本协议。您对本协议如存在任何的疑问，请咨询客服人员。一旦您点击“登录”按钮,即表示您已接受了以下条款和条件，本用户协议即对您与全民帮平台具有合同效力"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         以下这些条款和条件（以下简称“用户协议”）约定全民帮与用户之间关于“全民帮”软件服务（以下简称“服务”）的权利义务。“全民帮”手机客户端所有权和运营权属京诺科技所有。本协议可由“全民帮”随时更新，更新后的协议条款一旦公布即代替原来的协议条款，恕不再另行通知，用户可在全民帮平台查阅最新版协议条款。经“全民帮”修改协议条款后，如果用户不接受修改后的条款，请立即停止使用“全民帮”提供的服务，用户继续使用“全民帮”提供的服务将被视为接受修改后的协议。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="一、本用户协议适用于以下定义"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         1、全民帮同城服务平台（以下简称“全民帮”）：归属于郑州京诺信息科技有限公司。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         2、全民帮app是指全民帮为链接同城陌生人之间互帮互助、技能分享的一款投放于移动端的应用程序软件。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         3、用户：用户是指经注册成为全民帮APP用户后的您，可通过点击确认的方式与其他各方签订服务协议，并发布或接受服务（技能）的用户。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         4、帮手：帮手是指接受并同意本协议、与需求服务提供方签订协议的全部条款以及全民帮发布的全部服务条款和操作规则，并受需求服务提供方指派，在全民帮注册，自主选择、完成服务或技能等事项并获取相应报酬的具有完全民事行为能力的人。注：用户/帮手是具有完全民事行为能力，可以独立进行民事活动，是完全民事行为能力人。如果您未满18周岁，请在法定监护人的陪同下阅读本协议以及其他上述协议，并特别注意未成年人使用条款。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         5、任务事项发布方：任务事项发布方是指接受并同意本协议的全部条款以及全民帮发布的全部服务条款和操作规则，在全民帮注册，自主发布各类需求信息并同意支付相应报酬的人。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         6、 內容：指所有呈现或显示的內容，包括（但不限于）徽标、图标、商标、文本、图文、图形、照片、图像、动态影响、声音、图表、音乐、软件（不包括应用程序）、观点、评论、意见、图片、链接、问题、建议、信息或其他资料。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         7、全民帮內容：指“全民帮”拥有或使用的应用程序提供的內容，包括第三方许可的任何內容，但不包括用户內容。“用户”指访问或使用服务或应用程序的人。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         8、用户內容：指用户张贴、上传、发布、提交或传输通过服务或应用程序提供的內容。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="二、账号注册"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         1、注册资格：用户须具有法定的相应权利能力和行为能力的自然人、法人或其他组织，  能够独立承担法律责任。您一旦完成注册， 或开始使用“全民帮”服务即视为您已确认自己具备主体资格，能够独立承担法律责任。若因您不具备主体资格，而导致的一切后果，由您及您的监护人自行承担。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         2、用户在使用本服务前需要注册一个“全民帮”账号。“全民帮”账号应当使用手机号码绑定注册，请用户使用尚未与“全民帮”账号绑定的手机号码，以及未被全民帮平台根据本协议封禁的手机号码注册“全民帮”账号，或者利用全民帮授权的第三方软件（如腾讯qq、新浪微博、微信等）登陆注册。全民帮可以根据用户需求或产品需要对账号注册和绑定的方式进行变更，而无须事先通知用户。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         3、“全民帮”系基于地理位置的移动应用产品，用户注册时应当授权“全民帮”公开及使用其地理位置信息方可成功注册“全民帮”账号。故用户完成注册即表明用户同意“全民帮”提取、公开及使用用户的地理位置信息。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         4、鉴于“全民帮”账号的绑定注册方式，您同意全民帮在注册时将使用您提供的手机号码及/或自动提取您的手机号码及自动提取您的手机设备识别码等信息用于注册。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         5、在用户注册及使用本服务时，“全民帮”需要搜集能识别用户身份的个人信息以便全民帮可以在必要时联系用户，或为用户提供更好的使用体验。全民帮搜集的信息包括但不限于用户的姓名、性别、年龄、出生日期、身份证号、地址、学校情况、公司情况、所属行业、兴趣爱好、常出没的地方、个人说明；全民帮同意对这些信息的使用将受限于用户个人隐私信息保护的约束。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="         6、用户在注册帐号或使用本服务的过程中，应提供合法、真实、准确的个人资料，用户填写的个人资料有变动的，应及时进行更新。如果因您提供的个人资料不合法、不真实、不准确的，用户需承担因此引起的相应责任及后果，并且全民帮保留终止您使用全民帮平台各项服务的权利。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="三、服务内容"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        1、全民帮是针对本地市场为用户提供的同城便捷生活服务的互联网信息服务和在线交易的处理服务的网络平台。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        2、用户可以发布或接受任务事项发布方指示的服务或技能。全民帮作为信息发布、服务的中介平台，为全民帮用户提供技能和服务，由全民帮用户自主选择发布、接收任务事项信息，并在事项完成后获得任务事项信息发布方给付的在全民帮显示的相应报酬。平台用户自愿利用闲暇时间并根据自己的行程安排，自主选择是否接受全民帮的任务事项信息，并完成任务事项。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="四、用户个人隐私信息保护"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        1、 用户在注册账号或使用本服务的过程中，可能需要填写或提交一些必要的信息，如法律法规、规章规范性文件（以下称“法律法规”）规定的需要填写的身份信息。 如用户提交的信息不完整或不符合法律法规的规定，则用户可能无法使用本服务或在使用本服务的过程中受到限制。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        2、 个人隐私信息是指涉及用户个人身份或个人隐私的信息，比如，用户真实姓名、身份证号、手机号码、手机设备识别码、IP地址、用户聊天记录。非个人隐私信息是指用户对本服务的操作状态以及使用习惯等明确且客观反映在全民帮服务器端的基本记录信息、个人隐私信息范围外的其它普通信息，以及用户同意公开的上述隐私信息。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        3、 尊重用户个人隐私信息的私有性是全民帮的一贯制度，全民帮将采取技术措施和其他必要措施，确保用户个人隐私信 息安全，防止在本服务中收集的用户个人隐私信息泄露、毁损或丢失。在发生前述情形或者全民帮发现存在发生前述情形的可能时，将及时采取补救措施。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        4、全民帮未经用户同意不向任何第三方公开、 透露用户个人隐私信息。但以下特定情形除外："
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (1) 全民帮根据法律法规规定或有权机关的指示提供用户的个人隐私信息；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (2) 由于用户将其用户密码告知他人或与他人共享注册帐户与密码，由此导致的任何个人信息的泄漏，或其他非因全民帮原因导致的个人隐私信息的泄露；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (3) 用户自行向第三方公开其个人隐私信息；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (4) 用户与全民帮及合作单位之间就用户个人隐私信息的使用公开达成约定，全民帮因此向合作单位公开用户个人隐私信息:"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (5) 任何由于黑客攻击、电脑病毒侵入及其他不可抗力事件导致用户个人隐私信息的泄露。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        5、用户同意全民帮可在以下事项中使用用户的个人隐私信息："
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (1) 全民帮向用户及时发送重要通知，如软件更新、本协议条款的变更；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (2) 全民帮内部进行审计、数据分析和研究等，以改进全民帮的产品、服务和与用户之间的沟通；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        (4) 适用法律法规规定的其他事项。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        除上述事项外，如未取得用户事先同意，全民帮不会将用户个人隐私信息使用于任何其他用途。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        6、 全民帮重视对未成年人个人隐私信息的保护。全民帮将依赖用户提供的个人信息判断用户是否为未成年人。任何18岁以下的未成年人注册账号或使用本服务应事先取得家长或其法定监护人（以下简称“监护人”）的书面同意。除根据法律法规的规定及有权机关的指示披露外，全民帮不会使用或向任何第三方透露未成年人的聊天记录及其他个人隐私信息。除本协议约定的例外情形外，未经监护人事先同意，全民帮不会使用或向任何第三方透露未成年人的个人隐私信息。任何18 岁以下的用户不得下载和使用京诺科技通过全民帮软件提供的网络游戏。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        7、 用户确认，其地理位置信息为非个人隐私信息，用户成功注册“全民帮”账号视为确认授权全民帮提取、公开及使用用户的地理位置信息。用户地理位置信息将作为用户公开资料之一，由全民帮向其他用户公开。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        8、为了改善全民帮的技术和服务，向用户提供更好的服务体验，全民帮或可会自行收集使用或向第三方提供用户的非个人隐私信息。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="五、内容规范"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        1、 本条所述内容是指用户使用本服务过程中所制作、上载、复制、发布、传播的任何内容，包括但不限于账号头像、名称、用户说明等注册信息及认证资料，或文字、 语音、图片、视频、图文等发送、回复或自动回复消息和相关链接页面，以及其他使用账号或本服务所产生的内容。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="        2、用户不得利用“全民帮”账号或本服务制作、上载、复制、发布、传播如下法律、法规和政策禁止的内容："
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (1) 反对宪法所确定的基本原则的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (2) 危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (3) 损害国家荣誉和利益的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (4) 煽动民族仇恨、民族歧视，破坏民族团结的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (5) 破坏国家宗教政策，宣扬邪教和封建迷信的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (6) 散布谣言，扰乱社会秩序，破坏社会稳定的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (7) 散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (8) 侮辱或者诽谤他人，侵害他人合法权益的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (9) 不遵守法律法规底线、社会主义制度底线、国家利益底线、公民合法权益底线、社会公共秩序底线、道德风尚底线和信息真实性底线的“七条底线”要求的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (10) 含有法律、行政法规禁止的其他内容的信息。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       3、用户不得利用“全民帮”账号或本服务制作、上载、复制、发布、传播如下干扰“全民帮”正常运营，以及侵犯其他用户或第三方合法权益的内容："
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (1) 含有任何性或性暗示的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (2) 含有辱骂、恐吓、威胁内容的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (3) 含有骚扰、垃圾广告、恶意信息、诱骗信息的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (4) 涉及他人隐私、个人信息或资料的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (5) 侵害他人名誉权、肖像权、知识产权、商业秘密等合法权利的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (6) 含有其他干扰本服务正常运营和侵犯其他用户或第三方合法权益内容的信息。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       1、用户在本服务中或通过本服务所传送、发布的任何内容并不反映或代表，也不得被视为反映或代表“全民帮”的观点、立场或政策，“全民帮”对此不承担任何责任。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       2、用户不得利用“全民帮”账号或本服务进行如下行为："
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (1) 提交、发布虚假信息，或盗用他人头像或资料，冒充、利用他人名义的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (2) 强制、诱导其他用户关注、点击链接页面或分享信息的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (3) 虚构事实、隐瞒真相以误导、欺骗他人的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (4) 利用技术手段批量建立虚假账号的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (5) 利用“全民帮”账号或本服务从事任何违法犯罪活动的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (6) 制作、发布与以上行为相关的方法、工具，或对此类方法、工具进行运营或传播，无论这些行为是否为商业目的；"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       (7) 其他违反法律法规规定、侵犯其他用户合法权益、干扰“全民帮”正常运营或“全民帮”未明示授权的行为。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="       3、用户须对利用“全民帮”账号或本服务传送信息的真实性、合法性、无害性、准确性、有效性等全权负责，与用户所传播的信息相关的任何法律责任由用户自行承担，与“全民帮”无关。如因此给“全民帮”或第三方造成损害的，用户应当依法予以赔偿。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      4、“全民帮”提供的服务中可能包括广告，用户同意在使用过程中显示“全民帮”和第三方供应商、合作伙伴提供的广告。除法律法规明确规定外，用户应自行对依该广告 信息进行的交易负责，对用户因依该广告信息进行的交易或前述广告商提供的内容而遭受的损失或损害，“全民帮”不承担任何责任。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="七、帐户管理"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、 全民帮账号的所有权归全民帮所有，用户完成申请注册手续后，获得“全民帮”账号的使用权，该使用权仅属于初始申请注册人，禁止赠与、借用、租用、转让或售卖。全民帮因经营需要，有权回收用户的“全民帮”账号。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      2、用户可以更改、删除“全民帮”帐户上的个人资料、注册信息及传送内容等，但需注意，删除有关信息的同时也会删除用户储存在系统中的文字和图片。用户需承担该风险。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      3、用户有责任妥善保管注册账号信息及账号安全，因用户保管不善可能导致遭受盗号或密码失窃，责任由用户自行承担。用户需要对注册账号以及密码下的行为承担法律责任。用户同意在任何情况下不使用其他用户的账号或密码。在用户怀疑他人使用其账号或密码时，用户同意立即通知全民帮。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      4、用户应遵守本协议的各项条款，正确、适当地使用本服务，如因用户违反本协议中的任何条款，全民帮在通知用户后有权依据协议中断或终止对违约用户“全民帮”账号提供服务。同时，全民帮保留在任何时候收回“全民帮”账号、用户名的权利。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      5、如用户注册“全民帮”账号后一年不登录，通知用户后，全民帮可以收回该账号，以免造成资源浪费，由此造成的不利后果由用户自行承担。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="八、数据储存"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、全民帮不对用户在本服务中相关数据的删除或储存失败负责。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      2、全民帮可以根据实际情况自行决定用户在本服务中数据的最长储存期限，并在服务器上为其分配数据最大存储空间等。用户可根据自己的需要自行备份本服务中的相关数据。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      3、如用户停止使用本服务或本服务终止，全民帮可以从服务器上永久地删除用户的数据。本服务停止、终止后，全民帮没有义务向用户返还任何数据。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="九、风险承担"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、 用户理解并同意，“全民帮”仅为用户提供信息分享、传送及获取的平台，用户必须为自己注册账号下的一切行为负责，包括用户所传送的任何内容以及由此产生的任何后果。用户应对“全民帮”及本服务中的内容自行加以判断，并承担因使用内容而引起的所有风险，包括因对内容的正确性、完整性或实用性的依赖而产生的风险。 “全民帮”无法且不会对因用户行为而导致的任何损失或损害承担责任。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      2、 用户理解并同意，因业务发展需要，“全民帮”保留单方面对本服务的全部或部分服务内容变更、暂停、终止或撤销的权利，用户需承担此风险。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="十、知识产权声明"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、除本服务中涉及广告的知识产权由相应广告商享有外，“全民帮”在本服务中提供的内容（包括但不限于网页、文字、图片、音频、视频、图表等）的知识产权均归“全民帮”所有，但用户在使用本服务前对自己发布的内容已合法取得知识产权的除外。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      2、除另有特别声明外，“全民帮”提供本服务时所依托软件的著作权、专利权及其他知识产权均归“全民帮”所有。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      3、“全民帮”在本服务中所涉及的图形、文字或其组成，以及其他“全民帮”标志及产品、服务名称（以下统称““全民帮”标识”），其著作权或商标权归“全民帮”所有。 未经“全民帮”事先书面同意，用户不得将“全民帮”标识以任何方式展示或使用或作其他处理，也不得向他人表明用户有权展示、使用、或其他有权处理“全民帮”标识的行为。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      4、上述及其他任何“全民帮”或相关广告商依法拥有的知识产权均受到法律保护，未经“全民帮”或相关广告商书面许可，用户不得以任何形式进行使用或创造相关衍生作品。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="十一、法律责任"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、 如果“全民帮”发现或收到他人举报或投诉用户违反本协议约定的，“全民帮”有权不经通知随时对相关内容，包括但不限于用户资料、聊天记录进行审查、删除，并视 情节轻重对违规账号处以包括但不限于警告、账号封禁 、功能封禁的处罚，且通知用户处理结果。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      2、 因违反用户协议被封禁的用户，可以向“全民帮”客服咨询封禁期限，并在封禁期限届满后自助解封。其中，被实施功能封禁的用户会在封禁期届满后自动恢复被封禁功能。被封禁用户可向“全民帮”网站相关页面提交申诉，“全民帮”将对申诉进行审查，并自行合理判断决定是否变更处罚措施。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      3、 用户理解并同意，“全民帮”有权依合理判断对违反有关法律法规或本协议规定的行为进行处罚，对违法违规的任何用户采取适当的法律行动，并依据法律法规保存有关信息向有关部门报告等，用户应承担由此而产生的一切法律责任。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      4、 用户理解并同意，因用户违反本协议约定，导致或产生的任何第三方主张的任何索赔、要求或损失，包括合理的律师费，用户应当赔偿“全民帮”与合作公司、关联公司，并使之免受损害。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="十二、不可抗力及其他免责事由"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、 用户理解并确认，在使用本服务的过程中，可能会遇到不可抗力等风险因素，使本服务发生中断。不可抗力是指不能预见、不能克服并不能避免且对一方或双方造成 重大影响的客观事件，包括但不限于自然灾害如洪水、地震、瘟疫流行和风暴等以及社会事件如战争、动乱、政府行为等。出现上述情况时，“全民帮”将努力在第一 时间与相关单位配合，及时进行修复，但是由此给用户或第三方造成的损失，“全民帮”及合作单位在法律允许的范围内免责。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      2、 本服务同大多数互联网服务一样，受包括但不限于用户原因、网络服务质量、社会环境等因素的差异影响，可能受到各种安全问题的侵扰，如他人利用用户的资料， 造成现实生活中的骚扰；用户下载安装的其它软件或访问的其他网站中含有“特洛伊木马”等病毒，威胁到用户的计算机信息和数据的安全，继而影响本服务的正常 使用等等。用户应加强信息安全及使用者资料的保护意识，要注意加强密码保护，以免遭致损失和骚扰。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      3、 用户理解并确认，本服务存在因不可抗力、计算机病毒或黑客攻击、系统不稳定、用户所在位置、用户关机以及其他任何技术、互联网络、通信线路原因等造成的服务中断或不能满足用户要求的风险，因此导致的用户或第三方任何损失，“全民帮”不承担任何责任。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      4、 用户理解并确认，在使用本服务过程中存在来自任何他人的包括误导性的、欺骗性的、威胁性的、诽谤性的、令人反感的或非法的信息，或侵犯他人权利的匿名或冒名的信息，以及伴随该等信息的行为，因此导致的用户或第三方的任何损失，“全民帮”不承担任何责任。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      5、 用户理解并确认，“全民帮”需要定期或不定期地对“全民帮”平台或相关的设备进行检修或者维护，如因此类情况而造成服务在合理时间内的中断，“全民帮”无需为此承担任何责任，但“全民帮”应事先进行通告。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      6、 “全民帮”依据法律法规、本协议约定获得处理违法违规或违约内容的权利，该权利不构成“全民帮”的义务或承诺，“全民帮”不能保证及时发现违法违规或违约行为或进行相应处理。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      7、 用户理解并确认，对于“全民帮”向用户提供的下列产品或者服务的质量缺陷及其引发的任何损失，“全民帮”无需承担任何责任："
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      (1) “全民帮”向用户免费提供的服务；(2) “全民帮”向用户赠送的任何产品或者服务。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      8、 在任何情况下，“全民帮”均不对任何间接性、后果性、惩罚性、偶然性、特殊性或刑罚性的损害，包括因用户使用“全民帮”或本服务而遭受的利润损失，承担责任 （即使“全民帮”已被告知该等损失的可能性亦然）。尽管本协议中可能含有相悖的规定，“全民帮”对用户承担的全部责任，无论因何原因或何种行为方式，始终不超过用户因使用“全民帮”提供的服务而支付给“全民帮”的费用(如有)。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="十三、服务的变更、中断、终止"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、 鉴于网络服务的特殊性，用户同意“全民帮”有权随时变更、中断或终止部分或全部的服务（包括收费服务）。“全民帮”变更、中断或终止的服务，“全民帮”应当在变更、中断或终止之前通知用户，并应向受影响的用户提供等值的替代性的服务。2、 如发生下列任何一种情形，“全民帮”有权变更、中断或终止向用户提供的收费服务，而无需对用户或任何第三方承担任何责任：(1) 根据法律规定用户应提交真实信息，而用户提供的个人资料不真实、或与注册时信息不一致又未能提供合理证明；(2) 用户违反相关法律法规或本协议的约定；(3) 按照法律规定或有权机关的要求；(4) 出于安全的原因或其他必要的情形。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="十四、“发布任务”服务说明与免责条款"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、全民帮“发布任务”功能板块，是以地理位置为基础、发布用户周边需求信息共享平台（下称“本平台”）。2、本平台发布之全部需求信息,包括但不限于活动地理位置信息，均直接或者间接来自于发起人。3、本平台发布需求信息，意在宣传文化生活，丰富生活内容。本平台用户于本平台“发布任务”功能板块发布的留言、评论等信息，均系用户自行发布。本平台不对上述信息的真实性、准确性，或及时性、完整性负责。4、如果相关文化活动主办方及/或相关权利主体，认为该等文化活动，需求信息之发布，侵害其合法权益，可咨询全民帮客服人员，本平台在核实其提供的证明材料后，将依法履行网络平台发布者的义务，维护其合法权益。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="十五、其它"
+                android:textColor="@color/black_text"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="      1、“全民帮”郑重提醒用户注意本协议中免除“全民帮”责任和限制用户权利的条款，请用户仔细阅读，自主考虑风险。未成年人应在法定监护人的陪同下阅读本协议。2、本协议的效力、解释及纠纷的解决，适用于中华人民共和国法律。若用户和“全民帮”之间发生任何纠纷或争议，首先应友好协商解决，协商不成的，用户同意将纠纷或争议提交“全民帮”住所地有管辖权的人民法院管辖。3、本协议的任何条款无论因何种原因无效或不具可执行性，其余条款仍有效，对双方具有约束力。"
+                android:textColor="@color/text_title2"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

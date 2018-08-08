@@ -194,7 +194,8 @@ public class RegisterActivity extends BaseActivityother {
 
                 break;
             case R.id.textview_xieyi://协议
-                ToastUtils.showToast(this, "此处跳转协议界面");
+                Intent intent=new Intent(RegisterActivity.this,XieyZhuceiActivity.class);
+                startActivity(intent);
                 break;
 
         }

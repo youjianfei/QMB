@@ -213,7 +213,7 @@ public class MatchShopActivity extends AppCompatActivity  {
                     for (int i=0;i<list_matchbea.size();i++){
                         list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i),ID));
                     }
-                    adapterFragment.setFragments(list_myfragments);
+                    adapterFragment.setNewFragments(list_myfragments);
                 }else {
                     ToastUtils.showToast(MatchShopActivity.this,"附近没有此类型商户");
                 }

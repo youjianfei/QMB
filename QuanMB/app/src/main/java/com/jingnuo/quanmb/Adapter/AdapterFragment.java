@@ -35,19 +35,19 @@ public class AdapterFragment  extends FragmentPagerAdapter{
         this.fragmentsList = fragments;
         notifyDataSetChanged();
     }
-    public void setFragments(List<Fragment> fragments) {
-        if(this.fragmentsList != null){
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            for(Fragment f:this.fragmentsList){
-                ft.remove(f);
-            }
-            ft.commit();
-            ft=null;
-            fragmentManager.executePendingTransactions();
-        }
-        this.fragmentsList = fragments;
-        notifyDataSetChanged();
-    }
+//    public void setFragments(List<Fragment> fragments) {
+//        if(this.fragmentsList != null){
+//            FragmentTransaction ft = fragmentManager.beginTransaction();
+//            for(Fragment f:this.fragmentsList){
+//                ft.remove(f);
+//            }
+//            ft.commit();
+//            ft=null;
+//            fragmentManager.executePendingTransactions();
+//        }
+//        this.fragmentsList = fragments;
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public Fragment getItem(int position) {

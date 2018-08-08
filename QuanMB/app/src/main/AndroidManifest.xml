@@ -38,7 +38,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-        android:name="com.jingnuo.quanmb.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -55,7 +55,7 @@
             tools:node="replace" />
 
         <receiver
-            android:name="com.jingnuo.quanmb.broadcastrReceiver.JpushBroadcastRecricer"
+            android:name=".broadcastrReceiver.JpushBroadcastRecricer"
             android:enabled="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
@@ -70,72 +70,72 @@
         </receiver>
 
         <activity
-            android:name="com.jingnuo.quanmb.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.jingnuo.quanmb.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:launchMode="singleTask" />
-        <activity android:name="com.jingnuo.quanmb.activity.RegisterActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.FindPasswordActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.AuthenticationActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.DatailAddressActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.AddAddressActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.FindPasswordActivity" />
+        <activity android:name=".activity.AuthenticationActivity" />
+        <activity android:name=".activity.DatailAddressActivity" />
+        <activity android:name=".activity.AddAddressActivity" />
         <activity
-            android:name="com.jingnuo.quanmb.activity.IssueTaskActivity"
+            android:name=".activity.IssueTaskActivity"
             android:launchMode="singleTask" />
-        <activity android:name="com.jingnuo.quanmb.activity.SettingActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ChangepasswordActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ChangephoneNumberActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ChangephoneNumberNextActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SetPasswordActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.PersonInfoActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.TaskDetailsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShopInActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LaunchActivity">
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ChangepasswordActivity" />
+        <activity android:name=".activity.ChangephoneNumberActivity" />
+        <activity android:name=".activity.ChangephoneNumberNextActivity" />
+        <activity android:name=".activity.SetPasswordActivity" />
+        <activity android:name=".activity.PersonInfoActivity" />
+        <activity android:name=".activity.TaskDetailsActivity" />
+        <activity android:name=".activity.ShopInActivity" />
+        <activity android:name=".activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.jingnuo.quanmb.activity.ShopInNextActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.BargainActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShophallActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SkillDetailActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LocationMapActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssueSkillActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShopCenterActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SetNicknameActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.chooseImageActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssueTaskNextActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.HelperOrderActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SystemMessageActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.BarginmessageListActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MyOrderActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MytaskDetailActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ThreeRegisterActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ThreeLoginBindActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MyTodoActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MyAuthenticationActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MySkillActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.DealActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.PayActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SuggestActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.OrderThinkActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MySkillCollectActivity" />
+        <activity android:name=".activity.ShopInNextActivity" />
+        <activity android:name=".activity.BargainActivity" />
+        <activity android:name=".activity.ShophallActivity" />
+        <activity android:name=".activity.SkillDetailActivity" />
+        <activity android:name=".activity.LocationMapActivity" />
+        <activity android:name=".activity.IssueSkillActivity" />
+        <activity android:name=".activity.ShopCenterActivity" />
+        <activity android:name=".activity.SetNicknameActivity" />
+        <activity android:name=".activity.chooseImageActivity" />
+        <activity android:name=".activity.IssueTaskNextActivity" />
+        <activity android:name=".activity.HelperOrderActivity" />
+        <activity android:name=".activity.SystemMessageActivity" />
+        <activity android:name=".activity.BarginmessageListActivity" />
+        <activity android:name=".activity.MyOrderActivity" />
+        <activity android:name=".activity.MytaskDetailActivity" />
+        <activity android:name=".activity.ThreeRegisterActivity" />
+        <activity android:name=".activity.ThreeLoginBindActivity" />
+        <activity android:name=".activity.MyTodoActivity" />
+        <activity android:name=".activity.MyAuthenticationActivity" />
+        <activity android:name=".activity.MySkillActivity" />
+        <activity android:name=".activity.DealActivity" />
+        <activity android:name=".activity.PayActivity" />
+        <activity android:name=".activity.SuggestActivity" />
+        <activity android:name=".activity.OrderThinkActivity" />
+        <activity android:name=".activity.MySkillCollectActivity" />
         <activity
-            android:name="com.jingnuo.quanmb.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="behind" />
-        <activity android:name="com.jingnuo.quanmb.activity.SystemmessageDetailActivity" />
+        <activity android:name=".activity.SystemmessageDetailActivity" />
         <activity
-            android:name="com.jingnuo.quanmb.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name="com.jingnuo.quanmb.activity.LocationaddressActivity" />
+        <activity android:name=".activity.LocationaddressActivity" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
@@ -148,51 +148,49 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="com.jingnuo.quanmb.activity.RechargeActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.CashoutActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShopCenterInfoActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShopinfoEditActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SubmitSuccessActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.WalletActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MonryMingxiActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.PayBaozhengmoneyActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MoneyMingxiDetailsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword1Activity" />
-        <activity android:name="com.jingnuo.quanmb.activity.SetSafepassword2Activity" />
-        <activity android:name="com.jingnuo.quanmb.activity.TuiguangbiWalletActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.HuiyuanRechargeActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.PaytuiguangbiActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.PaySuccessActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.AboutUsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.FirstLoginActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.HelperType" />
-        <activity android:name="com.jingnuo.quanmb.activity.TuijianrenwuActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.AdressShowActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LoveTaskActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.LoveTaskDetailsActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MessageWallEditActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssuelovetaskActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.MyShequActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShuidianfeiActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ShezhishequActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.FulisheActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ErShoushichangActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.IssueErshoushichangActivity" />
-        <activity android:name="com.jingnuo.quanmb.activity.ErshouxinxiDetailsActivity" />
+        <activity android:name=".activity.RechargeActivity" />
+        <activity android:name=".activity.CashoutActivity" />
+        <activity android:name=".activity.ShopCenterInfoActivity" />
+        <activity android:name=".activity.ShopinfoEditActivity" />
+        <activity android:name=".activity.SubmitSuccessActivity" />
+        <activity android:name=".activity.WalletActivity" />
+        <activity android:name=".activity.MonryMingxiActivity" />
+        <activity android:name=".activity.PayBaozhengmoneyActivity" />
+        <activity android:name=".activity.MoneyMingxiDetailsActivity" />
+        <activity android:name=".activity.SetSafepassword1Activity" />
+        <activity android:name=".activity.SetSafepassword2Activity" />
+        <activity android:name=".activity.TuiguangbiWalletActivity" />
+        <activity android:name=".activity.HuiyuanRechargeActivity" />
+        <activity android:name=".activity.PaytuiguangbiActivity" />
+        <activity android:name=".activity.PaySuccessActivity" />
+        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.FirstLoginActivity" />
+        <activity android:name=".activity.HelperType" />
+        <activity android:name=".activity.TuijianrenwuActivity" />
+        <activity android:name=".activity.AdressShowActivity" />
+        <activity android:name=".activity.LoveTaskActivity" />
+        <activity android:name=".activity.LoveTaskDetailsActivity" />
+        <activity android:name=".activity.MessageWallEditActivity" />
+        <activity android:name=".activity.IssuelovetaskActivity" />
+        <activity android:name=".activity.MyShequActivity" />
+        <activity android:name=".activity.ShuidianfeiActivity" />
+        <activity android:name=".activity.ShezhishequActivity" />
+        <activity android:name=".activity.FulisheActivity" />
+        <activity android:name=".activity.ErShoushichangActivity" />
+        <activity android:name=".activity.IssueErshoushichangActivity" />
+        <activity android:name=".activity.ErshouxinxiDetailsActivity" />
         <activity
-            android:name="com.jingnuo.quanmb.activity.SquareActuvity"
-            android:launchMode="singleTask"
-            />
-        <activity
-            android:name="com.jingnuo.quanmb.activity.MessageActivity"
-            android:launchMode="singleTask"></activity>
-        <activity
-            android:name="com.jingnuo.quanmb.activity.SkillActivity"
+            android:name=".activity.SquareActuvity"
             android:launchMode="singleTask" />
-        <activity android:name="com.jingnuo.quanmb.activity.MatchShopActivity">
-
-
-        </activity>
+        <activity
+            android:name=".activity.MessageActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.SkillActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.MatchShopActivity" />
+        <activity android:name=".activity.XieyZhuceiActivity" />
+        <activity android:name=".activity.XieYiShanghuActivity"></activity>
     </application>
 
 </manifest>
