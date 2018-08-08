@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/gray_background"
+    android:gravity="center_horizontal"
     >
     <RelativeLayout
         android:id="@+id/relativelayout_banner"

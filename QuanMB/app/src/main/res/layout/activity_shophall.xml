@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="com.jingnuo.quanmb.activity.ShophallActivity">
     <!--虚假布局，抢走editview的焦点-->
     <LinearLayout
@@ -131,6 +132,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@color/gray_dfdfdf" />
+    <ImageView
+        android:id="@+id/image_empty"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/empty_1"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        />
+
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/mlistview_shophall"

@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -275,6 +276,7 @@ public class MyShequActivity extends BaseActivityother {
                 }
                 LogUtils.LOG("ceshiddd", "留言墙：" + respose, " 社区轮播");
                 liuyanqiangListBean=new  Gson().fromJson(respose,LiuyanqiangListBean.class);
+
                 if(page==1){
                     mList_liuyan.clear();
                     mList_liuyan.addAll(liuyanqiangListBean.getData());
@@ -282,6 +284,7 @@ public class MyShequActivity extends BaseActivityother {
                 }else {
                     mList_liuyan.addAll(liuyanqiangListBean.getData());
                     adapter_liuyanqiangList.notifyDataSetChanged();
+
                 }
             }
             @Override

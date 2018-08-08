@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -36,10 +37,12 @@ public class ShophallActivity extends BaseActivityother {
 //    LinearLayout mLinearlayout_filter;
     PullToRefreshListView mListview;
     EditText mEdit_search;
+    ImageView mImage_view_empty;
 
 
     //对象
     Adapter_shophall mAdapter_shophall;
+    SkillmentlistBean skillmentlistBean;
 
     PermissionHelper mPermission;//动态申请权限
     //数据
@@ -144,6 +147,7 @@ public class ShophallActivity extends BaseActivityother {
 //        mLinearlayout_filter = findViewById(R.id.linearlayout_filter);
         mEdit_search = findViewById(R.id.edit_searchskill);
         mListview = findViewById(R.id.mlistview_shophall);
+        mImage_view_empty=findViewById(R.id.image_empty);
     }
 
     void request( final int page) {
@@ -173,13 +177,16 @@ public class ShophallActivity extends BaseActivityother {
                 if (mListview.isRefreshing()) {
                     mListview.onRefreshComplete();
                 }
-                if(page==1&&new Gson().fromJson(respose,SkillmentlistBean.class).getData()!=null){
+                skillmentlistBean=new Gson().fromJson(respose,SkillmentlistBean.class);
+                if(page==1&&skillmentlistBean.getData()!=null){
                     mData.clear();
-                    mData.addAll(new Gson().fromJson(respose,SkillmentlistBean.class).getData().getList());
+                    mData.addAll(skillmentlistBean.getData().getList());
                     mAdapter_shophall.notifyDataSetChanged();
-                }else if(page!=1&&new Gson().fromJson(respose,SkillmentlistBean.class).getData()!=null) {
-                    mData.addAll(new Gson().fromJson(respose,SkillmentlistBean.class).getData().getList());
+                    mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
+                }else if(page!=1&&skillmentlistBean.getData()!=null) {
+                    mData.addAll(skillmentlistBean.getData().getList());
                     mAdapter_shophall.notifyDataSetChanged();
+                    mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
                 }else {
 
                 }
