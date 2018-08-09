@@ -25,7 +25,6 @@ public class SettingActivity extends BaseActivityother {
     //控件
 
     TextView mTextview_cleancache;
-    TextView mTextview_suggest;
     TextView mTextview_textview_cleancacheSize;
     TextView mTextview_share;
     TextView textview_aboutus;

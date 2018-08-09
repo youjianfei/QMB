@@ -6,10 +6,8 @@
         android:drawable="@mipmap/xingxinggray"/>
     <!-- 必须使用此id,drawable为 半选中 状态的图片 -->
     <item
-        android:id="@+android:id/secondaryProgress"
         android:drawable="@mipmap/xingxingyellow"/>
     <!-- 必须使用此id,drawable为 全选中 状态的图片 -->
     <item
-        android:id="@+android:id/progress"
         android:drawable="@mipmap/xingxingyellow"/>
 </layer-list>

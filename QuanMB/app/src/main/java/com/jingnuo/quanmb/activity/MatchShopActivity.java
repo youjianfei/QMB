@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ import java.util.TimerTask;
 public class MatchShopActivity extends AppCompatActivity  {
 
     //控件
+    ImageView iv_back;
     private ViewPager mViewPager;
     LinearLayout mtextview_change;
     TextView mTextview_taskdetails;//任务详情
@@ -129,6 +131,7 @@ public class MatchShopActivity extends AppCompatActivity  {
     }
 
     private void initview() {
+        iv_back = findViewById(R.id.iv_back);
         mViewPager = findViewById(R.id.viewPager);
         mtextview_change=findViewById(R.id.textview_change);
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
@@ -139,7 +142,21 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     }
     private  void  initlistenner(){
-
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Popwindow_Tip("放弃任务？", MatchShopActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if (result){
+                            Intent intent=new Intent(MatchShopActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                }).showPopwindow();
+            }
+        });
         mtextview_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,8 +313,15 @@ public class MatchShopActivity extends AppCompatActivity  {
     }
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(this,MainActivity.class);
-       startActivity(intent);
-       finish();
+        new Popwindow_Tip("放弃任务？", MatchShopActivity.this, new Interence_complteTask() {
+            @Override
+            public void onResult(boolean result) {
+                if (result){
+                    Intent intent=new Intent(MatchShopActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }).showPopwindow();
     }
 }

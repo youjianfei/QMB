@@ -219,8 +219,10 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LogUtils.LOG("ceshi","onDestroy","sss");
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mMapview.onDestroy();
+
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -291,7 +293,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 //                        regeocodeResult.getRegeocodeAddress().getFormatAddress()+"4"+
 //                        regeocodeResult.getRegeocodeAddress().getAois().get(0).getAoiName()+"5"
 //                ,"skdafjskafjsadf");
-        LogUtils.LOG("ceshi",isSearch+"","bbbbbbbbbbbbbbbbbbbbbbb");
+        LogUtils.LOG("ceshi",isSearch+"","bbbb");
         if(isSearch){
             String AOi=regeocodeResult.getRegeocodeAddress().getAois().get(0).getAoiName();
             String tichu=regeocodeResult.getRegeocodeAddress().getProvince()+regeocodeResult.getRegeocodeAddress().getCity();
@@ -300,7 +302,7 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
             mTextview_nowaddress.setText(AOi);
             citycode=regeocodeResult.getRegeocodeAddress().getCity();
             mText_location.setText(xianshi);
-            LogUtils.LOG("ceshi",isSearch+"","ssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+            LogUtils.LOG("ceshi",isSearch+"","s");
         }
        isSearch=true;
 

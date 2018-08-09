@@ -140,14 +140,15 @@ public class SquareActuvity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        map_filter_sort = new HashMap();
         if (!Staticdata.city_location.equals("")) {
             mTextview_address.setText(Staticdata.city_location);
+            map_filter_sort.put("city_code", Staticdata.city_location);
         }
 
         mKProgressHUD = new KProgressHUD(this);
         chengweibangshou = new Chengweibangshou(this);
         mdata_image_GG = new ArrayList<>();
-        map_filter_sort = new HashMap();
         initMap(MinCommission + "", MaxCommission + "", page + "", "", "", "");//默认展示
         mListDate_square = new ArrayList<>();
         mAdapter_SquareList = new Adapter_SquareList(mListDate_square, this);

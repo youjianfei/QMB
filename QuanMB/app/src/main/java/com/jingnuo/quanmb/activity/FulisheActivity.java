@@ -2,6 +2,8 @@ package com.jingnuo.quanmb.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -18,6 +20,7 @@ import java.util.List;
 public class FulisheActivity extends BaseActivityother {
     //控件
     ListView mlistview_fulishe;
+    ImageView mImageview;
 
 
     //对象
@@ -51,15 +54,18 @@ public class FulisheActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mlistview_fulishe=findViewById(R.id.listview_fulishe);
+        mImageview=findViewById(R.id.image_empty);
     }
 
     private void request_GGLB(){//请求网络轮播图
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "fulishe");
                 mdata.clear();
                 mdata.addAll(new Gson().fromJson(respose,GuanggaoBean.class).getData());
                 adapter_fulisheList.notifyDataSetChanged();
+                mImageview.setVisibility(mdata.size()==0? View.VISIBLE:View.GONE);
             }
 
             @Override
