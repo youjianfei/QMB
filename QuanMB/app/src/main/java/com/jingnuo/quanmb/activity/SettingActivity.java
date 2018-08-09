@@ -56,7 +56,6 @@ public class SettingActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         mTextview_cleancache.setOnClickListener(this);
-        mTextview_suggest.setOnClickListener(this);
         mTextview_share.setOnClickListener(this);
         textview_aboutus.setOnClickListener(this);
     }
@@ -64,7 +63,6 @@ public class SettingActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mTextview_cleancache=findViewById(R.id.textview_cleancache);
-        mTextview_suggest=findViewById(R.id.textview_suggest);
         mTextview_textview_cleancacheSize=findViewById(R.id.textview_cleancacheSize);
         mTextview_share=findViewById(R.id.textview_shareAPP);
         textview_aboutus=findViewById(R.id.textview_aboutus);
@@ -94,10 +92,6 @@ public class SettingActivity extends BaseActivityother {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                break;
-            case R.id.textview_suggest:
-                Intent intend_suggest=new Intent(this,SuggestActivity.class);
-                startActivity(intend_suggest);
                 break;
             case R.id.textview_shareAPP:
                 shareClass.shareapp();
