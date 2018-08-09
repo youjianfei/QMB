@@ -21,13 +21,12 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class ShopCenterActivity extends BaseActivityother {
     //控件
     CircleImageView imageview_head;
+
     ImageView mImageview_lv;
     ImageView mImageview_vip;
-    TextView mTextview;//
     TextView mTextview_tt;
     TextView mTextview_name;  //名字
 //
@@ -90,7 +89,6 @@ public class ShopCenterActivity extends BaseActivityother {
         imageview_head = findViewById(R.id.image_shoppeoplepic);
         mImageview_lv=findViewById(R.id.image_lv);
         mImageview_vip=findViewById(R.id.image_vip);
-        mTextview = findViewById(R.id.textview_address);//等级和vip分隔符
         mTextview_tt = findViewById(R.id.textview_tt);
         mTextview_name = findViewById(R.id.text_shopname);
         mTextview_text_tui_count = findViewById(R.id.text_tui_count);
@@ -182,10 +180,8 @@ public class ShopCenterActivity extends BaseActivityother {
                 if (type == 1) {
                     helpterInfoBean = new Gson().fromJson(respose, HelpterInfoBean.class);
                     if(helpterInfoBean.getData().getList().getMemberImgUrl()==null||helpterInfoBean.getData().getList().getMemberImgUrl().equals("")){
-                        mTextview.setVisibility(View.GONE);
                         mImageview_vip.setVisibility(View.GONE);
                     }else {
-                        mTextview.setVisibility(View.VISIBLE);
                         mImageview_vip.setVisibility(View.VISIBLE);
                         Glide.with(ShopCenterActivity.this).load(helpterInfoBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(mImageview_vip);
                     }
@@ -203,10 +199,8 @@ public class ShopCenterActivity extends BaseActivityother {
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                     if(shopcenterBean.getData().getList().getMemberImgUrl()==null||shopcenterBean.getData().getList().getMemberImgUrl().equals("")){
-                        mTextview.setVisibility(View.GONE);
                         mImageview_vip.setVisibility(View.GONE);
                     }else {
-                        mTextview.setVisibility(View.VISIBLE);
                         mImageview_vip.setVisibility(View.VISIBLE);
                         Glide.with(ShopCenterActivity.this).load(shopcenterBean.getData().getList().getMemberImgUrl()).error(R.mipmap.vip1).into(mImageview_vip);
                     }
