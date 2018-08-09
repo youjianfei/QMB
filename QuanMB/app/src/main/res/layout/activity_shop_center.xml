@@ -95,18 +95,11 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="3dp"
                     />
-                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                <com.jingnuo.quanmb.customview.SimpleRatingBar
                     android:id="@+id/SimpleRatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srb_starSize="20dp"
-                    app:srb_numberOfStars="5"
-                    app:srb_rating="3.6"
-                    app:srb_stepSize="0.1"
-                    app:srb_fillColor="#ffff00"
-                    app:srb_starBackgroundColor="@color/white"
-                    app:srb_drawBorderEnabled="false"
-                    app:srb_starsSeparation="1dp"
                     />
             </LinearLayout>
 

@@ -106,6 +106,15 @@ public class ShopcenterBean {
             private String  business_img;//(id,id,id)
             private int  business_level;
             private int  spread_b;
+            private double  evaluation_star;
+
+            public double getEvaluation_star() {
+                return evaluation_star;
+            }
+
+            public void setEvaluation_star(double evaluation_star) {
+                this.evaluation_star = evaluation_star;
+            }
 
             public String getMemberImgUrl() {
                 return memberImgUrl;

@@ -105,7 +105,15 @@ public class HelpterInfoBean {
             private String updateName;
             private String member_enddate;
             private int  spread_b;
+            private double  evaluation_star;
 
+            public double getEvaluation_star() {
+                return evaluation_star;
+            }
+
+            public void setEvaluation_star(double evaluation_star) {
+                this.evaluation_star = evaluation_star;
+            }
             public String getMemberImgUrl() {
                 return memberImgUrl;
             }

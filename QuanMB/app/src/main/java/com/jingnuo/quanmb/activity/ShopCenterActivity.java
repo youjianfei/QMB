@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.customview.SimpleRatingBar;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.HelpterInfoBean;
@@ -24,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ShopCenterActivity extends BaseActivityother {
     //控件
     CircleImageView imageview_head;
+    SimpleRatingBar simpleRatingBar;
 
     ImageView mImageview_lv;
     ImageView mImageview_vip;
@@ -87,6 +89,7 @@ public class ShopCenterActivity extends BaseActivityother {
     @Override
     protected void initView() {
         imageview_head = findViewById(R.id.image_shoppeoplepic);
+        simpleRatingBar = findViewById(R.id.SimpleRatingBar);
         mImageview_lv=findViewById(R.id.image_lv);
         mImageview_vip=findViewById(R.id.image_vip);
         mTextview_tt = findViewById(R.id.textview_tt);
@@ -101,6 +104,16 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
         mRealtivelayout_huiyuan = findViewById(R.id.huiyuan);
         mButtonCash = findViewById(R.id.button_cash);
+
+    }
+    void setstar(float stars){
+        simpleRatingBar.setNumberOfStars(5);
+        simpleRatingBar.setFillColor(getResources().getColor(R.color.srb_golden_stars));
+        simpleRatingBar.setStarBackgroundColor(getResources().getColor(R.color.white));
+        simpleRatingBar.setStepSize((float) 0.1);
+        simpleRatingBar.setRating(stars);
+        simpleRatingBar.setDrawBorderEnabled(false);
+        simpleRatingBar.setStarsSeparation(1);
     }
 
     @Override
@@ -195,6 +208,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     }
 //                    mTextview_namenext.setVisibility(View.GONE);
                     mTextview_money.setText(helpterInfoBean.getData().getList().getCommission()+"");
+                    setstar((float) helpterInfoBean.getData().getList().getEvaluation_star());
 
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
@@ -213,7 +227,7 @@ public class ShopCenterActivity extends BaseActivityother {
                     if(shopcenterBean.getData().getList().getMember_enddate()!=null){
                         mTextview_text_huiyuan.setText(shopcenterBean.getData().getList().getMember_enddate().substring(0,10)+"到期");
                     }
-
+                    setstar((float) shopcenterBean.getData().getList().getEvaluation_star());
                 }
 
             }
