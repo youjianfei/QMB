@@ -28,6 +28,7 @@ public class SettingActivity extends BaseActivityother {
     TextView mTextview_suggest;
     TextView mTextview_textview_cleancacheSize;
     TextView mTextview_share;
+    TextView textview_aboutus;
 
 
     //对象
@@ -57,6 +58,7 @@ public class SettingActivity extends BaseActivityother {
         mTextview_cleancache.setOnClickListener(this);
         mTextview_suggest.setOnClickListener(this);
         mTextview_share.setOnClickListener(this);
+        textview_aboutus.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +67,7 @@ public class SettingActivity extends BaseActivityother {
         mTextview_suggest=findViewById(R.id.textview_suggest);
         mTextview_textview_cleancacheSize=findViewById(R.id.textview_cleancacheSize);
         mTextview_share=findViewById(R.id.textview_shareAPP);
+        textview_aboutus=findViewById(R.id.textview_aboutus);
     }
     File root;//分享的图片要放的文件夹
     @Override
@@ -73,11 +76,8 @@ public class SettingActivity extends BaseActivityother {
         switch (v.getId()){
 
             case R.id.textview_aboutus :
-//                SharedPreferencesUtils.putString(SettingActivity.this,"QMB","password","");
-//                Staticdata.isLogin=false;
-//                Intent intent_logout=new Intent(SettingActivity.this,LoginActivity.class);
-//                startActivity(intent_logout);
-//                finish();
+                Intent intent=new Intent(SettingActivity.this,AboutUsActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.textview_cleancache:

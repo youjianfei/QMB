@@ -76,6 +76,14 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/image_empty"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/empty_1"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        />
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/list_square"
         android:layout_width="match_parent"

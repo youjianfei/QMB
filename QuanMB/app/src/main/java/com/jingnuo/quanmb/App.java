@@ -2,6 +2,7 @@ package com.jingnuo.quanmb;
 
 import android.app.Application;
 import android.content.Intent;
+import android.os.StrictMode;
 
 import com.jingnuo.quanmb.activity.LaunchActivity;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -32,17 +33,17 @@ public class App extends Application {
         LogUtils.LOG("ceshi", jpushid, "app");
         Staticdata.JpushID = jpushid;
 
-//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//                .detectAll()//监测所有内容
-//                .penaltyLog()//违规对log日志
-//                .penaltyDeath()//违规Crash
-//                .build());
-//
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectAll()//监测所以内容
-//                .penaltyLog()//违规对log日志
-//                .penaltyDeath()//违规Crash
-//                .build());
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()//监测所有内容
+                .penaltyLog()//违规对log日志
+                .penaltyDeath()//违规Crash
+                .build());
+
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()//监测所以内容
+                .penaltyLog()//违规对log日志
+                .penaltyDeath()//违规Crash
+                .build());
 
 
         {

@@ -31,38 +31,6 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
-    <!--<TextView-->
-        <!--android:id="@+id/text1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="消息通知"-->
-        <!--android:background="@color/white"-->
-        <!--android:textColor="@color/black_text"-->
-        <!--android:layout_below="@+id/re_title"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:paddingLeft="20dp"-->
-        <!--android:paddingTop="15dp"-->
-        <!--android:paddingBottom="15dp"-->
-        <!--/>-->
-    <!--<ImageView-->
-        <!--android:layout_width="15dp"-->
-        <!--android:layout_height="15dp"-->
-        <!--android:src="@mipmap/more"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_below="@+id/re_title"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--/>-->
-
-    <!--<ImageView-->
-        <!--android:layout_width="15dp"-->
-        <!--android:layout_height="15dp"-->
-        <!--android:src="@mipmap/more"-->
-        <!--android:layout_below="@+id/text1"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_marginTop="23dp"-->
-        <!--/>-->
     <TextView
         android:id="@+id/textview_suggest"
         android:layout_width="match_parent"

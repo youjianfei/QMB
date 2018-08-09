@@ -69,6 +69,7 @@ public class SquareActuvity extends BaseActivityother {
     RelativeLayout mRelayout_address;
     RelativeLayout relative_sort;
     RelativeLayout relative_shaixuan;
+    ImageView imageView_image_empty;
 
     Popwindow_SquareSort mPopwindow_square_sort;
 
@@ -179,28 +180,24 @@ public class SquareActuvity extends BaseActivityother {
                 if (status == 1) {
                     mSquare_default_DataBean = new Gson().fromJson(respose, Square_defaultBean.class).getData();
 
-//                    if (mSquare_default_DataBean.getList() == null || mSquare_default_DataBean.getList().size() == 0) {
-//                        ToastUtils.showToast(getActivity(), "没有符合条件的任务");
-//
-//                        return;
-//                    }
-                    if (page == 1 && mSquare_default_DataBean.getList() != null && mSquare_default_DataBean.getList().size() != 0) {
+
+                    if (page == 1  && mSquare_default_DataBean.getList().size() != 0) {
                         mListDate_square.clear();
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
-                        if (mListDate_square.size() == 0) {
-                            Square_defaultBean.DataBean.ListBean data = new Square_defaultBean.DataBean.ListBean();
-                            data.setNick_name("000");
-                            mListDate_square.add(data);
-                        }
-
                         mAdapter_SquareList.notifyDataSetChanged();
-                    } else if (page != 1 && mSquare_default_DataBean.getList() != null) {
+                    } else if (page != 1 ) {
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
                         mAdapter_SquareList.notifyDataSetChanged();
+                    }else {
+                        mListDate_square.clear();
+                        mAdapter_SquareList.notifyDataSetChanged();
+                        imageView_image_empty.setVisibility(mListDate_square.size() == 0?View.VISIBLE:View.GONE);
+                        LogUtils.LOG("ceshi", "mListDate_square.clear()" , "mListDate_square");
                     }
 
                 } else {
-                    ToastUtils.showToast(SquareActuvity.this, msg);
+                    ToastUtils.showToast(SquareActuvity.this,msg);
+
                 }
 
 
@@ -378,7 +375,7 @@ public class SquareActuvity extends BaseActivityother {
         mRelayout_address = findViewById(R.id.relayout_address);
         relative_sort = findViewById(R.id.relative_sort);
         relative_shaixuan = findViewById(R.id.relative_shaixuan);
-
+        imageView_image_empty=findViewById(R.id.image_empty);
         listheadView = LayoutInflater.from(this).inflate(R.layout.list_headview_square, null, false);
         mListview_square.getRefreshableView().addHeaderView(listheadView);
         /**
