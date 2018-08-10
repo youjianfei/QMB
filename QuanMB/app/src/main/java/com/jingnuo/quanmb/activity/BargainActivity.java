@@ -148,18 +148,20 @@ public class BargainActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", respose, "接受还价");
                 int status = 0;
                 String msg = "";
+                String data="";
                 try {
                     JSONObject object = new JSONObject(respose);
                     status = (Integer) object.get("code");
                     msg = (String) object.get("message");
+                    data = (String) object.get("data");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 if (status == 1) {
-                    ToastUtils.showToast(BargainActivity.this, msg);
                     final double amount_need=amount-money;
                     if(amount_need>0){
 
+                        final String finalData = data;
                         popwindow_tip=new Popwindow_Tip("需要补差价"+amount_need+"元", BargainActivity.this, new Interence_complteTask() {
                             @Override
                             public void onResult(boolean result) {
@@ -167,6 +169,7 @@ public class BargainActivity extends BaseActivityother {
                                     Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
                                     intentpay.putExtra("title", "任务补差价");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
                                     intentpay.putExtra("amount", amount_need + "");
+                                    intentpay.putExtra("order_no", finalData + "");
                                     intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
                                     startActivity(intentpay);
                                 }

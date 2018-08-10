@@ -40,10 +40,12 @@ import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_JiazhengweixiuTYpe;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -77,7 +79,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     //    Popwindow_CompleteTime popwindow_completeTime;
     DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
-
+    KProgressHUD mKProgressHUD;
 
     String xValue = "";//纬度
     String yValue = "";//经度
@@ -128,6 +130,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     }
 
     private void initdata() {
+        mKProgressHUD = new KProgressHUD(getActivity());
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
         mTextview_taskAddress.setText(Staticdata.aoi);
@@ -214,12 +217,12 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                 map_issueTask.put("y_value", yValue + "");
                 map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
                 if (initmap_zhaoshanghu()) {
+                    ProgressDlog.showProgress(mKProgressHUD);
                     Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
                     Staticdata.imagePathlist = mList_PicPath_down;
                     Map map_check = new HashMap();
                     map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_check.put("task_name", "假装有标题");//todo
                     map_check.put("task_description", map_issueTask.get("task_description"));
                     map_check.put("detailed_address", map_issueTask.get("detailed_address"));
                     new Volley_Utils(new Interface_volley_respose() {
@@ -227,7 +230,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                         public void onSuccesses(String respose) {
                             int status = 0;
                             String msg = "";
-
+                            mKProgressHUD.dismiss();
                             try {
                                 JSONObject object = new JSONObject(respose);
                                 status = (Integer) object.get("code");//
@@ -249,7 +252,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 
                         @Override
                         public void onError(int error) {
-
+                            mKProgressHUD.dismiss();
                         }
                     }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
 

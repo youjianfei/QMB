@@ -53,7 +53,7 @@ public class Adapter_SquareList extends  BaseAdapter {
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
-         holder.image_line.setVisibility(position==3? View.GONE:View.VISIBLE);
+//         holder.image_line.setVisibility(position==3? View.GONE:View.VISIBLE);
 
         holder.mText_task_des.setText(mData.get(position).getTask_description()+"");
 

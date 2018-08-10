@@ -341,6 +341,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 }
                 if(app_type.equals("1")){
                     linearlayout_tel.setVisibility(View.VISIBLE);
+                    mButton_help.setVisibility(View.GONE);
                 }
             }
 

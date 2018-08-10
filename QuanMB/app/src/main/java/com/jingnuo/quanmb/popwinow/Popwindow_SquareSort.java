@@ -149,7 +149,7 @@ public class Popwindow_SquareSort {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui + Urls.tasktype, activity, 0);
+        }).Http(Urls.Baseurl + Urls.Skillmenu_one, activity, 0);
     }
 
     private void initlistenner() {
@@ -251,20 +251,6 @@ public class Popwindow_SquareSort {
 
             }
         });
-//        mGridview_filter_level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                ToastUtils.showToast(activity,mData_filter_level.get(i).getText());
-//                LogUtils.LOG("ceshi",mData_filter_level.get(i).getText(),"pop");
-//                if(mData_filter_level.get(i).isChoose()){
-//                    mData_filter_level.get(i).setChoose(false);
-//                }else {
-//                    mData_filter_level.get(i).setChoose(true);
-//
-//                }
-//                mAdapter_filter_level.notifyDataSetChanged();
-//            }
-//        });
 
         mButton_complete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,16 +330,6 @@ public class Popwindow_SquareSort {
         mAdapter_filter_task = new FilterAdapter(Staticdata.mData_filter_task, activity);
         mGridview_filter_task.setAdapter(mAdapter_filter_task);
 
-//        mData_filter_level=new ArrayList<>();
-//        for (int i=0;i<4;i++){
-//            PopwindowGridBean.FilterBean  bean=new PopwindowGridBean.FilterBean();
-//            bean.setChoose(false);
-//            bean.setId(i);
-//            bean.setText(i+"级");
-//            mData_filter_level.add(bean);
-//        }
-//        mAdapter_filter_level=new FilterAdapter(mData_filter_level,activity);
-//        mGridview_filter_level.setAdapter(mAdapter_filter_level);
 
     }
 

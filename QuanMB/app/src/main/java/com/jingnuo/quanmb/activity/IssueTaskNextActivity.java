@@ -399,6 +399,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
                     Intent intentpay = new Intent(IssueTaskNextActivity.this, PayActivity.class);
                     intentpay.putExtra("title", "全民帮—任务付款");
+                    intentpay.putExtra("order_no", "000000");
                     intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
                     intentpay.putExtra("taskid", Staticdata.map_task.get("task_id")+"");
                     startActivity(intentpay);

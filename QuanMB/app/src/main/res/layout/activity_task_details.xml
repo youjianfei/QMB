@@ -342,7 +342,7 @@
             android:textSize="15dp"
             android:textColor="@color/white"
             android:background="@color/green"
-            android:visibility="gone"
+            android:visibility="visible"
             />
 
 

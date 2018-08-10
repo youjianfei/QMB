@@ -42,10 +42,12 @@ import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -112,7 +114,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 //    Popwindow_CompleteTime popwindow_completeTime;
     DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
-
+    KProgressHUD mKProgressHUD;
 
     String xValue = "";//纬度
     String yValue = "";//经度
@@ -200,6 +202,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
 
     private void initdata() {
+        mKProgressHUD = new KProgressHUD(getActivity());
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
         mTextview_taskAddress.setText(Staticdata.aoi);
@@ -295,11 +298,13 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 map_issueTask.put("city_code", citycode + "");
                 map_issueTask.put("x_value", xValue + "");
                 map_issueTask.put("y_value", yValue + "");
                 map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
                 if (initmap_zhaoshanghu()) {
+                    ProgressDlog.showProgress(mKProgressHUD);
                     Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
                     Staticdata.imagePathlist = mList_PicPath_down;
@@ -312,7 +317,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                         public void onSuccesses(String respose) {
                             int status = 0;
                             String msg = "";
-
+                            mKProgressHUD.dismiss();
                             try {
                                 JSONObject object = new JSONObject(respose);
                                 status = (Integer) object.get("code");//
@@ -334,7 +339,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
                         @Override
                         public void onError(int error) {
-
+                            mKProgressHUD.dismiss();
                         }
                     }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
 

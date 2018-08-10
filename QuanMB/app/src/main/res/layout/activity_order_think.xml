@@ -77,18 +77,26 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             />
-        <RatingBar
+        <!--<RatingBar-->
+            <!--style="@style/RadingStyle"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_below="@+id/image_1"-->
+            <!--android:numStars="5"-->
+            <!--android:rating="5.0"-->
+            <!--android:stepSize="1.0"-->
+            <!--/>-->
+        <com.jingnuo.quanmb.customview.SimpleRatingBar
             android:id="@+id/ratingbar"
-            style="@style/RadingStyle"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/image_1"
-            android:numStars="5"
-            android:rating="5.0"
-            android:stepSize="1.0"
+            android:layout_centerHorizontal="true"
+            app:srb_starSize="40dp"
             />
         <EditText
             android:id="@+id/edit_think"

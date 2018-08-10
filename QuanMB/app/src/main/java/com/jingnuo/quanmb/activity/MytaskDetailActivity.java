@@ -127,7 +127,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if (respose.equals("success")&&isIssueAgain) {//重新发布任务支付成功
-                    requestTaskAgain();
+                    request(map_taskdetail);
                 }else {//增加价格支付成功
                     Map map_addprice=new HashMap();
                     map_addprice.put("user_token",Staticdata.static_userBean.getData().getUser_token());
@@ -327,8 +327,8 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_again.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestTaskid();
 
+                requestTaskAgain();
             }
         });
         mText_xiugaijiage.setOnClickListener(new View.OnClickListener() {
@@ -340,6 +340,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                         addprice=result;
                         Intent intentaddprice = new Intent(MytaskDetailActivity.this, PayActivity.class);
                         intentaddprice.putExtra("title", "全民帮—任务加价");
+                        intentaddprice.putExtra("order_no", "000000");
                         intentaddprice.putExtra("amount", result + "");
                         intentaddprice.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
                         startActivity(intentaddprice);
@@ -382,6 +383,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 isIssueAgain = true;
                 Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
                 intentpay.putExtra("title", "全民帮—任务付款");
+                intentpay.putExtra("order_no", "000000");
 
                 if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     intentpay.putExtra("amount", "5");
@@ -416,9 +418,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 if (status == 1) {//重新发布成功
                     map_taskdetail.put("id", taskDetailBean.getData().getTask_id() + "");
                     mButton_again.setVisibility(View.GONE);
-                    request(map_taskdetail);
-                    LogUtils.LOG("ceshi1", "request(map_taskdetail)", "request");
-                    ToastUtils.showToast(MytaskDetailActivity.this, msg);
+                    requestTaskid();//支付
                 } else {
                     ToastUtils.showToast(MytaskDetailActivity.this, msg);
                 }
@@ -429,7 +429,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_id=" + taskDetailBean.getData().getTask_id() + "&payResult=" + 1, MytaskDetailActivity.this, 0);
+        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_id=" + taskDetailBean.getData().getTask_id() , MytaskDetailActivity.this, 0);
     }
 
     void request(Map map) {

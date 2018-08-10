@@ -60,6 +60,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     String title_pay="";
     String amount="";
     String taskid="";
+    String order_no="";
 
     int pay=1;  //1 余额支付 2 微信支付  3 支付宝支付
     private IWXAPI api;
@@ -106,6 +107,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         title_pay=intent.getStringExtra("title");
         amount=intent.getStringExtra("amount");
         taskid=intent.getStringExtra("taskid");
+        order_no=intent.getStringExtra("order_no");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_head);
         mTextview_amount.setText("¥"+amount);
 //        if(Staticdata.map_task.get("tasktypename")!=null){
@@ -230,6 +232,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_pay.put("task_id",taskid);
+                    map_pay.put("order_no",order_no);
                     if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                         map_pay.put("isBargainPay","Y");
                     }
@@ -246,6 +249,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_zpay.put("task_id",taskid);
+                    map_zpay.put("order_no",order_no);
                     if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                         map_zpay.put("isBargainPay","Y");
                     }
@@ -311,6 +315,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
             map_yue.put("pay_money",amount);
             map_yue.put("task_id",taskid);
+            map_yue.put("order_no",order_no);
             LogUtils.LOG("ceshi",title_pay.toString(),"title_pay");
             if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                 map_yue.put("isBargainPay","Y");

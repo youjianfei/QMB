@@ -136,15 +136,18 @@ public class Fragment_shopdetail extends Fragment{
                         public void onSuccesses(String respose) {
                             int status = 0;
                             String msg = "";
+                            String data = "";
                             try {
                                 JSONObject object = new JSONObject(respose);
                                 status = (Integer) object.get("code");//
                                 msg = (String) object.get("message");//
+                                data = (String) object.get("data");//
                                 if(status==1){
                                     timer.cancel();
                                     Intent intentpay = new Intent(getActivity(), PayActivity.class);
                                     intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
                                     intentpay.putExtra("amount", text_money.getText());
+                                    intentpay.putExtra("order_no", data);
                                     intentpay.putExtra("taskid", task_id);
                                     startActivity(intentpay);
 
