@@ -177,9 +177,9 @@ public class DatailAddressActivity extends BaseActivityother {
             }
             holder.mText_name.setText(mData.get(position).getName());
             if (mData.get(position).getSex() == 0) {
-                holder.mText_sex.setText("男");
+                holder.mText_sex.setText("先生");
             } else {
-                holder.mText_sex.setText("女");
+                holder.mText_sex.setText("女士");
             }
             holder.mText_number.setText(mData.get(position).getMobile_no());
             holder.mImageview_chose.setSelected(mData.get(position).getIs_default().equals("Y")? true:false);

@@ -114,6 +114,7 @@ public class ShopCenterActivity extends BaseActivityother {
         simpleRatingBar.setRating(stars);
         simpleRatingBar.setDrawBorderEnabled(false);
         simpleRatingBar.setStarsSeparation(1);
+
     }
 
     @Override

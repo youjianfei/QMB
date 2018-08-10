@@ -542,7 +542,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             ToastUtils.showToast(getActivity(), "请填写详细地址");
             return false;
         }
-        detailed_address = address_right + detailed_address;
         commission = mEditview_taskmoney.getText() + "";
         if (!commission.equals("")) {
             float min = Float.parseFloat(commission);
@@ -563,13 +562,18 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
             }
         }
+        if(address_right.equals("")){
+            map_issueTask.put("detailed_address", release_address + "");
+        }else {
+            map_issueTask.put("detailed_address", address_right + "");
+        }
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
         map_issueTask.put("commission", commission + "");//由帮手出价
         map_issueTask.put("is_counteroffer", is_counteroffer + "");
         map_issueTask.put("release_address", release_address);
-        map_issueTask.put("detailed_address", detailed_address + "");
+        map_issueTask.put("houseNumber", detailed_address + "");
 
 //        Staticdata.map_task.put("tasktypename", task_type);
 

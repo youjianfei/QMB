@@ -89,7 +89,8 @@ public class BargainActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if(respose.equals("success")){//支付成功
-                    acceptBargain();
+//                    acceptBargain();
+                    requestBargainmessage(map_bargainmessagedetail);//刷新状态
                 }
             }
 
@@ -156,7 +157,27 @@ public class BargainActivity extends BaseActivityother {
                 }
                 if (status == 1) {
                     ToastUtils.showToast(BargainActivity.this, msg);
-                    requestBargainmessage(map_bargainmessagedetail);//刷新状态
+                    final double amount_need=amount-money;
+                    if(amount_need>0){
+
+                        popwindow_tip=new Popwindow_Tip("需要补差价"+amount_need+"元", BargainActivity.this, new Interence_complteTask() {
+                            @Override
+                            public void onResult(boolean result) {
+                                if(result){
+                                    Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
+                                    intentpay.putExtra("title", "任务补差价");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
+                                    intentpay.putExtra("amount", amount_need + "");
+                                    intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
+                                    startActivity(intentpay);
+                                }
+
+                            }
+                        });
+                        popwindow_tip.showPopwindow();
+
+                    }else {
+                        requestBargainmessage(map_bargainmessagedetail);//刷新状态
+                    }
                 } else {
                     ToastUtils.showToast(BargainActivity.this, msg);
                 }
@@ -202,29 +223,9 @@ public class BargainActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.button_accect://接受还价
-                final double amount_need=amount-money;
-                if(amount_need>0){
 
-                    popwindow_tip=new Popwindow_Tip("需要补差价"+amount_need+"元", BargainActivity.this, new Interence_complteTask() {
-                        @Override
-                        public void onResult(boolean result) {
-                            if(result){
-                                Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
-                                intentpay.putExtra("title", "任务补差价");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-                                intentpay.putExtra("amount", amount_need + "");
-                                intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
-                                startActivity(intentpay);
-                            }
+                acceptBargain();
 
-                        }
-                    });
-                    popwindow_tip.showPopwindow();
-
-
-
-                }else {
-                    acceptBargain();
-                }
                 break;
             case R.id.button_goon://继续还价
 //                popwindow_bargin.showpop();

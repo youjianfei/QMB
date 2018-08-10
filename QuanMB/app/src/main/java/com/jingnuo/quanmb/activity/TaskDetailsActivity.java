@@ -1,9 +1,15 @@
 package com.jingnuo.quanmb.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +32,7 @@ import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.master.permissionhelper.PermissionHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,11 +57,13 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     Button mButton_help;
     Button mButton_counteroffer;
+    LinearLayout linearlayout_tel;
 
     //数据
     String ID = "";//任务id;
     String is_counteroffer = "";
     double commison=0;
+    String tel = "";//雇主电话
 
     String app_type="";//判断广场单和匹配单
 
@@ -67,7 +76,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     Popwindow_lookpic popwindow_lookpic;
     Popwindow_bargin popwindow_bargin;
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
-
+    PermissionHelper mPermission;//动态申请权限
     RequestManager glide;
     @Override
     public int setLayoutResID() {
@@ -222,6 +231,46 @@ public class TaskDetailsActivity extends BaseActivityother {
                 }
             }
         });
+        //拨打电话
+        linearlayout_tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!tel.equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    Uri data = Uri.parse("tel:" + tel);
+                    intent.setData(data);
+
+                    if (ActivityCompat.checkSelfPermission(TaskDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+                        mPermission.request(new PermissionHelper.PermissionCallback() {
+                            @Override
+                            public void onPermissionGranted() {
+
+                            }
+
+                            @Override
+                            public void onIndividualPermissionGranted(String[] grantedPermission) {
+
+                            }
+
+                            @Override
+                            public void onPermissionDenied() {
+
+                            }
+
+                            @Override
+                            public void onPermissionDeniedBySystem() {
+
+                            }
+                        });
+                        return;
+                    }
+                    startActivity(intent);//调用具体方法
+                }
+            }
+        });
+
     }
 
     @Override
@@ -236,6 +285,7 @@ public class TaskDetailsActivity extends BaseActivityother {
         imageGridview=findViewById(R.id.GridView_PIC);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
+        linearlayout_tel = findViewById(R.id.linearlayout_tel);
         imageView_head = findViewById(R.id.image_task);
     }
 
@@ -252,6 +302,7 @@ public class TaskDetailsActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", "任务详情返回信息" + respose, "TaskDetailsActivity");
                 mTaskData = new Gson().fromJson(respose, TaskDetailBean.class);
+                tel=mTaskData.getData().getMobile_no();
                 app_type=mTaskData.getData().getApp_type();
                 mTextview_state.setText(mTaskData.getData().getSpecialty_name());
                 mTextview_taskmoney.setText(mTaskData.getData().getCommission() + "元");
@@ -288,6 +339,9 @@ public class TaskDetailsActivity extends BaseActivityother {
                     mButton_counteroffer.setText("已报价");
                     mButton_counteroffer.setEnabled(false);
                 }
+                if(app_type.equals("1")){
+                    linearlayout_tel.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -313,5 +367,12 @@ public class TaskDetailsActivity extends BaseActivityother {
         }
 
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (mPermission != null) {
+            mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
+    }
 }

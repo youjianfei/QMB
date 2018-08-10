@@ -242,10 +242,10 @@ public class IssueTaskNextActivity extends BaseActivityother {
             String ismoren = data.getStringExtra("is_default");
             int sexw = data.getIntExtra("sex", 0);
             if(sexw==0){
-                mTextview_lianxirensex.setText("男");
+                mTextview_lianxirensex.setText("先生");
                 sex=0;
             }else {
-                mTextview_lianxirensex.setText("女");
+                mTextview_lianxirensex.setText("女士");
                 sex=1;
             }
             if(ismoren.equals("N")){

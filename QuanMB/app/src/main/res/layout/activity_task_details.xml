@@ -138,7 +138,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     />
 
                 <RelativeLayout
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="15dp"
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="15dp"
                     android:layout_below="@+id/line2"
@@ -235,7 +235,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="15dp"
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     android:layout_marginLeft="100dp"
                     android:layout_marginTop="15dp"
                     android:layout_below="@+id/line3"
@@ -285,48 +285,68 @@
                     />
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_below="@+id/re3"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="20dp"
-                >
-                <Button
-                    android:id="@+id/button_bargain"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:text="还 价"
-                    android:textSize="15dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/re2"
-                    android:background="@drawable/button_yellow_20dp"
-                    android:visibility="gone"
-                    />
-                <Button
-                    android:id="@+id/button_help"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:text="确认帮助"
-                    android:textSize="15dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/re2"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/button_green_20dp"
-                    />
 
-            </LinearLayout>
 
         </RelativeLayout>
 
     </com.jingnuo.quanmb.customview.CustomerScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+        <LinearLayout
+            android:id="@+id/linearlayout_tel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:visibility="gone"
+            >
 
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/tel_gray2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="电话"
+                android:textColor="#7f7f7f"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_bargain"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="还 价"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@color/yellow_jianbian_end"
+            android:visibility="visible"
+            />
+        <Button
+            android:id="@+id/button_help"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="确认帮助"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:visibility="gone"
+            />
+
+
+    </LinearLayout>
 
 
 

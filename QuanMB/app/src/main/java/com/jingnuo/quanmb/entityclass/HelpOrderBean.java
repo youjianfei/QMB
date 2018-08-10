@@ -85,6 +85,15 @@ public class HelpOrderBean {
             private String task_EndDate;
             private String order_enddate;
             private String task_Img_Url;
+            private String houseNumber;
+
+            public String getHouseNumber() {
+                return houseNumber;
+            }
+
+            public void setHouseNumber(String houseNumber) {
+                this.houseNumber = houseNumber;
+            }
 
             public String getTask_Img_Url() {
                 return task_Img_Url;

@@ -171,7 +171,7 @@ public class HelperOrderActivity extends BaseActivityother {
                 helpOrderBean = new Gson().fromJson(respose, HelpOrderBean.class);
                 Glide.with(HelperOrderActivity.this).load(helpOrderBean.getData().getDetail().getHeadUrl()).into(mImageview_head);
                 mTextview_state.setText(helpOrderBean.getData().getDetail().getOrder_status());
-                mTextview_money.setText("佣金：" + helpOrderBean.getData().getDetail().getOrder_amount() + "元");
+                mTextview_money.setText( helpOrderBean.getData().getDetail().getOrder_amount() + "元");
                 mTextview_time.setText("发布时间：" + helpOrderBean.getData().getDetail().getTask_StartDate());
 
 //                mTextview_resttime.setText(time);
@@ -179,7 +179,7 @@ public class HelperOrderActivity extends BaseActivityother {
                 setImage(image_url);
                 mTextview_peoplename.setText(helpOrderBean.getData().getDetail().getNick_name());
                 mTextview_taskDetail.setText(helpOrderBean.getData().getDetail().getTask_description());
-                mTextview_address.setText(helpOrderBean.getData().getDetail().getDetailed_address());
+                mTextview_address.setText(helpOrderBean.getData().getDetail().getDetailed_address()+helpOrderBean.getData().getDetail().getHouseNumber());
 //                mTextview_phonenumber.setText(helpOrderBean.getData().getDetail().getMobile_no());
                 tel = helpOrderBean.getData().getDetail().getMobile_no();
                 if (helpOrderBean.getData().getDetail().getOrder_status().equals("待确认")) {

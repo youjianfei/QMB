@@ -272,7 +272,7 @@
                     android:layout_marginTop="15dp"
                     android:text="任务详情"
                     android:layout_below="@+id/line111"
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     android:layout_toRightOf="@+id/text2"
                     android:textSize="15dp" />
 
@@ -290,6 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
+                        android:layout_marginTop="5dp"
                         android:numColumns="3"/>
 
                 </RelativeLayout>
@@ -332,7 +333,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:text="雇主名字"
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     android:layout_toRightOf="@+id/text2"
                     android:layout_below="@+id/line222"
                     android:textSize="15dp" />
@@ -376,7 +377,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/text3"
                     android:text=""
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -417,7 +418,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/text4"
                     android:text=""
-                    android:textColor="@color/black_text"
+                    android:textColor="#7f7f7f"
                     android:layout_marginBottom="15dp"
                     android:textSize="15dp" />
 

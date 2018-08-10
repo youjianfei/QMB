@@ -5,10 +5,11 @@ package com.jingnuo.quanmb.data;
  */
 
 public class Urls {
+    public static String Baseurl_index = "https://app.quanminbang.top/QuanMinBang";
         //正式
-//    public static String Baseurl = "http://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "http://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
         //  测试

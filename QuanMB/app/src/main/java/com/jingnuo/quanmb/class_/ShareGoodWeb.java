@@ -19,6 +19,8 @@ import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
+import static com.jingnuo.quanmb.data.Urls.Baseurl_index;
+
 
 /**
  * Created by Administrator on 2017/10/10.
@@ -43,9 +45,8 @@ public class ShareGoodWeb {//直接分享商品卡片链接
     public  void shareapp( ) {
         mKProgressHUD=new KProgressHUD(activity);
         LogUtils.LOG("ceshi","我是拉出来的微信分享","分享");
-        image_small= "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532493059729&di=416359b3ebe289b5ac6" +
-                "8ac0d01a7c53a&imgtype=0&src=http%3A%2F%2Fpic.xiudodo.com%2Ffigure%2F00%2F00%2F33%2F16%2F73%2F1655bda6abbcd26.jpg";
-        description="我是分享的图片";
+        image_small= "https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/512.png";
+        description="生活琐事就找全民帮";
         umShareListener = new UMShareListener() {
             @Override
             public void onStart(SHARE_MEDIA share_media) {
@@ -83,8 +84,8 @@ public class ShareGoodWeb {//直接分享商品卡片链接
 //                    // 将ClipData内容放到系统剪贴板里。
 //                    cm.setPrimaryClip(mClipData);
 
-                    UMWeb web = new UMWeb("https://www.baidu.com/");
-                    web.setTitle("分享标题");//标题
+                    UMWeb web = new UMWeb(Baseurl_index);
+                    web.setTitle("全民帮");//标题
                     web.setDescription(description);//描述
                     web.setThumb(image);
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
@@ -95,8 +96,8 @@ public class ShareGoodWeb {//直接分享商品卡片链接
                 if (share_media == share_media.WEIXIN) {
 
 
-                    UMWeb web = new UMWeb("https://www.baidu.com/");
-                    web.setTitle("分享标题");//标题
+                    UMWeb web = new UMWeb(Baseurl_index);
+                    web.setTitle("全民帮");//标题
                     web.setDescription(description);//描述
                     web.setThumb(image);
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.WEIXIN)
