@@ -54,6 +54,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     RelativeLayout mRelativylaout_background;
     RelativeLayout mRelativylaout_re1;
     RelativeLayout mRelativylaout_re4;
+    LinearLayout kefujieru;
     TextView getmTextview_statejieshao;//例：正在等待帮手接单
     TextView mTextview_taskstate;// 任务类型
     TextView mTextview_taskmoney;//佣金
@@ -239,7 +240,42 @@ public class MytaskDetailActivity extends BaseActivityother {
 
             }
         });
+        kefujieru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                Uri data = Uri.parse("tel:0371-55257257" );
+                intent.setData(data);
 
+                if (ActivityCompat.checkSelfPermission(MytaskDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+                    mPermission.request(new PermissionHelper.PermissionCallback() {
+                        @Override
+                        public void onPermissionGranted() {
+
+                        }
+
+                        @Override
+                        public void onIndividualPermissionGranted(String[] grantedPermission) {
+
+                        }
+
+                        @Override
+                        public void onPermissionDenied() {
+
+                        }
+
+                        @Override
+                        public void onPermissionDeniedBySystem() {
+
+                        }
+                    });
+                    return;
+                }
+                startActivity(intent);//调用具体方法
+            }
+        });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -376,6 +412,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mRelativylaout_background = findViewById(R.id.RelativeLayout_background);
         mRelativylaout_re1 = findViewById(R.id.re1);
         mRelativylaout_re4 = findViewById(R.id.re4);
+        kefujieru = findViewById(R.id._kefujieru);
     }
 
     void requestTaskid() {
@@ -585,6 +622,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
                     mButton_complete.setVisibility(View.VISIBLE);
+                    kefujieru.setVisibility(View.VISIBLE);
                     mButton_completed.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("帮手已经完成任务，快去确认订单");
                 }
@@ -603,10 +641,12 @@ public class MytaskDetailActivity extends BaseActivityother {
                 if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
                     mButton_completed.setVisibility(View.VISIBLE);
                     mButton_complete.setVisibility(View.GONE);
+                    kefujieru.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("很好的一次合作");
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("09")) {
                     mButton_complete.setVisibility(View.GONE);
+                    kefujieru.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("抱歉，帮手未完成任务");
                 }
 

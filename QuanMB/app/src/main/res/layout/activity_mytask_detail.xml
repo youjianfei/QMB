@@ -521,7 +521,49 @@
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/_kefujieru"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/white"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/kefu"
+                />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/qqq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="客服介入"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#ff6b52"
+                    android:visibility="visible"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="服务有疑问？"
+                    android:textSize="11dp"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#fc9393"
+                    android:visibility="visible"
+                    android:gravity="center"
+                    android:layout_below="@+id/qqq"
+                    />
+            </RelativeLayout>
 
+
+        </LinearLayout>
         <TextView
             android:id="@+id/button_complete"
             android:layout_width="0dp"
