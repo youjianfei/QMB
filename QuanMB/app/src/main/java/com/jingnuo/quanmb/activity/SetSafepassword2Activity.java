@@ -2,7 +2,9 @@ package com.jingnuo.quanmb.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,6 +110,29 @@ public class SetSafepassword2Activity extends BaseActivityother {
                 }
             }
         });
+        mEdit_newpassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String ss=s+"";
+                if(ss.length()>6){
+                    mEdit_newpassword.setText(ss.substring(0,6));
+                    mEdit_newpassword.setSelection(mEdit_newpassword.getText().toString().length());
+                }
+
+
+            }
+        });
+
     }
 
     @Override

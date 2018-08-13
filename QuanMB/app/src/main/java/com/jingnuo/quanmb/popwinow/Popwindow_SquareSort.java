@@ -149,7 +149,7 @@ public class Popwindow_SquareSort {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl + Urls.Skillmenu_one, activity, 0);
+        }).Http(Urls.Baseurl + Urls.tasktype, activity, 0);
     }
 
     private void initlistenner() {
