@@ -25,6 +25,7 @@ import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
+import com.jingnuo.quanmb.customview.SimpleRatingBar;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
@@ -47,7 +48,10 @@ public class Fragment_shopdetail extends Fragment{
     View  rootview;
     TextView text_name;
     TextView text_type;
-    TextView text_lv;
+    TextView text_orders;
+    ImageView image_vip;
+    SimpleRatingBar simpleRatingBar;
+//    TextView text_lv;
     CircleImageView image_head;
     ImageView imageView_call;
     Button button_choose;
@@ -59,6 +63,7 @@ public class Fragment_shopdetail extends Fragment{
     Map map_choosebissness;
     String task_id="";
 
+    double xingxing=0;
 
 
     //数据
@@ -172,9 +177,16 @@ public class Fragment_shopdetail extends Fragment{
     private void setdata() {
         text_name.setText(matchingBean.getBusiness_name());
         text_type.setText("主营："+matchingBean.getSpecialty_name());
-        text_lv.setText(matchingBean.getAppellation_name());
+//        text_lv.setText(matchingBean.getAppellation_name());
         Glide.with(getActivity()).load(matchingBean.getHeadUrl()).into(image_head);
-
+        if(!matchingBean.getMemberImgUrl().equals("")){
+            image_vip.setVisibility(View.VISIBLE);
+            Glide.with(getActivity()).load(matchingBean.getMemberImgUrl()).into(image_vip);
+        }else {
+            image_vip.setVisibility(View.INVISIBLE);
+        }
+        text_orders.setText("已完成"+matchingBean.getOverCount()+"单");
+        setstar((float) matchingBean.getEvaluation_star());
         timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -188,14 +200,25 @@ public class Fragment_shopdetail extends Fragment{
     private void initview() {
         text_name=rootview.findViewById(R.id.text_name);
         text_type=rootview.findViewById(R.id.text_main);
-        text_lv=rootview.findViewById(R.id.text_level);
+        text_orders=rootview.findViewById(R.id.text_orders);
+        image_vip=rootview.findViewById(R.id.image_vip);
+        simpleRatingBar=rootview.findViewById(R.id.SimpleRatingBar);
+//        text_lv=rootview.findViewById(R.id.text_level);
         image_head=rootview.findViewById(R.id.image_head);
         imageView_call=rootview.findViewById(R.id.image_callphone);
         button_choose=rootview.findViewById(R.id.button_choose);
         text_money=rootview.findViewById(R.id.text_money);
 
     }
-
+    void setstar(float count) {
+        simpleRatingBar.setNumberOfStars(5);
+        simpleRatingBar.setFillColor(getResources().getColor(R.color.yellow_jianbian_start));
+        simpleRatingBar.setStarBackgroundColor(getResources().getColor(R.color.gray_background));
+        simpleRatingBar.setStepSize((float) 0.1);
+        simpleRatingBar.setRating(count);
+        simpleRatingBar.setDrawBorderEnabled(false);
+        simpleRatingBar.setStarsSeparation(1);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

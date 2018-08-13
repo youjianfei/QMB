@@ -33,17 +33,17 @@ public class App extends Application {
         LogUtils.LOG("ceshi", jpushid, "app");
         Staticdata.JpushID = jpushid;
 
-//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//                .detectAll()//监测所有内容
-//                .penaltyLog()//违规对log日志
-//                .penaltyDeath()//违规Crash
-//                .build());
-//
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectAll()//监测所以内容
-//                .penaltyLog()//违规对log日志
-//                .penaltyDeath()//违规Crash
-//                .build());
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()//监测所有内容
+                .penaltyLog()//违规对log日志
+                .penaltyDeath()//违规Crash
+                .build());
+
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()//监测所以内容
+                .penaltyLog()//违规对log日志
+                .penaltyDeath()//违规Crash
+                .build());
 
 
         {
@@ -51,13 +51,14 @@ public class App extends Application {
             PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834", "http://www.sina.com.cn/");
             PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
         }
-        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
+//        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
     }
-    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
-        public void uncaughtException(Thread thread, Throwable ex) {
-            restartApp();
-        }
-    };
+
+//    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
+//        public void uncaughtException(Thread thread, Throwable ex) {
+//            restartApp();
+//        }
+//    };
 
     public void restartApp() {
         Intent intent = new Intent(getApplicationContext(), LaunchActivity.class);
@@ -66,4 +67,9 @@ public class App extends Application {
 //        RxBus.getDefault().post(RxBusConstant.FINISH);//把你退出APP的代码放在这，我这里使用了rxbus关闭所有Activity
         android.os.Process.killProcess(android.os.Process.myPid());
     }
-    }
+
+
+
+
+
+}

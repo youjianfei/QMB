@@ -284,15 +284,6 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
 
     @Override
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-//        LogUtils.LOG("ceshi",regeocodeResult.getRegeocodeAddress().getStreetNumber().getStreet()+"1"+
-//                        regeocodeResult.getRegeocodeAddress().getStreetNumber().getNumber()+"1"+
-//                        regeocodeResult.getRegeocodeAddress().getStreetNumber().getDistance()+"1"+
-//                        regeocodeResult.getRegeocodeAddress().getStreetNumber().getLatLonPoint()+"1"+
-//                        regeocodeResult.getRegeocodeAddress().getCity()+"2"+
-//                        regeocodeResult.getRegeocodeAddress().getDistrict()+"3"+
-//                        regeocodeResult.getRegeocodeAddress().getFormatAddress()+"4"+
-//                        regeocodeResult.getRegeocodeAddress().getAois().get(0).getAoiName()+"5"
-//                ,"skdafjskafjsadf");
         LogUtils.LOG("ceshi",isSearch+"","bbbb");
         if(isSearch){
             String AOi=regeocodeResult.getRegeocodeAddress().getAois().get(0).getAoiName();

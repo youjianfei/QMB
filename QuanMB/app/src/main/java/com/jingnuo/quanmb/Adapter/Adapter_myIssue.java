@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -52,6 +53,7 @@ public class Adapter_myIssue extends BaseAdapter {
             viewHolder.mTextview_resttime = convertView.findViewById(R.id.text_resttime);
             viewHolder.mTextview_cancel=convertView.findViewById(R.id.text_taskcancle);
             viewHolder.mImage_resttime=convertView.findViewById(R.id.iamge_resttimepic);
+            viewHolder.resttime=convertView.findViewById(R.id.resttime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (viewHolde) convertView.getTag();
@@ -59,8 +61,13 @@ public class Adapter_myIssue extends BaseAdapter {
         viewHolder.mTextview_type.setText(mData.get(position).getSpecialty_name());
         viewHolder.mTextview_title.setText(mData.get(position).getTask_description());
         viewHolder.mTextview_issuetime.setText("发布时间：" + mData.get(position).getTask_StartDate());
-
         viewHolder.mTextview_taskstate.setText(mData.get(position).getStatus_name());
+        if(mData.get(position).getTask_Status_code().equals("07")||mData.get(position).getTask_Status_code().equals("13")
+                ||mData.get(position).getTask_Status_code().equals("09")||mData.get(position).getTask_Status_code().equals("06")){
+            viewHolder.resttime.setVisibility(View.INVISIBLE);
+        }else{
+            viewHolder.resttime.setVisibility(View.VISIBLE);
+        }
         if(mData.get(position).getStatus_name().equals("待帮助")){
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_green2);
             if(mData.get(position).getIs_helper_bid().equals("Y")){//待帮助状态下  判断是否由帮手出价
@@ -151,5 +158,6 @@ public class Adapter_myIssue extends BaseAdapter {
         TextView mTextview_resttime;
         TextView mTextview_cancel;
         ImageView mImage_resttime;
+        RelativeLayout resttime;
     }
 }

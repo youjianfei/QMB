@@ -388,10 +388,10 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
     @Override
     public void onClick(View v) {
-        setunselect();
         switch (v.getId()) {
 
             case R.id.lin_banyungong:
+                setunselect();
                 task_typeID=2200;
                 linearLayout_banyungong.setSelected(true);
                 imageView_banyungong.setSelected(true);
@@ -399,7 +399,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 break;
             case R.id.lin_qingjie:
                 task_typeID=2201;
-
+                setunselect();
                 linearLayout_qingjie.setSelected(true);
                 imageView_qingjie.setSelected(true);
                 textView_qingjie.setSelected(true);
@@ -407,7 +407,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 break;
             case R.id.lin_bangmai:
                 task_typeID=2202;
-
+                setunselect();
                 linearLayout_bangmai.setSelected(true);
                 imageView_bangmai.setSelected(true);
                 textView_bangmai.setSelected(true);
@@ -415,7 +415,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 break;
             case R.id.lin_yuyue:
                 task_typeID=2203;
-
+                setunselect();
                 linearLayout_yuyue.setSelected(true);
                 imageView_yuyue.setSelected(true);
                 textView_yuyue.setSelected(true);
@@ -423,6 +423,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 break;
             case R.id.lin_daijia:
                 task_typeID=2204;
+                setunselect();
                 linearLayout_daijia.setSelected(true);
                 imageView_daijia.setSelected(true);
                 textView_daijia.setSelected(true);
@@ -430,6 +431,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 break;
             case R.id.lin_dingzhi:
                 task_typeID=2205;
+                setunselect();
                 linearLayout_dingzhi.setSelected(true);
                 imageView_dingzhi.setSelected(true);
                 textView_dingzhi.setSelected(true);

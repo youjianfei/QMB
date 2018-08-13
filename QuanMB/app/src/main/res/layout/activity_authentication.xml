@@ -266,7 +266,7 @@
                     android:id="@+id/textview_xieyi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="《全民帮用户协议》"
+                    android:text="《全民帮帮手协议》"
                     android:textSize="12dp"
                     android:textColor="@color/yellow_button"
                     />

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
@@ -52,6 +53,7 @@ public class AuthenticationActivity extends BaseActivityother {
     ImageView mImageview_shouchi;
     ImageView mImage_choose;
     Button mBitton_submit;
+    TextView textview_xieyi;
 
     //对象
     PermissionHelper permissionHelper;
@@ -154,7 +156,13 @@ public class AuthenticationActivity extends BaseActivityother {
                 }
             }
         });
-
+        textview_xieyi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AuthenticationActivity.this,XieYiShanghuActivity.class);
+                startActivity(intent);
+            }
+        });
         mBitton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,6 +215,7 @@ public class AuthenticationActivity extends BaseActivityother {
         mImageview_shouchi = findViewById(R.id.image_idcardshou);
         mBitton_submit = findViewById(R.id.button_submit);
         mImage_choose = findViewById(R.id.image_choose);
+        textview_xieyi = findViewById(R.id.textview_xieyi);
     }
     boolean setmap(){
         name=mEditview_name.getText()+"";

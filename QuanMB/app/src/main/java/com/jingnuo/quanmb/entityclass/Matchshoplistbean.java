@@ -87,9 +87,37 @@ public class Matchshoplistbean {
             private String headUrl;
             private String push_register;
             private String specialty_name;
+            private String memberImgUrl="";
             private int user_reputation;
+            private int overCount;
+            private double evaluation_star;
+
             private String x_value;
             private String y_value;
+
+            public String getMemberImgUrl() {
+                return memberImgUrl;
+            }
+
+            public void setMemberImgUrl(String memberImgUrl) {
+                this.memberImgUrl = memberImgUrl;
+            }
+
+            public int getOverCount() {
+                return overCount;
+            }
+
+            public void setOverCount(int overCount) {
+                this.overCount = overCount;
+            }
+
+            public double getEvaluation_star() {
+                return evaluation_star;
+            }
+
+            public void setEvaluation_star(double evaluation_star) {
+                this.evaluation_star = evaluation_star;
+            }
 
             public String getBusiness_no() {
                 return business_no;
