@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
@@ -32,6 +33,7 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShouyeRadios;
+import com.jingnuo.quanmb.utils.AutoUpdate;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -189,7 +191,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if(mainActivity==null){
             mainActivity=this;
         }
-        permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+        permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
             @Override
             public void onResult(boolean result) {
@@ -204,9 +206,32 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         });
         permissionmanage.requestpermission();
 
-
+        updata();
     }
 
+    AutoUpdate autoUpdate;
+    void updata(){
+
+        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                if (result) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//安卓7.0权限 代替了FileProvider方式   https://blog.csdn.net/xiaoyu940601/article/details/54406725
+                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        StrictMode.setVmPolicy(builder.build());
+                    }
+                    //检测是否更新
+                    autoUpdate = new AutoUpdate(MainActivity.this);
+                    autoUpdate.requestVersionData();
+
+                } else {
+                    Toast.makeText(MainActivity.this,"请开启存储权限,以便安装最新版本",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        permissionmanage.requestpermission();
+
+    }
     public void initlinstenner() {
         mImageview_message.setOnClickListener(this);
         mImageview_help.setOnClickListener(this);

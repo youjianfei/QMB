@@ -27,6 +27,9 @@ public class Urls {
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
     public static String upLoadImage = "uploadIge/headImgUpload";//上传图片  1.证件图片 2.任务图片 3.头像图片 4.商户证件图片 5.图标 6.发布专业图片
 
+
+
+    public static String autoupdata = "version/getAppVersion";//自动更新
     /**
      * 登录注册相关
      */

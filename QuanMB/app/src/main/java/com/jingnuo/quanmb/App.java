@@ -30,7 +30,6 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         String jpushid = JPushInterface.getRegistrationID(getApplicationContext());
-        LogUtils.LOG("ceshi", jpushid, "app");
         Staticdata.JpushID = jpushid;
 
 //        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -51,14 +50,14 @@ public class App extends Application {
             PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834", "http://www.sina.com.cn/");
             PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
         }
-//        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
+        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
     }
 
-//    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
-//        public void uncaughtException(Thread thread, Throwable ex) {
-//            restartApp();
-//        }
-//    };
+    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread thread, Throwable ex) {
+            restartApp();
+        }
+    };
 
     public void restartApp() {
         Intent intent = new Intent(getApplicationContext(), LaunchActivity.class);
