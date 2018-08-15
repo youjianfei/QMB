@@ -202,10 +202,10 @@ public class MatchShopActivity extends AppCompatActivity  {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails+"查订单"+respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
-                mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
+                mTextview_guzhuName.setText(taskDetailBean.getData().getClient_name());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
                 mTextview_yuyuetime.setText(taskDetailBean.getData().getTask_Time());
-                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() + "-" + taskDetailBean.getData().getDetailed_address());
+                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() );
                 String imageURL =taskDetailBean.getData().getTask_ImgUrl();
                 setImage(imageURL);
             }
@@ -276,6 +276,7 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     void setImage(String image) {
         if (image == null || image.equals("")) {
+            imageGridview.setVisibility(View.GONE);
         } else {
             String[] images = image.split(",");
             int len = images.length;
@@ -283,6 +284,11 @@ public class MatchShopActivity extends AppCompatActivity  {
             imageview_urllist.clear();
             for (int i = 0; i < len; i++) {
                 imageview_urllist.add(images[i]);
+            }
+            if(imageview_urllist.size()>0){
+                imageGridview.setVisibility(View.VISIBLE);
+            }else {
+                imageGridview.setVisibility(View.GONE);
             }
             adapter_gridviewpic.notifyDataSetChanged();
 

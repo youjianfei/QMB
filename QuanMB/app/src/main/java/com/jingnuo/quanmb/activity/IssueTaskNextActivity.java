@@ -43,9 +43,6 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     //控件
     Button mButton_submit;
-//    EditText mEdit_phonenumber;
-//    ImageView mImage_nan;
-//    ImageView mImage_nv;
     RelativeLayout mRelativelayout_lianxiren;
     RelativeLayout mRelativelayout_showlianxiren;
 

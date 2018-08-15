@@ -26,7 +26,7 @@ public class Adapter_Gridviewpic_queren extends BaseAdapter{
         this.inflater = LayoutInflater.from(context);
         //           /*  获得 屏幕宽  高 的  方法1*/
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        weight = (wm.getDefaultDisplay().getWidth() - SizeUtils.dip2px(mContext,80)) / 3;
+        weight = (wm.getDefaultDisplay().getWidth() - SizeUtils.dip2px(mContext,100)) / 3;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class Adapter_Gridviewpic_queren extends BaseAdapter{
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_lookic_gridview_nocha, parent, false);
-            holder.mImageView = (ImageView) convertView.findViewById(R.id.share_picture);
-            holder.mRelativeLayout = (RelativeLayout) convertView.findViewById(R.id.REL_shareimg);
+            holder.mImageView = convertView.findViewById(R.id.share_picture);
+            holder.mRelativeLayout =  convertView.findViewById(R.id.REL_shareimg);
 
             convertView.setTag(holder);
         } else {
