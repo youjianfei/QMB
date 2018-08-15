@@ -202,7 +202,8 @@ public class MatchShopActivity extends AppCompatActivity  {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails+"查订单"+respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
-                mTextview_guzhuName.setText(taskDetailBean.getData().getClient_name());
+                String sex=taskDetailBean.getData().getClient_sex().equals("0")?"（先生）":"（女士）";
+                mTextview_guzhuName.setText(taskDetailBean.getData().getClient_name()+sex+taskDetailBean.getData().getMobile_no());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
                 mTextview_yuyuetime.setText(taskDetailBean.getData().getTask_Time());
                 mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() );

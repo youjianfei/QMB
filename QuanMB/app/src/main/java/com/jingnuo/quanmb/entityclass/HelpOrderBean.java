@@ -71,6 +71,8 @@ public class HelpOrderBean {
 
             private String Avatar_img_id;
             private String client_no;
+            private String client_sex;
+            private String client_name;
             private String detailed_address;
             private String headUrl;
             private String mobile_no;
@@ -86,6 +88,31 @@ public class HelpOrderBean {
             private String order_enddate;
             private String task_Img_Url;
             private String houseNumber;
+            private String task_time;
+
+            public String getTask_time() {
+                return task_time;
+            }
+
+            public void setTask_time(String task_time) {
+                this.task_time = task_time;
+            }
+
+            public String getClient_sex() {
+                return client_sex;
+            }
+
+            public void setClient_sex(String client_sex) {
+                this.client_sex = client_sex;
+            }
+
+            public String getClient_name() {
+                return client_name;
+            }
+
+            public void setClient_name(String client_name) {
+                this.client_name = client_name;
+            }
 
             public String getHouseNumber() {
                 return houseNumber;

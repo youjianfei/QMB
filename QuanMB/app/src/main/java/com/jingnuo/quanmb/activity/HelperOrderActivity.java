@@ -50,7 +50,9 @@ public class HelperOrderActivity extends BaseActivityother {
     TextView mTextview_state;//状态
     TextView mTextview_money;//佣金
     TextView mTextview_time;//发布时间
+    TextView mTextview_yuyueshijian;//预约时间
     TextView mTextview_peoplename;//雇主
+    TextView text_lianxiren;//联系人
     TextView mTextview_taskDetail;//任务描述
     TextView mTextview_address;//地点
     //    TextView mTextview_phonenumber;//客户电话
@@ -149,6 +151,7 @@ public class HelperOrderActivity extends BaseActivityother {
             for (int i = 0; i < len; i++) {
                 imageview_urllist.add(images[i]);
             }
+            imageGridview.setVisibility(imageview_urllist.size()>0?View.VISIBLE:View.GONE);
             adapter_gridviewpic.notifyDataSetChanged();
 
         }
@@ -173,11 +176,16 @@ public class HelperOrderActivity extends BaseActivityother {
                 mTextview_state.setText(helpOrderBean.getData().getDetail().getOrder_status());
                 mTextview_money.setText( helpOrderBean.getData().getDetail().getOrder_amount() + "元");
                 mTextview_time.setText("发布时间：" + helpOrderBean.getData().getDetail().getTask_StartDate());
+                mTextview_yuyueshijian.setText( helpOrderBean.getData().getDetail().getTask_time());
 
 //                mTextview_resttime.setText(time);
                 image_url = helpOrderBean.getData().getDetail().getTask_Img_Url();
                 setImage(image_url);
                 mTextview_peoplename.setText(helpOrderBean.getData().getDetail().getNick_name());
+                String sex=helpOrderBean.getData().getDetail().getClient_sex().equals("0")?"（先生）":"（女士）";
+                text_lianxiren.setText(helpOrderBean.getData().getDetail().getClient_name()+sex+helpOrderBean.getData().getDetail().getMobile_no());
+
+
                 mTextview_taskDetail.setText(helpOrderBean.getData().getDetail().getTask_description());
                 mTextview_address.setText(helpOrderBean.getData().getDetail().getDetailed_address()+helpOrderBean.getData().getDetail().getHouseNumber());
 //                mTextview_phonenumber.setText(helpOrderBean.getData().getDetail().getMobile_no());
@@ -263,7 +271,9 @@ public class HelperOrderActivity extends BaseActivityother {
         mTextview_state = findViewById(R.id.text_taskstate);
         mTextview_money = findViewById(R.id.text_taskmoney_);
         mTextview_time = findViewById(R.id.text_tasktime);
+        mTextview_yuyueshijian = findViewById(R.id.text_time);
         mTextview_peoplename = findViewById(R.id.text_name);
+        text_lianxiren = findViewById(R.id.text_lianxiren);
         mTextview_taskDetail = findViewById(R.id.text_taskdetail);
         mTextview_address = findViewById(R.id.text_address);
 //        mTextview_phonenumber=findViewById(R.id.text_number);
