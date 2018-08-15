@@ -55,7 +55,9 @@ public class MytaskDetailActivity extends BaseActivityother {
     RelativeLayout mRelativylaout_re1;
     RelativeLayout mRelativylaout_re4;
     LinearLayout kefujieru;
+    ImageView stateImage;
     TextView getmTextview_statejieshao;//例：正在等待帮手接单
+    TextView text_state2;//例：正在等待帮手接单
     TextView mTextview_taskstate;// 任务类型
     TextView mTextview_taskmoney;//佣金
     TextView mTextview_tasktime;//发布时间
@@ -285,32 +287,40 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Volley_Utils(new Interface_volley_respose() {
+                new Popwindow_Tip("是否撤回任务？", MytaskDetailActivity.this, new Interence_complteTask() {
                     @Override
-                    public void onSuccesses(String respose) {
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("message");//登录返回信息
+                    public void onResult(boolean result) {
+                        if(result){
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//登录状态
+                                        msg = (String) object.get("message");//登录返回信息
 
-                            if (status == 1) {
-                                ToastUtils.showToast(MytaskDetailActivity.this, "撤回任务成功");
-                                finish();
-                            } else {
-                                ToastUtils.showToast(MytaskDetailActivity.this, msg);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                        if (status == 1) {
+                                            ToastUtils.showToast(MytaskDetailActivity.this, "撤回任务成功");
+                                            finish();
+                                        } else {
+                                            ToastUtils.showToast(MytaskDetailActivity.this, msg);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MytaskDetailActivity.this, 1, map_taskdetail);
+
                         }
                     }
-
-                    @Override
-                    public void onError(int error) {
-
-                    }
-                }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MytaskDetailActivity.this, 1, map_taskdetail);
+                }).showPopwindow();
 
             }
         });
@@ -402,6 +412,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mTextview_taskstarttime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
         getmTextview_statejieshao = findViewById(R.id.text_state);
+        text_state2 = findViewById(R.id.text_state2);
         mImageview_head = findViewById(R.id.image_task);
         mButton_cancle = findViewById(R.id.button_cancle);
         mText_xiugaijiage = findViewById(R.id._xiugaijiage);
@@ -413,6 +424,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mRelativylaout_re1 = findViewById(R.id.re1);
         mRelativylaout_re4 = findViewById(R.id.re4);
         kefujieru = findViewById(R.id._kefujieru);
+        stateImage = findViewById(R.id.stateImage);
     }
 
     void requestTaskid() {
@@ -510,77 +522,74 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
-                if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")&&taskDetailBean.getData().getTask_Status_code().equals("02")){
-                    String Tip="";
-                    switch (taskDetailBean.getData().getDelay_time()){
-                        case "1" :
-                            Tip="帮手申请延时3小时完成任务";
-                            break;
-                        case "2" :
-                            Tip="帮手申请延时一天完成任务";
-                            break;
-                        case "3" :
-                            Tip="帮手申请延时三天完成任务";
-                            break;
-                        case "4" :
-                            Tip="帮手申请延时七天完成任务";
-                            break;
-                        case "5" :
-                            Tip="帮手申请延时十五天完成任务";
-                            break;
-                        case "6" :
-                            Tip="帮手申请延时三十天完成任务";
-                            break;
-                    }
-                    if(popwindow_tip==null){
-                    popwindow_tip=new Popwindow_Tip(Tip, MytaskDetailActivity.this, new Interence_complteTask() {
-                        @Override
-                        public void onResult(boolean result) {
-                            Map map_agreeorefuse =new HashMap();
-                            map_agreeorefuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                            map_agreeorefuse.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                            map_agreeorefuse.put("task_id",taskDetailBean.getData().getTask_id()+"");
-                            map_agreeorefuse.put("order_no",taskDetailBean.getData().getOrder_no()+"");
-                            if(result){
-                                map_agreeorefuse.put("delay","Y");
-                            }else {
-                                map_agreeorefuse.put("delay","N");
-                            }
-
-                            map_agreeorefuse.put("delay_time",taskDetailBean.getData().getDelay_time()+"");
-                            LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,"申请延时接口");
-                            LogUtils.LOG("ceshi",map_agreeorefuse.toString(),"申请延时接口");
-                            new  Volley_Utils(new Interface_volley_respose() {
-                                @Override
-                                public void onSuccesses(String respose) {
-                                    int status = 0;
-                                    String msg = "";
-                                    try {
-                                        JSONObject object = new JSONObject(respose);
-                                        status = (Integer) object.get("code");//
-                                        msg = (String) object.get("message");//
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    ToastUtils.showToast(MytaskDetailActivity.this,msg);
-
-                                }
-
-                                @Override
-                                public void onError(int error) {
-
-                                }
-                            }).postHttp(Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,MytaskDetailActivity.this,1,map_agreeorefuse);
-                            }
-
-
-                    });
-                    popwindow_tip.showPopwindow();
-                    }
-                }
-
-
-
+//                if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")&&taskDetailBean.getData().getTask_Status_code().equals("02")){
+//                    String Tip="";
+//                    switch (taskDetailBean.getData().getDelay_time()){
+//                        case "1" :
+//                            Tip="帮手申请延时3小时完成任务";
+//                            break;
+//                        case "2" :
+//                            Tip="帮手申请延时一天完成任务";
+//                            break;
+//                        case "3" :
+//                            Tip="帮手申请延时三天完成任务";
+//                            break;
+//                        case "4" :
+//                            Tip="帮手申请延时七天完成任务";
+//                            break;
+//                        case "5" :
+//                            Tip="帮手申请延时十五天完成任务";
+//                            break;
+//                        case "6" :
+//                            Tip="帮手申请延时三十天完成任务";
+//                            break;
+//                    }
+//                    if(popwindow_tip==null){
+//                    popwindow_tip=new Popwindow_Tip(Tip, MytaskDetailActivity.this, new Interence_complteTask() {
+//                        @Override
+//                        public void onResult(boolean result) {
+//                            Map map_agreeorefuse =new HashMap();
+//                            map_agreeorefuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                            map_agreeorefuse.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                            map_agreeorefuse.put("task_id",taskDetailBean.getData().getTask_id()+"");
+//                            map_agreeorefuse.put("order_no",taskDetailBean.getData().getOrder_no()+"");
+//                            if(result){
+//                                map_agreeorefuse.put("delay","Y");
+//                            }else {
+//                                map_agreeorefuse.put("delay","N");
+//                            }
+//
+//                            map_agreeorefuse.put("delay_time",taskDetailBean.getData().getDelay_time()+"");
+//                            LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,"申请延时接口");
+//                            LogUtils.LOG("ceshi",map_agreeorefuse.toString(),"申请延时接口");
+//                            new  Volley_Utils(new Interface_volley_respose() {
+//                                @Override
+//                                public void onSuccesses(String respose) {
+//                                    int status = 0;
+//                                    String msg = "";
+//                                    try {
+//                                        JSONObject object = new JSONObject(respose);
+//                                        status = (Integer) object.get("code");//
+//                                        msg = (String) object.get("message");//
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                    ToastUtils.showToast(MytaskDetailActivity.this,msg);
+//
+//                                }
+//
+//                                @Override
+//                                public void onError(int error) {
+//
+//                                }
+//                            }).postHttp(Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,MytaskDetailActivity.this,1,map_agreeorefuse);
+//                            }
+//
+//
+//                    });
+//                    popwindow_tip.showPopwindow();
+//                    }
+//                }
 
                 if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     mTextview_taskmoney.setText("佣金：" + "帮手出价");
@@ -612,43 +621,56 @@ public class MytaskDetailActivity extends BaseActivityother {
                     mButton_cancle.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("01")|| taskDetailBean.getData().getTask_Status_code().equals("08")) {
-                    getmTextview_statejieshao.setText("正在等待帮手接单...");
+                    getmTextview_statejieshao.setText("正在为你匹配帮手");
+                    text_state2.setText("耐心等待");
                     mText_xiugaijiage.setVisibility(View.VISIBLE);//修改价格
+                    stateImage.setImageResource(R.mipmap.dengdai);
                 }else {
                     mText_xiugaijiage.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("02")) {
-                    getmTextview_statejieshao.setText("帮手正在全速完成任务...");
+                    getmTextview_statejieshao.setText("帮手已接单");
+                    text_state2.setText("全民帮帮手正在赶来...");
+                    stateImage.setImageResource(R.mipmap.peisong);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
                     mButton_complete.setVisibility(View.VISIBLE);
                     kefujieru.setVisibility(View.VISIBLE);
                     mButton_completed.setVisibility(View.GONE);
-                    getmTextview_statejieshao.setText("帮手已经完成任务，快去确认订单");
+                    getmTextview_statejieshao.setText("帮手已经完成任务");
+                    text_state2.setText("等待你的确认");
+                    stateImage.setImageResource(R.mipmap.daiwancheng);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("07") || taskDetailBean.getData().getTask_Status_code().equals("13")) {
                     mButton_cancle.setVisibility(View.GONE);
                     mButton_again.setVisibility(View.VISIBLE);
-                    getmTextview_statejieshao.setText("任务已失效，请重新发布");
+                    getmTextview_statejieshao.setText("任务已失效");
+                    stateImage.setImageResource(R.mipmap.shixiao);
+                    text_state2.setText("请重新发布");
                 }
                 if(app_type.equals("1")){
                     if (taskDetailBean.getData().getTask_Status_code().equals("07") || taskDetailBean.getData().getTask_Status_code().equals("13")) {
                         mButton_cancle.setVisibility(View.GONE);
                         mButton_again.setVisibility(View.GONE);
                         getmTextview_statejieshao.setText("任务已失效");
+                        stateImage.setImageResource(R.mipmap.shixiao);
+                        text_state2.setText("请重新发布");
                     }
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
                     mButton_completed.setVisibility(View.VISIBLE);
                     mButton_complete.setVisibility(View.GONE);
                     kefujieru.setVisibility(View.GONE);
-                    getmTextview_statejieshao.setText("很好的一次合作");
+                    getmTextview_statejieshao.setText("订单已完成");
+                    text_state2.setText("很好的一次合作");
+                    stateImage.setImageResource(R.mipmap.wancheng);
                 }
-                if (taskDetailBean.getData().getTask_Status_code().equals("09")) {
-                    mButton_complete.setVisibility(View.GONE);
-                    kefujieru.setVisibility(View.GONE);
-                    getmTextview_statejieshao.setText("抱歉，帮手未完成任务");
-                }
+//                if (taskDetailBean.getData().getTask_Status_code().equals("09")) {
+//                    mButton_complete.setVisibility(View.GONE);
+//                    kefujieru.setVisibility(View.GONE);
+//                    getmTextview_statejieshao.setText("抱歉");
+//                    text_state2.setText("帮手未完成任务");
+//                }
 
             }
 
@@ -662,6 +684,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     void setImage(String image) {
         if (image == null || image.equals("")) {
+            imageGridview.setVisibility(View.GONE);
 
         } else {
             String[] images = image.split(",");
@@ -671,6 +694,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             for (int i = 0; i < len; i++) {
                 imageview_urllist.add(images[i]);
             }
+            imageGridview.setVisibility(imageview_urllist.size()>0?View.VISIBLE:View.GONE);
             adapter_gridviewpic.notifyDataSetChanged();
 
         }

@@ -5,7 +5,7 @@ package com.jingnuo.quanmb.data;
  */
 
 public class Urls {
-    public static String Baseurl_index = "https://app.quanminbang.top/QuanMinBang";
+    public static String Baseurl_index = "http://v3.rabbitpre.com/m2/aUe1ZjN6ls";
         //正式
 //    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";

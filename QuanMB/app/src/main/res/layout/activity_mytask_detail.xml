@@ -53,16 +53,28 @@
                     android:id="@+id/text_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="15dp"
+                    android:text="帮手状态"
+                    android:textSize="16dp"
                     android:textColor="@color/white"
-                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    />
+                <TextView
+                    android:id="@+id/text_state2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="帮手状态"
+                    android:textSize="12dp"
+                    android:layout_below="@+id/text_state"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white"
                     android:layout_marginLeft="30dp"
                     />
                 <ImageView
+                    android:id="@+id/stateImage"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@mipmap/peisong"
+                    android:src="@mipmap/dengdai"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="50dp"
@@ -232,7 +244,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_centerHorizontal="true"
                     android:textSize="15dp"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     />
                 <ImageView
                     android:id="@+id/line111"
@@ -259,7 +271,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="15dp"
                     android:text="任务说明"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:layout_below="@+id/line111"
                     android:textSize="15dp" />
 
@@ -267,13 +279,13 @@
                     android:id="@+id/text_taskdetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="15dp"
                     android:text="任务详情"
                     android:layout_below="@+id/line111"
                     android:textColor="#7f7f7f"
-                    android:layout_toRightOf="@+id/text2"
                     android:textSize="15dp" />
 
                 <RelativeLayout
@@ -295,22 +307,22 @@
 
                 </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/line222"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@color/gray_dfdfdf" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/line222"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_below="@+id/skill_pic"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:src="@color/gray_dfdfdf" />-->
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/people2"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line222"
+                    android:layout_marginTop="28dp"
+                    android:layout_below="@+id/skill_pic"
                     />
 
                 <TextView
@@ -318,10 +330,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="15dp"
-                    android:text="雇主"
-                    android:layout_below="@+id/line222"
-                    android:textColor="#7f7f7f"
+                    android:layout_marginTop="25dp"
+                    android:text="联系人"
+                    android:layout_below="@+id/skill_pic"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
@@ -330,94 +342,94 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="25dp"
                     android:text="雇主名字"
                     android:textColor="#7f7f7f"
-                    android:layout_toRightOf="@+id/text2"
-                    android:layout_below="@+id/line222"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/skill_pic"
                     android:textSize="15dp" />
 
 
-                <ImageView
-                    android:id="@+id/line2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/text_guzhu"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@color/gray_dfdfdf" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/line2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_below="@+id/text_guzhu"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:src="@color/gray_dfdfdf" />-->
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/time2"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line2"
+                    android:layout_marginTop="28dp"
+                    android:layout_below="@+id/text_guzhu"
                     />
                 <TextView
                     android:id="@+id/text3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line2"
+                    android:layout_below="@+id/text_guzhu"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="25dp"
                     android:text="预约时间"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/text_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line2"
+                    android:layout_below="@+id/text_guzhu"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@+id/text3"
+                    android:layout_marginRight="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="25dp"
                     android:text=""
                     android:textColor="#7f7f7f"
                     android:textSize="15dp" />
 
-                <ImageView
-                    android:id="@+id/line3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/text3"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@color/gray_dfdfdf" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/line3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_below="@+id/text3"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:src="@color/gray_dfdfdf" />-->
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/address_blue"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line3"
+                    android:layout_marginTop="28dp"
+                    android:layout_below="@+id/text3"
                     />
                 <TextView
                     android:id="@+id/text4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line3"
+                    android:layout_below="@+id/text3"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="25dp"
                     android:text="地点"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/text_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line3"
-                    android:layout_marginLeft="35dp"
+                    android:layout_below="@+id/text3"
+                    android:layout_marginLeft="110dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@+id/text4"
-                    android:text=""
+                    android:layout_marginTop="25dp"
+                    android:layout_alignParentRight="true"
+                    android:text="地点"
                     android:textColor="#7f7f7f"
                     android:layout_marginBottom="15dp"
                     android:textSize="15dp" />

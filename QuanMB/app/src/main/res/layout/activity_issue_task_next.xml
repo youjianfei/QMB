@@ -151,7 +151,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_centerHorizontal="true"
                     android:textSize="15dp"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     />
                 <ImageView
                     android:id="@+id/line111"
@@ -177,7 +177,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="10dp"
                     android:text="任务说明"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:layout_below="@+id/line111"
                     android:textSize="15dp" />
 
@@ -237,7 +237,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="15dp"
                     android:text="预约时间"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
@@ -278,7 +278,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="15dp"
                     android:text="地点"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView

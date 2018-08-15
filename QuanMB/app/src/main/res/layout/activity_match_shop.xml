@@ -102,7 +102,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_centerHorizontal="true"
                     android:text="订单详情"
-                    android:textColor="@color/text_title2"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
                 <ImageView
                     android:id="@+id/line111"
@@ -129,19 +129,17 @@
                     android:layout_marginTop="15dp"
                     android:text="详情"
                     android:layout_below="@+id/line111"
-                    android:textColor="@color/black_text2"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/text_taskdetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="100dp"
                     android:layout_marginRight="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@+id/text2"
                     android:text="任务详情"
                     android:layout_below="@+id/line111"
                     android:textColor="#7f7f7f"
@@ -193,7 +191,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="18dp"
                     android:text="联系人"
-                    android:textColor="@color/black_text2"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
@@ -237,7 +235,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="18dp"
                     android:text="预约时间"
-                    android:textColor="#7f7f7f"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
@@ -279,7 +277,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="18dp"
                     android:text="地址"
-                    android:textColor="@color/black_text2"
+                    android:textColor="@color/black_text"
                     android:textSize="15dp" />
 
                 <TextView
