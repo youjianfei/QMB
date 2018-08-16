@@ -224,7 +224,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                     Map map_check = new HashMap();
                     map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_check.put("task_description", map_issueTask.get("task_description"));
-                    map_check.put("detailed_address", map_issueTask.get("detailed_address"));
+                    map_check.put("houseNumber", map_issueTask.get("houseNumber"));
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {

@@ -172,11 +172,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
     }
 
-    @Override
-    public void onClick(View v) {
-        super.onClick(v);
 
-    }
 
     @Override
     protected void initView() {

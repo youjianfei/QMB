@@ -53,6 +53,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="5f44a6cf8d64182033741d5b546a4ef0" />
@@ -199,7 +200,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".activity.MatchShopActivity" />
         <activity android:name=".activity.XieyZhuceiActivity" />
-        <activity android:name=".activity.XieYiShanghuActivity"></activity>
+        <activity android:name=".activity.XieYiShanghuActivity" />
+        <activity android:name=".activity.ZixunKefuWebActivity"></activity>
     </application>
 
 </manifest>

@@ -54,7 +54,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     RelativeLayout mRelativylaout_background;
     RelativeLayout mRelativylaout_re1;
     RelativeLayout mRelativylaout_re4;
-    LinearLayout kefujieru;
+    LinearLayout kefujieru;//客服介入按钮
     ImageView stateImage;
     TextView getmTextview_statejieshao;//例：正在等待帮手接单
     TextView text_state2;//例：正在等待帮手接单
@@ -104,7 +104,6 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     PermissionHelper mPermission;//动态申请权限
 
-    Popwindow_Tip popwindow_tip;
     Popwindow_addPrice popwindow_addPrice;
 
     RequestManager glidee;
@@ -244,37 +243,39 @@ public class MytaskDetailActivity extends BaseActivityother {
         kefujieru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                Uri data = Uri.parse("tel:0371-55257257" );
-                intent.setData(data);
-
-                if (ActivityCompat.checkSelfPermission(MytaskDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-
-//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
-                    mPermission.request(new PermissionHelper.PermissionCallback() {
-                        @Override
-                        public void onPermissionGranted() {
-
-                        }
-
-                        @Override
-                        public void onIndividualPermissionGranted(String[] grantedPermission) {
-
-                        }
-
-                        @Override
-                        public void onPermissionDenied() {
-
-                        }
-
-                        @Override
-                        public void onPermissionDeniedBySystem() {
-
-                        }
-                    });
-                    return;
-                }
-                startActivity(intent);//调用具体方法
+//                Intent intent = new Intent(Intent.ACTION_CALL);
+//                Uri data = Uri.parse("tel:0371-55257257" );
+//                intent.setData(data);
+//
+//                if (ActivityCompat.checkSelfPermission(MytaskDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//
+////                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+//                    mPermission.request(new PermissionHelper.PermissionCallback() {
+//                        @Override
+//                        public void onPermissionGranted() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onIndividualPermissionGranted(String[] grantedPermission) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onPermissionDenied() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onPermissionDeniedBySystem() {
+//
+//                        }
+//                    });
+//                    return;
+//                }
+//                startActivity(intent);//调用具体方法
+            Intent intent=new Intent(MytaskDetailActivity.this,ZixunKefuWebActivity.class);
+            startActivity(intent);
             }
         });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
