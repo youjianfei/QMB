@@ -62,7 +62,7 @@ public class AboutUsActivity extends BaseActivityother {
                 startActivity(intend_suggest);
                 break;
             case R.id.textview_shareAPP :
-                Uri uri = Uri.parse(Urls.Baseurl_index);
+                Uri uri = Uri.parse(Urls.Baseurl_zhuye);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;

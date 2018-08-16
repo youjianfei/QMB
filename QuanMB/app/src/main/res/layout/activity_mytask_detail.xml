@@ -176,12 +176,12 @@
                         android:background="@drawable/button_red_20dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
                         android:text="VIP1"
                         android:visibility="visible"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="11dp" />
 
                     <TextView
                         android:id="@+id/text_todoname"
@@ -200,8 +200,8 @@
 
                 <ImageView
                     android:id="@+id/image_phonenumber"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:padding="10dp"
                     android:src="@mipmap/phonephone"
                     android:layout_centerVertical="true"

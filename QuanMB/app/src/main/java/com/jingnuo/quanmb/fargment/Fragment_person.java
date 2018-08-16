@@ -29,6 +29,7 @@ import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.activity.SubmitSuccessActivity;
 import com.jingnuo.quanmb.activity.WalletActivity;
+import com.jingnuo.quanmb.activity.ZixunKefuWebActivity;
 import com.jingnuo.quanmb.class_.Chengweibangshou;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -180,9 +181,13 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         Intent intent_collect = new Intent(getActivity(), MySkillCollectActivity.class);
                         startActivity(intent_collect);
                         break;
-                    case 5://设置
+                    case 6://设置
                         Intent intent_aboutus = new Intent(getActivity(), SettingActivity.class);
                         startActivity(intent_aboutus);
+                        break;
+                    case 5://客服中心
+                        Intent intent_kefuzhongxin = new Intent(getActivity(), ZixunKefuWebActivity.class);
+                        startActivity(intent_kefuzhongxin);
                         break;
 
                 }
@@ -198,7 +203,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
     private void initdata() {//初始化个人中心菜单
         chengweibangshou = new Chengweibangshou(getActivity());
         menuList = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             switch (i) {
                 case 0://我的发布
                     MenuBean menuBean0 = new MenuBean();
@@ -235,17 +240,17 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                     menuBean4.setmBitmap(bitmap4);
                     menuList.add(menuBean4);
                     break;
-                case 5://关于我们
+                case 6://设置
                     MenuBean menuBean5 = new MenuBean();
                     menuBean5.setMenu_name("设置");
                     Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.setttt);
                     menuBean5.setmBitmap(bitmap5);
                     menuList.add(menuBean5);
                     break;
-                case 6://退出登录
+                case 5://客服中心
                     MenuBean menuBean6 = new MenuBean();
-                    menuBean6.setMenu_name("退出登录");
-                    Bitmap bitmap6 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.logout);
+                    menuBean6.setMenu_name("客服中心");
+                    Bitmap bitmap6 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.kefuzhongxin);
                     menuBean6.setmBitmap(bitmap6);
                     menuList.add(menuBean6);
                     break;
