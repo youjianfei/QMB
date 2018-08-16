@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HelperOrderActivity extends BaseActivityother {
 
     CircleImageView mImageview_head;
+    ImageView iv_back;
     TextView mTextview_state;//状态
     TextView mTextview_money;//佣金
     TextView mTextview_time;//发布时间
@@ -73,6 +75,7 @@ public class HelperOrderActivity extends BaseActivityother {
     //数据
     String order_no = "";
     int type = 0;  //1帮手  2  商户
+    int whichactivity=0;//判断点击返回是否跳转到帮帮广场   1 是
 
     String tel = "";//雇主电话
     PermissionHelper mPermission;//动态申请权限
@@ -137,6 +140,7 @@ public class HelperOrderActivity extends BaseActivityother {
         mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         order_no = getIntent().getStringExtra("order_no");
         type = getIntent().getIntExtra("type", 0);
+        whichactivity = getIntent().getIntExtra("whichactivity", 0);
         request();
 
     }
@@ -217,6 +221,7 @@ public class HelperOrderActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        iv_back.setOnClickListener(this);
         mButton_queren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -264,10 +269,36 @@ public class HelperOrderActivity extends BaseActivityother {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                if(whichactivity==1){
+                    Intent intent=new Intent(HelperOrderActivity.this,SquareActuvity.class);
+                    startActivity(intent);
+                }else {
+                    finish();
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(whichactivity==1){
+            Intent intent=new Intent(HelperOrderActivity.this,SquareActuvity.class);
+            intent.putExtra("refresh",1);
+            startActivity(intent);
+        }else {
+            finish();
+        }
+    }
 
     @Override
     protected void initView() {
         mImageview_head = findViewById(R.id.image_task);
+        iv_back = findViewById(R.id.iv_back);
         mTextview_state = findViewById(R.id.text_taskstate);
         mTextview_money = findViewById(R.id.text_taskmoney_);
         mTextview_time = findViewById(R.id.text_tasktime);

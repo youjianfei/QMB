@@ -174,6 +174,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                         ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
                         Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
                         startActivity(intent_renzheng);
+                        return;
                     }
                     new Popwindow_Tip("是否帮助此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
                         @Override
@@ -187,6 +188,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                                         if (queRenHelp_bean.getStatus() == 1) {
                                             Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
                                             intent_querenhelp.putExtra("order_no", queRenHelp_bean.getData().getOrder_no());
+                                            intent_querenhelp.putExtra("whichactivity", 1);
                                             startActivity(intent_querenhelp);
                                             finish();
                                         } else {

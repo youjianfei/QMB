@@ -96,6 +96,7 @@ public class SquareActuvity extends BaseActivityother {
     List<Square_defaultBean.DataBean.ListBean> mListDate_square;
     int page = 1;//分页加载；
     int MinCommission = 0, MaxCommission = 1000;
+    int refresh=0;//是否请求刷新数据   1  是
 
     List<GuanggaoBean.DataBean> mdata_image_GG;
 
@@ -156,6 +157,7 @@ public class SquareActuvity extends BaseActivityother {
 
         request_square(map_filter_sort, page);//首页默认请求 page==1
         request_GGLB();//请求轮播图
+
     }
 
     private void request_square(final Map map_filterOrsort, final int page) {
@@ -513,6 +515,16 @@ public class SquareActuvity extends BaseActivityother {
         }, re_title, leizing);
         mPopwindow_square_sort.showPopwindow();
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        refresh=getIntent().getIntExtra("refresh",0);
+        if(refresh==1){
+            request_square(map_filter_sort,1);
+        }
     }
 
 

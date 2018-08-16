@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jingnuo.quanmb.data.Staticdata;
@@ -14,6 +15,7 @@ public class PaySuccessActivity extends BaseActivityother {
     TextView textview_title;
     TextView textview_typesuccess;
     Button  mButton;
+    ImageView imageView;
 
     String  title="";
     String  typesuccess="";
@@ -59,5 +61,16 @@ public class PaySuccessActivity extends BaseActivityother {
         textview_title=findViewById(R.id.textview_title);
         textview_typesuccess=findViewById(R.id.text_type);
         mButton=findViewById(R.id.button_submit);
+        imageView=findViewById(R.id.iv_back);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                Intent  intent=new Intent(PaySuccessActivity.this,MainActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

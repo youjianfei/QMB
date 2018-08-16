@@ -191,7 +191,7 @@
                         android:layout_marginTop="13dp"
                         android:layout_toRightOf="@+id/text_vip"
                         android:text="孙悟空"
-                        android:textColor="@color/yellow_button"
+                        android:textColor="@color/black_text"
                         android:textSize="15dp" />
 
                 </LinearLayout>
@@ -224,8 +224,8 @@
                     android:paddingRight="5dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
-                    android:textColor="@color/yellow_button"
-                    android:background="@drawable/background_text_type"
+                    android:textColor="@color/text_hide_tip"
+                    android:background="@drawable/background_text_type3"
                     android:textSize="12dp" />
 
             </RelativeLayout>
@@ -586,19 +586,6 @@
             android:textColor="@color/white"
             android:layout_below="@+id/re2"
             android:background="#40ce3b"
-            android:visibility="gone"
-            android:gravity="center"
-            />
-        <TextView
-            android:id="@+id/button_completed"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="已完成"
-            android:textSize="15dp"
-            android:textColor="@color/white"
-            android:layout_below="@+id/re2"
-            android:background="#ff6b52"
             android:visibility="gone"
             android:gravity="center"
             />

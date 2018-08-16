@@ -79,7 +79,6 @@ public class MytaskDetailActivity extends BaseActivityother {
     LinearLayout mButton_cancle;
     LinearLayout mText_xiugaijiage;
     TextView mButton_complete;
-    TextView mButton_completed;
     TextView mButton_again;
 
     //数据
@@ -417,7 +416,6 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_cancle = findViewById(R.id.button_cancle);
         mText_xiugaijiage = findViewById(R.id._xiugaijiage);
         mButton_complete = findViewById(R.id.button_complete);
-        mButton_completed = findViewById(R.id.button_completed);
         mButton_again = findViewById(R.id.button_again);
         imageGridview = findViewById(R.id.GridView_PIC);
         mRelativylaout_background = findViewById(R.id.RelativeLayout_background);
@@ -636,7 +634,6 @@ public class MytaskDetailActivity extends BaseActivityother {
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
                     mButton_complete.setVisibility(View.VISIBLE);
                     kefujieru.setVisibility(View.VISIBLE);
-                    mButton_completed.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("帮手已经完成任务");
                     text_state2.setText("等待你的确认");
                     stateImage.setImageResource(R.mipmap.daiwancheng);
@@ -658,7 +655,6 @@ public class MytaskDetailActivity extends BaseActivityother {
                     }
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("06")) {
-                    mButton_completed.setVisibility(View.VISIBLE);
                     mButton_complete.setVisibility(View.GONE);
                     kefujieru.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("订单已完成");
