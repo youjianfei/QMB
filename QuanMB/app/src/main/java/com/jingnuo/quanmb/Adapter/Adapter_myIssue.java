@@ -93,16 +93,17 @@ public class Adapter_myIssue extends BaseAdapter {
             }
         }
 
-        if(mData.get(position).getTask_EndDate().equals("")){
-            viewHolder.mTextview_resttime.setVisibility(View.INVISIBLE);
-            viewHolder.mImage_resttime.setVisibility(View.INVISIBLE);
-        }else {
+        if(mData.get(position).getTask_Status_code().equals("01")){
+            viewHolder.mTextview_resttime.setVisibility(View.VISIBLE);
+            viewHolder.mImage_resttime.setVisibility(View.VISIBLE);
             long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
             long ago = Long.parseLong(Utils.getTime(mData.get(position).getTask_EndDate()));
             String time = Utils.getDistanceTime(ago, now);//算出的差值
             viewHolder.mTextview_resttime.setText("剩余时间："+time);
-            viewHolder.mTextview_resttime.setVisibility(View.VISIBLE);
-            viewHolder.mImage_resttime.setVisibility(View.VISIBLE);
+        }else {
+
+            viewHolder.mTextview_resttime.setVisibility(View.INVISIBLE);
+            viewHolder.mImage_resttime.setVisibility(View.INVISIBLE);
         }
         if(mData.get(position).getTask_Status_code().equals("01")||mData.get(position).getTask_Status_code().equals("02")||
         mData.get(position).getTask_Status_code().equals("08")){

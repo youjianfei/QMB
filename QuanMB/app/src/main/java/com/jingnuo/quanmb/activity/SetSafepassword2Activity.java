@@ -77,7 +77,7 @@ public class SetSafepassword2Activity extends BaseActivityother {
     protected void initData() {
         change=getIntent().getStringExtra("change");
         if(change.equals("change")){
-            mTextview_textview_title.setText("修改安全密码");
+            mTextview_textview_title.setText("修改支付密码");
         }
     }
 

@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/text_square_task"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="任务名称"
             android:textSize="16dp"
@@ -88,8 +88,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_below="@+id/line2"
             android:src="@mipmap/user_pic" />
 
@@ -101,7 +101,7 @@
             android:textColor="#666666"
             android:textSize="12dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/image_square_person"
             android:layout_below="@+id/line2"
@@ -126,7 +126,7 @@
             android:textColor="@color/white"
             android:background="@drawable/button_yellow_5dp"
             android:layout_below="@+id/line2"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingTop="3dp"

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -29,7 +30,7 @@ public class MySkillCollectActivity extends BaseActivityother {
     List<SkillCollectBean.DataBean.ListBean>mdata;
     SkillCollectBean skillCollectBean;
     Adapter_myCollect adapter_myCollect;
-
+    ImageView mImage_view_empty;
     //数据
     int  page=1;
 
@@ -93,6 +94,7 @@ public class MySkillCollectActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mListview=findViewById(R.id.mlistview_skillcollect);
+        mImage_view_empty=findViewById(R.id.image_empty);
 
     }
     void request(){
@@ -110,6 +112,7 @@ public class MySkillCollectActivity extends BaseActivityother {
                     mdata.clear();
                     mdata.addAll(skillCollectBean.getData().getList());
                     adapter_myCollect.notifyDataSetChanged();
+                    mImage_view_empty.setVisibility(mdata.size()==0? View.VISIBLE:View.GONE);
                 }else if(skillCollectBean.getData()!=null){
                     mdata.addAll(skillCollectBean.getData().getList());
                     adapter_myCollect.notifyDataSetChanged();

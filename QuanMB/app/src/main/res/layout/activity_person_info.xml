@@ -261,7 +261,7 @@
             android:id="@+id/text_setsafepassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="设置安全密码"
+            android:text="支付密码"
             android:textSize="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"

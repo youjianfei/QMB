@@ -97,7 +97,7 @@ public class PersonInfoActivity extends BaseActivityother {
         mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_headPIC);
         if(!Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
-            mTextview_setsafepassword.setText("修改安全密码");
+            mTextview_setsafepassword.setText("支付密码");
             mTextview_issetsafepassword.setVisibility(View.VISIBLE);
         }
         if (!Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
@@ -113,7 +113,7 @@ public class PersonInfoActivity extends BaseActivityother {
         mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
         mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
         if(!Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")){
-            mTextview_setsafepassword.setText("修改安全密码");
+            mTextview_setsafepassword.setText("支付密码");
             mTextview_issetsafepassword.setVisibility(View.VISIBLE);
         }
         if (!Staticdata.static_userBean.getData().getAppuser().getCommunity_name().equals("")){

@@ -1,6 +1,9 @@
 package com.jingnuo.quanmb.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.WindowManager;
 
 import java.io.File;
@@ -10,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/2.
@@ -17,7 +21,28 @@ import java.util.Date;
 
 public class Utils {
 
+    /**
+     * 检测是否安装微信
+     * 微博  com.sina.weibo
+     QQ   com.tencent.mobileqq
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isWxInstall(Context context) {
+        final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals("com.tencent.mm")) {
+                    return true;
+                }
+            }
+        }
 
+        return false;
+    }
 
     /**
      * //删除某个文件夹下面所有文件

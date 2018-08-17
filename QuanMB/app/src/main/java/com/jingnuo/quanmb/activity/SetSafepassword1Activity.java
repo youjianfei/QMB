@@ -49,7 +49,7 @@ public class SetSafepassword1Activity extends BaseActivityother {
     protected void initData() {
         change=getIntent().getStringExtra("change");
         if(change.equals("change")){
-            textview_titile.setText("修改安全密码");
+            textview_titile.setText("修改支付密码");
         }
         mtextview_phonenumber.setText(Staticdata.Userphonenumber);
         map_oldphonenumber  =new HashMap();

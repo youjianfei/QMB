@@ -287,7 +287,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Popwindow_Tip("是否撤回任务？", MytaskDetailActivity.this, new Interence_complteTask() {
+                new Popwindow_Tip("撤回成功后将在24小时内退还佣金，是否继续？", MytaskDetailActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
                         if(result){

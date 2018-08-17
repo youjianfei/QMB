@@ -186,11 +186,7 @@ public class ShophallActivity extends BaseActivityother {
                 }else if(page!=1&&skillmentlistBean.getData()!=null) {
                     mData.addAll(skillmentlistBean.getData().getList());
                     mAdapter_shophall.notifyDataSetChanged();
-                    mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
-                }else {
-
                 }
-
             }
 
             @Override

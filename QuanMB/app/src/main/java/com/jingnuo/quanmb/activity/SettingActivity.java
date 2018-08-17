@@ -16,6 +16,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.io.File;
 
@@ -93,8 +94,11 @@ public class SettingActivity extends BaseActivityother {
                 }
                 break;
             case R.id.textview_shareAPP:
-                shareClass.shareapp();
-
+                if(Utils.isWxInstall(this)){
+                 shareClass.shareapp();
+                }else {
+                    ToastUtils.showToast(this,"未安装微信");
+                }
                 break;
         }
     }

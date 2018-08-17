@@ -26,6 +26,7 @@ import com.jingnuo.quanmb.fargment.Fragment_phone_login;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -158,7 +159,11 @@ public class LoginActivity extends BaseActivityother {
                 mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
                 break;
             case R.id.image_wxLogin://微信登录
-                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                if(Utils.isWxInstall(this)){
+                    mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                }else {
+                    ToastUtils.showToast(this,"未安装微信");
+                }
                 break;
 
         }

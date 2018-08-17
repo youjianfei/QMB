@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ptr="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,13 +32,23 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
+
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/mlistview_skillcollect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/re_title"
         android:divider="@null"
         android:dividerHeight="8dp"
         ptr:ptrMode="both" />
+    <ImageView
+        android:id="@+id/image_empty"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/empty_1"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
-
-</LinearLayout>
+</RelativeLayout>
