@@ -197,7 +197,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void onResult(boolean result) {
                 LogUtils.LOG("ceshi", result + "", "");
                 if (result) {//定位权限
-                    setmapdata();// 百度地图配置参数
+                    setmapdata();// 高德地图配置参数
 
                 } else {
                     ToastUtils.showToast(MainActivity.this, "请允许开启定位功能");

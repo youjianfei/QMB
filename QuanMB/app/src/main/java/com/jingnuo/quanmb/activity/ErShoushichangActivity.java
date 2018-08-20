@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -44,7 +45,7 @@ public class ErShoushichangActivity extends BaseActivityother {
     //控件
     PullToRefreshListView mListview;
     LinearLayout mLinearlayout_fabu;//发布按钮
-
+    ImageView mImage_view_empty;
 
     List<EeshoushichangListBean.DataBean> mdata;
     Adapter_ErshoushichangList adapter_ershoushichangList;
@@ -57,6 +58,8 @@ public class ErShoushichangActivity extends BaseActivityother {
     //头视图
     Banner banner;
     List<GuanggaoBean.DataBean>mdata_image_GG;
+
+    int type=0;//0  自己社区进入的二手市场   1  不是自己社区的二手市场
 
     @Override
     public int setLayoutResID() {
@@ -78,6 +81,15 @@ public class ErShoushichangActivity extends BaseActivityother {
         map_ershoushichang=new HashMap();
         map_ershoushichang.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_ershoushichang.put("community_code",Staticdata.static_userBean.getData().getAppuser().getCommunity_code());
+
+
+        type=getIntent().getIntExtra("type",0);
+        if(type==0){
+            mLinearlayout_fabu.setVisibility(View.VISIBLE);
+        }else {
+            mLinearlayout_fabu.setVisibility(View.INVISIBLE);
+            map_ershoushichang.put("community_code",getIntent().getStringExtra("shequcode"));
+        }
 
         request(page);
         request_GGLB();
@@ -126,25 +138,26 @@ public class ErShoushichangActivity extends BaseActivityother {
         mListview.getRefreshableView().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        mFirstY[0] = event.getY();//按下时获取位置
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        mCurrentY[0] = event.getY();//得到滑动的位置
-                        if(mCurrentY[0] - mFirstY[0] > 5){//滑动的位置减去按下的位置大于最小滑动距离  则表示向下滑动
-                            //down
-                            LogUtils.LOG("ceshi", "下", "MyShequActivity");
-                            mLinearlayout_fabu.setVisibility(View.VISIBLE);
-                        }else if(mFirstY[0] - mCurrentY[0] > 5)
+                if(type==0){
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            mFirstY[0] = event.getY();//按下时获取位置
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            mCurrentY[0] = event.getY();//得到滑动的位置
+                            if(mCurrentY[0] - mFirstY[0] > 5){//滑动的位置减去按下的位置大于最小滑动距离  则表示向下滑动
+                                //down
+                                LogUtils.LOG("ceshi", "下", "MyShequActivity");
+                                mLinearlayout_fabu.setVisibility(View.VISIBLE);
+                            }else if(mFirstY[0] - mCurrentY[0] > 5)
                             {//反之向上滑动
-                            //up
-                            LogUtils.LOG("ceshi", "上", "MyShequActivity");
-                            mLinearlayout_fabu.setVisibility(View.INVISIBLE);
-                        }
-                        break;
+                                //up
+                                LogUtils.LOG("ceshi", "上", "MyShequActivity");
+                                mLinearlayout_fabu.setVisibility(View.INVISIBLE);
+                            }
+                            break;
 
+                    }
                 }
 
                 return false;
@@ -156,7 +169,7 @@ public class ErShoushichangActivity extends BaseActivityother {
     protected void initView() {
         mListview=findViewById(R.id.list_lovetask);
         mLinearlayout_fabu=findViewById(R.id.linearlayout_fabu);//发布按钮
-
+        mImage_view_empty=findViewById(R.id.image_empty);
         listheadView= LayoutInflater.from(this).inflate(R.layout.list_headview_lovetask,null,false);
         mListview.getRefreshableView().addHeaderView(listheadView);
         /**
@@ -167,6 +180,7 @@ public class ErShoushichangActivity extends BaseActivityother {
         relativeLayout_headbackground.setLayoutParams(mLayoutparams);
 
         banner = listheadView. findViewById(R.id.banner_lovetask);
+
     }
     private void request_GGLB(){//请求网络轮播图
         new Volley_Utils(new Interface_volley_respose() {
@@ -215,7 +229,7 @@ public class ErShoushichangActivity extends BaseActivityother {
                     if (page == 1 && eeshoushichangListBean.getData() != null) {
                         mdata.clear();
                         mdata.addAll(eeshoushichangListBean.getData());
-
+                        mImage_view_empty.setVisibility(mdata.size()==0? View.VISIBLE:View.GONE);
                         adapter_ershoushichangList.notifyDataSetChanged();
                     } else if (page != 1 && eeshoushichangListBean.getData() != null) {
                         mdata.addAll(eeshoushichangListBean.getData());

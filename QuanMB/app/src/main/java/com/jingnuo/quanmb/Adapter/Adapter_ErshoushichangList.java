@@ -69,7 +69,7 @@ public class Adapter_ErshoushichangList extends  BaseAdapter {
 //         }
 
         holder.mText_task_username.setText(mData.get(position).getNick_name()+"");
-        holder.mText_task_type.setText(Staticdata.static_userBean.getData().getAppuser().getCommunity_name());
+//        holder.mText_task_type.setText(Staticdata.static_userBean.getData().getAppuser().getCommunity_name());
         Glide.with(mContext).load(mData.get(position).getHeadUrl()).into(holder.mImage_view);
 
         return convertView;

@@ -39,6 +39,8 @@ public class ThreeRegisterActivity extends BaseActivityother {
     EditText mEdit_password;
     EditText mEdit_yanzhengma;
     EditText getmEdit_passwordagain;
+    EditText mEdit_tuijianma;
+    String tuijianma = "";
 //    ImageView mImage_choose;
     Button mButton_getyanzhengma;
     Button mButton_complte;
@@ -113,6 +115,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 if(initmap()){
+
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -164,6 +167,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
         mEdit_password = findViewById(R.id.edit_password);
         mEdit_yanzhengma = findViewById(R.id.edit_yanzhegnma);
         getmEdit_passwordagain = findViewById(R.id.edit_passwordagain);
+        mEdit_tuijianma = findViewById(R.id.edit_tuijianma);
         mButton_getyanzhengma = findViewById(R.id.button_getyanzhangma);
 //        mImage_choose = findViewById(R.id.image_choose);
         mButton_complte = findViewById(R.id.button_register);
@@ -203,6 +207,11 @@ public class ThreeRegisterActivity extends BaseActivityother {
         map_relogin.put("unionid",Staticdata.map_wechat.get("unionid"));
         map_relogin.put("uuid",Staticdata.UUID);
         map_relogin.put("Jpush_id", Staticdata.JpushID);
+        tuijianma=mEdit_tuijianma.getText()+"";
+        if(!tuijianma.equals("")){
+            map_relogin.put("recommend_code",tuijianma);
+        }
+
         return true;
 
 

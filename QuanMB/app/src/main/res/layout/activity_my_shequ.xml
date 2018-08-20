@@ -26,10 +26,31 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-
             android:text="我的社区"
             android:textColor="@color/black"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/textview_shequname"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:text="我的社区"
+            android:gravity="right"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:text=">"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
     </RelativeLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:layout_below="@+id/re_title"
@@ -37,7 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
-        android:background="@color/white"
         ptr:ptrMode="both"
         />
 

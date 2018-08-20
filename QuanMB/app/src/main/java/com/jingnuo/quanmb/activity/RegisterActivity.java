@@ -41,6 +41,7 @@ import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 public class RegisterActivity extends BaseActivityother {
     //控件
     EditText mEdit_phonenumber, mEdit_yanzhengma, mEdit_password, mEdit_passwordAgain;
+    EditText edit_tuijianma;
     Button mButton_yanzhegnma, mButton_register;
     ImageView mImage_choose;
     ImageView mImage_hide;
@@ -48,6 +49,7 @@ public class RegisterActivity extends BaseActivityother {
 
     //数据
     String phonenumber = "", yanzhengma = "", password = "", passwordagain = "";
+    String tuijianma = "";
 
     //对象
 
@@ -84,6 +86,7 @@ public class RegisterActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mEdit_phonenumber = findViewById(R.id.edit_phonenumber);
+        edit_tuijianma = findViewById(R.id.edit_tuijianma);
         mEdit_yanzhengma = findViewById(R.id.edit_yanzhegnma);
         mEdit_password = findViewById(R.id.edit_password);
         mEdit_passwordAgain = findViewById(R.id.edit_passwordagain);
@@ -137,10 +140,14 @@ public class RegisterActivity extends BaseActivityother {
                     ToastUtils.showToast(this, "请阅读全民帮用户协议并同意");
                     return;
                 }
+                tuijianma=edit_tuijianma.getText()+"";
                 String passwordMM= PasswordJiami.passwordjiami(password);
                 map_register.put("phoneNumbers",phonenumber);
                 map_register.put("password",passwordMM);
                 map_register.put("ValidateCode",yanzhengma);
+                if(!tuijianma.equals("")){
+                    map_register.put("recommend_code",tuijianma);
+                }
                 map_register.remove("type");
 
 

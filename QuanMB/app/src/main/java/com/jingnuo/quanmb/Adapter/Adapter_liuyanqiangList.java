@@ -74,20 +74,20 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             }else {
                 viewHolder0= (ViewHolder0) convertView.getTag();
             }
-            switch (position%4){
-                case 1:
-                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang1);
-                    break;
-                case 2:
-                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang2);
-                    break;
-                case 3:
-                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang3);
-                    break;
-                case 0:
-                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang0);
-                    break;
-            }
+//            switch (position%4){
+//                case 1:
+//                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang1);
+//                    break;
+//                case 2:
+//                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang2);
+//                    break;
+//                case 3:
+//                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang3);
+//                    break;
+//                case 0:
+//                    viewHolder0.relayout_liuyan0.setBackgroundResource(R.drawable.background_liuyanqiang0);
+//                    break;
+//            }
 
 //            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder0.imageView_touxiang);
             viewHolder0.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
@@ -108,20 +108,20 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             }else {
                 viewHolder1= (ViewHolder1) convertView.getTag();
             }
-            switch (position%4){
-                case 1:
-                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang1);
-                    break;
-                case 2:
-                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang2);
-                    break;
-                case 3:
-                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang3);
-                    break;
-                case 0:
-                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang0);
-                    break;
-            }
+//            switch (position%4){
+//                case 1:
+//                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang1);
+//                    break;
+//                case 2:
+//                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang2);
+//                    break;
+//                case 3:
+//                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang3);
+//                    break;
+//                case 0:
+//                    viewHolder1.relayout_liuyan1.setBackgroundResource(R.drawable.background_liuyanqiang0);
+//                    break;
+//            }
 //            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder1.imageView_touxiang);
             viewHolder1.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
             viewHolder1.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());
@@ -143,20 +143,20 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             }else {
                 viewHolder2= (ViewHolder2) convertView.getTag();
             }
-            switch (position%4){
-                case 1:
-                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang1);
-                    break;
-                case 2:
-                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang2);
-                    break;
-                case 3:
-                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang3);
-                    break;
-                case 0:
-                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang0);
-                    break;
-            }
+//            switch (position%4){
+//                case 1:
+//                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang1);
+//                    break;
+//                case 2:
+//                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang2);
+//                    break;
+//                case 3:
+//                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang3);
+//                    break;
+//                case 0:
+//                    viewHolder2.relayout_liuyan2.setBackgroundResource(R.drawable.background_liuyanqiang0);
+//                    break;
+//            }
 //            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder2.imageView_touxiang);
             viewHolder2.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
             viewHolder2.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());
@@ -180,20 +180,20 @@ public class Adapter_liuyanqiangList extends BaseAdapter{
             }else {
                 viewHolder3= (ViewHolder3) convertView.getTag();
             }
-            switch (position%4){
-                case 1:
-                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang1);
-                    break;
-                case 2:
-                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang2);
-                    break;
-                case 3:
-                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang3);
-                    break;
-                case 0:
-                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang0);
-                    break;
-            }
+//            switch (position%4){
+//                case 1:
+//                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang1);
+//                    break;
+//                case 2:
+//                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang2);
+//                    break;
+//                case 3:
+//                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang3);
+//                    break;
+//                case 0:
+//                    viewHolder3.relayout_liuyan3.setBackgroundResource(R.drawable.background_liuyanqiang0);
+//                    break;
+//            }
 //            Glide.with(mcontext).load(mList_liuyan.get(position).getAvatar_URL()).into(viewHolder3.imageView_touxiang);
             viewHolder3.mTextview_name.setText("by-"+mList_liuyan.get(position).getNick_name());
             viewHolder3.mTextview_content.setText("        "+mList_liuyan.get(position).getContent());

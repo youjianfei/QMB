@@ -32,6 +32,7 @@ import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.LiuyanqiangListBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.youth.banner.Banner;
 import com.jingnuo.quanmb.R;
@@ -48,6 +49,7 @@ public class MyShequActivity extends BaseActivityother {
     MyGridView mygrid_mokuai;
     ImageView mImageview_image_shuidian;
     PullToRefreshListView myListView;
+    TextView textview_shequname;
 
 
     //对象
@@ -61,6 +63,11 @@ public class MyShequActivity extends BaseActivityother {
     List<String>mList_mokuai;
     List<LiuyanqiangListBean.DataBean>mList_liuyan;
     List<String> imageview_urllist;
+
+
+
+
+    String  shequcode=Staticdata.static_userBean.getData().getAppuser().getCommunity_code()+"";
 
 
     int  page=1;
@@ -89,6 +96,7 @@ public class MyShequActivity extends BaseActivityother {
         mygrid_mokuai.setAdapter(adapter_shequ8kuai);
         adapter_liuyanqiangList=new Adapter_liuyanqiangList(mList_liuyan,this);
         myListView.setAdapter(adapter_liuyanqiangList);
+        textview_shequname.setText(Staticdata.static_userBean.getData().getAppuser().getCommunity_name());
         request_GGLB();
         request(1);
         requestNotic();
@@ -107,8 +115,15 @@ public class MyShequActivity extends BaseActivityother {
                         startActivity(intent);
                         break;
                     case 6://二手市场
-                        intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
-                        startActivity(intent);
+                        if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+                            startActivity(intent);
+                        }else {
+                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+                            intent.putExtra("type",1);
+                            intent.putExtra("shequcode",shequcode);
+                            startActivity(intent);
+                        }
                         break;
                     case 5://家电维修
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
@@ -126,8 +141,13 @@ public class MyShequActivity extends BaseActivityother {
                         startActivity(intent);
                         break;
                     case 2://物业缴费
-                        intent=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
-                        startActivity(intent);
+                        if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+                            intent=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
+                            startActivity(intent);
+                        }else {
+                            ToastUtils.showToast(MyShequActivity.this,"请进入你的社区缴费");
+                        }
+
                         break;
                     case 1://宠物护理
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
@@ -169,34 +189,47 @@ public class MyShequActivity extends BaseActivityother {
         myListView.getRefreshableView().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            mFirstY[0] = event.getY();//按下时获取位置
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            mCurrentY[0] = event.getY();//得到滑动的位置
+                            if(mCurrentY[0] - mFirstY[0] > 5){//滑动的位置减去按下的位置大于最小滑动距离  则表示向下滑动
+                                //down
+                                LogUtils.LOG("ceshi", "下", "MyShequActivity");
+                                mLinearlayout_fabbu.setVisibility(View.VISIBLE);
+                            }else if(mFirstY[0] - mCurrentY[0] > 5){//反之向上滑动
+                                //up
+                                LogUtils.LOG("ceshi", "上", "MyShequActivity");
+                                mLinearlayout_fabbu.setVisibility(View.INVISIBLE);
+                            }
+                            break;
 
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        mFirstY[0] = event.getY();//按下时获取位置
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        mCurrentY[0] = event.getY();//得到滑动的位置
-                        if(mCurrentY[0] - mFirstY[0] > 5){//滑动的位置减去按下的位置大于最小滑动距离  则表示向下滑动
-                           //down
-                            LogUtils.LOG("ceshi", "下", "MyShequActivity");
-                            mLinearlayout_fabbu.setVisibility(View.VISIBLE);
-                        }else if(mFirstY[0] - mCurrentY[0] > 5){//反之向上滑动
-                            //up
-                            LogUtils.LOG("ceshi", "上", "MyShequActivity");
-                            mLinearlayout_fabbu.setVisibility(View.INVISIBLE);
-                        }
-                        break;
+                    }
 
+                    return false;
                 }
-
                 return false;
             }
         });
         mImageview_image_shuidian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_shuidian=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
-                startActivity(intent_shuidian);
+                if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+                    Intent intent_shuidian=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
+                    startActivity(intent_shuidian);
+                }else {
+                    ToastUtils.showToast(MyShequActivity.this,"请进入你的社区缴费");
+                }
+            }
+        });
+        textview_shequname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_shequ=new Intent(MyShequActivity.this,LookShequ.class);
+                startActivityForResult(intent_shequ,1);
             }
         });
     }
@@ -208,6 +241,7 @@ public class MyShequActivity extends BaseActivityother {
         banner =  findViewById(R.id.banner_myshequ);
         mygrid_mokuai=findViewById(R.id.mygrid_mokuai);
         myListView=findViewById(R.id.listview_myshequ);
+        textview_shequname=findViewById(R.id.textview_shequname);
 
 
         listheadView= LayoutInflater.from(this).inflate(R.layout.list_headview_myshequ,null,false);
@@ -264,7 +298,7 @@ public class MyShequActivity extends BaseActivityother {
 
             }
         }).Http(Urls.Baseurl_hu+Urls.CommunityNotice+Staticdata.static_userBean.getData().getUser_token()+"&community_code="
-                +Staticdata.static_userBean.getData().getAppuser().getCommunity_code(),MyShequActivity.this,0);
+                +shequcode,MyShequActivity.this,0);
     }
     private  void  request(final int  page){
         LogUtils.LOG("ceshiddd", "留言墙：" + Urls.Baseurl+Urls.getliuyan+Staticdata.static_userBean.getData().getUser_token()+"&pageNo="+page, " 社区轮播");
@@ -294,7 +328,7 @@ public class MyShequActivity extends BaseActivityother {
                 }
             }
         }).Http(Urls.Baseurl+Urls.getliuyan+Staticdata.static_userBean.getData().getUser_token()
-                +"&community_code="+Staticdata.static_userBean.getData().getAppuser().getCommunity_code()
+                +"&community_code="+shequcode
                 +"&pageNo="+page,MyShequActivity.this,0);
 
     }
@@ -304,6 +338,23 @@ public class MyShequActivity extends BaseActivityother {
     protected void onPostResume() {
         super.onPostResume();
         request(1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==2018820){
+            String shequname=data.getStringExtra("shequname");
+            textview_shequname.setText(shequname);
+            shequcode=data.getStringExtra("community_code");
+            request(1);
+            requestNotic();
+            if(!shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+                mLinearlayout_fabbu.setVisibility(View.INVISIBLE);
+            }
+
+        }
+
     }
 }
 

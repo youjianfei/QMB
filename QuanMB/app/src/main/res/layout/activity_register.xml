@@ -163,13 +163,6 @@
         android:background="@drawable/background_account"
         android:gravity="center"
         android:orientation="horizontal">
-        <!--<ImageView-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:src="@mipmap/password"-->
-            <!--android:textColor="@color/gray_969696"-->
-            <!--/>-->
 
         <EditText
             android:id="@+id/edit_passwordagain"
@@ -183,7 +176,27 @@
             android:textColorHint="@color/gray_dbdbdb"
             android:textSize="15dp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/background_account"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <EditText
+            android:id="@+id/edit_tuijianma"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:hint="推荐码（选填）"
+            android:textColorHint="@color/gray_dbdbdb"
+            android:textSize="15dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

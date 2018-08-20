@@ -201,7 +201,8 @@
         <activity android:name=".activity.MatchShopActivity" />
         <activity android:name=".activity.XieyZhuceiActivity" />
         <activity android:name=".activity.XieYiShanghuActivity" />
-        <activity android:name=".activity.ZixunKefuWebActivity"></activity>
+        <activity android:name=".activity.ZixunKefuWebActivity" />
+        <activity android:name=".activity.LookShequ"></activity>
     </application>
 
 </manifest>

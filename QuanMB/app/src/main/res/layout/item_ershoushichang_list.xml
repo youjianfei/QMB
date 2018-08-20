@@ -64,6 +64,7 @@
             android:textSize="12dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             />
         <!--<TextView-->
             <!--android:id="@+id/text_square_address"-->

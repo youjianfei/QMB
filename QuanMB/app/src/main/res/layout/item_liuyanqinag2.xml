@@ -8,19 +8,11 @@
         android:id="@+id/relayout_liuyan2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/background_liuyanqiang1"
         >
-        <!--<de.hdodenhof.circleimageview.CircleImageView-->
-            <!--android:id="@+id/circle_touxiang"-->
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:src="@mipmap/user_pic"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--/>-->
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
@@ -31,7 +23,7 @@
             android:layout_marginTop="5dp"
             android:textSize="15dp"
             android:layout_below="@+id/linearlayout_twos"
-            android:textColor="@color/white"
+            android:textColor="@color/black_text"
             android:layout_marginBottom="20dp"
             />
         <!--<TextView-->
@@ -54,7 +46,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black_text"
             android:lineSpacingMultiplier="1.5"
             android:layout_marginBottom="10dp"
             />
@@ -73,7 +65,7 @@
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/black"
+                android:src="@color/white"
                 android:layout_marginRight="10dp"
                 />
             <ImageView
@@ -82,7 +74,7 @@
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 android:layout_weight="1"
-                android:src="@color/black"
+                android:src="@color/white"
                 android:layout_marginRight="10dp"
                 />
             <ImageView
