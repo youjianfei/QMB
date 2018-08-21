@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -29,7 +30,7 @@ public class DealActivity extends BaseActivityother {
 
     //控件
     PullToRefreshListView mListview;
-
+    ImageView mImage_view_empty;
     //数据
     Map map_message;
 
@@ -126,6 +127,7 @@ public class DealActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mListview=findViewById(R.id.list_dealmessage);
+        mImage_view_empty=findViewById(R.id.image_empty);
     }
 
 
@@ -144,6 +146,7 @@ public class DealActivity extends BaseActivityother {
                     if(dealMessageBean.getData()!=null){
                         mData.addAll(dealMessageBean.getData());
                         adapter_dealmessageList.notifyDataSetChanged();
+                        mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
                     }
                 }else {
                     if(dealMessageBean.getData()!=null){

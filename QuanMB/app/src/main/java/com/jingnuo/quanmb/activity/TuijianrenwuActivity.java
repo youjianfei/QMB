@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -29,7 +30,7 @@ import java.util.Map;
 public class TuijianrenwuActivity extends BaseActivityother {
     //控件
     PullToRefreshListView mListview;
-
+    ImageView mImage_view_empty;
     Message_tujianrenwu message_tujianrenwuBean;
 
     List<Message_tujianrenwu.DataBean> mData;
@@ -102,6 +103,7 @@ public class TuijianrenwuActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mListview=findViewById(R.id.list_tuijianrenwu);
+        mImage_view_empty=findViewById(R.id.image_empty);
     }
     void requestTuijianrenwumessage(Map map){
         LogUtils.LOG("ceshi","交易消息内容URL"+ Urls.Baseurl_hu+Urls.pushMessage,"TuijianrenwuActivity");
@@ -119,6 +121,7 @@ public class TuijianrenwuActivity extends BaseActivityother {
                         mData.addAll(message_tujianrenwuBean.getData());
                         adapter_dealmessageList.notifyDataSetChanged();
                     }
+                    mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
                 }else {
                     if(message_tujianrenwuBean.getData()!=null){
                         mData.addAll(message_tujianrenwuBean.getData());

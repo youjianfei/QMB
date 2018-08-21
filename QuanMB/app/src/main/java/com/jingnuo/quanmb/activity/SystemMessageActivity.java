@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -27,6 +28,7 @@ public class SystemMessageActivity extends BaseActivityother {
 
     //控件
     PullToRefreshListView  mListview;
+    ImageView mImage_view_empty;
 
     //数据
     Map map_message;
@@ -100,6 +102,7 @@ public class SystemMessageActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mListview=findViewById(R.id.list_systerme);
+        mImage_view_empty=findViewById(R.id.image_empty);
     }
 
     void requestSystermyMessage(Map map){
@@ -114,7 +117,7 @@ public class SystemMessageActivity extends BaseActivityother {
                     mData.clear();
                     mData.addAll(systemmessageBean.getData());
                     adapter_systemmessageList.notifyDataSetChanged();
-
+                    mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
                 }else {
                     mData.addAll(systemmessageBean.getData());
                     adapter_systemmessageList.notifyDataSetChanged();

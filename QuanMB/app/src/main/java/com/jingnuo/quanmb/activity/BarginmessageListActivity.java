@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ public class BarginmessageListActivity extends BaseActivityother {
 
     //控件
     PullToRefreshListView mList_view;
+    ImageView mImage_view_empty;
     //数据
     Map map_message;
     int page=1;
@@ -108,6 +110,7 @@ public class BarginmessageListActivity extends BaseActivityother {
     @Override
     protected void initView() {
         mList_view=findViewById(R.id.list_bargin);
+        mImage_view_empty=findViewById(R.id.image_empty);
 
     }
 
@@ -124,7 +127,7 @@ public class BarginmessageListActivity extends BaseActivityother {
                     mData.clear();
                     mData.addAll(bargainMessageListBean.getData());
                     adapter_barginmessageList.notifyDataSetChanged();
-
+                    mImage_view_empty.setVisibility(mData.size()==0? View.VISIBLE:View.GONE);
                 }else {
                     mData.addAll(bargainMessageListBean.getData());
                     adapter_barginmessageList.notifyDataSetChanged();

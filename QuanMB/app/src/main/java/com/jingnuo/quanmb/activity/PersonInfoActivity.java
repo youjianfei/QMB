@@ -22,10 +22,12 @@ import com.jingnuo.quanmb.customview.PayFragment;
 import com.jingnuo.quanmb.customview.PayPwdView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -51,6 +53,7 @@ public class PersonInfoActivity extends BaseActivityother {
     //对象
     PermissionHelper permissionHelper;
     UpLoadImage upLoadImage;
+    KProgressHUD mKProgressHUD;
 
     //数据
     Map  map_setheadpic;
@@ -91,6 +94,7 @@ public class PersonInfoActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        mKProgressHUD = new KProgressHUD(PersonInfoActivity.this);
         permissionHelper = new PermissionHelper(PersonInfoActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_setheadpic=new HashMap();
         mtextview_nickname.setText(Staticdata.static_userBean.getData().getAppuser().getNick_name());
@@ -194,7 +198,7 @@ public class PersonInfoActivity extends BaseActivityother {
                     status = (Integer) object.get("code");//登录状态
                     msg = (String) object.get("message");//登录返回信息
                     imageUrl=(String) object.get("img_url");
-
+                    mKProgressHUD.dismiss();
                     if (status == 1) {
                         ToastUtils.showToast(PersonInfoActivity.this,"设置头像成功");
                         Staticdata.static_userBean.getData().setImg_url(imageUrl);
@@ -207,7 +211,7 @@ public class PersonInfoActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-
+                mKProgressHUD.dismiss();
             }
         }).postHttp(Urls.Baseurl+Urls.setheadPic,PersonInfoActivity.this,1,map);
 
@@ -272,6 +276,7 @@ public class PersonInfoActivity extends BaseActivityother {
                 mList_picpath.add(compressImage);
 
             }
+            ProgressDlog.showProgress(mKProgressHUD);
             mImageview_headPIC.setImageBitmap(bitmap);
             upLoadImage.uploadImg(mList_picpath,3);
 
