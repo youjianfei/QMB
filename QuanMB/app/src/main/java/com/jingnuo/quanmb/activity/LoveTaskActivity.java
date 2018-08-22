@@ -28,6 +28,8 @@ import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.youth.banner.Banner;
 import com.jingnuo.quanmb.R;
+import com.youth.banner.listener.OnBannerListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -179,8 +181,20 @@ public class LoveTaskActivity extends BaseActivityother {
                 }
                 //设置图片集合
                 banner.setImages(images);
+                banner.setOnBannerListener(new OnBannerListener() {//banner  点击事件 需要放在start方法之前执行
+                    @Override
+                    public void OnBannerClick(int position) {
+                        LogUtils.LOG("ceshiddd","wodianjile"+position,"我的社区");
+                        if(mdata_image_GG.get(position).getActivity_url()!=null&&!mdata_image_GG.get(position).getActivity_url().equals("")){
+                            Intent intent=new Intent(LoveTaskActivity.this,GuanggaoWeb.class);
+                            intent.putExtra("web",mdata_image_GG.get(position).getActivity_url());
+                            LoveTaskActivity.this.startActivity(intent);
+                        }
+                    }
+                });
                 //banner设置方法全部调用完毕时最后调用
                 banner.start();
+
             }
 
             @Override

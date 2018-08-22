@@ -1,8 +1,10 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -48,7 +50,17 @@ public class FulisheActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-
+        mlistview_fulishe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi",position+"","福利社");
+                if(mdata.get(position).getActivity_url()!=null&&!mdata.get(position).getActivity_url().equals("")){
+                    Intent intent=new Intent(FulisheActivity.this,GuanggaoWeb.class);
+                    intent.putExtra("web",mdata.get(position).getActivity_url());
+                    FulisheActivity.this.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -73,6 +85,6 @@ public class FulisheActivity extends BaseActivityother {
 
             }
         }).Http(Urls.Baseurl_cui+Urls.shouyePic+"4",FulisheActivity.this,0);
-        LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui+Urls.shouyePic, "fragment_square");
+        LogUtils.LOG("ceshiddd", "轮播图片：" + Urls.Baseurl_cui+Urls.shouyePic+"4", "fragment_square");
     }
 }

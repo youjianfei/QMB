@@ -8,27 +8,26 @@ public class Urls {
     public static String Baseurl_zhuye = "https://app.quanminbang.top/QuanMinBang/";//官网主页
     public static String Baseurl_index = "http://v3.rabbitpre.com/m2/aUe1ZjN6ls";//分享的主页
     public static String Baseurl_zixunkefu = "http://www.quanminbang.top/QuanMinBang/v1.0/uploadIge/toH5";//客服咨询
-        //正式
-//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    //正式
+    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
-        //  测试
-    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    //  测试
+//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  本地
 //    public static String Baseurl = "http://192.168.0.184:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.0.103:8080/QuanMinBang/v1.0/";
-//    public  static  String Baseurl_hu="http://192.168.1.147:8080/QuanMinBang/v1.0/";
+//    public  static  String Baseurl_hu="http://192.168.0.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post
     public static String upLoadImage = "uploadIge/headImgUpload";//上传图片  1.证件图片 2.任务图片 3.头像图片 4.商户证件图片 5.图标 6.发布专业图片
-
 
 
     public static String autoupdata = "version/getAppVersion";//自动更新
@@ -59,7 +58,7 @@ public class Urls {
      */
     public static String shopIn = "business/commitApply";//商家入驻审核    post
     public static String shopIn_state = "business/queryBusinessStatus?user_token=";//商家入驻审核状态
-    public static String woderenzheng="business/queryAuthInfo?user_token=";// 我的认证
+    public static String woderenzheng = "business/queryAuthInfo?user_token=";// 我的认证
     public static String authenticationHelper = "helper/helperReal";//帮手认证
     public static String helpIn_state = "helper/getHelperAuditState";//帮手认证审核状态
 
@@ -103,7 +102,6 @@ public class Urls {
     public static String zhidiengShequSkiss = "major/querySpecificService";//显示某几个指定2级专业下的所有服务-电脑，手机，空调，家电维修接口
 
 
-
     public static String setColltctSkill = "user/myCollection";//收藏、取消收藏接口
     public static String ColltctSkillList = "user/getCollectionList?user_token=";//收藏列表
 
@@ -119,18 +117,14 @@ public class Urls {
     public static String shopIssueSkill = "business/releaseSpecialty";//发布专业    post
     public static String shopkilldetail = "business/queryPostDetail";//服务内容详情    参数  id  get请求
 
-    public  static String businessputongshuaxin="business/handRefresh?user_token=";//普通刷新   服务
-    public  static String businesszhinengshuaxin="business/autoRefresh?user_token=";//智能刷新   服务
-    public  static String businesszhiding="business/setTopSpecialty?user_token=";//置顶   服务
+    public static String businessputongshuaxin = "business/handRefresh?user_token=";//普通刷新   服务
+    public static String businesszhinengshuaxin = "business/autoRefresh?user_token=";//智能刷新   服务
+    public static String businesszhiding = "business/setTopSpecialty?user_token=";//置顶   服务
 
 
     //商户 帮手通用
-    public static String shuaxinchoseDays="major/choiceRefreshDayList?user_token=";// 智能刷新选择的天数
-    public static String zhidingchoseDays="major/choiceTopDayList?user_token=";// 智能刷新选择的天数
-
-
-
-
+    public static String shuaxinchoseDays = "major/choiceRefreshDayList?user_token=";// 智能刷新选择的天数
+    public static String zhidingchoseDays = "major/choiceTopDayList?user_token=";// 智能刷新选择的天数
 
 
     //帮手模块
@@ -143,11 +137,11 @@ public class Urls {
     public static String helperSkilldetail = "helper/queryPostDetail";//服务内容详情    参数  id  get请求
     public static String orderthink = "order/orderEvaluate";//评价帮手
     public static String BaoSuccess = "helper/after_PayMargin?user_token=";//缴纳保证金成功之后调用
-    public  static String helperputongshuaxin="helper/handRefresh?user_token=";//普通刷新   服务
-    public  static String helperzhinengshuaxin="helper/autoRefresh?user_token=";//智能刷新   服务
-    public  static String helperzhiding="helper/setTopSpecialty?user_token=";//置顶   服务
-    public  static String helper_type="helper/updateHelperType?user_token=";//更新帮手服务类型
-    public  static String helper_isHavehelper="helper/getStatuAboutHelperType?user_token=";//帮手是否选择过服务类型
+    public static String helperputongshuaxin = "helper/handRefresh?user_token=";//普通刷新   服务
+    public static String helperzhinengshuaxin = "helper/autoRefresh?user_token=";//智能刷新   服务
+    public static String helperzhiding = "helper/setTopSpecialty?user_token=";//置顶   服务
+    public static String helper_type = "helper/updateHelperType?user_token=";//更新帮手服务类型
+    public static String helper_isHavehelper = "helper/getStatuAboutHelperType?user_token=";//帮手是否选择过服务类型
 
     //消息模块
 
@@ -199,12 +193,12 @@ public class Urls {
     public static String ErshoushichangDetails = "secondaryMarket/secondaryDetail?user_token=";//二手信息单挑条详细信息
 
     //社区
-    public  static String addLiuyan="communityMsg/saveWallMsg";//添加留言
-    public  static String getliuyan="communityMsg/getAllMsg?user_token=";//获取留言墙列表
-    public  static String shuidianfeidaijiao="Community/PayCommunityFee";//教水电费
-    public  static String getCommunityList="Community/getMyCommunity";//模糊查询所有社区
-    public  static String bindCommunity="Community/RequiredCom";//绑定社区
-    public  static String CommunityNotice="Community/getCommunityNotice?user_token=";//社区公告
+    public static String addLiuyan = "communityMsg/saveWallMsg";//添加留言
+    public static String getliuyan = "communityMsg/getAllMsg?user_token=";//获取留言墙列表
+    public static String shuidianfeidaijiao = "Community/PayCommunityFee";//教水电费
+    public static String getCommunityList = "Community/getMyCommunity";//模糊查询所有社区
+    public static String bindCommunity = "Community/RequiredCom";//绑定社区
+    public static String CommunityNotice = "Community/getCommunityNotice?user_token=";//社区公告
 
 
     //省市县

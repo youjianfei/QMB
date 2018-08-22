@@ -45,7 +45,7 @@ public class GuanggaoBean {
          * img_url : https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/icon/%E5%B9%BF%E5%91%8A%E5%9B%BE1.png
          */
 
-        private String activity_url;
+        private String activity_url="";
         private int id;
         private String img_url;
 

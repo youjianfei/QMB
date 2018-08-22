@@ -36,6 +36,8 @@ import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.youth.banner.Banner;
 import com.jingnuo.quanmb.R;
+import com.youth.banner.listener.OnBannerListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +83,7 @@ public class MyShequActivity extends BaseActivityother {
     protected void setData() {
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
+
     }
 
     @Override
@@ -273,6 +276,18 @@ public class MyShequActivity extends BaseActivityother {
                 }
                 //设置图片集合
                 banner.setImages(images);
+
+                banner.setOnBannerListener(new OnBannerListener() {//banner  点击事件
+                    @Override
+                    public void OnBannerClick(int position) {
+                        LogUtils.LOG("ceshiddd","wodianjile"+position,"我的社区");
+                        if(mdata_image_GG.get(position).getActivity_url()!=null&&!mdata_image_GG.get(position).getActivity_url().equals("")){
+                            Intent intent=new Intent(MyShequActivity.this,GuanggaoWeb.class);
+                            intent.putExtra("web",mdata_image_GG.get(position).getActivity_url());
+                            MyShequActivity.this.startActivity(intent);
+                        }
+                    }
+                });
                 //banner设置方法全部调用完毕时最后调用
                 banner.start();
             }
@@ -301,14 +316,14 @@ public class MyShequActivity extends BaseActivityother {
                 +shequcode,MyShequActivity.this,0);
     }
     private  void  request(final int  page){
-        LogUtils.LOG("ceshiddd", "留言墙：" + Urls.Baseurl+Urls.getliuyan+Staticdata.static_userBean.getData().getUser_token()+"&pageNo="+page, " 社区轮播");
+        LogUtils.LOG("ceshi", "留言墙：" + Urls.Baseurl+Urls.getliuyan+Staticdata.static_userBean.getData().getUser_token()+"&pageNo="+page, " 社区轮播");
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
                 if (myListView.isRefreshing()) {
                     myListView.onRefreshComplete();
                 }
-                LogUtils.LOG("ceshiddd", "留言墙：" + respose, " 社区轮播");
+                LogUtils.LOG("ceshi", "留言墙：" + respose, " 社区轮播");
                 liuyanqiangListBean=new  Gson().fromJson(respose,LiuyanqiangListBean.class);
 
                 if(page==1){
