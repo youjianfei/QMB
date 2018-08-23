@@ -191,7 +191,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
 
     void uploadimg() {
         if (Staticdata.imagePathlist.size() >= 1) {
-            upLoadImage.uploadImg(Staticdata.imagePathlist.get(0), 2);
+            upLoadImage.uploadImg(Staticdata.imagePathlist.get(0), 2,"Y");
         } else {
 //            requast(Staticdata.map_task);
             requestTaskid();
@@ -200,7 +200,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
     }
 
     void uploadimgagain(int count) {
-        upLoadImage.uploadImg(Staticdata.imagePathlist.get(count), 2);
+        upLoadImage.uploadImg(Staticdata.imagePathlist.get(count), 2,"Y");
     }
 
     @Override
@@ -402,7 +402,7 @@ public class IssueTaskNextActivity extends BaseActivityother {
                     startActivity(intentpay);
 
                     Staticdata.imagePathlist.clear();
-                    Staticdata.map_task.clear();
+//                    Staticdata.map_task.clear();
                     Staticdata.PayissuetaskSuccess=true;
                 } else {
                     count = 0;

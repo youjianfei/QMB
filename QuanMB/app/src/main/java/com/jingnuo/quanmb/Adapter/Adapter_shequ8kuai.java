@@ -37,26 +37,18 @@ public class Adapter_shequ8kuai extends BaseAdapter {
                 mImage.setImageResource(R.mipmap.chongwuhuli);
                 break;
             case "3":
-                mTextview.setText("物业缴费");
-                mImage.setImageResource(R.mipmap.wuyejiaofei);
-                break;
-            case "4":
                 mTextview.setText("家政服务");
                 mImage.setImageResource(R.mipmap.jiazhengfuwu);
                 break;
-            case "5":
+            case "4":
                 mTextview.setText("搬家运输");
                 mImage.setImageResource(R.mipmap.banjiayunshu);
                 break;
-            case "6":
+            case "5":
                 mTextview.setText("家电维修");
                 mImage.setImageResource(R.mipmap.jiadianweixiu);
                 break;
-            case "7":
-                mTextview.setText("二手市场");
-                mImage.setImageResource(R.mipmap.ershoushichang);
-                break;
-            case "8":
+            case "6":
                 mTextview.setText("福利社");
                 mImage.setImageResource(R.mipmap.fulishe);
                 break;

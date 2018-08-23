@@ -278,7 +278,7 @@ public class PersonInfoActivity extends BaseActivityother {
             }
             ProgressDlog.showProgress(mKProgressHUD);
             mImageview_headPIC.setImageBitmap(bitmap);
-            upLoadImage.uploadImg(mList_picpath,3);
+            upLoadImage.uploadImg(mList_picpath,3,"Y");
 
 
         }

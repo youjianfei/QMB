@@ -50,9 +50,9 @@ public class ShopCenterInfoActivity extends BaseActivityother {
     //控件
     TextView mTextview_edit;
     TextView mtextview_name;
-    TextView mtextview_phone;
+    EditText mtextview_phone;
     TextView mtextview_hangye;
-    TextView mtextview_address;
+    EditText mtextview_address;
     CircleImageView mImageview_head;
     EditText mEdit_view_jianjie;
     MyGridView myGridView;
@@ -76,6 +76,8 @@ public class ShopCenterInfoActivity extends BaseActivityother {
 
     Map map_edit;//编辑资料的map
     String jianjie = "";//简介
+    String lianxifangshi = "";//电话号
+    String address = "";//地址
     String business_id = "";//店铺id
     String img_id="";//上传的图片id
     int  count=0;//图片的张数。判断调用几次上传图片接口
@@ -294,7 +296,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
     }
     void uploadimg(){
         if( mList_PicPath_down.size()>=1){
-            upLoadImage.uploadImg(mList_PicPath_down.get(0),6);
+            upLoadImage.uploadImg(mList_PicPath_down.get(0),6,"Y");
         }else {
             for (String image : imageIDList) {//遍  线上图片删除之后剩下了 ID
                 img_id=img_id+image+",";
@@ -305,7 +307,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
 
     }
     void uploadimgagain(int  count){
-        upLoadImage.uploadImg(mList_PicPath_down.get(count),6);
+        upLoadImage.uploadImg(mList_PicPath_down.get(count),6,"Y");
     }
     void request_edit (Map map){//上传编辑的资料
         String URL= Urls.Baseurl+Urls.editshopinfo;
@@ -378,6 +380,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","商铺地址"+respose,"shop");
                 shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                 Glide.with(ShopCenterInfoActivity.this)
                         .load(shopcenterBean.getData().getList().getAvatar_url()).into(mImageview_head);
@@ -481,8 +484,20 @@ public class ShopCenterInfoActivity extends BaseActivityother {
             ToastUtils.showToast(this, "请输入商铺简介");
             return false;
         }
+        lianxifangshi=mtextview_phone.getText()+"";
+        if (lianxifangshi.equals("")) {
+            ToastUtils.showToast(this, "请输入联系方式");
+            return false;
+        }
+        address=mtextview_address.getText()+"";
+        if (address.equals("")) {
+            ToastUtils.showToast(this, "请输入商铺地址");
+            return false;
+        }
         map_edit.put("business_id", shopcenterBean.getData().getList().getBusiness_id() + "");
         map_edit.put("introduction", jianjie);
+        map_edit.put("business_mobile_no", lianxifangshi);
+        map_edit.put("business_address", address);
         map_edit.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         return true;
     }
@@ -509,7 +524,7 @@ public class ShopCenterInfoActivity extends BaseActivityother {
                     mList_picpath.add(compressImage);
                 }
                 mImageview_head.setImageBitmap(bitmap);
-                upLoadImage.uploadImg(mList_picpath, 3);
+                upLoadImage.uploadImg(mList_picpath, 3,"N");
             } else {
                 List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
                 ArrayList<Bitmap> dataPictrue = dataPictrue = new ArrayList<>();

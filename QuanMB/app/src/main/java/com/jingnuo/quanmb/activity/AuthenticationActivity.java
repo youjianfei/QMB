@@ -322,15 +322,15 @@ public class AuthenticationActivity extends BaseActivityother {
             switch (PICposition) {
                 case 1:
                     mImageview_zheng.setImageBitmap(mBitmap);
-                    upLoadImage.uploadImg(mList_picpath, 1);//上传图片
+                    upLoadImage.uploadImg(mList_picpath, 1,"Y");//上传图片
                     break;
                 case 2:
                     mImageview_fan.setImageBitmap(mBitmap);
-                    upLoadImage.uploadImg(mList_picpath, 1);//上传图片
+                    upLoadImage.uploadImg(mList_picpath, 1,"Y");//上传图片
                     break;
                 case 3:
                     mImageview_shouchi.setImageBitmap(mBitmap);
-                    upLoadImage.uploadImg(mList_picpath, 1);//上传图片
+                    upLoadImage.uploadImg(mList_picpath, 1,"Y");//上传图片
                     break;
             }
         }

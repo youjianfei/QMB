@@ -159,7 +159,7 @@ public class IssuelovetaskActivity extends BaseActivityother {
         });
     }
     void uploadimgagain(int  count){
-        upLoadImage.uploadImg(mList_PicPath_down.get(count),6);
+        upLoadImage.uploadImg(mList_PicPath_down.get(count),6,"Y");
     }
     @Override
     protected void initData() {
@@ -224,7 +224,7 @@ public class IssuelovetaskActivity extends BaseActivityother {
     }
     void uploadimg(){
         if( mList_PicPath_down.size()>=1){
-            upLoadImage.uploadImg(mList_PicPath_down.get(0),6);
+            upLoadImage.uploadImg(mList_PicPath_down.get(0),6,"Y");
         }else {
             request(map_issueLoveTask);
         }

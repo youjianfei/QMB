@@ -369,6 +369,11 @@ public class BargainActivity extends BaseActivityother {
                         mTextview_money.setText("帮手出价");
                         money=5;
                     }
+                    if(bargainMessagedetailsBean.getData().getClient_no().equals(Staticdata.static_userBean.getData().getAppuser().getClient_no())){
+                        mTextview_1.setText("还价帮手");
+                    }else {
+                        mTextview_1.setText("雇主");
+                    }
                     amount=bargainMessagedetailsBean.getData().getCounteroffer_Amount();
                     mTextview_mymoney.setText("还价价格：" + amount + "元");
                     String URL_imagehead = bargainMessagedetailsBean.getData().getAvatar_imgUrl().substring(0, bargainMessagedetailsBean.getData().getAvatar_imgUrl().length() - 1);

@@ -53,7 +53,7 @@ public class UpLoadImage {
 //    }
 
 
-    public  void uploadImg(List<String> pathList, int  type) {
+    public  void uploadImg(List<String> pathList, int  type,String  isFilter) {
 
 
         // mImgUrls为存放图片的url集合
@@ -71,6 +71,7 @@ public class UpLoadImage {
 
         }else{
             builder.addFormDataPart("type",type+"");
+            builder.addFormDataPart("isFilter",isFilter);//是否过滤
             LogUtils.LOG("ceshi","图片文件type:"+type,"上传图片");
         }
 

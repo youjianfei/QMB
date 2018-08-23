@@ -93,7 +93,7 @@ public class MyShequActivity extends BaseActivityother {
         mList_liuyan=new ArrayList();
         imageview_urllist=new ArrayList<>();
         mList_mokuai.add("1");mList_mokuai.add("2");mList_mokuai.add("3");mList_mokuai.add("4");
-        mList_mokuai.add("5");mList_mokuai.add("6");mList_mokuai.add("7");mList_mokuai.add("8");
+        mList_mokuai.add("5");mList_mokuai.add("6");
 
         adapter_shequ8kuai=new Adapter_shequ8kuai(mList_mokuai,this);
         mygrid_mokuai.setAdapter(adapter_shequ8kuai);
@@ -113,45 +113,45 @@ public class MyShequActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", "点击"+position, "mygrid_mokuai");
                 Intent intent;
                 switch (position){
-                    case 7://福利社
+                    case 5://福利社
                         intent=new Intent(MyShequActivity.this,FulisheActivity.class);
                         startActivity(intent);
                         break;
-                    case 6://二手市场
-                        if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
-                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
-                            startActivity(intent);
-                        }else {
-                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
-                            intent.putExtra("type",1);
-                            intent.putExtra("shequcode",shequcode);
-                            startActivity(intent);
-                        }
-                        break;
-                    case 5://家电维修
+//                    case 6://二手市场
+//                        if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+//                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+//                            startActivity(intent);
+//                        }else {
+//                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+//                            intent.putExtra("type",1);
+//                            intent.putExtra("shequcode",shequcode);
+//                            startActivity(intent);
+//                        }
+//                        break;
+                    case 4://家电维修
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
                         intent.putExtra("FromShequZuhe","1203,1204,1205,1210,");
                         startActivity(intent);
                         break;
-                    case 4://搬家运输
+                    case 3://搬家运输
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
                         intent.putExtra("FromShequ",106+"");
                         startActivity(intent);
                         break;
-                    case 3://家政服务
+                    case 2://家政服务
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
                         intent.putExtra("FromShequ",103+"");
                         startActivity(intent);
                         break;
-                    case 2://物业缴费
-                        if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
-                            intent=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
-                            startActivity(intent);
-                        }else {
-                            ToastUtils.showToast(MyShequActivity.this,"请进入你的社区缴费");
-                        }
-
-                        break;
+//                    case 2://物业缴费
+//                        if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
+//                            intent=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
+//                            startActivity(intent);
+//                        }else {
+//                            ToastUtils.showToast(MyShequActivity.this,"请进入你的社区缴费");
+//                        }
+//
+//                        break;
                     case 1://宠物护理
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
                         intent.putExtra("specialty_id",1105);
@@ -220,12 +220,16 @@ public class MyShequActivity extends BaseActivityother {
         mImageview_image_shuidian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent  intent;
                 if(shequcode.equals(Staticdata.static_userBean.getData().getAppuser().getCommunity_code())){
-                    Intent intent_shuidian=new Intent(MyShequActivity.this,ShuidianfeiActivity.class);
-                    startActivity(intent_shuidian);
-                }else {
-                    ToastUtils.showToast(MyShequActivity.this,"请进入你的社区缴费");
-                }
+                    intent  =new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+                            startActivity(intent);
+                        }else {
+                            intent=new Intent(MyShequActivity.this,ErShoushichangActivity.class);
+                            intent.putExtra("type",1);
+                            intent.putExtra("shequcode",shequcode);
+                            startActivity(intent);
+                        }
             }
         });
         textview_shequname.setOnClickListener(new View.OnClickListener() {
