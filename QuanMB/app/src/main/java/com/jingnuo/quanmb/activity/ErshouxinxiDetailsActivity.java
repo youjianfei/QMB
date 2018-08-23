@@ -1,26 +1,40 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
+import com.jingnuo.quanmb.Interface.Interence_jubao;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.ErshoushichangDetailsBean;
 import com.jingnuo.quanmb.entityclass.LoveTaskDetailsBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_jubao1;
+import com.jingnuo.quanmb.popwinow.Popwindow_jubao2;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,6 +45,7 @@ public class ErshouxinxiDetailsActivity extends BaseActivityother {
     TextView mtextview_time;//time
     TextView mtextview_peoplename;//求助人
     TextView mtextview_taskdetails;//任务详情
+    ImageView iv_3dian;
 
     MyGridView myGridView;//图片表
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
@@ -42,6 +57,8 @@ public class ErshouxinxiDetailsActivity extends BaseActivityother {
 
     RequestManager glide;
     Popwindow_lookpic popwindow_lookpic;
+    Popwindow_jubao1 popwindow_jubao1;
+    Popwindow_jubao2 popwindow_jubao2;
 
     @Override
     public int setLayoutResID() {
@@ -51,7 +68,71 @@ public class ErshouxinxiDetailsActivity extends BaseActivityother {
     @Override
     protected void setData() {
         popwindow_lookpic=new Popwindow_lookpic(this);
+        popwindow_jubao1=new Popwindow_jubao1(ErshouxinxiDetailsActivity.this, new Interence_jubao() {
+            @Override
+            public void onResult(String result) {
+                if(result.equals("jubao")){
+//                    Utils.setAlpha((float) 1,ErshouxinxiDetailsActivity.this);
+                    popwindow_jubao2.showPopwindow();
+                }
+            }
+        });
+        popwindow_jubao2=new Popwindow_jubao2(this, new Interence_jubao() {
+            @Override
+            public void onResult(String result) {
+                switch (result){
+                    case "tousu":
+                        Intent intent=new Intent(ErshouxinxiDetailsActivity.this,JubaoActivity.class);
+                        intent.putExtra("jubaoid",loveTaskDetailsBean.getData().getTask_id()+"");
+                        intent.putExtra("typeID","3");
+                        ErshouxinxiDetailsActivity.this.startActivity(intent);
+                        break;
+                    case "xujia":
+                        jubao("虚假信息");
+                        break;
+                    case "feifa":
+                        jubao("非法信息");
+                        break;
+                }
+
+            }
+        });
     }
+    void  jubao(String jubaoneirong){
+        Map map=new HashMap();
+        map.put("inform_id",loveTaskDetailsBean.getData().getTask_id()+"");
+        map.put("type","3");
+        map.put("inform_content",jubaoneirong);
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(status==1){
+                    ToastUtils.showToast(ErshouxinxiDetailsActivity.this,msg);
+                }else {
+                    ToastUtils.showToast(ErshouxinxiDetailsActivity.this,msg);
+                }
+
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.myJubao,ErshouxinxiDetailsActivity.this,1,map);
+
+    }
+
 
     @Override
     protected void initData() {
@@ -71,6 +152,12 @@ public class ErshouxinxiDetailsActivity extends BaseActivityother {
                 popwindow_lookpic.showPopwindow(position,imageview_urllist);
             }
         });
+        iv_3dian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_jubao1.showPopwindow();
+            }
+        });
     }
 
     @Override
@@ -80,6 +167,7 @@ public class ErshouxinxiDetailsActivity extends BaseActivityother {
         mtextview_time=findViewById(R.id.text_tasktime);
         mtextview_peoplename=findViewById(R.id.text_name);
         mtextview_taskdetails=findViewById(R.id.text_taskdetail);
+        iv_3dian=findViewById(R.id.iv_3dian);
         myGridView=findViewById(R.id.GridView_PIC);
     }
     void request(){

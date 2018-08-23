@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="举报内容"
+            android:layout_marginLeft="5dp"
+            android:lines="1"
+            android:textSize="16dp"
+            android:textColor="@color/yellow_jianbian_start"
+            android:layout_height="40dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/yellow_jianbian_start"
+            />
+        <TextView
+            android:id="@+id/text_one1"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="虚假信息"
+            android:layout_marginLeft="5dp"
+            android:lines="1"
+            android:textSize="16dp"
+            android:textColor="@color/text_black"
+            android:layout_height="40dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/gray_background"
+            />
+        <TextView
+            android:id="@+id/text_one2"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="非法内容"
+            android:layout_marginLeft="5dp"
+            android:lines="1"
+            android:textSize="16dp"
+            android:textColor="@color/text_black"
+            android:layout_height="40dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/gray_background"
+            />
+        <TextView
+            android:id="@+id/text_one3"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="其他投诉"
+            android:layout_marginLeft="5dp"
+            android:lines="1"
+            android:textSize="16dp"
+            android:textColor="@color/text_black"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+</LinearLayout>

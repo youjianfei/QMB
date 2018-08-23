@@ -9,15 +9,15 @@ public class Urls {
     public static String Baseurl_index = "http://v3.rabbitpre.com/m2/aUe1ZjN6ls";//分享的主页
     public static String Baseurl_zixunkefu = "http://www.quanminbang.top/QuanMinBang/v1.0/uploadIge/toH5";//客服咨询
     //正式
-//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  测试
-    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  本地
@@ -166,9 +166,12 @@ public class Urls {
     public static String editLianxiren = "user/editContacts";//编辑联系人
     public static String findMorenlianxiren = "user/getIsDefaultContacts?user_token=";//默认联系人
     public static String mySuggest = "user/myComplaints";//投诉和建议
+    public static String myJubao = "task/querySpecialty/informAdd";//我的举报
     public static String setSafepassword = "user/setSecurityCode";//设置支付密码
     public static String checkSafepassword = "user/checkSecurityCode";//校验支付密码
     public static String updataXYDU = "user/updateXYDu?user_token=";//更新经纬度
+
+
 
 
     //支付

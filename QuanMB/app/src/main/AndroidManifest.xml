@@ -203,7 +203,8 @@
         <activity android:name=".activity.XieYiShanghuActivity" />
         <activity android:name=".activity.ZixunKefuWebActivity" />
         <activity android:name=".activity.LookShequ" />
-        <activity android:name=".activity.GuanggaoWeb"></activity>
+        <activity android:name=".activity.GuanggaoWeb" />
+        <activity android:name=".activity.JubaoActivity"></activity>
     </application>
 
 </manifest>

@@ -7,8 +7,8 @@ android {
         applicationId "com.jingnuo.quanmb"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 8
-        versionName "v1.3.8"
+        versionCode 9
+        versionName "v1.3.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 qqappid      : "1106726779",//友盟配置的qq   id

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_background"
     android:orientation="vertical"
-    tools:context="com.jingnuo.quanmb.activity.SuggestActivity">
+    tools:context=".activity.JubaoActivity">
     <RelativeLayout
         android:id="@+id/re_title"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="投诉和建议"
+            android:text="其他投诉"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -59,7 +59,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         />
-
 
 
 </LinearLayout>

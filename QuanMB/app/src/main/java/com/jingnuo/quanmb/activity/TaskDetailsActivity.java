@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,9 +20,12 @@ import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
 import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
+import com.jingnuo.quanmb.Interface.Interence_jubao;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.popwinow.Popwindow_bargin;
+import com.jingnuo.quanmb.popwinow.Popwindow_jubao1;
+import com.jingnuo.quanmb.popwinow.Popwindow_jubao2;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -58,7 +62,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     Button mButton_help;
     Button mButton_counteroffer;
     LinearLayout linearlayout_tel;
-
+    ImageView iv_3dian;
     //数据
     String ID = "";//任务id;
     String is_counteroffer = "";
@@ -78,6 +82,8 @@ public class TaskDetailsActivity extends BaseActivityother {
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
     PermissionHelper mPermission;//动态申请权限
     RequestManager glide;
+    Popwindow_jubao1 popwindow_jubao1;
+    Popwindow_jubao2 popwindow_jubao2;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_task_details;
@@ -90,6 +96,69 @@ public class TaskDetailsActivity extends BaseActivityother {
         imageGridview.setAdapter(adapter_gridviewpic);
         popwindow_lookpic=new Popwindow_lookpic(this);
         requestTaseDetail();
+        popwindow_jubao1=new Popwindow_jubao1(TaskDetailsActivity.this, new Interence_jubao() {
+            @Override
+            public void onResult(String result) {
+                if(result.equals("jubao")){
+//                    Utils.setAlpha((float) 1,ErshouxinxiDetailsActivity.this);
+                    popwindow_jubao2.showPopwindow();
+                }
+            }
+        });
+        popwindow_jubao2=new Popwindow_jubao2(this, new Interence_jubao() {
+            @Override
+            public void onResult(String result) {
+                switch (result){
+                    case "tousu":
+                        Intent intent=new Intent(TaskDetailsActivity.this,JubaoActivity.class);
+                        intent.putExtra("jubaoid",mTaskData.getData().getTask_id()+"");
+                        intent.putExtra("typeID","1");
+                        TaskDetailsActivity.this.startActivity(intent);
+                        break;
+                    case "xujia":
+                        jubao("虚假信息");
+                        break;
+                    case "feifa":
+                        jubao("非法信息");
+                        break;
+                }
+
+            }
+        });
+    }
+    void  jubao(String jubaoneirong){
+        Map map=new HashMap();
+        map.put("inform_id",mTaskData.getData().getTask_id()+"");
+        map.put("type","1");
+        map.put("inform_content",jubaoneirong);
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(status==1){
+                    ToastUtils.showToast(TaskDetailsActivity.this,msg);
+                }else {
+                    ToastUtils.showToast(TaskDetailsActivity.this,msg);
+                }
+
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).postHttp(Urls.Baseurl+Urls.myJubao,TaskDetailsActivity.this,1,map);
+
     }
 
     @Override
@@ -147,6 +216,12 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        iv_3dian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popwindow_jubao1.showPopwindow();
+            }
+        });
         mTextview_taskaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -285,6 +360,7 @@ public class TaskDetailsActivity extends BaseActivityother {
         mTextview_tasktime = findViewById(R.id.text_time);
         mTextview_taskaddress = findViewById(R.id.text_address);
         imageGridview=findViewById(R.id.GridView_PIC);
+        iv_3dian=findViewById(R.id.iv_3dian);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
         linearlayout_tel = findViewById(R.id.linearlayout_tel);
