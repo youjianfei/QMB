@@ -287,7 +287,14 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Popwindow_Tip("撤回成功后将在24小时内退还佣金，是否继续？", MytaskDetailActivity.this, new Interence_complteTask() {
+
+                    String tip="";
+                if(taskDetailBean.getData().getTask_Status_code().equals("01")|| taskDetailBean.getData().getTask_Status_code().equals("08")){
+                    tip="撤回成功后将在24小时内退还佣金，是否继续？";
+                }else {
+                    tip="3分钟内取消订单不受惩罚";
+                }
+                new Popwindow_Tip(tip, MytaskDetailActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
                         if(result){
@@ -623,6 +630,8 @@ public class MytaskDetailActivity extends BaseActivityother {
                     getmTextview_statejieshao.setText("正在为你匹配帮手");
                     text_state2.setText("耐心等待");
                     mText_xiugaijiage.setVisibility(View.VISIBLE);//修改价格
+                    kefujieru.setVisibility(View.GONE);
+
                     stateImage.setImageResource(R.mipmap.dengdai);
                 }else {
                     mText_xiugaijiage.setVisibility(View.GONE);
@@ -630,6 +639,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 if (taskDetailBean.getData().getTask_Status_code().equals("02")) {
                     getmTextview_statejieshao.setText("帮手已接单");
                     text_state2.setText("全民帮帮手正在赶来...");
+                    kefujieru.setVisibility(View.VISIBLE);
                     stateImage.setImageResource(R.mipmap.peisong);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("05")) {
@@ -642,6 +652,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 if (taskDetailBean.getData().getTask_Status_code().equals("07") || taskDetailBean.getData().getTask_Status_code().equals("13")) {
                     mButton_cancle.setVisibility(View.GONE);
                     mButton_again.setVisibility(View.VISIBLE);
+                    kefujieru.setVisibility(View.GONE);
                     getmTextview_statejieshao.setText("任务已失效");
                     stateImage.setImageResource(R.mipmap.shixiao);
                     text_state2.setText("请重新发布");

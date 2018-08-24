@@ -154,7 +154,7 @@ public class MyShequActivity extends BaseActivityother {
 //                        break;
                     case 1://宠物护理
                         intent=new Intent(MyShequActivity.this,ShophallActivity.class);
-                        intent.putExtra("specialty_id",1105);
+                        intent.putExtra("specialty_id",2300);
                         startActivity(intent);
                         break;
                     case 0://门禁钥匙

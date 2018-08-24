@@ -174,6 +174,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //启动定位
+//        mLocationClient.startLocation();
+    }
+
+
     public void initview() {
         drawerlayout_menu=findViewById(R.id.drawerlayout_menu);
         image_dot=findViewById(R.id.image_dot);
@@ -198,15 +206,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 LogUtils.LOG("ceshi", result + "", "");
                 if (result) {//定位权限
                     setmapdata();// 高德地图配置参数
-
+                    updata();
+                return;
                 } else {
                     ToastUtils.showToast(MainActivity.this, "请允许开启定位功能");
                 }
+
             }
         });
         permissionmanage.requestpermission();
 
-        updata();
+
     }
 
     AutoUpdate autoUpdate;

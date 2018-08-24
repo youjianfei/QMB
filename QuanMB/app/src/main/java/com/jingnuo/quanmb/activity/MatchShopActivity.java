@@ -162,8 +162,7 @@ public class MatchShopActivity extends AppCompatActivity  {
             public void onClick(View v) {
 //                ToastUtils.showToast(MatchShopActivity.this,"点击刷新");
                 huanyipi();//请求换一批
-
-
+                ProgressDlog.showProgress(mKProgressHUD);
             }
         });
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -222,6 +221,7 @@ public class MatchShopActivity extends AppCompatActivity  {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                mKProgressHUD.dismiss();
                 LogUtils.LOG("ceshi",respose,"换一批");
                 matchshoplistbean=new Gson().fromJson(respose,Matchshoplistbean.class);
                 if(matchshoplistbean.getCode()==1){
@@ -239,7 +239,7 @@ public class MatchShopActivity extends AppCompatActivity  {
 
             @Override
             public void onError(int error) {
-
+                mKProgressHUD.dismiss();
             }
         }).Http(Urls.Baseurl_cui+Urls.issuetask_huanyipi
                 +Staticdata.static_userBean.getData().getUser_token()+"&task_id="

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -58,6 +59,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_taskaddress;
     CircleImageView imageView_head;
     MyGridView imageGridview;
+    RelativeLayout re3;
 
     Button mButton_help;
     Button mButton_counteroffer;
@@ -365,6 +367,7 @@ public class TaskDetailsActivity extends BaseActivityother {
         mButton_counteroffer = findViewById(R.id.button_bargain);
         linearlayout_tel = findViewById(R.id.linearlayout_tel);
         imageView_head = findViewById(R.id.image_task);
+        re3 = findViewById(R.id.re3);
     }
 
     void requestTaseDetail() {
@@ -420,6 +423,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 if(app_type.equals("1")){
                     linearlayout_tel.setVisibility(View.VISIBLE);
                     mButton_help.setVisibility(View.GONE);
+                    re3.setVisibility(View.INVISIBLE);
                 }
             }
 

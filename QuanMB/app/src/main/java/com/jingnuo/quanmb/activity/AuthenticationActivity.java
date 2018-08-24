@@ -30,6 +30,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -57,6 +58,7 @@ public class AuthenticationActivity extends BaseActivityother {
 
     //对象
     PermissionHelper permissionHelper;
+    KProgressHUD mKProgressHUD;
 
     UpLoadImage upLoadImage;
 
@@ -80,6 +82,7 @@ public class AuthenticationActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+
         upLoadImage = new UpLoadImage(this, new Interface_loadImage_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -93,6 +96,7 @@ public class AuthenticationActivity extends BaseActivityother {
                     msg = (String) object.get("msg");//登录返回信息
 
                     if (status == 1) {
+                        mKProgressHUD.dismiss();
                         imageID = (String) object.get("imgID");
                         LogUtils.LOG("ceshi", "单张图片ID" + imageID, "发布技能上传图片返回imageID");
                         switch (PICposition) {
@@ -118,6 +122,8 @@ public class AuthenticationActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        mKProgressHUD = new KProgressHUD(AuthenticationActivity.this);
+
         permissionHelper = new PermissionHelper(AuthenticationActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_submit=new HashMap();
 
@@ -315,10 +321,11 @@ public class AuthenticationActivity extends BaseActivityother {
 
                 String src_path = path;//原图片的路径
                 String targetPath = Environment.getExternalStorageDirectory() + "/picyasuo/"+System.currentTimeMillis()+".png";//压缩后图片的路径
-                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 30);//进行图片压缩，返回压缩后图片的路径
+                final String compressImage = ReducePIC.compressImage(src_path, targetPath, 60);//进行图片压缩，返回压缩后图片的路径
 //                dataPictrue.add(mBitmap);
                 mList_picpath.add(compressImage);
             }
+            mKProgressHUD.show();
             switch (PICposition) {
                 case 1:
                     mImageview_zheng.setImageBitmap(mBitmap);
