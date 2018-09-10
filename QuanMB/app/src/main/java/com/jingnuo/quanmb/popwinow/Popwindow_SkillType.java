@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
@@ -42,7 +44,7 @@ public class Popwindow_SkillType {
     TextView mTextview_one;
     TextView mTextview_two;
     ImageView mImage_close;
-    ListView popListview;
+    GridView popListview;
     //对象
     Adapter_choose mAdapter;
     InterfacePopwindow_SkillType  mInterface;
@@ -88,7 +90,7 @@ public class Popwindow_SkillType {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose,"popwindow");
+                LogUtils.LOG("ceshi","选择类型"+respose,"popwindow");
                 listdata_one.clear();
                 listdata_one.addAll(new Gson().fromJson(respose,Skillmenu_oneBean.class).getData().getList());
                 mAdapter.notifyDataSetChanged();
@@ -163,16 +165,19 @@ public class Popwindow_SkillType {
                 viewholder=new Viewholder();
                 convertView=mInflater.inflate(R.layout.item_text,null,false);
                 viewholder.mtextview_choose=convertView.findViewById(R.id.text_text);
+                viewholder.image_type=convertView.findViewById(R.id.image_type);
                 convertView.setTag(viewholder);
             }else {
                 viewholder= (Viewholder) convertView.getTag();
             }
             viewholder.mtextview_choose.setText(mData.get(position).getSpecialty_name());
+            Glide.with(mContext).load(mData.get(position).getImg_url()).into(viewholder.image_type);
 
             return convertView;
         }
         class Viewholder {
             TextView mtextview_choose;
+            ImageView image_type;
         }
     }
 

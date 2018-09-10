@@ -8,8 +8,9 @@ import java.util.List;
 
 public class Skillmenu_oneBean {
 
+
     /**
-     * data : {"list":[{"specialty_id":101,"specialty_name":"同城帮"},{"specialty_id":102,"specialty_name":"维修"},{"specialty_id":103,"specialty_name":"家政"},{"specialty_id":104,"specialty_name":"互联网"},{"specialty_id":105,"specialty_name":"设计"},{"specialty_id":106,"specialty_name":"运输"},{"specialty_id":107,"specialty_name":"代购"},{"specialty_id":108,"specialty_name":"商务"},{"specialty_id":109,"specialty_name":"其他"}]}
+     * data : {"list":[{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-Home@2x.png","specialty_id":113,"specialty_name":"家居日常"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-repair@2x.png","specialty_id":102,"specialty_name":"维修"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-Housekeeping@2x.png","specialty_id":103,"specialty_name":"家政"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-transport@2x.png","specialty_id":106,"specialty_name":"运输"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-business@2x.png","specialty_id":108,"specialty_name":"商务"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-internet@2x.png","specialty_id":104,"specialty_name":"互联网"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-design@2x.png","specialty_id":105,"specialty_name":"设计策划"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-automobile@2x.png","specialty_id":107,"specialty_name":"汽车服务"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-education@2x.png","specialty_id":109,"specialty_name":"教育培训"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-wedding@2x.png","specialty_id":110,"specialty_name":"婚庆摄影"},{"img_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-building@2x.png","specialty_id":101,"specialty_name":"建材装修"}]}
      * message : 获取列表成功
      * status : 1
      */
@@ -55,12 +56,22 @@ public class Skillmenu_oneBean {
 
         public static class ListBean {
             /**
-             * specialty_id : 101
-             * specialty_name : 同城帮
+             * img_url : https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/classify-Home@2x.png
+             * specialty_id : 113
+             * specialty_name : 家居日常
              */
 
+            private String img_url;
             private int specialty_id;
             private String specialty_name;
+
+            public String getImg_url() {
+                return img_url;
+            }
+
+            public void setImg_url(String img_url) {
+                this.img_url = img_url;
+            }
 
             public int getSpecialty_id() {
                 return specialty_id;

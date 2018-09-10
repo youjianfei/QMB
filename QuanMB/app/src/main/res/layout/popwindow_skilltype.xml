@@ -33,7 +33,7 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:layout_marginLeft="5dp"
-                android:text="请选择"
+                android:text="选择类型"
                 android:lines="1"
                 android:textColor="@color/black_text"
                 android:layout_height="40dp"
@@ -47,13 +47,14 @@
             android:background="@color/gray_dbdbdb"
             />
 
-        <ListView
+        <GridView
             android:id="@+id/Listview_addresspopwindow"
             android:layout_width="match_parent"
+            android:layout_height="170dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:dividerHeight="0.5dp"
-            android:layout_height="250dp"/>
+            android:numColumns="6"
+            />
     </LinearLayout>
     <ImageView
         android:id="@+id/ImageView_close"
