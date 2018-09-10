@@ -5,6 +5,9 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -24,13 +27,26 @@ public class IssueTaskActivity extends BaseActivityother {
     /**
      * 公用
      */
-    TabLayout mTablayout_task;
+    //控件
+//    TabLayout mTablayout_task;
+    LinearLayout linearlayout_zhaoshanghu;
+    LinearLayout linearlayout_zhaorenshou;
+    ImageView image_zhaoshanghu;
+    ImageView image_zhaorenshou;
+    TextView textview_zhaoshanghu;
+    TextView textview_zhaorenshou;
+    TextView text_chooceaddress;
+
+
+
+
+
+
 
     private int[] images = new int[]{
             R.drawable.tablayout_image_zhaoshanghu,
-            R.drawable.tablayout_image_zhaorenshou,
-            R.drawable.tablayout_image_zhaojiazheng};
-    private String[] tabs = new String[]{"找商户", "找人手", "家政维修"};
+            R.drawable.tablayout_image_zhaorenshou};
+    private String[] tabs = new String[]{"找商户", "找人手"};
 
     String xValue = "";//纬度
     String yValue = "";//经度
@@ -40,7 +56,7 @@ public class IssueTaskActivity extends BaseActivityother {
 
     Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
     Fragment_tsk_ZhaoRenShou  fragmentTskZhaoRenShou;
-    Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;
+//    Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;
 
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
@@ -69,18 +85,24 @@ public class IssueTaskActivity extends BaseActivityother {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
                     //可在其中解析amapLocation获取相应内容。
-                    LogUtils.LOG("ceshi", "定位成功" + aMapLocation.getAddress(), "发布任务");
+                    LogUtils.LOG("ceshi", "定位成功" + aMapLocation.getPoiName(), "发布任务");
                     xValue = aMapLocation.getLatitude() + "";//获取纬度
                     yValue = aMapLocation.getLongitude() + "";//获取经度
                     citycode = aMapLocation.getCity();//城市信息
                      Aoi = aMapLocation.getAoiName() + "";
-                    Staticdata.aoi=Aoi;
-                    if (Aoi.equals("")) {
 
+                    if (Aoi.equals("")) {
+                        Staticdata.aoi=aMapLocation.getPoiName();
+                        text_chooceaddress.setText(Staticdata.aoi);
+//                        if(fragmentTaskZhaoShangHu!=null){
+//                            fragmentTaskZhaoShangHu.setAddress(Staticdata.aoi);
+//                        }
                     } else {
-                        if(fragmentTaskZhaoShangHu!=null){
-                            fragmentTaskZhaoShangHu.setAddress(Aoi);
-                        }
+                        Staticdata.aoi=Aoi;
+                        text_chooceaddress.setText(Aoi);
+//                        if(fragmentTaskZhaoShangHu!=null){
+//                            fragmentTaskZhaoShangHu.setAddress(Aoi);
+//                        }
                     }
 
                 } else {
@@ -121,54 +143,96 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
-
-
-        mTablayout_task.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                text_chooceaddress.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                LogUtils.LOG("ceshi", tab.getTag() + "", "MyOrderActivity");
+            public void onClick(View view) {
+                Intent mIntent_map = new Intent(IssueTaskActivity.this, LocationMapActivity.class);
+                startActivityForResult(mIntent_map, 2018418);
+            }
+        });
+
+
+
+        linearlayout_zhaoshanghu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearlayout_zhaoshanghu.setSelected(true);
+                linearlayout_zhaorenshou.setSelected(false);
+                image_zhaoshanghu.setSelected(true);
+                image_zhaorenshou.setSelected(false);
+                textview_zhaoshanghu.setTextColor(IssueTaskActivity.this.getResources().getColor(R.color.white));
+                textview_zhaorenshou.setTextColor(IssueTaskActivity.this.getResources().getColor(R.color.yellow_jianbian_end));
+                //逻辑
+                Tag=0;
                 transaction = fragmetnmanager.beginTransaction();
-                if (tab.getTag().equals("找商户")) {
-                    Tag=0;
-                    if (fragmentTaskZhaoShangHu == null) {
-                        fragmentTaskZhaoShangHu = new Fragment_task_ZhaoShangHu();
-                        transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
-                    } else {
-                        transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
-                    }
+                if (fragmentTaskZhaoShangHu == null) {
+                    fragmentTaskZhaoShangHu = new Fragment_task_ZhaoShangHu();
+                    transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
+                } else {
+                    transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
                 }
-                if (tab.getTag().equals("找人手")) {
-                    Tag=1;
-                    if (fragmentTskZhaoRenShou == null) {
-                        fragmentTskZhaoRenShou = new Fragment_tsk_ZhaoRenShou();
-                        transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
-                    } else {
-                        transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
-                    }
-                }
-                if (tab.getTag().equals("家政维修")) {
-                    Tag=2;
-                    if (fragment_task_jiaZhengWeixiu == null) {
-                        fragment_task_jiaZhengWeixiu = new Fragment_task_JiaZhengWeixiu();
-                        transaction.replace(R.id.framelayout_main, fragment_task_jiaZhengWeixiu).commit();
-                    } else {
-                        transaction.replace(R.id.framelayout_main, fragment_task_jiaZhengWeixiu).commit();
-                    }
-                }
-
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
+        linearlayout_zhaorenshou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearlayout_zhaoshanghu.setSelected(false);
+                linearlayout_zhaorenshou.setSelected(true);
+                image_zhaoshanghu.setSelected(false);
+                image_zhaorenshou.setSelected(true);
+                textview_zhaoshanghu.setTextColor(IssueTaskActivity.this.getResources().getColor(R.color.yellow_jianbian_end));
+                textview_zhaorenshou.setTextColor(IssueTaskActivity.this.getResources().getColor(R.color.white));
+
+                Tag=1;
+                transaction = fragmetnmanager.beginTransaction();
+                if (fragmentTskZhaoRenShou == null) {
+                    fragmentTskZhaoRenShou = new Fragment_tsk_ZhaoRenShou();
+                    transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
+                } else {
+                    transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
+                }
+            }
+        });
+
+
+//        mTablayout_task.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                LogUtils.LOG("ceshi", tab.getTag() + "", "MyOrderActivity");
+//                transaction = fragmetnmanager.beginTransaction();
+//                if (tab.getTag().equals("找商户")) {
+//                    Tag=0;
+//                    if (fragmentTaskZhaoShangHu == null) {
+//                        fragmentTaskZhaoShangHu = new Fragment_task_ZhaoShangHu();
+//                        transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
+//                    } else {
+//                        transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
+//                    }
+//                }
+//                if (tab.getTag().equals("找人手")) {
+//                    Tag=1;
+//                    if (fragmentTskZhaoRenShou == null) {
+//                        fragmentTskZhaoRenShou = new Fragment_tsk_ZhaoRenShou();
+//                        transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
+//                    } else {
+//                        transaction.replace(R.id.framelayout_main, fragmentTskZhaoRenShou).commit();
+//                    }
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
     }
 
@@ -176,10 +240,23 @@ public class IssueTaskActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mTablayout_task = findViewById(R.id.tablayout);
-        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[0]).setText(tabs[0]).setTag("找商户"), true);
-        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[1]).setText(tabs[1]).setTag("找人手"), false);
-        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[2]).setText(tabs[2]).setTag("家政维修"), false);
+//        mTablayout_task = findViewById(R.id.tablayout);
+//        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[0]).setText(tabs[0]).setTag("找商户"), true);
+//        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[1]).setText(tabs[1]).setTag("找人手"), false);
+//        mTablayout_task.addTab(mTablayout_task.newTab().setIcon(images[2]).setText(tabs[2]).setTag("家政维修"), false);
+
+        linearlayout_zhaoshanghu=findViewById(R.id.linearlayout_zhaoshanghu);
+        linearlayout_zhaorenshou=findViewById(R.id.linearlayout_zhaorenshou);
+        image_zhaoshanghu=findViewById(R.id.image_zhaoshanghu);
+        image_zhaorenshou=findViewById(R.id.image_zhaorenshou);
+        textview_zhaoshanghu=findViewById(R.id.textview_zhaoshanghu);
+        textview_zhaorenshou=findViewById(R.id.textview_zhaorenshou);
+        text_chooceaddress=findViewById(R.id.text_chooceaddress);
+
+        linearlayout_zhaoshanghu.setSelected(true);
+        image_zhaoshanghu.setSelected(true);
+        textview_zhaoshanghu.setTextColor(this.getResources().getColor(R.color.white));
+        textview_zhaorenshou.setTextColor(this.getResources().getColor(R.color.yellow_jianbian_end));
     }
 
     @Override
@@ -194,11 +271,20 @@ public class IssueTaskActivity extends BaseActivityother {
                 fragmentTskZhaoRenShou.setview(data);
             }
 
-            if(Tag==2&&fragment_task_jiaZhengWeixiu!=null){
-                fragment_task_jiaZhengWeixiu.setview(data);
+//            if(Tag==2&&fragment_task_jiaZhengWeixiu!=null){
+//                fragment_task_jiaZhengWeixiu.setview(data);
+//            }
+        }
+        if (requestCode == 2018418 && resultCode == 2018418) {
+            text_chooceaddress.setText(data.getStringExtra("address"));
+            if(Tag==0&&fragmentTaskZhaoShangHu!=null){
+                fragmentTaskZhaoShangHu.setAddress(data);
+            }
+
+            if(Tag==1&&fragmentTskZhaoRenShou!=null){
+                fragmentTskZhaoRenShou.setview(data);
             }
         }
-
     }
     @Override
     protected void onDestroy() {

@@ -17,7 +17,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:text="任务类型："
+            android:text="请选择服务类型"
             android:textColor="@color/text_title2"
             android:textSize="15dp" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/imageqq"
-                android:text="请选择类型"
+                android:text=""
                 android:textColor="@color/black_text2" />
         </RelativeLayout>
 
@@ -74,7 +74,7 @@
             android:layout_toRightOf="@+id/image2"
             android:background="@null"
             android:gravity="top"
-            android:hint="请描述你的任务，不少于5字"
+            android:hint="详细描述你的需求"
             android:lines="3"
             android:textColorHint="@color/text_hide_tip"
             android:textSize="14dp" />
@@ -149,52 +149,52 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_below="@+id/relative_1"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="51dp"-->
+        <!--android:layout_below="@+id/relative_1"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal">-->
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/address_blue" />
+        <!--<ImageView-->
+            <!--android:layout_width="15dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:src="@mipmap/address_blue" />-->
 
-        <TextView
-            android:id="@+id/text_chooseaddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:paddingBottom="15dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="5dp"
-            android:paddingTop="15dp"
-            android:scrollbars="horizontal"
-            android:singleLine="true"
-            android:text="选择地址"
-            android:textColor="@color/text_hide_tip"
-            android:textSize="14dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/text_chooseaddress"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:paddingBottom="15dp"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:paddingRight="5dp"-->
+            <!--android:paddingTop="15dp"-->
+            <!--android:scrollbars="horizontal"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="选择地址"-->
+            <!--android:textColor="@color/text_hide_tip"-->
+            <!--android:textSize="14dp" />-->
 
-        <EditText
-            android:id="@+id/edit_detailaddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_weight="1.2"
-            android:background="@null"
-            android:gravity="right"
-            android:hint="输入详细地址"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:singleLine="true"
-            android:textColorHint="@color/text_hide_tip"
-            android:textSize="14dp" />
-    </LinearLayout>
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/edit_detailaddress"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginRight="30dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1.2"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@null"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="right"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:hint="输入详细地址"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:paddingBottom="15dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:paddingTop="15dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:singleLine="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColorHint="@color/text_hide_tip"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="14dp" />&ndash;&gt;-->
+    <!--</LinearLayout>-->
     <Button
         android:id="@+id/button_submitsave"
         android:layout_width="match_parent"
@@ -202,9 +202,9 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button_morph_20dp"
-        android:text="下一步"
+        android:text="确  认"
         android:textColor="@color/white"
         android:textSize="15dp" />
 </LinearLayout>
