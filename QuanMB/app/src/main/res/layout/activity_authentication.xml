@@ -49,17 +49,18 @@
             <TextView
                 android:id="@+id/text_a"
                 android:layout_width="match_parent"
-                android:layout_height="18dp"
+                android:layout_height="40dp"
                 android:background="@color/gray_background"
-                android:gravity="center"
-                android:text="注：您上传的信息仅用于实名认证，不会用于其他用途"
-                android:textColor="@color/gray_969696"
-                android:textSize="10dp" />
+                android:text="身份信息"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_title2"
+                android:paddingLeft="30dp"
+                android:textSize="15dp" />
             <TextView
                 android:id="@+id/textview_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的姓名:"
+                android:text="我的姓名"
                 android:textSize="15dp"
                 android:textColor="@color/text_title2"
                 android:layout_below="@+id/text_a"
@@ -72,9 +73,11 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入您的姓名"
                 android:textColorHint="@color/text_hide_tip"
-                android:textSize="15dp"
+                android:textSize="13dp"
+                android:singleLine="true"
+                android:layout_marginRight="20dp"
                 android:background="@null"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="95dp"
                 android:layout_below="@+id/text_a"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/textview_1"
@@ -93,7 +96,7 @@
                 android:id="@+id/textview_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="身份证号:"
+                android:text="身份证号"
                 android:textSize="15dp"
                 android:textColor="@color/text_title2"
                 android:layout_below="@+id/image_line1"
@@ -104,12 +107,14 @@
                 android:id="@+id/edit_idcardnumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入您的身份证号"
+                android:hint="请输入你的身份证号"
+                android:singleLine="true"
+                android:layout_marginRight="20dp"
                 android:textColorHint="@color/text_hide_tip"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:digits="1234567890xX"
                 android:background="@null"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="95dp"
                 android:layout_below="@+id/image_line1"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/textview_2"
@@ -146,96 +151,65 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/gray_background"
                 />
-            <TextView
-                android:id="@+id/text_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="证件需清晰有效且为原件数码照"
-                android:textSize="12dp"
-                android:layout_below="@+id/image_line3"
-                android:textColor="@color/yellow_button"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                />
+
             <ImageView
                 android:id="@+id/image_idcardzheng"
-                android:layout_width="150dp"
+                android:layout_width="135dp"
                 android:layout_height="95dp"
-                android:layout_below="@+id/text_3"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_below="@+id/image_line3"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
                 android:src="@mipmap/idcardzheng"
+                android:scaleType="centerCrop"
                 />
             <ImageView
                 android:id="@+id/image_idcardfan"
-                android:layout_width="150dp"
+                android:layout_width="135dp"
                 android:layout_height="95dp"
-                android:layout_below="@+id/image_idcardzheng"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/image_line3"
                 android:layout_marginTop="20dp"
                 android:src="@mipmap/idcardfan"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:scaleType="centerCrop"
                 />
-            <ImageView
-                android:id="@+id/image_line4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/image_idcardfan"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_background"
-                />
+
             <TextView
                 android:id="@+id/textview_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="身份证手持照片:"
-                android:textSize="15dp"
-                android:textColor="@color/text_title2"
-                android:layout_below="@+id/image_line4"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                />
-            <ImageView
-                android:id="@+id/image_line5"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/textview_4"
-                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="手持身份证正面:"
                 android:background="@color/gray_background"
+                android:textSize="15dp"
+                android:paddingLeft="30dp"
+                android:textColor="@color/text_title2"
+                android:layout_below="@+id/image_idcardfan"
+                android:layout_marginTop="8dp"
                 />
+
             <ImageView
                 android:id="@+id/image_idcardshou"
-                android:layout_width="150dp"
+                android:layout_width="135dp"
                 android:layout_height="95dp"
-                android:layout_below="@+id/image_line5"
+                android:layout_below="@+id/textview_4"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/idcardshou"
-                />
-            <!--<TextView-->
-                <!--android:id="@+id/text_4"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="我们保障您的身份信息安全，请放心上传"-->
-                <!--android:textSize="10dp"-->
-                <!--android:layout_below="@+id/image_idcardshou"-->
-                <!--android:textColor="@color/text_hide_tip"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--/>-->
-            <ImageView
-                android:id="@+id/image_line6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/image_idcardshou"
                 android:layout_marginTop="10dp"
-                android:background="@color/gray_background"
+                android:src="@mipmap/idcardshou"
+                android:scaleType="centerCrop"
                 />
+
+            <!--<ImageView-->
+                <!--android:id="@+id/image_line6"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_below="@+id/image_idcardshou"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@color/gray_background"-->
+                <!--/>-->
 
             <LinearLayout
                 android:id="@+id/isAgree"
@@ -243,9 +217,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:layout_below="@+id/image_line6"
+                android:layout_below="@+id/image_idcardshou"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 >
                 <ImageView
                     android:id="@+id/image_choose"
@@ -280,11 +254,11 @@
                 android:text="提 交"
                 android:textSize="15dp"
                 android:textColor="@color/white"
-                android:background="@drawable/button_morph_20dp"
+                android:background="@drawable/button_yellow_20dp"
                 android:layout_below="@+id/isAgree"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
                 />
 

@@ -27,12 +27,14 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShouyeRadios;
+import com.jingnuo.quanmb.popwinow.Popwindow_shenfenzhengTip;
 import com.jingnuo.quanmb.utils.AutoUpdate;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -313,7 +315,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         }).Http(Urls.Baseurl_hu+Urls.shouyeRadios,this,0);
     }
-
     @Override
     public void onClick(View view) {
             Intent intent;

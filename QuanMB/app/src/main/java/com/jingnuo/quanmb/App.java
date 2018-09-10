@@ -31,6 +31,7 @@ public class App extends Application {
         JPushInterface.init(this);
         String jpushid = JPushInterface.getRegistrationID(getApplicationContext());
         Staticdata.JpushID = jpushid;
+        LogUtils.LOG("ceshi","JpushId"+Staticdata.JpushID,"APP");
 
 //        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 //                .detectAll()//监测所有内容

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -26,6 +27,7 @@ import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.popwinow.Popwindow_shenfenzhengTip;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -135,21 +137,42 @@ public class AuthenticationActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 PICposition = 1;
-                chooseIDcard();
+                new Popwindow_shenfenzhengTip(1,AuthenticationActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if(result){
+                            chooseIDcard();
+                        }
+                    }
+                }).showPopwindow();
             }
         });
         mImageview_fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PICposition = 2;
-                chooseIDcard();
+                new Popwindow_shenfenzhengTip(2,AuthenticationActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if(result){
+                            chooseIDcard();
+                        }
+                    }
+                }).showPopwindow();
             }
         });
         mImageview_shouchi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PICposition = 3;
-                chooseIDcard();
+                new Popwindow_shenfenzhengTip(3,AuthenticationActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if(result){
+                            chooseIDcard();
+                        }
+                    }
+                }).showPopwindow();
             }
         });
         mImage_choose.setOnClickListener(new View.OnClickListener() {

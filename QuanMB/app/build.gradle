@@ -7,7 +7,7 @@ android {
         applicationId "com.jingnuo.quanmb"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 5
+        versionCode 11
         versionName "v1.4.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
