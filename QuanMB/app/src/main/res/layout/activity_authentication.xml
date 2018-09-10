@@ -160,7 +160,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
                 android:src="@mipmap/idcardzheng"
-                android:scaleType="centerCrop"
                 />
             <ImageView
                 android:id="@+id/image_idcardfan"
@@ -172,7 +171,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
-                android:scaleType="centerCrop"
                 />
 
             <TextView
@@ -197,7 +195,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:src="@mipmap/idcardshou"
-                android:scaleType="centerCrop"
                 />
 
             <!--<ImageView-->

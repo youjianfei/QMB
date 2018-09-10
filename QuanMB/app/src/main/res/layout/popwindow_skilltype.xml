@@ -50,10 +50,20 @@
         <GridView
             android:id="@+id/Listview_addresspopwindow"
             android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:numColumns="5"
+            android:visibility="visible"
+            />
+        <GridView
+            android:id="@+id/Listview_addresspopwindow2"
+            android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:numColumns="6"
+            android:numColumns="4"
+            android:visibility="gone"
             />
     </LinearLayout>
     <ImageView

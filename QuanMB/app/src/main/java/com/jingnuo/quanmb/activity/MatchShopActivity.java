@@ -55,7 +55,7 @@ public class MatchShopActivity extends AppCompatActivity  {
     TextView mTextview_taskdetails;//任务详情
     MyGridView imageGridview;
     TextView mTextview_yuyuetime;//预约时间
-    TextView mTextview_guzhuName;//雇主姓名
+//    TextView mTextview_guzhuName;//雇主姓名
     TextView mTextview_taskaddress;//地址
 
     //数据
@@ -137,7 +137,7 @@ public class MatchShopActivity extends AppCompatActivity  {
         mTextview_taskdetails = findViewById(R.id.text_taskdetail);
         imageGridview = findViewById(R.id.GridView_PIC);
         mTextview_yuyuetime = findViewById(R.id.text_time);
-        mTextview_guzhuName = findViewById(R.id.text_guzhuname);
+//        mTextview_guzhuName = findViewById(R.id.text_guzhuname);
         mTextview_taskaddress = findViewById(R.id.text_address);
 
     }
@@ -202,7 +202,7 @@ public class MatchShopActivity extends AppCompatActivity  {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails+"查订单"+respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
                 String sex=taskDetailBean.getData().getClient_sex().equals("0")?"（先生）":"（女士）";
-                mTextview_guzhuName.setText(taskDetailBean.getData().getClient_name()+sex+taskDetailBean.getData().getMobile_no());
+//                mTextview_guzhuName.setText(taskDetailBean.getData().getClient_name()+sex+taskDetailBean.getData().getMobile_no());
                 mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
                 mTextview_yuyuetime.setText(taskDetailBean.getData().getTask_Time());
                 mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() );

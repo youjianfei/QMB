@@ -141,7 +141,7 @@ public class Popwindow_LoveType {
            Viewholder  viewholder=null;
             if(convertView==null){
                 viewholder=new Viewholder();
-                convertView=mInflater.inflate(R.layout.item_text,null,false);
+                convertView=mInflater.inflate(R.layout.item_text_lovetype,null,false);
                 viewholder.mtextview_choose=convertView.findViewById(R.id.text_text);
                 convertView.setTag(viewholder);
             }else {

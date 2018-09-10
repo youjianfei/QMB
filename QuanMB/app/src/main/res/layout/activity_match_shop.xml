@@ -175,38 +175,38 @@
                     <!--android:layout_marginTop="15dp"-->
                     <!--android:src="@color/gray_dfdfdf" />-->
 
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@mipmap/people2" />
+                <!--<ImageView-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_below="@+id/skill_pic"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:src="@mipmap/people2" />-->
 
-                <TextView
-                    android:id="@+id/text_guzhu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="18dp"
-                    android:text="联系人"
-                    android:textColor="@color/black_text"
-                    android:textSize="15dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/text_guzhu"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/skill_pic"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginTop="18dp"-->
+                    <!--android:text="联系人"-->
+                    <!--android:textColor="@color/black_text"-->
+                    <!--android:textSize="15dp" />-->
 
-                <TextView
-                    android:id="@+id/text_guzhuname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="18dp"
-                    android:text="雇主名字"
-                    android:textColor="#7f7f7f"
-                    android:textSize="15dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/text_guzhuname"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/skill_pic"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_marginTop="18dp"-->
+                    <!--android:text="雇主名字"-->
+                    <!--android:textColor="#7f7f7f"-->
+                    <!--android:textSize="15dp" />-->
 
 
                 <!--<ImageView-->
@@ -222,7 +222,7 @@
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_below="@+id/text_guzhu"
+                    android:layout_below="@+id/skill_pic"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:src="@mipmap/time2" />
@@ -231,7 +231,7 @@
                     android:id="@+id/text3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/text_guzhu"
+                    android:layout_below="@+id/skill_pic"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="18dp"
                     android:text="预约时间"
@@ -242,7 +242,7 @@
                     android:id="@+id/text_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/text_guzhu"
+                    android:layout_below="@+id/skill_pic"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="18dp"

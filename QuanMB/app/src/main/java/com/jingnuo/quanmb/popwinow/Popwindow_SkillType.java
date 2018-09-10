@@ -45,8 +45,10 @@ public class Popwindow_SkillType {
     TextView mTextview_two;
     ImageView mImage_close;
     GridView popListview;
+    GridView Listview_addresspopwindow2;
     //对象
     Adapter_choose mAdapter;
+    Adapter_choose2 mAdapter2;
     InterfacePopwindow_SkillType  mInterface;
     //数据
     List<Skillmenu_oneBean.DataBean.ListBean>listdata_one;
@@ -71,18 +73,24 @@ public class Popwindow_SkillType {
         mPopupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
 
         popListview= conView.findViewById(R.id.Listview_addresspopwindow);
+        Listview_addresspopwindow2= conView.findViewById(R.id.Listview_addresspopwindow2);
         mImage_close= conView.findViewById(R.id.ImageView_close);
         mTextview_one= conView.findViewById(R.id.text_one);
         mTextview_two=  conView.findViewById(R.id.text_two);
         Utils.setAlpha((float) 0.3,activity);
         initdata();
         initlistennr();
+        popListview.setVisibility(View.VISIBLE);
+        Listview_addresspopwindow2.setVisibility(View.GONE);
         request(Urls.Baseurl+Urls.Skillmenu_one,level);
     }
 
     private void initdata() {
         mAdapter=new Adapter_choose(listdata_one,activity);
+        mAdapter2=new Adapter_choose2(listdata_one,activity);
         popListview.setAdapter(mAdapter);
+        Listview_addresspopwindow2.setAdapter(mAdapter2);
+
     }
 
     private void request(String url_list , final int level_) {
@@ -94,6 +102,7 @@ public class Popwindow_SkillType {
                 listdata_one.clear();
                 listdata_one.addAll(new Gson().fromJson(respose,Skillmenu_oneBean.class).getData().getList());
                 mAdapter.notifyDataSetChanged();
+                mAdapter2.notifyDataSetChanged();
             }
 
             @Override
@@ -109,6 +118,8 @@ public class Popwindow_SkillType {
             @Override
             public void onClick(View view) {
                 level=1;
+                popListview.setVisibility(View.VISIBLE);
+                Listview_addresspopwindow2 .setVisibility(View.GONE);
                 request(Urls.Baseurl+Urls.Skillmenu_one,level);
                 mTextview_two.setVisibility(View.GONE);
             }
@@ -131,16 +142,40 @@ public class Popwindow_SkillType {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(level==1){
                     level=2;
+                    popListview.setVisibility(View.GONE);
+                    Listview_addresspopwindow2 .setVisibility(View.VISIBLE);
                     int  id=listdata_one.get(i).getSpecialty_id();
                     mTextview_one.setText(listdata_one.get(i).getSpecialty_name());
                     request(Urls.Baseurl+Urls.Skillmenu_right+"?specialty_id="+id,level);
                     mTextview_two.setVisibility(View.VISIBLE);
                 }else {
+                    popListview.setVisibility(View.VISIBLE);
+                    Listview_addresspopwindow2 .setVisibility(View.GONE);
                     mTextview_two.setText(listdata_one.get(i).getSpecialty_name());
                     mInterface.onSuccesses(listdata_one.get(i).getSpecialty_name(),listdata_one.get(i).getSpecialty_id());
                     mPopupWindow.dismiss();
                 }
 
+            }
+        });
+        Listview_addresspopwindow2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                if(level==1){
+                    level=2;
+                    popListview.setVisibility(View.GONE);
+                    Listview_addresspopwindow2 .setVisibility(View.VISIBLE);
+                    int  id=listdata_one.get(i).getSpecialty_id();
+                    mTextview_one.setText(listdata_one.get(i).getSpecialty_name());
+                    request(Urls.Baseurl+Urls.Skillmenu_right+"?specialty_id="+id,level);
+                    mTextview_two.setVisibility(View.VISIBLE);
+                }else {
+                    popListview.setVisibility(View.VISIBLE);
+                    Listview_addresspopwindow2 .setVisibility(View.GONE);
+                    mTextview_two.setText(listdata_one.get(i).getSpecialty_name());
+                    mInterface.onSuccesses(listdata_one.get(i).getSpecialty_name(),listdata_one.get(i).getSpecialty_id());
+                    mPopupWindow.dismiss();
+                }
             }
         });
     }
@@ -180,6 +215,39 @@ public class Popwindow_SkillType {
             ImageView image_type;
         }
     }
+    class Adapter_choose2 extends BaseAdapter {
+        List<Skillmenu_oneBean.DataBean.ListBean> mData;
+        Context mContext;
+        LayoutInflater mInflater;
 
+        public Adapter_choose2(List mDatas, Context mContext) {
+            super(mDatas, mContext);
+            this.mContext=mContext;
+            this.mData=mDatas;
+            mInflater=LayoutInflater.from(mContext);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Viewholder  viewholder=null;
+            if(convertView==null){
+                viewholder=new Viewholder();
+                convertView=mInflater.inflate(R.layout.item_text2,null,false);
+                viewholder.mtextview_choose=convertView.findViewById(R.id.text_text);
+//                viewholder.image_type=convertView.findViewById(R.id.image_type);
+                convertView.setTag(viewholder);
+            }else {
+                viewholder= (Viewholder) convertView.getTag();
+            }
+            viewholder.mtextview_choose.setText(mData.get(position).getSpecialty_name());
+//            Glide.with(mContext).load(mData.get(position).getImg_url()).into(viewholder.image_type);
+
+            return convertView;
+        }
+        class Viewholder {
+            TextView mtextview_choose;
+        }
+    }
 
 }
