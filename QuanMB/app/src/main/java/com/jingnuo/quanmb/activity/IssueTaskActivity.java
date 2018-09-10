@@ -282,7 +282,7 @@ public class IssueTaskActivity extends BaseActivityother {
             }
 
             if(Tag==1&&fragmentTskZhaoRenShou!=null){
-                fragmentTskZhaoRenShou.setview(data);
+                fragmentTskZhaoRenShou.setAddress(data);
             }
         }
     }

@@ -346,6 +346,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
             imageGridview.setVisibility(View.VISIBLE);
         }
     }
+    String address_left = "";
+    String address_right = "";
     public void setAddress(Intent data){
         address_left = data.getStringExtra("address");
         address_right = data.getStringExtra("address2");
@@ -567,23 +569,9 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         permissionmanage.requestpermission();
     }
 
-    String address_left = "";
-    String address_right = "";
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2018418 && resultCode == 2018418) {
-            address_left = data.getStringExtra("address");
-            address_right = data.getStringExtra("address2");
-            xValue = data.getStringExtra("xValue");
-            yValue = data.getStringExtra("yValue");
-            citycode = data.getStringExtra("citycode");
-//            mTextview_taskAddress.setText(address_left);
-        }
 
 
-    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
