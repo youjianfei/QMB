@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -53,9 +55,8 @@ public class Fragment_shopdetail extends Fragment{
     SimpleRatingBar simpleRatingBar;
 //    TextView text_lv;
     CircleImageView image_head;
-    ImageView imageView_call;
-    Button button_choose;
-    TextView text_money;
+    LinearLayout imageView_call;
+    LinearLayout button_choose;
 
     //对象
     PermissionHelper mPermission;//动态申请权限
@@ -127,15 +128,13 @@ public class Fragment_shopdetail extends Fragment{
         button_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(text_money.getText().equals("等待商户出价")){
-                    ToastUtils.showToast(getContext(),"该商户还未出价");
-                }else {
+                 {
                     map_choosebissness=new HashMap();
                     map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_choosebissness.put("task_id", task_id);
                     map_choosebissness.put("business_no", matchingBean.getBusiness_no());
-                    map_choosebissness.put("counteroffer_amount", text_money.getText());
+//                    map_choosebissness.put("counteroffer_amount", text_money.getText());
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -148,10 +147,10 @@ public class Fragment_shopdetail extends Fragment{
                                 msg = (String) object.get("message");//
                                 data = (String) object.get("data");//
                                 if(status==1){
-                                    timer.cancel();
+//                                    timer.cancel();
                                     Intent intentpay = new Intent(getActivity(), PayActivity.class);
                                     intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-                                    intentpay.putExtra("amount", text_money.getText());
+//                                    intentpay.putExtra("amount", text_money.getText());
                                     intentpay.putExtra("order_no", data);
                                     intentpay.putExtra("taskid", task_id);
                                     startActivity(intentpay);
@@ -187,14 +186,14 @@ public class Fragment_shopdetail extends Fragment{
         }
         text_orders.setText("已完成"+matchingBean.getOverCount()+"单");
         setstar((float) matchingBean.getEvaluation_star());
-        timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mhandler.sendEmptyMessage(0);
-            }
-        };
-        timer.schedule(timerTask, 0, 100);
+//        timer = new Timer();
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                mhandler.sendEmptyMessage(0);
+//            }
+//        };
+//        timer.schedule(timerTask, 0, 100);
     }
 
     private void initview() {
@@ -207,7 +206,7 @@ public class Fragment_shopdetail extends Fragment{
         image_head=rootview.findViewById(R.id.image_head);
         imageView_call=rootview.findViewById(R.id.image_callphone);
         button_choose=rootview.findViewById(R.id.button_choose);
-        text_money=rootview.findViewById(R.id.text_money);
+//        text_money=rootview.findViewById(R.id.text_money);
 
     }
     void setstar(float count) {
@@ -228,24 +227,24 @@ public class Fragment_shopdetail extends Fragment{
         }
 
     }
-    Timer timer;
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    text_money.setText(Staticdata.price);
-                    break;
-            }
-        }
-
-    };
+//    Timer timer;
+//    private Handler mhandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what) {
+//                case 0:
+//                    text_money.setText(Staticdata.price);
+//                    break;
+//            }
+//        }
+//
+//    };
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timer.cancel();
-        timer=null;
+//        timer.cancel();
+//        timer=null;
     }
 }

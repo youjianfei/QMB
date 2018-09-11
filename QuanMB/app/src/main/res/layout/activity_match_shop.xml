@@ -40,53 +40,56 @@
         android:overScrollMode="never"
         android:scrollbars="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
             android:fitsSystemWindows="true"
-            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_matchCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="已为你匹配到最合适的商家" />
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="bottom"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:paddingEnd="40dp"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp"
-                android:paddingStart="40dp" />
-
+                android:layout_margin="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="为你选择最合适的商家" />
             <LinearLayout
                 android:id="@+id/textview_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="换一组" />
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@mipmap/refresh"
-                    android:layout_marginLeft="5dp"
                     />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:text="换一组" />
+
 
             </LinearLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="bottom"
+                android:clipToPadding="false"
+                android:layout_below="@+id/text_matchCount"
+                android:overScrollMode="never"
+                android:paddingEnd="30dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingStart="30dp" />
+
+
 
 
             <RelativeLayout
@@ -94,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:layout_below="@+id/viewPager"
                 android:background="@color/white">
                 <TextView
                     android:id="@+id/texttitle"
@@ -298,7 +302,7 @@
             </RelativeLayout>
 
 
-        </LinearLayout>
+        </RelativeLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
 
 

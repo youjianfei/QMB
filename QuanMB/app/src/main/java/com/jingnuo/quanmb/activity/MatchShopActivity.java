@@ -120,14 +120,14 @@ public class MatchShopActivity extends AppCompatActivity  {
         map_price.put("user_token", Staticdata.static_userBean.getData().getUser_token());
         map_price.put("task_id", ID + "");
         map_price.put("business_no", list_matchbea.get(0).getBusiness_no());
-        timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mhandler.sendEmptyMessage(0);
-            }
-        };
-        timer.schedule(timerTask, 0, 3000);
+//        timer = new Timer();
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                mhandler.sendEmptyMessage(0);
+//            }
+//        };
+//        timer.schedule(timerTask, 0, 3000);
     }
 
     private void initview() {
@@ -173,18 +173,18 @@ public class MatchShopActivity extends AppCompatActivity  {
 
             @Override
             public void onPageSelected(int position) {
-                ProgressDlog.showProgress(mKProgressHUD);
-                map_price.put("business_no", list_matchbea.get(position).getBusiness_no());//确定请求哪一个商户的出价
-                timer.cancel();
-                timer=null;
-                timer = new Timer();
-                TimerTask timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        mhandler.sendEmptyMessage(0);
-                    }
-                };
-                timer.schedule(timerTask, 0, 3000);
+//                ProgressDlog.showProgress(mKProgressHUD);
+//                map_price.put("business_no", list_matchbea.get(position).getBusiness_no());//确定请求哪一个商户的出价
+//                timer.cancel();
+//                timer=null;
+//                timer = new Timer();
+//                TimerTask timerTask = new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        mhandler.sendEmptyMessage(0);
+//                    }
+//                };
+//                timer.schedule(timerTask, 0, 3000);
             }
 
             @Override
@@ -245,35 +245,35 @@ public class MatchShopActivity extends AppCompatActivity  {
                 +Staticdata.static_userBean.getData().getUser_token()+"&task_id="
                 +ID,MatchShopActivity.this,0);
     }
-    void getPrice(Map map){
-        LogUtils.LOG("ceshi","商户出价"+map,"商户出价map");
-        new  Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi","商户出价"+respose,"商户出价");
-                mKProgressHUD.dismiss();
-                int status = 0;
-                String msg = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//
-                    msg = (String) object.get("data");//
-                    Staticdata.price=msg;
-                    if(status==1){
-                        timer.cancel();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).postHttp(Urls.Baseurl_cui+Urls.issuetask_getprice,MatchShopActivity.this,1,map);
-    }
+//    void getPrice(Map map){
+//        LogUtils.LOG("ceshi","商户出价"+map,"商户出价map");
+//        new  Volley_Utils(new Interface_volley_respose() {
+//            @Override
+//            public void onSuccesses(String respose) {
+//                LogUtils.LOG("ceshi","商户出价"+respose,"商户出价");
+//                mKProgressHUD.dismiss();
+//                int status = 0;
+//                String msg = "";
+//                try {
+//                    JSONObject object = new JSONObject(respose);
+//                    status = (Integer) object.get("code");//
+//                    msg = (String) object.get("data");//
+//                    Staticdata.price=msg;
+//                    if(status==1){
+////                        timer.cancel();
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(int error) {
+//
+//            }
+//        }).postHttp(Urls.Baseurl_cui+Urls.issuetask_getprice,MatchShopActivity.this,1,map);
+//    }
 
     void setImage(String image) {
         if (image == null || image.equals("")) {
@@ -297,26 +297,26 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     }
 
-    Timer timer;
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    getPrice(map_price);//请求商户出价
-                    break;
-            }
-        }
-
-
-    };
+//    Timer timer;
+//    private Handler mhandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what) {
+//                case 0:
+//                    getPrice(map_price);//请求商户出价
+//                    break;
+//            }
+//        }
+//
+//
+//    };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
-        timer=null;
+//        timer.cancel();
+//        timer=null;
     }
     @Override
     public void onBackPressed() {
