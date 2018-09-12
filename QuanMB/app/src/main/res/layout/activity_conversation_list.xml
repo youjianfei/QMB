@@ -5,7 +5,284 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ConversationListActivity">
+    tools:context=".activity.ConversationListActivity"
+    android:background="@color/gray_background"
+    >
+    <RelativeLayout
+        android:id="@+id/re_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/back_black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="消息"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_white_10dp"
+        >
+        <RelativeLayout
+            android:id="@+id/relativelayout_systemnotice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:id="@+id/image_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/notice" />
+            <ImageView
+                android:id="@+id/image_reddot1"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:src="@mipmap/red_dot"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+
+                />
+            <TextView
+                android:id="@+id/text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/image_1"
+                android:text="系统消息"
+                android:textColor="@color/text_title2"
+                android:textSize="15dp" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/text_systemnotice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text_1"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toRightOf="@+id/image_1"-->
+                <!--android:text="暂时没有系统消息"-->
+                <!--android:lines="1"-->
+
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:textColor="@color/text_hide_tip"-->
+                <!--android:textSize="15dp"-->
+
+                <!--/>-->
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativelayout_Kanprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/image_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+
+                android:src="@mipmap/price" />
+            <ImageView
+                android:id="@+id/image_reddot2"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:src="@mipmap/red_dot"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+
+                />
+            <TextView
+                android:id="@+id/text_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/image_2"
+                android:text="还价消息"
+                android:textColor="@color/text_title2"
+                android:textSize="15dp" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/text_moneynotice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text_2"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toRightOf="@+id/image_2"-->
+                <!--android:text="暂时没有新消息"-->
+                <!--android:lines="1"-->
+                <!--android:textColor="@color/text_hide_tip"-->
+                <!--android:textSize="15dp"-->
+
+                <!--/>-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativelayout_Jiaoyinotice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/image_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/money" />
+            <ImageView
+                android:id="@+id/image_reddot3"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:src="@mipmap/red_dot"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+
+                />
+            <TextView
+                android:id="@+id/text_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:layout_below="@+id/image_3"
+                android:layout_centerHorizontal="true"
+                android:text="交易提醒"
+                android:textColor="@color/text_title2"
+                android:textSize="15dp" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/text_jiaoyitixing"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text_3"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toRightOf="@+id/image_3"-->
+                <!--android:lines="1"-->
+                <!--android:text="暂无交易"-->
+                <!--android:textColor="@color/text_hide_tip"-->
+                <!--android:textSize="15dp" />-->
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativelayout_tuijianrenwu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="visible"
+            >
+
+            <ImageView
+                android:id="@+id/image_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+
+                android:src="@mipmap/tuijianrenwu" />
+            <ImageView
+                android:id="@+id/image_reddot4"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:src="@mipmap/red_dot"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+
+                />
+            <TextView
+                android:id="@+id/text_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/image_4"
+                android:text="推荐任务"
+                android:textColor="@color/text_title2"
+                android:textSize="15dp" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/text_tujianrenwu"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text_4"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toRightOf="@+id/image_4"-->
+                <!--android:lines="1"-->
+                <!--android:text="暂无新的推荐任务"-->
+                <!--android:textColor="@color/text_hide_tip"-->
+                <!--android:textSize="15dp" />-->
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/image_line2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/gray_dbdbdb" />-->
+
+
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/image_line3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/gray_dbdbdb" />-->
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/image_line4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/gray_dbdbdb" />-->
+
     <fragment
         android:id="@+id/conversationlist"
         android:name="io.rong.imkit.fragment.ConversationListFragment"

@@ -394,9 +394,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 break;
             case R.id.iamge_message://消息界面
+//                if (isLogin) {
+//                    image_dot.setVisibility(View.INVISIBLE);
+//                    intent=new Intent(MainActivity.this,MessageActivity.class);
+//                    intent.putExtra("newmessageTYpe",Staticdata.newmessageTYpe);
+//                    startActivity(intent);
+//                    Staticdata.newmessageTYpe="notype";//跳转完之后归0
+//                } else {
+//                    intent = new Intent(this, LoginActivity.class);
+//                    startActivity(intent);
+//                }
                 if (isLogin) {
                     image_dot.setVisibility(View.INVISIBLE);
-                    intent=new Intent(MainActivity.this,MessageActivity.class);
+                    intent=new Intent(MainActivity.this,ConversationListActivity.class);
                     intent.putExtra("newmessageTYpe",Staticdata.newmessageTYpe);
                     startActivity(intent);
                     Staticdata.newmessageTYpe="notype";//跳转完之后归0
@@ -406,12 +416,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 break;
             case R.id.text_lovetask://爱心帮
-//                intent=new Intent(MainActivity.this, LoveTaskActivity.class);
-//                startActivity(intent);
+                intent=new Intent(MainActivity.this, LoveTaskActivity.class);
+                startActivity(intent);
 
 //                RongIM.getInstance().startPrivateChat(MainActivity.this, "456", "标题");
 //                RongIM.getInstance().startConversation(MainActivity.this,PRIVATE,"111","用户名");
-                RongIM.getInstance().startConversationList(MainActivity.this);
+//                RongIM.getInstance().startConversationList(MainActivity.this);
 
                 break;
 
