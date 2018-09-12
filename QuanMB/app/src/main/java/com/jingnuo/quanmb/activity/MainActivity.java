@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.App;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
@@ -44,10 +47,15 @@ import com.jingnuo.quanmb.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
+import static io.rong.imlib.model.Conversation.ConversationType.PRIVATE;
 
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
@@ -100,7 +108,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         initlinstenner();
         setview();
         setdata();
-
+        connect("f");
     }
 
     //声明AMapLocationClient类对象
@@ -362,8 +370,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 break;
             case R.id.text_lovetask://爱心帮
-                intent=new Intent(MainActivity.this, LoveTaskActivity.class);
-                startActivity(intent);
+//                intent=new Intent(MainActivity.this, LoveTaskActivity.class);
+//                startActivity(intent);
+
+//                RongIM.getInstance().startPrivateChat(MainActivity.this, "456", "标题");
+                RongIM.getInstance().startConversation(MainActivity.this,PRIVATE,"123","用户名");
                 break;
 
             case R.id.iamge_person://个人中心
@@ -428,6 +439,53 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if(!Staticdata.isLogin){
         }
     }
+
+
+    /**
+     * 融云登录
+     */
+    private void connect(String token) {
+
+//        if (getApplicationInfo().packageName.equals(get.getCurProcessName(getApplicationContext()))) {
+
+            RongIM.connect("8G4NX0OUyCpPWBwbDrRS5PlbA5OjohFiFt7EYhRlTXXzhUUOdIYJQIkM/jJi3jqbPs/3xWPo1rWcFpPsgUTUYQ==", new RongIMClient.ConnectCallback() {
+
+                /**
+                 * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
+                 *                  2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
+                 */
+                @Override
+                public void onTokenIncorrect() {
+
+                }
+
+                /**
+                 * 连接融云成功
+                 * @param userid 当前 token 对应的用户 id
+                 */
+                @Override
+                public void onSuccess(String userid) {
+                    Log.d("LoginActivity", "--onSuccess" + userid);
+                    LogUtils.LOG("rongyun","--onSuccess" + userid,"rongyun登录");
+//                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+//                    finish();
+                }
+
+                /**
+                 * 连接融云失败
+                 * @param errorCode 错误码，可到官网 查看错误码对应的注释
+                 */
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    LogUtils.LOG("rongyun","--ErrorCode" + errorCode,"rongyun登录");
+                }
+            });
+//        }
+    }
+
+
+
+
 }
 
 

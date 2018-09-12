@@ -2,15 +2,16 @@ package com.jingnuo.quanmb;
 
 import android.app.Application;
 import android.content.Intent;
-import android.os.StrictMode;
 
 import com.jingnuo.quanmb.activity.LaunchActivity;
+import com.jingnuo.quanmb.class_.MyReceiveMessageListener;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
 import cn.jpush.android.api.JPushInterface;
+import io.rong.imkit.RongIM;
 
 /**
  * Created by Administrator on 2018/4/9.
@@ -33,6 +34,10 @@ public class App extends Application {
         Staticdata.JpushID = jpushid;
         LogUtils.LOG("ceshi","JpushId"+Staticdata.JpushID,"APP");
 
+        /**
+         * 融云IM
+         */
+        RongIM.init(this);
 //        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 //                .detectAll()//监测所有内容
 //                .penaltyLog()//违规对log日志
@@ -44,13 +49,20 @@ public class App extends Application {
 //                .penaltyLog()//违规对log日志
 //                .penaltyDeath()//违规Crash
 //                .build());
-
+        RongIM.setOnReceiveMessageListener(new MyReceiveMessageListener());
 
         {
             PlatformConfig.setWeixin("wx1589c6a947d1f803", "aad4f32f43f69d06cdaf6df5e1237e8b");
             PlatformConfig.setSinaWeibo("3364493522", "90801d9b64840597f32ed0533e8a2834", "http://www.sina.com.cn/");
             PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
         }
+
+//        @Override
+//        protected void attachBaseContext(Context base) {
+//            super.attachBaseContext(base);
+//            MultiDex.install(this);
+//        }
+
 //        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
     }
 

@@ -53,7 +53,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
+        <!-- <provider -->
+        <!-- android:name="android.support.v4.content.FileProvider" -->
+        <!-- android:authorities="com.jingnuo.quanmb.FileProvider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/rc_file_path" /> -->
+        <!-- </provider> -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="5f44a6cf8d64182033741d5b546a4ef0" />
@@ -78,7 +86,16 @@
                 <category android:name="com.jingnuo.quanmb" />
             </intent-filter>
         </receiver>
-
+        <!--融云广播接受者-->
+        <receiver android:name=".broadcastrReceiver.SealNotificationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask" />
@@ -204,7 +221,23 @@
         <activity android:name=".activity.ZixunKefuWebActivity" />
         <activity android:name=".activity.LookShequ" />
         <activity android:name=".activity.GuanggaoWeb" />
-        <activity android:name=".activity.JubaoActivity"></activity>
+        <activity android:name=".activity.JubaoActivity" />
+        <activity android:name=".activity.ConversationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.jingnuo.quanmb"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+
+        </activity>
+
     </application>
 
 </manifest>
