@@ -118,7 +118,7 @@
             android:hint="请输入商铺名称"
             android:text=""
             android:textSize="15dp"
-            android:textColor="@color/text_hide_tip"
+            android:textColorHint="@color/text_hide_tip"
             android:layout_toRightOf="@+id/tt"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="30dp"

@@ -247,12 +247,13 @@ public class TaskDetailsActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (Staticdata.isLogin) {//是否登录
-                    if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")) {
+                    if (!Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")) {
                         ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
                         Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
                         startActivity(intent_renzheng);
                         return;
                     }
+
                     new Popwindow_Tip("是否帮助此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
                         @Override
                         public void onResult(boolean result) {
@@ -296,7 +297,7 @@ public class TaskDetailsActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 if (Staticdata.isLogin) {
-                    if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")) {
+                    if (!Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")) {
                         ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
                         Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
                         startActivity(intent_renzheng);

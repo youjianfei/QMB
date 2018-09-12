@@ -124,7 +124,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         break;
                     case 2://商户中心
                         LogUtils.LOG("ceshi", Urls.Baseurl + Urls.shopIn_state + Staticdata.static_userBean.getData().getUser_token(), "检测商户审核状态接口");
-                        if (Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {
+                        if (Staticdata.static_userBean.getData().getAppuser().getRole().contains("2")) {
                             LogUtils.LOG("ceshi", "检测商户审核状态dfgdfsgfd", "检测商户审核状态");
 
                             Intent intent_shopcenter = new Intent(getActivity(), ShopCenterActivity.class);

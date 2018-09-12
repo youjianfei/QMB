@@ -29,7 +29,7 @@ public class Chengweibangshou {
 
     public void  chengweibangshou(){
 
-        if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("1")){
+        if(Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")){
             new Volley_Utils(new Interface_volley_respose() {
                 @Override
                 public void onSuccesses(String respose) {
@@ -60,9 +60,10 @@ public class Chengweibangshou {
             }).Http(Urls.Baseurl_hu+Urls.helper_isHavehelper+Staticdata.static_userBean.getData().getUser_token()+"&client_no="+
                     Staticdata.static_userBean.getData().getAppuser().getClient_no(),activity,0);
 
-        }else if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {//即时帮手也是商户
-            ToastUtils.showToast(activity,"你已经是商户啦！");
         }
+//        else if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("2")) {//即时帮手也是商户
+//            ToastUtils.showToast(activity,"你已经是商户啦！");
+//        }
         else {//申请帮手界面
 //                    Intent intent_anthentication = new Intent(getActivity(), AuthenticationActivity.class);
 //                    getActivity().startActivity(intent_anthentication);

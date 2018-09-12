@@ -70,7 +70,7 @@ public class Popwindow_addPrice {
             public void onClick(View view) {
                 money=mEdit_money.getText()+"";
                 if(money.equals("")){
-                    ToastUtils.showToast(activity,"请输入增加金额");
+                    ToastUtils.showToast(activity,"请输入修改金额");
                 }else {
                     interence_bargin.onResult(money);
                     mPopupWindow.dismiss();

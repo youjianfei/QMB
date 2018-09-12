@@ -390,9 +390,17 @@ public class MytaskDetailActivity extends BaseActivityother {
                 popwindow_addPrice=new Popwindow_addPrice(MytaskDetailActivity.this, new Interence_bargin() {
                     @Override
                     public void onResult(String result) {
-                        addprice=result;
+                        if(Double.parseDouble(result)>taskDetailBean.getData().getCommission()){
+                            result=Double.parseDouble(result)-taskDetailBean.getData().getCommission()+"";
+                            result=String .format("%.2f",Double.parseDouble(result));
+                            addprice=result;
+                        }else {
+                            ToastUtils.showToast(MytaskDetailActivity.this,"不得低于原价格");
+                            return;
+                        }
+
                         Intent intentaddprice = new Intent(MytaskDetailActivity.this, PayActivity.class);
-                        intentaddprice.putExtra("title", "全民帮—任务加价");
+                        intentaddprice.putExtra("title", "全民帮—修改金额");
                         intentaddprice.putExtra("order_no", "000000");
                         intentaddprice.putExtra("amount", result + "");
                         intentaddprice.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
