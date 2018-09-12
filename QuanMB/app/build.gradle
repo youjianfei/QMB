@@ -112,4 +112,5 @@ dependencies {
     compile project(':IMKit')
     compile project(':IMLib')
     compile 'com.android.support:multidex:1.0.1'
+    compile files('libs/MiPush_SDK_Client_3_6_9.jar')
 }

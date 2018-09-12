@@ -153,6 +153,15 @@ public class UserBean {
             private String security_code;
             private String community_code="";
             private String community_name="";
+            private String rongCloud_token="";
+
+            public String getRongCloud_token() {
+                return rongCloud_token;
+            }
+
+            public void setRongCloud_token(String rongCloud_token) {
+                this.rongCloud_token = rongCloud_token;
+            }
 
             public String getCommunity_name() {
                 return community_name;

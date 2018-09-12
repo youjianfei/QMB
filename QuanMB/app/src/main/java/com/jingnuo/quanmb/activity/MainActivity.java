@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -53,6 +54,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.UserInfo;
+import io.rong.push.RongPushClient;
+import io.rong.push.common.RongException;
 
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 import static io.rong.imlib.model.Conversation.ConversationType.PRIVATE;
@@ -108,7 +112,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         initlinstenner();
         setview();
         setdata();
-        connect("f");
+
     }
 
     //声明AMapLocationClient类对象
@@ -297,7 +301,39 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
     };
+    //设置容云用户信息
+//    private void setRongUserInfo(final String targetid) {
+//        if (RongIM.getInstance()!=null){
+//            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+//                @Override
+//                public UserInfo getUserInfo(String s) {
+//                    if(targetid.equals(s)){
+//                        return new UserInfo(targetid,"郑州灯饰借", Uri.parse("http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/ba031a18-c3c0-4e7d-8a8f-2b94c12489391534840739188.png"));
+//                    }
+//                    return null;
+//                }
+//            },true);
+//        }
+//
+//
+//    }
     public void setdata() {
+//        RongIM.getInstance().getConversationList(new RongIMClient.ResultCallback<List<Conversation>>() {
+//            @Override
+//            public void onSuccess(List<Conversation> conversations) {
+//                for (int i = 0; i < conversations.size(); i++) {
+////                    getListUserInfo(ConversationListActivity.this,conversations.get(i).getTargetId());
+//                    setRongUserInfo(conversations.get(i).getTargetId());
+//                }
+//            }
+//
+//            @Override
+//            public void onError(RongIMClient.ErrorCode errorCode) {
+//
+//            }
+//        });
+
+
     if(isLogin){
         drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
     }else {
@@ -374,7 +410,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                startActivity(intent);
 
 //                RongIM.getInstance().startPrivateChat(MainActivity.this, "456", "标题");
-                RongIM.getInstance().startConversation(MainActivity.this,PRIVATE,"123","用户名");
+//                RongIM.getInstance().startConversation(MainActivity.this,PRIVATE,"111","用户名");
+                RongIM.getInstance().startConversationList(MainActivity.this);
+
                 break;
 
             case R.id.iamge_person://个人中心
@@ -439,51 +477,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if(!Staticdata.isLogin){
         }
     }
-
-
-    /**
-     * 融云登录
-     */
-    private void connect(String token) {
-
-//        if (getApplicationInfo().packageName.equals(get.getCurProcessName(getApplicationContext()))) {
-
-            RongIM.connect("8G4NX0OUyCpPWBwbDrRS5PlbA5OjohFiFt7EYhRlTXXzhUUOdIYJQIkM/jJi3jqbPs/3xWPo1rWcFpPsgUTUYQ==", new RongIMClient.ConnectCallback() {
-
-                /**
-                 * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
-                 *                  2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
-                 */
-                @Override
-                public void onTokenIncorrect() {
-
-                }
-
-                /**
-                 * 连接融云成功
-                 * @param userid 当前 token 对应的用户 id
-                 */
-                @Override
-                public void onSuccess(String userid) {
-                    Log.d("LoginActivity", "--onSuccess" + userid);
-                    LogUtils.LOG("rongyun","--onSuccess" + userid,"rongyun登录");
-//                    startActivity(new Intent(MainActivity.this, MainActivity.class));
-//                    finish();
-                }
-
-                /**
-                 * 连接融云失败
-                 * @param errorCode 错误码，可到官网 查看错误码对应的注释
-                 */
-                @Override
-                public void onError(RongIMClient.ErrorCode errorCode) {
-                    LogUtils.LOG("rongyun","--ErrorCode" + errorCode,"rongyun登录");
-                }
-            });
-//        }
-    }
-
-
 
 
 }

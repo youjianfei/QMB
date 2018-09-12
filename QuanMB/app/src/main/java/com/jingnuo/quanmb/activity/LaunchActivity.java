@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
 import org.json.JSONException;
@@ -142,6 +143,7 @@ public class LaunchActivity extends BaseActivityother {
                     Staticdata.static_userBean = userBean;
                     LogUtils.LOG("ceshi", userBean.getData().getUser_token(), "fragment_account");
                     isLogin = true;
+                    Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
                     Userphonenumber = userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
                     mTimer = new Timer();
                     TimerTask timerTask = new TimerTask() {

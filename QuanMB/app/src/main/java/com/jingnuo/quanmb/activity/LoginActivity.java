@@ -242,6 +242,7 @@ public class LoginActivity extends BaseActivityother {
                 if(status==1){
                     Staticdata. static_userBean=new Gson().fromJson(respose,UserBean.class);
                     isLogin = true;
+                    Utils.connect(Staticdata. static_userBean.getData().getAppuser().getRongCloud_token());
                     Staticdata.Userphonenumber=Staticdata.static_userBean.getData().getAppuser().getMobile_no();
                     Intent intent_login = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent_login);

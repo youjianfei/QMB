@@ -9,8 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/text1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="8dp"
-        android:background="@color/white">
+        android:background="@drawable/button_white_10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +33,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="17dp"
                 android:src="@mipmap/more" />
 
@@ -51,8 +53,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relative_2"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:background="@color/white">
+        android:background="@drawable/button_white_10dp">
         <ImageView
             android:id="@+id/image2"
             android:layout_width="15dp"
@@ -85,7 +89,7 @@
             android:layout_height="20dp"
             android:layout_alignBottom="@+id/edit_detailtask"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="15dp"
             android:src="@mipmap/chosepic" />
 
         <com.jingnuo.quanmb.customview.MyGridView
@@ -100,26 +104,24 @@
             android:numColumns="3"
             android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/image_line2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/GridView_PIC"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/gray_background" />
-
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_white_10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        >
         <TextView
             android:id="@+id/text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_line2"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
             android:text="预约时间："
             android:textColor="@color/text_title2"
             android:textSize="15dp" />
-
         <RelativeLayout
             android:id="@+id/relative_chosetime"
             android:layout_width="wrap_content"
@@ -142,11 +144,12 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="17dp"
                 android:src="@mipmap/more" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 
     <!--<LinearLayout-->
@@ -203,7 +206,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/button_morph_20dp"
+        android:background="@drawable/button_yellow_20dp"
         android:text="确  认"
         android:textColor="@color/white"
         android:textSize="15dp" />

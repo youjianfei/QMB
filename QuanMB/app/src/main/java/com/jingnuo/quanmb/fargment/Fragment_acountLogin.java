@@ -23,6 +23,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
 import org.json.JSONException;
@@ -142,6 +143,7 @@ public class Fragment_acountLogin extends Fragment {
                     Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
+                    Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
                     Intent intent_login = new Intent(getActivity(), MainActivity.class);
                     getActivity().startActivity(intent_login);
                     getActivity().finish();

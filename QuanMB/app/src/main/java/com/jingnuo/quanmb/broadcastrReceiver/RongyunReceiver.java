@@ -7,7 +7,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import io.rong.push.notification.PushMessageReceiver;
 import io.rong.push.notification.PushNotificationMessage;
 
-public class SealNotificationReceiver extends PushMessageReceiver {
+public class RongyunReceiver extends PushMessageReceiver {
     @Override
     public boolean onNotificationMessageArrived(Context context, PushNotificationMessage pushNotificationMessage) {
         LogUtils.LOG("rongyun",pushNotificationMessage.toString(),"融云广播接收器");

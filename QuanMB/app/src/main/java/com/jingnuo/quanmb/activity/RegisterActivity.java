@@ -24,6 +24,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.PasswordJiami;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
 import org.json.JSONException;
@@ -265,6 +266,7 @@ public class RegisterActivity extends BaseActivityother {
                     Staticdata. static_userBean=userBean;
                     LogUtils.LOG("ceshi", respose + "1111111111", "RegisterActivity");
                     isLogin = true;
+                    Utils.connect(Staticdata. static_userBean.getData().getAppuser().getRongCloud_token());
                     Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
                     Intent intent_login = new Intent(RegisterActivity.this, MainActivity.class);
                     RegisterActivity.this.startActivity(intent_login);

@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.util.Log;
 import android.view.WindowManager;
+
+import com.jingnuo.quanmb.data.Staticdata;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -15,11 +19,61 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
+
 /**
  * Created by Administrator on 2018/4/2.
  */
 
 public class Utils {
+    /**
+     * 融云登录
+     */
+    public static void connect(String token) {
+
+//        if (getApplicationInfo().packageName.equals(get.getCurProcessName(getApplicationContext()))) {
+
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+            /**
+             * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
+             *                  2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
+             */
+            @Override
+            public void onTokenIncorrect() {
+                LogUtils.LOG("rongyun","--Token 错误" ,"rongyun登录");
+
+            }
+
+            /**
+             * 连接融云成功
+             * @param userid 当前 token 对应的用户 id
+             */
+            @Override
+            public void onSuccess(String userid) {
+                Log.d("LoginActivity", "--onSuccess" + userid);
+                LogUtils.LOG("rongyun","--onSuccess" + userid,"rongyun登录");
+//                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+//                    finish();
+
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
+                        Staticdata.static_userBean.getData().getAppuser().getNick_name(),
+                        Uri.parse(Staticdata.static_userBean.getData().getImg_url())));
+            }
+
+            /**
+             * 连接融云失败
+             * @param errorCode 错误码，可到官网 查看错误码对应的注释
+             */
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                LogUtils.LOG("rongyun","--ErrorCode" + errorCode,"rongyun登录失败");
+            }
+        });
+//        }
+    }
 
     /**
      * 检测是否安装微信

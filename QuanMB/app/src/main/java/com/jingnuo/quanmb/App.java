@@ -12,12 +12,13 @@ import com.umeng.socialize.PlatformConfig;
 
 import cn.jpush.android.api.JPushInterface;
 import io.rong.imkit.RongIM;
+import io.rong.push.RongPushClient;
 
 /**
  * Created by Administrator on 2018/4/9.
  */
 
-public class App extends Application {
+public class App extends Application  {
 
     @Override
     public void onCreate() {
@@ -50,6 +51,7 @@ public class App extends Application {
 //                .penaltyDeath()//违规Crash
 //                .build());
         RongIM.setOnReceiveMessageListener(new MyReceiveMessageListener());
+        RongIM.getInstance().setMessageAttachedUserInfo(true);
 
         {
             PlatformConfig.setWeixin("wx1589c6a947d1f803", "aad4f32f43f69d06cdaf6df5e1237e8b");

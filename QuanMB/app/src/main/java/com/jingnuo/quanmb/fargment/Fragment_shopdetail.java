@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
+import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
 import com.jingnuo.quanmb.customview.SimpleRatingBar;
@@ -44,6 +45,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.rong.imkit.RongIM;
+
+import static io.rong.imlib.model.Conversation.ConversationType.PRIVATE;
 
 @SuppressLint("ValidFragment")
 public class Fragment_shopdetail extends Fragment{
@@ -57,6 +61,7 @@ public class Fragment_shopdetail extends Fragment{
     CircleImageView image_head;
     LinearLayout imageView_call;
     LinearLayout button_choose;
+    LinearLayout linearlayout_zixun;
 
     //对象
     PermissionHelper mPermission;//动态申请权限
@@ -171,6 +176,14 @@ public class Fragment_shopdetail extends Fragment{
 
             }
         });
+        linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getClient_no(),matchingBean.getBusiness_name());
+
+            }
+        });
     }
 
     private void setdata() {
@@ -206,6 +219,7 @@ public class Fragment_shopdetail extends Fragment{
         image_head=rootview.findViewById(R.id.image_head);
         imageView_call=rootview.findViewById(R.id.image_callphone);
         button_choose=rootview.findViewById(R.id.button_choose);
+        linearlayout_zixun=rootview.findViewById(R.id.linearlayout_zixun);
 //        text_money=rootview.findViewById(R.id.text_money);
 
     }
