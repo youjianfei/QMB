@@ -76,8 +76,10 @@ public class Urls {
     public static String helptask = "order/taskHelp";//确认帮助 ?id=
     public static String barginmonry = "bargain/taskBargain";//广场单还价
     public static String barginPiPei = "bargain/businessBid";//匹配单出价
-    public static String applycompletetask = "order/requestOk?user_token=";//申请任务完成
-    public static String completetask = "order/affirmOk?user_token=";//确认任务完成
+    public static String applycompletetask = "order/requestOk?user_token=";//广场申请任务完成
+    public static String applyPipeicompletetask = "order/matchingRequestOk?user_token=";//匹配单申请任务完成
+    public static String completetask = "order/affirmOk?user_token=";//广场确认任务完成
+    public static String completePipeitask = "order/matchingAffirmOk?user_token=";//匹配单确认任务完成
     public static String chooseBusiness = "order/chooseBusiness";//选择商户
     public static String checkissuetask = "task/querySpecialty/checkAnnouncementList";//检验任务内容是否有违规
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号

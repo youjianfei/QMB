@@ -16,7 +16,7 @@
             android:id="@+id/text_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请输入修改金额"
+            android:text="请输入金额"
             android:textSize="13dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"

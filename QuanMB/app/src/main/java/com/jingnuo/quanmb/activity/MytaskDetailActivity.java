@@ -334,47 +334,86 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
-                        "&task_id=" + taskDetailBean.getData().getTask_id(), "确认完成");
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi", respose, "确认完成");
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("message");//登录返回信息
+                if(taskDetailBean.getData().getApp_type().equals("1")){
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi", respose, "确认完成");
+                            int status = 0;
+                            String msg = "";
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//登录状态
+                                msg = (String) object.get("message");//登录返回信息
 
-                            if (status == 1) {
-                                ToastUtils.showToast(MytaskDetailActivity.this, msg);
-//                                request(map_taskdetail);
-                                Intent intend_think = new Intent(MytaskDetailActivity.this, OrderThinkActivity.class);
-                                intend_think.putExtra("task_id", taskDetailBean.getData().getTask_id() + "");
-                                if(taskDetailBean.getData().getBusiness_name().equals("")){
-                                    intend_think.putExtra("helpername", taskDetailBean.getData().getHelper_name() + "");
-                                }else {
-                                    intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
+                                if (status == 1) {
+                                    Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
+                                    intentpay.putExtra("title", "商户任务付款");
+                                    intentpay.putExtra("order_no", taskDetailBean.getData().getOrder_no());
+                                    intentpay.putExtra("amount",  taskDetailBean.getData().getCommission()+"");
+                                    intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id()+"");
+                                    startActivity(intentpay);
+
+                                } else {
+                                    ToastUtils.showToast(MytaskDetailActivity.this, msg);
                                 }
-
-                                intend_think.putExtra("orderno", taskDetailBean.getData().getSpecialty_name() + "");
-                                intend_think.putExtra("imageurl", taskDetailBean.getData().getB_h_url() + "");
-                                startActivity(intend_think);
-                            } else {
-                                ToastUtils.showToast(MytaskDetailActivity.this, msg);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onError(int error) {
+                        @Override
+                        public void onError(int error) {
 
-                    }
-                }).Http(Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
-                        "&task_id=" + taskDetailBean.getData().getTask_id(), MytaskDetailActivity.this, 0);
+                        }
+                    }).Http(Urls.Baseurl_cui + Urls.completePipeitask + Staticdata.static_userBean.getData().getUser_token() +
+                            "&task_id=" + taskDetailBean.getData().getTask_id(), MytaskDetailActivity.this, 0);
+
+
+                }else {
+                    LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
+                            "&task_id=" + taskDetailBean.getData().getTask_id(), "确认完成");
+                    new Volley_Utils(new Interface_volley_respose() {
+                        @Override
+                        public void onSuccesses(String respose) {
+                            LogUtils.LOG("ceshi", respose, "确认完成");
+                            int status = 0;
+                            String msg = "";
+                            try {
+                                JSONObject object = new JSONObject(respose);
+                                status = (Integer) object.get("code");//登录状态
+                                msg = (String) object.get("message");//登录返回信息
+
+                                if (status == 1) {
+                                    ToastUtils.showToast(MytaskDetailActivity.this, msg);
+//                                request(map_taskdetail);
+                                    Intent intend_think = new Intent(MytaskDetailActivity.this, OrderThinkActivity.class);
+                                    intend_think.putExtra("task_id", taskDetailBean.getData().getTask_id() + "");
+                                    if(taskDetailBean.getData().getBusiness_name().equals("")){
+                                        intend_think.putExtra("helpername", taskDetailBean.getData().getHelper_name() + "");
+                                    }else {
+                                        intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
+                                    }
+
+                                    intend_think.putExtra("orderno", taskDetailBean.getData().getSpecialty_name() + "");
+                                    intend_think.putExtra("imageurl", taskDetailBean.getData().getB_h_url() + "");
+                                    startActivity(intend_think);
+                                } else {
+                                    ToastUtils.showToast(MytaskDetailActivity.this, msg);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+                    }).Http(Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
+                            "&task_id=" + taskDetailBean.getData().getTask_id(), MytaskDetailActivity.this, 0);
+                }
+
             }
         });
         mButton_again.setOnClickListener(new View.OnClickListener() {

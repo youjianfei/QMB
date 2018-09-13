@@ -89,6 +89,15 @@ public class HelpOrderBean {
             private String task_Img_Url;
             private String houseNumber;
             private String task_time;
+            private String app_type;
+
+            public String getApp_type() {
+                return app_type;
+            }
+
+            public void setApp_type(String app_type) {
+                this.app_type = app_type;
+            }
 
             public String getTask_time() {
                 return task_time;

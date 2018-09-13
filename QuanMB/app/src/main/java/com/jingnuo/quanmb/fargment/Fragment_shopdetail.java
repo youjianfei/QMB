@@ -26,6 +26,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
+import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
 import com.jingnuo.quanmb.customview.SimpleRatingBar;
@@ -153,12 +154,13 @@ public class Fragment_shopdetail extends Fragment{
                                 data = (String) object.get("data");//
                                 if(status==1){
 //                                    timer.cancel();
-                                    Intent intentpay = new Intent(getActivity(), PayActivity.class);
-                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-//                                    intentpay.putExtra("amount", text_money.getText());
-                                    intentpay.putExtra("order_no", data);
-                                    intentpay.putExtra("taskid", task_id);
+                                    Intent intentpay = new Intent(getActivity(), MytaskDetailActivity.class);
+//                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
+                                    intentpay.putExtra("id", task_id);
+//                                    intentpay.putExtra("order_no", data);
+//                                    intentpay.putExtra("taskid", task_id);
                                     startActivity(intentpay);
+                                    getActivity().finish();
 
                                 }
                             } catch (JSONException e) {

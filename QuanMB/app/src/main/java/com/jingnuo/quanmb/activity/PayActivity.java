@@ -236,6 +236,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                         map_pay.put("isBargainPay","Y");
                     }
+                    if(title_pay.equals("商户任务付款")){
+                        map_pay.put("isMatchPay","Y");
+                    }
                     LogUtils.LOG("ceshi",map_pay.toString(),"充值");
                     new WechatPay(PayActivity.this,api,map_pay).wepay();
                     return;
@@ -252,6 +255,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_zpay.put("order_no",order_no);
                     if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                         map_zpay.put("isBargainPay","Y");
+                    }
+                    if(title_pay.equals("商户任务付款")){
+                        map_zpay.put("isMatchPay","Y");
                     }
                     LogUtils.LOG("ceshi",map_zpay.toString(),"支付宝qingqiu接口");
                     LogUtils.LOG("ceshi", Urls.Baseurl_hu+Urls.zhifubaoPay,"支付宝qingqiu接口");
@@ -320,6 +326,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                 map_yue.put("isBargainPay","Y");
                 LogUtils.LOG("ceshi",map_yue.toString(),"余额付款");
+            }
+            if(title_pay.equals("商户任务付款")){
+                map_yue.put("isMatchPay","Y");
             }
             balancePay(map_yue);
         }else {

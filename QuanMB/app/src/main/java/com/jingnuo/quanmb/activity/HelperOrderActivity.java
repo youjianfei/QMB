@@ -18,11 +18,13 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_skillsdetails;
+import com.jingnuo.quanmb.Interface.Interence_bargin;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
+import com.jingnuo.quanmb.popwinow.Popwindow_addPrice;
 import com.jingnuo.quanmb.popwinow.Popwindow_complatetask;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -49,6 +51,7 @@ public class HelperOrderActivity extends BaseActivityother {
 
     CircleImageView mImageview_head;
     ImageView iv_back;
+    TextView text_title;//标题
     TextView mTextview_state;//状态
     TextView mTextview_money;//佣金
     TextView mTextview_time;//发布时间
@@ -70,7 +73,7 @@ public class HelperOrderActivity extends BaseActivityother {
 
 
     //对象
-    Popwindow_complatetask popwindow_complatetask;
+//    Popwindow_complatetask popwindow_complatetask;
     HelpOrderBean helpOrderBean;
     //数据
     String order_no = "";
@@ -93,46 +96,6 @@ public class HelperOrderActivity extends BaseActivityother {
         adapter_gridviewpic = new Adapter_Gridviewpic_skillsdetails(imageview_urllist, this);
         imageGridview.setAdapter(adapter_gridviewpic);
 
-        popwindow_complatetask = new Popwindow_complatetask(this, new Interence_complteTask() {
-            @Override
-            public void onResult(boolean result) {
-                if (result) {
-                    LogUtils.LOG("ceshi", "申请完成任务接口+" + Urls.Baseurl_cui + Urls.applycompletetask + Staticdata.static_userBean.getData().getUser_token() +
-                            "&order_no=" + helpOrderBean.getData().getDetail().getOrder_no() +
-                            "&task_id=" + helpOrderBean.getData().getDetail().getTask_id(), "申请完成任务");
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
-                            LogUtils.LOG("ceshi", respose, "申请完成");
-                            int status = 0;
-                            String msg = "";
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//登录状态
-                                msg = (String) object.get("message");//登录返回信息
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (status == 1) {
-                                ToastUtils.showToast(HelperOrderActivity.this, msg);
-                                request();
-                            } else {
-                                request();
-                                ToastUtils.showToast(HelperOrderActivity.this, msg);
-                            }
-                        }
-
-                        @Override
-                        public void onError(int error) {
-                            request();
-                        }
-                    }).Http(Urls.Baseurl_cui + Urls.applycompletetask + Staticdata.static_userBean.getData().getUser_token() +
-                            "&order_no=" + helpOrderBean.getData().getDetail().getOrder_no() +
-                            "&task_id=" + helpOrderBean.getData().getDetail().getTask_id(), HelperOrderActivity.this, 0);
-                }
-
-            }
-        });
     }
 
     @Override
@@ -140,6 +103,7 @@ public class HelperOrderActivity extends BaseActivityother {
         mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         order_no = getIntent().getStringExtra("order_no");
         type = getIntent().getIntExtra("type", 0);
+        text_title.setText(type==1?"帮手订单":"商户订单");
         whichactivity = getIntent().getIntExtra("whichactivity", 0);
         request();
 
@@ -222,10 +186,97 @@ public class HelperOrderActivity extends BaseActivityother {
     @Override
     protected void initListener() {
         iv_back.setOnClickListener(this);
-        mButton_queren.setOnClickListener(new View.OnClickListener() {
+        mButton_queren.setOnClickListener(new View.OnClickListener() {//申请完成任务
             @Override
             public void onClick(View view) {
-                popwindow_complatetask.showPopwindow();
+                if(helpOrderBean.getData().getDetail().getApp_type().equals("1")){//匹配订单申请完成
+                    new Popwindow_addPrice(HelperOrderActivity.this, new Interence_bargin() {
+                        @Override
+                        public void onResult(String result) {
+                            if(Double.parseDouble(result)<5){
+                                ToastUtils.showToast(HelperOrderActivity.this,"金额不得低于5元");
+                                return;
+                            }
+                            LogUtils.LOG("ceshi",result,"dsfsdafsaf");
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    LogUtils.LOG("ceshi", respose, "申请完成");
+                                    int status = 0;
+                                    String msg = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//登录状态
+                                        msg = (String) object.get("message");//登录返回信息
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (status == 1) {
+                                        ToastUtils.showToast(HelperOrderActivity.this, msg);
+                                        request();
+                                    } else {
+                                        request();
+                                        ToastUtils.showToast(HelperOrderActivity.this, msg);
+                                    }
+                                }
+
+                                @Override
+                                public void onError(int error) {
+                                    request();
+                                }
+                            }).Http(Urls.Baseurl_cui + Urls.applyPipeicompletetask + Staticdata.static_userBean.getData().getUser_token() +
+                                    "&order_no=" + helpOrderBean.getData().getDetail().getOrder_no() +
+                                    "&order_amount=" + result, HelperOrderActivity.this, 0);
+
+
+
+
+                        }
+                    }).showpop();
+
+                }else {//广场申请完成
+                    new Popwindow_complatetask(HelperOrderActivity.this, new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if (result) {
+                                LogUtils.LOG("ceshi", "申请完成任务接口+" + Urls.Baseurl_cui + Urls.applycompletetask + Staticdata.static_userBean.getData().getUser_token() +
+                                        "&order_no=" + helpOrderBean.getData().getDetail().getOrder_no() +
+                                        "&task_id=" + helpOrderBean.getData().getDetail().getTask_id(), "申请完成任务");
+                                new Volley_Utils(new Interface_volley_respose() {
+                                    @Override
+                                    public void onSuccesses(String respose) {
+                                        LogUtils.LOG("ceshi", respose, "申请完成");
+                                        int status = 0;
+                                        String msg = "";
+                                        try {
+                                            JSONObject object = new JSONObject(respose);
+                                            status = (Integer) object.get("code");//登录状态
+                                            msg = (String) object.get("message");//登录返回信息
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (status == 1) {
+                                            ToastUtils.showToast(HelperOrderActivity.this, msg);
+                                            request();
+                                        } else {
+                                            request();
+                                            ToastUtils.showToast(HelperOrderActivity.this, msg);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(int error) {
+                                        request();
+                                    }
+                                }).Http(Urls.Baseurl_cui + Urls.applycompletetask + Staticdata.static_userBean.getData().getUser_token() +
+                                        "&order_no=" + helpOrderBean.getData().getDetail().getOrder_no() +
+                                        "&task_id=" + helpOrderBean.getData().getDetail().getTask_id(), HelperOrderActivity.this, 0);
+                            }
+
+                        }
+                    }).showPopwindow();
+                }
+
             }
         });
         mLinearlayout_tel.setOnClickListener(new View.OnClickListener() {
@@ -299,6 +350,7 @@ public class HelperOrderActivity extends BaseActivityother {
     protected void initView() {
         mImageview_head = findViewById(R.id.image_task);
         iv_back = findViewById(R.id.iv_back);
+        text_title = findViewById(R.id.text_title);
         mTextview_state = findViewById(R.id.text_taskstate);
         mTextview_money = findViewById(R.id.text_taskmoney_);
         mTextview_time = findViewById(R.id.text_tasktime);
