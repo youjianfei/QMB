@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.rong.imkit.RongIM;
 
 public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_state;
@@ -64,6 +65,7 @@ public class TaskDetailsActivity extends BaseActivityother {
     Button mButton_help;
     Button mButton_counteroffer;
     LinearLayout linearlayout_tel;
+    LinearLayout linearlayout_zixun;
     ImageView iv_3dian;
     //数据
     String ID = "";//任务id;
@@ -218,6 +220,13 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void initListener() {
+        linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().startPrivateChat(TaskDetailsActivity.this,mTaskData.getData().getClient_no(),mTaskData.getData().getNick_name());
+            }
+        });
         iv_3dian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,6 +376,7 @@ public class TaskDetailsActivity extends BaseActivityother {
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
         linearlayout_tel = findViewById(R.id.linearlayout_tel);
+        linearlayout_zixun = findViewById(R.id.linearlayout_zixun);
         imageView_head = findViewById(R.id.image_task);
         re3 = findViewById(R.id.re3);
     }
@@ -417,14 +427,12 @@ public class TaskDetailsActivity extends BaseActivityother {
                     mTextview_taskmoney.setText("帮手出价" );
                     commison=5;
                 }
-                if(app_type.equals("1")&&mTaskData.getData().getCounteroffer_amount()!=0){
-                    mButton_counteroffer.setText("已报价");
-                    mButton_counteroffer.setEnabled(false);
-                }
                 if(app_type.equals("1")){
-                    linearlayout_tel.setVisibility(View.VISIBLE);
+                    linearlayout_tel.setVisibility(View.GONE);
                     mButton_help.setVisibility(View.GONE);
                     re3.setVisibility(View.INVISIBLE);
+                    linearlayout_zixun.setVisibility(View.VISIBLE);
+                    mButton_counteroffer.setVisibility(View.GONE);
                 }
             }
 

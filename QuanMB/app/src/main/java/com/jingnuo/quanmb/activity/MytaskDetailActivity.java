@@ -95,6 +95,7 @@ public class MytaskDetailActivity extends BaseActivityother {
     String newID = "";
     boolean isIssueAgain = false;
 
+
     String image_url = "";
     List<String> imageview_urllist;
     //对象
@@ -117,6 +118,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        Staticdata. ispipei=false;
         imageview_urllist = new ArrayList<>();
         adapter_gridviewpic = new Adapter_Gridviewpic_skillsdetails(imageview_urllist, this);
         imageGridview.setAdapter(adapter_gridviewpic);
@@ -127,6 +129,9 @@ public class MytaskDetailActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
+                if(respose.equals("success")&&Staticdata.ispipei){
+                return;
+                }
                 if (respose.equals("success")&&isIssueAgain) {//重新发布任务支付成功
                     request(map_taskdetail);
                 }else {//增加价格支付成功
@@ -335,6 +340,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 if(taskDetailBean.getData().getApp_type().equals("1")){
+                   Staticdata. ispipei=true;
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -541,6 +547,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails, "MytaskDetailActivity");
                 LogUtils.LOG("ceshi", respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
+               Staticdata. taskDetailBeanStatic=taskDetailBean;
                 app_type=taskDetailBean.getData().getApp_type();
                 if (taskDetailBean.getData().getTask_Status_code().equals("01") ||
                         taskDetailBean.getData().getTask_Status_code().equals("08") ||

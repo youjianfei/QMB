@@ -30,6 +30,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
     ImageView mImageview_lv;
     ImageView mImageview_vip;
+    TextView text_guize;//规则
     TextView mTextview_tt;
     TextView mTextview_name;  //名字
 //
@@ -74,6 +75,7 @@ public class ShopCenterActivity extends BaseActivityother {
         type = intent.getIntExtra("type", 0);
         mTextview_tt.setText(type == 1 ? "帮手中心" : "商户中心");
         if (type==1){
+            text_guize.setText("帮手细则");
             isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "bangshou");
             if(isfirst){
                 Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
@@ -82,6 +84,7 @@ public class ShopCenterActivity extends BaseActivityother {
             }
 
         }else {
+            text_guize.setText("接单规则");
             isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "shanghu");
             if (isfirst){
                 Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
@@ -91,9 +94,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
         }
         request();
-
     }
-
     @Override
     protected void initListener() {
         mRealtivelayout_issue.setOnClickListener(this);
@@ -104,7 +105,7 @@ public class ShopCenterActivity extends BaseActivityother {
         mRealtivelayout_huiyuan.setOnClickListener(this);
         mButtonCash.setOnClickListener(this);
         imageview_head.setOnClickListener(this);
-
+        text_guize.setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +115,7 @@ public class ShopCenterActivity extends BaseActivityother {
         mImageview_lv=findViewById(R.id.image_lv);
         mImageview_vip=findViewById(R.id.image_vip);
         mTextview_tt = findViewById(R.id.textview_tt);
+        text_guize = findViewById(R.id.text_guize);
         mTextview_name = findViewById(R.id.text_shopname);
         mTextview_text_tui_count = findViewById(R.id.text_tui_count);
         mTextview_money = findViewById(R.id.textview_money);
@@ -142,6 +144,18 @@ public class ShopCenterActivity extends BaseActivityother {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.text_guize://接单规则界面
+                if (type==1){
+                        Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
+                        intent_shopcenter.putExtra("title","帮手细则");
+                        startActivity(intent_shopcenter);
+
+                }else {
+                        Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
+                        intent_shopcenter.putExtra("title","接单规则");
+                        startActivity(intent_shopcenter);
+                }
+                break;
             case R.id.huiyuan://会员充值
                 Intent intent_huiyuan = new Intent(ShopCenterActivity.this, HuiyuanRechargeActivity.class);
                 startActivity(intent_huiyuan);

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.jingnuo.quanmb.entityclass.PopwindowGridBean;
 import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
+import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.entityclass.UserBean;
 
 import java.util.ArrayList;
@@ -63,5 +64,10 @@ public class Staticdata {
 
     //判断新消息的类型
     public  static  String  newmessageTYpe="notype";
+
+    //是否是匹配单确认完成
+    public  static boolean ispipei = false;
+
+    public  static TaskDetailBean taskDetailBeanStatic=new TaskDetailBean();
 
 }

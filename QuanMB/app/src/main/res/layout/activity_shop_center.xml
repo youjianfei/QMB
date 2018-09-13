@@ -31,15 +31,42 @@
             android:textColor="@color/white"
             android:visibility="invisible"
             android:textSize="18sp" />
-        <ImageView
-            android:id="@+id/image_vip"
-            android:layout_width="45dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/vip1"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:orientation="horizontal"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            />
+            >
+            <TextView
+                android:id="@+id/text_guize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="接单规则"
+                android:textSize="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/text_wehite_miaobian_20"
+                />
+            <ImageView
+                android:id="@+id/image_vip"
+                android:layout_width="45dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/vip1"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <com.jingnuo.quanmb.customview.CustomerScrollView

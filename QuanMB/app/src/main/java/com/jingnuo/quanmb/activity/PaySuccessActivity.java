@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.utils.LogUtils;
+
 public class PaySuccessActivity extends BaseActivityother {
 
     TextView textview_title;
@@ -44,12 +46,28 @@ public class PaySuccessActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
             finish();
+            if(Staticdata.PayissuetaskSuccess&&Staticdata.ispipei){
+                Intent intend_think = new Intent(PaySuccessActivity.this, OrderThinkActivity.class);
+                intend_think.putExtra("task_id", Staticdata. taskDetailBeanStatic.getData().getTask_id() + "");
+                if(Staticdata. taskDetailBeanStatic.getData().getBusiness_name().equals("")){
+                    intend_think.putExtra("helpername", Staticdata. taskDetailBeanStatic.getData().getHelper_name() + "");
+                }else {
+                    intend_think.putExtra("helpername", Staticdata. taskDetailBeanStatic.getData().getBusiness_name() + "");
+                }
+
+                intend_think.putExtra("orderno", Staticdata. taskDetailBeanStatic.getData().getSpecialty_name() + "");
+                intend_think.putExtra("imageurl", Staticdata. taskDetailBeanStatic.getData().getB_h_url() + "");
+                startActivity(intend_think);
+                return;
+            }
             if(Staticdata.PayissuetaskSuccess){
                 Intent mainIntent = new Intent(PaySuccessActivity.this, MainActivity.class);
                 Intent intent_bargain=new Intent(PaySuccessActivity.this, MyOrderActivity.class);
                 Intent[] intents = {mainIntent, intent_bargain};
                 Staticdata.PayissuetaskSuccess=false;
                 startActivities(intents);
+                LogUtils.LOG("pay","222222","PaySuccessActivity");
+                return;
             }
             }
         });

@@ -304,7 +304,38 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:background="@color/white"
         >
+        <LinearLayout
+            android:id="@+id/linearlayout_zixun"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/text_yellow2"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/zixun2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="咨询"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/linearlayout_tel"
             android:layout_width="0dp"
