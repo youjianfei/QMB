@@ -18,6 +18,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.HelpterInfoBean;
 import com.jingnuo.quanmb.entityclass.ShopcenterBean;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,6 +54,9 @@ public class ShopCenterActivity extends BaseActivityother {
     //数据
     int type = 0;  //1 帮手  2  商户
 
+
+    boolean isfirst=true;
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_shop_center;
@@ -69,6 +73,23 @@ public class ShopCenterActivity extends BaseActivityother {
         Intent intent = getIntent();
         type = intent.getIntExtra("type", 0);
         mTextview_tt.setText(type == 1 ? "帮手中心" : "商户中心");
+        if (type==1){
+            isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "bangshou");
+            if(isfirst){
+                Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
+                intent_shopcenter.putExtra("title","帮手细则");
+                startActivity(intent_shopcenter);
+            }
+
+        }else {
+            isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "shanghu");
+            if (isfirst){
+                Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
+                intent_shopcenter.putExtra("title","接单规则");
+                startActivity(intent_shopcenter);
+            }
+
+        }
         request();
 
     }

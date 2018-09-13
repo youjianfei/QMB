@@ -38,6 +38,7 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShouyeRadios;
+import com.jingnuo.quanmb.popwinow.Popwindow_helperfirst;
 import com.jingnuo.quanmb.popwinow.Popwindow_shenfenzhengTip;
 import com.jingnuo.quanmb.utils.AutoUpdate;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -422,6 +423,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                RongIM.getInstance().startPrivateChat(MainActivity.this, "456", "标题");
 //                RongIM.getInstance().startConversation(MainActivity.this,PRIVATE,"111","用户名");
 //                RongIM.getInstance().startConversationList(MainActivity.this);
+
+//                new Popwindow_helperfirst(MainActivity.this,1,5.16).showpop();
+
 
                 break;
 
