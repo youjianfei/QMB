@@ -34,7 +34,7 @@ public class Utils {
     public static void connect(String token) {
 
 //        if (getApplicationInfo().packageName.equals(get.getCurProcessName(getApplicationContext()))) {
-
+        LogUtils.LOG("rongyun","-rongyun准备登录" ,"rongyun登录");
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
 
             /**
@@ -43,8 +43,7 @@ public class Utils {
              */
             @Override
             public void onTokenIncorrect() {
-                LogUtils.LOG("rongyun","--Token 错误" ,"rongyun登录");
-
+                
             }
 
             /**
