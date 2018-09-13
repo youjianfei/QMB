@@ -171,22 +171,22 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="30dp"
-                    android:background="@drawable/button_bluemiao_20dp"
+                    android:background="@drawable/button_blue_20dp"
                     android:text="提现"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/white"
                     android:textSize="12dp" />
 
-                <!--<Button-->
-                    <!--android:id="@+id/button_recharge"-->
-                    <!--android:layout_width="55dp"-->
-                    <!--android:layout_height="25dp"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:layout_toLeftOf="@+id/button_cash"-->
-                    <!--android:background="@drawable/button_blue_20dp"-->
-                    <!--android:text="充值"-->
-                    <!--android:textColor="@color/white"-->
-                    <!--android:textSize="12dp" />-->
+                <Button
+                    android:id="@+id/button_tuiyajin"
+                    android:layout_width="55dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/button_cash"
+                    android:background="@drawable/button_bluemiao_20dp"
+                    android:text="退押金"
+                    android:textColor="@color/blue"
+                    android:textSize="12dp" />
 
             </RelativeLayout>
 
@@ -331,7 +331,6 @@
                     android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-
                     >
 
                     <ImageView
@@ -393,7 +392,30 @@
                         android:layout_marginRight="20dp"
                         android:src="@mipmap/more" />
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relative_istujianrenwu"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:visibility="invisible"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:text="推荐任务"
+                        android:layout_centerVertical="true"
+                        android:textSize="15dp" />
 
+                    <ImageView
+                        android:id="@+id/image_tujianrenwukaiguan"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/selsect_tuijianrenwu" />
+                </RelativeLayout>
             </LinearLayout>
 
 

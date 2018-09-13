@@ -35,11 +35,13 @@
     <com.jingnuo.quanmb.customview.CustomerScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/relative"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-        </RelativeLayout>
+        </LinearLayout>
     </com.jingnuo.quanmb.customview.CustomerScrollView>
 </LinearLayout>

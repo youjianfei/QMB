@@ -254,7 +254,8 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HelperguizeActivity"></activity>
+        <activity android:name=".activity.HelperguizeActivity" />
+        <activity android:name=".activity.TuiyajinActivity"></activity>
     </application>
 
 </manifest>

@@ -104,9 +104,18 @@ public class ShopcenterBean {
             private String  commission;
             private String  member_enddate;
             private String  business_img;//(id,id,id)
+            private String  push_on_off;//
             private int  business_level;
             private int  spread_b;
             private double  evaluation_star;
+
+            public String getPush_on_off() {
+                return push_on_off;
+            }
+
+            public void setPush_on_off(String push_on_off) {
+                this.push_on_off = push_on_off;
+            }
 
             public double getEvaluation_star() {
                 return evaluation_star;

@@ -19,8 +19,13 @@ import com.jingnuo.quanmb.entityclass.HelpterInfoBean;
 import com.jingnuo.quanmb.entityclass.ShopcenterBean;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ShopCenterActivity extends BaseActivityother {
@@ -30,6 +35,7 @@ public class ShopCenterActivity extends BaseActivityother {
 
     ImageView mImageview_lv;
     ImageView mImageview_vip;
+    ImageView image_tujianrenwukaiguan;//是否开启推荐任务
     TextView text_guize;//规则
     TextView mTextview_tt;
     TextView mTextview_name;  //名字
@@ -45,7 +51,9 @@ public class ShopCenterActivity extends BaseActivityother {
     RelativeLayout mRealtivelayout_mytuiguangbi;
     RelativeLayout mRealtivelayout_myauthentication;
     RelativeLayout mRealtivelayout_huiyuan;
+    RelativeLayout relative_istujianrenwu;
     Button mButtonCash;
+    Button button_tuiyajin;
 
     //对象
     ShopcenterBean shopcenterBean;//商户
@@ -76,6 +84,8 @@ public class ShopCenterActivity extends BaseActivityother {
         mTextview_tt.setText(type == 1 ? "帮手中心" : "商户中心");
         if (type==1){
             text_guize.setText("帮手细则");
+            button_tuiyajin.setVisibility(View.VISIBLE);
+            relative_istujianrenwu.setVisibility(View.INVISIBLE);
             isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "bangshou");
             if(isfirst){
                 Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
@@ -85,6 +95,8 @@ public class ShopCenterActivity extends BaseActivityother {
 
         }else {
             text_guize.setText("接单规则");
+            button_tuiyajin.setVisibility(View.INVISIBLE);
+            relative_istujianrenwu.setVisibility(View.VISIBLE);
             isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "shanghu");
             if (isfirst){
                 Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
@@ -106,6 +118,8 @@ public class ShopCenterActivity extends BaseActivityother {
         mButtonCash.setOnClickListener(this);
         imageview_head.setOnClickListener(this);
         text_guize.setOnClickListener(this);
+        image_tujianrenwukaiguan.setOnClickListener(this);
+        button_tuiyajin.setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +128,7 @@ public class ShopCenterActivity extends BaseActivityother {
         simpleRatingBar = findViewById(R.id.SimpleRatingBar);
         mImageview_lv=findViewById(R.id.image_lv);
         mImageview_vip=findViewById(R.id.image_vip);
+        image_tujianrenwukaiguan=findViewById(R.id.image_tujianrenwukaiguan);
         mTextview_tt = findViewById(R.id.textview_tt);
         text_guize = findViewById(R.id.text_guize);
         mTextview_name = findViewById(R.id.text_shopname);
@@ -126,7 +141,9 @@ public class ShopCenterActivity extends BaseActivityother {
         mTextview_text_huiyuan = findViewById(R.id.text_huiyuan);
         mRealtivelayout_myauthentication = findViewById(R.id.myauthentication);
         mRealtivelayout_huiyuan = findViewById(R.id.huiyuan);
+        relative_istujianrenwu = findViewById(R.id.relative_istujianrenwu);
         mButtonCash = findViewById(R.id.button_cash);
+        button_tuiyajin = findViewById(R.id.button_tuiyajin);
 
     }
     void setstar(float stars){
@@ -144,6 +161,10 @@ public class ShopCenterActivity extends BaseActivityother {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case  R.id.button_tuiyajin://退押金
+                Intent intent_tuiyajin=new Intent(this,TuiyajinActivity.class);
+                startActivity(intent_tuiyajin);
+                break;
             case R.id.text_guize://接单规则界面
                 if (type==1){
                         Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
@@ -154,6 +175,16 @@ public class ShopCenterActivity extends BaseActivityother {
                         Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
                         intent_shopcenter.putExtra("title","接单规则");
                         startActivity(intent_shopcenter);
+                }
+                break;
+            case  R.id.image_tujianrenwukaiguan://推荐任务推送的开关
+                if(image_tujianrenwukaiguan.isSelected()){
+                    image_tujianrenwukaiguan.setSelected(false);
+                    requestTuisongstate("N");
+
+                }else {
+                    image_tujianrenwukaiguan.setSelected(true);
+                    requestTuisongstate("Y");
                 }
                 break;
             case R.id.huiyuan://会员充值
@@ -212,6 +243,39 @@ public class ShopCenterActivity extends BaseActivityother {
 
 
     }
+    void  requestTuisongstate(String state){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                int status = 0;
+                String msg = "";
+                LogUtils.LOG("ceshi", respose, "推送开关");
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    ToastUtils.showToast(ShopCenterActivity.this, msg);
+                    request();
+                } else {
+                    ToastUtils.showToast(ShopCenterActivity.this, msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.push_on_off+Staticdata.static_userBean.getData().getUser_token()+"&push_on_off="+state,this,0);
+
+
+
+
+    }
 
     void request() {
         String url_info = type == 1 ? Urls.Baseurl + Urls.helperInfo + Staticdata.static_userBean.getData()
@@ -248,6 +312,11 @@ public class ShopCenterActivity extends BaseActivityother {
 
                 } else {
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
+                    if(shopcenterBean.getData().getList().getPush_on_off().equals("Y")){//推送开关状态
+                        image_tujianrenwukaiguan.setSelected(true);
+                    }else {
+                        image_tujianrenwukaiguan.setSelected(false);
+                    }
                     if(shopcenterBean.getData().getList().getMemberImgUrl()==null||shopcenterBean.getData().getList().getMemberImgUrl().equals("")){
                         mImageview_vip.setVisibility(View.GONE);
                     }else {

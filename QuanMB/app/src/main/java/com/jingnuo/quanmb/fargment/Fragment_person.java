@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.rong.imkit.RongIM;
 
 /**
  * Created by Administrator on 2018/3/20.
@@ -328,6 +329,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                 SharedPreferencesUtils.putString(getActivity(), "QMB", "password", "");
                 Staticdata.isLogin = false;
                 Staticdata.static_userBean.setData(null);//用户信息清空
+                RongIM.getInstance().disconnect();
                 Intent intent_logout = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent_logout);
                 getActivity().finish();
