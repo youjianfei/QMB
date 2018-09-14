@@ -85,11 +85,11 @@ public class IssueTaskActivity extends BaseActivityother {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
                     //可在其中解析amapLocation获取相应内容。
-                    LogUtils.LOG("ceshi", "定位成功" + aMapLocation.getPoiName(), "发布任务");
                     xValue = aMapLocation.getLatitude() + "";//获取纬度
                     yValue = aMapLocation.getLongitude() + "";//获取经度
                     citycode = aMapLocation.getCity();//城市信息
                      Aoi = aMapLocation.getAoiName() + "";
+                    LogUtils.LOG("ceshi", "定位成功" + aMapLocation.getPoiName()+"11"+Aoi, "发布任务");
 
                     if (Aoi.equals("")) {
                         Staticdata.aoi=aMapLocation.getPoiName();
@@ -103,6 +103,10 @@ public class IssueTaskActivity extends BaseActivityother {
 //                        if(fragmentTaskZhaoShangHu!=null){
 //                            fragmentTaskZhaoShangHu.setAddress(Aoi);
 //                        }
+                    }
+                    if(aMapLocation.getPoiName().equals("")&&Aoi.equals("")){
+                        Staticdata.aoi="选择地址" ;
+                        text_chooceaddress.setText(Staticdata.aoi);
                     }
 
                 } else {
