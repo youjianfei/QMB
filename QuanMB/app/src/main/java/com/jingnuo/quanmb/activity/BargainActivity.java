@@ -159,16 +159,17 @@ public class BargainActivity extends BaseActivityother {
                 }
                 if (status == 1) {
                     final double amount_need=amount-money;
+                  final String price=  String .format("%.2f",Double.parseDouble(amount_need+""));
                     if(amount_need>0){
 
                         final String finalData = data;
-                        popwindow_tip=new Popwindow_Tip("需要补差价"+amount_need+"元", BargainActivity.this, new Interence_complteTask() {
+                        popwindow_tip=new Popwindow_Tip("需要补差价"+price+"元", BargainActivity.this, new Interence_complteTask() {
                             @Override
                             public void onResult(boolean result) {
                                 if(result){
                                     Intent intentpay = new Intent(BargainActivity.this, PayActivity.class);
                                     intentpay.putExtra("title", "任务补差价");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-                                    intentpay.putExtra("amount", amount_need + "");
+                                    intentpay.putExtra("amount", price + "");
                                     intentpay.putExtra("order_no", finalData + "");
                                     intentpay.putExtra("taskid", bargainMessagedetailsBean.getData().getTask_id() + "");
                                     startActivity(intentpay);

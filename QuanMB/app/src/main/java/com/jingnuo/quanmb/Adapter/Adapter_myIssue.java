@@ -68,6 +68,7 @@ public class Adapter_myIssue extends BaseAdapter {
         }else{
             viewHolder.resttime.setVisibility(View.VISIBLE);
         }
+
         if(mData.get(position).getStatus_name().equals("待帮助")){
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_green2);
             if(mData.get(position).getIs_helper_bid().equals("Y")){//待帮助状态下  判断是否由帮手出价
@@ -92,7 +93,9 @@ public class Adapter_myIssue extends BaseAdapter {
                 viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCounteroffer_Amount() + "元");
             }
         }
-
+        if(mData.get(position).getApp_type().equals("1")&&mData.get(position).getCommission()==0){
+            viewHolder.mTextview_money.setText("佣金：等待报价");
+        }
         if(mData.get(position).getTask_Status_code().equals("01")){
             viewHolder.mTextview_resttime.setVisibility(View.VISIBLE);
             viewHolder.mImage_resttime.setVisibility(View.VISIBLE);

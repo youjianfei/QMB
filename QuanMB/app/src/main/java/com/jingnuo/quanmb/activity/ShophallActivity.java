@@ -151,7 +151,7 @@ public class ShophallActivity extends BaseActivityother {
     }
 
     void request( final int page) {
-        LogUtils.LOG("ceshi","接口："+NO,"找专业列表");
+        LogUtils.LOG("sousuo","接口："+NO,"找专业列表");
         String URL="";
         if(NO!=null&&NO.startsWith("H")){//查看某个帮手的所有服务
             URL=Urls.Baseurl+Urls.BHSkissAll+"?helper_no="+NO.substring(1)+"&type="+1+"&curPageNo="+page;
@@ -164,12 +164,12 @@ public class ShophallActivity extends BaseActivityother {
             URL=Urls.Baseurl+Urls.Skillmenulist+"?specialty_id="+specialty_id+"&title="+search2+"&curPageNo="+page;
         }
         if(FromShequ!=null&&!FromShequ.equals("")){//社区跳转来的
-            URL=Urls.Baseurl+Urls.FromShequSkiss+"?specialty_id="+FromShequ+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
+            URL=Urls.Baseurl+Urls.FromShequSkiss+"?specialty_id="+FromShequ+"&title="+search2+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
         }
         if(FromShequZuhe!=null&&!FromShequZuhe.equals("")){//社区跳转来的
-            URL=Urls.Baseurl+Urls.zhidiengShequSkiss+"?specialtyidlist="+FromShequZuhe+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
+            URL=Urls.Baseurl+Urls.zhidiengShequSkiss+"?specialtyidlist="+FromShequZuhe+"&title="+search2+"&curPageNo="+page+"&user_token="+ Staticdata.static_userBean.getData().getUser_token();
         }
-        LogUtils.LOG("ceshi","接口："+URL,"找专业列表");
+        LogUtils.LOG("sousuo","接口："+URL,"找专业列表");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {

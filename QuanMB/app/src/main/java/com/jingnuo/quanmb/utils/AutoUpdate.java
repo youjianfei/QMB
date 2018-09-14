@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -86,7 +87,7 @@ public class AutoUpdate {
      */
     String newdownurl = "";//下载apk网址
     public  void requestVersionData() {
-        LogUtils.LOG("ceshi","联网查询的版本号请求","updataapp");
+        LogUtils.LOG("anzhuang","联网查询的版本号请求","updataapp");
 
         new Volley_Utils(new Interface_volley_respose() {
             @Override
@@ -232,6 +233,7 @@ public class AutoUpdate {
                     } while (!cancelUpdate);
                     fos.close();
                     is.close();
+                    LogUtils.LOG("anzhuang","下载apk","autoupdate");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -245,21 +247,28 @@ public class AutoUpdate {
      * 安装APK
      */
     private void installApk() {
-
+        LogUtils.LOG("anzhuang","安装apk","autoupdate");
         File newFile = new File(mSavePath, "version.apk");
 
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LogUtils.LOG("anzhuang","安装apk1","autoupdate");
+
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Uri contentUri = FileProvider.getUriForFile(activity, "com.jingnuo.quanmb.FileProvider", newFile);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
 
+//            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//            StrictMode.setVmPolicy(builder.build());
+//            LogUtils.LOG("anzhuang","安装apk3","autoupdate");
+//            intent.setDataAndType(Uri.fromFile(newFile), "application/vnd.android.package-archive");
         } else {
+            LogUtils.LOG("anzhuang","安装apk2","autoupdate");
             intent.setDataAndType(Uri.fromFile(newFile), "application/vnd.android.package-archive");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         }
         activity.startActivity(intent);
         android.os.Process.killProcess(android.os.Process.myPid());

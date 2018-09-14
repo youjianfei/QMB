@@ -45,7 +45,6 @@ public class PaySuccessActivity extends BaseActivityother {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            finish();
             if(Staticdata.PayissuetaskSuccess&&Staticdata.ispipei){
                 Intent intend_think = new Intent(PaySuccessActivity.this, OrderThinkActivity.class);
                 intend_think.putExtra("task_id", Staticdata. taskDetailBeanStatic.getData().getTask_id() + "");
@@ -58,6 +57,8 @@ public class PaySuccessActivity extends BaseActivityother {
                 intend_think.putExtra("orderno", Staticdata. taskDetailBeanStatic.getData().getSpecialty_name() + "");
                 intend_think.putExtra("imageurl", Staticdata. taskDetailBeanStatic.getData().getB_h_url() + "");
                 startActivity(intend_think);
+                Staticdata. ispipei=false;
+                finish();
                 return;
             }
             if(Staticdata.PayissuetaskSuccess){
@@ -67,6 +68,7 @@ public class PaySuccessActivity extends BaseActivityother {
                 Staticdata.PayissuetaskSuccess=false;
                 startActivities(intents);
                 LogUtils.LOG("pay","222222","PaySuccessActivity");
+                finish();
                 return;
             }
             }

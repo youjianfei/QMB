@@ -61,7 +61,12 @@ public class Adapter_mytodo extends  BaseAdapter {
         holder.mTextview_issuename.setText(mdata.get(position).getCreateDate());
 
         holder.mTextview_content.setText("预约时间："+mdata.get(position).getTask_time());
-        holder.mTextview_money.setText("佣金："+mdata.get(position).getOrder_amount()+"元");
+        if(mdata.get(position).getOrder_amount()==0&&mdata.get(position).getApp_type().equals("1")){
+            holder.mTextview_money.setText("佣金：未报价");
+        }else {
+            holder.mTextview_money.setText("佣金："+mdata.get(position).getOrder_amount()+"元");
+        }
+
         holder.mTextview_state.setText(mdata.get(position).getOrder_status());
         if(mdata.get(position).getOrder_status().equals("已完成")){
             holder.mTextview_complete.setText("任务完成");
@@ -73,7 +78,7 @@ public class Adapter_mytodo extends  BaseAdapter {
         holder.mTextview_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true){
+                if(mdata.get(position).getApp_type().equals("1")){
                     new Popwindow_addPrice((Activity) mContext, new Interence_bargin() {
                         @Override
                         public void onResult(String result) {
@@ -81,7 +86,7 @@ public class Adapter_mytodo extends  BaseAdapter {
                                 ToastUtils.showToast(mContext,"金额不得低于5元");
                                 return;
                             }
-                            LogUtils.LOG("ceshi",result,"dsfsdafsaf");
+                            LogUtils.LOG("ceshi",result,"我的订单适配器");
                             new Volley_Utils(new Interface_volley_respose() {
                                 @Override
                                 public void onSuccesses(String respose) {

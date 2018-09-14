@@ -46,15 +46,19 @@ public class HelperguizeActivity extends BaseActivityother {
             SharedPreferencesUtils.putBoolean(this, "QMB", "shanghu", false);
             ImageView image = new ImageView(HelperguizeActivity.this);
             ImageView image2 = new ImageView(HelperguizeActivity.this);
-            image.setBackgroundResource(R.mipmap.helperguize);
-            image2.setBackgroundResource(R.mipmap.helperguize);
+            ImageView image3 = new ImageView(HelperguizeActivity.this);
+            image.setBackgroundResource(R.mipmap.shangjiaguize1);
+            image2.setBackgroundResource(R.mipmap.shangjiaguize2);
+            image3.setBackgroundResource(R.mipmap.shangjiaguize3);
             hight=(int) (Staticdata.ScreenWidth * 5.16);
             LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
             image.setLayoutParams(mLayoutparams);
             image2.setLayoutParams(mLayoutparams);
+            image3.setLayoutParams(mLayoutparams);
             relative.addView(image);
             relative.addView(image2);
-            image.setOnClickListener(new View.OnClickListener() {
+            relative.addView(image3);
+            image3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();

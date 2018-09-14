@@ -38,8 +38,6 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShouyeRadios;
-import com.jingnuo.quanmb.popwinow.Popwindow_helperfirst;
-import com.jingnuo.quanmb.popwinow.Popwindow_shenfenzhengTip;
 import com.jingnuo.quanmb.utils.AutoUpdate;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;

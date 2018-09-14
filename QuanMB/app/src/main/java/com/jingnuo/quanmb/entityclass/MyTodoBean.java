@@ -71,6 +71,15 @@ public class MyTodoBean {
             private String createDate;
             private String order_enddate;
             private String specialty_name;
+            private String app_type;
+
+            public String getApp_type() {
+                return app_type;
+            }
+
+            public void setApp_type(String app_type) {
+                this.app_type = app_type;
+            }
 
             public String getTask_time() {
                 return task_time;

@@ -27,7 +27,7 @@ public class Adapter_Gridviewpic_UPLoad extends BaseAdapter{
         this.inflater = LayoutInflater.from(context);
         //           /*  获得 屏幕宽  高 的  方法1*/
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        weight = (wm.getDefaultDisplay().getWidth() - SizeUtils.dip2px(mContext,80)) / 3;
+        weight = (wm.getDefaultDisplay().getWidth() - SizeUtils.dip2px(mContext,110)) / 3;
     }
 
     @Override

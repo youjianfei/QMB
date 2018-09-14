@@ -288,7 +288,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
                     Staticdata.imagePathlist.clear();
                     Staticdata.map_task.clear();
-                    Staticdata.PayissuetaskSuccess=true;
+
                 } else {
                     ToastUtils.showToast(getActivity(),"附近没有此类型商户");
                     count = 0;

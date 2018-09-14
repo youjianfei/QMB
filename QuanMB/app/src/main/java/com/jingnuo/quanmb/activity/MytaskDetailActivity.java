@@ -130,6 +130,9 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if(respose.equals("success")&&Staticdata.ispipei){
+
+
+
                 return;
                 }
                 if (respose.equals("success")&&isIssueAgain) {//重新发布任务支付成功

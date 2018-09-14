@@ -59,7 +59,7 @@ public class Popwindow_helperfirst {
         if(type==1){
             image.setBackgroundResource(R.mipmap.helperguize);
         }else {
-            image.setBackgroundResource(R.mipmap.shangjiaguize);
+//            image.setBackgroundResource(R.mipmap.shangjiaguize);
         }
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * hight));
         image.setLayoutParams(mLayoutparams);

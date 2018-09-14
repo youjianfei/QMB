@@ -88,6 +88,15 @@ public class MyorderBean {
         private String img_url="";
         private String specialty_name="";
         private String is_helper_bid="";
+        private String app_type="";
+
+        public String getApp_type() {
+            return app_type;
+        }
+
+        public void setApp_type(String app_type) {
+            this.app_type = app_type;
+        }
 
         public String getIs_helper_bid() {
             return is_helper_bid;

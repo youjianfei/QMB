@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
@@ -33,6 +34,7 @@ import com.jingnuo.quanmb.customview.SimpleRatingBar;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -134,48 +136,52 @@ public class Fragment_shopdetail extends Fragment{
         button_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 {
-                    map_choosebissness=new HashMap();
-                    map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                    map_choosebissness.put("task_id", task_id);
-                    map_choosebissness.put("business_no", matchingBean.getBusiness_no());
+                new Popwindow_Tip("是否选择此商家下单?", getActivity(), new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if(result) {
+                            map_choosebissness=new HashMap();
+                            map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                            map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_choosebissness.put("task_id", task_id);
+                            map_choosebissness.put("business_no", matchingBean.getBusiness_no());
 //                    map_choosebissness.put("counteroffer_amount", text_money.getText());
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
-                            int status = 0;
-                            String msg = "";
-                            String data = "";
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//
-                                msg = (String) object.get("message");//
-                                data = (String) object.get("data");//
-                                if(status==1){
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    String data = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//
+                                        msg = (String) object.get("message");//
+                                        data = (String) object.get("data");//
+                                        if(status==1){
 //                                    timer.cancel();
-                                    Intent intentpay = new Intent(getActivity(), MytaskDetailActivity.class);
+                                            Intent intentpay = new Intent(getActivity(), MytaskDetailActivity.class);
 //                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-                                    intentpay.putExtra("id", task_id);
+                                            intentpay.putExtra("id", task_id);
 //                                    intentpay.putExtra("order_no", data);
 //                                    intentpay.putExtra("taskid", task_id);
-                                    startActivity(intentpay);
-                                    getActivity().finish();
+                                            startActivity(intentpay);
+                                            getActivity().finish();
+
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
 
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
 
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,getContext(),1,map_choosebissness);
                         }
-
-                        @Override
-                        public void onError(int error) {
-
-                        }
-                    }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,getContext(),1,map_choosebissness);
-                }
-
+                    }
+                }).showPopwindow();
             }
         });
         linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
