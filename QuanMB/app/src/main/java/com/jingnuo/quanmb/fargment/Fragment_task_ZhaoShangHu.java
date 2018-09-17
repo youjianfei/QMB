@@ -499,13 +499,15 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
 
         release_address = address_left + "";
+
         if (release_address.equals("")) {
             release_address=Staticdata.aoi;
         }
-        if (release_address.equals("")) {
-            ToastUtils.showToast(getActivity(), "请选择任务地点");
+        if (release_address.equals("选择地址")) {
+            ToastUtils.showToast(getActivity(), "请选择任务地址");
             return false;
         }
+
 //        detailed_address = mEditview_addressDetail.getText() + "";
 //        if (detailed_address.equals("")) {
 //            ToastUtils.showToast(getActivity(), "请填写详细地址");

@@ -50,8 +50,8 @@ public class SetNicknameActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 nickname=mEdit_nickname.getText()+"";
-                if(nickname.equals("")){
-                    ToastUtils.showToast(SetNicknameActivity.this,"请输入用户名");
+                if(nickname.equals("")||nickname.length()<2||nickname.length()>8){
+                    ToastUtils.showToast(SetNicknameActivity.this,"用户名限2~8个字符");
                 }else {
                         map_nickname.put("NickName",nickname);
                         map_nickname.put("user_token", Staticdata.static_userBean.getData().getUser_token());

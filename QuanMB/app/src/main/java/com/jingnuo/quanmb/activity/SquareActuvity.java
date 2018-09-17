@@ -187,10 +187,12 @@ public class SquareActuvity extends BaseActivityother {
                     if (page == 1  && mSquare_default_DataBean.getList().size() != 0) {
                         mListDate_square.clear();
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
+                        imageView_image_empty.setVisibility(mListDate_square.size() == 0?View.VISIBLE:View.GONE);
                         mAdapter_SquareList.notifyDataSetChanged();
                     } else if (page != 1 ) {
                         mListDate_square.addAll(mSquare_default_DataBean.getList());
                         mAdapter_SquareList.notifyDataSetChanged();
+                        imageView_image_empty.setVisibility(mListDate_square.size() == 0?View.VISIBLE:View.GONE);
                     }else {
                         mListDate_square.clear();
                         mAdapter_SquareList.notifyDataSetChanged();
@@ -340,27 +342,33 @@ public class SquareActuvity extends BaseActivityother {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem > 1) {
-                    relative_sort.setVisibility(View.VISIBLE);
-                } else {
-                    relative_sort.setVisibility(View.INVISIBLE);
-                }
-//                if(isScroll())
-//                {
-//                    float scrollY = getScrollY();
-//                    if(scrollY <= 1)
-//                    {
+
+                if(isScroll()) {
+                    float scrollY = getScrollY();
+                    LogUtils.LOG("ceshi","scrollY"+scrollY,"透明度");
+
+                    if(scrollY >0.68)
+                    {
 //                        int alpha = (int) (255 * scrollY);
-//
-//                        LogUtils.LOG("ceshi",alpha+"alpha"+firstVisibleItem,"透明度");
-////                        mRelativelayout_sort.setAlpha(alpha);
-////                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+                    relative_sort.setVisibility(View.VISIBLE);
+
+//                        LogUtils.LOG("ceshi",alpha+"scrollY"+scrollY,"透明度");
+//                        mRelativelayout_sort.setAlpha(alpha);
+//                        mRelativelayout_sort.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
 //                        relative_shaixuan.setVisibility(View.INVISIBLE);
-//                    }else {
+                    }else {
 //                        relative_shaixuan.setVisibility(View.VISIBLE);
-////                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
-//                    }
-//                }
+                        relative_sort.setVisibility(View.INVISIBLE);
+
+//                        mRelativelayout_sort.setBackgroundColor(Color.argb(255, 255, 255, 255));
+                    }
+                }else {
+                    if (firstVisibleItem > 1) {
+                        relative_sort.setVisibility(View.VISIBLE);
+                    } else {
+                        relative_sort.setVisibility(View.INVISIBLE);
+                    }
+                }
 
             }
         });
@@ -400,15 +408,17 @@ public class SquareActuvity extends BaseActivityother {
             @Override
             public void onClick(View v) {
 //                mListview_square.getRefreshableView().setSelectionFromTop(2, SizeUtils.dip2px(SquareActuvity.this, 80));
-                mListview_square.getRefreshableView().setSelection(2);
+//                mListview_square.getRefreshableView().setSelection(2);
+                mListview_square.getRefreshableView().setSelectionFromTop(2,SizeUtils.dip2px(SquareActuvity.this,85));
+
                 showPopwindow(0);
             }
         });
         paixu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mListview_square.getRefreshableView().setSelectionFromTop(2, SizeUtils.dip2px(SquareActuvity.this, 80));
-                mListview_square.getRefreshableView().setSelection(2);
+                mListview_square.getRefreshableView().setSelectionFromTop(2, SizeUtils.dip2px(SquareActuvity.this, 85));
+//                mListview_square.getRefreshableView().setSelection(2);
                 showPopwindow(1);
             }
         });

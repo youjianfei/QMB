@@ -218,8 +218,12 @@ public class MessageWallEditActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请输入留言内容");
             return false;
         }
+        if(message.length()<5){
+            ToastUtils.showToast(this,"不得少于5个字符");
+            return false;
+        }
         if(message.length()>300){
-            ToastUtils.showToast(this,"最多支持300个字");
+            ToastUtils.showToast(this,"最多支持300个字符");
             return false;
         }
 

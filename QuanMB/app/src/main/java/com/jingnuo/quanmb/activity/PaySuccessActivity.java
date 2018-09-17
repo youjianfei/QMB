@@ -71,6 +71,13 @@ public class PaySuccessActivity extends BaseActivityother {
                 finish();
                 return;
             }
+//                if(Staticdata.PayissuetaskSuccess){
+                    Intent mainIntent = new Intent(PaySuccessActivity.this, MainActivity.class);
+                    startActivity(mainIntent);
+                    LogUtils.LOG("pay","退款成功","PaySuccessActivity");
+                    finish();
+                    return;
+//                }
             }
         });
 

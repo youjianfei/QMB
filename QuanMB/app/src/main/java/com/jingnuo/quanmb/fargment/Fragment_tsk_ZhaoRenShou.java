@@ -709,11 +709,12 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             return false;
         }
         release_address = address_left + "";
+
         if (release_address.equals("")) {
             release_address=Staticdata.aoi;
         }
-        if (release_address.equals("")) {
-            ToastUtils.showToast(getActivity(), "请选择任务地点");
+        if (release_address.equals("选择地址")) {
+            ToastUtils.showToast(getActivity(), "请选择任务地址");
             return false;
         }
 

@@ -165,8 +165,14 @@ public class FindPasswordActivity extends BaseActivityother {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                ToastUtils.showToast(FindPasswordActivity.this, msg);
-                finish();
+                if(status==1){
+                    ToastUtils.showToast(FindPasswordActivity.this, msg);
+                    finish();
+
+                }else {
+                    ToastUtils.showToast(FindPasswordActivity.this, msg);
+
+                }
             }
 
             @Override

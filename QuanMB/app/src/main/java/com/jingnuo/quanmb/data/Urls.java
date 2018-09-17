@@ -22,8 +22,8 @@ public class Urls {
 
     //  本地
 //    public static String Baseurl = "http://192.168.0.186:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.0.103:8080/QuanMinBang/v1.0/";
-//    public  static  String Baseurl_hu="http://192.168.0.147:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://192.168.0.186:8080/QuanMinBang/v1.0/";
+//    public  static  String Baseurl_hu="http://192.168.0.186:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post

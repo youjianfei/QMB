@@ -124,9 +124,10 @@ public class RegisterActivity extends BaseActivityother {
                     return;
                 }
                 if (! RegularYanzheng.ispassword(password)||password.length()<6||password.length()>18){
-                    ToastUtils.showToast(this, "密码必须为6~18位且包含字母");
+                    ToastUtils.showToast(this, "密码必须为6~18位字母数字组合");
                     return;
                 }
+
                 if (phonenumber.equals("") || yanzhengma.equals("") || password.equals("") || passwordagain.equals("")) {
                     ToastUtils.showToast(this, "信息填写不完整");
                     return;

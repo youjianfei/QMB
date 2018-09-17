@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class RegularYanzheng {
     public static boolean ispassword(String mobiles) {
         Pattern p = Pattern
-                .compile("^(?![0-9]*$)[a-zA-Z0-9]{6,18}$");
+                .compile(".*[a-zA-Z].*[0-9]|.*[0-9].*[a-zA-Z]");
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }
