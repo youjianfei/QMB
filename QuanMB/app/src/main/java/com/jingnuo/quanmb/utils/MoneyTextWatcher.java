@@ -1,7 +1,9 @@
 package com.jingnuo.quanmb.utils;
 
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.widget.EditText;
 
 
@@ -37,12 +39,15 @@ public class MoneyTextWatcher implements TextWatcher {
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         //删除“.”后面超过2位后的数据
         if (s.toString().contains(".")) {
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
             if (s.length() - 1 - s.toString().indexOf(".") > digits) {
                 s = s.toString().subSequence(0,
                         s.toString().indexOf(".") + digits+1);
                 editText.setText(s);
                 editText.setSelection(s.length()); //光标移到最后
             }
+        }else {
+            editText.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
         }
         //如果"."在起始位置,则起始位置自动补0
         if (s.toString().trim().substring(0).equals(".")) {

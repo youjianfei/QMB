@@ -47,6 +47,7 @@ import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -437,7 +438,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         mImage_choosehelper.setOnClickListener(this);
         mtextview_choseme.setOnClickListener(this);
         mtextview_chosehelper.setOnClickListener(this);
-
+        mEditview_taskmoney.addTextChangedListener(new MoneyTextWatcher(mEditview_taskmoney).setDigits(2));
 //        mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

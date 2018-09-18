@@ -26,17 +26,20 @@ public class Popwindow_bargin {
     ImageView mImageview_close;
     EditText mEdit_money;
     TextView mtextview_queren;
+    TextView mtextview_tip;
 
     //数据
     String money="";
+    String  title="";
 
     //对象
     Interence_bargin  interence_bargin;
 
 
-    public Popwindow_bargin(Activity activity,Interence_bargin interence_bargin) {
+    public Popwindow_bargin(Activity activity,Interence_bargin interence_bargin,String title) {
         this.activity = activity;
         this.interence_bargin=interence_bargin;
+        this.title=title;
     }
     public  void  showpop(){
         view  = LayoutInflater.from(activity).inflate(R.layout.popwindow_bargin,null,false);
@@ -70,7 +73,7 @@ public class Popwindow_bargin {
             public void onClick(View view) {
                 money=mEdit_money.getText()+"";
                 if(money.equals("")){
-                    ToastUtils.showToast(activity,"请输入还价金额");
+                    ToastUtils.showToast(activity,"请输入金额");
                 }else {
                     interence_bargin.onResult(money);
                     mPopupWindow.dismiss();
@@ -84,6 +87,8 @@ public class Popwindow_bargin {
         mImageview_close=view.findViewById(R.id.iamge_close);
         mEdit_money=view.findViewById(R.id.edit_bargin);
         mtextview_queren=view.findViewById(R.id.text_queren);
+        mtextview_tip=view.findViewById(R.id.text_text);
+        mtextview_tip.setText(title);
     }
 
 

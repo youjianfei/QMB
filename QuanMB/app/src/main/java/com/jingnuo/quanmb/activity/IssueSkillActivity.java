@@ -200,6 +200,20 @@ public class IssueSkillActivity extends BaseActivityother {
         mButton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(checknull()){
+                    new Popwindow_Tip("需缴纳10个推广币", IssueSkillActivity.this, new Interence_complteTask() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if (result) {
+//                    progressDlog.showPD("正在发布，请稍等");
+                                    mKProgressHUD.show();
+                                    uploadimg();//上传图片
+                            }
+
+                        }
+                    }).showPopwindow();
+                }
+
                 new Popwindow_Tip("需缴纳10个推广币", IssueSkillActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
@@ -267,6 +281,10 @@ public class IssueSkillActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请填写标题");
             return false;
         }
+        if(tittle.length()>16){
+            ToastUtils.showToast(this,"标题最多15个字");
+            return false;
+        }
         description=mEditview_skilldetail.getText()+"";
         if(description.equals("")){
             ToastUtils.showToast(this,"请填写详细描述");
@@ -287,9 +305,17 @@ public class IssueSkillActivity extends BaseActivityother {
             ToastUtils.showToast(this,"请填写联系人");
             return false;
         }
+        if(detail_address.length()>5){
+            ToastUtils.showToast(this,"联系人名字过长");
+            return false;
+        }
         mobile_no=mEditview_phonenumber.getText()+"";
         if (mobile_no.equals("")){
             ToastUtils.showToast(this,"请填写手机号码");
+            return false;
+        }
+        if (mobile_no.length()!=11){
+            ToastUtils.showToast(this,"手机号码格式不正确");
             return false;
         }
 

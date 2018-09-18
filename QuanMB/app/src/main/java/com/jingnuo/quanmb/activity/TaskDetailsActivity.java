@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.entityclass.QueRenHelp_Bean;
 import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -75,6 +76,8 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     String app_type="";//判断广场单和匹配单
 
+    String popTitle="还价金额";// 报价金额   还价金额
+
 
     String image_url="";
     List<String> imageview_urllist;
@@ -82,7 +85,6 @@ public class TaskDetailsActivity extends BaseActivityother {
     //对象
     TaskDetailBean mTaskData;
     Popwindow_lookpic popwindow_lookpic;
-    Popwindow_bargin popwindow_bargin;
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;
     PermissionHelper mPermission;//动态申请权限
     RequestManager glide;
@@ -95,6 +97,8 @@ public class TaskDetailsActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
+        Staticdata.ScreenWidth =SizeUtils.getScreenWidthPx(this);
         imageview_urllist=new ArrayList<>();
         adapter_gridviewpic=new Adapter_Gridviewpic_skillsdetails(imageview_urllist,this);
         imageGridview.setAdapter(adapter_gridviewpic);
@@ -170,51 +174,7 @@ public class TaskDetailsActivity extends BaseActivityother {
         glide=Glide.with(TaskDetailsActivity.this);
         Intent intend_id = getIntent();
         ID = intend_id.getStringExtra("id");
-        popwindow_bargin = new Popwindow_bargin(this, new Interence_bargin() {
-            @Override
-            public void onResult(String result) {//还价网络请求
-                String URL="";
-                if(app_type.equals("1")){//1   匹配单
-                    URL=Urls.Baseurl_cui + Urls.barginPiPei;
-                }else {//广场单
-                    URL=Urls.Baseurl_cui + Urls.barginmonry;
-                    if(commison>Double.parseDouble(result)){
-                        ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
-                        return;
-                    }
-                }
 
-                Map map_bargin = new HashMap();
-                map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                map_bargin.put("task_id", "" + ID);
-                map_bargin.put("counteroffer_Amount", result);
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        LogUtils.LOG("ceshi", "任务还价+" + respose, "TaskDetailsActivity");
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("message");//登录返回信息
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (status == 1) {
-                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
-                            requestTaseDetail();
-                        } else {
-                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
-                        }
-                    }
-                    @Override
-                    public void onError(int error) {
-
-                    }
-                }).postHttp(URL, TaskDetailsActivity.this, 1, map_bargin);
-            }
-        });
 
     }
 
@@ -311,7 +271,51 @@ public class TaskDetailsActivity extends BaseActivityother {
                         Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
                         startActivity(intent_renzheng);
                     } else {
-                        popwindow_bargin.showpop();
+                        new Popwindow_bargin(TaskDetailsActivity.this, new Interence_bargin() {
+                            @Override
+                            public void onResult(String result) {//还价网络请求
+                                String URL="";
+                                if(app_type.equals("1")){//1   匹配单
+                                    URL=Urls.Baseurl_cui + Urls.barginPiPei;
+                                }else {//广场单
+                                    URL=Urls.Baseurl_cui + Urls.barginmonry;
+                                    if(commison>Double.parseDouble(result)){
+                                        ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
+                                        return;
+                                    }
+                                }
+
+                                Map map_bargin = new HashMap();
+                                map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                                map_bargin.put("task_id", "" + ID);
+                                map_bargin.put("counteroffer_Amount", result);
+                                new Volley_Utils(new Interface_volley_respose() {
+                                    @Override
+                                    public void onSuccesses(String respose) {
+                                        LogUtils.LOG("ceshi", "任务还价+" + respose, "TaskDetailsActivity");
+                                        int status = 0;
+                                        String msg = "";
+                                        try {
+                                            JSONObject object = new JSONObject(respose);
+                                            status = (Integer) object.get("code");//登录状态
+                                            msg = (String) object.get("message");//登录返回信息
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (status == 1) {
+                                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
+                                            requestTaseDetail();
+                                        } else {
+                                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
+                                        }
+                                    }
+                                    @Override
+                                    public void onError(int error) {
+
+                                    }
+                                }).postHttp(URL, TaskDetailsActivity.this, 1, map_bargin);
+                            }
+                        },popTitle).showpop();
                     }
                 } else {
                     Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
@@ -419,6 +423,8 @@ public class TaskDetailsActivity extends BaseActivityother {
 
                 if (is_counteroffer.equals("1")) {
                     mButton_counteroffer.setVisibility(View.VISIBLE);
+                    popTitle="还价金额";
+
                 }
                 if(mTaskData.getData().getIs_helper_bid().equals("Y")){
                     mButton_counteroffer.setVisibility(View.VISIBLE);
@@ -426,6 +432,12 @@ public class TaskDetailsActivity extends BaseActivityother {
                     mButton_help.setVisibility(View.GONE);
                     mTextview_taskmoney.setText("帮手出价" );
                     commison=5;
+                    popTitle="报价金额";
+                }
+                if(!mTaskData.getData().getTask_Status_code().equals("01")){
+                    mButton_counteroffer.setVisibility(View.GONE);
+                    mButton_help.setVisibility(View.GONE);
+
                 }
                 if(app_type.equals("1")){
                     linearlayout_tel.setVisibility(View.GONE);

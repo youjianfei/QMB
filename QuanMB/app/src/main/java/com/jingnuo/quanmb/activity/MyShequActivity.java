@@ -32,6 +32,7 @@ import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.LiuyanqiangListBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_lookpic;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.youth.banner.Banner;
@@ -83,7 +84,8 @@ public class MyShequActivity extends BaseActivityother {
     protected void setData() {
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
-
+        Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
+        Staticdata.ScreenWidth =SizeUtils.getScreenWidthPx(this);
     }
 
     @Override

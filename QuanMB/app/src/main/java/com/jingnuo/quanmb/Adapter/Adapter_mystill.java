@@ -80,22 +80,31 @@ public class Adapter_mystill extends BaseAdapter {
         holder.mTextview_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.LOG("ceshi", Urls.Baseurl + Urls.shopCancleSkill +
-                        Staticdata.static_userBean.getData().getUser_token() +
-                        "&id=" + mData.get(position).getRelease_specialty_id(), "撤消任务");
-                new Volley_Utils(new Interface_volley_respose() {
+                new  Popwindow_Tip("是否撤消服务?", mContext, new Interence_complteTask() {
                     @Override
-                    public void onSuccesses(String respose) {
-                        interfaceAdapterSuccess.onResult(true);
-                    }
+                    public void onResult(boolean result) {
+                        if(result){
+                            LogUtils.LOG("ceshi", Urls.Baseurl + Urls.shopCancleSkill +
+                                    Staticdata.static_userBean.getData().getUser_token() +
+                                    "&id=" + mData.get(position).getRelease_specialty_id(), "撤消任务");
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    interfaceAdapterSuccess.onResult(true);
+                                }
 
-                    @Override
-                    public void onError(int error) {
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).Http(Urls.Baseurl + Urls.shopCancleSkill +
+                                    Staticdata.static_userBean.getData().getUser_token() +
+                                    "&id=" + mData.get(position).getRelease_specialty_id(), mContext, 0);
+                        }
 
                     }
-                }).Http(Urls.Baseurl + Urls.shopCancleSkill +
-                        Staticdata.static_userBean.getData().getUser_token() +
-                        "&id=" + mData.get(position).getRelease_specialty_id(), mContext, 0);
+                }).showPopwindow();
+
             }
         });
         holder.mTextview_putongshuxin.setOnClickListener(new View.OnClickListener() {

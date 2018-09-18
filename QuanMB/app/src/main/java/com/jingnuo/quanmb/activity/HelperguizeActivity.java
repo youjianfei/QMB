@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
+import com.jingnuo.quanmb.utils.SizeUtils;
 
 public class HelperguizeActivity extends BaseActivityother {
     TextView text_title;
     LinearLayout relative;
 
     String title="";
+
     int hight=0;
 
 
@@ -72,6 +74,8 @@ public class HelperguizeActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
+        Staticdata.ScreenWidth = SizeUtils.getScreenWidthPx(this);
         title=getIntent().getStringExtra("title");
         text_title.setText(title);
     }

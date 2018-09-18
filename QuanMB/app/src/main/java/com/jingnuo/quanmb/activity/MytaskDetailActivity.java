@@ -34,6 +34,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -118,6 +119,8 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
+        Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
+        Staticdata.ScreenWidth =SizeUtils.getScreenWidthPx(this);
         Staticdata. ispipei=false;
         imageview_urllist = new ArrayList<>();
         adapter_gridviewpic = new Adapter_Gridviewpic_skillsdetails(imageview_urllist, this);

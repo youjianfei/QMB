@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.Adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.MyorderBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -117,35 +120,44 @@ public class Adapter_myIssue extends BaseAdapter {
         viewHolder.mTextview_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map map=new HashMap();
-                map.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                map.put("id",mData.get(position).getTask_id()+"");
-                new Volley_Utils(new Interface_volley_respose() {
+                new Popwindow_Tip("是否取消任务?", (Activity) mContext, new Interence_complteTask() {
                     @Override
-                    public void onSuccesses(String respose) {
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//登录状态
-                            msg = (String) object.get("message");//登录返回信息
+                    public void onResult(boolean result) {
+                        if (result){
+                            Map map=new HashMap();
+                            map.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                            map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map.put("id",mData.get(position).getTask_id()+"");
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//登录状态
+                                        msg = (String) object.get("message");//登录返回信息
 
-                            if (status == 1) {
-                                ToastUtils.showToast(mContext, "取消任务成功");
-                            } else {
-                                ToastUtils.showToast(mContext, msg);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                        if (status == 1) {
+                                            ToastUtils.showToast(mContext, "取消任务成功");
+                                        } else {
+                                            ToastUtils.showToast(mContext, msg);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, mContext, 1, map);
                         }
-                    }
-
-                    @Override
-                    public void onError(int error) {
 
                     }
-                }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, mContext, 1, map);
+                }).showPopwindow();
+
 
             }
         });
