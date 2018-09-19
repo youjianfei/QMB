@@ -32,6 +32,7 @@ import com.jingnuo.quanmb.fargment.Fragment_shopdetail;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -100,6 +101,8 @@ public class MatchShopActivity extends AppCompatActivity  {
     }
 
     private void initdata() {
+        Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
+        Staticdata.ScreenWidth = SizeUtils.getScreenWidthPx(this);
         ID = getIntent().getStringExtra("id");
         imageview_urllist=new ArrayList<>();//图片展示
         adapter_gridviewpic=new Adapter_Gridviewpic_skillsdetails(imageview_urllist,MatchShopActivity.this);

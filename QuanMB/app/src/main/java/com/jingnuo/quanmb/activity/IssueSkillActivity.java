@@ -214,24 +214,6 @@ public class IssueSkillActivity extends BaseActivityother {
                     }).showPopwindow();
                 }
 
-                new Popwindow_Tip("需缴纳10个推广币", IssueSkillActivity.this, new Interence_complteTask() {
-                    @Override
-                    public void onResult(boolean result) {
-                        if (result) {
-                            boolean Nonull= checknull();//判空方法
-                            if(Nonull){
-//                    progressDlog.showPD("正在发布，请稍等");
-                                mKProgressHUD.show();
-                                uploadimg();//上传图片
-
-                            }
-                        }
-
-                    }
-                }).showPopwindow();
-
-
-
             }
         });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -301,11 +283,11 @@ public class IssueSkillActivity extends BaseActivityother {
             return false;
         }
         contacts=mEditview_name.getText()+"";
-        if(detail_address.equals("")){
+        if(contacts.equals("")){
             ToastUtils.showToast(this,"请填写联系人");
             return false;
         }
-        if(detail_address.length()>5){
+        if(contacts.length()>5){
             ToastUtils.showToast(this,"联系人名字过长");
             return false;
         }

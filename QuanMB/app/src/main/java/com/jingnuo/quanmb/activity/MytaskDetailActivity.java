@@ -696,6 +696,9 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }else {
                     mText_xiugaijiage.setVisibility(View.GONE);
                 }
+                if(taskDetailBean.getData().getIs_helper_bid().equals("Y")){
+                    mText_xiugaijiage.setVisibility(View.GONE);
+                }
                 if (taskDetailBean.getData().getTask_Status_code().equals("02")) {
                     getmTextview_statejieshao.setText("帮手已接单");
                     text_state2.setText("全民帮帮手正在赶来...");

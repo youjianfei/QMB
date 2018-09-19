@@ -31,7 +31,7 @@ public class HelperguizeActivity extends BaseActivityother {
     protected void setData() {
 //        ImageView image = new ImageView(HelperguizeActivity.this);
         if(title.equals("帮手细则")){
-            SharedPreferencesUtils.putBoolean(this, "QMB", "bangshou", false);
+
             ImageView image = new ImageView(HelperguizeActivity.this);
             image.setBackgroundResource(R.mipmap.helperguize);
             hight=(int) (Staticdata.ScreenWidth * 5.16);
@@ -45,7 +45,7 @@ public class HelperguizeActivity extends BaseActivityother {
                 }
             });
         }else {
-            SharedPreferencesUtils.putBoolean(this, "QMB", "shanghu", false);
+
             ImageView image = new ImageView(HelperguizeActivity.this);
             ImageView image2 = new ImageView(HelperguizeActivity.this);
             ImageView image3 = new ImageView(HelperguizeActivity.this);

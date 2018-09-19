@@ -80,13 +80,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     PermissionHelper permissionHelper;
 
 
-
     //高德定位
-    int locationtime=0;
+    int locationtime = 0;
 
 
-
-    private String[] mAdvertisements ;
+    private String[] mAdvertisements;
 
     @SuppressLint("ResourceType")
     @Override
@@ -122,20 +120,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         public void onLocationChanged(AMapLocation aMapLocation) {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
-                //可在其中解析amapLocation获取相应内容。
-                    LogUtils.LOG("ceshiqq","定位成功,纬度："+aMapLocation.getLatitude()+"精度："+ aMapLocation.getLongitude(),"mainactivity");
+                    //可在其中解析amapLocation获取相应内容。
+                    LogUtils.LOG("ceshiqq", "定位成功,纬度：" + aMapLocation.getLatitude() + "精度：" + aMapLocation.getLongitude(), "mainactivity");
 
-                    Staticdata.xValue =aMapLocation.getLatitude()+"";//获取纬度
-                    Staticdata.yValue=aMapLocation.getLongitude()+"";//获取经度
-                    Staticdata. city_location=aMapLocation.getCity();//城市信息
+                    Staticdata.xValue = aMapLocation.getLatitude() + "";//获取纬度
+                    Staticdata.yValue = aMapLocation.getLongitude() + "";//获取经度
+                    Staticdata.city_location = aMapLocation.getCity();//城市信息
                     ++locationtime;
-                    LogUtils.LOG("ceshiqq","定位次数："+locationtime,"mainactivity");
-                    if(locationtime==1){
+                    LogUtils.LOG("ceshiqq", "定位次数：" + locationtime, "mainactivity");
+                    if (locationtime == 1) {
                         Intent intent = new Intent("com.jingnuo.quanmb.ADDRESS");
-                        intent.putExtra("address",aMapLocation.getCity());
+                        intent.putExtra("address", aMapLocation.getCity());
                         sendBroadcast(intent);
                     }
-                    if(Staticdata.isLogin){
+                    if (Staticdata.isLogin) {
                         new Volley_Utils(new Interface_volley_respose() {
                             @Override
                             public void onSuccesses(String respose) {
@@ -146,12 +144,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             public void onError(int error) {
 
                             }
-                        }).Http(Urls.Baseurl+Urls.updataXYDU+Staticdata.static_userBean.getData().getUser_token()+"&x_value=" +
-                                Staticdata.xValue+"&y_value="+Staticdata.yValue,MainActivity.this,0);
+                        }).Http(Urls.Baseurl + Urls.updataXYDU + Staticdata.static_userBean.getData().getUser_token() + "&x_value=" +
+                                Staticdata.xValue + "&y_value=" + Staticdata.yValue, MainActivity.this, 0);
 
                     }
 
-                }else {
+                } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 }
             }
@@ -163,8 +161,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     private void setmapdata() {
-    //初始化定位
-        if(mLocationClient==null){
+        //初始化定位
+        if (mLocationClient == null) {
             mLocationClient = new AMapLocationClient(getApplicationContext());
             //设置定位回调监听
             mLocationClient.setLocationListener(mLocationListener);
@@ -196,23 +194,23 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     public void initview() {
-        drawerlayout_menu=findViewById(R.id.drawerlayout_menu);
-        image_dot=findViewById(R.id.image_dot);
-        mImageview_message=findViewById(R.id.iamge_message);
-        mImageview_iamge_person=findViewById(R.id.iamge_person);
-        mImageview_help=findViewById(R.id.image_help);
-        mImageview_needhelp=findViewById(R.id.image_needhelp);
-        mTextview_neerbytask=findViewById(R.id.text_neerbytask);
-        mTextview_lovetask=findViewById(R.id.text_lovetask);
-        mTextview_myshequ=findViewById(R.id.text_myshequ);
+        drawerlayout_menu = findViewById(R.id.drawerlayout_menu);
+        image_dot = findViewById(R.id.image_dot);
+        mImageview_message = findViewById(R.id.iamge_message);
+        mImageview_iamge_person = findViewById(R.id.iamge_person);
+        mImageview_help = findViewById(R.id.image_help);
+        mImageview_needhelp = findViewById(R.id.image_needhelp);
+        mTextview_neerbytask = findViewById(R.id.text_neerbytask);
+        mTextview_lovetask = findViewById(R.id.text_lovetask);
+        mTextview_myshequ = findViewById(R.id.text_myshequ);
         tv_notice = findViewById(R.id.tv_notice);
     }
 
     public void initdata() {
-        if(mainActivity==null){
-            mainActivity=this;
+        if (mainActivity == null) {
+            mainActivity = this;
         }
-        permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+        permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
             @Override
             public void onResult(boolean result) {
@@ -220,7 +218,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 if (result) {//定位权限
                     setmapdata();// 高德地图配置参数
                     updata();
-                return;
+                    return;
                 } else {
                     ToastUtils.showToast(MainActivity.this, "请允许开启定位功能");
                 }
@@ -233,7 +231,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     AutoUpdate autoUpdate;
-    void updata(){
+
+    void updata() {
 
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
             @Override
@@ -248,13 +247,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     autoUpdate.requestVersionData();
 
                 } else {
-                    Toast.makeText(MainActivity.this,"请开启存储权限,以便安装最新版本",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "请开启存储权限,以便安装最新版本", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         permissionmanage.requestpermission();
 
     }
+
     public void initlinstenner() {
         mImageview_message.setOnClickListener(this);
         mImageview_help.setOnClickListener(this);
@@ -283,8 +283,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tv_notice.setOutAnimation(getApplicationContext(), R.anim.slide_out_up);
 
     }
+
     private final int HOME_AD_RESULT = 1;
-    private int mSwitcherCount=0;
+    private int mSwitcherCount = 0;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -300,6 +301,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
     };
+
     //设置容云用户信息
 //    private void setRongUserInfo(final String targetid) {
 //        if (RongIM.getInstance()!=null){
@@ -333,22 +335,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //        });
 
 
-    if(isLogin){
-        drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
-    }else {
-        drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
-    }
-        data=new ArrayList<>();
+        if (isLogin) {
+            drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
+        } else {
+            drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
+        }
+        data = new ArrayList<>();
         requestRadios();
     }
+
     List<ShouyeRadios.DataBean> data;
-    void requestRadios(){
-        new  Volley_Utils(new Interface_volley_respose() {
+
+    void requestRadios() {
+        new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose+"喇叭","首页");
+                LogUtils.LOG("ceshi", respose + "喇叭", "首页");
                 data.clear();
-                data.addAll(new Gson().fromJson(respose,ShouyeRadios.class).getData());
+                data.addAll(new Gson().fromJson(respose, ShouyeRadios.class).getData());
                 mHandler.sendEmptyMessage(HOME_AD_RESULT);
             }
 
@@ -356,35 +360,36 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_hu+Urls.shouyeRadios,this,0);
+        }).Http(Urls.Baseurl_hu + Urls.shouyeRadios, this, 0);
     }
+
     @Override
     public void onClick(View view) {
-            Intent intent;
+        Intent intent;
         switch (view.getId()) {
             case R.id.image_help://广场列表
-                intent=new Intent(MainActivity.this,SquareActuvity.class);
+                intent = new Intent(MainActivity.this, SquareActuvity.class);
                 startActivity(intent);
 
                 break;
             case R.id.text_myshequ://我的社区
-                if (Staticdata.isLogin){
-                    if(Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")){
-                        ToastUtils.showToast(this,"请先绑定社区");
-                         intent=new Intent(this, ShezhishequActivity.class);
+                if (Staticdata.isLogin) {
+                    if (Staticdata.static_userBean.getData().getAppuser().getCommunity_code().equals("")) {
+                        ToastUtils.showToast(this, "请先绑定社区");
+                        intent = new Intent(this, ShezhishequActivity.class);
                         startActivity(intent);
                         return;
                     }
-                    intent=new Intent(this, MyShequActivity.class);
+                    intent = new Intent(this, MyShequActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 }
                 break;
             case R.id.image_needhelp://发布服务
                 if (isLogin) {
-                     intent = new Intent(this, IssueTaskActivity.class);
+                    intent = new Intent(this, IssueTaskActivity.class);
                     this.startActivity(intent);
                 } else {
                     intent = new Intent(this, LoginActivity.class);
@@ -405,17 +410,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                }
                 if (isLogin) {
                     image_dot.setVisibility(View.INVISIBLE);
-                    intent=new Intent(MainActivity.this,ConversationListActivity.class);
-                    intent.putExtra("newmessageTYpe",Staticdata.newmessageTYpe);
+                    RongIM.getInstance().setMessageAttachedUserInfo(true);
+
+                    intent = new Intent(MainActivity.this, ConversationListActivity.class);
+                    intent.putExtra("newmessageTYpe", Staticdata.newmessageTYpe);
                     startActivity(intent);
-                    Staticdata.newmessageTYpe="notype";//跳转完之后归0
+                    Staticdata.newmessageTYpe = "notype";//跳转完之后归0
                 } else {
                     intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 }
                 break;
             case R.id.text_lovetask://爱心帮
-                intent=new Intent(MainActivity.this, LoveTaskActivity.class);
+                intent = new Intent(MainActivity.this, LoveTaskActivity.class);
                 startActivity(intent);
 
 //                RongIM.getInstance().startPrivateChat(MainActivity.this, "456", "标题");
@@ -428,24 +435,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
 
             case R.id.iamge_person://个人中心
-                if(isLogin){
+                if (isLogin) {
                     drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
                     drawerlayout_menu.openDrawer(Gravity.LEFT);
-                }else {
+                } else {
                     drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
                     intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 }
                 break;
             case R.id.text_neerbytask:
-                intent=new Intent(this,SkillActivity.class);
+                intent = new Intent(this, SkillActivity.class);
                 startActivity(intent);
                 break;
         }
 
     }
 
-    public  void setdot(){
+    public void setdot() {
         image_dot.setVisibility(View.VISIBLE);
     }
 
@@ -477,7 +484,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mLocationClient!=null){
+        if (mLocationClient != null) {
             mLocationClient.onDestroy();//调用定位结束方法
         }
     }
@@ -485,8 +492,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        LogUtils.LOG("ceshi1","onPostResume111","~~~~main");
-        if(!Staticdata.isLogin){
+        LogUtils.LOG("ceshi1", "onPostResume111", "~~~~main");
+        if (!Staticdata.isLogin) {
         }
     }
 

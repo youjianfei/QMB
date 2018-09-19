@@ -217,21 +217,21 @@ public class ConversationListActivity extends FragmentActivity {
     }
 
     //设置容云用户信息
-    private void setRongUserInfo(final String targetid) {
-        if (RongIM.getInstance()!=null){
-            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
-                @Override
-                public UserInfo getUserInfo(String s) {
-                    if(targetid.equals(s)){
-                        return new UserInfo(targetid,"郑州灯饰借", Uri.parse("http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/ba031a18-c3c0-4e7d-8a8f-2b94c12489391534840739188.png"));
-                    }
-                    return null;
-                }
-            },true);
-        }
-
-
-    }
+//    private void setRongUserInfo(final String targetid) {
+//        if (RongIM.getInstance()!=null){
+//            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+//                @Override
+//                public UserInfo getUserInfo(String s) {
+//                    if(targetid.equals(s)){
+//                        return new UserInfo(targetid,"郑州灯饰借", Uri.parse("http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/ba031a18-c3c0-4e7d-8a8f-2b94c12489391534840739188.png"));
+//                    }
+//                    return null;
+//                }
+//            },true);
+//        }
+//
+//
+//    }
     @Override
     public void onResume() {
         super.onResume();

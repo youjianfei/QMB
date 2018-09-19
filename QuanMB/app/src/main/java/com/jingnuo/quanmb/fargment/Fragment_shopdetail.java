@@ -49,6 +49,7 @@ import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 
 import static io.rong.imlib.model.Conversation.ConversationType.PRIVATE;
 
@@ -187,7 +188,16 @@ public class Fragment_shopdetail extends Fragment{
         linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchingBean.getClient_no(),
+                        matchingBean.getBusiness_name(),
+                        Uri.parse(matchingBean.getHeadUrl())));
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
+                        Staticdata.static_userBean.getData().getAppuser().getNick_name(),
+                        Uri.parse( Staticdata.static_userBean.getData().getImg_url())));
+//                RongIM.getInstance().refreshUserInfoCache(new UserInfo(matchingBean.getClient_no(),
+//                        matchingBean.getBusiness_name(),
+//                        Uri.parse(matchingBean.getHeadUrl())));
+//                RongIM.getInstance().setMessageAttachedUserInfo(true);
                 RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getClient_no(),matchingBean.getBusiness_name());
 
             }

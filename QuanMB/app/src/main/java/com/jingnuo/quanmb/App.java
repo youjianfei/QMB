@@ -51,7 +51,7 @@ public class App extends Application  {
 //                .penaltyDeath()//违规Crash
 //                .build());
         RongIM.setOnReceiveMessageListener(new MyReceiveMessageListener());
-        RongIM.getInstance().setMessageAttachedUserInfo(true);
+//        RongIM.getInstance().setMessageAttachedUserInfo(true);
 
         {
             PlatformConfig.setWeixin("wx1589c6a947d1f803", "aad4f32f43f69d06cdaf6df5e1237e8b");

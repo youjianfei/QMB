@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.HelpterInfoBean;
 import com.jingnuo.quanmb.entityclass.ShopcenterBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_helperfirst;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -86,23 +87,20 @@ public class ShopCenterActivity extends BaseActivityother {
             text_guize.setText("帮手细则");
             button_tuiyajin.setVisibility(View.VISIBLE);
             relative_istujianrenwu.setVisibility(View.INVISIBLE);
-            isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "bangshou");
-            if(isfirst){
-                Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
-                intent_shopcenter.putExtra("title","帮手细则");
-                startActivity(intent_shopcenter);
-            }
+
+//            if(true){
+////                Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
+////                intent_shopcenter.putExtra("title","帮手细则");
+////                startActivity(intent_shopcenter);
+//                new Popwindow_helperfirst (this,1,1.17).showpop();
+//            }
 
         }else {
             text_guize.setText("接单规则");
             button_tuiyajin.setVisibility(View.INVISIBLE);
             relative_istujianrenwu.setVisibility(View.VISIBLE);
-            isfirst= SharedPreferencesUtils.getBoolean(this, "QMB", "shanghu");
-            if (isfirst){
-                Intent intent_shopcenter=new Intent(this, HelperguizeActivity.class);
-                intent_shopcenter.putExtra("title","接单规则");
-                startActivity(intent_shopcenter);
-            }
+
+
 
         }
         request();
@@ -291,6 +289,11 @@ public class ShopCenterActivity extends BaseActivityother {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", "商户中心：" + respose, "ShopCenterActivity");
                 if (type == 1) {
+                    isfirst= SharedPreferencesUtils.getBoolean(ShopCenterActivity.this, "QMB", "bangshou");
+                    if(isfirst){
+                        new Popwindow_helperfirst (ShopCenterActivity.this,1,1.17).showpop();
+                    }
+
                     helpterInfoBean = new Gson().fromJson(respose, HelpterInfoBean.class);
                     if(helpterInfoBean.getData().getList().getMemberImgUrl()==null||helpterInfoBean.getData().getList().getMemberImgUrl().equals("")){
                         mImageview_vip.setVisibility(View.GONE);
@@ -311,6 +314,10 @@ public class ShopCenterActivity extends BaseActivityother {
                     setstar((float) helpterInfoBean.getData().getList().getEvaluation_star());
 
                 } else {
+                    isfirst= SharedPreferencesUtils.getBoolean(ShopCenterActivity.this, "QMB", "shanghu");
+                    if (isfirst){
+                        new Popwindow_helperfirst (ShopCenterActivity.this,2,1.17).showpop();
+                    }
                     shopcenterBean = new Gson().fromJson(respose, ShopcenterBean.class);
                     if(shopcenterBean.getData().getList().getPush_on_off().equals("Y")){//推送开关状态
                         image_tujianrenwukaiguan.setSelected(true);
