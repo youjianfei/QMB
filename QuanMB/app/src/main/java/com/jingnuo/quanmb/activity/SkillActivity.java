@@ -170,11 +170,11 @@ public class SkillActivity extends BaseActivityother {
                     mListData_right.add(listBean_two);
                     break;
                 case 3:
-                    listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E4%BB%A3%E9%A9%BEhot.png");//代驾
-                    listBean_two.setSpecialty_name("代驾");
-                    listBean_two.setSpecialty_id(1104);
-                    mListData_right.add(listBean_two);
+//                    listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
+//                    listBean_two.setImg_url(Urls.hotbackImage+"%E4%BB%A3%E9%A9%BEhot.png");//代驾
+//                    listBean_two.setSpecialty_name("代驾");
+//                    listBean_two.setSpecialty_id(1104);
+//                    mListData_right.add(listBean_two);
                     break;
                 case 4:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
@@ -198,11 +198,11 @@ public class SkillActivity extends BaseActivityother {
                     mListData_right.add(listBean_two);
                     break;
                 case 7:
-                    listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E6%8E%92%E9%98%9Fhot.png");//帮排队
-                    listBean_two.setSpecialty_name("帮排队");
-                    listBean_two.setSpecialty_id(1102);
-                    mListData_right.add(listBean_two);
+//                    listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
+//                    listBean_two.setImg_url(Urls.hotbackImage+"%E6%8E%92%E9%98%9Fhot.png");//帮排队
+//                    listBean_two.setSpecialty_name("帮排队");
+//                    listBean_two.setSpecialty_id(1102);
+//                    mListData_right.add(listBean_two);
                     break;
                 case 8:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
