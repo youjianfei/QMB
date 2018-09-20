@@ -38,6 +38,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
+
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 public class LoginActivity extends BaseActivityother {
@@ -69,7 +71,7 @@ public class LoginActivity extends BaseActivityother {
     @Override
     protected void setData() {
         Staticdata.UUID = InstalltionId.id(this);//第一次运行生成一个id
-
+        Staticdata.JpushID=JPushInterface.getRegistrationID(getApplicationContext());
     }
 
     @Override

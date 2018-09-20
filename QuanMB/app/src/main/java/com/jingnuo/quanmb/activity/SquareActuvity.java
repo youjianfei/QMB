@@ -70,7 +70,7 @@ public class SquareActuvity extends BaseActivityother {
     RelativeLayout relative_sort;
     RelativeLayout relative_shaixuan;
     ImageView imageView_image_empty;
-
+    TextView textview_paixu;
     Popwindow_SquareSort mPopwindow_square_sort;
 
     //头视图
@@ -78,6 +78,7 @@ public class SquareActuvity extends BaseActivityother {
     LinearLayout shaixuan;
     LinearLayout paixu;
     EditText mEdit_serchSquare_head;
+    TextView textview_paixuhead;
 
     Chengweibangshou chengweibangshou;
 
@@ -141,6 +142,7 @@ public class SquareActuvity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        Staticdata.paixuname="智能排序";
         map_filter_sort = new HashMap();
         if (!Staticdata.city_location.equals("")) {
             mTextview_address.setText(Staticdata.city_location);
@@ -380,6 +382,7 @@ public class SquareActuvity extends BaseActivityother {
         mListview_square = findViewById(R.id.list_square);
         mImageview_jiantou = findViewById(R.id.iamge_jiantou);
         mTextview_sort = findViewById(R.id.text_sort);
+        textview_paixu = findViewById(R.id.textview_paixu);
         mTextview_filter = findViewById(R.id.text_filter);
         re_title = findViewById(R.id.re_title);
         mTextview_address = findViewById(R.id.textview_login);
@@ -401,6 +404,7 @@ public class SquareActuvity extends BaseActivityother {
         shaixuan = listheadView.findViewById(R.id.text_filter);
         paixu = listheadView.findViewById(R.id.text_sort);
         mEdit_serchSquare_head = listheadView.findViewById(R.id.edit_searchSquare);
+        textview_paixuhead = listheadView.findViewById(R.id.textview_paixuhead);
 
         //设置图片加载器
         banner.setImageLoader(new GlideLoader22());
@@ -448,6 +452,11 @@ public class SquareActuvity extends BaseActivityother {
 
             }
         });
+    }
+    public void setPaixutext(String paixu){
+        Staticdata.paixuname=paixu;
+        textview_paixu.setText(paixu);
+        textview_paixuhead.setText(paixu);
     }
 
     void initMap(String minCommission, String maxCommission, String pageNum, String name, String task_type, String code) {
@@ -518,11 +527,25 @@ public class SquareActuvity extends BaseActivityother {
                     page = 1;
                     LogUtils.LOG("ceshi", address + id, "排序方式");
                     initMap(MinCommission + "", MaxCommission + "", page + "", "", "", id + "");
+                    switch (id){
+                        case "10":
+                            setPaixutext("智能排序");
+                            break;
+                        case "20":
+                            setPaixutext("时间排序");
+                            break;
+                        case "30":
+                            setPaixutext("佣金排序");
+                            break;
+                        case "40":
+                            setPaixutext("距离排序");
+                            break;
+                    }
                     request_square(map_filter_sort, page);
                 }
 
             }
-        }, re_title, leizing);
+        }, re_title, leizing,Staticdata.paixuname);
         mPopwindow_square_sort.showPopwindow();
 
     }

@@ -51,6 +51,7 @@ public class Popwindow_SquareSort {
     View mInclude_sort;
     View mInclude_filter;
     LinearLayout mText_sort_title, mText_filter_title;
+    TextView text_paixuname;
 
 
     //sort_pop用到的布局 数据
@@ -77,12 +78,15 @@ public class Popwindow_SquareSort {
     int Min = 0;
     int Max = 1000;
 
+    String  paixuname="";//排序方式
 
-    public Popwindow_SquareSort(Activity activity, InterfacePopwindow_square_sort mInterface, RelativeLayout mLinearLayout, int type) {
+
+    public Popwindow_SquareSort(Activity activity, InterfacePopwindow_square_sort mInterface, RelativeLayout mLinearLayout, int type,String paixuname) {
         this.activity = activity;
         this.mInterface = mInterface;
         this.mLinearLayout = mLinearLayout;
         this.type = type;
+        this.paixuname=paixuname;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -313,6 +317,8 @@ public class Popwindow_SquareSort {
         mSeekBar = conView.findViewById(R.id.seekbar);
         mButton_chongzhi = conView.findViewById(R.id.button_chongzhi);
         mButton_complete = conView.findViewById(R.id.button_complte);
+        text_paixuname = conView.findViewById(R.id.text_paixuname);
+        text_paixuname .setText(paixuname);
     }
 
     public void initdata() {

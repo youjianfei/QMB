@@ -64,8 +64,10 @@ public class TaskDetailsActivity extends BaseActivityother {
     RelativeLayout re3;
 
     Button mButton_help;
+    Button mButton_help2;
     Button mButton_counteroffer;
-    LinearLayout linearlayout_tel;
+    Button mButton_counteroffer2;
+    LinearLayout linearlayout_huanjiaqueren;
     LinearLayout linearlayout_zixun;
     ImageView iv_3dian;
     //数据
@@ -215,154 +217,69 @@ public class TaskDetailsActivity extends BaseActivityother {
         mButton_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Staticdata.isLogin) {//是否登录
-                    if (!Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")) {
-                        ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
-                        Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
-                        startActivity(intent_renzheng);
-                        return;
-                    }
-
-                    new Popwindow_Tip("是否帮助此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
-                        @Override
-                        public void onResult(boolean result) {
-                            if(result){
-                                new Volley_Utils(new Interface_volley_respose() {
-                                    @Override
-                                    public void onSuccesses(String respose) {
-                                        LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
-                                        QueRenHelp_Bean queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
-                                        if (queRenHelp_bean.getStatus() == 1) {
-                                            Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
-                                            intent_querenhelp.putExtra("order_no", queRenHelp_bean.getData().getOrder_no());
-                                            intent_querenhelp.putExtra("whichactivity", 1);
-                                            startActivity(intent_querenhelp);
-                                            finish();
-                                        } else {
-                                            ToastUtils.showToast(TaskDetailsActivity.this, queRenHelp_bean.getMessage());
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(int error) {
-
-                                    }
-                                }).Http(Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), TaskDetailsActivity.this, 0);
-
-                            }
-
-                        }
-                    }).showPopwindow();
-                    LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
-
-                } else {
-                    Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
-                    startActivity(intent_login);
-                }
+                querenbangzhu();
             }
         });
         //还价
         mButton_counteroffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Staticdata.isLogin) {
-                    if (!Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")) {
-                        ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
-                        Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
-                        startActivity(intent_renzheng);
-                    } else {
-                        new Popwindow_bargin(TaskDetailsActivity.this, new Interence_bargin() {
-                            @Override
-                            public void onResult(String result) {//还价网络请求
-                                String URL="";
-                                if(app_type.equals("1")){//1   匹配单
-                                    URL=Urls.Baseurl_cui + Urls.barginPiPei;
-                                }else {//广场单
-                                    URL=Urls.Baseurl_cui + Urls.barginmonry;
-                                    if(commison>Double.parseDouble(result)){
-                                        ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
-                                        return;
-                                    }
-                                }
-
-                                Map map_bargin = new HashMap();
-                                map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                                map_bargin.put("task_id", "" + ID);
-                                map_bargin.put("counteroffer_Amount", result);
-                                new Volley_Utils(new Interface_volley_respose() {
-                                    @Override
-                                    public void onSuccesses(String respose) {
-                                        LogUtils.LOG("ceshi", "任务还价+" + respose, "TaskDetailsActivity");
-                                        int status = 0;
-                                        String msg = "";
-                                        try {
-                                            JSONObject object = new JSONObject(respose);
-                                            status = (Integer) object.get("code");//登录状态
-                                            msg = (String) object.get("message");//登录返回信息
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        if (status == 1) {
-                                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
-                                            requestTaseDetail();
-                                        } else {
-                                            ToastUtils.showToast(TaskDetailsActivity.this, msg);
-                                        }
-                                    }
-                                    @Override
-                                    public void onError(int error) {
-
-                                    }
-                                }).postHttp(URL, TaskDetailsActivity.this, 1, map_bargin);
-                            }
-                        },popTitle).showpop();
-                    }
-                } else {
-                    Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
-                    startActivity(intent_login);
-                    finish();
-                }
+                baojia();
+            }
+        });
+        //确认帮助请求
+        mButton_help2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                querenbangzhu();
+            }
+        });
+        //还价
+        mButton_counteroffer2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                baojia();
             }
         });
         //拨打电话
-        linearlayout_tel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!tel.equals("")) {
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    Uri data = Uri.parse("tel:" + tel);
-                    intent.setData(data);
-
-                    if (ActivityCompat.checkSelfPermission(TaskDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-
-//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
-                        mPermission.request(new PermissionHelper.PermissionCallback() {
-                            @Override
-                            public void onPermissionGranted() {
-
-                            }
-
-                            @Override
-                            public void onIndividualPermissionGranted(String[] grantedPermission) {
-
-                            }
-
-                            @Override
-                            public void onPermissionDenied() {
-
-                            }
-
-                            @Override
-                            public void onPermissionDeniedBySystem() {
-
-                            }
-                        });
-                        return;
-                    }
-                    startActivity(intent);//调用具体方法
-                }
-            }
-        });
+//        linearlayout_tel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!tel.equals("")) {
+//                    Intent intent = new Intent(Intent.ACTION_CALL);
+//                    Uri data = Uri.parse("tel:" + tel);
+//                    intent.setData(data);
+//
+//                    if (ActivityCompat.checkSelfPermission(TaskDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//
+////                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+//                        mPermission.request(new PermissionHelper.PermissionCallback() {
+//                            @Override
+//                            public void onPermissionGranted() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onIndividualPermissionGranted(String[] grantedPermission) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onPermissionDenied() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onPermissionDeniedBySystem() {
+//
+//                            }
+//                        });
+//                        return;
+//                    }
+//                    startActivity(intent);//调用具体方法
+//                }
+//            }
+//        });
 
     }
 
@@ -377,9 +294,11 @@ public class TaskDetailsActivity extends BaseActivityother {
         mTextview_taskaddress = findViewById(R.id.text_address);
         imageGridview=findViewById(R.id.GridView_PIC);
         iv_3dian=findViewById(R.id.iv_3dian);
+        mButton_help2 = findViewById(R.id.button_help2);
         mButton_help = findViewById(R.id.button_help);
         mButton_counteroffer = findViewById(R.id.button_bargain);
-        linearlayout_tel = findViewById(R.id.linearlayout_tel);
+        mButton_counteroffer2 = findViewById(R.id.button_bargain2);
+        linearlayout_huanjiaqueren = findViewById(R.id.linearlayout_tel);
         linearlayout_zixun = findViewById(R.id.linearlayout_zixun);
         imageView_head = findViewById(R.id.image_task);
         re3 = findViewById(R.id.re3);
@@ -420,29 +339,37 @@ public class TaskDetailsActivity extends BaseActivityother {
                }
                 image_url=mTaskData.getData().getTask_ImgUrl();
                 setImage(image_url);
-
-                if (is_counteroffer.equals("1")) {
-                    mButton_counteroffer.setVisibility(View.VISIBLE);
-                    popTitle="还价金额";
-
-                }
-                if(mTaskData.getData().getIs_helper_bid().equals("Y")){
+                if(mTaskData.getData().getIs_helper_bid().equals("Y")){//由帮手出价
                     mButton_counteroffer.setVisibility(View.VISIBLE);
                     mButton_counteroffer.setText("报价");
                     mButton_help.setVisibility(View.GONE);
+                    linearlayout_huanjiaqueren.setVisibility(View.GONE);
                     mTextview_taskmoney.setText("帮手出价" );
                     commison=5;
                     popTitle="报价金额";
                 }
+                if (is_counteroffer.equals("1")&&mTaskData.getData().getIs_helper_bid().equals("N")) {
+                    mButton_counteroffer.setVisibility(View.GONE);
+                    mButton_help.setVisibility(View.GONE);
+                    linearlayout_huanjiaqueren.setVisibility(View.VISIBLE);
+                    popTitle="还价金额";
+                }
+                if (is_counteroffer.equals("0")) {
+                    mButton_counteroffer.setVisibility(View.GONE);
+                    mButton_help.setVisibility(View.VISIBLE);
+                    linearlayout_huanjiaqueren.setVisibility(View.GONE);
+                }
+
                 if(!mTaskData.getData().getTask_Status_code().equals("01")){
                     mButton_counteroffer.setVisibility(View.GONE);
                     mButton_help.setVisibility(View.GONE);
+                    linearlayout_huanjiaqueren.setVisibility(View.GONE);
 
                 }
                 if(app_type.equals("1")){
-                    linearlayout_tel.setVisibility(View.GONE);
                     mButton_help.setVisibility(View.GONE);
                     re3.setVisibility(View.INVISIBLE);
+                    linearlayout_huanjiaqueren.setVisibility(View.GONE);
                     linearlayout_zixun.setVisibility(View.VISIBLE);
                     mButton_counteroffer.setVisibility(View.GONE);
                 }
@@ -457,10 +384,117 @@ public class TaskDetailsActivity extends BaseActivityother {
 
 
     }
+    void querenbangzhu(){
+        if (Staticdata.isLogin) {//是否登录
+            if (!Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")) {
+                ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
+                Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
+                startActivity(intent_renzheng);
+                return;
+            }
+
+            new Popwindow_Tip("是否帮助此任务？", TaskDetailsActivity.this, new Interence_complteTask() {
+                @Override
+                public void onResult(boolean result) {
+                    if(result){
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
+                                LogUtils.LOG("ceshi", "确认帮助+" + respose, "TaskDetailsActivity");
+                                QueRenHelp_Bean queRenHelp_bean = new Gson().fromJson(respose, QueRenHelp_Bean.class);
+                                if (queRenHelp_bean.getStatus() == 1) {
+                                    Intent intent_querenhelp = new Intent(TaskDetailsActivity.this, HelperOrderActivity.class);
+                                    intent_querenhelp.putExtra("order_no", queRenHelp_bean.getData().getOrder_no());
+                                    intent_querenhelp.putExtra("whichactivity", 1);
+                                    startActivity(intent_querenhelp);
+                                    finish();
+                                } else {
+                                    ToastUtils.showToast(TaskDetailsActivity.this, queRenHelp_bean.getMessage());
+                                }
+                            }
+
+                            @Override
+                            public void onError(int error) {
+
+                            }
+                        }).Http(Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), TaskDetailsActivity.this, 0);
+
+                    }
+
+                }
+            }).showPopwindow();
+            LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
+
+        } else {
+            Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
+            startActivity(intent_login);
+        }
+    }
+    void baojia(){
+        if (Staticdata.isLogin) {
+            if (!Staticdata.static_userBean.getData().getAppuser().getRole().contains("1")) {
+                ToastUtils.showToast(TaskDetailsActivity.this, "请先认证帮手");
+                Intent intent_renzheng = new Intent(TaskDetailsActivity.this, AuthenticationActivity.class);
+                startActivity(intent_renzheng);
+            } else {
+                new Popwindow_bargin(TaskDetailsActivity.this, new Interence_bargin() {
+                    @Override
+                    public void onResult(String result) {//还价网络请求
+                        String URL="";
+                        if(app_type.equals("1")){//1   匹配单
+                            URL=Urls.Baseurl_cui + Urls.barginPiPei;
+                        }else {//广场单
+                            URL=Urls.Baseurl_cui + Urls.barginmonry;
+                            if(commison>Double.parseDouble(result)){
+                                ToastUtils.showToast(TaskDetailsActivity.this,"还价金额低于雇主出价");
+                                return;
+                            }
+                        }
+
+                        Map map_bargin = new HashMap();
+                        map_bargin.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                        map_bargin.put("task_id", "" + ID);
+                        map_bargin.put("counteroffer_Amount", result);
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
+                                LogUtils.LOG("ceshi", "任务还价+" + respose, "TaskDetailsActivity");
+                                int status = 0;
+                                String msg = "";
+                                try {
+                                    JSONObject object = new JSONObject(respose);
+                                    status = (Integer) object.get("code");//登录状态
+                                    msg = (String) object.get("message");//登录返回信息
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (status == 1) {
+                                    ToastUtils.showToast(TaskDetailsActivity.this, msg);
+                                    requestTaseDetail();
+                                } else {
+                                    ToastUtils.showToast(TaskDetailsActivity.this, msg);
+                                }
+                            }
+                            @Override
+                            public void onError(int error) {
+
+                            }
+                        }).postHttp(URL, TaskDetailsActivity.this, 1, map_bargin);
+                    }
+                },popTitle).showpop();
+            }
+        } else {
+            Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
+            startActivity(intent_login);
+            finish();
+        }
+    }
+
     void setImage(String  image){
         if(image==null||image.equals("")){
 
         }else {
+            imageview_urllist.clear();
             String []images=image.split(",");
             int len=images.length;
             LogUtils.LOG("ceshi","图片的个数"+images.length,"SkillDetailActivity分隔图片");

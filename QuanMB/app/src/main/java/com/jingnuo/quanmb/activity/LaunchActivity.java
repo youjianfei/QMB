@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.jpush.android.api.JPushInterface;
+
 import static com.jingnuo.quanmb.data.Staticdata.ScreenWidth;
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
 import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
@@ -97,6 +99,7 @@ public class LaunchActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
+        Staticdata.JpushID= JPushInterface.getRegistrationID(getApplicationContext());
         UUID = InstalltionId.id(this);//第一次运行生成一个id
         isFirstlogin = SharedPreferencesUtils.getBoolean(this, "QMB", "isfirstlogin");
         Screenhight = SizeUtils.getScreenHeightPx(this);

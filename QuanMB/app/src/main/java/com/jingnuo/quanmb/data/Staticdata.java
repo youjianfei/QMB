@@ -70,4 +70,7 @@ public class Staticdata {
 
     public  static TaskDetailBean taskDetailBeanStatic=new TaskDetailBean();
 
+    //排序的选择
+    public  static  String  paixuname="";
+
 }
