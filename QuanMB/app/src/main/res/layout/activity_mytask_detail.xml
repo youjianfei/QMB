@@ -481,20 +481,22 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:background="@color/white"
         >
         <LinearLayout
             android:id="@+id/_kefujieru"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_weight="1.2"
+            android:layout_margin="5dp"
             android:gravity="center"
-            android:background="@color/white"
+            android:background="@drawable/button_yellow_star_5dp"
             android:visibility="gone"
             >
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/kefu"
+                android:src="@mipmap/kefu2"
                 />
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -506,7 +508,7 @@
                     android:text="客服介入"
                     android:textSize="14dp"
                     android:layout_marginLeft="15dp"
-                    android:textColor="#ff6b52"
+                    android:textColor="@color/white"
                     android:visibility="visible"
                     android:gravity="center"
                     />
@@ -516,7 +518,7 @@
                     android:text="服务有疑问？"
                     android:textSize="11dp"
                     android:layout_marginLeft="15dp"
-                    android:textColor="#fc9393"
+                    android:textColor="@color/white"
                     android:visibility="visible"
                     android:gravity="center"
                     android:layout_below="@+id/qqq"
@@ -529,10 +531,12 @@
         <LinearLayout
             android:id="@+id/button_cancle"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_weight="1.2"
             android:gravity="center"
-            android:background="#d5d2d2"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:background="@drawable/button_yellow_star_5dp"
             >
             <ImageView
                 android:layout_width="20dp"
@@ -553,10 +557,11 @@
         <LinearLayout
             android:id="@+id/_xiugaijiage"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:layout_margin="5dp"
             android:gravity="center"
-            android:background="#ff6b52"
+            android:background="@drawable/button_yellow_star_5dp"
             android:visibility="gone"
             >
             <ImageView
@@ -580,13 +585,14 @@
         <TextView
             android:id="@+id/button_complete"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_weight="2"
             android:text="确认完成"
             android:textSize="15dp"
             android:textColor="@color/white"
             android:layout_below="@+id/re2"
-            android:background="#40ce3b"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_yellow_star_5dp"
             android:visibility="gone"
             android:gravity="center"
             />
@@ -594,13 +600,14 @@
         <TextView
             android:id="@+id/button_again"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="#fb1419"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_yellow_star_5dp"
             android:text="重新发布"
             android:gravity="center"
             android:visibility="gone"
             android:textColor="@color/white"
+            android:layout_margin="5dp"
             android:textSize="15dp" />
 
 

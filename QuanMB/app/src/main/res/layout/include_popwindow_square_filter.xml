@@ -13,83 +13,96 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/white"
+            android:background="@color/gray_background"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="任务类型"
-                android:textColor="@color/text_hide_tip"
-                android:textSize="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                />
-            <com.jingnuo.quanmb.customview.MyGridView
-                android:id="@+id/mygridview_filter"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:numColumns="3">
-
-            </com.jingnuo.quanmb.customview.MyGridView>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_below="@+id/edit_realname"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_dbdbdb"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="佣金金额"
-                android:textColor="@color/text_hide_tip"
-                android:textSize="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="25dp"
-                />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/background_text_white_15"
+                >
                 <TextView
-                    android:id="@+id/textview_filter_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥ 0"
-                    android:textSize="13dp"
+                    android:text="任务类型"
+                    android:textColor="@color/text_hide_tip"
+                    android:textSize="15dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="15dp"
                     />
+                <com.jingnuo.quanmb.customview.MyGridView
+                    android:id="@+id/mygridview_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/white"
+                    android:numColumns="3">
+
+                </com.jingnuo.quanmb.customview.MyGridView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_text_white_15"
+                >
                 <TextView
-                    android:id="@+id/textview_filter_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="￥ 0"
-                    android:textSize="13dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="30dp"
+                    android:text="佣金金额"
+                    android:textColor="@color/text_hide_tip"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="25dp"
                     />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/textview_filter_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￥ 0"
+                        android:textSize="13dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:id="@+id/textview_filter_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="￥ 0"
+                        android:textSize="13dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="30dp"
+                        />
 
-            </RelativeLayout>
-            <com.jaygoo.widget.RangeSeekBar
-                android:id="@+id/seekbar"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:rsb_lineColorSelected="@color/yellow_button"
-                app:rsb_lineColorEdge="@color/colorSeekBarDefault"
-                app:rsb_cellMode="number"
-                app:rsb_seekBarMode="range"
-                app:rsb_thumbResId="@mipmap/circle_filter"
-                app:rsb_seekBarHeight="1dp"
-                />
+                </RelativeLayout>
+                <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:rsb_lineColorSelected="@color/yellow_button"
+                    app:rsb_lineColorEdge="@color/colorSeekBarDefault"
+                    app:rsb_cellMode="number"
+                    app:rsb_seekBarMode="range"
+                    app:rsb_thumbResId="@mipmap/circle_filter"
+                    app:rsb_seekBarHeight="1dp"
+                    />
+        </LinearLayout>
+
             <!--<ImageView-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="1dp"-->
@@ -123,6 +136,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
         >
         <Button
             android:id="@+id/button_chongzhi"
@@ -130,19 +145,27 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="重置"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/white"
-            android:background="#d5d2d2"
+            android:background="@drawable/button_yellow_star_5dp"
             android:textSize="15dp"
             />
         <Button
             android:id="@+id/button_complte"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="完成"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/white"
-            android:background="@color/yellow_jianbian_end"
-            android:textSize="15dp"
+            android:background="@drawable/button_yellow_star_5dp"
+        android:textSize="15dp"
             />
 
 

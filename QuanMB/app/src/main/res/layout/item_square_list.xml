@@ -11,18 +11,22 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_white_corners_8"
         android:visibility="visible"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
         <TextView
+
             android:id="@+id/text_square_type"
-            android:layout_width="60dp"
-            android:layout_height="25dp"
-            android:background="@mipmap/tasktype"
-            android:text="家庭保洁"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_yellow_star_ban_20dp"
+            android:text="全民帮"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="12dp"
             />
@@ -35,7 +39,7 @@
             android:textSize="12dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             />
 
         <TextView
@@ -124,7 +128,7 @@
             android:layout_height="wrap_content"
             android:text="帮 助"
             android:textColor="@color/white"
-            android:background="@drawable/button_yellow_5dp"
+            android:background="@drawable/button_yellow_star_5dp"
             android:layout_below="@+id/line2"
             android:layout_marginTop="15dp"
             android:paddingLeft="8dp"
@@ -140,7 +144,7 @@
     <ImageView
         android:id="@+id/image_line"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="10dp"
         android:src="@color/gray_background"/>
 
 

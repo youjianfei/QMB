@@ -31,43 +31,23 @@
             android:textColor="@color/white"
             android:visibility="invisible"
             android:textSize="18sp" />
-        <LinearLayout
+        <TextView
+            android:id="@+id/text_guize"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="接单规则"
+            android:textSize="12dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:layout_alignParentRight="true"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            >
-            <TextView
-                android:id="@+id/text_guize"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:text="接单规则"
-                android:textSize="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/text_wehite_miaobian_20"
-                />
-            <ImageView
-                android:id="@+id/image_vip"
-                android:layout_width="45dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/vip1"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:visibility="gone"
-
-                />
-
-        </LinearLayout>
+            android:background="@drawable/text_wehite_miaobian_20"
+            />
 
     </RelativeLayout>
 
@@ -95,7 +75,15 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:src="@mipmap/user_pic" />
-
+            <ImageView
+                android:id="@+id/image_vip"
+                android:layout_width="45dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/vip1"
+                android:layout_marginTop="40dp"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                />
             <TextView
                 android:id="@+id/text_shopname"
                 android:layout_width="wrap_content"
@@ -207,16 +195,17 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_marginLeft="35dp"
-                        android:src="@mipmap/fabufuwu" />
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="25dp"
+                        android:src="@mipmap/fabufuwu_new" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="55dp"
                         android:text="发布服务"
+                        android:textColor="@color/black_text"
                         android:textSize="15dp" />
 
                     <ImageView
@@ -231,23 +220,23 @@
                     android:id="@+id/relative_myissue"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-
                     >
 
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myfabu" />
+                        android:layout_marginLeft="25dp"
+                        android:src="@mipmap/myfabu_new" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="55dp"
                         android:text="我的服务"
+                        android:textColor="@color/black_text"
+
                         android:textSize="15dp" />
 
                     <ImageView
@@ -262,7 +251,6 @@
                     android:id="@+id/myorder"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     >
@@ -270,14 +258,16 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myorder" />
+                        android:layout_marginLeft="25dp"
+                        android:src="@mipmap/myorder_new" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="55dp"
                         android:text="我的订单"
+                        android:textColor="@color/black_text"
+
                         android:textSize="15dp" />
 
                     <ImageView
@@ -299,14 +289,16 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginLeft="35dp"
-                        android:src="@mipmap/tuiguangbi" />
+                        android:layout_marginLeft="25dp"
+                        android:src="@mipmap/tuiguangbi_new" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="55dp"
                         android:text="我的推广币"
+                        android:textColor="@color/black_text"
+
                         android:textSize="15dp" />
                     <TextView
                         android:id="@+id/text_tui_count"
@@ -330,7 +322,6 @@
                     android:id="@+id/huiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     >
@@ -338,14 +329,16 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginLeft="35dp"
-                        android:src="@mipmap/huiyuan" />
+                        android:layout_marginLeft="25dp"
+                        android:src="@mipmap/huiyuan_new" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="55dp"
                         android:text="会员充值"
+                        android:textColor="@color/black_text"
+
                         android:textSize="15dp" />
                     <TextView
                         android:id="@+id/text_huiyuan"
@@ -368,7 +361,6 @@
                     android:id="@+id/myauthentication"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
 
@@ -377,14 +369,16 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginLeft="35dp"
-                        android:src="@mipmap/myrenzheng" />
+                        android:layout_marginLeft="25dp"
+                        android:src="@mipmap/myrenzheng_new" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="55dp"
                         android:text="我的认证"
+                        android:textColor="@color/black_text"
+
                         android:textSize="15dp" />
 
                     <ImageView
@@ -399,14 +393,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@color/white"
                     android:visibility="visible"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="35dp"
+                        android:layout_marginLeft="25dp"
                         android:text="推荐任务"
+                        android:textColor="@color/black_text"
+
                         android:layout_centerVertical="true"
                         android:textSize="15dp" />
 

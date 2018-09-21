@@ -65,13 +65,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
-                    android:background="@drawable/background_text_taskstate"
-                    android:text="跑腿"
+                    android:background="@drawable/text_yellow_miaobian_20"
+                    android:text="全民帮"
                     android:paddingTop="1dp"
                     android:paddingBottom="1dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/yellow_jianbian_end"
                     android:textSize="12dp" />
                 <TextView
                     android:id="@+id/text_name"
@@ -335,6 +335,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -342,13 +343,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@drawable/button_yellow_star_5dp"
+            android:layout_margin="5dp"
             android:gravity="center">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/tel_gray2" />
+                android:src="@mipmap/tel_white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -357,7 +359,7 @@
                 android:enabled="false"
                 android:gravity="center"
                 android:text="电话"
-                android:textColor="#7f7f7f"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
         </LinearLayout>
@@ -366,10 +368,13 @@
             android:id="@+id/button_bargain"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/yellow_button"
+            android:layout_weight="2"
+            android:background="@drawable/button_yellow_star_5dp"
             android:enabled="false"
             android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="申请完成"
             android:textColor="@color/white"
             android:textSize="15dp" />

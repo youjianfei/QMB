@@ -8,35 +8,50 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/text_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="维修"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:text="全名帮"
             android:textColor="@color/white"
-            android:paddingLeft="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:gravity="left|center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:textSize="13dp"
+            android:background="@mipmap/type_biaoqian"
+            />
+        <TextView
+            android:id="@+id/text_type2"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:text="全名帮"
+            android:textColor="@color/white"
+            android:paddingLeft="5dp"
             android:paddingRight="10dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
-            android:textSize="12dp"
-            android:background="@drawable/text_yellow2"
+            android:textSize="13dp"
+            android:visibility="invisible"
+            android:gravity="left|center"
+            android:background="@mipmap/type_biaoqian2"
             />
         <TextView
             android:id="@+id/textview_issuename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/text_type"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:textSize="12dp"
+            android:layout_marginTop="16dp"
+            android:textSize="13dp"
             android:text="2018.03.25 10：22"
             android:textColor="@color/gray_969696" />
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:src="@mipmap/title"
+            android:src="@mipmap/taskdetail"
             android:layout_below="@+id/text_type"
             android:layout_marginTop="18dp"
             android:layout_marginLeft="15dp"
@@ -55,7 +70,7 @@
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:src="@mipmap/money_blue"
+            android:src="@mipmap/money_yellow"
             android:layout_below="@+id/textview_titl"
             android:layout_marginTop="18dp"
             android:layout_marginLeft="15dp"
@@ -69,7 +84,7 @@
         android:layout_marginLeft="35dp"
         android:layout_marginTop="15dp"
         android:text="佣金：2000元"
-        android:textColor="@color/red"
+        android:textColor="@color/yellow_button"
         android:textSize="15dp" />
 
 
@@ -91,7 +106,7 @@
                 android:id="@+id/iamge_resttimepic"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@mipmap/resttime"
+                android:src="@mipmap/resttime2"
                 android:layout_marginTop="13dp"
                 android:layout_marginLeft="15dp"
                 />
@@ -128,15 +143,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_01"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="15dp"
-            android:padding="3dp"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:layout_toLeftOf="@+id/text_taskstate"
-            android:background="@drawable/text_gray2"
             android:text="取消"
-            android:textColor="@color/white" />
+            android:textColor="@color/gray_969696" />
 
     <!--<TextView-->
         <!--android:id="@+id/text_resttime"-->

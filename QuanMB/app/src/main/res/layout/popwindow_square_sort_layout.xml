@@ -3,22 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/gray_background"
     >
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relative_sort"
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/relative_sort"
-        android:background="@color/white">
+        android:background="@drawable/background_text_white_15"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        >
         <LinearLayout
             android:id="@+id/text_filter_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="110dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -34,18 +40,18 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/jiantou_xia1"
+                android:src="@mipmap/shaixuan"
                 android:layout_marginLeft="10dp"
                 />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/text_sort_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
             >
             <TextView
                 android:id="@+id/text_paixuname"
@@ -67,20 +73,21 @@
                 />
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_background"
-            android:layout_alignParentBottom="true"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/gray_background"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--/>-->
 
 
-    </RelativeLayout>
+    </LinearLayout>
     <include
         android:id="@+id/include_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/include_popwindow_square_sort"
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         />
     <include

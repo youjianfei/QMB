@@ -15,24 +15,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
-    </RelativeLayout>
 
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/image_line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/relativeLayout_headbackground"
+        android:background="@color/gray_background"
+        />
     <RelativeLayout
         android:id="@+id/relative_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout_headbackground"
-        android:background="@color/white"
+        android:layout_below="@+id/image_line"
+        android:background="@drawable/background_white_corners_8_shang"
         android:visibility="visible"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
-        <ImageView
-            android:id="@+id/image_line"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/gray_background"
-            />
+
         <ImageView
             android:id="@+id/tttt"
             android:layout_width="25dp"
