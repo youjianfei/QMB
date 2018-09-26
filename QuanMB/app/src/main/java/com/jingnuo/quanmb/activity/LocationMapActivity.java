@@ -156,6 +156,11 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
         mBUtton_queding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                address=mTextview_nowaddress.getText()+"";
+                if(address .equals("")){
+                    ToastUtils.showToast(LocationMapActivity.this,"无名坐标,请重新选择");
+                    return;
+                }
                 Intent result = new Intent();
                 result.putExtra("address", mTextview_nowaddress.getText() + "");
                 String add = mText_location.getText() + "";

@@ -9,6 +9,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
 import org.json.JSONException;
@@ -50,14 +51,18 @@ public class SetNicknameActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
                 nickname=mEdit_nickname.getText()+"";
-                if(nickname.equals("")||nickname.length()<2||nickname.length()>8){
-                    ToastUtils.showToast(SetNicknameActivity.this,"用户名限2~8个字符");
+                nickname=nickname.trim();
+                int lenth=Utils.length(nickname);
+                if(lenth<0||lenth>16){
+                    ToastUtils.showToast(SetNicknameActivity.this,"用户名限1~16个字符,一个汉字为两个字符");
                 }else {
                         map_nickname.put("NickName",nickname);
                         map_nickname.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     LogUtils.LOG("ceshi","修改昵称的map"+map_nickname.toString(),"SetNicknameActivity");
                     request(map_nickname);
                 }
+                LogUtils.LOG("ceshi","修改昵称的位数"+Utils.length(nickname),"SetNicknameActivity");
+//                request(map_nickname);
             }
         });
 
