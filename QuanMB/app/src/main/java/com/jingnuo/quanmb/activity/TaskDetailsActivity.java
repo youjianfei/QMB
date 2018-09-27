@@ -50,6 +50,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 
 public class TaskDetailsActivity extends BaseActivityother {
     TextView mTextview_state;
@@ -186,6 +187,9 @@ public class TaskDetailsActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(mTaskData.getData().getClient_no(),
+                        mTaskData.getData().getNick_name(),
+                        Uri.parse( mTaskData.getData().getAvatar_imgUrl())));
                 RongIM.getInstance().startPrivateChat(TaskDetailsActivity.this,mTaskData.getData().getClient_no(),mTaskData.getData().getNick_name());
             }
         });
