@@ -140,35 +140,36 @@ public class MytaskDetailActivity extends BaseActivityother {
                 }
                 if (respose.equals("success")&&isIssueAgain) {//重新发布任务支付成功
                     request(map_taskdetail);
-                }else {//增加价格支付成功
-                    Map map_addprice=new HashMap();
-                    map_addprice.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-                    map_addprice.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                    map_addprice.put("task_id",taskDetailBean.getData().getTask_id()+"");
-                    map_addprice.put("money",addprice+"");
-                new Volley_Utils(new Interface_volley_respose() {
-                    @Override
-                    public void onSuccesses(String respose) {
-                        int status = 0;
-                        String msg = "";
-                        try {
-                            JSONObject object = new JSONObject(respose);
-                            status = (Integer) object.get("code");//
-                            msg = (String) object.get("message");//
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        ToastUtils.showToast(MytaskDetailActivity.this,msg);
-
-                    }
-
-                    @Override
-                    public void onError(int error) {
-
-                    }
-                }).postHttp(Urls.Baseurl_cui+Urls.taskaddCommission,MytaskDetailActivity.this,1,map_addprice);
                 }
+//                else {//增加价格支付成功
+//                    Map map_addprice=new HashMap();
+//                    map_addprice.put("user_token",Staticdata.static_userBean.getData().getUser_token());
+//                    map_addprice.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                    map_addprice.put("task_id",taskDetailBean.getData().getTask_id()+"");
+//                    map_addprice.put("money",addprice+"");
+//                new Volley_Utils(new Interface_volley_respose() {
+//                    @Override
+//                    public void onSuccesses(String respose) {
+//                        int status = 0;
+//                        String msg = "";
+//                        try {
+//                            JSONObject object = new JSONObject(respose);
+//                            status = (Integer) object.get("code");//
+//                            msg = (String) object.get("message");//
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        ToastUtils.showToast(MytaskDetailActivity.this,msg);
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(int error) {
+//
+//                    }
+//                }).postHttp(Urls.Baseurl_cui+Urls.taskaddCommission,MytaskDetailActivity.this,1,map_addprice);
+//                }
             }
 
             @Override
@@ -438,6 +439,8 @@ public class MytaskDetailActivity extends BaseActivityother {
         mText_xiugaijiage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 popwindow_addPrice=new Popwindow_addPrice(MytaskDetailActivity.this, new Interence_bargin() {
                     @Override
                     public void onResult(String result) {

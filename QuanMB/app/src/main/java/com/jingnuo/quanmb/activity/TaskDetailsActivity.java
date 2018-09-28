@@ -189,7 +189,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 RongIM.getInstance().setMessageAttachedUserInfo(true);
                 RongIM.getInstance().setCurrentUserInfo(new UserInfo(mTaskData.getData().getClient_no(),
                         mTaskData.getData().getNick_name(),
-                        Uri.parse( mTaskData.getData().getAvatar_imgUrl())));
+                        Uri.parse( mTaskData.getData().getAvatar_imgUrl().substring(0, mTaskData.getData().getAvatar_imgUrl().length() - 1))));
                 RongIM.getInstance().startPrivateChat(TaskDetailsActivity.this,mTaskData.getData().getClient_no(),mTaskData.getData().getNick_name());
             }
         });
