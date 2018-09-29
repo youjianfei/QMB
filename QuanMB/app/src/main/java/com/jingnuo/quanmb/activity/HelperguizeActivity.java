@@ -31,14 +31,25 @@ public class HelperguizeActivity extends BaseActivityother {
     protected void setData() {
 //        ImageView image = new ImageView(HelperguizeActivity.this);
         if(title.equals("帮手细则")){
-
             ImageView image = new ImageView(HelperguizeActivity.this);
+            ImageView image2 = new ImageView(HelperguizeActivity.this);
+            ImageView image3 = new ImageView(HelperguizeActivity.this);
+            ImageView image4 = new ImageView(HelperguizeActivity.this);
             image.setBackgroundResource(R.mipmap.helperguize);
-            hight=(int) (Staticdata.ScreenWidth * 5.16);
+            image2.setBackgroundResource(R.mipmap.helperguize2);
+            image3.setBackgroundResource(R.mipmap.helperguize3);
+            image4.setBackgroundResource(R.mipmap.helperguize4);
+            hight=(int) (Staticdata.ScreenWidth * 1.51);
             LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
             image.setLayoutParams(mLayoutparams);
+            image2.setLayoutParams(mLayoutparams);
+            image3.setLayoutParams(mLayoutparams);
+            image4.setLayoutParams(mLayoutparams);
             relative.addView(image);
-            image.setOnClickListener(new View.OnClickListener() {
+            relative.addView(image2);
+            relative.addView(image3);
+            relative.addView(image4);
+            image4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
@@ -49,18 +60,26 @@ public class HelperguizeActivity extends BaseActivityother {
             ImageView image = new ImageView(HelperguizeActivity.this);
             ImageView image2 = new ImageView(HelperguizeActivity.this);
             ImageView image3 = new ImageView(HelperguizeActivity.this);
+            ImageView image4 = new ImageView(HelperguizeActivity.this);
+            ImageView image5 = new ImageView(HelperguizeActivity.this);
             image.setBackgroundResource(R.mipmap.shangjiaguize1);
             image2.setBackgroundResource(R.mipmap.shangjiaguize2);
             image3.setBackgroundResource(R.mipmap.shangjiaguize3);
-            hight=(int) (Staticdata.ScreenWidth * 5.16);
+            image4.setBackgroundResource(R.mipmap.shangjiaguize4);
+            image5.setBackgroundResource(R.mipmap.shangjiaguize5);
+            hight=(int) (Staticdata.ScreenWidth * 1.41);
             LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
             image.setLayoutParams(mLayoutparams);
             image2.setLayoutParams(mLayoutparams);
             image3.setLayoutParams(mLayoutparams);
+            image4.setLayoutParams(mLayoutparams);
+            image5.setLayoutParams(mLayoutparams);
             relative.addView(image);
             relative.addView(image2);
             relative.addView(image3);
-            image3.setOnClickListener(new View.OnClickListener() {
+            relative.addView(image4);
+            relative.addView(image5);
+            image5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
