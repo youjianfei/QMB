@@ -59,7 +59,7 @@ public class Fragment_shopdetail extends Fragment{
     TextView text_name;
     TextView text_type;
     TextView text_orders;
-    ImageView image_vip;
+    TextView text_vip;
     SimpleRatingBar simpleRatingBar;
 //    TextView text_lv;
     CircleImageView image_head;
@@ -207,15 +207,15 @@ public class Fragment_shopdetail extends Fragment{
     private void setdata() {
         text_name.setText(matchingBean.getBusiness_name());
         text_type.setText("主营："+matchingBean.getSpecialty_name());
-//        text_lv.setText(matchingBean.getAppellation_name());
         Glide.with(getActivity()).load(matchingBean.getHeadUrl()).into(image_head);
         if(!matchingBean.getMemberImgUrl().equals("")){
-            image_vip.setVisibility(View.VISIBLE);
-            Glide.with(getActivity()).load(matchingBean.getMemberImgUrl()).into(image_vip);
+            text_vip.setVisibility(View.VISIBLE);
+            text_vip.setText(matchingBean.getMember_lv());
+
         }else {
-            image_vip.setVisibility(View.INVISIBLE);
+            text_vip.setVisibility(View.INVISIBLE);
         }
-        text_orders.setText("已完成"+matchingBean.getOverCount()+"单");
+        text_orders.setText(matchingBean.getOverCount()+"单");
         setstar((float) matchingBean.getEvaluation_star());
 //        timer = new Timer();
 //        TimerTask timerTask = new TimerTask() {
@@ -231,7 +231,7 @@ public class Fragment_shopdetail extends Fragment{
         text_name=rootview.findViewById(R.id.text_name);
         text_type=rootview.findViewById(R.id.text_main);
         text_orders=rootview.findViewById(R.id.text_orders);
-        image_vip=rootview.findViewById(R.id.image_vip);
+        text_vip=rootview.findViewById(R.id.text_vip);
         simpleRatingBar=rootview.findViewById(R.id.SimpleRatingBar);
 //        text_lv=rootview.findViewById(R.id.text_level);
         image_head=rootview.findViewById(R.id.image_head);

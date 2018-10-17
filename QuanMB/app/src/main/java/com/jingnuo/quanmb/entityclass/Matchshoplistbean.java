@@ -88,12 +88,21 @@ public class Matchshoplistbean {
             private String push_register;
             private String specialty_name;
             private String memberImgUrl="";
+            private String member_lv="";
             private int user_reputation;
             private int overCount;
             private double evaluation_star;
 
             private String x_value;
             private String y_value;
+
+            public String getMember_lv() {
+                return member_lv;
+            }
+
+            public void setMember_lv(String member_lv) {
+                this.member_lv = member_lv;
+            }
 
             public String getMemberImgUrl() {
                 return memberImgUrl;

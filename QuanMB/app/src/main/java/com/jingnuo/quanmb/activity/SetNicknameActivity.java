@@ -53,6 +53,10 @@ public class SetNicknameActivity extends BaseActivityother {
                 nickname=mEdit_nickname.getText()+"";
                 nickname=nickname.trim();
                 int lenth=Utils.length(nickname);
+                if (!Utils.compileExChar(nickname)){
+                    ToastUtils.showToast(SetNicknameActivity.this,"用户名不允许有特殊字符");
+                    return;
+                }
                 if(lenth<0||lenth>16){
                     ToastUtils.showToast(SetNicknameActivity.this,"用户名限1~16个字符,一个汉字为两个字符");
                 }else {

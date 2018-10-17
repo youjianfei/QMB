@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -30,6 +32,7 @@ import io.rong.imlib.model.UserInfo;
 public class Utils {
     /**
      * 获取字符串的长度，如果有中文，则每个中文字符计为2位
+     *
      * @param value 指定的字符串
      * @return 字符串的长度
      */
@@ -51,13 +54,30 @@ public class Utils {
         }
         return valueLength;
     }
+
+    /**
+     * @prama: str 要判断是否包含特殊字符的目标字符串
+     */
+    public static boolean compileExChar(String str) {
+        String limitEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+
+        Pattern pattern = Pattern.compile(limitEx);
+
+        Matcher m = pattern.matcher(str);
+        if (m.find()) {
+            return false;
+        }
+        return true;
+    }
+
+
     /**
      * 融云登录
      */
     public static void connect(String token) {
 
 //        if (getApplicationInfo().packageName.equals(get.getCurProcessName(getApplicationContext()))) {
-        LogUtils.LOG("rongyun","-rongyun准备登录token"+token ,"rongyun登录");
+        LogUtils.LOG("rongyun", "-rongyun准备登录token" + token, "rongyun登录");
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
 
             /**
@@ -76,19 +96,19 @@ public class Utils {
             @Override
             public void onSuccess(String userid) {
                 Log.d("LoginActivity", "--onSuccess" + userid);
-                LogUtils.LOG("rongyun","--onSuccess" + userid,"rongyun登录");
+                LogUtils.LOG("rongyun", "--onSuccess" + userid, "rongyun登录");
 //                    startActivity(new Intent(MainActivity.this, MainActivity.class));
 //                    finish();
-                if(Staticdata.static_userBean.getData().getAppuser().getRole().contains("2")){
+                if (Staticdata.static_userBean.getData().getAppuser().getRole().contains("2")) {
                     RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
-                            Staticdata.static_userBean.getData().getAppuser().getNick_name()+"(" +Staticdata.static_userBean.getData().getAppuser().getBusiness_name()+")",
+                            Staticdata.static_userBean.getData().getAppuser().getNick_name() + "(" + Staticdata.static_userBean.getData().getAppuser().getBusiness_name() + ")",
                             Uri.parse(Staticdata.static_userBean.getData().getImg_url())));
-                }else {
+                } else {
                     RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
                             Staticdata.static_userBean.getData().getAppuser().getNick_name(),
                             Uri.parse(Staticdata.static_userBean.getData().getImg_url())));
                 }
-                LogUtils.LOG("rongyun","名字"+Staticdata.static_userBean.getData().getAppuser().getNick_name()+"(" +Staticdata.static_userBean.getData().getAppuser().getBusiness_name()+")","Utils");
+                LogUtils.LOG("rongyun", "名字" + Staticdata.static_userBean.getData().getAppuser().getNick_name() + "(" + Staticdata.static_userBean.getData().getAppuser().getBusiness_name() + ")", "Utils");
 
             }
 
@@ -98,7 +118,7 @@ public class Utils {
              */
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
-                LogUtils.LOG("rongyun","--ErrorCode" + errorCode,"rongyun登录失败");
+                LogUtils.LOG("rongyun", "--ErrorCode" + errorCode, "rongyun登录失败");
             }
         });
 //        }
@@ -107,7 +127,7 @@ public class Utils {
     /**
      * 检测是否安装微信
      * 微博  com.sina.weibo
-     QQ   com.tencent.mobileqq
+     * QQ   com.tencent.mobileqq
      *
      * @param context
      * @return
@@ -160,15 +180,16 @@ public class Utils {
         lp.alpha = bgAlpha; //0.0-1.0
         activity.getWindow().setAttributes(lp);
     }
+
     /**
      * 汉字转为url编码  原因   volley不支持含有汉字的网址
      */
-    public static String  ZhuanMa(String string){
+    public static String ZhuanMa(String string) {
 
         //URL编码
-        String nameStr= null;
+        String nameStr = null;
         try {
-            nameStr = new String(URLEncoder.encode(string,"utf-8").getBytes());
+            nameStr = new String(URLEncoder.encode(string, "utf-8").getBytes());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -186,22 +207,22 @@ public class Utils {
         Calendar calendar = Calendar.getInstance();
         return df.format(calendar.getTime());
     }
-    public static long getCurTimeLong(){
-        long time=System.currentTimeMillis();
+
+    public static long getCurTimeLong() {
+        long time = System.currentTimeMillis();
         return time;
     }
 
     public static long getStringToDate(String dateString, String pattern) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         Date date = new Date();
-        try{
+        try {
             date = dateFormat.parse(dateString);
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return date.getTime();
     }
-
 
 
     //字符串转时间戳
@@ -227,78 +248,82 @@ public class Utils {
         timeString = sdf.format(new Date(l));//单位秒
         return timeString;
     }
+
     /*
      *计算time2减去time1的差值 差值只设置 几天 几个小时 或 几分钟
      * 根据差值返回多长之间前或多长时间后
      * */
-    public static String getDistanceTime(long  time1,long time2 ) {
+    public static String getDistanceTime(long time1, long time2) {
         long day = 0;
         long hour = 0;
         long min = 0;
         long sec = 0;
-        long diff ;
+        long diff;
         String flag;
-        if(time1<time2) {
+        if (time1 < time2) {
             return "0小时0分";
         } else {
             diff = time1 - time2;
-            flag="后";
+            flag = "后";
         }
         day = diff / (24 * 60 * 60 * 1000);
         hour = (diff / (60 * 60 * 1000) - day * 24);
         min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
-        sec = (diff/1000-day*24*60*60-hour*60*60-min*60);
-        if(day!=0)return day+"天"+hour+"小时";
-        if(hour!=0)return hour+"小时"+min+"分钟";
-        if(min!=0)return min+"分钟";
+        sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        if (day != 0) return day + "天" + hour + "小时";
+        if (hour != 0) return hour + "小时" + min + "分钟";
+        if (min != 0) return min + "分钟";
         return "刚刚";
     }
-    public static String getDistanceTime2(long  time1,long time2 ) {
+
+    public static String getDistanceTime2(long time1, long time2) {
         long day = 0;
         long hour = 0;
         long min = 0;
         long sec = 0;
-        long diff ;
+        long diff;
         String flag;
-        if(time1<time2) {
+        if (time1 < time2) {
             diff = time2 - time1;
-            flag="前";
+            flag = "前";
         } else {
             diff = time1 - time2;
-            flag="后";
+            flag = "后";
         }
         day = diff / (24 * 60 * 60 * 1000);
         hour = (diff / (60 * 60 * 1000) - day * 24);
         min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
-        sec = (diff/1000-day*24*60*60-hour*60*60-min*60);
-        if(day!=0)return day+"天"+flag;
-        if(hour!=0)return hour+"小时"+flag;
-        if(min!=0)return min+"分钟"+flag;
+        sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        if (day != 0) return day + "天" + flag;
+        if (hour != 0) return hour + "小时" + flag;
+        if (min != 0) return min + "分钟" + flag;
         return "刚刚";
     }
-    public static String getDistanceTime3(long  time1,long time2 ) {
+
+    public static String getDistanceTime3(long time1, long time2) {
         long day = 0;
         long hour = 0;
         long min = 0;
         long sec = 0;
-        long diff ;
+        long diff;
         String flag;
-        if(time1<time2) {
+        if (time1 < time2) {
             diff = time2 - time1;
-            flag="前";
+            flag = "前";
         } else {
             diff = time1 - time2;
-            flag="后";
+            flag = "后";
         }
         day = diff / (24 * 60 * 60 * 1000);
         hour = (diff / (60 * 60 * 1000) - day * 24);
         min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
-        sec = (diff/1000-day*24*60*60-hour*60*60-min*60);
-        if(day!=0)return day+"天"+hour+"小时";
-        if(hour!=0)return hour+"小时"+min+"分钟";
-        if(min!=0)return min+"分钟";
+        sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        if (day != 0) return day + "天" + hour + "小时";
+        if (hour != 0) return hour + "小时" + min + "分钟";
+        if (min != 0) return min + "分钟";
         return "刚刚";
     }
+
     public static String getDistanceTime4(long diff) {
         long day = 0;
         long hour = 0;
@@ -306,12 +331,12 @@ public class Utils {
         long sec = 0;
         day = diff / (24 * 60 * 60 * 1000);
         hour = (diff / (60 * 60 * 1000) - day * 24);
-        min = ((diff / (60 * 1000) ) - day * 24 * 60 - hour * 60);
-        sec = (diff/1000-day*24*60*60-hour*60*60-min*60);
-        if(day!=0)return day+"天"+hour+"小时"+min+"分钟";
-        if(hour!=0)return hour+"小时"+min+"分钟"+sec+"秒";
-        if(min!=0)return hour+"小时"+min+"分钟"+sec+"秒";
-        if(sec!=0)return hour+"小时"+min+"分钟"+sec+"秒";
+        min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        if (day != 0) return day + "天" + hour + "小时" + min + "分钟";
+        if (hour != 0) return hour + "小时" + min + "分钟" + sec + "秒";
+        if (min != 0) return hour + "小时" + min + "分钟" + sec + "秒";
+        if (sec != 0) return hour + "小时" + min + "分钟" + sec + "秒";
         return "刚刚";
     }
 }

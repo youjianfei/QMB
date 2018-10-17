@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background"
+    android:background="@color/white"
     tools:context=".activity.MatchShopActivity">
 
     <RelativeLayout
@@ -27,24 +27,27 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="匹配商家"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <com.jingnuo.quanmb.customview.CustomerScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/linearlayout_bottom"
-        android:layout_below="@+id/re_title"
-        android:overScrollMode="never"
-        android:scrollbars="vertical">
+    <!--<com.jingnuo.quanmb.customview.CustomerScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_above="@+id/linearlayout_bottom"-->
+        <!---->
+        <!--android:overScrollMode="never"-->
+        <!--android:scrollbars="vertical">-->
 
         <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_below="@+id/re_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
             android:fitsSystemWindows="true"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <TextView
@@ -52,14 +55,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:layout_centerHorizontal="true"
-                android:text="为你选择最合适的商家" />
+                android:textSize="23dp"
+                android:textColor="@color/black"
+                android:text="已为您选择附近的商家" />
             <LinearLayout
                 android:id="@+id/textview_change"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginRight="15dp"
                 android:layout_alignParentRight="true"
                 android:orientation="vertical">
@@ -73,237 +77,202 @@
                     android:layout_height="wrap_content"
                     android:textSize="12dp"
                     android:text="换一组" />
-
-
             </LinearLayout>
+            <TextView
+                android:id="@+id/text_timelow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:text="15s" />
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:clipToPadding="false"
                 android:layout_below="@+id/text_matchCount"
                 android:overScrollMode="never"
-                android:paddingEnd="30dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:paddingStart="30dp" />
+                />
+
+
+            <ImageView
+                android:id="@+id/image_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/left"
+                android:layout_marginTop="150dp"
+                android:layout_marginLeft="5dp"
+                android:visibility="invisible"
+                android:layout_below="@+id/textview_change"
+                />
+            <ImageView
+                android:id="@+id/image_right"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/right"
+                android:layout_marginTop="150dp"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textview_change"
+                />
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/re2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="8dp"-->
+                <!--android:layout_below="@+id/viewPager"-->
+                <!--android:visibility="visible"-->
+                <!--android:background="@color/white">-->
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/texttitle"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="订单详情"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/black_text"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/line111"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="1dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/texttitle"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:src="@color/gray_dfdfdf" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="18dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/line111"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:src="@mipmap/taskdetails2" />&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/text2"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="40dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="详情"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/line111"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/black_text"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/text_taskdetail"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="100dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="任务详情"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/line111"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="#7f7f7f"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/skill_pic"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/text_taskdetail"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:background="@color/white">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;&lt;!&ndash;<com.jingnuo.quanmb.customview.MyGridView&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/GridView_PIC"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:background="@color/white"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:visibility="gone"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;android:numColumns="3" />&ndash;&gt;&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
 
 
 
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/text3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/skill_pic"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="40dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="18dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="预约时间"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/black_text"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
 
-            <RelativeLayout
-                android:id="@+id/re2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_below="@+id/viewPager"
-                android:background="@color/white">
-                <TextView
-                    android:id="@+id/texttitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_centerHorizontal="true"
-                    android:text="订单详情"
-                    android:textColor="@color/black_text"
-                    android:textSize="15dp" />
-                <ImageView
-                    android:id="@+id/line111"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@+id/texttitle"
-                    android:src="@color/gray_dfdfdf" />
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_below="@+id/line111"
-                    android:src="@mipmap/taskdetails2" />
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/text_time"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/skill_pic"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="18dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text=""&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/black_text2"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
 
-                <TextView
-                    android:id="@+id/text2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="15dp"
-                    android:text="详情"
-                    android:layout_below="@+id/line111"
-                    android:textColor="@color/black_text"
-                    android:textSize="15dp" />
+                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/line3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="1dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/text3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:src="@color/gray_dfdfdf" />&ndash;&gt;-->
 
-                <TextView
-                    android:id="@+id/text_taskdetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="15dp"
-                    android:text="任务详情"
-                    android:layout_below="@+id/line111"
-                    android:textColor="#7f7f7f"
-                    android:textSize="15dp" />
+                <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/text3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:src="@mipmap/address_blue" />&ndash;&gt;-->
 
-                <RelativeLayout
-                    android:id="@+id/skill_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/text_taskdetail"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@color/white">
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/text4"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/text3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="40dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="18dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="地址"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/black_text"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
 
-                    <com.jingnuo.quanmb.customview.MyGridView
-                        android:id="@+id/GridView_PIC"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:visibility="gone"
-                        android:numColumns="3" />
-
-                </RelativeLayout>
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/line222"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_below="@+id/skill_pic"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:src="@color/gray_dfdfdf" />-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="15dp"-->
-                    <!--android:layout_height="15dp"-->
-                    <!--android:layout_below="@+id/skill_pic"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginTop="20dp"-->
-                    <!--android:src="@mipmap/people2" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/text_guzhu"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/skill_pic"-->
-                    <!--android:layout_marginLeft="40dp"-->
-                    <!--android:layout_marginTop="18dp"-->
-                    <!--android:text="联系人"-->
-                    <!--android:textColor="@color/black_text"-->
-                    <!--android:textSize="15dp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/text_guzhuname"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/skill_pic"-->
-                    <!--android:layout_marginBottom="10dp"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginTop="18dp"-->
-                    <!--android:text="雇主名字"-->
-                    <!--android:textColor="#7f7f7f"-->
-                    <!--android:textSize="15dp" />-->
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/text_address"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_below="@+id/text3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginBottom="15dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="35dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="18dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text=""&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="#7f7f7f"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15dp" />&ndash;&gt;-->
 
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/line2"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_below="@+id/text_guzhu"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:src="@color/gray_dfdfdf" />-->
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@mipmap/time2" />
-
-                <TextView
-                    android:id="@+id/text3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="18dp"
-                    android:text="预约时间"
-                    android:textColor="@color/black_text"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/text_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/skill_pic"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_alignParentRight="true"
-                    android:text=""
-                    android:textColor="@color/black_text2"
-                    android:textSize="15dp" />
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/line3"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_below="@+id/text3"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:src="@color/gray_dfdfdf" />-->
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_below="@+id/text3"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@mipmap/address_blue" />
-
-                <TextView
-                    android:id="@+id/text4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/text3"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="18dp"
-                    android:text="地址"
-                    android:textColor="@color/black_text"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/text_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/text3"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_alignParentRight="true"
-                    android:text=""
-                    android:textColor="#7f7f7f"
-                    android:textSize="15dp" />
-
-
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
 
         </RelativeLayout>
-    </com.jingnuo.quanmb.customview.CustomerScrollView>
+    <!--</com.jingnuo.quanmb.customview.CustomerScrollView>-->
 
 
 </RelativeLayout>
