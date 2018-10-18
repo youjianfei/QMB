@@ -102,15 +102,16 @@ public class MatchShopActivity extends AppCompatActivity  {
         list_matchbea.clear();
         list_matchbea.addAll(matchshoplistbean.getData().getMatching());
         page_all=list_matchbea.size()-1;
-        if(page_all==1){
-            image_right.setVisibility(View.INVISIBLE);
-        }
+
         initview();
         initdata();
         initlistenner();
     }
 
     private void initdata() {
+        if(page_all==0){
+            image_right.setVisibility(View.INVISIBLE);
+        }
         Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
         Staticdata.ScreenWidth = SizeUtils.getScreenWidthPx(this);
         ID = getIntent().getStringExtra("id");
