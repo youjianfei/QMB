@@ -27,7 +27,7 @@ public class SuggestActivity extends BaseActivityother {
 
     String release_specialty_id="";
 
-
+    String URL;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_suggest;
@@ -39,7 +39,10 @@ public class SuggestActivity extends BaseActivityother {
     map_suggest.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
     map_suggest.put("user_token",Staticdata.static_userBean.getData().getUser_token());
     if(release_specialty_id!=null){
+         URL=Urls.Baseurl+Urls.mySuggest;
         map_suggest.put("release_specialty_id",release_specialty_id);
+    }else {
+        URL=Urls.Baseurl+Urls. mySFeedBack;
     }
 
     }
@@ -61,6 +64,8 @@ public class SuggestActivity extends BaseActivityother {
                     map_suggest.put("content",mysuggest);
                     LogUtils.LOG("ceshi",Urls.Baseurl+Urls.mySuggest,"投诉和建议");
                     LogUtils.LOG("ceshi",map_suggest.toString(),"投诉和建议");
+
+
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -88,7 +93,7 @@ public class SuggestActivity extends BaseActivityother {
                         public void onError(int error) {
 
                         }
-                    }).postHttp(Urls.Baseurl+Urls.mySuggest,SuggestActivity.this,1,map_suggest);
+                    }).postHttp(URL,SuggestActivity.this,1,map_suggest);
                 }
 
 

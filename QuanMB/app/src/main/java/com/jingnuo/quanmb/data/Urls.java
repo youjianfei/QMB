@@ -168,7 +168,8 @@ public class Urls {
     public static String addLianxiren = "user/addContacts";//新增联系人
     public static String editLianxiren = "user/editContacts";//编辑联系人
     public static String findMorenlianxiren = "user/getIsDefaultContacts?user_token=";//默认联系人
-    public static String mySuggest = "user/myComplaints";//投诉和建议
+    public static String mySuggest = "user/myComplaints";//服务投诉
+    public static String mySFeedBack = "user/addFeedBack";//反馈
     public static String myJubao = "task/querySpecialty/informAdd";//我的举报
     public static String setSafepassword = "user/setSecurityCode";//设置支付密码
     public static String checkSafepassword = "user/checkSecurityCode";//校验支付密码
