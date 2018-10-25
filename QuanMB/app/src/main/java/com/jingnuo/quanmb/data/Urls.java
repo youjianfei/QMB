@@ -9,21 +9,21 @@ public class Urls {
     public static String Baseurl_index = "http://v3.rabbitpre.com/m2/aUe1ZjN6ls";//分享的主页
     public static String Baseurl_zixunkefu = "http://www.quanminbang.top/QuanMinBang/v1.0/uploadIge/toH5";//客服咨询
     //正式
-//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  测试
-    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  本地
 //    public static String Baseurl = "http://192.168.0.186:8080/QuanMinBang/v1.0/";
 //    public static String Baseurl_cui = "http://192.168.0.186:8080/QuanMinBang/v1.0/";
-//    public  static  String Baseurl_hu="http://192.168.0.186:8080/QuanMinBang/v1.0/";
+//    public  static  String Baseurl_hu="http://192.168.0.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
     public static String sendzhuceyanzhengma = "send/sendValidate";//注册发送注册短信验证码  post

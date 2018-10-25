@@ -36,7 +36,8 @@ public class WechatPay {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi","请求服务器统一下单"+ Urls.Baseurl_hu+Urls.wechatPay,"关于我们");
+                LogUtils.LOG("ceshi","请求服务器统一下单"+ Urls.Baseurl_hu+Urls.wechatPay,"微信支付");
+                LogUtils.LOG("ceshi","请求服务器统一下单"+ respose,"微信支付");
                 wechatPayBean=new Gson().fromJson(respose,WechatPayBean.class);
                 PayReq request = new PayReq();
                 request.appId = WechatApi;

@@ -188,7 +188,7 @@ public class Fragment_shopdetail extends Fragment{
         linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchingBean.getClient_no(),
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchingBean.getBusiness_no(),
                         matchingBean.getBusiness_name(),
                         Uri.parse(matchingBean.getHeadUrl())));
                 RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),

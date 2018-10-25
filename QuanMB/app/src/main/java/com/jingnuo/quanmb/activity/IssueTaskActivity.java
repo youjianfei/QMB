@@ -1,9 +1,13 @@
 package com.jingnuo.quanmb.activity;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
@@ -20,15 +24,20 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
+import com.jingnuo.quanmb.utils.AutoUpdate;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageSelector;
 import com.jingnuo.quanmb.R;
 
@@ -65,6 +74,8 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
     FragmentManager fragmetnmanager;
     FragmentTransaction transaction;
+    PermissionHelper permissionHelper;
+
 
     int Tag=0;//   0找商户  1  找人手   2   家政维修
     @Override
@@ -93,7 +104,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
 
     protected void setData() {
-        setmapdata();
+
     }
 
     //声明AMapLocationClientOption对象
@@ -176,6 +187,22 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
 
     protected void initData() {
+        permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                LogUtils.LOG("ceshi", result + "", "");
+                if (result) {//定位权限
+                    setmapdata();// 高德地图配置参数
+                    updata();
+                    return;
+                } else {
+                    ToastUtils.showToast(IssueTaskActivity.this, "请允许开启定位功能");
+                }
+
+            }
+        });
+        permissionmanage.requestpermission();
         if (issueTaskActivity == null) {
             issueTaskActivity = this;
         }
@@ -302,6 +329,29 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
             }
         }
     }
+    AutoUpdate autoUpdate;
+    void updata() {
+
+        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                if (result) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//安卓7.0权限 代替了FileProvider方式   https://blog.csdn.net/xiaoyu940601/article/details/54406725
+                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        StrictMode.setVmPolicy(builder.build());
+                    }
+                    //检测是否更新
+                    autoUpdate = new AutoUpdate(IssueTaskActivity.this);
+                    autoUpdate.requestVersionData();
+
+                } else {
+                    Toast.makeText(IssueTaskActivity.this, "请开启存储权限,以便安装最新版本", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        permissionmanage.requestpermission();
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -365,6 +415,13 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
             mLastTime = System.currentTimeMillis();
         } else {
             finish();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissionHelper != null) {
+            permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

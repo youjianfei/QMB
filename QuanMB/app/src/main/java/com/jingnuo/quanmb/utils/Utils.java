@@ -117,16 +117,10 @@ public class Utils {
                 LogUtils.LOG("rongyun", "--onSuccess" + userid, "rongyun登录");
 //                    startActivity(new Intent(MainActivity.this, MainActivity.class));
 //                    finish();
-                if (Staticdata.static_userBean.getData().getAppuser().getRole().contains("2")) {
-                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
-                            Staticdata.static_userBean.getData().getAppuser().getNick_name() + "(" + Staticdata.static_userBean.getData().getAppuser().getBusiness_name() + ")",
-                            Uri.parse(Staticdata.static_userBean.getData().getImg_url())));
-                } else {
+
                     RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
                             Staticdata.static_userBean.getData().getAppuser().getNick_name(),
                             Uri.parse(Staticdata.static_userBean.getData().getImg_url())));
-                }
-                LogUtils.LOG("rongyun", "名字" + Staticdata.static_userBean.getData().getAppuser().getNick_name() + "(" + Staticdata.static_userBean.getData().getAppuser().getBusiness_name() + ")", "Utils");
 
             }
 
