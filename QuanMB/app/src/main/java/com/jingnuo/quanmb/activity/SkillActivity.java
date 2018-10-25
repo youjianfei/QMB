@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.jingnuo.quanmb.R;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_classification_left;
@@ -45,6 +46,7 @@ public class SkillActivity extends BaseActivityother {
     Skillmenu_oneBean skillmenu_oneBean;
     Skillmenu_oneBean.DataBean.ListBean listBean;
     Skillmenu_twoBean.DataBean.ListBean listBean_two;
+
     @Override
     public int setLayoutResID() {
         return R.layout.activity_skill;
@@ -78,9 +80,9 @@ public class SkillActivity extends BaseActivityother {
                 int ID = mListData_left.get(i).getSpecialty_id();
                 LogUtils.LOG("ceshi", "一级菜单对应的id:" + ID, "找专业frament");
                 mtextview_classification_title.setText(mListData_left.get(i).getSpecialty_name());
-                if(ID==0){
+                if (ID == 0) {
                     getHotRightmenu();
-                }else {
+                } else {
                     requestRightMenu(ID);
                 }
             }
@@ -129,9 +131,9 @@ public class SkillActivity extends BaseActivityother {
 
                 LogUtils.LOG("ceshi", mListData_left.size() + "个数据", "找专业一级菜单");
                 mAdapter_classification_left.notifyDataSetChanged();
-                if(mListData_left.get(position).getSpecialty_id()==0){
+                if (mListData_left.get(position).getSpecialty_id() == 0) {
                     getHotRightmenu();
-                }else {
+                } else {
                     requestRightMenu(mListData_left.get(position).getSpecialty_id());
                 }
 
@@ -150,21 +152,21 @@ public class SkillActivity extends BaseActivityother {
             switch (i) {
                 case 0:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E6%90%AC%E5%AE%B6hot.png");//搬家
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E6%90%AC%E5%AE%B6hot.png");//搬家
                     listBean_two.setSpecialty_name("搬家");
                     listBean_two.setSpecialty_id(1305);
                     mListData_right.add(listBean_two);
                     break;
                 case 1:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E4%BF%9D%E6%B4%81hot.png");//家庭保洁
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E4%BF%9D%E6%B4%81hot.png");//家庭保洁
                     listBean_two.setSpecialty_name("家庭保洁");
                     listBean_two.setSpecialty_id(1300);
                     mListData_right.add(listBean_two);
                     break;
                 case 2:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E8%BD%A6%E8%BE%86%E4%BB%A3%E5%8A%9Ehot.png");//车务代办
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E8%BD%A6%E8%BE%86%E4%BB%A3%E5%8A%9Ehot.png");//车务代办
                     listBean_two.setSpecialty_name("车务代办");
                     listBean_two.setSpecialty_id(1702);
                     mListData_right.add(listBean_two);
@@ -178,21 +180,21 @@ public class SkillActivity extends BaseActivityother {
                     break;
                 case 4:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E8%BE%85%E5%AF%BChot.png");//中小学辅导
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E8%BE%85%E5%AF%BChot.png");//中小学辅导
                     listBean_two.setSpecialty_name("中小学辅导");
                     listBean_two.setSpecialty_id(1901);
                     mListData_right.add(listBean_two);
                     break;
                 case 5:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E5%AE%B6%E7%94%B5hot.png");//家具维修
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E5%AE%B6%E7%94%B5hot.png");//家具维修
                     listBean_two.setSpecialty_name("家具维修");
                     listBean_two.setSpecialty_id(1202);
                     mListData_right.add(listBean_two);
                     break;
                 case 6:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E5%AE%B6%E6%95%99hot.png");//家教
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E5%AE%B6%E6%95%99hot.png");//家教
                     listBean_two.setSpecialty_name("家教");
                     listBean_two.setSpecialty_id(1906);
                     mListData_right.add(listBean_two);
@@ -206,35 +208,35 @@ public class SkillActivity extends BaseActivityother {
                     break;
                 case 8:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E6%89%8B%E6%9C%BA%E7%BB%B4%E4%BF%AEhot.png");//手机维修
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E6%89%8B%E6%9C%BA%E7%BB%B4%E4%BF%AEhot.png");//手机维修
                     listBean_two.setSpecialty_name("手机维修");
                     listBean_two.setSpecialty_id(1204);
                     mListData_right.add(listBean_two);
                     break;
                 case 9:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E6%B0%B4hot.png");//送水
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E6%B0%B4hot.png");//送水
                     listBean_two.setSpecialty_name("送水");
                     listBean_two.setSpecialty_id(1306);
                     mListData_right.add(listBean_two);
                     break;
                 case 10:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E9%94%81hot.png");//开锁修锁
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E9%94%81hot.png");//开锁修锁
                     listBean_two.setSpecialty_name("开锁修锁");
                     listBean_two.setSpecialty_id(1209);
                     mListData_right.add(listBean_two);
                     break;
                 case 11:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E6%8E%A8%E5%B9%BFhot.png");//推广运营
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E6%8E%A8%E5%B9%BFhot.png");//推广运营
                     listBean_two.setSpecialty_name("推广运营");
                     listBean_two.setSpecialty_id(1402);
                     mListData_right.add(listBean_two);
                     break;
                 case 12:
                     listBean_two = new Skillmenu_twoBean.DataBean.ListBean();
-                    listBean_two.setImg_url(Urls.hotbackImage+"%E7%A7%9F%E8%BD%A6hot.png");//租车
+                    listBean_two.setImg_url(Urls.hotbackImage + "%E7%A7%9F%E8%BD%A6hot.png");//租车
                     listBean_two.setSpecialty_name("租车");
                     listBean_two.setSpecialty_id(1700);
                     mListData_right.add(listBean_two);
@@ -263,6 +265,7 @@ public class SkillActivity extends BaseActivityother {
             }
         }).Http(Urls.Baseurl + Urls.Skillmenu_right + "?specialty_id=" + id, SkillActivity.this, 0);
     }
+
     @Override
     public void onResume() {
         super.onResume();

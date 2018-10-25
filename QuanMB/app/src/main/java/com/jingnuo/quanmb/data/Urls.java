@@ -107,9 +107,7 @@ public class Urls {
     public static String setColltctSkill = "user/myCollection";//收藏、取消收藏接口
     public static String ColltctSkillList = "user/getCollectionList?user_token=";//收藏列表
 
-
     //商户
-
 
     public static String shopcenter = "business/queryBusinessInfo?user_token=";//商家info    get     client_no  user_token
     public static String shoporder = "business/queryBusinessOrder?user_token=";//商家接收的任务

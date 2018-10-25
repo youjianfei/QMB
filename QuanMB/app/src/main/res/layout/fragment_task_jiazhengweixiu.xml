@@ -4,38 +4,261 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <ImageView
+        android:id="@+id/imageview_jiazheng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前城市有"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textview_suiji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 236位 "
+            android:textColor="@color/yellow_jianbian_start"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="师傅接单"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:text="选择服务 提交订单 师傅接单"
+        android:textColor="@color/text_gray"
+        android:textSize="13dp" />
+    <!--<LinearLayout-->
+    <!--android:id="@+id/relative_1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="70dp"-->
+    <!--android:layout_below="@+id/text1"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:background="@color/white"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin_banyungong"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_marginLeft="30dp"-->
+    <!--android:background="@drawable/selsect_task_typebackground"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_banyungong"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:src="@drawable/selsect_task_banyungong" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_banyungong"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:text="搬运工"-->
+    <!--android:layout_marginBottom="5dp"-->
+
+    <!--android:textColor="@drawable/selsect_task_typetext"-->
+    <!--android:textSize="10dp" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin_qingjie"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:background="@drawable/selsect_task_typebackground"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_qingjie"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:src="@drawable/selsect_task_qingjie"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_qingjie"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="5dp"-->
+
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:text="清洁"-->
+    <!--android:textColor="@drawable/selsect_task_typetext"-->
+    <!--android:textSize="10dp" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin_bangmai"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:background="@drawable/selsect_task_typebackground"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_bangmai"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:src="@drawable/selsect_task_bangmai"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_bangmai"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:layout_marginBottom="5dp"-->
+
+    <!--android:text="帮买帮送"-->
+    <!--android:textColor="@drawable/selsect_task_typetext"-->
+    <!--android:textSize="10dp" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin_yuyue"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:background="@drawable/selsect_task_typebackground"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_yuyue"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:src="@drawable/selsect_task_yuyue"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_yuyue"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:layout_marginBottom="5dp"-->
+
+    <!--android:textColor="@drawable/selsect_task_typetext"-->
+    <!--android:text="预约排队"-->
+    <!--android:textSize="10dp" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin_daijia"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:background="@drawable/selsect_task_typebackground"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_daijia"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:src="@drawable/selsect_task_daijia" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_daijia"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:text="代驾"-->
+    <!--android:layout_marginBottom="5dp"-->
+
+    <!--android:textColor="@drawable/selsect_task_typetext"-->
+    <!--android:textSize="10dp" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin_dingzhi"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginRight="30dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:background="@drawable/selsect_task_typebackground"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_dingzhi"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:src="@drawable/selsect_task_dingzhi" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_dingzhi"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:layout_marginBottom="5dp"-->
+    <!--android:text="私人订制"-->
+    <!--android:textColor="@drawable/selsect_task_typetext"-->
+    <!--android:textSize="10dp" />-->
+
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+    <com.jingnuo.quanmb.customview.MyGridView
+        android:id="@+id/gridview_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:background="@color/white"
+        android:numColumns="5" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relative_2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
-        android:background="@color/white">
-        <TextView
-            android:id="@+id/text_chooce"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:text="请选择类型"
-            android:textSize="15dp"
-            android:gravity="center"
-            android:textColor="@color/yellow_jianbian_end" />
-        <ImageView
-            android:id="@+id/image_line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/text_chooce"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/gray_background" />
-        <ImageView
-            android:id="@+id/image2"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/image_line1"
-            android:src="@mipmap/taskexplain" />
-
+        android:background="@drawable/background_white_corners_8">
         <EditText
             android:id="@+id/edit_detailtask"
             android:layout_width="match_parent"
@@ -43,11 +266,9 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/image_line1"
             android:layout_marginBottom="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/image2"
-
             android:background="@null"
             android:gravity="top"
             android:hint="请描述你的任务，不少于5字"
@@ -125,52 +346,6 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_below="@+id/relative_1"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/address_blue" />
-
-        <TextView
-            android:id="@+id/text_chooseaddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:paddingBottom="15dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="5dp"
-            android:paddingTop="15dp"
-            android:scrollbars="horizontal"
-            android:singleLine="true"
-            android:text="选择地址"
-            android:textColor="@color/text_hide_tip"
-            android:textSize="14dp" />
-
-        <EditText
-            android:id="@+id/edit_detailaddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_weight="1.2"
-            android:background="@null"
-            android:gravity="right"
-            android:hint="输入详细地址"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:singleLine="true"
-            android:textColorHint="@color/text_hide_tip"
-            android:textSize="14dp" />
-    </LinearLayout>
     <Button
         android:id="@+id/button_submitsave"
         android:layout_width="match_parent"
@@ -179,8 +354,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_morph_20dp"
-        android:text="下一步"
+        android:background="@drawable/button_yellow_20dp"
+        android:text="确  定"
         android:textColor="@color/white"
         android:textSize="15dp" />
 </LinearLayout>

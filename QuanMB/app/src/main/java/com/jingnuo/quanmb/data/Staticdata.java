@@ -73,4 +73,7 @@ public class Staticdata {
     //排序的选择
     public  static  String  paixuname="";
 
+    //随机数
+    public static int  suijiAcount=0;
+
 }

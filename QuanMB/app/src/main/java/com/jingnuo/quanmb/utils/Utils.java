@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +31,23 @@ import io.rong.imlib.model.UserInfo;
  */
 
 public class Utils {
+    /**
+     * 生成一个startNum 到 endNum之间的随机数(不包含endNum的随机数)
+     * @param startNum
+     * @param endNum
+     * @return
+     */
+    public static int getNum(int startNum,int endNum){
+        if(endNum > startNum){
+            Random random = new Random();
+            return random.nextInt(endNum - startNum) + startNum;
+        }
+        return 0;
+    }
+
+
+
+
     /**
      * 获取字符串的长度，如果有中文，则每个中文字符计为2位
      *

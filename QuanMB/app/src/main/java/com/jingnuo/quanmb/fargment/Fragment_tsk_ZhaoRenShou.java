@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +24,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
+import com.jingnuo.quanmb.Adapter.Adapter_WeixiuJiazheng;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.InterfaceDate_select;
@@ -33,6 +37,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskActivity;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
+import com.jingnuo.quanmb.activity.MatchShopActivity;
 import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
@@ -41,6 +46,7 @@ import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.WeixiuJiazhengBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
@@ -50,6 +56,7 @@ import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ReducePIC;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.master.permissionhelper.PermissionHelper;
@@ -64,14 +71,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.app.Activity.RESULT_OK;
 
 public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickListener {
     View rootview;
     //控件
-    LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
-//    TextView mTextview_taskAddress;//地图返回地点
+    MyGridView gridview_type;
     TextView mTextview_time;//预约时间
     RelativeLayout mRelativelayout_chosetime;//选择时间
 //    EditText mEditview_addressDetail;//详细地址
@@ -79,37 +87,10 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     MyGridView imageGridview;
     ImageView image_chosePIC;
     Button mButton_sub;
-
-    LinearLayout linearLayout_banyungong;
-    LinearLayout linearLayout_qingjie;
-    LinearLayout linearLayout_bangmai;
-    LinearLayout linearLayout_yuyue;
-    LinearLayout linearLayout_daijia;
-    LinearLayout linearLayout_dingzhi;
-
-    ImageView imageView_banyungong;
-    ImageView imageView_qingjie;
-    ImageView imageView_bangmai;
-    ImageView imageView_yuyue;
-    ImageView imageView_daijia;
-    ImageView imageView_dingzhi;
-
-    TextView textView_banyungong;
-    TextView textView_qingjie;
-    TextView textView_bangmai;
-    TextView textView_yuyue;
-    TextView textView_daijia;
-    TextView textView_dingzhi;
+    ImageView imageview_jiazheng;
 
 
-    EditText mEditview_taskmoney;
-    ImageView mImage_choosejieshou;
-    TextView mText_choosejieshou;
-    ImageView mImage_chooseme;
-    ImageView mImage_choosehelper;
-    TextView mtextview_choseme;
-    TextView mtextview_chosehelper;
-    RelativeLayout relativelayout_chujia;
+    TextView textview_suiji;//随机数
 
 
     //对象
@@ -129,7 +110,24 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     String release_address = "";
     Bitmap mBitmap = null;
     String commission = "";
-    int task_typeID=2200;
+    int task_typeID=1300;
+    String  JiazhengTypeJson="{\"list\":[{\"specialty_id\":1300,\"specialty_name\":\"家庭保洁\",\"image\":\"\",\"isselect\":false}," +
+            "{\"specialty_id\":1306,\"specialty_name\":\"送水\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1302," +
+            "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆\"," +
+            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"月嫂\",\"image\":\"\",\"isselect\":false}," +
+            "{\"specialty_id\":1305,\"specialty_name\":\"搬家\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1303," +
+            "\"specialty_name\":\"擦玻璃\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1307,\"specialty_name\":\"小时工\"," +
+            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
+            ",{\"specialty_id\":1301,\"specialty_name\":\"土地开荒\",\"image\":\"\",\"isselect\":false}]}";
+    List<WeixiuJiazhengBean.ListBean>mdata;
+    int [] images={R.mipmap.baojie_b,R.mipmap.songshui_b,R.mipmap.youyanji_b,R.mipmap.baomu_b,R.mipmap.yuesao_b,R.mipmap.banjia_b
+            ,R.mipmap.boli_b,R.mipmap.xiaoshigong_b,R.mipmap.diban_b,R.mipmap.kaihuang_b};
+    int [] images_select={R.mipmap.baojie,R.mipmap.songshui,R.mipmap.youyanji,R.mipmap.baomu,R.mipmap.yuesao,R.mipmap.banjia
+    ,R.mipmap.caboli,R.mipmap.xiaoshigong,R.mipmap.diban,R.mipmap.kaihuang};
+    Adapter_WeixiuJiazheng adapter_weixiuJiazheng;
+
+
+    int   suijiAcount=0;//随机数
 
     String detailed_address = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
@@ -159,57 +157,41 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
 
     private void initview() {
-        mLinearlayout_zhaoshanghu = rootview.findViewById(R.id.linearlayout_zhaoshanghu);
-//        mTextview_taskAddress = rootview.findViewById(R.id.text_chooseaddress);
+        gridview_type = rootview.findViewById(R.id.gridview_type);
+        imageview_jiazheng = rootview.findViewById(R.id.imageview_jiazheng);
         mTextview_time = rootview.findViewById(R.id.edit_tasktime);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
-//        mEditview_addressDetail = rootview.findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
         imageGridview = rootview.findViewById(R.id.GridView_PIC);
         image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
-
-
-        linearLayout_banyungong = rootview.findViewById(R.id.lin_banyungong);
-        linearLayout_banyungong.setSelected(true);
-        linearLayout_qingjie = rootview.findViewById(R.id.lin_qingjie);
-        linearLayout_bangmai = rootview.findViewById(R.id.lin_bangmai);
-        linearLayout_yuyue = rootview.findViewById(R.id.lin_yuyue);
-        linearLayout_daijia = rootview.findViewById(R.id.lin_daijia);
-        linearLayout_dingzhi = rootview.findViewById(R.id.lin_dingzhi);
-
-        imageView_banyungong = rootview.findViewById(R.id.image_banyungong);
-        imageView_banyungong.setSelected(true);
-        imageView_qingjie = rootview.findViewById(R.id.image_qingjie);
-        imageView_bangmai = rootview.findViewById(R.id.image_bangmai);
-        imageView_yuyue = rootview.findViewById(R.id.image_yuyue);
-        imageView_daijia = rootview.findViewById(R.id.image_daijia);
-        imageView_dingzhi = rootview.findViewById(R.id.image_dingzhi);
-
-        textView_banyungong = rootview.findViewById(R.id.text_banyungong);
-        textView_banyungong.setSelected(true);
-        textView_qingjie = rootview.findViewById(R.id.text_qingjie);
-        textView_bangmai = rootview.findViewById(R.id.text_bangmai);
-        textView_yuyue = rootview.findViewById(R.id.text_yuyue);
-        textView_daijia = rootview.findViewById(R.id.text_daijia);
-        textView_dingzhi = rootview.findViewById(R.id.text_dingzhi);
-
-
-        mEditview_taskmoney = rootview.findViewById(R.id.edit_charges);
-        mImage_choosejieshou = rootview.findViewById(R.id.image_choosejieshou);
-        mImage_choosejieshou.setSelected(true);
-        mText_choosejieshou = rootview.findViewById(R.id.text_choosejieshou);
-        mImage_chooseme = rootview.findViewById(R.id.image_chooseme);
-        mImage_chooseme.setSelected(true);
-        mtextview_choseme = rootview.findViewById(R.id.textview_chooseme);
-        mtextview_chosehelper = rootview.findViewById(R.id.text_choosehelper);
-        mImage_choosehelper = rootview.findViewById(R.id.image_choosehelper);
-        relativelayout_chujia = rootview.findViewById(R.id.relativelayout_chujia);
-
+        textview_suiji=rootview.findViewById(R.id.textview_suiji);
 
     }
 
     private void initdata() {
+        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
+        int  hight=(int) (Staticdata.ScreenWidth * 0.38);
+        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
+        imageview_jiazheng.setLayoutParams(mLayoutparams);
+
+        mdata=new ArrayList<>();
+        mdata.addAll(new Gson().fromJson(JiazhengTypeJson,WeixiuJiazhengBean.class).getList());
+        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images,images_select);
+        gridview_type.setAdapter(adapter_weixiuJiazheng);
+
+
+        //随机数动态变化
+        textview_suiji.setText(Staticdata.suijiAcount+"");
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                mhandler.sendEmptyMessage(0);
+            }
+        };
+        timer.schedule(timerTask, 0, 50);
+
         mList_picID=new ArrayList<>();
         mKProgressHUD = new KProgressHUD(getActivity());
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -308,7 +290,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                     if (status == 1) {
                         Staticdata.map_task.put("task_id", data + "");
 
-                        requast(Staticdata.map_task);//个性单发布任务
+                        requast(Staticdata.map_task);
 
                     } else {
                         ToastUtils.showToast(getActivity(), msg);
@@ -330,13 +312,59 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 + Staticdata.static_userBean.getData().getUser_token(), getActivity(), 0);
     }
     void requast(Map map) {//正式发布个性任务
+//        LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
+//        new Volley_Utils(new Interface_volley_respose() {
+//            @Override
+//            public void onSuccesses(String respose) {
+////                progressDlog.cancelPD();
+//                mKProgressHUD.dismiss();
+//                LogUtils.LOG("ceshi", "发布任务返回json", "发布任务");
+//                int status = 0;
+//                String msg = "";
+//                try {
+//                    JSONObject object = new JSONObject(respose);
+//                    status = (Integer) object.get("code");//
+//                    msg = (String) object.get("message");//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                if (status == 1) {
+//
+//                    Intent intentpay = new Intent(getActivity(), PayActivity.class);
+//                    intentpay.putExtra("title", "全民帮—任务付款");
+//                    intentpay.putExtra("order_no", "000000");
+//                    intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
+//                    intentpay.putExtra("taskid", Staticdata.map_task.get("task_id")+"");
+//                    startActivity(intentpay);
+//
+//                    Staticdata.imagePathlist.clear();
+////                    Staticdata.map_task.clear();
+//                    Staticdata.PayissuetaskSuccess=true;
+//                } else {
+//                    count = 0;
+//                    mList_picID.clear();
+//                    mKProgressHUD.dismiss();
+//                    ToastUtils.showToast(getActivity(), msg);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(int error) {
+////                progressDlog.cancelPD();
+//                mKProgressHUD.dismiss();
+//                count = 0;
+//                mList_picID.clear();
+//            }
+//        }).postHttp(Urls.Baseurl_cui + Urls.issuetask, getActivity(), 1, map);
         LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
 //                progressDlog.cancelPD();
                 mKProgressHUD.dismiss();
-                LogUtils.LOG("ceshi", "发布任务返回json", "发布任务");
+
+                LogUtils.LOG("ceshi", "发布任务返回json"+respose, "发布任务");
                 int status = 0;
                 String msg = "";
                 try {
@@ -347,20 +375,16 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                     e.printStackTrace();
                 }
                 if (status == 1) {
-//                    Intent intent = new Intent(IssueTaskNextActivity.this, MainActivity.class);
-//                    startActivity(intent);
-
-                    Intent intentpay = new Intent(getActivity(), PayActivity.class);
-                    intentpay.putExtra("title", "全民帮—任务付款");
-                    intentpay.putExtra("order_no", "000000");
-                    intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
-                    intentpay.putExtra("taskid", Staticdata.map_task.get("task_id")+"");
-                    startActivity(intentpay);
+                    Intent intent = new Intent(getActivity(), MatchShopActivity.class);
+                    intent.putExtra("respose",respose);
+                    intent.putExtra("id",Staticdata.map_task.get("task_id")+"");
+                    startActivity(intent);
 
                     Staticdata.imagePathlist.clear();
-//                    Staticdata.map_task.clear();
-                    Staticdata.PayissuetaskSuccess=true;
+                    Staticdata.map_task.clear();
+
                 } else {
+                    ToastUtils.showToast(getActivity(),"附近没有此类型商户");
                     count = 0;
                     mList_picID.clear();
                     mKProgressHUD.dismiss();
@@ -376,7 +400,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                 count = 0;
                 mList_picID.clear();
             }
-        }).postHttp(Urls.Baseurl_cui + Urls.issuetask, getActivity(), 1, map);
+        }).postHttp(Urls.Baseurl_cui + Urls.issuetask_zhaoshanghu, getActivity(), 1, map);
     }
     private void setdata() {
         Staticdata.mlistdata_pic.clear();//展示得 选择得图片得bitmap
@@ -424,29 +448,14 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
 
     private void initlistenner() {
-        linearLayout_banyungong.setOnClickListener(this);
-        linearLayout_qingjie.setOnClickListener(this);
-        linearLayout_bangmai.setOnClickListener(this);
-        linearLayout_yuyue.setOnClickListener(this);
-        linearLayout_daijia.setOnClickListener(this);
-        linearLayout_dingzhi.setOnClickListener(this);
-
-
-        mImage_choosejieshou.setOnClickListener(this);
-        mText_choosejieshou.setOnClickListener(this);
-        mImage_chooseme.setOnClickListener(this);
-        mImage_choosehelper.setOnClickListener(this);
-        mtextview_choseme.setOnClickListener(this);
-        mtextview_chosehelper.setOnClickListener(this);
-        mEditview_taskmoney.addTextChangedListener(new MoneyTextWatcher(mEditview_taskmoney).setDigits(2));
-//        mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent mIntent_map = new Intent(getActivity(), LocationMapActivity.class);
-//                startActivityForResult(mIntent_map, 2018418);
-//            }
-//        });
-
+        gridview_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter_weixiuJiazheng.setSelectedPosition(position);
+                adapter_weixiuJiazheng.notifyDataSetInvalidated();
+                task_typeID=mdata.get(position).getSpecialty_id();
+            }
+        });
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -538,152 +547,9 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         image_chosePIC.setOnClickListener(this);
 
     }
-    void  setunselect(){
-        linearLayout_banyungong.setSelected(false);
-        linearLayout_qingjie.setSelected(false);
-        linearLayout_bangmai.setSelected(false);
-        linearLayout_yuyue.setSelected(false);
-        linearLayout_daijia.setSelected(false);
-        linearLayout_dingzhi.setSelected(false);
-        imageView_banyungong.setSelected(false);
-        imageView_qingjie.setSelected(false);
-        imageView_bangmai.setSelected(false);
-        imageView_yuyue.setSelected(false);
-        imageView_daijia.setSelected(false);
-        imageView_dingzhi.setSelected(false);
-        textView_banyungong.setSelected(false);
-        textView_qingjie.setSelected(false);
-        textView_bangmai.setSelected(false);
-        textView_yuyue.setSelected(false);
-        textView_daijia.setSelected(false);
-        textView_dingzhi.setSelected(false);
-    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
-            case R.id.lin_banyungong:
-                setunselect();
-                task_typeID=2200;
-                linearLayout_banyungong.setSelected(true);
-                imageView_banyungong.setSelected(true);
-                textView_banyungong.setSelected(true);
-                break;
-            case R.id.lin_qingjie:
-                task_typeID=2201;
-                setunselect();
-                linearLayout_qingjie.setSelected(true);
-                imageView_qingjie.setSelected(true);
-                textView_qingjie.setSelected(true);
-
-                break;
-            case R.id.lin_bangmai:
-                task_typeID=2202;
-                setunselect();
-                linearLayout_bangmai.setSelected(true);
-                imageView_bangmai.setSelected(true);
-                textView_bangmai.setSelected(true);
-
-                break;
-            case R.id.lin_yuyue:
-                task_typeID=2203;
-                setunselect();
-                linearLayout_yuyue.setSelected(true);
-                imageView_yuyue.setSelected(true);
-                textView_yuyue.setSelected(true);
-
-                break;
-            case R.id.lin_daijia:
-                task_typeID=2204;
-                setunselect();
-                linearLayout_daijia.setSelected(true);
-                imageView_daijia.setSelected(true);
-                textView_daijia.setSelected(true);
-
-                break;
-            case R.id.lin_dingzhi:
-                task_typeID=2205;
-                setunselect();
-                linearLayout_dingzhi.setSelected(true);
-                imageView_dingzhi.setSelected(true);
-                textView_dingzhi.setSelected(true);
-                break;
-            case R.id.text_choosehelper:
-                if (!mImage_choosehelper.isSelected()) {
-
-//                    ToastUtils.showToast(IssueTaskActivity.this,"帮手出价需缴纳5元押金");
-                    new Popwindow_Tip("需缴纳5元押金", getActivity(), new Interence_complteTask() {
-                        @Override
-                        public void onResult(boolean result) {
-                            if (result) {
-                                mImage_choosehelper.setSelected(true);
-                                mImage_chooseme.setSelected(false);
-                                isMEchujia = 2;
-                                relativelayout_chujia.setVisibility(View.GONE);
-                                mEditview_taskmoney.setText("");
-                                is_counteroffer = 1;
-                            }
-
-                        }
-                    }).showPopwindow();
-
-                }
-                break;
-            case R.id.textview_chooseme:
-                if (!mImage_chooseme.isSelected()) {
-                    mImage_chooseme.setSelected(true);
-                    mImage_choosehelper.setSelected(false);
-                    isMEchujia = 1;
-                    relativelayout_chujia.setVisibility(View.VISIBLE);
-                }
-                break;
-            case R.id.image_choosehelper:
-                if (!mImage_choosehelper.isSelected()) {
-                    new Popwindow_Tip("需缴纳5元押金", getActivity(), new Interence_complteTask() {
-                        @Override
-                        public void onResult(boolean result) {
-                            if (result) {
-                                mImage_choosehelper.setSelected(true);
-                                mImage_chooseme.setSelected(false);
-                                isMEchujia = 2;
-                                relativelayout_chujia.setVisibility(View.GONE);
-                                mEditview_taskmoney.setText("");
-                                is_counteroffer = 1;
-                            }
-
-                        }
-                    }).showPopwindow();
-
-
-                }
-                break;
-            case R.id.image_chooseme:
-                if (!mImage_chooseme.isSelected()) {
-                    mImage_chooseme.setSelected(true);
-                    mImage_choosehelper.setSelected(false);
-                    isMEchujia = 1;
-                    relativelayout_chujia.setVisibility(View.VISIBLE);
-                }
-                break;
-            case R.id.image_choosejieshou:
-                if (!mImage_choosejieshou.isSelected()) {
-                    mImage_choosejieshou.setSelected(true);
-                    is_counteroffer = 1;
-                } else {
-                    mImage_choosejieshou.setSelected(false);
-                    is_counteroffer = 0;
-                }
-                break;
-
-            case R.id.text_choosejieshou:
-                if (!mImage_choosejieshou.isSelected()) {
-                    mImage_choosejieshou.setSelected(true);
-                    is_counteroffer = 1;
-                } else {
-                    mImage_choosejieshou.setSelected(false);
-                    is_counteroffer = 0;
-                }
-                break;
             case R.id.image_chosePIC:
                 choosePIC();
 
@@ -719,31 +585,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             return false;
         }
 
-//        detailed_address = mEditview_addressDetail.getText() + "";
-//        if (detailed_address.equals("")) {
-//            ToastUtils.showToast(getActivity(), "请填写详细地址");
-//            return false;
-//        }
-        commission = mEditview_taskmoney.getText() + "";
-        if (!commission.equals("")) {
-            float min = Float.parseFloat(commission);
-            map_issueTask.put("is_helper_bid", "N");//由我出价
-            LogUtils.LOG("ceshi", min + "", "最低佣金");
-            if (min < 5) {
-                ToastUtils.showToast(getActivity(), "佣金不能低于5元");
-                return false;
-            }
-        } else {
-            if (isMEchujia == 1) {
-                map_issueTask.put("is_helper_bid", "N");
-                ToastUtils.showToast(getActivity(), "请填写佣金");
-                return false;
-            } else {
-                commission = "5";
-                map_issueTask.put("is_helper_bid", "Y");//由帮手出价
-
-            }
-        }
         if(address_right.equals("")){
             map_issueTask.put("detailed_address", release_address + "");
         }else {
@@ -822,5 +663,31 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+    //数字动态添加变化
+    int time = 0;
+    Timer timer;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    time=time+50;
+                    textview_suiji.setText( " "+time + " 位 ");
+                    if (time > Staticdata.suijiAcount) {
+                        textview_suiji.setText( " "+Staticdata.suijiAcount + " 位 ");
+                        time=0;
+                        if(timer!=null){
+                            timer.cancel();
+                        }
+                        timer=null;
+                    }
+                    break;
+            }
+        }
+
+
+    };
 
 }

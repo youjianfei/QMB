@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,20 +24,26 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
+import com.jingnuo.quanmb.Adapter.Adapter_WeixiuJiazheng;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
 import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
+import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
+import com.jingnuo.quanmb.activity.MatchShopActivity;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
+import com.jingnuo.quanmb.class_.UpLoadImage;
 import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.WeixiuJiazhengBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_JiazhengweixiuTYpe;
@@ -58,24 +66,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
     View rootview;
     //控件
-    LinearLayout mLinearlayout_zhaoshanghu;//找商户模块
-    TextView mTextview_taskAddress;//地图返回地点
-    TextView mTextview_choose;
-    TextView mTextview_time;
+    MyGridView gridview_type;
+    TextView mTextview_time;//预约时间
     RelativeLayout mRelativelayout_chosetime;//选择时间
-    EditText mEditview_addressDetail;//详细地址
+    //    EditText mEditview_addressDetail;//详细地址
     EditText mEditview_taskdetails;
     MyGridView imageGridview;
     ImageView image_chosePIC;
     Button mButton_sub;
+    ImageView imageview_jiazheng;
+
+
+    TextView textview_suiji;//随机数
+
 
     //对象
-    Popwindow_ChooseTime popwindow_chooseTime;
     PermissionHelper permissionHelper;
+    Popwindow_ChooseTime popwindow_chooseTime;
     //    Popwindow_CompleteTime popwindow_completeTime;
     DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
@@ -86,10 +99,30 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     String citycode = "";//城市名字
 
     String task_description = "";
-    String task_typeID = "";
     String task_time = "";
     String release_address = "";
     Bitmap mBitmap = null;
+    String commission = "";
+    int task_typeID=1204;
+    String  JiazhengTypeJson="{\"list\":[{\"specialty_id\":1204,\"specialty_name\":\"手机\",\"image\":\"\"," +
+            "\"isselect\":true},{\"specialty_id\":1201,\"specialty_name\":\"房屋\",\"image\":\"\",\"isselect\":false}," +
+            "{\"specialty_id\":1210,\"specialty_name\":\"家电\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1207," +
+            "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1209,\"specialty_name\":\"开锁\"," +
+            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1206,\"specialty_name\":\"数码\",\"image\":\"\",\"isselect\":false}," +
+            "{\"specialty_id\":1208,\"specialty_name\":\"电路\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1202,\"specialty_name\"" +
+            ":\"家具\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1212,\"specialty_name\":\"手表\",\"image\":\"\",\"isselect\":false}" +
+            ",{\"specialty_id\":1205,\"specialty_name\":\"空调\",\"image\":\"\",\"isselect\":false},\n" +
+            "{\"specialty_id\":1203,\"specialty_name\":\"电脑\",\"image\":\"\",\"isselect\":false},\n" +
+            "{\"specialty_id\":1211,\"specialty_name\":\"电动车\",\"image\":\"\",\"isselect\":false}]}";
+    List<WeixiuJiazhengBean.ListBean>mdata;
+    int [] images={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_jiadian,R.mipmap.b_guandao,R.mipmap.b_kaisuo,R.mipmap.b_shuma
+            ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_shoubiao,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao,R.mipmap.b_diandongche};
+    int [] images_select={R.mipmap.w_shouji,R.mipmap.w_fangwu,R.mipmap.w_jiadian,R.mipmap.w_guandao,R.mipmap.w_kaisuo,R.mipmap.w_shuma
+            ,R.mipmap.w_dianlu,R.mipmap.w_jiaju,R.mipmap.w_shoubiao,R.mipmap.w_kongtiao,R.mipmap.w_diannao,R.mipmap.w_diandongche};
+    Adapter_WeixiuJiazheng adapter_weixiuJiazheng;
+
+
+    int   suijiAcount=0;//随机数
 
     String detailed_address = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
@@ -97,14 +130,18 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     boolean ceshi = true;
     int PIC_mix = 3;//选择图片得张数
 
+    List<String> mList_picID;// 上传图片返回ID;
+    int count = 0;//图片的张数。判断调用几次上传图片接口
+    String img_id = "";//图片
     List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
     Map map_issueTask;
-
+    UpLoadImage upLoadImage;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_jiazhengweixiu, container, false);
+
         initview();
         initdata();
         setdata();
@@ -115,30 +152,251 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     }
 
     private void initview() {
-        //找商户模块
-        mLinearlayout_zhaoshanghu = rootview.findViewById(R.id.linearlayout_zhaoshanghu);
-        mTextview_taskAddress = rootview.findViewById(R.id.text_chooseaddress);
-        mTextview_choose = rootview.findViewById(R.id.text_chooce);
+        gridview_type = rootview.findViewById(R.id.gridview_type);
+        imageview_jiazheng = rootview.findViewById(R.id.imageview_jiazheng);
         mTextview_time = rootview.findViewById(R.id.edit_tasktime);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
-        mEditview_addressDetail = rootview.findViewById(R.id.edit_detailaddress);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
         imageGridview = rootview.findViewById(R.id.GridView_PIC);
         image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
+        textview_suiji=rootview.findViewById(R.id.textview_suiji);
 
     }
 
     private void initdata() {
+        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
+        int  hight=(int) (Staticdata.ScreenWidth * 0.38);
+        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
+        imageview_jiazheng.setLayoutParams(mLayoutparams);
+
+        mdata=new ArrayList<>();
+        mdata.addAll(new Gson().fromJson(JiazhengTypeJson,WeixiuJiazhengBean.class).getList());
+        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images,images_select);
+        gridview_type.setAdapter(adapter_weixiuJiazheng);
+
+
+        //随机数动态变化
+        textview_suiji.setText(Staticdata.suijiAcount+"");
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                mhandler.sendEmptyMessage(0);
+            }
+        };
+        timer.schedule(timerTask, 0, 50);
+
+        mList_picID=new ArrayList<>();
         mKProgressHUD = new KProgressHUD(getActivity());
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
-        mTextview_taskAddress.setText(Staticdata.aoi);
+//        mTextview_taskAddress.setText(Staticdata.aoi);
         xValue=Staticdata.xValue;
         yValue=Staticdata.yValue;
         citycode=Staticdata.city_location;
-    }
 
+        upLoadImage = new UpLoadImage(getActivity(), new Interface_loadImage_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "发布技能上传图片返回respose");
+                if (respose.equals("erro")) {
+//                    progressDlog.cancelPD();
+                    mKProgressHUD.dismiss();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showToast(getActivity(), "网络开小差儿，请重新提交");
+                        }
+                    });
+                    mList_picID.clear();
+                    return;
+                }
+                int status = 0;
+                String msg = "";
+                String imageID = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("msg");//登录返回信息
+
+                    if (status == 1) {
+                        count++;
+                        imageID = (String) object.get("imgID");
+                        LogUtils.LOG("ceshi", "单张图片ID" + imageID, "发布技能上传图片返回imageID");
+                        mList_picID.add(0, imageID);
+                        LogUtils.LOG("ceshi", mList_picID.size() + "tupiangeshu", "发布技能上传图片返回imageID333");
+                        if (count != Staticdata.imagePathlist.size()) {
+                            uploadimgagain(count);
+                        } else {
+                            for (String image : mList_picID) {
+                                img_id = img_id + image + ",";
+                            }
+                            Staticdata.map_task.put("task_Img_id", img_id);
+                            LogUtils.LOG("ceshi", "上传图片完成", "发布技能上传图片");
+                            requestTaskid();
+//                            requast(Staticdata.map_task);//正式发布任务
+                        }
+                    } else {
+//                        progressDlog.cancelPD();
+                        mKProgressHUD.dismiss();
+                        mList_picID.clear();
+                        final String finalMsg = msg;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.showToast(getActivity(), finalMsg);
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    void uploadimg() {
+        if (Staticdata.imagePathlist.size() >= 1) {
+            upLoadImage.uploadImg(Staticdata.imagePathlist.get(0), 2,"Y");
+        } else {
+            requestTaskid();
+        }
+
+    }
+    void uploadimgagain(int count) {
+        upLoadImage.uploadImg(Staticdata.imagePathlist.get(count), 2,"Y");
+    }
+    void requestTaskid() {//请求任务号,
+        LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.gettaskid
+                + Staticdata.static_userBean.getData().getUser_token(), "获取任务ID");
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "获取任务ID");
+//                {"code":1,"date":151,"message":"获取成功"}
+                int status = 0;
+                String msg = "";
+                int data = 0;
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    data = (Integer) object.get("data");//
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
+                    if (status == 1) {
+                        Staticdata.map_task.put("task_id", data + "");
+
+                        requast(Staticdata.map_task);
+
+                    } else {
+                        ToastUtils.showToast(getActivity(), msg);
+//                        progressDlog.cancelPD();
+                        mKProgressHUD.dismiss();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui + Urls.gettaskid
+                + Staticdata.static_userBean.getData().getUser_token(), getActivity(), 0);
+    }
+    void requast(Map map) {//正式发布个性任务
+//        LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
+//        new Volley_Utils(new Interface_volley_respose() {
+//            @Override
+//            public void onSuccesses(String respose) {
+////                progressDlog.cancelPD();
+//                mKProgressHUD.dismiss();
+//                LogUtils.LOG("ceshi", "发布任务返回json", "发布任务");
+//                int status = 0;
+//                String msg = "";
+//                try {
+//                    JSONObject object = new JSONObject(respose);
+//                    status = (Integer) object.get("code");//
+//                    msg = (String) object.get("message");//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                if (status == 1) {
+//
+//                    Intent intentpay = new Intent(getActivity(), PayActivity.class);
+//                    intentpay.putExtra("title", "全民帮—任务付款");
+//                    intentpay.putExtra("order_no", "000000");
+//                    intentpay.putExtra("amount", Staticdata.map_task.get("commission")+"");
+//                    intentpay.putExtra("taskid", Staticdata.map_task.get("task_id")+"");
+//                    startActivity(intentpay);
+//
+//                    Staticdata.imagePathlist.clear();
+////                    Staticdata.map_task.clear();
+//                    Staticdata.PayissuetaskSuccess=true;
+//                } else {
+//                    count = 0;
+//                    mList_picID.clear();
+//                    mKProgressHUD.dismiss();
+//                    ToastUtils.showToast(getActivity(), msg);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(int error) {
+////                progressDlog.cancelPD();
+//                mKProgressHUD.dismiss();
+//                count = 0;
+//                mList_picID.clear();
+//            }
+//        }).postHttp(Urls.Baseurl_cui + Urls.issuetask, getActivity(), 1, map);
+        LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
+
+                LogUtils.LOG("ceshi", "发布任务返回json"+respose, "发布任务");
+                int status = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(respose);
+                    status = (Integer) object.get("code");//
+                    msg = (String) object.get("message");//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status == 1) {
+                    Intent intent = new Intent(getActivity(), MatchShopActivity.class);
+                    intent.putExtra("respose",respose);
+                    intent.putExtra("id",Staticdata.map_task.get("task_id")+"");
+                    startActivity(intent);
+
+                    Staticdata.imagePathlist.clear();
+                    Staticdata.map_task.clear();
+
+                } else {
+                    ToastUtils.showToast(getActivity(),"附近没有此类型商户");
+                    count = 0;
+                    mList_picID.clear();
+                    mKProgressHUD.dismiss();
+                    ToastUtils.showToast(getActivity(), msg);
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+//                progressDlog.cancelPD();
+                mKProgressHUD.dismiss();
+                count = 0;
+                mList_picID.clear();
+            }
+        }).postHttp(Urls.Baseurl_cui + Urls.issuetask_zhaoshanghu, getActivity(), 1, map);
+    }
     private void setdata() {
         Staticdata.mlistdata_pic.clear();//展示得 选择得图片得bitmap
 
@@ -147,7 +405,6 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-
         dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
             @Override
             public void onResult(String time) {
@@ -155,6 +412,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                 mTextview_time.setText(time);
             }
         });
+
     }
 
     public void setview(Intent data) {
@@ -183,21 +441,20 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
             imageGridview.setVisibility(View.VISIBLE);
         }
     }
-    public void setAddress(String address){
-        mTextview_taskAddress.setText(address);
-    }
+
     private void initlistenner() {
-        mTextview_choose.setOnClickListener(this);
-        mTextview_taskAddress.setOnClickListener(new View.OnClickListener() {
+        gridview_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent mIntent_map = new Intent(getActivity(), LocationMapActivity.class);
-                startActivityForResult(mIntent_map, 2018418);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter_weixiuJiazheng.setSelectedPosition(position);
+                adapter_weixiuJiazheng.notifyDataSetInvalidated();
+                task_typeID=mdata.get(position).getSpecialty_id();
             }
         });
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                popwindow_completeTime.showPopwindow();
 //                dataTimeSelect.timeSelect(getActivity());
                 popwindow_chooseTime=new Popwindow_ChooseTime(getActivity(), new InterfaceDate_select() {
                     @Override
@@ -212,6 +469,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 map_issueTask.put("city_code", citycode + "");
                 map_issueTask.put("x_value", xValue + "");
                 map_issueTask.put("y_value", yValue + "");
@@ -224,13 +482,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                     Map map_check = new HashMap();
                     map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_check.put("task_description", map_issueTask.get("task_description"));
-                    map_check.put("houseNumber", map_issueTask.get("houseNumber"));
+//                    map_check.put("houseNumber", map_issueTask.get("houseNumber"));
+
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
                             int status = 0;
                             String msg = "";
-                            mKProgressHUD.dismiss();
+
                             try {
                                 JSONObject object = new JSONObject(respose);
                                 status = (Integer) object.get("code");//
@@ -242,10 +501,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                             if (status == 1) {
                                 Staticdata.map_task.put("check", 1 + "");
                                 LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
-                                Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
-                                intent.putExtra("issuetask","zhaoshanghu");
-                                startActivity(intent);
+//                                Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
+//                                intent.putExtra("issuetask","zhaorenshou");
+//                                startActivity(intent);
+                                mList_picID.clear();
+                                count = 0;
+                                uploadimg();
                             } else {
+                                mKProgressHUD.dismiss();
                                 ToastUtils.showToast(getActivity(), msg);
                             }
                         }
@@ -279,7 +542,6 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         image_chosePIC.setOnClickListener(this);
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -287,32 +549,12 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                 choosePIC();
 
                 break;
-            case R.id.text_chooce://选择家政维修类型
-                new Popwindow_JiazhengweixiuTYpe(getActivity(), new InterfacePopwindow_SkillType() {
-                    @Override
-                    public void onSuccesses(String type, int id) {
-                        mTextview_choose.setText(type);
-                        task_typeID = id + "";
-                    }
-                }).showPopwindow();
-//                mPopwindow_skilltype = new Popwindow_SkillType(getActivity(), new InterfacePopwindow_SkillType() {
-//                    @Override
-//                    public void onSuccesses(String type, int id) {
-//                        mTextview_choose.setText(type);
-//                        task_typeID = id + "";
-//                    }
-//                });
-//                mPopwindow_skilltype.showPopwindow();
-                break;
         }
+
     }
 
     boolean initmap_zhaoshanghu() {
-        String task_type = mTextview_choose.getText() + "";
-        if (task_type.equals("请选择类型")) {
-            ToastUtils.showToast(getActivity(), "请选择任务类型");
-            return false;
-        }
+
         task_description = mEditview_taskdetails.getText() + "";
         if (task_description.equals("")) {
             ToastUtils.showToast(getActivity(), "请填写任务说明");
@@ -324,23 +566,19 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         }
 
         task_time = mTextview_time.getText() + "";
-        if (task_time.equals("请选择希望完成时间")) {
-            ToastUtils.showToast(getActivity(), "请选择希望完成时间");
+        if (task_time.equals("请选择预约时间")) {
+            ToastUtils.showToast(getActivity(), "请选择预约时间");
             return false;
         }
+        release_address = address_left + "";
 
-        release_address = mTextview_taskAddress.getText() + "";
+        if (release_address.equals("")) {
+            release_address=Staticdata.aoi;
+        }
         if (release_address.equals("选择地址")) {
-            ToastUtils.showToast(getActivity(), "请选择任务地点");
+            ToastUtils.showToast(getActivity(), "请选择任务地址");
             return false;
         }
-
-        detailed_address = mEditview_addressDetail.getText() + "";
-        if (detailed_address.equals("")) {
-            ToastUtils.showToast(getActivity(), "请填写详细地址");
-            return false;
-        }
-        detailed_address = address_right + detailed_address;
 
         if(address_right.equals("")){
             map_issueTask.put("detailed_address", release_address + "");
@@ -350,10 +588,12 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
+        map_issueTask.put("commission", commission + "");//由帮手出价
+        map_issueTask.put("is_counteroffer", is_counteroffer + "");
         map_issueTask.put("release_address", release_address);
-        map_issueTask.put("houseNumber", detailed_address + "");
+//        map_issueTask.put("houseNumber", detailed_address + "");
 
-        Staticdata.map_task.put("tasktypename", task_type);
+//        Staticdata.map_task.put("tasktypename", task_type);
 
         LogUtils.LOG("ceshi", map_issueTask.toString(), "发布任务map集合中的内容");
 
@@ -403,24 +643,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 
     String address_left = "";
     String address_right = "";
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2018418 && resultCode == 2018418) {
-            address_left = data.getStringExtra("address");
-            address_right = data.getStringExtra("address2");
-            xValue = data.getStringExtra("xValue");
-            yValue = data.getStringExtra("yValue");
-            citycode = data.getStringExtra("citycode");
-            mTextview_taskAddress.setText(address_left);
-        }
-
-
+    public void setAddress(Intent data){
+        address_left = data.getStringExtra("address");
+        address_right = data.getStringExtra("address2");
+        xValue = data.getStringExtra("xValue");
+        yValue = data.getStringExtra("yValue");
+        citycode = data.getStringExtra("citycode");
+        Staticdata.aoi=address_left;
     }
-
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -428,4 +658,30 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+    //数字动态添加变化
+    int time = 0;
+    Timer timer;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    time=time+50;
+                    textview_suiji.setText( " "+time + " 位 ");
+                    if (time > Staticdata.suijiAcount) {
+                        textview_suiji.setText( " "+Staticdata.suijiAcount + " 位 ");
+                        time=0;
+                        if(timer!=null){
+                            timer.cancel();
+                        }
+                        timer=null;
+                    }
+                    break;
+            }
+        }
+
+
+    };
 }
