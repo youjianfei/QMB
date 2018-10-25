@@ -198,8 +198,7 @@ public class Fragment_shopdetail extends Fragment{
 //                        matchingBean.getBusiness_name(),
 //                        Uri.parse(matchingBean.getHeadUrl())));
 //                RongIM.getInstance().setMessageAttachedUserInfo(true);
-                RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getClient_no(),matchingBean.getBusiness_name());
-
+                RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getBusiness_no(),matchingBean.getBusiness_name());
             }
         });
     }

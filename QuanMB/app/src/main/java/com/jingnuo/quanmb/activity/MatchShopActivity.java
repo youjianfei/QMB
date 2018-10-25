@@ -70,7 +70,7 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     List<String> imageview_urllist;
     Map map_taskdetail;//任务详情map
-    Map map_price;//请求价格map
+//    Map map_price;//请求价格map
 
     int page=0;//viewpager  默认展示第1个
     int page_all=0;//viewpager  一共多少页；
@@ -130,10 +130,10 @@ public class MatchShopActivity extends AppCompatActivity  {
         map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
         map_taskdetail.put("id", ID + "");
 //        request(map_taskdetail);//请求任务详情
-        map_price=new HashMap();
-        map_price.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-        map_price.put("task_id", ID + "");
-        map_price.put("business_no", list_matchbea.get(0).getBusiness_no());
+//        map_price=new HashMap();
+//        map_price.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+//        map_price.put("task_id", ID + "");
+//        map_price.put("business_no", list_matchbea.get(0).getBusiness_no());
 //        timer = new Timer();
 //        TimerTask timerTask = new TimerTask() {
 //            @Override
@@ -177,7 +177,7 @@ public class MatchShopActivity extends AppCompatActivity  {
                     @Override
                     public void onResult(boolean result) {
                         if (result){
-                            Intent intent=new Intent(MatchShopActivity.this,MainActivity.class);
+                            Intent intent=new Intent(MatchShopActivity.this,IssueTaskActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -376,7 +376,7 @@ public class MatchShopActivity extends AppCompatActivity  {
             @Override
             public void onResult(boolean result) {
                 if (result){
-                    Intent intent=new Intent(MatchShopActivity.this,MainActivity.class);
+                    Intent intent=new Intent(MatchShopActivity.this,IssueTaskActivity.class);
                     startActivity(intent);
                     finish();
                 }

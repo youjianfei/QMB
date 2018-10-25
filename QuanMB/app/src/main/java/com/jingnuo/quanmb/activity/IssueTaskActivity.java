@@ -3,29 +3,43 @@ package com.jingnuo.quanmb.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.jaeger.library.StatusBarUtil;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Utils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.yancy.imageselector.ImageSelector;
 import com.jingnuo.quanmb.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+import io.rong.imkit.RongIM;
 
-public class IssueTaskActivity extends BaseActivityother {
+import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
+
+public class IssueTaskActivity extends FragmentActivity implements View.OnClickListener{
+    public static IssueTaskActivity issueTaskActivity;
     /**
      * 公用
      */
@@ -33,14 +47,16 @@ public class IssueTaskActivity extends BaseActivityother {
 //    TabLayout mTablayout_task;
     TextView text_chooceaddress;
     TabLayout tablayout_issue;
+    DrawerLayout drawerlayout_menu;
+    CircleImageView image_dot;
+    ImageView mImageview_message;//消息
+    ImageView mImageview_iamge_person;//用户中心
 
 
     String xValue = "";//纬度
     String yValue = "";//经度
     String citycode = "";//城市名字
     String Aoi="";
-
-
 
 
     Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
@@ -51,14 +67,31 @@ public class IssueTaskActivity extends BaseActivityother {
     FragmentTransaction transaction;
 
     int Tag=0;//   0找商户  1  找人手   2   家政维修
-
-
     @Override
-    public int setLayoutResID() {
-        return R.layout.activity_issue_task;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_issue_task);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
+        //注册监听函数
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR| View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(option);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }2
+
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setCustomView(R.mipmap.aboutus);
+
+        initView();
+        initData();
+        initListener();
+        setData();
+
     }
 
-    @Override
+
     protected void setData() {
         setmapdata();
     }
@@ -79,7 +112,9 @@ public class IssueTaskActivity extends BaseActivityother {
                     citycode = aMapLocation.getCity();//城市信息
                      Aoi = aMapLocation.getAoiName() + "";
                     LogUtils.LOG("ceshi", "定位成功" + aMapLocation.getPoiName()+"11"+Aoi, "发布任务");
-
+                    Staticdata.xValue = aMapLocation.getLatitude() + "";//获取纬度
+                    Staticdata.yValue = aMapLocation.getLongitude() + "";//获取经度
+                    Staticdata.city_location = aMapLocation.getCity();//城市信息
                     if (Aoi.equals("")) {
                         Staticdata.aoi=aMapLocation.getPoiName();
                         text_chooceaddress.setText(Staticdata.aoi);
@@ -97,7 +132,21 @@ public class IssueTaskActivity extends BaseActivityother {
                         Staticdata.aoi="选择地址" ;
                         text_chooceaddress.setText(Staticdata.aoi);
                     }
+                    if (Staticdata.isLogin) {
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
 
+                            }
+
+                            @Override
+                            public void onError(int error) {
+
+                            }
+                        }).Http(Urls.Baseurl + Urls.updataXYDU + Staticdata.static_userBean.getData().getUser_token() + "&x_value=" +
+                                Staticdata.xValue + "&y_value=" + Staticdata.yValue, IssueTaskActivity.this, 0);
+
+                    }
                 } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 }
@@ -125,22 +174,32 @@ public class IssueTaskActivity extends BaseActivityother {
         mLocationClient.startLocation();
     }
 
-    @Override
+
     protected void initData() {
+        if (issueTaskActivity == null) {
+            issueTaskActivity = this;
+        }
         Staticdata.suijiAcount= Utils.getNum(500,1000);
         fragment_task_jiaZhengWeixiu = new Fragment_task_JiaZhengWeixiu();
         fragmetnmanager = getFragmentManager();
         transaction = fragmetnmanager.beginTransaction();
         transaction.add(R.id.framelayout_main, fragment_task_jiaZhengWeixiu).commit();
+        if (isLogin) {
+            drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
+        } else {
+            drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
+        }
     }
 
-    @Override
+
     protected void initListener() {
+        mImageview_iamge_person.setOnClickListener(this);
+        mImageview_message.setOnClickListener(this);
                 text_chooceaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent_map = new Intent(IssueTaskActivity.this, LocationMapActivity.class);
-                startActivityForResult(mIntent_map, 2018418);
+                startActivityForResult(mIntent_map, 418);
             }
         });
     tablayout_issue.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -197,10 +256,14 @@ public class IssueTaskActivity extends BaseActivityother {
 
 
 
-    @Override
+
     protected void initView() {
+        image_dot = findViewById(R.id.image_dot);
+        drawerlayout_menu = findViewById(R.id.drawerlayout_menu);
         text_chooceaddress=findViewById(R.id.text_chooceaddress);
         tablayout_issue=findViewById(R.id.tablayout_issue);
+        mImageview_message = findViewById(R.id.iamge_message);
+        mImageview_iamge_person = findViewById(R.id.iamge_person);
         tablayout_issue.addTab(tablayout_issue.newTab().setText("维修").setTag("0"));
         tablayout_issue.addTab(tablayout_issue.newTab().setText("家政").setTag("1"));
         tablayout_issue.addTab(tablayout_issue.newTab().setText("其他").setTag("2"));
@@ -225,7 +288,7 @@ public class IssueTaskActivity extends BaseActivityother {
 //                fragment_task_jiaZhengWeixiu.setview(data);
 //            }
         }
-        if (requestCode == 2018418 && resultCode == 2018418) {
+        if (requestCode == 418 && resultCode == 418) {
             text_chooceaddress.setText(data.getStringExtra("address"));
             if(Tag==0&&fragment_task_jiaZhengWeixiu!=null){
                 fragment_task_jiaZhengWeixiu.setAddress(data);
@@ -244,5 +307,64 @@ public class IssueTaskActivity extends BaseActivityother {
         super.onDestroy();
         LogUtils.LOG("ceshi", "onDestroy", "faburenwu");
         mLocationClient.onDestroy();//调用定位结束方法
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.iamge_message://消息界面
+//                if (isLogin) {
+//                    image_dot.setVisibility(View.INVISIBLE);
+//                    intent=new Intent(MainActivity.this,MessageActivity.class);
+//                    intent.putExtra("newmessageTYpe",Staticdata.newmessageTYpe);
+//                    startActivity(intent);
+//                    Staticdata.newmessageTYpe="notype";//跳转完之后归0
+//                } else {
+//                    intent = new Intent(this, LoginActivity.class);
+//                    startActivity(intent);
+//                }
+                if (isLogin) {
+                    image_dot.setVisibility(View.INVISIBLE);
+                    RongIM.getInstance().setMessageAttachedUserInfo(true);
+
+                    intent = new Intent(IssueTaskActivity.this, ConversationListActivity.class);
+                    intent.putExtra("newmessageTYpe", Staticdata.newmessageTYpe);
+                    startActivity(intent);
+                    Staticdata.newmessageTYpe = "notype";//跳转完之后归0
+                } else {
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.iamge_person://个人中心
+                if (isLogin) {
+                    drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
+                    drawerlayout_menu.openDrawer(Gravity.LEFT);
+                } else {
+                    drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+        }
+    }
+    public void setdot() {
+        image_dot.setVisibility(View.VISIBLE);
+    }
+    /**
+     * 再点一次退出
+     */
+    private long mLastTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - mLastTime > 2000) {
+            // 两次返回时间超出两秒
+            Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
+            mLastTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }

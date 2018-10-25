@@ -34,7 +34,7 @@ public class SetPasswordActivity extends BaseActivityother {
     mButton_setpassword.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent_login=new Intent(SetPasswordActivity.this, MainActivity.class);
+            Intent intent_login=new Intent(SetPasswordActivity.this, IssueTaskActivity.class);
             startActivity(intent_login);
         }
     });

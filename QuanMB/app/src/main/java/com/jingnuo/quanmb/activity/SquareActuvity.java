@@ -564,14 +564,14 @@ public class SquareActuvity extends BaseActivityother {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_back:
-                    Intent intent=new Intent(SquareActuvity.this,MainActivity.class);
+                    Intent intent=new Intent(SquareActuvity.this,IssueTaskActivity.class);
                     startActivity(intent);
                 break;
         }
     }
     @Override
     public void onBackPressed() {
-            Intent intent=new Intent(SquareActuvity.this,MainActivity.class);
+            Intent intent=new Intent(SquareActuvity.this,IssueTaskActivity.class);
             intent.putExtra("refresh",1);
             startActivity(intent);
     }

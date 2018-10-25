@@ -269,7 +269,7 @@ public class RegisterActivity extends BaseActivityother {
                     isLogin = true;
                     Utils.connect(Staticdata. static_userBean.getData().getAppuser().getRongCloud_token());
                     Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
-                    Intent intent_login = new Intent(RegisterActivity.this, MainActivity.class);
+                    Intent intent_login = new Intent(RegisterActivity.this, IssueTaskActivity.class);
                     RegisterActivity.this.startActivity(intent_login);
                     finish();
                 }else {

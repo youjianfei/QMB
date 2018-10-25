@@ -64,7 +64,7 @@ public class FirstLoginActivity extends BaseActivityother {
                 imageview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(FirstLoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(FirstLoginActivity.this, IssueTaskActivity.class);
                         startActivity(intent);
                         finish();
 
@@ -131,7 +131,7 @@ public class FirstLoginActivity extends BaseActivityother {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.textview_skip:
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, IssueTaskActivity.class);
                 startActivity(intent);
                 finish();
                 break;

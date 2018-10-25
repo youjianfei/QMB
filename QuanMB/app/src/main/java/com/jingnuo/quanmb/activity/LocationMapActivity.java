@@ -35,6 +35,7 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.jingnuo.quanmb.Adapter.Adapter_SearchAddress;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.R;
@@ -164,12 +165,14 @@ public class LocationMapActivity extends BaseActivityother implements AMap.OnCam
                 Intent result = new Intent();
                 result.putExtra("address", mTextview_nowaddress.getText() + "");
                 String add = mText_location.getText() + "";
-
+                 Staticdata.xValue=xValue;
+                Staticdata.yValue=yValue;
+                Staticdata.city_location=citycode;
                 result.putExtra("address2", add);
                 result.putExtra("xValue", xValue);
                 result.putExtra("yValue", yValue);
                 result.putExtra("citycode", citycode);
-                setResult(2018418, result);
+                setResult(418, result);
                 finish();
             }
         });

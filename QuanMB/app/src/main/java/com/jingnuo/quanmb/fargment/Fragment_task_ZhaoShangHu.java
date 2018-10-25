@@ -31,6 +31,7 @@ import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
+import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MatchShopActivity;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
@@ -144,9 +145,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 //        if(!Staticdata.aoi.equals("")){
 //            mTextview_taskAddress.setText(Staticdata.aoi);
 //        }
-        xValue=Staticdata.xValue;
-        yValue=Staticdata.yValue;
-        citycode=Staticdata.city_location;
+
 
 
         upLoadImage = new UpLoadImage(getActivity(), new Interface_loadImage_respose() {
@@ -395,57 +394,66 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(Staticdata.isLogin){
+                    xValue=Staticdata.xValue;
+                    yValue=Staticdata.yValue;
+                    citycode=Staticdata.city_location;
+                    map_issueTask.put("city_code", citycode + "");
+                    map_issueTask.put("x_value", xValue + "");
+                    map_issueTask.put("y_value", yValue + "");
+                    map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
+                    if (initmap_zhaoshanghu()) {
+                        ProgressDlog.showProgress(mKProgressHUD);
+                        Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
-                map_issueTask.put("city_code", citycode + "");
-                map_issueTask.put("x_value", xValue + "");
-                map_issueTask.put("y_value", yValue + "");
-                map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
-                if (initmap_zhaoshanghu()) {
-                    ProgressDlog.showProgress(mKProgressHUD);
-                    Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
-
-                    Staticdata.imagePathlist = mList_PicPath_down;
-                    Map map_check = new HashMap();
-                    map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_check.put("task_description", map_issueTask.get("task_description"));
+                        Staticdata.imagePathlist = mList_PicPath_down;
+                        Map map_check = new HashMap();
+                        map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                        map_check.put("task_description", map_issueTask.get("task_description"));
 //                    map_check.put("houseNumber", map_issueTask.get("houseNumber"));
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
-                            int status = 0;
-                            String msg = "";
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
+                                int status = 0;
+                                String msg = "";
 //                            mKProgressHUD.dismiss();
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//
-                                msg = (String) object.get("msg");//
+                                try {
+                                    JSONObject object = new JSONObject(respose);
+                                    status = (Integer) object.get("code");//
+                                    msg = (String) object.get("msg");//
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (status == 1) {
-                                Staticdata.map_task.put("check", 1 + "");
-                                LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (status == 1) {
+                                    Staticdata.map_task.put("check", 1 + "");
+                                    LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
 //                                Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
 //                                intent.putExtra("issuetask","zhaoshanghu");
 //                                startActivity(intent);
-                                mList_picID.clear();
-                                count = 0;
-                                uploadimg();
+                                    mList_picID.clear();
+                                    count = 0;
+                                    uploadimg();
 
-                            } else {
-                                ToastUtils.showToast(getActivity(), msg);
+                                } else {
+                                    ToastUtils.showToast(getActivity(), msg);
+                                    mKProgressHUD.dismiss();
+                                }
+                            }
+
+                            @Override
+                            public void onError(int error) {
                                 mKProgressHUD.dismiss();
                             }
-                        }
+                        }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
 
-                        @Override
-                        public void onError(int error) {
-                            mKProgressHUD.dismiss();
-                        }
-                    }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
-
+                    }
+                }else {
+                    Intent   intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
                 }
+
+
             }
         });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
+import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MatchShopActivity;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
@@ -165,7 +166,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     }
 
     private void initdata() {
-        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
+        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaoweixiu);
         int  hight=(int) (Staticdata.ScreenWidth * 0.38);
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
         imageview_jiazheng.setLayoutParams(mLayoutparams);
@@ -192,9 +193,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
 //        mTextview_taskAddress.setText(Staticdata.aoi);
-        xValue=Staticdata.xValue;
-        yValue=Staticdata.yValue;
-        citycode=Staticdata.city_location;
+
 
         upLoadImage = new UpLoadImage(getActivity(), new Interface_loadImage_respose() {
             @Override
@@ -469,57 +468,65 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(Staticdata.isLogin){
+                    xValue=Staticdata.xValue;
+                    yValue=Staticdata.yValue;
+                    citycode=Staticdata.city_location;
+                    map_issueTask.put("city_code", citycode + "");
+                    map_issueTask.put("x_value", xValue + "");
+                    map_issueTask.put("y_value", yValue + "");
+                    map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
+                    if (initmap_zhaoshanghu()) {
+                        ProgressDlog.showProgress(mKProgressHUD);
+                        Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
-                map_issueTask.put("city_code", citycode + "");
-                map_issueTask.put("x_value", xValue + "");
-                map_issueTask.put("y_value", yValue + "");
-                map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
-                if (initmap_zhaoshanghu()) {
-                    ProgressDlog.showProgress(mKProgressHUD);
-                    Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
-
-                    Staticdata.imagePathlist = mList_PicPath_down;
-                    Map map_check = new HashMap();
-                    map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                    map_check.put("task_description", map_issueTask.get("task_description"));
+                        Staticdata.imagePathlist = mList_PicPath_down;
+                        Map map_check = new HashMap();
+                        map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                        map_check.put("task_description", map_issueTask.get("task_description"));
 //                    map_check.put("houseNumber", map_issueTask.get("houseNumber"));
 
-                    new Volley_Utils(new Interface_volley_respose() {
-                        @Override
-                        public void onSuccesses(String respose) {
-                            int status = 0;
-                            String msg = "";
+                        new Volley_Utils(new Interface_volley_respose() {
+                            @Override
+                            public void onSuccesses(String respose) {
+                                int status = 0;
+                                String msg = "";
 
-                            try {
-                                JSONObject object = new JSONObject(respose);
-                                status = (Integer) object.get("code");//
-                                msg = (String) object.get("msg");//
+                                try {
+                                    JSONObject object = new JSONObject(respose);
+                                    status = (Integer) object.get("code");//
+                                    msg = (String) object.get("msg");//
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (status == 1) {
-                                Staticdata.map_task.put("check", 1 + "");
-                                LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (status == 1) {
+                                    Staticdata.map_task.put("check", 1 + "");
+                                    LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
 //                                Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
 //                                intent.putExtra("issuetask","zhaorenshou");
 //                                startActivity(intent);
-                                mList_picID.clear();
-                                count = 0;
-                                uploadimg();
-                            } else {
-                                mKProgressHUD.dismiss();
-                                ToastUtils.showToast(getActivity(), msg);
+                                    mList_picID.clear();
+                                    count = 0;
+                                    uploadimg();
+                                } else {
+                                    mKProgressHUD.dismiss();
+                                    ToastUtils.showToast(getActivity(), msg);
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onError(int error) {
-                            mKProgressHUD.dismiss();
-                        }
-                    }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
+                            @Override
+                            public void onError(int error) {
+                                mKProgressHUD.dismiss();
+                            }
+                        }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
 
+                    }
+                }else {
+                 Intent   intent = new Intent(getActivity(), LoginActivity.class);
+                 startActivity(intent);
                 }
+
             }
         });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

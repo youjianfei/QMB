@@ -65,7 +65,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public static MainActivity mainActivity;
     //控件
     DrawerLayout drawerlayout_menu;
-
     CircleImageView image_dot;
     ImageView mImageview_message;//消息
     ImageView mImageview_iamge_person;//用户中心
@@ -333,8 +332,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //
 //            }
 //        });
-
-
         if (isLogin) {
             drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开滑动
         } else {

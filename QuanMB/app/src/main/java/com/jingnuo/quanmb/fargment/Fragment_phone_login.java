@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.activity.IssueTaskActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.class_.SendYanZhengMa;
@@ -99,7 +100,7 @@ public class Fragment_phone_login extends Fragment {
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
                     Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
-                    Intent intent_login = new Intent(getActivity(), MainActivity.class);
+                    Intent intent_login = new Intent(getActivity(), IssueTaskActivity.class);
                     getActivity().startActivity(intent_login);
                     getActivity().finish();
                 }else {

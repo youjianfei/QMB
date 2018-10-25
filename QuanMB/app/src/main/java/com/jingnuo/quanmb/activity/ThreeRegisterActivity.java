@@ -134,7 +134,7 @@ public class ThreeRegisterActivity extends BaseActivityother {
                                 userBean=new Gson().fromJson(respose,UserBean.class);
                                 Staticdata. static_userBean=userBean;
                                 isLogin = true;
-                                Intent intent_login = new Intent(ThreeRegisterActivity.this, MainActivity.class);
+                                Intent intent_login = new Intent(ThreeRegisterActivity.this, IssueTaskActivity.class);
                                 ThreeRegisterActivity.this.startActivity(intent_login);
                                 finish();
                             }else {

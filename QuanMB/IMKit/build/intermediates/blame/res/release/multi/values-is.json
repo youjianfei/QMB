@@ -22,29 +22,5 @@
                 }
             }
         ]
-    },
-    {
-        "outputFile": "D:\\MYwork\\work\\QMB\\QuanMB\\IMKit\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-is\\values-is.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 100,
-                    "endOffset": 151
-                },
-                "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\c4195fe69b4cf4554b9805c9a44605e09e4b6c06\\output\\res\\values-is\\values-is.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 100,
-                        "endOffset": 151
-                    }
-                }
-            }
-        ]
     }
 ]

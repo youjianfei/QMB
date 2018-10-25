@@ -197,7 +197,7 @@ public class LaunchActivity extends BaseActivityother {
                         Intent intent = new Intent(LaunchActivity.this, FirstLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LaunchActivity.this, IssueTaskActivity.class);
                         startActivity(intent);
                     }
                     finish();

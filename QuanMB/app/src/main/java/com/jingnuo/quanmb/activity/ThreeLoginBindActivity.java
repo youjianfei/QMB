@@ -107,7 +107,7 @@ public class ThreeLoginBindActivity extends BaseActivityother {
                     Staticdata. static_userBean=userBean;
                     LogUtils.LOG("ceshi", respose + "1111111111", "微信绑定已有账号");
                     isLogin = true;
-                    Intent intent_login = new Intent(ThreeLoginBindActivity.this, MainActivity.class);
+                    Intent intent_login = new Intent(ThreeLoginBindActivity.this, IssueTaskActivity.class);
                     ThreeLoginBindActivity.this.startActivity(intent_login);
                     finish();
                 }else {

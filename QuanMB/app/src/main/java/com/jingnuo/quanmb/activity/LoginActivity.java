@@ -246,7 +246,7 @@ public class LoginActivity extends BaseActivityother {
                     isLogin = true;
                     Utils.connect(Staticdata. static_userBean.getData().getAppuser().getRongCloud_token());
                     Staticdata.Userphonenumber=Staticdata.static_userBean.getData().getAppuser().getMobile_no();
-                    Intent intent_login = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent_login = new Intent(LoginActivity.this, IssueTaskActivity.class);
                     startActivity(intent_login);
                     ToastUtils.showToast(LoginActivity.this,msg);
                     finish();
@@ -278,7 +278,7 @@ public class LoginActivity extends BaseActivityother {
     @Override
     public void onBackPressed() {
         LogUtils.LOG("ceshi1","点击返回","~~~~login");
-        Intent intent_main=new Intent(this,MainActivity.class);
+        Intent intent_main=new Intent(this,IssueTaskActivity.class);
         startActivity(intent_main);
         finish();
     }

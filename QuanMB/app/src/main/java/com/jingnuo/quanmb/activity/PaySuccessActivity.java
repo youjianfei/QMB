@@ -62,7 +62,7 @@ public class PaySuccessActivity extends BaseActivityother {
                 return;
             }
             if(Staticdata.PayissuetaskSuccess){
-                Intent mainIntent = new Intent(PaySuccessActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(PaySuccessActivity.this, IssueTaskActivity.class);
                 Intent intent_bargain=new Intent(PaySuccessActivity.this, MyOrderActivity.class);
                 Intent[] intents = {mainIntent, intent_bargain};
                 Staticdata.PayissuetaskSuccess=false;
@@ -72,7 +72,7 @@ public class PaySuccessActivity extends BaseActivityother {
                 return;
             }
 //                if(Staticdata.PayissuetaskSuccess){
-                    Intent mainIntent = new Intent(PaySuccessActivity.this, MainActivity.class);
+                    Intent mainIntent = new Intent(PaySuccessActivity.this, IssueTaskActivity.class);
                     startActivity(mainIntent);
                     LogUtils.LOG("pay","退款成功","PaySuccessActivity");
                     finish();
@@ -95,7 +95,7 @@ public class PaySuccessActivity extends BaseActivityother {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_back:
-                Intent  intent=new Intent(PaySuccessActivity.this,MainActivity.class);
+                Intent  intent=new Intent(PaySuccessActivity.this,IssueTaskActivity.class);
                 startActivity(intent);
                 break;
         }
