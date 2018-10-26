@@ -75,5 +75,8 @@ public class Staticdata {
 
     //随机数
     public static int  suijiAcount=0;
+    //是否延迟显示随机数
+    public static boolean isyanshi=true;
+
 
 }

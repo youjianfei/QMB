@@ -77,7 +77,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
     PermissionHelper permissionHelper;
 
 
-    int Tag=0;//   0找商户  1  找人手   2   家政维修
+    int Tag=0;//    0   维修   1  家政   2  其他
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,9 +99,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         initData();
         initListener();
         setData();
-
     }
-
 
     protected void setData() {
 
@@ -187,6 +185,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
 
     protected void initData() {
+        Staticdata.suijiAcount= Utils.getNum(500,1000);
         permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
             @Override
@@ -206,7 +205,6 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         if (issueTaskActivity == null) {
             issueTaskActivity = this;
         }
-        Staticdata.suijiAcount= Utils.getNum(500,1000);
         fragment_task_jiaZhengWeixiu = new Fragment_task_JiaZhengWeixiu();
         fragmetnmanager = getFragmentManager();
         transaction = fragmetnmanager.beginTransaction();
@@ -357,6 +355,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         super.onDestroy();
         LogUtils.LOG("ceshi", "onDestroy", "faburenwu");
         mLocationClient.onDestroy();//调用定位结束方法
+        Staticdata.isyanshi=true;
     }
 
     @Override

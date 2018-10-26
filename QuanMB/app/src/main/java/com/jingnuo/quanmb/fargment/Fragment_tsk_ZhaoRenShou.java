@@ -82,6 +82,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     //控件
     MyGridView gridview_type;
     TextView mTextview_time;//预约时间
+    TextView textview_shouqi;//收起
     RelativeLayout mRelativelayout_chosetime;//选择时间
 //    EditText mEditview_addressDetail;//详细地址
     EditText mEditview_taskdetails;
@@ -120,11 +121,17 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             "\"specialty_name\":\"擦玻璃\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1307,\"specialty_name\":\"小时工\"," +
             "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
             ",{\"specialty_id\":1301,\"specialty_name\":\"土地开荒\",\"image\":\"\",\"isselect\":false}]}";
+    String  JiazhengTypeJson_shao="{\"list\":[{\"specialty_id\":1300,\"specialty_name\":\"家庭保洁\",\"image\":\"\",\"isselect\":false}," +
+            "{\"specialty_id\":1306,\"specialty_name\":\"送水\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1302," +
+            "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆\"," +
+            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false}]}";
     List<WeixiuJiazhengBean.ListBean>mdata;
     int [] images={R.mipmap.baojie_b,R.mipmap.songshui_b,R.mipmap.youyanji_b,R.mipmap.baomu_b,R.mipmap.yuesao_b,R.mipmap.banjia_b
             ,R.mipmap.boli_b,R.mipmap.xiaoshigong_b,R.mipmap.diban_b,R.mipmap.kaihuang_b};
     int [] images_select={R.mipmap.baojie,R.mipmap.songshui,R.mipmap.youyanji,R.mipmap.baomu,R.mipmap.yuesao,R.mipmap.banjia
     ,R.mipmap.caboli,R.mipmap.xiaoshigong,R.mipmap.diban,R.mipmap.kaihuang};
+    int [] images_shao={R.mipmap.baojie_b,R.mipmap.songshui_b,R.mipmap.youyanji_b,R.mipmap.baomu_b,R.mipmap.b_all};
+    int [] images_select_shao={R.mipmap.baojie,R.mipmap.songshui,R.mipmap.youyanji,R.mipmap.baomu,R.mipmap.b_all};
     Adapter_WeixiuJiazheng adapter_weixiuJiazheng;
 
 
@@ -143,6 +150,37 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     Map map_issueTask;
     UpLoadImage upLoadImage;
 
+
+
+
+    //数字动态添加变化
+    int time = 0;
+    Timer timer;
+    TimerTask timerTask;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    time=time+64;
+                    textview_suiji.setText( " "+time + " 位 ");
+                    if (time > Staticdata.suijiAcount) {
+                        textview_suiji.setText( " "+Staticdata.suijiAcount + " 位 ");
+                        time=0;
+                        if(timer!=null){
+                            timer.cancel();
+                            timerTask.cancel();
+                        }
+                        timer=null;
+                    }
+                    break;
+            }
+        }
+
+
+    };
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -160,6 +198,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     private void initview() {
         gridview_type = rootview.findViewById(R.id.gridview_type);
         imageview_jiazheng = rootview.findViewById(R.id.imageview_jiazheng);
+        textview_shouqi = rootview.findViewById(R.id.textview_shouqi);
         mTextview_time = rootview.findViewById(R.id.edit_tasktime);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
@@ -177,15 +216,15 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         imageview_jiazheng.setLayoutParams(mLayoutparams);
 
         mdata=new ArrayList<>();
-        mdata.addAll(new Gson().fromJson(JiazhengTypeJson,WeixiuJiazhengBean.class).getList());
-        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images,images_select);
+        mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao,WeixiuJiazhengBean.class).getList());
+        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images_shao,images_select_shao);
         gridview_type.setAdapter(adapter_weixiuJiazheng);
 
 
         //随机数动态变化
         textview_suiji.setText(Staticdata.suijiAcount+"");
         timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+         timerTask = new TimerTask() {
             @Override
             public void run() {
                 mhandler.sendEmptyMessage(0);
@@ -401,12 +440,46 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
 
     private void initlistenner() {
+      textview_shouqi.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              mdata.clear();
+              adapter_weixiuJiazheng = null;
+              mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao, WeixiuJiazhengBean.class).getList());
+              adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images_shao, images_select_shao);
+              gridview_type.setAdapter(adapter_weixiuJiazheng);
+              textview_shouqi.setVisibility(View.GONE);
+          }
+      });
         gridview_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter_weixiuJiazheng.setSelectedPosition(position);
-                adapter_weixiuJiazheng.notifyDataSetInvalidated();
-                task_typeID=mdata.get(position).getSpecialty_id();
+                if(mdata.size()>5){
+//                    if(position==mdata.size()-1){
+//                        mdata.clear();
+//                        adapter_weixiuJiazheng=null;
+//                        mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao,WeixiuJiazhengBean.class).getList());
+//                        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images_shao,images_select_shao);
+//                        gridview_type.setAdapter(adapter_weixiuJiazheng);
+//                    }else {
+                        adapter_weixiuJiazheng.setSelectedPosition(position);
+                        adapter_weixiuJiazheng.notifyDataSetInvalidated();
+                        task_typeID=mdata.get(position).getSpecialty_id();
+//                    }
+                }else {
+                    if(position==4){
+                        mdata.clear();
+                        adapter_weixiuJiazheng=null;
+                        mdata.addAll(new Gson().fromJson(JiazhengTypeJson,WeixiuJiazhengBean.class).getList());
+                        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images,images_select);
+                        gridview_type.setAdapter(adapter_weixiuJiazheng);
+                        textview_shouqi.setVisibility(View.VISIBLE);
+                    }else {
+                        adapter_weixiuJiazheng.setSelectedPosition(position);
+                        adapter_weixiuJiazheng.notifyDataSetInvalidated();
+                        task_typeID=mdata.get(position).getSpecialty_id();
+                    }
+                }
             }
         });
         mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
@@ -555,8 +628,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         map_issueTask.put("task_description", task_description + "");
         map_issueTask.put("task_type", task_typeID + "");
         map_issueTask.put("task_time", task_time);
-        map_issueTask.put("commission", commission + "");//由帮手出价
-        map_issueTask.put("is_counteroffer", is_counteroffer + "");
         map_issueTask.put("release_address", release_address);
 //        map_issueTask.put("houseNumber", detailed_address + "");
 
@@ -625,31 +696,5 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
-    //数字动态添加变化
-    int time = 0;
-    Timer timer;
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    time=time+50;
-                    textview_suiji.setText( " "+time + " 位 ");
-                    if (time > Staticdata.suijiAcount) {
-                        textview_suiji.setText( " "+Staticdata.suijiAcount + " 位 ");
-                        time=0;
-                        if(timer!=null){
-                            timer.cancel();
-                        }
-                        timer=null;
-                    }
-                    break;
-            }
-        }
-
-
-    };
 
 }

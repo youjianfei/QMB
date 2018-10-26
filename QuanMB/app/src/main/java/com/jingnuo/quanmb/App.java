@@ -7,6 +7,7 @@ import com.jingnuo.quanmb.activity.LaunchActivity;
 import com.jingnuo.quanmb.class_.MyReceiveMessageListener;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.Utils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -23,6 +24,7 @@ public class App extends Application  {
     @Override
     public void onCreate() {
         super.onCreate();
+
         UMConfigure.init(this, "5ad55925f43e4835c1000064"
                 , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         UMConfigure.setLogEnabled(true);

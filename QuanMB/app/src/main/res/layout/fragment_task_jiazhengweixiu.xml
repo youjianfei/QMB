@@ -28,7 +28,7 @@
             android:id="@+id/textview_suiji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 236位 "
+            android:text=" 0位 "
             android:textColor="@color/yellow_jianbian_start"
             android:textSize="15dp" />
 
@@ -243,13 +243,25 @@
         android:id="@+id/gridview_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="15dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingBottom="15dp"
+        android:paddingBottom="5dp"
         android:background="@color/white"
         android:numColumns="5" />
+    <TextView
+        android:id="@+id/textview_shouqi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingRight="30dp"
+        android:text="收起"
+        android:visibility="gone"
+        android:textColor="@color/yellow_jianbian_start"
+        android:background="@color/white"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
