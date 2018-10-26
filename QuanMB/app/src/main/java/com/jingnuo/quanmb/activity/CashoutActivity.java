@@ -78,7 +78,7 @@ public class CashoutActivity extends BaseActivityother implements PayPwdView.Inp
 
     @Override
     protected void initListener() {
-        mEdit_cash.addTextChangedListener(new MoneyTextWatcher(mEdit_cash).setDigits(1));
+        mEdit_cash.addTextChangedListener(new MoneyTextWatcher(mEdit_cash).setDigits(2));
         mTextview_allcash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
