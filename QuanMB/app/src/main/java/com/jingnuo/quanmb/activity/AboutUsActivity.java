@@ -67,8 +67,6 @@ public class AboutUsActivity extends BaseActivityother {
                 startActivity(intent);
                 break;
 
-
-
         }
     }
 }

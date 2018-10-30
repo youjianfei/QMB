@@ -9,12 +9,15 @@
     android:id="@+id/textview_text"
     android:layout_width="wrap_content"
     android:layout_height="50dp"
-    android:text="登录过期，请重新登录"
+    android:text="下载“全民帮商家版”APP，一键合作，快捷接单"
     android:gravity="center"
     android:textColor="@color/text_title2"
     android:textSize="15dp"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:lineSpacingMultiplier="1.5"
     />
     <ImageView
         android:id="@+id/image_q"
@@ -30,12 +33,10 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="确  认"
-        android:textColor="@color/white"
+        android:text="立即前往"
+        android:textColor="@color/yellow_jianbian_start"
         android:gravity="center"
-        android:background="@drawable/button_yellow_5dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         />
 
 

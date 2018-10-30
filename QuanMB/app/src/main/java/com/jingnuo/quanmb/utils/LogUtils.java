@@ -12,10 +12,7 @@ public   class LogUtils {
    public static void LOG(String tag, String message,String position){
        if(log){
            Log.i(tag,message+"所在位置："+position);
-       }else{
-//           Log.i("ceshi","log日志关闭");
        }
-
    }
 
 }

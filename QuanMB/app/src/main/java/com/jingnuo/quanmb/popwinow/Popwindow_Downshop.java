@@ -16,7 +16,7 @@ import com.jingnuo.quanmb.R;
  * Created by 飞 on 2018/4/25.
  */
 
-public class Popwindow_loginAgain {
+public class Popwindow_Downshop {
     View view;
     PopupWindow mPopupWindow;
     private Activity activity;
@@ -28,12 +28,12 @@ public class Popwindow_loginAgain {
     //对象
     Interence_complteTask interence_complteTask;
 
-    public Popwindow_loginAgain(Activity activity, Interence_complteTask interence_complteTask) {
+    public Popwindow_Downshop(Activity activity, Interence_complteTask interence_complteTask) {
         this.activity = activity;
         this.interence_complteTask=interence_complteTask;
     }
 
-    public Popwindow_loginAgain showPopwindow(){
+    public Popwindow_Downshop showPopwindow(){
         view= LayoutInflater.from(activity).inflate(R.layout.popwindow_loginagain,null,false);
         mPopupWindow=new PopupWindow(view, (int) (Staticdata.ScreenWidth*0.8), ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setOutsideTouchable(false);// 触摸popupwindow外部，popupwindow消失

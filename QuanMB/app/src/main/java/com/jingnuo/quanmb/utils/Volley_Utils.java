@@ -16,7 +16,6 @@ import com.android.volley.toolbox.Volley;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.data.Staticdata;
-import com.jingnuo.quanmb.popwinow.Popwindow_loginAgain;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +44,6 @@ public class Volley_Utils {
     StringRequest mStringRequest;
 
 
-    Popwindow_loginAgain popwindow_loginAgain;
 
 
     public Volley_Utils(Interface_volley_respose mInterface) {
