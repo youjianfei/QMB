@@ -188,6 +188,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         break;
                     case 3://优惠券
                         Intent intent_coupon = new Intent(getActivity(), CouponActivity.class);
+                    intent_coupon.putExtra("type","优惠券");
                         startActivity(intent_coupon);
                         break;
                     case 4://我的收藏

@@ -59,6 +59,7 @@ public class TaskDetailBean {
         private String is_helper_bid;
         private String task_name;
         private String task_Time;
+        private String task_type;
         private String Avatar_imgUrl;
         private String task_ImgUrl;
         private String user_grade;
@@ -69,6 +70,7 @@ public class TaskDetailBean {
         private String b_h_url;
         private String business_name="";
         private String business_mobile_no;
+        private String business_no;
         private String level="";
         private String delay="";
         private String is_delay="";
@@ -76,6 +78,22 @@ public class TaskDetailBean {
         private String task_Startdate;
         private String x_value="";
         private String y_value="";
+
+        public String getTask_type() {
+            return task_type;
+        }
+
+        public void setTask_type(String task_type) {
+            this.task_type = task_type;
+        }
+
+        public String getBusiness_no() {
+            return business_no;
+        }
+
+        public void setBusiness_no(String business_no) {
+            this.business_no = business_no;
+        }
 
         public double getCounteroffer_amount() {
             return counteroffer_amount;

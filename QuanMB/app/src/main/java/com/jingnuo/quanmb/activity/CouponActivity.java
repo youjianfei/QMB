@@ -1,23 +1,44 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Coupon;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.customview.MyListView;
+import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.CouponBean;
+import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CouponActivity extends BaseActivityother {
 
+    TextView     text_title;
     ListView mylistview_coupon;
 
-    List<String> mData;
 
+    String title="";
+    String GetURL="";
+    CouponBean couponBean;
+    List<CouponBean.DataBean> mData;
 
+    String  tasktyoeID="";
+    String  business_no="";
+
+    int  selectposition=0;
 
     Adapter_Coupon  adapter_coupon;
 
@@ -30,31 +51,73 @@ public class CouponActivity extends BaseActivityother {
     @Override
     protected void setData() {
 
+        if(title.equals("优惠券")){
+            GetURL= Urls.Baseurl_cui+Urls.myCoupon+ Staticdata.static_userBean.getData().getUser_token();
+        }else if(title.equals("选择优惠券")){
+            GetURL= Urls.Baseurl_cui+Urls.useableCoupon+ Staticdata.static_userBean.getData().getUser_token()+"&task_type_id="
+                    +tasktyoeID+"&business_no"+business_no;
+        }
+
+        request(GetURL);
+    }
+    void request(String  URL){
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi","优惠券："+respose,"优惠券");
+                couponBean=new Gson().fromJson(respose,CouponBean.class);
+                mData.clear();
+                if(couponBean.getData().size()>0){
+                    mData.addAll(couponBean.getData());
+//                    adapter_coupon.notifyDataSetChanged();
+                    adapter_coupon.setSelectedPosition(selectposition);
+                    adapter_coupon.notifyDataSetInvalidated();
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(URL,CouponActivity.this,0);
+
     }
 
     @Override
     protected void initData() {
+        title=getIntent().getStringExtra("type");
+        tasktyoeID=getIntent().getStringExtra("task_type_id");
+        business_no=getIntent().getStringExtra("business_no");
+        selectposition=getIntent().getIntExtra("selectposition",0);
+        text_title.setText(title);
         mData=new ArrayList<>();
-        mData.add("56");
-        mData.add("120");
-        mData.add("56");
-        mData.add("5");
-        mData.add("51");
-        mData.add("31");
-        mData.add("61");
-        mData.add("11");
-        mData.add("51");
-        adapter_coupon=new Adapter_Coupon(mData,this);
+        adapter_coupon=new Adapter_Coupon(mData,this,title);
         mylistview_coupon.setAdapter(adapter_coupon);
     }
 
     @Override
     protected void initListener() {
-
+        mylistview_coupon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(title.equals("优惠券")){
+                    Intent  intent=new Intent(CouponActivity.this,IssueTaskActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent result = new Intent();
+                    result.putExtra("position", position);
+                    result.putExtra("amount", mData.get(position).getAmount());
+                    setResult(1637, result);
+                    finish();
+                }
+            }
+        });
     }
 
     @Override
     protected void initView() {
+        text_title=findViewById(R.id.text_title);
         mylistview_coupon=findViewById(R.id.Mylistview_coupon);
     }
 }

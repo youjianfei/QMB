@@ -24,7 +24,7 @@
             android:id="@+id/textview_moneytext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="满500可用"
+            android:text="条件"
             android:textColor="@color/white"
             android:textSize="14dp"
             />
@@ -43,7 +43,8 @@
         android:id="@+id/textview_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2013~2018"
+        android:text="2000~2000"
+        android:textSize="12dp"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/linearlayout_left"
         android:layout_below="@+id/textview_coupontype"
@@ -55,10 +56,10 @@
         android:id="@+id/textview_overtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="还有3天过期"
+        android:text="将于0天后过期"
         android:layout_toRightOf="@+id/linearlayout_left"
         android:layout_below="@+id/textview_time"
-        android:textColor="@color/text_gray"
+        android:textColor="@color/red2"
         android:layout_centerVertical="true"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
@@ -76,8 +77,19 @@
         android:textColor="@color/blue"
         android:layout_alignParentRight="true"
         android:layout_alignBaseline="@+id/textview_time"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/text_blue_miaobian_20"
+        android:visibility="invisible"
+        />
+    <ImageView
+        android:id="@+id/image_selectcoupon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:src="@mipmap/selectcoupon"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>

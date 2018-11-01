@@ -6,6 +6,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -32,6 +34,7 @@ import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
+import com.jingnuo.quanmb.popwinow.Popwindow_coupon;
 import com.jingnuo.quanmb.utils.AutoUpdate;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -40,6 +43,9 @@ import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 import com.yancy.imageselector.ImageSelector;
 import com.jingnuo.quanmb.R;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.rong.imkit.RongIM;
@@ -76,7 +82,6 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
     FragmentTransaction transaction;
     PermissionHelper permissionHelper;
 
-
     int Tag=0;//    0   维修   1  家政   2  其他
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +105,39 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         initListener();
         setData();
     }
+    //推迟显示pop
+    int time = 0;
+    Timer timer;
+    TimerTask timerTask;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    new Popwindow_coupon(IssueTaskActivity.this).showpopwindow();
+                        if(timer!=null){
+                            timer.cancel();
+                            timerTask.cancel();
+                        }
+                        timer=null;
+                    break;
+            }
+        }
 
+
+    };
     protected void setData() {
+        //随机数动态变化
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                mhandler.sendEmptyMessage(0);
+            }
+        };
+        timer.schedule(timerTask, 1500);
+
 
     }
 
@@ -185,6 +221,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
 
     protected void initData() {
+
         Staticdata.suijiAcount= Utils.getNum(500,1000);
         permissionHelper = new PermissionHelper(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
@@ -214,6 +251,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         } else {
             drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
         }
+
     }
 
 
@@ -279,8 +317,11 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
     }
 
-
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        drawerlayout_menu.closeDrawer(Gravity.LEFT);
+    }
 
     protected void initView() {
         image_dot = findViewById(R.id.image_dot);

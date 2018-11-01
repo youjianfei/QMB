@@ -365,6 +365,8 @@ public class MytaskDetailActivity extends BaseActivityother {
                                     intentpay.putExtra("order_no", taskDetailBean.getData().getOrder_no());
                                     intentpay.putExtra("amount",  taskDetailBean.getData().getCommission()+"");
                                     intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id()+"");
+                                    intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no()+"");
+                                    intentpay.putExtra("tasktypeid", taskDetailBean.getData().getTask_type()+"");
                                     startActivity(intentpay);
 
                                 } else {
@@ -452,12 +454,13 @@ public class MytaskDetailActivity extends BaseActivityother {
                             ToastUtils.showToast(MytaskDetailActivity.this,"不得低于原价格");
                             return;
                         }
-
                         Intent intentaddprice = new Intent(MytaskDetailActivity.this, PayActivity.class);
                         intentaddprice.putExtra("title", "全民帮—修改金额");
                         intentaddprice.putExtra("order_no", "000000");
                         intentaddprice.putExtra("amount", result + "");
                         intentaddprice.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
+                        intentaddprice.putExtra("tasktypeid", taskDetailBean.getData().getTask_type()+"");
+                        intentaddprice.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
                         startActivity(intentaddprice);
                     }
                 });
@@ -501,6 +504,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
                 intentpay.putExtra("title", "全民帮—任务付款");
                 intentpay.putExtra("order_no", "000000");
+                intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
 
                 if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     intentpay.putExtra("amount", "5");

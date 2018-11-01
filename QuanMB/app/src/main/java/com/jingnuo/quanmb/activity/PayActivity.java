@@ -43,10 +43,13 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     RelativeLayout mRelayout_yue;
     RelativeLayout mRelayout_wechat;
     RelativeLayout mRelayout_zhifubao;
+    RelativeLayout relayout_selectCoupon;//选择优惠券
     ImageView image_yue;
     ImageView image_wechat;
     ImageView image_zhifubao;
     Button mButton_submit;
+    TextView text_couponTextContent;
+    TextView text_select;
 
 
     //数据
@@ -60,7 +63,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     String title_pay="";
     String amount="";
     String taskid="";
+    String tasktypeid="";
     String order_no="";
+    String business_no="";
+
+    double coupon_amout;//优惠券金额
+    int  coupon_possition=100;
 
     int pay=1;  //1 余额支付 2 微信支付  3 支付宝支付
     private IWXAPI api;
@@ -108,7 +116,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         title_pay=intent.getStringExtra("title");
         amount=intent.getStringExtra("amount");
         taskid=intent.getStringExtra("taskid");
+        tasktypeid=intent.getStringExtra("tasktypeid");
         order_no=intent.getStringExtra("order_no");
+        business_no=intent.getStringExtra("business_no");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_head);
         mTextview_amount.setText("¥"+amount);
 //        if(Staticdata.map_task.get("tasktypename")!=null){
@@ -163,6 +173,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         mRelayout_wechat.setOnClickListener(this);
         mRelayout_zhifubao.setOnClickListener(this);
         mButton_submit.setOnClickListener(this);
+        relayout_selectCoupon.setOnClickListener(this);
 
     }
 
@@ -173,9 +184,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         mRelayout_yue = findViewById(R.id.relayoutyue);
         mRelayout_wechat = findViewById(R.id.relayout_wechat);
         mRelayout_zhifubao = findViewById(R.id.relayout_zhifubao);
+        relayout_selectCoupon = findViewById(R.id.relayout_selectCoupon);
         image_yue = findViewById(R.id.image_yue);
         image_wechat = findViewById(R.id.image_wechat);
         image_zhifubao = findViewById(R.id.image_zhifubao);
+        text_select=findViewById(R.id.text_select);
+        text_couponTextContent=findViewById(R.id.text_couponTextContent);
         mButton_submit=findViewById(R.id.button_submit);
     }
 
@@ -184,6 +198,15 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         super.onClick(v);
 
         switch (v.getId()) {
+            case R.id.relayout_selectCoupon:
+                Intent intent_selectcoupon=new Intent(PayActivity.this,CouponActivity.class);
+                intent_selectcoupon.putExtra("type","选择优惠券");
+                intent_selectcoupon.putExtra("task_type_id",tasktypeid+"");
+                intent_selectcoupon.putExtra("business_no",business_no);
+                intent_selectcoupon.putExtra("selectposition",coupon_possition);
+                startActivityForResult(intent_selectcoupon,1637);
+
+                break;
             case R.id.relayoutyue:
                 if(balance<intend_amount){
                    ToastUtils.showToast(this,"余额不足");
@@ -318,6 +341,18 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
             }
         }).postHttp(Urls.Baseurl_hu+Urls.balancePay,this,1,map);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1637&&resultCode==1637){
+            coupon_amout=data.getDoubleExtra("amount",0.0);
+            coupon_possition=data.getIntExtra("position",0);
+            text_couponTextContent.setText("已抵用"+coupon_amout+"元");
+            text_select.setVisibility(View.VISIBLE);
+            LogUtils.LOG("ceshi","优惠金额"+coupon_amout+"条目"+coupon_possition,"payactivity");
+        }
     }
 
     @Override

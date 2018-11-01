@@ -175,6 +175,10 @@ public class Urls {
     public static String updataXYDU = "user/updateXYDu?user_token=";//更新经纬度
 
 
+    public static String myCoupon = "coupon/getMyCoupon?user_token=";//我的优惠券
+    public static String useableCoupon = "coupon/getUsableCoupon?user_token=";//可用于当前任务的优惠券
+
+
 
 
     //支付
