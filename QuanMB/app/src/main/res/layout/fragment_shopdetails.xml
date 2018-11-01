@@ -6,7 +6,7 @@
     android:background="@color/white">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/background_text_white_5"
         >
         <de.hdodenhof.circleimageview.CircleImageView
@@ -167,28 +167,6 @@
                     android:textColor="@color/yellow_jianbian_start"
                     />
             </LinearLayout>
-            <!--<TextView-->
-                <!--android:id="@+id/text_money"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="等待商户出价"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:textSize="14dp"-->
-                <!--/>-->
-            <!--<Button-->
-
-                <!--android:layout_width="40dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--android:text="选 择"-->
-                <!--android:textSize="12dp"-->
-                <!--android:textColor="@color/yellow_jianbian_end"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:background="@drawable/background_text_white"-->
-                <!--/>-->
-
 
         </LinearLayout>
 
@@ -245,27 +223,6 @@
                     />
             </LinearLayout>
 
-            <!--<TextView-->
-            <!--android:id="@+id/text_money"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="等待商户出价"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:textSize="14dp"-->
-            <!--/>-->
-            <!--<Button-->
-
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:text="选 择"-->
-            <!--android:textSize="12dp"-->
-            <!--android:textColor="@color/yellow_jianbian_end"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:background="@drawable/background_text_white"-->
-            <!--/>-->
 
 
         </LinearLayout>

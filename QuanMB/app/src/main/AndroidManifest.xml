@@ -256,7 +256,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.HelperguizeActivity" />
-        <activity android:name=".activity.TuiyajinActivity"></activity>
+        <activity android:name=".activity.TuiyajinActivity" />
+        <activity android:name=".activity.CouponActivity"></activity>
     </application>
 
 </manifest>

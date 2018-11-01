@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import com.jingnuo.quanmb.Adapter.Adapter_menu;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.CashoutActivity;
+import com.jingnuo.quanmb.activity.CouponActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MyOrderActivity;
@@ -41,6 +43,7 @@ import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_Downshop;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -183,19 +186,22 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
 //
 //                        }
                         break;
-                    case 3://我的收藏
+                    case 3://优惠券
+                        Intent intent_coupon = new Intent(getActivity(), CouponActivity.class);
+                        startActivity(intent_coupon);
+                        break;
+                    case 4://我的收藏
                         Intent intent_collect = new Intent(getActivity(), MySkillCollectActivity.class);
                         startActivity(intent_collect);
                         break;
-                    case 5://设置
-                        Intent intent_aboutus = new Intent(getActivity(), SettingActivity.class);
-                        startActivity(intent_aboutus);
-                        break;
-                    case 4://客服中心
+                    case 5://客服中心
                         Intent intent_kefuzhongxin = new Intent(getActivity(), ZixunKefuWebActivity.class);
                         startActivity(intent_kefuzhongxin);
                         break;
-
+                    case 6://设置
+                        Intent intent_aboutus = new Intent(getActivity(), SettingActivity.class);
+                        startActivity(intent_aboutus);
+                        break;
                 }
             }
         });
@@ -233,27 +239,36 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                     menuBean3.setmBitmap(bitmap3);
                     menuList.add(menuBean3);
                     break;
-                case 3://我的收藏
+                case 3://优惠券
+                    MenuBean menuBean7 = new MenuBean();
+                    menuBean7.setMenu_name("优惠券");
+                    Bitmap bitmap7 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.youhuiquan);
+                    menuBean7.setmBitmap(bitmap7);
+                    menuList.add(menuBean7);
+                    break;
+                case 4://我的收藏
                     MenuBean menuBean4 = new MenuBean();
                     menuBean4.setMenu_name("我的收藏");
                     Bitmap bitmap4 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.shoucang11);
                     menuBean4.setmBitmap(bitmap4);
                     menuList.add(menuBean4);
                     break;
-                case 5://设置
-                    MenuBean menuBean5 = new MenuBean();
-                    menuBean5.setMenu_name("设置");
-                    Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.setttt);
-                    menuBean5.setmBitmap(bitmap5);
-                    menuList.add(menuBean5);
-                    break;
-                case 4://客服中心
+                case 5://客服中心
                     MenuBean menuBean6 = new MenuBean();
                     menuBean6.setMenu_name("客服中心");
                     Bitmap bitmap6 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.kefuzhongxin);
                     menuBean6.setmBitmap(bitmap6);
                     menuList.add(menuBean6);
                     break;
+                case 6://设置
+                    MenuBean menuBean5 = new MenuBean();
+                    menuBean5.setMenu_name("设置");
+                    Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.setttt);
+                    menuBean5.setmBitmap(bitmap5);
+                    menuList.add(menuBean5);
+                    break;
+
+
             }
         }
         mAdapter_menu = new Adapter_menu(menuList, getActivity());

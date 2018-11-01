@@ -56,6 +56,8 @@ public class MatchShopActivity extends AppCompatActivity  {
     private ViewPager mViewPager;
     LinearLayout mtextview_change;
     TextView text_timelow;
+    LinearLayout iamge_newacount;
+
 //    TextView mTextview_taskdetails;//任务详情
 //    MyGridView imageGridview;
 //    TextView mTextview_yuyuetime;//预约时间
@@ -151,6 +153,16 @@ public class MatchShopActivity extends AppCompatActivity  {
         mViewPager = findViewById(R.id.viewPager);
         mtextview_change=findViewById(R.id.textview_change);
         text_timelow=findViewById(R.id.text_timelow);
+        iamge_newacount=findViewById(R.id.iamge_newacount);
+
+
+        ImageView image = new ImageView(MatchShopActivity.this);
+        image.setBackgroundResource(R.mipmap.newacount);
+        int w=Staticdata.ScreenWidth- SizeUtils.dip2px(this,40);
+        int h= (int) (w*0.2);
+        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
+        image.setLayoutParams(mLayoutparams);
+        iamge_newacount.addView(image);
 //        mTextview_taskdetails = findViewById(R.id.text_taskdetail);
 //        imageGridview = findViewById(R.id.GridView_PIC);
 //        mTextview_yuyuetime = findViewById(R.id.text_time);
@@ -158,6 +170,12 @@ public class MatchShopActivity extends AppCompatActivity  {
 //        mTextview_taskaddress = findViewById(R.id.text_address);
     }
     private  void  initlistenner(){
+        iamge_newacount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(MatchShopActivity.this,"我被点击了");
+            }
+        });
         image_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

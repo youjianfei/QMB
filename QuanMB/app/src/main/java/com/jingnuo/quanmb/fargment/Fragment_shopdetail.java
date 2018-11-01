@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
@@ -233,12 +234,12 @@ public class Fragment_shopdetail extends Fragment{
         text_orders=rootview.findViewById(R.id.text_orders);
         text_vip=rootview.findViewById(R.id.text_vip);
         simpleRatingBar=rootview.findViewById(R.id.SimpleRatingBar);
-//        text_lv=rootview.findViewById(R.id.text_level);
         image_head=rootview.findViewById(R.id.image_head);
         imageView_call=rootview.findViewById(R.id.image_callphone);
         button_choose=rootview.findViewById(R.id.button_choose);
         linearlayout_zixun=rootview.findViewById(R.id.linearlayout_zixun);
-//        text_money=rootview.findViewById(R.id.text_money);
+//        iamge_newacount=rootview.findViewById(R.id.iamge_newacount);
+
 
     }
     void setstar(float count) {
