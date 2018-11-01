@@ -120,7 +120,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             "{\"specialty_id\":1305,\"specialty_name\":\"搬家\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1303," +
             "\"specialty_name\":\"擦玻璃\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1307,\"specialty_name\":\"小时工\"," +
             "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
-            ",{\"specialty_id\":1301,\"specialty_name\":\"土地开荒\",\"image\":\"\",\"isselect\":false}]}";
+            ",{\"specialty_id\":1301,\"specialty_name\":\"新居开荒\",\"image\":\"\",\"isselect\":false}]}";
     String  JiazhengTypeJson_shao="{\"list\":[{\"specialty_id\":1300,\"specialty_name\":\"家庭保洁\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1306,\"specialty_name\":\"送水\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1302," +
             "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆\"," +
