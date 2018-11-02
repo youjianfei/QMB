@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.popwinow;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.activity.IssueSkillActivity;
 import com.jingnuo.quanmb.activity.IssueTaskActivity;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.R;
@@ -25,6 +28,8 @@ public class Popwindow_coupon {
     View  view;
     PopupWindow mPopupWindow;
     private Activity activity;
+    private  String ImageBG;
+    private  String Imagesub;
 
     //控件
     LinearLayout linearLayout_coupon;
@@ -32,8 +37,10 @@ public class Popwindow_coupon {
     ImageView image_get;
 
 
-    public Popwindow_coupon(Activity activity) {
+    public Popwindow_coupon(Activity activity,String ImageBG,String Imagesub ) {
         this.activity = activity;
+        this.ImageBG=ImageBG;
+        this.Imagesub=Imagesub;
     }
 
     public  void showpopwindow(){
@@ -58,7 +65,9 @@ public class Popwindow_coupon {
         image_get.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {//立即领取
-
+                Uri uri = Uri.parse(Urls.newpeoplecoupon);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                activity.startActivity(intent);
                 mPopupWindow.dismiss();
             }
         });
@@ -76,8 +85,9 @@ public class Popwindow_coupon {
         linearLayout_coupon=view.findViewById(R.id.iamage_coupon);
         image_cancell=view.findViewById(R.id.image_cancell);
         image_get=view.findViewById(R.id.image_get);
-
+        Glide.with(activity).load(Imagesub).into(image_get);
         ImageView image = new ImageView(activity);
+        Glide.with(activity).load(ImageBG).into(image);
         image.setBackgroundResource(R.mipmap.maincoupon);
         int w=Staticdata.ScreenWidth-SizeUtils.dip2px(activity,20);
         int h= (int) (w*1.08);

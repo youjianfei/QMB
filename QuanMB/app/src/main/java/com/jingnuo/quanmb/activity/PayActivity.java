@@ -59,10 +59,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     PayFragment fragment;
 
     double balance=0;//余额
-    double intend_amount=0;//要付的金额
     String title_pay="";
-    String amount="";
+    String amount="";//订单金额
+    double pay_amount;//要付的金额
+
     String taskid="";
+    String coupon_code="";//优惠券码
     String tasktypeid="";
     String order_no="";
     String business_no="";
@@ -114,18 +116,14 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         api = WXAPIFactory.createWXAPI(PayActivity.this, Staticdata.WechatApi);//微信支付用到
         Intent intent=getIntent();
         title_pay=intent.getStringExtra("title");
-        amount=intent.getStringExtra("amount");
+        amount=intent.getStringExtra("amount");//订单金额
+        pay_amount=Double.parseDouble(amount);//要付的金额
         taskid=intent.getStringExtra("taskid");
         tasktypeid=intent.getStringExtra("tasktypeid");
         order_no=intent.getStringExtra("order_no");
         business_no=intent.getStringExtra("business_no");
         Glide.with(this).load(Staticdata.static_userBean.getData().getImg_url()).into(mImageview_head);
         mTextview_amount.setText("¥"+amount);
-//        if(Staticdata.map_task.get("tasktypename")!=null){
-//            mTextview_order.setText(Staticdata.map_task.get("tasktypename").toString()+"-"+Staticdata.map_task.get("task_id"));
-//        }else {
-//            mTextview_order.setText(title_pay+"-"+taskid);
-//        }
         image_yue.setSelected(true);
         requestYue();//请求实时余额
     }
@@ -145,8 +143,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     if(status==1){
                         balan=(String) object.get("balance");
                         balance= Double.parseDouble(balan);
-                         intend_amount=Double.parseDouble(amount);
-                        if(balance<intend_amount){
+                        if(balance<pay_amount){
                             image_yue.setSelected(false);
                             image_wechat.setSelected(true);
                             image_zhifubao.setSelected(false);
@@ -204,11 +201,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                 intent_selectcoupon.putExtra("task_type_id",tasktypeid+"");
                 intent_selectcoupon.putExtra("business_no",business_no);
                 intent_selectcoupon.putExtra("selectposition",coupon_possition);
+                intent_selectcoupon.putExtra("order_no",order_no);
                 startActivityForResult(intent_selectcoupon,1637);
 
                 break;
             case R.id.relayoutyue:
-                if(balance<intend_amount){
+                if(balance<pay_amount){
                    ToastUtils.showToast(this,"余额不足");
                    return;
                 }
@@ -240,7 +238,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     }
                     //余额支付
                     Bundle bundle = new Bundle();
-                    bundle.putString(PayFragment.EXTRA_CONTENT, title_pay+"：¥ " + amount);
+                    bundle.putString(PayFragment.EXTRA_CONTENT, title_pay+"：¥ " + pay_amount);
                      fragment = new PayFragment();
                     fragment.setArguments(bundle);
                     fragment.setPaySuccessCallBack(PayActivity.this);
@@ -252,10 +250,11 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Map map_pay=new HashMap();
                     map_pay.put("isrecharge","N");
                     map_pay.put("body",title_pay);
-                    map_pay.put("total_fee",amount);
+                    map_pay.put("total_fee",pay_amount+"");
                     map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_pay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_pay.put("task_id",taskid);
+                    map_pay.put("coupon_code",coupon_code);//优惠券代码
                     map_pay.put("order_no",order_no);
                     if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                         map_pay.put("isBargainPay","Y");
@@ -278,10 +277,11 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Map map_zpay=new HashMap();
                     map_zpay.put("isrecharge","N");
                     map_zpay.put("subject",title_pay);
-                    map_zpay.put("total_fee",amount);
+                    map_zpay.put("total_fee",pay_amount);
                     map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_zpay.put("task_id",taskid);
+                    map_zpay.put("coupon_code",coupon_code);//优惠券代码
                     map_zpay.put("order_no",order_no);
                     if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){
                         map_zpay.put("isBargainPay","Y");
@@ -349,9 +349,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         if(requestCode==1637&&resultCode==1637){
             coupon_amout=data.getDoubleExtra("amount",0.0);
             coupon_possition=data.getIntExtra("position",0);
+            coupon_code=data.getStringExtra("coupon_code");
             text_couponTextContent.setText("已抵用"+coupon_amout+"元");
             text_select.setVisibility(View.VISIBLE);
-            LogUtils.LOG("ceshi","优惠金额"+coupon_amout+"条目"+coupon_possition,"payactivity");
+            pay_amount=Double.parseDouble(amount)-coupon_amout;
+            mButton_submit.setText("确认支付¥"+pay_amount);
+            LogUtils.LOG("ceshi","优惠金额"+coupon_amout+"条目"+coupon_possition+"现价"+pay_amount,"payactivity");
         }
     }
 
@@ -367,8 +370,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             Map map_yue=new HashMap();
             map_yue.put("user_token",Staticdata.static_userBean.getData().getUser_token());
             map_yue.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-            map_yue.put("pay_money",amount);
+            map_yue.put("pay_money",pay_amount+"");
             map_yue.put("task_id",taskid);
+            map_yue.put("coupon_code",coupon_code);//优惠券代码
             map_yue.put("order_no",order_no);
             LogUtils.LOG("ceshi",title_pay.toString(),"title_pay");
             if(title_pay.equals("匹配商户成功付款")||title_pay.equals("任务补差价")){

@@ -45,6 +45,9 @@ public class Matchshoplistbean {
          */
 
         private int task_id;
+        private String  img_url ;
+        private String  activity_url ;
+        private String  isShow ;
         private List<MatchingBean> Matching;
 
         public int getTask_id() {
@@ -61,6 +64,30 @@ public class Matchshoplistbean {
 
         public void setMatching(List<MatchingBean> Matching) {
             this.Matching = Matching;
+        }
+
+        public String getImg_url() {
+            return img_url;
+        }
+
+        public void setImg_url(String img_url) {
+            this.img_url = img_url;
+        }
+
+        public String getActivity_url() {
+            return activity_url;
+        }
+
+        public void setActivity_url(String activity_url) {
+            this.activity_url = activity_url;
+        }
+
+        public String getIsShow() {
+            return isShow;
+        }
+
+        public void setIsShow(String isShow) {
+            this.isShow = isShow;
         }
 
         public static class MatchingBean {

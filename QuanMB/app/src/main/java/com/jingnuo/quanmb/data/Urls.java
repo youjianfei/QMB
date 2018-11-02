@@ -9,16 +9,17 @@ public class Urls {
     public static String Baseurl_zhuye = "https://app.quanminbang.top/QuanMinBang/";//官网主页
     public static String Baseurl_index = "http://v3.rabbitpre.com/m2/aUe1ZjN6ls";//分享的主页
     public static String Baseurl_zixunkefu = "http://www.quanminbang.top/QuanMinBang/v1.0/uploadIge/toH5";//客服咨询
+    public static String newpeoplecoupon = "";//新用户活动领取点击接口
     //正式
-//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  测试
-    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  本地
@@ -175,6 +176,7 @@ public class Urls {
     public static String updataXYDU = "user/updateXYDu?user_token=";//更新经纬度
 
 
+    public static String couponPopwindow= "coupon/getCouponWindow?user_token=";//新用户弹窗
     public static String myCoupon = "coupon/getMyCoupon?user_token=";//我的优惠券
     public static String useableCoupon = "coupon/getUsableCoupon?user_token=";//可用于当前任务的优惠券
 

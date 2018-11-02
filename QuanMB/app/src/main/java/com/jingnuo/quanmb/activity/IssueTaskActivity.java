@@ -25,12 +25,14 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.NewCouponBean;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
@@ -82,6 +84,8 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
     FragmentTransaction transaction;
     PermissionHelper permissionHelper;
 
+    NewCouponBean  newCouponBean;
+
     int Tag=0;//    0   维修   1  家政   2  其他
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         setData();
     }
     //推迟显示pop
+    String URL_popwindow="";
     int time = 0;
     Timer timer;
     TimerTask timerTask;
@@ -115,7 +120,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    new Popwindow_coupon(IssueTaskActivity.this).showpopwindow();
+                    requestCouponPopwindow(URL_popwindow);
                         if(timer!=null){
                             timer.cancel();
                             timerTask.cancel();
@@ -128,6 +133,11 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
     };
     protected void setData() {
+    if(Staticdata.static_userBean.getData()==null){
+        URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+"";
+    }else {
+        URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+Staticdata.static_userBean.getData().getUser_token();
+    }
         //随机数动态变化
         timer = new Timer();
         timerTask = new TimerTask() {
@@ -137,8 +147,28 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
             }
         };
         timer.schedule(timerTask, 1500);
+    }
+    void requestCouponPopwindow(String URL){
+        LogUtils.LOG("ceshi","新用户弹窗"+URL,"tanchuang");
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", "新用户弹窗" + respose, "发布任务");
+                newCouponBean=new Gson().fromJson(respose,NewCouponBean.class);
+                if(newCouponBean.getCode()==1){
+                    if(newCouponBean.getData().getIsShow().equals("1")){
+                        Urls.newpeoplecoupon=newCouponBean.getData().getBut_url();
+                        new Popwindow_coupon(IssueTaskActivity.this,newCouponBean.getData().getBk_img(),newCouponBean.getData().getBut_img()).showpopwindow();
+                    }
+                }
 
+            }
 
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(URL,IssueTaskActivity.this,0);
     }
 
     //声明AMapLocationClientOption对象

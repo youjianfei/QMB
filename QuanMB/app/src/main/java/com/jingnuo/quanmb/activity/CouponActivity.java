@@ -17,6 +17,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.CouponBean;
 import com.jingnuo.quanmb.utils.LogUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import org.w3c.dom.Text;
@@ -37,6 +38,7 @@ public class CouponActivity extends BaseActivityother {
 
     String  tasktyoeID="";
     String  business_no="";
+    String  order_no="";
 
     int  selectposition=0;
 
@@ -55,7 +57,7 @@ public class CouponActivity extends BaseActivityother {
             GetURL= Urls.Baseurl_cui+Urls.myCoupon+ Staticdata.static_userBean.getData().getUser_token();
         }else if(title.equals("选择优惠券")){
             GetURL= Urls.Baseurl_cui+Urls.useableCoupon+ Staticdata.static_userBean.getData().getUser_token()+"&task_type_id="
-                    +tasktyoeID+"&business_no"+business_no;
+                    +tasktyoeID+"&business_no"+business_no+"&order_no="+order_no;
         }
 
         request(GetURL);
@@ -88,6 +90,7 @@ public class CouponActivity extends BaseActivityother {
         title=getIntent().getStringExtra("type");
         tasktyoeID=getIntent().getStringExtra("task_type_id");
         business_no=getIntent().getStringExtra("business_no");
+        order_no=getIntent().getStringExtra("order_no");
         selectposition=getIntent().getIntExtra("selectposition",0);
         text_title.setText(title);
         mData=new ArrayList<>();
@@ -105,11 +108,17 @@ public class CouponActivity extends BaseActivityother {
                     startActivity(intent);
                     finish();
                 }else {
-                    Intent result = new Intent();
-                    result.putExtra("position", position);
-                    result.putExtra("amount", mData.get(position).getAmount());
-                    setResult(1637, result);
-                    finish();
+                    if(mData.get(position).getUsable()==0){
+                        ToastUtils.showToast(CouponActivity.this,"该优惠券不可用");
+                    }else {
+                        Intent result = new Intent();
+                        result.putExtra("position", position);
+                        result.putExtra("amount", mData.get(position).getAmount());
+                        result.putExtra("coupon_code", mData.get(position).getCoupon_code());
+                        setResult(1637, result);
+                        finish();
+                    }
+
                 }
             }
         });

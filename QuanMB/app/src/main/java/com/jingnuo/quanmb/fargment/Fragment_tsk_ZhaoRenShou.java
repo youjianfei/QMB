@@ -163,7 +163,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    time=time+64;
+                    time=time+12;
                     textview_suiji.setText( " "+time + " 位 ");
                     if (time > Staticdata.suijiAcount) {
                         textview_suiji.setText( " "+Staticdata.suijiAcount + " 位 ");
@@ -211,7 +211,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
     private void initdata() {
         imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
-        int  hight=(int) (Staticdata.ScreenWidth * 0.38);
+        int  hight=(int) (Staticdata.ScreenWidth * 0.45);
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth,hight );
         imageview_jiazheng.setLayoutParams(mLayoutparams);
 
@@ -696,5 +696,14 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.LOG("ceshi","维修不见","维修fragment");
+        if(timer!=null){
+            timer.cancel();
+            timerTask.cancel();
+        }
+        timer=null;
+    }
 }

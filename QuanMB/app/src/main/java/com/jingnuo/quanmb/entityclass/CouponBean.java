@@ -66,6 +66,15 @@ public class CouponBean {
         private String startdate;
         private String status;
         private int type;
+        private int usable;
+
+        public int getUsable() {
+            return usable;
+        }
+
+        public void setUsable(int usable) {
+            this.usable = usable;
+        }
 
         public double getAmount() {
             return amount;

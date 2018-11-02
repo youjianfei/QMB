@@ -72,7 +72,7 @@ public class App extends Application  {
 
     private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
         public void uncaughtException(Thread thread, Throwable ex) {
-//            restartApp();
+            restartApp();
         }
     };
 

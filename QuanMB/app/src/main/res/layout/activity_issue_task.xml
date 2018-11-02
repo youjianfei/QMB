@@ -42,12 +42,12 @@
             android:layout_centerVertical="true"
             android:text="选择地址"
             android:singleLine="true"
-            android:textColor="@color/black"
+            android:textColor="@color/text_gray"
             android:textSize="18sp" />
         <ImageView
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:src="@mipmap/jiantou_xia"
+            android:src="@mipmap/jiantou_xia_gray"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/text_chooceaddress"
             android:layout_marginLeft="5dp"
@@ -91,7 +91,7 @@
                 app:tabMode="fixed"
                 android:layout_height="50dp"
                 android:background="@color/white"
-                app:tabTextColor="@color/text_title2"
+                app:tabTextColor="@color/text_gray"
                 app:tabSelectedTextColor="@color/yellow_jianbian_start"
                 app:tabIndicatorColor="@color/yellow_jianbian_start"
                 app:tabMinWidth="110dp"

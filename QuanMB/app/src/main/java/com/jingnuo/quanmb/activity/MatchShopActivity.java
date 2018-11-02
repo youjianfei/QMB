@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.activity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -155,14 +156,16 @@ public class MatchShopActivity extends AppCompatActivity  {
         text_timelow=findViewById(R.id.text_timelow);
         iamge_newacount=findViewById(R.id.iamge_newacount);
 
+        if(matchshoplistbean.getData().getIsShow().equals("1")){
+            ImageView image = new ImageView(MatchShopActivity.this);
+            Glide.with(MatchShopActivity.this).load(matchshoplistbean.getData().getImg_url()).into(image);
+            int w=Staticdata.ScreenWidth- SizeUtils.dip2px(this,40);
+            int h= (int) (w*0.2);
+            LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
+            image.setLayoutParams(mLayoutparams);
+            iamge_newacount.addView(image);
+        }
 
-        ImageView image = new ImageView(MatchShopActivity.this);
-        image.setBackgroundResource(R.mipmap.newacount);
-        int w=Staticdata.ScreenWidth- SizeUtils.dip2px(this,40);
-        int h= (int) (w*0.2);
-        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
-        image.setLayoutParams(mLayoutparams);
-        iamge_newacount.addView(image);
 //        mTextview_taskdetails = findViewById(R.id.text_taskdetail);
 //        imageGridview = findViewById(R.id.GridView_PIC);
 //        mTextview_yuyuetime = findViewById(R.id.text_time);
@@ -173,7 +176,11 @@ public class MatchShopActivity extends AppCompatActivity  {
         iamge_newacount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(MatchShopActivity.this,"我被点击了");
+                if(matchshoplistbean.getData().getIsShow().equals("1")){
+                    Uri uri = Uri.parse(matchshoplistbean.getData().getActivity_url());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
             }
         });
         image_left.setOnClickListener(new View.OnClickListener() {
