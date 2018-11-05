@@ -247,12 +247,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="预  约"
+                android:text="预约下单"
                 android:textSize="15dp"
                 android:layout_marginLeft="15dp"
                 android:textColor="@color/white"
                 />
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_choose"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textSize="11dp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginTop="10dp"
+            android:text="已为您匹配到商家，立即预约下单，商家将在一小时内与您联系，提供上门服务"
+            />
 
     </RelativeLayout>
 
