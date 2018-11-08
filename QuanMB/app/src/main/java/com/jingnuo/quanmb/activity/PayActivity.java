@@ -277,7 +277,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Map map_zpay=new HashMap();
                     map_zpay.put("isrecharge","N");
                     map_zpay.put("subject",title_pay);
-                    map_zpay.put("total_fee",pay_amount);
+                    map_zpay.put("total_fee",pay_amount+"");
                     map_zpay.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_zpay.put("user_token",Staticdata.static_userBean.getData().getUser_token());
                     map_zpay.put("task_id",taskid);

@@ -7,7 +7,7 @@ package com.jingnuo.quanmb.data;
 public class Urls {
     public static String Baseurl_downShop = "https://app.quanminbang.top/QMB_Business/v1.0/uploadIge/downLoad";//下载商户版本
     public static String Baseurl_zhuye = "https://app.quanminbang.top/QuanMinBang/";//官网主页
-    public static String Baseurl_index = "http://v3.rabbitpre.com/m2/aUe1ZjN6ls";//分享的主页
+    public static String Baseurl_index = "https://app.quanminbang.top/v1.0/uploadIge/goActivity";//分享的主页
     public static String Baseurl_zixunkefu = "http://www.quanminbang.top/QuanMinBang/v1.0/uploadIge/toH5";//客服咨询
     public static String newpeoplecoupon = "";//新用户活动领取点击接口
     //正式
