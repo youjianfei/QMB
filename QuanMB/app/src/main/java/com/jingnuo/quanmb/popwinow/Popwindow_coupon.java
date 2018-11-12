@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.activity.IssueSkillActivity;
 import com.jingnuo.quanmb.activity.IssueTaskActivity;
+import com.jingnuo.quanmb.activity.ZixunKefuWebActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.SizeUtils;
@@ -65,9 +66,12 @@ public class Popwindow_coupon {
         image_get.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {//立即领取
-                Uri uri = Uri.parse(Urls.newpeoplecoupon);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                activity.startActivity(intent);
+//                Uri uri = Uri.parse(Urls.newpeoplecoupon);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                activity.startActivity(intent);
+                Intent intent_kefuzhongxin = new Intent(activity, ZixunKefuWebActivity.class);
+                intent_kefuzhongxin.putExtra("webtitle", "优惠券");
+                activity.startActivity(intent_kefuzhongxin);
                 mPopupWindow.dismiss();
             }
         });

@@ -21,8 +21,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.LogUtils;
 
@@ -30,6 +32,11 @@ public class ZixunKefuWebActivity extends BaseActivityother {
     //控件
     private WebView webView;
     ProgressBar mPrigressBer;
+    TextView textview_webtitle;
+
+
+    String web_title = "";
+    String url = "";
 
     @Override
     public int setLayoutResID() {
@@ -44,6 +51,18 @@ public class ZixunKefuWebActivity extends BaseActivityother {
     @Override
     protected void initData() {
         WebSettings settings = webView.getSettings();
+        web_title = getIntent().getStringExtra("webtitle");
+        textview_webtitle.setText(web_title);
+        if (web_title.equals("全民帮客服中心")) {
+            url = Urls.Baseurl_zixunkefu;
+        } else {
+            if(Staticdata.static_userBean.getData()==null){
+                url = Urls.newpeoplecoupon;
+            }else {
+                url = Urls.newpeoplecoupon+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();
+            }
+            settings.setUseWideViewPort(true);
+        }
         // 设置与Js交互的权限
         settings.setJavaScriptEnabled(true);
         // 设置允许JS弹窗
@@ -55,12 +74,17 @@ public class ZixunKefuWebActivity extends BaseActivityother {
         settings.setDomStorageEnabled(true);//开启DOM storage API功能
         settings.setAllowFileAccess(true);
         // 将网页内容以单列显示
+//        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        final String url = Urls.Baseurl_zixunkefu;
-//        final String url = "file:///android_asset/text.html";
+        settings.setLoadWithOverviewMode(true);
+
+//        settings.setAllowFileAccess(true);
+//        settings.setAllowFileAccessFromFileURLs(true);
+//        settings.setAllowUniversalAccessFromFileURLs(true);
 
         webView.loadUrl(url);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String request) {
                 view.loadUrl(request);
@@ -86,27 +110,25 @@ public class ZixunKefuWebActivity extends BaseActivityother {
                 super.onReceivedHttpError(view, request, errorResponse);
             }
         });
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if(newProgress==100){
+                if (newProgress == 100) {
                     mPrigressBer.setVisibility(View.GONE);//加载完网页进度条消失
-                    LogUtils.LOG("ceshi",webView.getUrl(),"网..址");
+                    LogUtils.LOG("ceshi", webView.getUrl(), "网..址");
 //                    if(webView.getUrl().contains("https://eoskoreanode.com/app/index/index.html")||
 //                            webView.getUrl().contains("https://eoskoreanode.com/app/asset/index.html")||
 //                            webView.getUrl().contains("https://eoskoreanode.com/app/user/index.html")){
 //                        webView.clearHistory();
 //                    }
-                }
-                else{
+                } else {
                     mPrigressBer.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
                     mPrigressBer.setProgress(newProgress);//设置进度值
                 }
 
 
             }
-
 
 
             //扩展浏览器上传文件
@@ -128,38 +150,40 @@ public class ZixunKefuWebActivity extends BaseActivityother {
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
 
-                LogUtils.LOG("ceshi","图片选择","tupian");
+                LogUtils.LOG("ceshi", "图片选择", "tupian");
                 onenFileChooseImpleForAndroid(filePathCallback);
                 return true;
 
             }
 
-            @Override
-            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-//                Uri uri = Uri.parse(message);
-//                if ( uri.getScheme().equals("ete")) {
-//
-//                    // 如果 authority  = 预先约定协议里的 webview，即代表都符合约定的协议
-//                    // 所以拦截url,下面JS开始调用Android需要的方法
-//                    Log.i("ceshi",uri.getAuthority()+".....2");
-//                    webView.stopLoading();
-//                    if(uri.getAuthority().equals("scan")){
-//                        erweima();
-//                    }else {
-//                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-//                        cm.setText(uri.getAuthority());
-//                        ToastUtils.showToast(MainActivity.this,"复制到剪贴板成功");
-//                    }
-//                    result.cancel();
-//                    return true;
-//                }
-                return true;
-            }
+//            @Override
+//            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+////                Uri uri = Uri.parse(message);
+////                if ( uri.getScheme().equals("ete")) {
+////
+////                    // 如果 authority  = 预先约定协议里的 webview，即代表都符合约定的协议
+////                    // 所以拦截url,下面JS开始调用Android需要的方法
+////                    Log.i("ceshi",uri.getAuthority()+".....2");
+////                    webView.stopLoading();
+////                    if(uri.getAuthority().equals("scan")){
+////                        erweima();
+////                    }else {
+////                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+////                        cm.setText(uri.getAuthority());
+////                        ToastUtils.showToast(MainActivity.this,"复制到剪贴板成功");
+////                    }
+////                    result.cancel();
+////                    return true;
+////                }
+//                return true;
+//            }
         });
     }
+
     public final static int FILECHOOSER_RESULTCODE = 1;
     public final static int FILECHOOSER_RESULTCODE_FOR_ANDROID_5 = 2;
     public ValueCallback<Uri> mUploadMessage;
+
     private void openFileChooserImpl(ValueCallback<Uri> uploadMsg) {
         mUploadMessage = uploadMsg;
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
@@ -169,6 +193,7 @@ public class ZixunKefuWebActivity extends BaseActivityother {
     }
 
     public ValueCallback<Uri[]> mUploadMessageForAndroid5;
+
     private void onenFileChooseImpleForAndroid(ValueCallback<Uri[]> filePathCallback) {
         mUploadMessageForAndroid5 = filePathCallback;
         Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -186,20 +211,21 @@ public class ZixunKefuWebActivity extends BaseActivityother {
     protected void initListener() {
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FILECHOOSER_RESULTCODE) {
             if (null == mUploadMessage)
                 return;
-            Uri result = data == null || resultCode != RESULT_OK ? null: data.getData();
+            Uri result = data == null || resultCode != RESULT_OK ? null : data.getData();
             mUploadMessage.onReceiveValue(result);
             mUploadMessage = null;
 
-        } else if (requestCode == FILECHOOSER_RESULTCODE_FOR_ANDROID_5){
+        } else if (requestCode == FILECHOOSER_RESULTCODE_FOR_ANDROID_5) {
             if (null == mUploadMessageForAndroid5)
                 return;
-            Uri result = (data == null || resultCode != RESULT_OK) ? null: data.getData();
+            Uri result = (data == null || resultCode != RESULT_OK) ? null : data.getData();
             if (result != null) {
                 mUploadMessageForAndroid5.onReceiveValue(new Uri[]{result});
             } else {
@@ -208,9 +234,12 @@ public class ZixunKefuWebActivity extends BaseActivityother {
             mUploadMessageForAndroid5 = null;
         }
     }
+
     @Override
     protected void initView() {
-        webView=findViewById(R.id.webview);
-        mPrigressBer=findViewById(R.id.pb);
+        webView = findViewById(R.id.webview);
+        textview_webtitle = findViewById(R.id.textview_webtitle);
+        mPrigressBer = findViewById(R.id.pb);
+
     }
 }

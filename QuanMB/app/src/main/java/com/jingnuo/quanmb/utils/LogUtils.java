@@ -7,7 +7,7 @@ import android.util.Log;
  */
 
 public   class LogUtils {
-    static boolean log =false ;
+    static boolean log =false;
 
    public static void LOG(String tag, String message,String position){
        if(log){

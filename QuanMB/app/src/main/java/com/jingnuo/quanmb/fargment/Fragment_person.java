@@ -49,6 +49,7 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.jingnuo.quanmb.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -188,7 +189,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         break;
                     case 3://优惠券
                         Intent intent_coupon = new Intent(getActivity(), CouponActivity.class);
-                    intent_coupon.putExtra("type","优惠券");
+                        intent_coupon.putExtra("type", "优惠券");
                         startActivity(intent_coupon);
                         break;
                     case 4://我的收藏
@@ -197,6 +198,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         break;
                     case 5://客服中心
                         Intent intent_kefuzhongxin = new Intent(getActivity(), ZixunKefuWebActivity.class);
+                        intent_kefuzhongxin.putExtra("webtitle", "全民帮客服中心");
                         startActivity(intent_kefuzhongxin);
                         break;
                     case 6://设置

@@ -39,6 +39,7 @@ import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.master.permissionhelper.PermissionHelper;
 import com.jingnuo.quanmb.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -83,14 +84,14 @@ public class MytaskDetailActivity extends BaseActivityother {
     TextView mButton_again;
 
     //数据
-    String app_type="";//判断是否是匹配单
+    String app_type = "";//判断是否是匹配单
 
     String ID = "";
     Map map_taskdetail;
 
-    String  phonenumber="";
+    String phonenumber = "";
 
-    String addprice="";//加价的金额
+    String addprice = "";//加价的金额
 
 
     String newID = "";
@@ -120,8 +121,8 @@ public class MytaskDetailActivity extends BaseActivityother {
     @Override
     protected void setData() {
         Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
-        Staticdata.ScreenWidth =SizeUtils.getScreenWidthPx(this);
-        Staticdata. ispipei=false;
+        Staticdata.ScreenWidth = SizeUtils.getScreenWidthPx(this);
+        Staticdata.ispipei = false;
         imageview_urllist = new ArrayList<>();
         adapter_gridviewpic = new Adapter_Gridviewpic_skillsdetails(imageview_urllist, this);
         imageGridview.setAdapter(adapter_gridviewpic);
@@ -132,13 +133,12 @@ public class MytaskDetailActivity extends BaseActivityother {
             @Override
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
-                if(respose.equals("success")&&Staticdata.ispipei){
+                if (respose.equals("success") && Staticdata.ispipei) {
 
 
-
-                return;
+                    return;
                 }
-                if (respose.equals("success")&&isIssueAgain) {//重新发布任务支付成功
+                if (respose.equals("success") && isIssueAgain) {//重新发布任务支付成功
                     request(map_taskdetail);
                 }
 //                else {//增加价格支付成功
@@ -187,8 +187,8 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        glidee=Glide.with(MytaskDetailActivity.this);
-        mPermission= new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
+        glidee = Glide.with(MytaskDetailActivity.this);
+        mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         Intent intent = getIntent();
         ID = intent.getStringExtra("id");
         map_taskdetail = new HashMap();
@@ -205,10 +205,10 @@ public class MytaskDetailActivity extends BaseActivityother {
         mTextview_taskaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!taskDetailBean.getData().getX_value().equals("")){
-                    Intent intentAddressshow= new Intent(MytaskDetailActivity.this,AdressShowActivity.class);
-                    intentAddressshow.putExtra("x_vlaue",taskDetailBean.getData().getX_value());
-                    intentAddressshow.putExtra("y_vlaue",taskDetailBean.getData().getY_value());
+                if (!taskDetailBean.getData().getX_value().equals("")) {
+                    Intent intentAddressshow = new Intent(MytaskDetailActivity.this, AdressShowActivity.class);
+                    intentAddressshow.putExtra("x_vlaue", taskDetailBean.getData().getX_value());
+                    intentAddressshow.putExtra("y_vlaue", taskDetailBean.getData().getY_value());
                     startActivity(intentAddressshow);
                 }
             }
@@ -286,8 +286,9 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                    return;
 //                }
 //                startActivity(intent);//调用具体方法
-            Intent intent=new Intent(MytaskDetailActivity.this,ZixunKefuWebActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(MytaskDetailActivity.this, ZixunKefuWebActivity.class);
+                intent.putExtra("webtitle", "全民帮客服中心");
+                startActivity(intent);
             }
         });
         imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -300,16 +301,16 @@ public class MytaskDetailActivity extends BaseActivityother {
             @Override
             public void onClick(View view) {
 
-                    String tip="";
-                if(taskDetailBean.getData().getTask_Status_code().equals("01")|| taskDetailBean.getData().getTask_Status_code().equals("08")){
-                    tip="撤回成功后将在24小时内退还佣金，是否继续？";
-                }else {
-                    tip="3分钟内取消订单不受惩罚";
+                String tip = "";
+                if (taskDetailBean.getData().getTask_Status_code().equals("01") || taskDetailBean.getData().getTask_Status_code().equals("08")) {
+                    tip = "撤回成功后将在24小时内退还佣金，是否继续？";
+                } else {
+                    tip = "3分钟内取消订单不受惩罚";
                 }
                 new Popwindow_Tip(tip, MytaskDetailActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
-                        if(result){
+                        if (result) {
                             new Volley_Utils(new Interface_volley_respose() {
                                 @Override
                                 public void onSuccesses(String respose) {
@@ -346,8 +347,8 @@ public class MytaskDetailActivity extends BaseActivityother {
         mButton_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(taskDetailBean.getData().getApp_type().equals("1")){
-                   Staticdata. ispipei=true;
+                if (taskDetailBean.getData().getApp_type().equals("1")) {
+                    Staticdata.ispipei = true;
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -363,10 +364,10 @@ public class MytaskDetailActivity extends BaseActivityother {
                                     Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
                                     intentpay.putExtra("title", "商户任务付款");
                                     intentpay.putExtra("order_no", taskDetailBean.getData().getOrder_no());
-                                    intentpay.putExtra("amount",  taskDetailBean.getData().getCommission()+"");
-                                    intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id()+"");
-                                    intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no()+"");
-                                    intentpay.putExtra("tasktypeid", taskDetailBean.getData().getTask_type()+"");
+                                    intentpay.putExtra("amount", taskDetailBean.getData().getCommission() + "");
+                                    intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
+                                    intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
+                                    intentpay.putExtra("tasktypeid", taskDetailBean.getData().getTask_type() + "");
                                     startActivity(intentpay);
 
                                 } else {
@@ -385,7 +386,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                             "&task_id=" + taskDetailBean.getData().getTask_id(), MytaskDetailActivity.this, 0);
 
 
-                }else {
+                } else {
                     LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
                             "&task_id=" + taskDetailBean.getData().getTask_id(), "确认完成");
                     new Volley_Utils(new Interface_volley_respose() {
@@ -404,9 +405,9 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                                request(map_taskdetail);
                                     Intent intend_think = new Intent(MytaskDetailActivity.this, OrderThinkActivity.class);
                                     intend_think.putExtra("task_id", taskDetailBean.getData().getTask_id() + "");
-                                    if(taskDetailBean.getData().getBusiness_name().equals("")){
+                                    if (taskDetailBean.getData().getBusiness_name().equals("")) {
                                         intend_think.putExtra("helpername", taskDetailBean.getData().getHelper_name() + "");
-                                    }else {
+                                    } else {
                                         intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
                                     }
 
@@ -443,15 +444,15 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onClick(View v) {
 
 
-                popwindow_addPrice=new Popwindow_addPrice(MytaskDetailActivity.this, new Interence_bargin() {
+                popwindow_addPrice = new Popwindow_addPrice(MytaskDetailActivity.this, new Interence_bargin() {
                     @Override
                     public void onResult(String result) {
-                        if(Double.parseDouble(result)>taskDetailBean.getData().getCommission()){
-                            result=Double.parseDouble(result)-taskDetailBean.getData().getCommission()+"";
-                            result=String .format("%.2f",Double.parseDouble(result));
-                            addprice=result;
-                        }else {
-                            ToastUtils.showToast(MytaskDetailActivity.this,"不得低于原价格");
+                        if (Double.parseDouble(result) > taskDetailBean.getData().getCommission()) {
+                            result = Double.parseDouble(result) - taskDetailBean.getData().getCommission() + "";
+                            result = String.format("%.2f", Double.parseDouble(result));
+                            addprice = result;
+                        } else {
+                            ToastUtils.showToast(MytaskDetailActivity.this, "不得低于原价格");
                             return;
                         }
                         Intent intentaddprice = new Intent(MytaskDetailActivity.this, PayActivity.class);
@@ -459,7 +460,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                         intentaddprice.putExtra("order_no", "000000");
                         intentaddprice.putExtra("amount", result + "");
                         intentaddprice.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
-                        intentaddprice.putExtra("tasktypeid", taskDetailBean.getData().getTask_type()+"");
+                        intentaddprice.putExtra("tasktypeid", taskDetailBean.getData().getTask_type() + "");
                         intentaddprice.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
                         startActivity(intentaddprice);
                     }
@@ -500,21 +501,20 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     void requestTaskid() {
 
-                isIssueAgain = true;
-                Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
-                intentpay.putExtra("title", "全民帮—任务付款");
-                intentpay.putExtra("order_no", "000000");
-                intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
+        isIssueAgain = true;
+        Intent intentpay = new Intent(MytaskDetailActivity.this, PayActivity.class);
+        intentpay.putExtra("title", "全民帮—任务付款");
+        intentpay.putExtra("order_no", "000000");
+        intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
 
-                if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
-                    intentpay.putExtra("amount", "5");
-                } else {
-                    intentpay.putExtra("amount", taskDetailBean.getData().getCommission() + "");
-                }
+        if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
+            intentpay.putExtra("amount", "5");
+        } else {
+            intentpay.putExtra("amount", taskDetailBean.getData().getCommission() + "");
+        }
 
-                intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
-                startActivity(intentpay);
-
+        intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
+        startActivity(intentpay);
 
 
     }
@@ -550,7 +550,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onError(int error) {
 
             }
-        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_id=" + taskDetailBean.getData().getTask_id() , MytaskDetailActivity.this, 0);
+        }).Http(Urls.Baseurl_cui + Urls.Issue_again + Staticdata.static_userBean.getData().getUser_token() + "&task_id=" + taskDetailBean.getData().getTask_id(), MytaskDetailActivity.this, 0);
     }
 
     void request(Map map) {
@@ -560,8 +560,8 @@ public class MytaskDetailActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails, "MytaskDetailActivity");
                 LogUtils.LOG("ceshi", respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
-               Staticdata. taskDetailBeanStatic=taskDetailBean;
-                app_type=taskDetailBean.getData().getApp_type();
+                Staticdata.taskDetailBeanStatic = taskDetailBean;
+                app_type = taskDetailBean.getData().getApp_type();
                 if (taskDetailBean.getData().getTask_Status_code().equals("01") ||
                         taskDetailBean.getData().getTask_Status_code().equals("08") ||
                         taskDetailBean.getData().getTask_Status_code().equals("09") ||
@@ -571,26 +571,26 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                    mRelativylaout_re1.setVisibility(View.VISIBLE);
                     mRelativylaout_re4.setVisibility(View.GONE);
                 } else {
-                   glidee.load(taskDetailBean.getData().getB_h_url()).into(mImageview_todo);
+                    glidee.load(taskDetailBean.getData().getB_h_url()).into(mImageview_todo);
 
 //                    mRelativylaout_re1.setVisibility(View.GONE);
                     mRelativylaout_re4.setVisibility(View.VISIBLE);
-                    String vip=""+taskDetailBean.getData().getLevel();
-                    if (vip.equals("")){
+                    String vip = "" + taskDetailBean.getData().getLevel();
+                    if (vip.equals("")) {
                         todoVIP.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         todoVIP.setText(vip);
                     }
                     if (taskDetailBean.getData().getBusiness_name().equals("")) {
                         //没有商户名字   是帮手
                         todoName.setText(taskDetailBean.getData().getHelper_name());
                         todoShenfen.setText("个人帮手");
-                        phonenumber=taskDetailBean.getData().getHelper_mobile_no();
+                        phonenumber = taskDetailBean.getData().getHelper_mobile_no();
                     } else {
                         //商户
                         todoName.setText(taskDetailBean.getData().getBusiness_name());
                         todoShenfen.setText("认证商户");
-                        phonenumber=taskDetailBean.getData().getBusiness_mobile_no();
+                        phonenumber = taskDetailBean.getData().getBusiness_mobile_no();
                     }
                 }
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
@@ -678,7 +678,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 mTextview_taskstarttime.setText(taskDetailBean.getData().getTask_Time());
 
 
-                mTextview_taskaddress.setText( taskDetailBean.getData().getDetailed_address());
+                mTextview_taskaddress.setText(taskDetailBean.getData().getDetailed_address());
                 String imageURL = taskDetailBean.getData().getAvatar_imgUrl().substring(0, taskDetailBean.getData().getAvatar_imgUrl().length() - 1);
 
                 LogUtils.LOG("ceshi", "调用glide", "wode renwu");
@@ -693,17 +693,17 @@ public class MytaskDetailActivity extends BaseActivityother {
                 } else {
                     mButton_cancle.setVisibility(View.GONE);
                 }
-                if (taskDetailBean.getData().getTask_Status_code().equals("01")|| taskDetailBean.getData().getTask_Status_code().equals("08")) {
+                if (taskDetailBean.getData().getTask_Status_code().equals("01") || taskDetailBean.getData().getTask_Status_code().equals("08")) {
                     getmTextview_statejieshao.setText("正在为你匹配帮手");
                     text_state2.setText("耐心等待");
                     mText_xiugaijiage.setVisibility(View.VISIBLE);//修改价格
                     kefujieru.setVisibility(View.GONE);
 
                     stateImage.setImageResource(R.mipmap.dengdai);
-                }else {
+                } else {
                     mText_xiugaijiage.setVisibility(View.GONE);
                 }
-                if(taskDetailBean.getData().getIs_helper_bid().equals("Y")){
+                if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     mText_xiugaijiage.setVisibility(View.GONE);
                 }
                 if (taskDetailBean.getData().getTask_Status_code().equals("02")) {
@@ -727,7 +727,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                     stateImage.setImageResource(R.mipmap.shixiao);
                     text_state2.setText("请重新发布");
                 }
-                if(app_type.equals("1")){
+                if (app_type.equals("1")) {
                     if (taskDetailBean.getData().getTask_Status_code().equals("07") || taskDetailBean.getData().getTask_Status_code().equals("13")) {
                         mButton_cancle.setVisibility(View.GONE);
                         mButton_again.setVisibility(View.GONE);
@@ -772,7 +772,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             for (int i = 0; i < len; i++) {
                 imageview_urllist.add(images[i]);
             }
-            imageGridview.setVisibility(imageview_urllist.size()>0?View.VISIBLE:View.GONE);
+            imageGridview.setVisibility(imageview_urllist.size() > 0 ? View.VISIBLE : View.GONE);
             adapter_gridviewpic.notifyDataSetChanged();
 
         }
@@ -794,6 +794,7 @@ public class MytaskDetailActivity extends BaseActivityother {
         super.onDestroy();
         unregisterReceiver(paysuccess_BroadcastReciver);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
