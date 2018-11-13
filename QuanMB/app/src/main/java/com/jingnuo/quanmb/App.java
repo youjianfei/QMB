@@ -67,14 +67,14 @@ public class App extends Application  {
 //            MultiDex.install(this);
 //        }
 
-//        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
+        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
     }
 
-//    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
-//        public void uncaughtException(Thread thread, Throwable ex) {
-//            restartApp();
-//        }
-//    };
+    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread thread, Throwable ex) {
+            restartApp();
+        }
+    };
 
     public void restartApp() {
         Intent intent = new Intent(getApplicationContext(), LaunchActivity.class);
