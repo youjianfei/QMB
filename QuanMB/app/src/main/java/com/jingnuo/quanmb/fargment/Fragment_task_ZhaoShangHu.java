@@ -511,7 +511,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         if (release_address.equals("")) {
             release_address=Staticdata.aoi;
         }
-        if (release_address.equals("选择地址")) {
+        if (release_address.equals("选择地址")||release_address.equals("")) {
             ToastUtils.showToast(getActivity(), "请选择任务地址");
             return false;
         }
