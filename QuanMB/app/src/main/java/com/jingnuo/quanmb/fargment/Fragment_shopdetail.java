@@ -60,16 +60,14 @@ public class Fragment_shopdetail extends Fragment{
     TextView text_name;
     TextView text_type;
     TextView text_orders;
-    TextView text_vip;
+    ImageView text_vip;
     SimpleRatingBar simpleRatingBar;
 //    TextView text_lv;
     CircleImageView image_head;
-    LinearLayout imageView_call;
-    LinearLayout button_choose;
-    LinearLayout linearlayout_zixun;
+//    LinearLayout button_choose;
+//    LinearLayout linearlayout_zixun;
 
     //对象
-    PermissionHelper mPermission;//动态申请权限
 
     Map map_choosebissness;
     String task_id="";
@@ -89,7 +87,6 @@ public class Fragment_shopdetail extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_shopdetails, container, false);
-        mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         initview();
         setdata();
         initlistenner();
@@ -99,110 +96,75 @@ public class Fragment_shopdetail extends Fragment{
     }
 
     private void initlistenner() {
-        imageView_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                Uri data = Uri.parse("tel:" + matchingBean.getBusiness_mobile_no());
-                intent.setData(data);
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
-//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
-                    mPermission.request(new PermissionHelper.PermissionCallback() {
-                        @Override
-                        public void onPermissionGranted() {
-
-                        }
-
-                        @Override
-                        public void onIndividualPermissionGranted(String[] grantedPermission) {
-
-                        }
-
-                        @Override
-                        public void onPermissionDenied() {
-
-                        }
-
-                        @Override
-                        public void onPermissionDeniedBySystem() {
-
-                        }
-                    });
-                    return;
-                }
-
-                startActivity(intent);//调用具体方法
-            }
-        });
-        button_choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Popwindow_Tip("是否选择此商家下单?", getActivity(), new Interence_complteTask() {
-                    @Override
-                    public void onResult(boolean result) {
-                        if(result) {
-                            map_choosebissness=new HashMap();
-                            map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                            map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                            map_choosebissness.put("task_id", task_id);
-                            map_choosebissness.put("business_no", matchingBean.getBusiness_no());
-//                    map_choosebissness.put("counteroffer_amount", text_money.getText());
-                            new Volley_Utils(new Interface_volley_respose() {
-                                @Override
-                                public void onSuccesses(String respose) {
-                                    int status = 0;
-                                    String msg = "";
-                                    String data = "";
-                                    try {
-                                        JSONObject object = new JSONObject(respose);
-                                        status = (Integer) object.get("code");//
-                                        msg = (String) object.get("message");//
-                                        data = (String) object.get("data");//
-                                        if(status==1){
-//                                    timer.cancel();
-                                            Intent intentpay = new Intent(getActivity(), MytaskDetailActivity.class);
-//                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-                                            intentpay.putExtra("id", task_id);
-//                                    intentpay.putExtra("order_no", data);
-//                                    intentpay.putExtra("taskid", task_id);
-                                            startActivity(intentpay);
-                                            getActivity().finish();
-
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-
-                                @Override
-                                public void onError(int error) {
-
-                                }
-                            }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,getContext(),1,map_choosebissness);
-                        }
-                    }
-                }).showPopwindow();
-            }
-        });
-        linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RongIM.getInstance().setMessageAttachedUserInfo(true);
-                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchingBean.getBusiness_no(),
-                        matchingBean.getBusiness_name(),
-                        Uri.parse(matchingBean.getHeadUrl())));
-                RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
-                        Staticdata.static_userBean.getData().getAppuser().getNick_name(),
-                        Uri.parse( Staticdata.static_userBean.getData().getImg_url())));
-//                RongIM.getInstance().refreshUserInfoCache(new UserInfo(matchingBean.getClient_no(),
+//        button_choose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new Popwindow_Tip("是否选择此商家下单?", getActivity(), new Interence_complteTask() {
+//                    @Override
+//                    public void onResult(boolean result) {
+//                        if(result) {
+//                            map_choosebissness=new HashMap();
+//                            map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+//                            map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                            map_choosebissness.put("task_id", task_id);
+//                            map_choosebissness.put("business_no", matchingBean.getBusiness_no());
+////                    map_choosebissness.put("counteroffer_amount", text_money.getText());
+//                            new Volley_Utils(new Interface_volley_respose() {
+//                                @Override
+//                                public void onSuccesses(String respose) {
+//                                    int status = 0;
+//                                    String msg = "";
+//                                    String data = "";
+//                                    try {
+//                                        JSONObject object = new JSONObject(respose);
+//                                        status = (Integer) object.get("code");//
+//                                        msg = (String) object.get("message");//
+//                                        data = (String) object.get("data");//
+//                                        if(status==1){
+////                                    timer.cancel();
+//                                            Intent intentpay = new Intent(getActivity(), MytaskDetailActivity.class);
+////                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
+//                                            intentpay.putExtra("id", task_id);
+////                                    intentpay.putExtra("order_no", data);
+////                                    intentpay.putExtra("taskid", task_id);
+//                                            startActivity(intentpay);
+//                                            getActivity().finish();
+//
+//                                        }
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//
+//                                @Override
+//                                public void onError(int error) {
+//
+//                                }
+//                            }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,getContext(),1,map_choosebissness);
+//                        }
+//                    }
+//                }).showPopwindow();
+//            }
+//        });
+//        linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                RongIM.getInstance().setMessageAttachedUserInfo(true);
+//                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchingBean.getBusiness_no(),
 //                        matchingBean.getBusiness_name(),
 //                        Uri.parse(matchingBean.getHeadUrl())));
-//                RongIM.getInstance().setMessageAttachedUserInfo(true);
-                RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getBusiness_no(),matchingBean.getBusiness_name());
-            }
-        });
+//                RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
+//                        Staticdata.static_userBean.getData().getAppuser().getNick_name(),
+//                        Uri.parse( Staticdata.static_userBean.getData().getImg_url())));
+////                RongIM.getInstance().refreshUserInfoCache(new UserInfo(matchingBean.getClient_no(),
+////                        matchingBean.getBusiness_name(),
+////                        Uri.parse(matchingBean.getHeadUrl())));
+////                RongIM.getInstance().setMessageAttachedUserInfo(true);
+//                RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getBusiness_no(),matchingBean.getBusiness_name());
+//            }
+//        });
     }
 
     private void setdata() {
@@ -211,7 +173,7 @@ public class Fragment_shopdetail extends Fragment{
         Glide.with(getActivity()).load(matchingBean.getHeadUrl()).into(image_head);
         if(!matchingBean.getMemberImgUrl().equals("")){
             text_vip.setVisibility(View.VISIBLE);
-            text_vip.setText(matchingBean.getMember_lv());
+            Glide.with(getActivity()).load(matchingBean.getMemberImgUrl()).into(text_vip);
 
         }else {
             text_vip.setVisibility(View.INVISIBLE);
@@ -235,9 +197,8 @@ public class Fragment_shopdetail extends Fragment{
         text_vip=rootview.findViewById(R.id.text_vip);
         simpleRatingBar=rootview.findViewById(R.id.SimpleRatingBar);
         image_head=rootview.findViewById(R.id.image_head);
-        imageView_call=rootview.findViewById(R.id.image_callphone);
-        button_choose=rootview.findViewById(R.id.button_choose);
-        linearlayout_zixun=rootview.findViewById(R.id.linearlayout_zixun);
+//        button_choose=rootview.findViewById(R.id.button_choose);
+//        linearlayout_zixun=rootview.findViewById(R.id.linearlayout_zixun);
 //        iamge_newacount=rootview.findViewById(R.id.iamge_newacount);
 
 
@@ -252,14 +213,7 @@ public class Fragment_shopdetail extends Fragment{
         simpleRatingBar.setStarsSeparation(1);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (mPermission != null) {
-            mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
 
-    }
 //    Timer timer;
 //    private Handler mhandler = new Handler() {
 //        @Override

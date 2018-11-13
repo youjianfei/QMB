@@ -33,103 +33,204 @@
     </RelativeLayout>
 
     <!--<com.jingnuo.quanmb.customview.CustomerScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_above="@+id/linearlayout_bottom"-->
-        <!---->
-        <!--android:overScrollMode="never"-->
-        <!--android:scrollbars="vertical">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_above="@+id/linearlayout_bottom"-->
+    <!---->
+    <!--android:overScrollMode="never"-->
+    <!--android:scrollbars="vertical">-->
 
-        <RelativeLayout
-            android:id="@+id/relative1"
-            android:layout_below="@+id/re_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipChildren="false"
-            android:fitsSystemWindows="true"
-            android:background="@color/white"
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/re_title"
+        android:background="@color/white"
+        android:clipChildren="false"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_matchCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="已为您选择附近的商家"
+            android:textColor="@color/black"
+            android:textSize="23dp" />
+
+        <LinearLayout
+            android:id="@+id/textview_change"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/refresh" />
+
             <TextView
-                android:id="@+id/text_matchCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:textSize="23dp"
-                android:textColor="@color/black"
-                android:text="已为您选择附近的商家" />
+                android:text="换一组"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_timelow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:text="15s"
+            android:textSize="15dp"
+            android:visibility="invisible" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="245dp"
+            android:layout_below="@+id/text_matchCount"
+            android:layout_gravity="bottom"
+            android:clipToPadding="false"
+            android:overScrollMode="never" />
+
+
+        <ImageView
+            android:id="@+id/image_left"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/textview_change"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="150dp"
+            android:src="@mipmap/left"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/image_right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textview_change"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="150dp"
+            android:src="@mipmap/right" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout1"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/background_line">
+
             <LinearLayout
-                android:id="@+id/textview_change"
-                android:layout_width="50dp"
+                android:id="@+id/linearLayout_callphone"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="22dp"
                 android:gravity="center"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="15dp"
-                android:layout_alignParentRight="true"
                 android:orientation="vertical">
+
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@mipmap/refresh"
-                    />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/phone5" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:text="换一组" />
+                    android:text="电话"
+                    android:textColor="@color/gray_969696"
+                    android:textSize="13dp" />
             </LinearLayout>
-            <TextView
-                android:id="@+id/text_timelow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_alignParentRight="true"
-                android:visibility="invisible"
-                android:text="15s" />
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:clipToPadding="false"
-                android:layout_below="@+id/text_matchCount"
-                android:overScrollMode="never"
-                />
 
-
-            <ImageView
-                android:id="@+id/image_left"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/left"
-                android:layout_marginTop="150dp"
-                android:layout_marginLeft="5dp"
-                android:visibility="invisible"
-                android:layout_below="@+id/textview_change"
-                />
-            <ImageView
-                android:id="@+id/image_right"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/right"
-                android:layout_marginTop="150dp"
-                android:layout_marginRight="5dp"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/textview_change"
-                />
             <LinearLayout
-                android:id="@+id/iamge_newacount"
-                android:layout_width="wrap_content"
+                android:id="@+id/linearlayout_zixun"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="40dp"
-                android:orientation="horizontal" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="22dp"
+                android:layout_toRightOf="@+id/linearLayout_callphone"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/zixun4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="咨询"
+                    android:textColor="@color/gray_969696"
+
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/linearlayout_zixun"
+                android:background="@color/yellow_jianbian_start"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/yuyue3"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="预约下单"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+            </LinearLayout>
 
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textviewtip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_above="@+id/relativelayout1"
+            android:text="已为您匹配到附近最适合商家，预约下单商家将在30分钟之内与您联系为您提供上门服务"
+            android:textSize="11dp" />
+        <LinearLayout
+            android:id="@+id/iamge_newacount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_above="@+id/textviewtip"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal" />
+
+    </RelativeLayout>
     <!--</com.jingnuo.quanmb.customview.CustomerScrollView>-->
 
 

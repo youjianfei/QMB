@@ -1,12 +1,16 @@
 package com.jingnuo.quanmb.activity;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +41,7 @@ import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.master.permissionhelper.PermissionHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +53,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
+
 public class MatchShopActivity extends AppCompatActivity  {
 
     //控件
@@ -55,15 +63,15 @@ public class MatchShopActivity extends AppCompatActivity  {
     ImageView image_left;
     ImageView image_right;
     private ViewPager mViewPager;
-    LinearLayout mtextview_change;
+    LinearLayout mtextview_change;//换一批
     TextView text_timelow;
     LinearLayout iamge_newacount;
 
-//    TextView mTextview_taskdetails;//任务详情
-//    MyGridView imageGridview;
-//    TextView mTextview_yuyuetime;//预约时间
-//    TextView mTextview_guzhuName;//雇主姓名
-//    TextView mTextview_taskaddress;//地址
+    LinearLayout linearLayout_callphone;//电话
+    LinearLayout linearlayout_zixun;//咨询
+    LinearLayout linearLayout_choose;//预约下单
+
+
 
     //数据
     String ID = "";
@@ -72,8 +80,7 @@ public class MatchShopActivity extends AppCompatActivity  {
     List<Matchshoplistbean.DataBean.MatchingBean>list_matchbea;//匹配的商户对象数组
 
     List<String> imageview_urllist;
-    Map map_taskdetail;//任务详情map
-//    Map map_price;//请求价格map
+    Map map_choosebissness;//下单map
 
     int page=0;//viewpager  默认展示第1个
     int page_all=0;//viewpager  一共多少页；
@@ -89,6 +96,7 @@ public class MatchShopActivity extends AppCompatActivity  {
     TaskDetailBean taskDetailBean;
     Adapter_Gridviewpic_skillsdetails adapter_gridviewpic;//图片展示适配器
 
+    PermissionHelper mPermission;//动态申请权限
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -105,7 +113,7 @@ public class MatchShopActivity extends AppCompatActivity  {
         list_matchbea.clear();
         list_matchbea.addAll(matchshoplistbean.getData().getMatching());
         page_all=list_matchbea.size()-1;
-
+        mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         initview();
         initdata();
         initlistenner();
@@ -120,7 +128,6 @@ public class MatchShopActivity extends AppCompatActivity  {
         ID = getIntent().getStringExtra("id");
         imageview_urllist=new ArrayList<>();//图片展示
         adapter_gridviewpic=new Adapter_Gridviewpic_skillsdetails(imageview_urllist,MatchShopActivity.this);
-//        imageGridview.setAdapter(adapter_gridviewpic);
         list_myfragments=new ArrayList<>();
         for (int i=0;i<list_matchbea.size();i++){
             list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i),ID));
@@ -128,23 +135,6 @@ public class MatchShopActivity extends AppCompatActivity  {
         adapterFragment=new AdapterFragment(getSupportFragmentManager(),list_myfragments);
         mViewPager.setAdapter(adapterFragment);
 
-        map_taskdetail = new HashMap();
-        map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-        map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-        map_taskdetail.put("id", ID + "");
-//        request(map_taskdetail);//请求任务详情
-//        map_price=new HashMap();
-//        map_price.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-//        map_price.put("task_id", ID + "");
-//        map_price.put("business_no", list_matchbea.get(0).getBusiness_no());
-//        timer = new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                mhandler.sendEmptyMessage(0);
-//            }
-//        };
-//        timer.schedule(timerTask, 0, 3000);
     }
 
     private void initview() {
@@ -153,33 +143,136 @@ public class MatchShopActivity extends AppCompatActivity  {
         image_right = findViewById(R.id.image_right);
         mViewPager = findViewById(R.id.viewPager);
         mtextview_change=findViewById(R.id.textview_change);
+        linearLayout_callphone=findViewById(R.id.linearLayout_callphone);
+        linearLayout_choose=findViewById(R.id.linearLayout_choose);
+        linearlayout_zixun=findViewById(R.id.linearlayout_zixun);
         text_timelow=findViewById(R.id.text_timelow);
         iamge_newacount=findViewById(R.id.iamge_newacount);
 
         if(matchshoplistbean.getData().getIsShow().equals("1")){
             ImageView image = new ImageView(MatchShopActivity.this);
             Glide.with(MatchShopActivity.this).load(matchshoplistbean.getData().getImg_url()).into(image);
-            int w=Staticdata.ScreenWidth- SizeUtils.dip2px(this,40);
+            int w=Staticdata.ScreenWidth- SizeUtils.dip2px(this,20);
             int h= (int) (w*0.2);
             LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
             image.setLayoutParams(mLayoutparams);
             iamge_newacount.addView(image);
         }
 
-//        mTextview_taskdetails = findViewById(R.id.text_taskdetail);
-//        imageGridview = findViewById(R.id.GridView_PIC);
-//        mTextview_yuyuetime = findViewById(R.id.text_time);
-//        mTextview_guzhuName = findViewById(R.id.text_guzhuname);
-//        mTextview_taskaddress = findViewById(R.id.text_address);
     }
     private  void  initlistenner(){
+        linearLayout_choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Popwindow_Tip("是否选择此商家下单?", MatchShopActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if(result) {
+                            map_choosebissness=new HashMap();
+                            map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                            map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_choosebissness.put("task_id", ID);
+                            map_choosebissness.put("business_no", matchshoplistbean.getData().getMatching().get(page).getBusiness_no());
+//                    map_choosebissness.put("counteroffer_amount", text_money.getText());
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    String data = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//
+                                        msg = (String) object.get("message");//
+                                        data = (String) object.get("data");//
+                                        if(status==1){
+//                                    timer.cancel();
+                                            Intent intentpay = new Intent(MatchShopActivity.this, MytaskDetailActivity.class);
+//                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
+                                            intentpay.putExtra("id", ID);
+//                                    intentpay.putExtra("order_no", data);
+//                                    intentpay.putExtra("taskid", task_id);
+                                            startActivity(intentpay);
+                                            MatchShopActivity.this.finish();
+
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,MatchShopActivity.this,1,map_choosebissness);
+                        }
+                    }
+                }).showPopwindow();
+            }
+        });
+        linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchshoplistbean.getData().getMatching().get(page).getBusiness_no(),
+                        matchshoplistbean.getData().getMatching().get(page).getBusiness_name(),
+                        Uri.parse(matchshoplistbean.getData().getMatching().get(page).getHeadUrl())));
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
+                        Staticdata.static_userBean.getData().getAppuser().getNick_name(),
+                        Uri.parse( Staticdata.static_userBean.getData().getImg_url())));
+//                RongIM.getInstance().refreshUserInfoCache(new UserInfo(matchingBean.getClient_no(),
+//                        matchingBean.getBusiness_name(),
+//                        Uri.parse(matchingBean.getHeadUrl())));
+//                RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().startPrivateChat(MatchShopActivity.this,matchshoplistbean.getData().getMatching().get(page).getBusiness_no(),matchshoplistbean.getData().getMatching().get(page).getBusiness_name());
+            }
+        });
+        linearLayout_callphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                Uri data = Uri.parse("tel:" +matchshoplistbean.getData().getMatching().get(page).getBusiness_mobile_no());
+                intent.setData(data);
+                if (ActivityCompat.checkSelfPermission(MatchShopActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+//                    ToastUtils.showToast(mContext,"拨打电话权限被你拒绝，请在手机设置中开启");
+                    mPermission.request(new PermissionHelper.PermissionCallback() {
+                        @Override
+                        public void onPermissionGranted() {
+
+                        }
+
+                        @Override
+                        public void onIndividualPermissionGranted(String[] grantedPermission) {
+
+                        }
+
+                        @Override
+                        public void onPermissionDenied() {
+
+                        }
+
+                        @Override
+                        public void onPermissionDeniedBySystem() {
+
+                        }
+                    });
+                    return;
+                }
+
+                startActivity(intent);//调用具体方法
+            }
+        });
         iamge_newacount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(matchshoplistbean.getData().getIsShow().equals("1")){
-                    Uri uri = Uri.parse(matchshoplistbean.getData().getActivity_url());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
+                    Intent intent_kefuzhongxin = new Intent(MatchShopActivity.this, ZixunKefuWebActivity.class);
+                    intent_kefuzhongxin.putExtra("webtitle", "优惠券");
+                    startActivity(intent_kefuzhongxin);
+
                 }
             }
         });
@@ -226,8 +319,6 @@ public class MatchShopActivity extends AppCompatActivity  {
 
             @Override
             public void onPageSelected(int position) {
-//                ProgressDlog.showProgress(mKProgressHUD);
-//                map_price.put("business_no", list_matchbea.get(position).getBusiness_no());//确定请求哪一个商户的出价
                 LogUtils.LOG("ceshi","选择了第一页"+position,"匹配商家");
                 page=position;
                 if(position==page_all){
@@ -258,13 +349,6 @@ public class MatchShopActivity extends AppCompatActivity  {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.mytaskdetails+"查订单"+respose, "MytaskDetailActivity");
                 taskDetailBean = new Gson().fromJson(respose, TaskDetailBean.class);
-//                String sex=taskDetailBean.getData().getClient_sex().equals("0")?"（先生）":"（女士）";
-//                mTextview_guzhuName.setText(taskDetailBean.getData().getClient_name()+sex+taskDetailBean.getData().getMobile_no());
-//                mTextview_taskdetails.setText(taskDetailBean.getData().getTask_description());
-//                mTextview_yuyuetime.setText(taskDetailBean.getData().getTask_Time());
-//                mTextview_taskaddress.setText(taskDetailBean.getData().getRelease_address() );
-//                String imageURL =taskDetailBean.getData().getTask_ImgUrl();
-//                setImage(imageURL);
             }
 
             @Override
@@ -312,57 +396,6 @@ public class MatchShopActivity extends AppCompatActivity  {
                 +Staticdata.static_userBean.getData().getUser_token()+"&task_id="
                 +ID,MatchShopActivity.this,0);
     }
-//    void getPrice(Map map){
-//        LogUtils.LOG("ceshi","商户出价"+map,"商户出价map");
-//        new  Volley_Utils(new Interface_volley_respose() {
-//            @Override
-//            public void onSuccesses(String respose) {
-//                LogUtils.LOG("ceshi","商户出价"+respose,"商户出价");
-//                mKProgressHUD.dismiss();
-//                int status = 0;
-//                String msg = "";
-//                try {
-//                    JSONObject object = new JSONObject(respose);
-//                    status = (Integer) object.get("code");//
-//                    msg = (String) object.get("data");//
-//                    Staticdata.price=msg;
-//                    if(status==1){
-////                        timer.cancel();
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(int error) {
-//
-//            }
-//        }).postHttp(Urls.Baseurl_cui+Urls.issuetask_getprice,MatchShopActivity.this,1,map);
-//    }
-
-//    void setImage(String image) {
-//        if (image == null || image.equals("")) {
-//            imageGridview.setVisibility(View.GONE);
-//        } else {
-//            String[] images = image.split(",");
-//            int len = images.length;
-//            LogUtils.LOG("ceshi", "图片的个数" + images.length, "SkillDetailActivity分隔图片");
-//            imageview_urllist.clear();
-//            for (int i = 0; i < len; i++) {
-//                imageview_urllist.add(images[i]);
-//            }
-//            if(imageview_urllist.size()>0){
-//                imageGridview.setVisibility(View.VISIBLE);
-//            }else {
-//                imageGridview.setVisibility(View.GONE);
-//            }
-//            adapter_gridviewpic.notifyDataSetChanged();
-//
-//        }
-//
-//    }
 
     Timer timer;
     int time=16;
@@ -386,7 +419,14 @@ public class MatchShopActivity extends AppCompatActivity  {
 //
 //
     };
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (mPermission != null) {
+            mPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
