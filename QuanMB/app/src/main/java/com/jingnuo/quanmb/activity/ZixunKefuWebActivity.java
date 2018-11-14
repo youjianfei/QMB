@@ -55,13 +55,15 @@ public class ZixunKefuWebActivity extends BaseActivityother {
         textview_webtitle.setText(web_title);
         if (web_title.equals("全民帮客服中心")) {
             url = Urls.Baseurl_zixunkefu;
-        } else {
+        } else if (web_title.equals("优惠券")) {
             if(Staticdata.static_userBean.getData()==null){
                 url = Urls.newpeoplecoupon;
             }else {
                 url = Urls.newpeoplecoupon+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();
             }
             settings.setUseWideViewPort(true);
+        }else if(web_title.equals("优惠活动")){
+            url = Urls.shareweb+ Staticdata.static_userBean.getData().getAppuser().getClient_no();
         }
         // 设置与Js交互的权限
         settings.setJavaScriptEnabled(true);

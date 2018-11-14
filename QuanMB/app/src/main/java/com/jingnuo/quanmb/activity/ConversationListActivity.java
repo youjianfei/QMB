@@ -37,10 +37,10 @@ public class ConversationListActivity extends FragmentActivity {
     String  newmessageTYpe="";
 
     //控件
-    RelativeLayout mRelativelayout_bargain;
+//    RelativeLayout mRelativelayout_bargain;
     RelativeLayout mRelativelayout_systemmessage;
     RelativeLayout mRelativelayout_dealmessage;
-    RelativeLayout mRelativelayout_tuijianrenwu;
+//    RelativeLayout mRelativelayout_tuijianrenwu;
 
     ImageView iv_back;
 
@@ -50,9 +50,9 @@ public class ConversationListActivity extends FragmentActivity {
 //    TextView mTextview_tuijianrenwu;
 
     static ImageView mImageView_dot1;
-    static ImageView mImageView_dot2;
+//    static ImageView mImageView_dot2;
     static ImageView mImageView_dot3;
-    static ImageView mImageView_dot4;
+//    static ImageView mImageView_dot4;
 
 
     //数据
@@ -112,14 +112,14 @@ public class ConversationListActivity extends FragmentActivity {
                 finish();
             }
         });
-        mRelativelayout_bargain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intend_bargain=new Intent(ConversationListActivity.this, BarginmessageListActivity.class);
-                mImageView_dot2.setVisibility(View.GONE);
-                startActivity(intend_bargain);
-            }
-        });
+//        mRelativelayout_bargain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intend_bargain=new Intent(ConversationListActivity.this, BarginmessageListActivity.class);
+//                mImageView_dot2.setVisibility(View.GONE);
+//                startActivity(intend_bargain);
+//            }
+//        });
         mRelativelayout_systemmessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,14 +136,14 @@ public class ConversationListActivity extends FragmentActivity {
                 startActivity(intent_deal);
             }
         });
-        mRelativelayout_tuijianrenwu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_tuijian=new Intent(ConversationListActivity.this, TuijianrenwuActivity.class);
-                mImageView_dot4.setVisibility(View.GONE);
-                startActivity(intent_tuijian);
-            }
-        });
+//        mRelativelayout_tuijianrenwu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_tuijian=new Intent(ConversationListActivity.this, TuijianrenwuActivity.class);
+//                mImageView_dot4.setVisibility(View.GONE);
+//                startActivity(intent_tuijian);
+//            }
+//        });
     }
 
     private void setdata() {
@@ -156,28 +156,28 @@ public class ConversationListActivity extends FragmentActivity {
     private void initdata() {
         newmessageTYpe=getIntent().getStringExtra("newmessageTYpe");
         setDot(newmessageTYpe);
-        if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")){
-            mRelativelayout_tuijianrenwu.setVisibility(View.GONE);
-        }else {
-            mRelativelayout_tuijianrenwu.setVisibility(View.VISIBLE);
-        }
+//        if(Staticdata.static_userBean.getData().getAppuser().getRole().equals("0")){
+//            mRelativelayout_tuijianrenwu.setVisibility(View.GONE);
+//        }else {
+//            mRelativelayout_tuijianrenwu.setVisibility(View.VISIBLE);
+//        }
     }
 
     private void initview() {
 
-        mRelativelayout_bargain=findViewById(R.id.relativelayout_Kanprice);
+//        mRelativelayout_bargain=findViewById(R.id.relativelayout_Kanprice);
         mRelativelayout_systemmessage=findViewById(R.id.relativelayout_systemnotice);
         mRelativelayout_dealmessage=findViewById(R.id.relativelayout_Jiaoyinotice);
-        mRelativelayout_tuijianrenwu=findViewById(R.id.relativelayout_tuijianrenwu);
+//        mRelativelayout_tuijianrenwu=findViewById(R.id.relativelayout_tuijianrenwu);
         iv_back=findViewById(R.id.iv_back);
 //        mTextview_systemmessage=findViewById(R.id.text_systemnotice);
 //        mTextview_bargainmessage=findViewById(R.id.text_moneynotice);
 //        mTextview_jiaoyimeaage=findViewById(R.id.text_jiaoyitixing);
 //        mTextview_tuijianrenwu=findViewById(R.id.text_tujianrenwu);
         mImageView_dot1=findViewById(R.id.image_reddot1);
-        mImageView_dot2=findViewById(R.id.image_reddot2);
+//        mImageView_dot2=findViewById(R.id.image_reddot2);
         mImageView_dot3=findViewById(R.id.image_reddot3);
-        mImageView_dot4=findViewById(R.id.image_reddot4);
+//        mImageView_dot4=findViewById(R.id.image_reddot4);
         
     }
     public   void setDot(String num){
@@ -187,13 +187,13 @@ public class ConversationListActivity extends FragmentActivity {
                 mImageView_dot1.setVisibility(View.VISIBLE);
                 break;
             case "type2":
-                mImageView_dot2.setVisibility(View.VISIBLE);
+//                mImageView_dot2.setVisibility(View.VISIBLE);
                 break;
             case "type3":
                 mImageView_dot3.setVisibility(View.VISIBLE);
                 break;
             case "type4":
-                mImageView_dot4.setVisibility(View.VISIBLE);
+//                mImageView_dot4.setVisibility(View.VISIBLE);
                 break;
         }
     }

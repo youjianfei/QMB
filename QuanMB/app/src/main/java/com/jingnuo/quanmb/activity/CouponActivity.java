@@ -57,7 +57,7 @@ public class CouponActivity extends BaseActivityother {
             GetURL= Urls.Baseurl_cui+Urls.myCoupon+ Staticdata.static_userBean.getData().getUser_token();
         }else if(title.equals("选择优惠券")){
             GetURL= Urls.Baseurl_cui+Urls.useableCoupon+ Staticdata.static_userBean.getData().getUser_token()+"&task_type_id="
-                    +tasktyoeID+"&business_no"+business_no+"&order_no="+order_no;
+                    +tasktyoeID+"&business_no="+business_no+"&order_no="+order_no;
         }
 
         request(GetURL);

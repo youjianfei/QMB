@@ -8,6 +8,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -84,7 +85,7 @@ public class ShareGoodWeb {//直接分享商品卡片链接
 //                    // 将ClipData内容放到系统剪贴板里。
 //                    cm.setPrimaryClip(mClipData);
 
-                    UMWeb web = new UMWeb(Baseurl_index);
+                    UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     web.setTitle("全民帮");//标题
                     web.setDescription(description);//描述
                     web.setThumb(image);
@@ -96,7 +97,7 @@ public class ShareGoodWeb {//直接分享商品卡片链接
                 if (share_media == share_media.WEIXIN) {
 
 
-                    UMWeb web = new UMWeb(Baseurl_index);
+                    UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     web.setTitle("全民帮");//标题
                     web.setDescription(description);//描述
                     web.setThumb(image);

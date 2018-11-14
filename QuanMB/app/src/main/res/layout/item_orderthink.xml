@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="horizontal"
-    android:background="@drawable/background_account_2conner"
+    android:layout_height="wrap_content"
     >
-
-
+<RelativeLayout
+    android:id="@+id/relayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@drawable/select_orderthinkgrid">
     <TextView
         android:id="@+id/textname_order"
         android:layout_width="match_parent"
@@ -17,5 +18,5 @@
         android:gravity="center"
         android:textColor="@color/text_gray"
         android:textSize="12dp" />
-
+</RelativeLayout>
 </RelativeLayout>
