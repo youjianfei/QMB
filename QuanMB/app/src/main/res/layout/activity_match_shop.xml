@@ -225,7 +225,7 @@
             android:id="@+id/iamge_newacount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_above="@+id/textviewtip"
             android:layout_marginBottom="30dp"
             android:orientation="horizontal" />

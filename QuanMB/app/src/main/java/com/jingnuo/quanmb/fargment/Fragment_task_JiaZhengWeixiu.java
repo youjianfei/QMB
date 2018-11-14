@@ -600,14 +600,14 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     boolean initmap_zhaoshanghu() {
 
         task_description = mEditview_taskdetails.getText() + "";
-        if (task_description.equals("")) {
+        if (task_description.trim().equals("")) {
             ToastUtils.showToast(getActivity(), "请填写任务说明");
             return false;
         }
-        if (task_description.length() < 5) {
-            ToastUtils.showToast(getActivity(), "任务说明太短了");
-            return false;
-        }
+//        if (task_description.length() < 5) {
+//            ToastUtils.showToast(getActivity(), "任务说明太短了");
+//            return false;
+//        }
 
         task_time = mTextview_time.getText() + "";
         if (task_time.equals("请选择预约时间")) {

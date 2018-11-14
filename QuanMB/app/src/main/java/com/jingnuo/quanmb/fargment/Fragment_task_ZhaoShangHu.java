@@ -494,14 +494,14 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
             return false;
         }
         task_description = mEditview_taskdetails.getText() + "";
-        if (task_description.equals("")) {
+        if (task_description.trim().equals("")) {
             ToastUtils.showToast(getActivity(), "请填写任务说明");
             return false;
         }
-        if (task_description.length() < 5) {
-            ToastUtils.showToast(getActivity(), "任务说明太短了");
-            return false;
-        }
+//        if (task_description.length() < 5) {
+//            ToastUtils.showToast(getActivity(), "任务说明太短了");
+//            return false;
+//        }
 
         task_time = mTextview_time.getText() + "";
 

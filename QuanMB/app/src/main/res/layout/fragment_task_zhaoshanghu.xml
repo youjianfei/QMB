@@ -78,7 +78,7 @@
             android:layout_toRightOf="@+id/image2"
             android:background="@null"
             android:gravity="top"
-            android:hint="详细描述你的需求"
+            android:hint="详细描述您的需求"
             android:lines="3"
             android:textColorHint="@color/text_hide_tip"
             android:textSize="14dp" />

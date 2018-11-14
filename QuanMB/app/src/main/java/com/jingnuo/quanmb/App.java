@@ -61,13 +61,8 @@ public class App extends Application  {
             PlatformConfig.setQQZone("1106726779", "1wAnKLtEKebMe8WI");
         }
 
-//        @Override
-//        protected void attachBaseContext(Context base) {
-//            super.attachBaseContext(base);
-//            MultiDex.install(this);
-//        }
 
-        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
+//        Thread.setDefaultUncaughtExceptionHandler(restartHandler);
     }
 
     private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {

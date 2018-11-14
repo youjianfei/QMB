@@ -87,14 +87,6 @@ public class LaunchActivity extends BaseActivityother {
 
         }
 
-//        mTimer = new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                mhandler.sendEmptyMessage(0);
-//            }
-//        };
-//        mTimer.schedule(timerTask, 1500);
     }
 
     @Override
@@ -197,7 +189,7 @@ public class LaunchActivity extends BaseActivityother {
                         Intent intent = new Intent(LaunchActivity.this, FirstLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(LaunchActivity.this, IssueTaskActivity.class);
+                        Intent intent = new Intent(LaunchActivity.this, OrderThinkActivity.class);
                         startActivity(intent);
                     }
                     finish();
