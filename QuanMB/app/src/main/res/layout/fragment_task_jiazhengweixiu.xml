@@ -101,7 +101,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="45dp"
             android:gravity="bottom"
-            android:text="手机坏了"
+            android:text="屏幕问题"
             android:textColor="@color/text_hide_tip"
             android:textSize="14dp" />
         <ImageView
