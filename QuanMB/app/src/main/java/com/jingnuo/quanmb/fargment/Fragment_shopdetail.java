@@ -28,7 +28,6 @@ import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
-import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
 import com.jingnuo.quanmb.customview.SimpleRatingBar;
 import com.jingnuo.quanmb.data.Staticdata;

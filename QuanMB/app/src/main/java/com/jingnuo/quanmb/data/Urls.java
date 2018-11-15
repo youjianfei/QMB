@@ -99,6 +99,7 @@ public class Urls {
 
     public static String hotbackImage = "https://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/icon/";//热门图片写在本地
     public static String Skillmenu_one = "major/searchOne";//找专业一级菜单
+    public static String DescriptionType = "task/querySpecialty/taskDescription?task_type=";//发布任务描述选择内容
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务

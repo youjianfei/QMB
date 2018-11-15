@@ -96,9 +96,19 @@ public class DealActivity extends BaseActivityother {
                     intent.putExtra("order_no",binding_id);
                     startActivity(intent);
                 }else {
-                    Intent intent=new Intent(DealActivity.this,MytaskDetailActivity.class);
-                    intent.putExtra("id",binding_id);
-                    startActivity(intent);
+                    if(mData.get(position-1).getTask_Status_code().equals("05")){
+                        Intent intent_mytaskdetail=new Intent(DealActivity.this,PayActivity.class);
+                        intent_mytaskdetail.putExtra("title", "商户任务付款");
+                        intent_mytaskdetail.putExtra("order_no", mData.get(position-1).getOrder_no());
+                        intent_mytaskdetail.putExtra("taskid", mData.get(position-1).getBinding_id()+"");
+                        startActivity(intent_mytaskdetail);
+                    }else {
+                        Intent intent=new Intent(DealActivity.this,MytaskDetailActivity.class);
+                        intent.putExtra("id",binding_id);
+                        startActivity(intent);
+
+                    }
+
                 }
             }
         });

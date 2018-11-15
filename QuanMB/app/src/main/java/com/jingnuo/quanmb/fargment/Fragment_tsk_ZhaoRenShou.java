@@ -39,7 +39,6 @@ import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
 import com.jingnuo.quanmb.activity.MatchShopActivity;
-import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
 import com.jingnuo.quanmb.class_.Permissionmanage;
@@ -142,7 +141,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     int isMEchujia = 1;//1  由我出价   2  由帮手出价
     boolean ceshi = true;
     int PIC_mix = 3;//选择图片得张数
-
+    Bitmap bitmap;
     List<String> mList_picID;// 上传图片返回ID;
     int count = 0;//图片的张数。判断调用几次上传图片接口
     String img_id = "";//图片
@@ -398,7 +397,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         Staticdata.mlistdata_pic.clear();//展示得 选择得图片得bitmap
 
         mList_PicPath_down = new ArrayList<>();
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+         bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
@@ -705,5 +704,13 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             timerTask.cancel();
         }
         timer=null;
+        Staticdata.mlistdata_pic.clear();
+        Staticdata.mlistdata_pic.add(bitmap);
+        mList_PicPath_down.clear();//删除图片地址以便上传；
+        PIC_mix = 3 - mList_PicPath_down.size();
+        adapter_gridviewpic_upLoad.notifyDataSetChanged();
+        if (Staticdata.mlistdata_pic.size() <= 1) {
+            imageGridview.setVisibility(View.GONE);
+        }
     }
 }

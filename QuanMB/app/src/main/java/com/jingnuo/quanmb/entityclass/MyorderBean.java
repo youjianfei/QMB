@@ -89,6 +89,15 @@ public class MyorderBean {
         private String specialty_name="";
         private String is_helper_bid="";
         private String app_type="";
+        private String order_no="";
+
+        public String getOrder_no() {
+            return order_no;
+        }
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
+        }
 
         public String getApp_type() {
             return app_type;

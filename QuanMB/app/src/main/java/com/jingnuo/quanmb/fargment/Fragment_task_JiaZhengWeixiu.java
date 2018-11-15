@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
 import com.jingnuo.quanmb.Adapter.Adapter_WeixiuJiazheng;
 import com.jingnuo.quanmb.Interface.Interence_complteTask_time;
+import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
@@ -49,6 +50,7 @@ import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
 import com.jingnuo.quanmb.popwinow.Popwindow_JiazhengweixiuTYpe;
 import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
+import com.jingnuo.quanmb.popwinow.Popwindow_descriptionType;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ReducePIC;
@@ -71,6 +73,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
+    //维修Fragment
+
     View rootview;
     //控件
     MyGridView gridview_type;
@@ -78,7 +82,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     TextView textview_shouqi;//收起
     RelativeLayout mRelativelayout_chosetime;//选择时间
     //    EditText mEditview_addressDetail;//详细地址
-    EditText mEditview_taskdetails;
+    TextView mEditview_taskdetails;
     MyGridView imageGridview;
     ImageView image_chosePIC;
     Button mButton_sub;
@@ -124,10 +128,10 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     List<WeixiuJiazhengBean.ListBean>mdata;
     int [] images={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_jiadian,R.mipmap.b_shuma
             ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_shoubiao,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao,R.mipmap.b_diandongche};
-    int [] images_select={R.mipmap.w_shouji,R.mipmap.w_fangwu,R.mipmap.w_kaisuo,R.mipmap.w_guandao,R.mipmap.w_jiadian,R.mipmap.w_shuma
-            ,R.mipmap.w_dianlu,R.mipmap.w_jiaju,R.mipmap.w_shoubiao,R.mipmap.w_kongtiao,R.mipmap.w_diannao,R.mipmap.w_diandongche};
+    int [] images_select={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_jiadian,R.mipmap.b_shuma
+            ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_shoubiao,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao,R.mipmap.b_diandongche};
     int [] images_shao={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_all};
-    int [] images_select_shao={R.mipmap.w_shouji,R.mipmap.w_fangwu,R.mipmap.w_kaisuo,R.mipmap.w_guandao,R.mipmap.b_all};
+    int [] images_select_shao={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_all};
 
     Adapter_WeixiuJiazheng adapter_weixiuJiazheng;
 
@@ -135,7 +139,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
     boolean ceshi = true;
     int PIC_mix = 3;//选择图片得张数
-
+    Bitmap bitmap;
     List<String> mList_picID;// 上传图片返回ID;
     int count = 0;//图片的张数。判断调用几次上传图片接口
     String img_id = "";//图片
@@ -383,7 +387,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         Staticdata.mlistdata_pic.clear();//展示得 选择得图片得bitmap
 
         mList_PicPath_down = new ArrayList<>();
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+         bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
@@ -440,6 +444,18 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     }
 
     private void initlistenner() {
+        mEditview_taskdetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Popwindow_descriptionType(task_typeID, getActivity(), new InterfaceBaiduAddress() {
+                    @Override
+                    public void onResult(String address) {
+                        LogUtils.LOG("ceshi",address,"descriptionTYPE");
+                        mEditview_taskdetails.setText(address);
+                    }
+                }).showPopwindow();
+            }
+        });
         textview_shouqi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -466,6 +482,13 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
                         task_typeID=mdata.get(position).getSpecialty_id();
 //                    }
+                    new Popwindow_descriptionType(task_typeID, getActivity(), new InterfaceBaiduAddress() {
+                        @Override
+                        public void onResult(String address) {
+                            LogUtils.LOG("ceshi",address,"descriptionTYPE");
+                            mEditview_taskdetails.setText(address);
+                        }
+                    }).showPopwindow();
 
                 }else {
                     if(position==4){
@@ -480,6 +503,13 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                         adapter_weixiuJiazheng.setSelectedPosition(position);
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
                         task_typeID=mdata.get(position).getSpecialty_id();
+                        new Popwindow_descriptionType(task_typeID, getActivity(), new InterfaceBaiduAddress() {
+                            @Override
+                            public void onResult(String address) {
+                                LogUtils.LOG("ceshi",address,"descriptionTYPE");
+                                mEditview_taskdetails.setText(address);
+                            }
+                        }).showPopwindow();
                     }
                 }
 
@@ -710,5 +740,13 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
             timerTask.cancel();
         }
         timer=null;
+        Staticdata.mlistdata_pic.clear();
+        Staticdata.mlistdata_pic.add(bitmap);
+        mList_PicPath_down.clear();//删除图片地址以便上传；
+        PIC_mix = 3 - mList_PicPath_down.size();
+        adapter_gridviewpic_upLoad.notifyDataSetChanged();
+        if (Staticdata.mlistdata_pic.size() <= 1) {
+            imageGridview.setVisibility(View.GONE);
+        }
     }
 }

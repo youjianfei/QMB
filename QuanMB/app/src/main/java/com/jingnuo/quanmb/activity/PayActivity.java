@@ -136,17 +136,16 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         api = WXAPIFactory.createWXAPI(PayActivity.this, Staticdata.WechatApi);//微信支付用到
         Intent intent = getIntent();
         title_pay = intent.getStringExtra("title");
-        amount = intent.getStringExtra("amount");//订单金额
-        pay_amount = Double.parseDouble(amount);//要付的金额
+//        amount = intent.getStringExtra("amount");//订单金额
+//        pay_amount = Double.parseDouble(amount);//要付的金额
         taskid = intent.getStringExtra("taskid");
-        tasktypeid = intent.getStringExtra("tasktypeid");
         order_no = intent.getStringExtra("order_no");
-        business_no = intent.getStringExtra("business_no");
+//        business_no = intent.getStringExtra("business_no");
+//        tasktypeid = intent.getStringExtra("tasktypeid");
 
-        Glide.with(this).load(intent.getStringExtra("shopheadimage")).into(mImageview_head);
-        mTextview_amount.setText("" + amount);
+
         image_yue.setSelected(true);
-        requestYue();//请求实时余额
+
         requestInfo();//请求商户信息
     }
     void requestInfo(){
@@ -164,7 +163,15 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     txtview_shopname.setText(orderThinkBean.getData().getBusiness_name());
                     textview_startcounts.setText(orderThinkBean.getData().getEvaluation_star()+"");
                     shopPhonenumber=orderThinkBean.getData().getBusiness_mobile_no();
+                    Glide.with(PayActivity.this).load(orderThinkBean.getData().getBus_head_url()).into(mImageview_head);
+                    business_no=orderThinkBean.getData().getBusiness_no();
+                    tasktypeid = orderThinkBean.getData().getTask_type();
+                    amount=orderThinkBean.getData().getOrder_amount();
+                    pay_amount = Double.parseDouble(amount);//要付的金额
+                    mTextview_amount.setText("" + amount);
 
+
+                    requestYue();//请求实时余额
                 }
             }
 

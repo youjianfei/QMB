@@ -135,57 +135,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                                 startActivity(intent);
                             }
                         }).showPopwindow();
-//                        LogUtils.LOG("ceshi", Urls.Baseurl + Urls.shopIn_state + Staticdata.static_userBean.getData().getUser_token(), "检测商户审核状态接口");
-//                        if (Staticdata.static_userBean.getData().getAppuser().getRole().contains("2")) {
-//                            LogUtils.LOG("ceshi", "检测商户审核状态dfgdfsgfd", "检测商户审核状态");
-//
-//                            Intent intent_shopcenter = new Intent(getActivity(), ShopCenterActivity.class);
-//                            intent_shopcenter.putExtra("type", 2);//2  商户
-//                            getActivity().startActivity(intent_shopcenter);
-//
-//                        } else {
-//                            LogUtils.LOG("ceshi", "检测商户审核状态" + Staticdata.static_userBean.getData().getAppuser().getRole(), "检测商户审核状态");
-//                            new Volley_Utils(new Interface_volley_respose() {
-//                                @Override
-//                                public void onSuccesses(String respose) {
-//
-//                                    int status = 0;
-//                                    String msg = "";
-//                                    String state = "";
-//                                    try {
-//                                        JSONObject object = new JSONObject(respose);
-//                                        status = (Integer) object.get("code");//
-//                                        msg = (String) object.get("message");//
-//                                        state = (String) object.get("status");//
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                    if (state.equals("00")) {//审核通过
-//                                        Intent intent_shopcenter = new Intent(getActivity(), ShopCenterActivity.class);
-//                                        intent_shopcenter.putExtra("type", 2);//2  商户
-//                                        getActivity().startActivity(intent_shopcenter);
-//                                    } else if (state.equals("01")) {//没提交
-//                                        Intent intent_shopin = new Intent(getActivity(), ShopInActivity.class);
-//                                        getActivity().startActivity(intent_shopin);
-//
-//                                    } else if (state.equals("02")) {//正在审核
-//                                        Intent intent_submit = new Intent(getActivity(), SubmitSuccessActivity.class);
-//                                        intent_submit.putExtra("state", "2");
-//                                        startActivity(intent_submit);
-//
-//                                    } else if (state.equals("03")) {//没提交审核
-//                                        Intent intent_shopin = new Intent(getActivity(), ShopInActivity.class);
-//                                        getActivity().startActivity(intent_shopin);
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onError(int error) {
-//
-//                                }
-//                            }).Http(Urls.Baseurl + Urls.shopIn_state + Staticdata.static_userBean.getData().getUser_token(), getContext(), 0);
-//
-//                        }
                         break;
                     case 3://优惠券
                         Intent intent_coupon = new Intent(getActivity(), CouponActivity.class);

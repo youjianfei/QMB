@@ -104,9 +104,21 @@ public class MyOrderActivity extends BaseActivityother {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LogUtils.LOG("ceshi","点击的条目+"+i,"MyOrderActivity");
 
-                Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
-                intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id()+"");
-                startActivity(intent_mytaskdetail);
+
+
+                if(mData.get(i-1).getStatus_name().equals("待确认")){
+                    Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,PayActivity.class);
+                    intent_mytaskdetail.putExtra("title", "商户任务付款");
+                    intent_mytaskdetail.putExtra("order_no", mData.get(i-1).getOrder_no());
+                    intent_mytaskdetail.putExtra("taskid", mData.get(i-1).getTask_id()+"");
+                    startActivity(intent_mytaskdetail);
+                }else {
+                    Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
+                    intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id()+"");
+                    startActivity(intent_mytaskdetail);
+                }
+
+
             }
         });
     }

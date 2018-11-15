@@ -99,7 +99,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     Bitmap mBitmap = null;
 
 //    String detailed_address = "";
-
+    Bitmap bitmap;
     int PIC_mix = 3;//选择图片得张数
     List<String> mList_picID;// 上传图片返回ID;
     int count = 0;//图片的张数。判断调用几次上传图片接口
@@ -312,7 +312,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         mList_picID = new ArrayList<>();
 
         mList_PicPath_down = new ArrayList<>();
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
+         bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
         imageGridview.setAdapter(adapter_gridviewpic_upLoad);
@@ -580,8 +580,18 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     }
 
 
-
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        Staticdata.mlistdata_pic.clear();
+        Staticdata.mlistdata_pic.add(bitmap);
+        mList_PicPath_down.clear();//删除图片地址以便上传；
+        PIC_mix = 3 - mList_PicPath_down.size();
+        adapter_gridviewpic_upLoad.notifyDataSetChanged();
+        if (Staticdata.mlistdata_pic.size() <= 1) {
+            imageGridview.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

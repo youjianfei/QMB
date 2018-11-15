@@ -61,6 +61,33 @@ public class OrderThinkBean {
         private String evaluation_star;
         private String order_amount;
         private String total_score;
+        private String bus_head_url;
+        private String business_no;
+        private String task_type;
+
+        public String getBusiness_no() {
+            return business_no;
+        }
+
+        public void setBusiness_no(String business_no) {
+            this.business_no = business_no;
+        }
+
+        public String getTask_type() {
+            return task_type;
+        }
+
+        public void setTask_type(String task_type) {
+            this.task_type = task_type;
+        }
+
+        public String getBus_head_url() {
+            return bus_head_url;
+        }
+
+        public void setBus_head_url(String bus_head_url) {
+            this.bus_head_url = bus_head_url;
+        }
 
         public String getActually_amount() {
             return actually_amount;
