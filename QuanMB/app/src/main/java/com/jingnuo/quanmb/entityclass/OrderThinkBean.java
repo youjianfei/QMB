@@ -59,7 +59,7 @@ public class OrderThinkBean {
         private String business_name;
         private int count;
         private String evaluation_star;
-        private double order_amount;
+        private String order_amount;
         private String total_score;
 
         public String getActually_amount() {
@@ -110,11 +110,11 @@ public class OrderThinkBean {
             this.evaluation_star = evaluation_star;
         }
 
-        public double getOrder_amount() {
+        public String getOrder_amount() {
             return order_amount;
         }
 
-        public void setOrder_amount(double order_amount) {
+        public void setOrder_amount(String order_amount) {
             this.order_amount = order_amount;
         }
 

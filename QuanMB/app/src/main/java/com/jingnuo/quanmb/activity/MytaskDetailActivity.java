@@ -368,6 +368,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                                     intentpay.putExtra("taskid", taskDetailBean.getData().getTask_id() + "");
                                     intentpay.putExtra("business_no", taskDetailBean.getData().getBusiness_no() + "");
                                     intentpay.putExtra("tasktypeid", taskDetailBean.getData().getTask_type() + "");
+                                    intentpay.putExtra("shopheadimage", taskDetailBean.getData().getB_h_url() + "");
                                     startActivity(intentpay);
 
                                 } else {
