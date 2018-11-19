@@ -12,15 +12,15 @@ public class Urls {
     public static String newpeoplecoupon = "";//新用户活动领取点击接口
     public static String shareweb = "https://app.quanminbang.top/v1.0/uploadIge/goShareHaveGift?client_no=";//新用户活动领取点击接口
     //正式
-    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  测试
-//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  本地

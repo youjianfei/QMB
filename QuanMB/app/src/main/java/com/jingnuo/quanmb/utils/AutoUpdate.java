@@ -271,7 +271,7 @@ public class AutoUpdate {
 
         }
         activity.startActivity(intent);
-        android.os.Process.killProcess(android.os.Process.myPid());
+//        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 
