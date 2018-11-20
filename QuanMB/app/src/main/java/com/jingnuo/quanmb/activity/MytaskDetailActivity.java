@@ -288,6 +288,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                startActivity(intent);//调用具体方法
                 Intent intent = new Intent(MytaskDetailActivity.this, ZixunKefuWebActivity.class);
                 intent.putExtra("webtitle", "全民帮客服中心");
+                intent.putExtra("type", "全民帮客服中心");
                 startActivity(intent);
             }
         });
@@ -349,6 +350,7 @@ public class MytaskDetailActivity extends BaseActivityother {
             public void onClick(View v) {
                 if (taskDetailBean.getData().getApp_type().equals("1")) {
                     Staticdata.ispipei = true;
+
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {
@@ -388,8 +390,7 @@ public class MytaskDetailActivity extends BaseActivityother {
 
 
                 } else {
-                    LogUtils.LOG("ceshi", Urls.Baseurl_cui + Urls.completetask + Staticdata.static_userBean.getData().getUser_token() +
-                            "&task_id=" + taskDetailBean.getData().getTask_id(), "确认完成");
+
                     new Volley_Utils(new Interface_volley_respose() {
                         @Override
                         public void onSuccesses(String respose) {

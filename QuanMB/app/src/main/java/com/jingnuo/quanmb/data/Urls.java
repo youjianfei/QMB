@@ -10,6 +10,7 @@ public class Urls {
     public static String Baseurl_index = "https://app.quanminbang.top/v1.0/uploadIge/goActivity?client_no=";//分享的主页
     public static String Baseurl_zixunkefu = "http://www.quanminbang.top/QuanMinBang/v1.0/uploadIge/toH5";//客服咨询
     public static String newpeoplecoupon = "";//新用户活动领取点击接口
+    public static String  pipeijiemianhuodong= "";//匹配商家界面活动点击接口
     public static String shareweb = "https://app.quanminbang.top/v1.0/uploadIge/goShareHaveGift?client_no=";//新用户活动领取点击接口
     //正式
 //    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";

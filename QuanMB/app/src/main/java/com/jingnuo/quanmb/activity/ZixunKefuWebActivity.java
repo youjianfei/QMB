@@ -36,6 +36,7 @@ public class ZixunKefuWebActivity extends BaseActivityother {
 
 
     String web_title = "";
+    String type = "";
     String url = "";
 
     @Override
@@ -52,18 +53,23 @@ public class ZixunKefuWebActivity extends BaseActivityother {
     protected void initData() {
         WebSettings settings = webView.getSettings();
         web_title = getIntent().getStringExtra("webtitle");
+        type = getIntent().getStringExtra("type");
         textview_webtitle.setText(web_title);
-        if (web_title.equals("全民帮客服中心")) {
+        if (type.equals("全民帮客服中心")) {
             url = Urls.Baseurl_zixunkefu;
-        } else if (web_title.equals("优惠券")) {
+        } else if (type.equals("首页弹窗")) {
             if(Staticdata.static_userBean.getData()==null){
                 url = Urls.newpeoplecoupon;
             }else {
                 url = Urls.newpeoplecoupon+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();
             }
             settings.setUseWideViewPort(true);
-        }else if(web_title.equals("优惠活动")){
+        }else if(type.equals("优惠活动")){
             url = Urls.shareweb+ Staticdata.static_userBean.getData().getAppuser().getClient_no();
+        }
+        else if(type.equals("匹配商家界面")){
+            url = Urls.pipeijiemianhuodong+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();
+            settings.setUseWideViewPort(true);
         }
         // 设置与Js交互的权限
         settings.setJavaScriptEnabled(true);

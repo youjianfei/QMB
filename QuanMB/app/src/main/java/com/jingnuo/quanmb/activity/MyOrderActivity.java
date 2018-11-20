@@ -106,7 +106,8 @@ public class MyOrderActivity extends BaseActivityother {
 
 
 
-                if(mData.get(i-1).getStatus_name().equals("待确认")){
+                if(mData.get(i-1).getStatus_name().equals("待确认")&&mData.get(i-1).getApp_type().equals("1")){
+                    Staticdata.ispipei = true;
                     Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,PayActivity.class);
                     intent_mytaskdetail.putExtra("title", "商户任务付款");
                     intent_mytaskdetail.putExtra("order_no", mData.get(i-1).getOrder_no());

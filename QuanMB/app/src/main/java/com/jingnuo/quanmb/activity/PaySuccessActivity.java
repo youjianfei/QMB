@@ -58,6 +58,7 @@ public class PaySuccessActivity extends BaseActivityother {
                 intend_think.putExtra("imageurl", Staticdata. taskDetailBeanStatic.getData().getB_h_url() + "");
                 startActivity(intend_think);
                 Staticdata. ispipei=false;
+                LogUtils.LOG("payqq","11111","PaySuccessActivity");
                 finish();
                 return;
             }
@@ -67,14 +68,14 @@ public class PaySuccessActivity extends BaseActivityother {
                 Intent[] intents = {mainIntent, intent_bargain};
                 Staticdata.PayissuetaskSuccess=false;
                 startActivities(intents);
-                LogUtils.LOG("pay","222222","PaySuccessActivity");
+                LogUtils.LOG("payqq","222222","PaySuccessActivity");
                 finish();
                 return;
             }
 //                if(Staticdata.PayissuetaskSuccess){
                     Intent mainIntent = new Intent(PaySuccessActivity.this, IssueTaskActivity.class);
                     startActivity(mainIntent);
-                    LogUtils.LOG("pay","退款成功","PaySuccessActivity");
+                    LogUtils.LOG("payqq","退款成功","PaySuccessActivity");
                     finish();
                     return;
 //                }

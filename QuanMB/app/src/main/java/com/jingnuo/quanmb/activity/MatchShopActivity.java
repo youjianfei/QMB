@@ -269,8 +269,10 @@ public class MatchShopActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 if(matchshoplistbean.getData().getIsShow().equals("1")){
+                    Urls.pipeijiemianhuodong=matchshoplistbean.getData().getActivity_url();
                     Intent intent_kefuzhongxin = new Intent(MatchShopActivity.this, ZixunKefuWebActivity.class);
-                    intent_kefuzhongxin.putExtra("webtitle", "优惠券");
+                    intent_kefuzhongxin.putExtra("webtitle", "优惠活动");
+                    intent_kefuzhongxin.putExtra("type", "匹配商家界面");
                     startActivity(intent_kefuzhongxin);
 
                 }

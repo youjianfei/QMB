@@ -291,6 +291,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             case R.id.textview_kefu:
                 Intent intent_kefuzhongxin = new Intent(PayActivity.this, ZixunKefuWebActivity.class);
                 intent_kefuzhongxin.putExtra("webtitle", "全民帮客服中心");
+                intent_kefuzhongxin.putExtra("type", "全民帮客服中心");
                 startActivity(intent_kefuzhongxin);
                 break;
             case R.id.relayout_selectCoupon:

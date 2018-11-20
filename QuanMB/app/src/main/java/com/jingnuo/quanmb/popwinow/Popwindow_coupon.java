@@ -70,7 +70,8 @@ public class Popwindow_coupon {
 //                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 //                activity.startActivity(intent);
                 Intent intent_kefuzhongxin = new Intent(activity, ZixunKefuWebActivity.class);
-                intent_kefuzhongxin.putExtra("webtitle", "优惠券");
+                intent_kefuzhongxin.putExtra("webtitle", "优惠活动");
+                intent_kefuzhongxin.putExtra("type", "首页弹窗");
                 activity.startActivity(intent_kefuzhongxin);
                 mPopupWindow.dismiss();
             }

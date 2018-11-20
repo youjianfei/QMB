@@ -97,6 +97,7 @@ public class DealActivity extends BaseActivityother {
                     startActivity(intent);
                 }else {
                     if(mData.get(position-1).getTask_Status_code().equals("05")){
+                        Staticdata.ispipei = true;
                         Intent intent_mytaskdetail=new Intent(DealActivity.this,PayActivity.class);
                         intent_mytaskdetail.putExtra("title", "商户任务付款");
                         intent_mytaskdetail.putExtra("order_no", mData.get(position-1).getOrder_no());
