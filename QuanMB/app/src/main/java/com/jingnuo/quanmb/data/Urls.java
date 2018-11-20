@@ -51,6 +51,7 @@ public class Urls {
     public static String setheadPic = "user/setheadimage";//设置头像
     public static String changephonenumber = "user/modifyPhone1";//更换绑定手机号第一步
     public static String bindphonenumber = "user/modifyPhone2";//更换绑定手机号第er步,绑定手机号
+    public static String setpassword = "user/setPwd";//设置密码
     public static String changepassword = "user/changePwd";//更换密码
     public static String findpassword = "login/forgetPwd";//找回密码
     public static String setshophead = "business/setBusinessAvatar";//设置商户头像

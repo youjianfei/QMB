@@ -259,7 +259,8 @@
         <activity android:name=".activity.TuiyajinActivity" />
         <activity android:name=".activity.CouponActivity" />
         <activity android:name=".activity.OrderThinkSuccessActivity" />
-        <activity android:name=".activity.SharefriendActivity"></activity>
+        <activity android:name=".activity.SharefriendActivity" />
+        <activity android:name=".activity.LoginActivityPhone"></activity>
     </application>
 
 </manifest>

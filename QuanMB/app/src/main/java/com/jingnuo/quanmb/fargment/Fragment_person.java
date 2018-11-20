@@ -24,6 +24,7 @@ import com.jingnuo.quanmb.activity.CashoutActivity;
 import com.jingnuo.quanmb.activity.CouponActivity;
 import com.jingnuo.quanmb.activity.DatailAddressActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
+import com.jingnuo.quanmb.activity.LoginActivityPhone;
 import com.jingnuo.quanmb.activity.MyOrderActivity;
 import com.jingnuo.quanmb.activity.MySkillCollectActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
@@ -296,7 +297,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                 Staticdata.isLogin = false;
                 Staticdata.static_userBean.setData(null);//用户信息清空
                 RongIM.getInstance().disconnect();
-                Intent intent_logout = new Intent(getActivity(), LoginActivity.class);
+                Intent intent_logout = new Intent(getActivity(), LoginActivityPhone.class);
                 startActivity(intent_logout);
                 getActivity().finish();
                 break;

@@ -216,7 +216,7 @@
             android:id="@+id/text_changephonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="修改密码"
+            android:text=""
             android:textSize="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"

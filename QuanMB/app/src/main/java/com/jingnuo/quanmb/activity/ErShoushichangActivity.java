@@ -106,7 +106,7 @@ public class ErShoushichangActivity extends BaseActivityother {
                     Intent intent_isslovetask=new Intent(ErShoushichangActivity.this,IssueErshoushichangActivity.class);
                     startActivity(intent_isslovetask);
                 }else {
-                    Intent intent_login = new Intent(ErShoushichangActivity.this, LoginActivity.class);
+                    Intent intent_login = new Intent(ErShoushichangActivity.this, LoginActivityPhone.class);
                     startActivity(intent_login);
                 }
             }

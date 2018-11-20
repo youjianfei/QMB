@@ -101,7 +101,7 @@ public class ChangephoneNumberNextActivity extends BaseActivityother {
                             return;
                         }
                         ToastUtils.showToast(ChangephoneNumberNextActivity.this, msg);
-                        Staticdata.Userphonenumber=phonenumber;
+                        Staticdata.static_userBean.getData().getAppuser().setMobile_no(phonenumber);
                         finish();
 
                     }

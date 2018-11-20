@@ -37,8 +37,6 @@ public class Staticdata {
 
     //用户是否已经登陆  true表示登录   flase表示未登录    待解决   退出程序后还为true
     public static boolean isLogin = false;//默认为未登录
-    //用户的token
-    public static String Userphonenumber = "";
 
 
     public  static UserBean static_userBean=new UserBean();

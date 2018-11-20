@@ -51,9 +51,9 @@ public class SetSafepassword1Activity extends BaseActivityother {
         if(change.equals("change")){
             textview_titile.setText("修改支付密码");
         }
-        mtextview_phonenumber.setText(Staticdata.Userphonenumber);
+        mtextview_phonenumber.setText(Staticdata.static_userBean.getData().getAppuser().getMobile_no());
         map_oldphonenumber  =new HashMap();
-        map_oldphonenumber.put("phoneNumbers",Staticdata.Userphonenumber);
+        map_oldphonenumber.put("phoneNumbers",Staticdata.static_userBean.getData().getAppuser().getMobile_no());
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.FindPasswordActivity;
 import com.jingnuo.quanmb.activity.IssueTaskActivity;
+import com.jingnuo.quanmb.activity.LoginActivityPhone;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -36,7 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
-import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 /**
@@ -48,6 +48,7 @@ public class Fragment_acountLogin extends Fragment {
     //控件
     Button mButton_login;
     TextView mtextview_forgotpassword;
+    TextView textview_yanzhengmalogin;
     EditText medit_account, medit_password;
 
     //数据
@@ -86,6 +87,14 @@ public class Fragment_acountLogin extends Fragment {
     }
 
     private void initlinster() {
+        textview_yanzhengmalogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), LoginActivityPhone.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         mButton_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,12 +105,10 @@ public class Fragment_acountLogin extends Fragment {
                 } else {
                     SharedPreferencesUtils.putString(getActivity(),"QMB","phonenumber",account);//存电话号
 
-
                     publicEncryptedResult= PasswordJiami.passwordjiami(password);//对密码加密
                     LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
 
                     map_login = new HashMap();
-                    Userphonenumber=account;//将电话号设为全局变量
                     map_login.put("username", account);
                     map_login.put("Jpush_id", Staticdata.JpushID);
                     map_login.put("password", publicEncryptedResult);
@@ -142,9 +149,10 @@ public class Fragment_acountLogin extends Fragment {
                     SharedPreferencesUtils.putString(getActivity(),"QMB","password",password);//登录成功之后存未加密de密码
                     userBean=new Gson().fromJson(respose,UserBean.class);
                    Staticdata. static_userBean=userBean;
-                    Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
+//                    Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
+                    SharedPreferencesUtils.putString(getActivity(),"QMB","mobile",Staticdata.static_userBean.getData().getAppuser().getMobile_no());//存电话号
                     Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
                     Intent intent_login = new Intent(getActivity(), IssueTaskActivity.class);
                     getActivity().startActivity(intent_login);
@@ -169,6 +177,7 @@ public class Fragment_acountLogin extends Fragment {
         medit_password = rootview.findViewById(R.id.edit_password);
         mButton_login = rootview.findViewById(R.id.button_login);
         mtextview_forgotpassword = rootview.findViewById(R.id.textview_forgotpassword);
+        textview_yanzhengmalogin = rootview.findViewById(R.id.textview_yanzhengmalogin);
     }
 
 

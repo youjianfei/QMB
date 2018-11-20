@@ -15,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.LoginActivity;
+import com.jingnuo.quanmb.activity.LoginActivityPhone;
 import com.jingnuo.quanmb.data.Staticdata;
 
 import org.json.JSONException;
@@ -72,7 +73,7 @@ public class Volley_Utils {
                         Staticdata. static_userBean=null;
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;//将登录状态改为未登录
-                        mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                        mContext.startActivity(new Intent(mContext, LoginActivityPhone.class));
                     }else {
 
                         mInterface.onSuccesses(response);
@@ -134,7 +135,7 @@ public class Volley_Utils {
                         Staticdata. static_userBean=null;
                         ToastUtils.showToast(mContext,"登录过期，请重新登录");
                         Staticdata.isLogin=false;
-                        mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                        mContext.startActivity(new Intent(mContext, LoginActivityPhone.class));
 
 
                     }else {

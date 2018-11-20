@@ -71,7 +71,7 @@ public class DealActivity extends BaseActivityother {
         map_message.put("pageNo",page+"");
         map_message.put("type","3");
         if(Staticdata.static_userBean.getData()==null){
-            Intent intent=new Intent(this,LoginActivity.class);
+            Intent intent=new Intent(this,LoginActivityPhone.class);
             startActivity(intent);
             finish();
             return;

@@ -146,6 +146,7 @@ public class PersonInfoActivity extends BaseActivityother {
         mTextview_issetsafepassword=findViewById(R.id.text_issetsafepassword);
         mtextview_setshequ=findViewById(R.id.text_setshequ);
         mtextview_text_issetshequ=findViewById(R.id.text_issetshequ);
+        mTextview_changepassword.setText(Staticdata.static_userBean.getData().getAppuser().getPassworded().equals("01")?"修改密码":"设置密码");
     }
 
     @Override
@@ -153,9 +154,13 @@ public class PersonInfoActivity extends BaseActivityother {
         super.onClick(v);
     switch (v.getId()){
         case R.id.text_changephonenumber:
-            Intent intent_change=new Intent(this,ChangepasswordActivity.class);
-
-            startActivity(intent_change);
+            if(Staticdata.static_userBean.getData().getAppuser().getPassworded().equals("01")){
+                Intent intent_change=new Intent(this,ChangepasswordActivity.class);
+                startActivity(intent_change);
+            }else {
+                Intent intent_change=new Intent(this,SetPasswordActivity.class);
+                startActivity(intent_change);
+            }
             break;
         case R.id.text_name:
             Intent intent_nickname =new Intent(this,SetNicknameActivity.class);

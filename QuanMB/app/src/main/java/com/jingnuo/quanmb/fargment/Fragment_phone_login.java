@@ -33,7 +33,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 /**
@@ -146,15 +145,13 @@ public class Fragment_phone_login extends Fragment {
                 if (phonenumber.equals("") || yangzhengma.equals("")) {
                     ToastUtils.showToast(getActivity(), "请输入手机号和验证码");
                 } else {
-                    Userphonenumber=phonenumber;//将电话号设为全局变量
+//                    Userphonenumber=phonenumber;//将电话号设为全局变量
                     Map map = new HashMap();
                     map.put("ValidateCode", yangzhengma);
                     map.put("phoneNumbers", phonenumber);
                     map.put("uuid", Staticdata.UUID);
                     map.put("Jpush_id", Staticdata.JpushID);
                     loginrequest(map);
-
-
                 }
             }
         });

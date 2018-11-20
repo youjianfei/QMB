@@ -380,7 +380,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     intent = new Intent(this, MyShequActivity.class);
                     startActivity(intent);
                 } else {
-                    intent = new Intent(this, LoginActivity.class);
+                    intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
                 }
                 break;
@@ -389,7 +389,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     intent = new Intent(this, IssueTaskActivity.class);
                     this.startActivity(intent);
                 } else {
-                    intent = new Intent(this, LoginActivity.class);
+                    intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
                 }
 
@@ -414,7 +414,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     startActivity(intent);
                     Staticdata.newmessageTYpe = "notype";//跳转完之后归0
                 } else {
-                    intent = new Intent(this, LoginActivity.class);
+                    intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
                 }
                 break;
@@ -437,7 +437,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     drawerlayout_menu.openDrawer(Gravity.LEFT);
                 } else {
                     drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
-                    intent = new Intent(this, LoginActivity.class);
+                    intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
                 }
                 break;

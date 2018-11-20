@@ -430,7 +430,7 @@ public class TaskDetailsActivity extends BaseActivityother {
             LogUtils.LOG("ceshi", "确认帮助网址+" + Urls.Baseurl_cui + Urls.helptask + "?tid=" + ID + "&user_token=" + Staticdata.static_userBean.getData().getUser_token(), "TaskDetailsActivity");
 
         } else {
-            Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
+            Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivityPhone.class);
             startActivity(intent_login);
         }
     }
@@ -488,7 +488,7 @@ public class TaskDetailsActivity extends BaseActivityother {
                 },popTitle).showpop();
             }
         } else {
-            Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivity.class);
+            Intent intent_login = new Intent(TaskDetailsActivity.this, LoginActivityPhone.class);
             startActivity(intent_login);
             finish();
         }

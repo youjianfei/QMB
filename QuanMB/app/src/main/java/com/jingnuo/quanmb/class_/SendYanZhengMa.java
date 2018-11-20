@@ -6,10 +6,12 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.Interface.SendYanZhengmaSuccess;
 import com.jingnuo.quanmb.activity.RegisterActivity;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.YanzhengmaBean;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -28,6 +30,7 @@ import java.util.TimerTask;
 public class SendYanZhengMa {
     SendYanZhengmaSuccess  minterfaceSueecss;
     Button view;
+    YanzhengmaBean yanzhengmaBean;
 
     public SendYanZhengMa(SendYanZhengmaSuccess minterfaceSueecss,Button view) {
         this.minterfaceSueecss = minterfaceSueecss;
@@ -39,17 +42,18 @@ public class SendYanZhengMa {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                int status = 0;
-                String msg = "";
-                try {
-                    JSONObject object = new JSONObject(respose);
-                    status = (Integer) object.get("code");//登录状态
-                    msg = (String) object.get("message");//登录返回信息
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                LogUtils.LOG("ceshi","发送+"+respose,"发送验证码位置");
+                yanzhengmaBean=new Gson().fromJson(respose,YanzhengmaBean.class);
+                int status = yanzhengmaBean.getCode();
+                String msg = yanzhengmaBean.getMessage();
                 if (status == 1) {
-                    minterfaceSueecss.onSuccesses(msg);
+                    String registed=yanzhengmaBean.getData().getRegisted();
+                    if(registed.equals("00")){
+                        minterfaceSueecss.onSuccesses(msg+"00");
+                    }else {
+                        minterfaceSueecss.onSuccesses(msg);
+                    }
+
                     //验证码倒计时
                     timer = new Timer();
                     TimerTask timerTask = new TimerTask() {

@@ -26,59 +26,47 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/back_black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="全民帮"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/text_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:text="注册"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="全民帮"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="18sp" />-->
 
     </RelativeLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:src="@color/gray_background"
-        />
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="5dp"-->
+        <!--android:src="@color/gray_background"-->
+        <!--/>-->
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tablayout_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/yellow_button"
-        app:tabSelectedTextColor="@color/yellow_button"
-        app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
-        app:tabTextColor="@color/gray_969696">
+    <!--<android.support.design.widget.TabLayout-->
+        <!--android:id="@+id/tablayout_login"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="40dp"-->
+        <!--android:layout_marginRight="40dp"-->
+        <!--android:background="@color/white"-->
+        <!--app:tabIndicatorColor="@color/yellow_button"-->
+        <!--app:tabSelectedTextColor="@color/yellow_button"-->
+        <!--app:tabTextAppearance="@style/TabLayoutTextSizeStyle"-->
+        <!--app:tabTextColor="@color/gray_969696">-->
 
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="账号密码登录" />
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:id="@+id/tab_account"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="账号密码登录" />-->
 
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手机验证码登陆" />
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:id="@+id/tab_phone"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="手机验证码登陆" />-->
 
-    </android.support.design.widget.TabLayout>
+    <!--</android.support.design.widget.TabLayout>-->
 
     <FrameLayout
         android:id="@+id/framelayout_login"
@@ -88,69 +76,69 @@
         >
 
     </FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:gravity="center"
-        >
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="@color/gray_dfdfdf"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="微信登录"
-            android:textSize="15dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:textColor="@color/gray_dbdbdb"
-            />
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="@color/gray_dfdfdf"
-            />
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        >
-        <ImageView
-            android:id="@+id/image_wxLogin"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@mipmap/weixin_logo"
-            android:layout_centerInParent="true"
-            />
-        <ImageView
-            android:id="@+id/image_qqLogin"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@mipmap/qq_logo"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            />
-        <ImageView
-            android:id="@+id/image_xlLogin"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@mipmap/weibo_logo"
-            android:layout_alignParentRight="true"
-            android:visibility="gone"
-            />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:layout_marginLeft="28dp"-->
+        <!--android:layout_marginRight="28dp"-->
+        <!--android:gravity="center"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/gray_dfdfdf"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="微信登录"-->
+            <!--android:textSize="15dp"-->
+            <!--android:layout_marginLeft="12dp"-->
+            <!--android:layout_marginRight="12dp"-->
+            <!--android:textColor="@color/gray_dbdbdb"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/gray_dfdfdf"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="40dp"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+            <!--android:id="@+id/image_wxLogin"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:src="@mipmap/weixin_logo"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/image_qqLogin"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:src="@mipmap/qq_logo"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:visibility="gone"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/image_xlLogin"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:src="@mipmap/weibo_logo"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:visibility="gone"-->
+            <!--/>-->
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
 

@@ -32,7 +32,6 @@ import cn.jpush.android.api.JPushInterface;
 
 import static com.jingnuo.quanmb.data.Staticdata.ScreenWidth;
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
-import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 
@@ -65,6 +64,7 @@ public class LaunchActivity extends BaseActivityother {
         password = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "password");
 
         if (phonenumber.equals("") || password.equals("")) {
+            isLogin = false;
             mTimer = new Timer();
             TimerTask timerTask = new TimerTask() {
                 @Override
@@ -77,7 +77,7 @@ public class LaunchActivity extends BaseActivityother {
             Map map_autoLogind = new HashMap();
             publicEncryptedResult = PasswordJiami.passwordjiami(password);//对密码加密
             LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
-            Userphonenumber = phonenumber;//将电话号设为全局变量
+//            Userphonenumber = phonenumber;//将电话号设为全局变量
             map_autoLogind.put("username", phonenumber);
             map_autoLogind.put("password", publicEncryptedResult);
             map_autoLogind.put("Jpush_id", Staticdata.JpushID);
@@ -103,7 +103,6 @@ public class LaunchActivity extends BaseActivityother {
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, (int) (Staticdata.ScreenWidth * 1.77));
         image.setLayoutParams(mLayoutparams);
         mLinearlauout_root.addView(image);
-
 
     }
 
@@ -139,7 +138,8 @@ public class LaunchActivity extends BaseActivityother {
                     LogUtils.LOG("ceshi", userBean.getData().getUser_token(), "fragment_account");
                     isLogin = true;
                     Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
-                    Userphonenumber = userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
+                    SharedPreferencesUtils.putString(LaunchActivity.this,"QMB","mobile",Staticdata.static_userBean.getData().getAppuser().getMobile_no());//存电话号
+
                     mTimer = new Timer();
                     TimerTask timerTask = new TimerTask() {
                         @Override
@@ -149,7 +149,8 @@ public class LaunchActivity extends BaseActivityother {
                     };
                     mTimer.schedule(timerTask, 1000);
                 } else {
-                    Intent intent_ = new Intent(LaunchActivity.this, LoginActivity.class);
+                    isLogin = false;
+                    Intent intent_ = new Intent(LaunchActivity.this, LoginActivityPhone.class);
                     startActivity(intent_);
                     finish();
                 }
@@ -157,7 +158,7 @@ public class LaunchActivity extends BaseActivityother {
 
             @Override
             public void onError(int error) {
-                Intent intent_ = new Intent(LaunchActivity.this, LoginActivity.class);
+                Intent intent_ = new Intent(LaunchActivity.this, LoginActivityPhone.class);
                 startActivity(intent_);
                 finish();
 
@@ -189,6 +190,8 @@ public class LaunchActivity extends BaseActivityother {
                         Intent intent = new Intent(LaunchActivity.this, FirstLoginActivity.class);
                         startActivity(intent);
                     } else {
+                        LogUtils.LOG("ceshi", "未登录", "fragment_account");
+
                         Intent intent = new Intent(LaunchActivity.this, IssueTaskActivity.class);
                         startActivity(intent);
                     }

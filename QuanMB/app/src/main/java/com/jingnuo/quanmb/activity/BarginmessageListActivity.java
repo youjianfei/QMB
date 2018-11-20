@@ -60,7 +60,7 @@ public class BarginmessageListActivity extends BaseActivityother {
         map_message.put("pageNo",page+"");
         map_message.put("type","2");
         if(Staticdata.static_userBean.getData()==null){
-            Intent intent=new Intent(BarginmessageListActivity.this,LoginActivity.class);
+            Intent intent=new Intent(BarginmessageListActivity.this,LoginActivityPhone.class);
             startActivity(intent);
             finish();
             return;

@@ -32,6 +32,7 @@ import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.LocationMapActivity;
 import com.jingnuo.quanmb.activity.LoginActivity;
+import com.jingnuo.quanmb.activity.LoginActivityPhone;
 import com.jingnuo.quanmb.activity.MatchShopActivity;
 import com.jingnuo.quanmb.class_.DataTime_select;
 import com.jingnuo.quanmb.class_.GlideLoader;
@@ -449,7 +450,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
                     }
                 }else {
-                    Intent   intent = new Intent(getActivity(), LoginActivity.class);
+                    Intent   intent = new Intent(getActivity(), LoginActivityPhone.class);
                     startActivity(intent);
                 }
 

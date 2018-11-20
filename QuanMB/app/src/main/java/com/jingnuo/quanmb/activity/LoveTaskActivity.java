@@ -96,7 +96,7 @@ public class LoveTaskActivity extends BaseActivityother {
                     Intent intent_isslovetask=new Intent(LoveTaskActivity.this,IssuelovetaskActivity.class);
                     startActivity(intent_isslovetask);
                 }else {
-                    Intent intent_login = new Intent(LoveTaskActivity.this, LoginActivity.class);
+                    Intent intent_login = new Intent(LoveTaskActivity.this, LoginActivityPhone.class);
                     startActivity(intent_login);
                 }
             }

@@ -36,7 +36,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.jingnuo.quanmb.data.Staticdata.UUID;
-import static com.jingnuo.quanmb.data.Staticdata.Userphonenumber;
 import static com.jingnuo.quanmb.data.Staticdata.isLogin;
 
 public class RegisterActivity extends BaseActivityother {
@@ -158,7 +157,7 @@ public class RegisterActivity extends BaseActivityother {
                 LogUtils.LOG("ceshi","电话号"+map_register.get("phoneNumbers")+"密码"+map_register.get("password")+"验证码"+map_register.get("ValidateCode"),getPackageName());
 
                 map_login = new HashMap();
-                Userphonenumber=phonenumber;//将电话号设为全局变量
+//                Userphonenumber=phonenumber;//将电话号设为全局变量
                 map_login.put("username", phonenumber);
                 map_login.put("password", passwordMM);
                 map_login.put("Jpush_id", Staticdata.JpushID);
@@ -268,7 +267,7 @@ public class RegisterActivity extends BaseActivityother {
                     LogUtils.LOG("ceshi", respose + "1111111111", "RegisterActivity");
                     isLogin = true;
                     Utils.connect(Staticdata. static_userBean.getData().getAppuser().getRongCloud_token());
-                    Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
+//                    Userphonenumber=userBean.getData().getAppuser().getMobile_no();//将电话号设为全局变量
                     Intent intent_login = new Intent(RegisterActivity.this, IssueTaskActivity.class);
                     RegisterActivity.this.startActivity(intent_login);
                     finish();

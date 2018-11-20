@@ -453,7 +453,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
                     startActivity(intent);
                     Staticdata.newmessageTYpe = "notype";//跳转完之后归0
                 } else {
-                    intent = new Intent(this, LoginActivity.class);
+                    intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
                 }
                 break;
@@ -463,7 +463,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
                     drawerlayout_menu.openDrawer(Gravity.LEFT);
                 } else {
                     drawerlayout_menu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
-                    intent = new Intent(this, LoginActivity.class);
+                    intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
                 }
                 break;

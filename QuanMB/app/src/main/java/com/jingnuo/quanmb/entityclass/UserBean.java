@@ -134,6 +134,7 @@ public class UserBean {
              */
 
             private String avatar_img_id;
+            private String passworded;
             private String client_no;
             private String createDate;
             private String createName;
@@ -155,6 +156,14 @@ public class UserBean {
             private String community_name="";
             private String rongCloud_token="";
             private String business_name="";
+
+            public String getPassworded() {
+                return passworded;
+            }
+
+            public void setPassworded(String passworded) {
+                this.passworded = passworded;
+            }
 
             public String getBusiness_name() {
                 return business_name;
