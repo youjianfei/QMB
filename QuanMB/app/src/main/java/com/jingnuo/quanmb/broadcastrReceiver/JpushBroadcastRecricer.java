@@ -9,6 +9,7 @@ import com.jingnuo.quanmb.activity.BarginmessageListActivity;
 import com.jingnuo.quanmb.activity.DealActivity;
 import com.jingnuo.quanmb.activity.IssueTaskActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
+import com.jingnuo.quanmb.activity.PayActivity;
 import com.jingnuo.quanmb.activity.SystemMessageActivity;
 import com.jingnuo.quanmb.activity.TuijianrenwuActivity;
 import com.jingnuo.quanmb.data.Staticdata;
@@ -28,6 +29,9 @@ public class JpushBroadcastRecricer extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String type = "";//判断跳转页面
 
+        String order_no="";//订单号，用于跳转支付页
+        String taskid="";//任务号，用于跳转支付页
+
         Bundle bundle = intent.getExtras();
         String title = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
         if (bundle.getString(JPushInterface.EXTRA_EXTRA) != null) {
@@ -42,6 +46,8 @@ public class JpushBroadcastRecricer extends BroadcastReceiver {
             try {
                 JSONObject object = new JSONObject(extras);
                 type = (String) object.get("type");
+                order_no = (String) object.get("order_no");
+                taskid = (String) object.get("task_id");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -55,6 +61,18 @@ public class JpushBroadcastRecricer extends BroadcastReceiver {
             Staticdata.newmessageTYpe = "type3";
         } else if (type.equals("4")) {
             Staticdata.newmessageTYpe = "type4";
+        }
+        else if (type.equals("5")) {
+            Staticdata.newmessageTYpe = "type3";
+            Intent mainIntent = new Intent(context, IssueTaskActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent1=new Intent(context, PayActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent1.putExtra("title", "商户任务付款");
+            intent1.putExtra("order_no", order_no);
+            intent1.putExtra("taskid", taskid);
+            Intent[] intents = {mainIntent, intent1};
+            context.startActivities(intents);
         }
 
         if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {

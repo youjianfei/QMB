@@ -88,8 +88,8 @@ public class OrderThinkSuccessActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                web.setTitle("全民帮");//标题
-                web.setDescription("生活琐事就找全民帮");//描述
+                web.setTitle("全民帮|专业家政维修");//标题
+                web.setDescription("一键下单，找到你的专属师傅");//描述
                 web.setThumb(image);
                 new ShareAction(OrderThinkSuccessActivity.this).setPlatform(SHARE_MEDIA.WEIXIN)
                         .withMedia(web)
@@ -103,8 +103,8 @@ public class OrderThinkSuccessActivity extends BaseActivityother {
             public void onClick(View v) {
 
                 UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                web.setTitle("全民帮");//标题
-                web.setDescription("生活琐事就找全民帮");//描述
+                web.setTitle("全民帮|专业家政维修");//标题
+                web.setDescription("一键下单，找到你的专属师傅");//描述
                 web.setThumb(image);
                 new ShareAction(OrderThinkSuccessActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .withMedia(web)

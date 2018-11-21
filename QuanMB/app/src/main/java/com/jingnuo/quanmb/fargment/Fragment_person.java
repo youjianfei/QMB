@@ -30,6 +30,7 @@ import com.jingnuo.quanmb.activity.MySkillCollectActivity;
 import com.jingnuo.quanmb.activity.PersonInfoActivity;
 import com.jingnuo.quanmb.activity.RechargeActivity;
 import com.jingnuo.quanmb.activity.SettingActivity;
+import com.jingnuo.quanmb.activity.SharefriendActivity;
 import com.jingnuo.quanmb.activity.ShopCenterActivity;
 import com.jingnuo.quanmb.activity.ShopInActivity;
 import com.jingnuo.quanmb.activity.SubmitSuccessActivity;
@@ -111,7 +112,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
     }
 
     private void initlistener() {
-        mTextview_logout.setOnClickListener(this);
+//        mTextview_logout.setOnClickListener(this);
         mCircleImage.setOnClickListener(this);
         mButton_rechange.setOnClickListener(this);
         mButton_cashout.setOnClickListener(this);
@@ -152,7 +153,11 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         intent_kefuzhongxin.putExtra("type", "全民帮客服中心");
                         startActivity(intent_kefuzhongxin);
                         break;
-                    case 6://设置
+                    case 6://邀请有奖
+                        Intent intent_youjiang = new Intent(getActivity(), SharefriendActivity.class);
+                        startActivity(intent_youjiang);
+                        break;
+                    case 7://设置
                         Intent intent_aboutus = new Intent(getActivity(), SettingActivity.class);
                         startActivity(intent_aboutus);
                         break;
@@ -169,7 +174,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
     private void initdata() {//初始化个人中心菜单
         chengweibangshou = new Chengweibangshou(getActivity());
         menuList = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             switch (i) {
                 case 0://我的发布
                     MenuBean menuBean0 = new MenuBean();
@@ -214,7 +219,14 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                     menuBean6.setmBitmap(bitmap6);
                     menuList.add(menuBean6);
                     break;
-                case 6://设置
+                case 6://邀请有奖
+                    MenuBean menuBean8 = new MenuBean();
+                    menuBean8.setMenu_name("邀请有奖");
+                    Bitmap bitmap8 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.yaoqingyoujiang);
+                    menuBean8.setmBitmap(bitmap8);
+                    menuList.add(menuBean8);
+                    break;
+                case 7://设置
                     MenuBean menuBean5 = new MenuBean();
                     menuBean5.setMenu_name("设置");
                     Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.setttt);
@@ -284,7 +296,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
         mButton_rechange = rootview.findViewById(R.id.button_recharge);
         mButton_cashout = rootview.findViewById(R.id.button_tixian);
         mimage_chengwei = rootview.findViewById(R.id.image_chengwei);
-        mTextview_logout = rootview.findViewById(R.id.text_logout);
+//        mTextview_logout = rootview.findViewById(R.id.text_logout);
         myGridview_menu = rootview.findViewById(R.id.mygridview_menu);
     }
 
@@ -292,16 +304,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.text_logout://退出
-                logout();
-                SharedPreferencesUtils.putString(getActivity(), "QMB", "password", "");
-                Staticdata.isLogin = false;
-                Staticdata.static_userBean.setData(null);//用户信息清空
-                RongIM.getInstance().disconnect();
-                Intent intent_logout = new Intent(getActivity(), LoginActivityPhone.class);
-                startActivity(intent_logout);
-                getActivity().finish();
-                break;
             case R.id.button_tixian://提现
                 Intent intent_cash = new Intent(getActivity(), CashoutActivity.class);
                 intent_cash.putExtra("money", Staticdata.static_userBean.getData().getAppuser().getBalance() + "");
@@ -330,42 +332,6 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
 
     }
 
-    public void logout() {
-
-        new Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi", respose, "退出登录");
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).Http(Urls.Baseurl + Urls.logout + Staticdata.static_userBean.getData().getUser_token(), getActivity(), 0);
-        //登出注销微信授权
-        mShareAPI = UMShareAPI.get(getActivity());
-        mShareAPI.deleteOauth(getActivity(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
-            @Override
-            public void onStart(SHARE_MEDIA share_media) {
-
-            }
-
-            @Override
-            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            }
-
-            @Override
-            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
-            }
-
-            @Override
-            public void onCancel(SHARE_MEDIA share_media, int i) {
-
-            }
-        });
-    }
 
 
 }

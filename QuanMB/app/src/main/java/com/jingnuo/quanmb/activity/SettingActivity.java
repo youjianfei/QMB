@@ -8,27 +8,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.class_.ShareGoodWeb;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.DataCleanManager;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SharedPreferencesUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.io.File;
+import java.util.Map;
+
+import io.rong.imkit.RongIM;
 
 import static com.jingnuo.quanmb.utils.Utils.deleteAllFiles;
 
 public class SettingActivity extends BaseActivityother {
+    private UMShareAPI mShareAPI;//第三方登录登录
     //控件
 
     TextView mTextview_cleancache;
     TextView mTextview_textview_cleancacheSize;
     TextView mTextview_share;
     TextView textview_aboutus;
+    TextView textview_logout;
 
 
     //对象
@@ -58,6 +68,7 @@ public class SettingActivity extends BaseActivityother {
         mTextview_cleancache.setOnClickListener(this);
         mTextview_share.setOnClickListener(this);
         textview_aboutus.setOnClickListener(this);
+        textview_logout.setOnClickListener(this);
     }
 
     @Override
@@ -66,13 +77,25 @@ public class SettingActivity extends BaseActivityother {
         mTextview_textview_cleancacheSize=findViewById(R.id.textview_cleancacheSize);
         mTextview_share=findViewById(R.id.textview_shareAPP);
         textview_aboutus=findViewById(R.id.textview_aboutus);
+        textview_logout=findViewById(R.id.textview_logout);
     }
     File root;//分享的图片要放的文件夹
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
+            case  R.id.textview_logout:
+                logout();
+                SharedPreferencesUtils.putString(SettingActivity.this, "QMB", "password", "");
+                Staticdata.isLogin = false;
+                Staticdata.static_userBean.setData(null);//用户信息清空
+                RongIM.getInstance().disconnect();
+                Intent intent_logout = new Intent(SettingActivity.this, LoginActivityPhone.class);
+                startActivity(intent_logout);
+               finish();
 
+
+                break;
             case R.id.textview_aboutus :
                 Intent intent=new Intent(SettingActivity.this,AboutUsActivity.class);
                 startActivity(intent);
@@ -101,5 +124,41 @@ public class SettingActivity extends BaseActivityother {
                 }
                 break;
         }
+    }
+    public void logout() {
+
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi", respose, "退出登录");
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl + Urls.logout + Staticdata.static_userBean.getData().getUser_token(), SettingActivity.this, 0);
+        //登出注销微信授权
+        mShareAPI = UMShareAPI.get(SettingActivity.this);
+        mShareAPI.deleteOauth(SettingActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media, int i) {
+
+            }
+        });
     }
 }

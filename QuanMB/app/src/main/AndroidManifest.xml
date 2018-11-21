@@ -149,7 +149,9 @@
         <activity android:name=".activity.MyAuthenticationActivity" />
         <activity android:name=".activity.MySkillActivity" />
         <activity android:name=".activity.DealActivity" />
-        <activity android:name=".activity.PayActivity" />
+        <activity android:name=".activity.PayActivity"
+            android:launchMode="singleTask"
+            />
         <activity android:name=".activity.SuggestActivity" />
         <activity android:name=".activity.OrderThinkActivity" />
         <activity android:name=".activity.MySkillCollectActivity" />

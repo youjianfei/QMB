@@ -114,6 +114,18 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
          />
+    <TextView
+        android:id="@+id/textview_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="退出登录"
+        android:textSize="15dp"
+        android:textColor="@color/text_title2"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:background="@color/white"
+        />
 
 
 
