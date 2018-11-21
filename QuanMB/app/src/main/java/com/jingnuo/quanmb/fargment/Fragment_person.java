@@ -125,10 +125,10 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         Intent intent_myorder = new Intent(getActivity(), MyOrderActivity.class);
                         getActivity().startActivity(intent_myorder);
                         break;
-                    case 1://我是帮手
-                        chengweibangshou.chengweibangshou();
-                        break;
-                    case 2://商户中心
+//                    case 1://我是帮手
+//                        chengweibangshou.chengweibangshou();
+//                        break;
+                    case 1://商户中心
                         new Popwindow_Downshop(getActivity(), new Interence_complteTask() {
                             @Override
                             public void onResult(boolean result) {
@@ -138,26 +138,26 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                             }
                         }).showPopwindow();
                         break;
-                    case 3://优惠券
+                    case 2://优惠券
                         Intent intent_coupon = new Intent(getActivity(), CouponActivity.class);
                         intent_coupon.putExtra("type", "优惠券");
                         startActivity(intent_coupon);
                         break;
-                    case 4://我的收藏
+                    case 3://我的收藏
                         Intent intent_collect = new Intent(getActivity(), MySkillCollectActivity.class);
                         startActivity(intent_collect);
                         break;
-                    case 5://客服中心
+                    case 4://客服中心
                         Intent intent_kefuzhongxin = new Intent(getActivity(), ZixunKefuWebActivity.class);
                         intent_kefuzhongxin.putExtra("webtitle", "全民帮客服中心");
                         intent_kefuzhongxin.putExtra("type", "全民帮客服中心");
                         startActivity(intent_kefuzhongxin);
                         break;
-                    case 6://邀请有奖
+                    case 5://邀请有奖
                         Intent intent_youjiang = new Intent(getActivity(), SharefriendActivity.class);
                         startActivity(intent_youjiang);
                         break;
-                    case 7://设置
+                    case 6://设置
                         Intent intent_aboutus = new Intent(getActivity(), SettingActivity.class);
                         startActivity(intent_aboutus);
                         break;
@@ -174,7 +174,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
     private void initdata() {//初始化个人中心菜单
         chengweibangshou = new Chengweibangshou(getActivity());
         menuList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             switch (i) {
                 case 0://我的发布
                     MenuBean menuBean0 = new MenuBean();
@@ -183,50 +183,49 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                     menuBean0.setmBitmap(bitmap0);
                     menuList.add(menuBean0);
                     break;
-                case 1://我是帮手
-                    MenuBean menuBean2 = new MenuBean();
-                    menuBean2.setMenu_name("我是帮手");
-                    Bitmap bitmap2 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.people11);
-                    menuBean2.setmBitmap(bitmap2);
-                    menuList.add(menuBean2);
-
-                    break;
-                case 2://商户中心
+//                case 1://我是帮手
+//                    MenuBean menuBean2 = new MenuBean();
+//                    menuBean2.setMenu_name("我是帮手");
+//                    Bitmap bitmap2 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.people11);
+//                    menuBean2.setmBitmap(bitmap2);
+//                    menuList.add(menuBean2);
+//                    break;
+                case 1://商户中心
                     MenuBean menuBean3 = new MenuBean();
                     menuBean3.setMenu_name("商户中心");
                     Bitmap bitmap3 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.shopiii);
                     menuBean3.setmBitmap(bitmap3);
                     menuList.add(menuBean3);
                     break;
-                case 3://优惠券
+                case 2://优惠券
                     MenuBean menuBean7 = new MenuBean();
                     menuBean7.setMenu_name("优惠券");
                     Bitmap bitmap7 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.youhuiquan);
                     menuBean7.setmBitmap(bitmap7);
                     menuList.add(menuBean7);
                     break;
-                case 4://我的收藏
+                case 3://我的收藏
                     MenuBean menuBean4 = new MenuBean();
                     menuBean4.setMenu_name("我的收藏");
                     Bitmap bitmap4 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.shoucang11);
                     menuBean4.setmBitmap(bitmap4);
                     menuList.add(menuBean4);
                     break;
-                case 5://客服中心
+                case 4://客服中心
                     MenuBean menuBean6 = new MenuBean();
                     menuBean6.setMenu_name("客服中心");
                     Bitmap bitmap6 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.kefuzhongxin);
                     menuBean6.setmBitmap(bitmap6);
                     menuList.add(menuBean6);
                     break;
-                case 6://邀请有奖
+                case 5://邀请有奖
                     MenuBean menuBean8 = new MenuBean();
                     menuBean8.setMenu_name("邀请有奖");
                     Bitmap bitmap8 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.yaoqingyoujiang);
                     menuBean8.setmBitmap(bitmap8);
                     menuList.add(menuBean8);
                     break;
-                case 7://设置
+                case 6://设置
                     MenuBean menuBean5 = new MenuBean();
                     menuBean5.setMenu_name("设置");
                     Bitmap bitmap5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.setttt);
