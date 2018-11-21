@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
+import com.jingnuo.quanmb.Interface.Interface_descriptionType;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.data.Urls;
@@ -31,7 +32,6 @@ import java.util.List;
  */
 
 public class Popwindow_descriptionType {
-    View conView;
     private Activity activity;
     PopupWindow mPopupWindow;
 
@@ -42,14 +42,14 @@ public class Popwindow_descriptionType {
     DescriptionTypeBean descriptionTypeBean;
 
 
-    InterfaceBaiduAddress interfaceBaiduAddress;
+    Interface_descriptionType interface_descriptionType;
 
     List <DescriptionTypeBean.DataBean> mdata;
 
     Adapter_choose2 adapter_choose2;
-    public Popwindow_descriptionType(int typeid,Activity activity , InterfaceBaiduAddress interfaceBaiduAddress) {
+    public Popwindow_descriptionType(int typeid,Activity activity , Interface_descriptionType interface_descriptionType) {
         this.activity = activity;
-        this.interfaceBaiduAddress=interfaceBaiduAddress;
+        this.interface_descriptionType=interface_descriptionType;
         this.typeid=typeid;
 
     }
@@ -87,7 +87,9 @@ public class Popwindow_descriptionType {
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                interfaceBaiduAddress.onResult(mdata.get(position).getTask_des());
+
+                interface_descriptionType.onDestext(mdata.get(position).getTask_des());
+                interface_descriptionType.onDesId(mdata.get(position).getDes_id());
                 mPopupWindow.dismiss();
             }
         });
@@ -103,7 +105,8 @@ public class Popwindow_descriptionType {
                     mdata.clear();
                     mdata.addAll(descriptionTypeBean.getData());
                     adapter_choose2.notifyDataSetChanged();
-                    interfaceBaiduAddress.onResult(mdata.get(0).getTask_des());
+                    interface_descriptionType.onDestext(mdata.get(0).getTask_des());
+                    interface_descriptionType.onDesId(mdata.get(0).getDes_id());
                 }
 
             }

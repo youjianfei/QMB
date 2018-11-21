@@ -48,6 +48,15 @@ public class DescriptionTypeBean {
          */
 
         private String task_des;
+        private String des_id;
+
+        public String getDes_id() {
+            return des_id;
+        }
+
+        public void setDes_id(String des_id) {
+            this.des_id = des_id;
+        }
 
         public String getTask_des() {
             return task_des;

@@ -52,7 +52,7 @@ public class App extends Application  {
 //                .penaltyLog()//违规对log日志
 //                .penaltyDeath()//违规Crash
 //                .build());
-        RongIM.setOnReceiveMessageListener(new MyReceiveMessageListener());
+//        RongIM.setOnReceiveMessageListener(new MyReceiveMessageListener());
 //        RongIM.getInstance().setMessageAttachedUserInfo(true);
 
         {

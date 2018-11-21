@@ -104,6 +104,7 @@ public class Urls {
     public static String DescriptionType = "task/querySpecialty/taskDescription?task_type=";//发布任务描述选择内容
     public static String Skillmenu_right = "major/searchTwo";//找专业二级菜单list
     public static String Skillmenulist = "major/searchPost";//二级菜单点开所有服务列表    参数  specialty_id
+    public static String JiazhengBiaoge = "task/querySpecialty/taskReference?content_id=";//二级菜单点开所有服务列表    参数  specialty_id
     public static String searchSkill = "major/queryPostByTitle";//按标题搜索服务
     public static String BHSkissAll = "user/querySpecialtyList";//某个商家或帮手的所有服务
     public static String FromShequSkiss = "major/queryALLServiceByOne";//显示某1级专业下的所有2级专业下的所有服务接口

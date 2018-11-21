@@ -32,6 +32,7 @@ import com.jingnuo.quanmb.Interface.InterfaceBaiduAddress;
 import com.jingnuo.quanmb.Interface.InterfaceDate_select;
 import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.Interface.InterfacePopwindow_SkillType;
+import com.jingnuo.quanmb.Interface.Interface_descriptionType;
 import com.jingnuo.quanmb.Interface.Interface_loadImage_respose;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
@@ -48,9 +49,6 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.WeixiuJiazhengBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
-import com.jingnuo.quanmb.popwinow.Popwindow_CompleteTime;
-import com.jingnuo.quanmb.popwinow.Popwindow_JiazhengweixiuTYpe;
-import com.jingnuo.quanmb.popwinow.Popwindow_SkillType;
 import com.jingnuo.quanmb.popwinow.Popwindow_descriptionType;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
@@ -73,9 +71,10 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * //维修Fragment
+ */
 public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
-    //维修Fragment
-
     View rootview;
     //控件
     MyGridView gridview_type;
@@ -448,11 +447,17 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         mEditview_taskdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Popwindow_descriptionType(task_typeID, getActivity(), new InterfaceBaiduAddress() {
+
+                new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
                     @Override
-                    public void onResult(String address) {
-                        LogUtils.LOG("ceshi",address,"descriptionTYPE");
-                        mEditview_taskdetails.setText(address);
+                    public void onDestext(String text) {
+                        LogUtils.LOG("ceshi",text,"descriptionTYPE");
+                        mEditview_taskdetails.setText(text);
+                    }
+
+                    @Override
+                    public void onDesId(String id) {
+
                     }
                 }).showPopwindow();
             }
@@ -483,11 +488,16 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
                         task_typeID=mdata.get(position).getSpecialty_id();
 //                    }
-                    new Popwindow_descriptionType(task_typeID, getActivity(), new InterfaceBaiduAddress() {
+                    new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
                         @Override
-                        public void onResult(String address) {
-                            LogUtils.LOG("ceshi",address,"descriptionTYPE");
-                            mEditview_taskdetails.setText(address);
+                        public void onDestext(String text) {
+                            LogUtils.LOG("ceshi",text,"descriptionTYPE");
+                            mEditview_taskdetails.setText(text);
+                        }
+
+                        @Override
+                        public void onDesId(String id) {
+
                         }
                     }).showPopwindow();
 
@@ -504,11 +514,16 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                         adapter_weixiuJiazheng.setSelectedPosition(position);
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
                         task_typeID=mdata.get(position).getSpecialty_id();
-                        new Popwindow_descriptionType(task_typeID, getActivity(), new InterfaceBaiduAddress() {
+                        new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
                             @Override
-                            public void onResult(String address) {
-                                LogUtils.LOG("ceshi",address,"descriptionTYPE");
-                                mEditview_taskdetails.setText(address);
+                            public void onDestext(String text) {
+                                LogUtils.LOG("ceshi",text,"descriptionTYPE");
+                                mEditview_taskdetails.setText(text);
+                            }
+
+                            @Override
+                            public void onDesId(String id) {
+
                             }
                         }).showPopwindow();
                     }
