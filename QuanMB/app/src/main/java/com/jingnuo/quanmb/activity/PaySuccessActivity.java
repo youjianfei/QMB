@@ -45,7 +45,7 @@ public class PaySuccessActivity extends BaseActivityother {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(Staticdata.PayissuetaskSuccess&&Staticdata.ispipei){
+            if(Staticdata.PayissuetaskSuccess){
                 Intent intend_think = new Intent(PaySuccessActivity.this, OrderThinkActivity.class);
                 intend_think.putExtra("task_id", Staticdata. taskDetailBeanStatic.getData().getTask_id() + "");
                 if(Staticdata. taskDetailBeanStatic.getData().getBusiness_name().equals("")){
@@ -62,16 +62,16 @@ public class PaySuccessActivity extends BaseActivityother {
                 finish();
                 return;
             }
-            if(Staticdata.PayissuetaskSuccess){
-                Intent mainIntent = new Intent(PaySuccessActivity.this, IssueTaskActivity.class);
-                Intent intent_bargain=new Intent(PaySuccessActivity.this, MyOrderActivity.class);
-                Intent[] intents = {mainIntent, intent_bargain};
-                Staticdata.PayissuetaskSuccess=false;
-                startActivities(intents);
-                LogUtils.LOG("payqq","222222","PaySuccessActivity");
-                finish();
-                return;
-            }
+//            if(Staticdata.PayissuetaskSuccess){
+//                Intent mainIntent = new Intent(PaySuccessActivity.this, IssueTaskActivity.class);
+//                Intent intent_bargain=new Intent(PaySuccessActivity.this, MyOrderActivity.class);
+//                Intent[] intents = {mainIntent, intent_bargain};
+//                Staticdata.PayissuetaskSuccess=false;
+//                startActivities(intents);
+//                LogUtils.LOG("payqq","222222","PaySuccessActivity");
+//                finish();
+//                return;
+//            }
 //                if(Staticdata.PayissuetaskSuccess){
                     Intent mainIntent = new Intent(PaySuccessActivity.this, IssueTaskActivity.class);
                     startActivity(mainIntent);
