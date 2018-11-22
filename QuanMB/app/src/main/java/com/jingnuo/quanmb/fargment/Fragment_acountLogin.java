@@ -153,6 +153,7 @@ public class Fragment_acountLogin extends Fragment {
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
                     SharedPreferencesUtils.putString(getActivity(),"QMB","mobile",Staticdata.static_userBean.getData().getAppuser().getMobile_no());//存电话号
+                    SharedPreferencesUtils.putString(getActivity(),"QMB","usertoken",Staticdata.static_userBean.getData().getUser_token());//登录成功之后存token
                     Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
                     Intent intent_login = new Intent(getActivity(), IssueTaskActivity.class);
                     getActivity().startActivity(intent_login);

@@ -42,10 +42,10 @@ public class LaunchActivity extends BaseActivityother {
     int Screenhight = 0;
     int Screenwidth = 0;
 
-    String phonenumber = "";
-    String password = "";
-    String publicEncryptedResult = "";//加密的密码
-
+//    String phonenumber = "";
+//    String password = "";
+//    String publicEncryptedResult = "";//加密的密码
+    String  usertoken="";
 
     UserBean userBean;
 
@@ -60,10 +60,10 @@ public class LaunchActivity extends BaseActivityother {
 
     @Override
     protected void setData() {
-        phonenumber = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "phonenumber");
-        password = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "password");
+        usertoken = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "usertoken");
+//        password = SharedPreferencesUtils.getString(LaunchActivity.this, "QMB", "password");
 
-        if (phonenumber.equals("") || password.equals("")) {
+        if (usertoken.equals("")) {
             isLogin = false;
             mTimer = new Timer();
             TimerTask timerTask = new TimerTask() {
@@ -75,11 +75,9 @@ public class LaunchActivity extends BaseActivityother {
             mTimer.schedule(timerTask, 1500);
         } else {
             Map map_autoLogind = new HashMap();
-            publicEncryptedResult = PasswordJiami.passwordjiami(password);//对密码加密
-            LogUtils.LOG("ceshi", publicEncryptedResult + "1111111111", "fragment_account");
+//            publicEncryptedResult = PasswordJiami.passwordjiami(password);//对密码加密
 //            Userphonenumber = phonenumber;//将电话号设为全局变量
-            map_autoLogind.put("username", phonenumber);
-            map_autoLogind.put("password", publicEncryptedResult);
+            map_autoLogind.put("user_token", usertoken);
             map_autoLogind.put("Jpush_id", Staticdata.JpushID);
             map_autoLogind.put("uuid", UUID);
             //登陆成功后 设置全局变量islogin为 true
@@ -163,7 +161,7 @@ public class LaunchActivity extends BaseActivityother {
                 finish();
 
             }
-        }).postHttp(Urls.Baseurl + Urls.login, LaunchActivity.this, 1, map);
+        }).postHttp(Urls.Baseurl + Urls.tokenlogin, LaunchActivity.this, 1, map);
 
 
     }

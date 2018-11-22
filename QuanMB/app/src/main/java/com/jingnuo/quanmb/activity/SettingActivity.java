@@ -87,6 +87,7 @@ public class SettingActivity extends BaseActivityother {
             case  R.id.textview_logout:
                 logout();
                 SharedPreferencesUtils.putString(SettingActivity.this, "QMB", "password", "");
+                SharedPreferencesUtils.putString(SettingActivity.this, "QMB", "usertoken", "");
                 Staticdata.isLogin = false;
                 Staticdata.static_userBean.setData(null);//用户信息清空
                 RongIM.getInstance().disconnect();

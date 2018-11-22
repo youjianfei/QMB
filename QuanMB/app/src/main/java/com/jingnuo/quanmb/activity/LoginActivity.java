@@ -22,7 +22,6 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.UserBean;
 import com.jingnuo.quanmb.fargment.Fragment_acountLogin;
-import com.jingnuo.quanmb.fargment.Fragment_phone_login;
 import com.jingnuo.quanmb.utils.InstalltionId;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;

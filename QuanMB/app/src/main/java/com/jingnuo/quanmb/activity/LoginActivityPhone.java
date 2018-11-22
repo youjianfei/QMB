@@ -263,6 +263,7 @@ public class LoginActivityPhone extends BaseActivityother {
                     LogUtils.LOG("ceshi", respose + "1111111111", "fragment_account");
                     isLogin = true;
                     SharedPreferencesUtils.putString(LoginActivityPhone.this, "QMB", "phonenumber", Staticdata.static_userBean.getData().getAppuser().getUser_name());
+                    SharedPreferencesUtils.putString(LoginActivityPhone.this,"QMB","usertoken",Staticdata.static_userBean.getData().getUser_token());//登录成功之后存token
                     Utils.connect(userBean.getData().getAppuser().getRongCloud_token());
                     Intent intent_login = new Intent(LoginActivityPhone.this, IssueTaskActivity.class);
                     LoginActivityPhone.this.startActivity(intent_login);
