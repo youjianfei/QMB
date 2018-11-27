@@ -35,19 +35,6 @@ public class AdapterFragment  extends FragmentPagerAdapter{
         this.fragmentsList = fragments;
         notifyDataSetChanged();
     }
-//    public void setFragments(List<Fragment> fragments) {
-//        if(this.fragmentsList != null){
-//            FragmentTransaction ft = fragmentManager.beginTransaction();
-//            for(Fragment f:this.fragmentsList){
-//                ft.remove(f);
-//            }
-//            ft.commit();
-//            ft=null;
-//            fragmentManager.executePendingTransactions();
-//        }
-//        this.fragmentsList = fragments;
-//        notifyDataSetChanged();
-//    }
 
     @Override
     public Fragment getItem(int position) {
@@ -58,11 +45,6 @@ public class AdapterFragment  extends FragmentPagerAdapter{
     public int getCount() {
         return fragmentsList.size();
     }
-//    @Override
-//    public void destroyItem(ViewGroup container, int position, Object object) {
-//        Fragment fragment = fragmentsList.get(position);
-//        fragmentManager.beginTransaction().hide(fragment).commit();
-//    }
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         tags.add(makeFragmentName(container.getId(), getItemId(position)));

@@ -52,9 +52,11 @@ public class Adapter_WeixiuJiazheng extends BaseAdapter {
         holder.mTextview.setText(mData.get(position).getSpecialty_name());
         if(selectedPosition==position){
             holder.mImageview_icon.setBackgroundResource(images_select[position]);
+            holder.mTextview.setTextColor(mContext.getResources().getColor(R.color.yellow_jianbian_start));
 
         }else {
             holder.mImageview_icon.setBackgroundResource(images[position]);
+            holder.mTextview.setTextColor(mContext.getResources().getColor(R.color.black_text));
 
         }
 
