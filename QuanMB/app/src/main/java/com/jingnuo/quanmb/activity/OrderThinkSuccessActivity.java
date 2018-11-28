@@ -1,6 +1,8 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.popwinow.Popwindow_orderthinkShare;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.umeng.socialize.ShareAction;
@@ -17,19 +20,19 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.jingnuo.quanmb.data.Urls.Baseurl_index;
 
 public class OrderThinkSuccessActivity extends BaseActivityother {
     //控件
-
     Button button_main;
     Button button_issue;
-    ImageView image_wxShare;
-    ImageView image_wxcircleShare;
 
+    Popwindow_orderthinkShare popwindow_orderthinkShare;
 
-    UMImage image;
-    public UMShareListener umShareListener;
+    Timer timer;
     @Override
     public int setLayoutResID() {
         return R.layout.activity_order_think_success;
@@ -38,32 +41,33 @@ public class OrderThinkSuccessActivity extends BaseActivityother {
     @Override
     protected void setData() {
 
-    }
 
+    }
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                  popwindow_orderthinkShare.showPopwindow();
+                    break;
+            }
+        }
+
+
+    };
     @Override
     protected void initData() {
-         image = new UMImage(OrderThinkSuccessActivity.this, "https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/512.png");//缩略图
-        umShareListener = new UMShareListener() {
+        popwindow_orderthinkShare=new Popwindow_orderthinkShare(this);
+        //验证码倒计时
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
             @Override
-            public void onStart(SHARE_MEDIA share_media) {
-                LogUtils.LOG("ceshi",share_media.getName(),"onStart");
-
-            }
-
-            @Override
-            public void onResult(SHARE_MEDIA platform) {
-                ToastUtils.showToast(OrderThinkSuccessActivity.this,"分享成功");
-            }
-
-            @Override
-            public void onError(SHARE_MEDIA platform, Throwable t) {
-            }
-
-            @Override
-            public void onCancel(SHARE_MEDIA share_media) {
-                ToastUtils.showToast(OrderThinkSuccessActivity.this,"分享取消");
+            public void run() {
+                mhandler.sendEmptyMessage(0);
             }
         };
+        timer.schedule(timerTask, 400);
     }
 
     @Override
@@ -84,42 +88,13 @@ public class OrderThinkSuccessActivity extends BaseActivityother {
                 finish();
             }
         });
-        image_wxShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                web.setTitle("全民帮|专业家政维修");//标题
-                web.setDescription("一键下单，找到你的专属师傅");//描述
-                web.setThumb(image);
-                new ShareAction(OrderThinkSuccessActivity.this).setPlatform(SHARE_MEDIA.WEIXIN)
-                        .withMedia(web)
-                        .setCallback(umShareListener)
-                        .share();
 
-            }
-        });
-        image_wxcircleShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                web.setTitle("全民帮|专业家政维修");//标题
-                web.setDescription("一键下单，找到你的专属师傅");//描述
-                web.setThumb(image);
-                new ShareAction(OrderThinkSuccessActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                        .withMedia(web)
-                        .setCallback(umShareListener)
-                        .share();
-            }
-        });
     }
 
     @Override
     protected void initView() {
         button_main=findViewById(R.id.button_main);
         button_issue=findViewById(R.id.button_issue);
-        image_wxShare=findViewById(R.id.image_wxShare);
-        image_wxcircleShare=findViewById(R.id.image_wxcircleShare);
     }
 
     @Override
