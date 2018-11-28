@@ -30,7 +30,6 @@ public class Adapter_jiazhengBiaoge extends  BaseAdapter{
         mInflater=LayoutInflater.from(mContext);
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=mInflater.inflate(R.layout.item_jiazhengbiaoge,null,false);

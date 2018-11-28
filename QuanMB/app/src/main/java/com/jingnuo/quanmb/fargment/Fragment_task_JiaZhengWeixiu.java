@@ -123,8 +123,18 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     String  JiazhengTypeJson_shao="{\"list\":[{\"specialty_id\":1204,\"specialty_name\":\"手机\",\"image\":\"\"," +
             "\"isselect\":true},{\"specialty_id\":1201,\"specialty_name\":\"房屋\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1209,\"specialty_name\":\"开锁\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1207," +
-            "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1209,\"specialty_name\":\"全部\"," +
-            "\"image\":\"\",\"isselect\":false}]}";
+            "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1209,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1210,\"specialty_name\":\"家电\"," +
+            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1206,\"specialty_name\":\"数码\",\"image\":\"\",\"isselect\":false}," +
+            "{\"specialty_id\":1208,\"specialty_name\":\"电路\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1202,\"specialty_name\"" +
+            ":\"家具\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1212,\"specialty_name\":\"手表\",\"image\":\"\",\"isselect\":false}" +
+            ",{\"specialty_id\":1205,\"specialty_name\":\"空调\",\"image\":\"\",\"isselect\":false},\n" +
+            "{\"specialty_id\":1203,\"specialty_name\":\"电脑\",\"image\":\"\",\"isselect\":false},\n" +
+            "{\"specialty_id\":1211,\"specialty_name\":\"电动车\",\"image\":\"\",\"isselect\":false}]}";
+
+//    String  JiazhengTypeJson_shao="{\"list\":[{\"specialty_id\":1204,\"specialty_name\":\"手机\",\"image\":\"\"," +
+//            "\"isselect\":true},{\"specialty_id\":1201,\"specialty_name\":\"房屋\",\"image\":\"\",\"isselect\":false}," +
+//            "{\"specialty_id\":1209,\"specialty_name\":\"开锁\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1207," +
+//            "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1209,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false}]}";
     List<WeixiuJiazhengBean.ListBean>mdata;
     int [] images={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_jiadian,R.mipmap.b_shuma
             ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_shoubiao,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao,R.mipmap.b_diandongche};
@@ -134,6 +144,11 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     int [] images_select_shao={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_all};
 
     Adapter_WeixiuJiazheng adapter_weixiuJiazheng;
+
+    boolean isShowAll=false;
+    int  se_position;//选择的位置
+
+
 
     String detailed_address = "";
     int is_counteroffer = 1;//是否接受议价 1 接受  0 拒绝
@@ -216,8 +231,10 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         imageview_jiazheng.setLayoutParams(mLayoutparams);
 
         mdata=new ArrayList<>();
+        mdata.clear();
         mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao,WeixiuJiazhengBean.class).getList());
         adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images_shao,images_select_shao);
+        adapter_weixiuJiazheng.isShowAll(isShowAll);
         gridview_type.setAdapter(adapter_weixiuJiazheng);
 
         mList_picID=new ArrayList<>();
@@ -338,7 +355,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
                 + Staticdata.static_userBean.getData().getUser_token(), getActivity(), 0);
     }
     void requast(Map map) {//正式发布个性任务
-        LogUtils.LOG("ceshi", Staticdata.map_task.toString(), "发布任务的map参数");
+        LogUtils.LOG("ceshimap", Staticdata.map_task.toString(), "发布任务的map参数");
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
@@ -464,10 +481,13 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         textview_shouqi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isShowAll=false;
                 mdata.clear();
                 adapter_weixiuJiazheng = null;
                 mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao, WeixiuJiazhengBean.class).getList());
                 adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images_shao, images_select_shao);
+                adapter_weixiuJiazheng.isShowAll(isShowAll);
+                adapter_weixiuJiazheng.setSelectedPosition(se_position);
                 gridview_type.setAdapter(adapter_weixiuJiazheng);
                 textview_shouqi.setVisibility(View.GONE);
             }
@@ -475,7 +495,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         gridview_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mdata.size()>5){
+                if(isShowAll){
 //                    if(position==mdata.size()-1){
 //                        mdata.clear();
 //                        adapter_weixiuJiazheng=null;
@@ -483,9 +503,11 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 //                        adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images_shao,images_select_shao);
 //                        gridview_type.setAdapter(adapter_weixiuJiazheng);
 //                    }else {
-                        adapter_weixiuJiazheng.setSelectedPosition(position);
+                    se_position=position;
+
+                    adapter_weixiuJiazheng.setSelectedPosition(se_position);
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
-                        task_typeID=mdata.get(position).getSpecialty_id();
+                        task_typeID=mdata.get(se_position).getSpecialty_id();
 //                    }
                     new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
                         @Override
@@ -502,17 +524,21 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 
                 }else {
                     if(position==4){
+                        isShowAll=true;
                         mdata.clear();
                         adapter_weixiuJiazheng=null;
                         mdata.addAll(new Gson().fromJson(JiazhengTypeJson,WeixiuJiazhengBean.class).getList());
                         adapter_weixiuJiazheng=new Adapter_WeixiuJiazheng(mdata,getActivity(),images,images_select);
+                        adapter_weixiuJiazheng.setSelectedPosition(se_position);
+                        adapter_weixiuJiazheng.isShowAll(isShowAll);
                         gridview_type.setAdapter(adapter_weixiuJiazheng);
                         textview_shouqi.setVisibility(View.VISIBLE);
 
                     }else {
-                        adapter_weixiuJiazheng.setSelectedPosition(position);
+                        se_position=position;
+                        adapter_weixiuJiazheng.setSelectedPosition(se_position);
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
-                        task_typeID=mdata.get(position).getSpecialty_id();
+                        task_typeID=mdata.get(se_position).getSpecialty_id();
                         new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
                             @Override
                             public void onDestext(String text) {
@@ -754,6 +780,9 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
             timer.cancel();
             timerTask.cancel();
         }
+        isShowAll=false;//恢复初始
+        task_typeID=1204;//恢复初始
+        se_position=0;//恢复初始
         timer=null;
         Staticdata.mlistdata_pic.clear();
         Staticdata.mlistdata_pic.add(bitmap);

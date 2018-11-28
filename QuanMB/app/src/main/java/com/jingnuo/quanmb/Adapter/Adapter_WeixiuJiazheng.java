@@ -25,6 +25,7 @@ public class Adapter_WeixiuJiazheng extends BaseAdapter {
     Context mContext;
     LayoutInflater mInflater;
     private int selectedPosition = 0;// 选中的位置
+    public   boolean isShowAll;
     public Adapter_WeixiuJiazheng(List mDatas, Context mContext,int [] images,int [] images_select) {
         super(mDatas, mContext);
         this.mData = mDatas;
@@ -35,6 +36,17 @@ public class Adapter_WeixiuJiazheng extends BaseAdapter {
     }
     public void setSelectedPosition(int position) {
         selectedPosition = position;
+    }
+    public void isShowAll(boolean isShowAll) {
+        this.  isShowAll=isShowAll;
+    }
+    @Override
+    public int getCount() {
+        if(mDatas!=null){
+            return isShowAll?mDatas.size():5;
+        }else {
+            return 0;
+        }
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
