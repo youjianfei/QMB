@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Gridviewpic_UPLoad;
+import com.jingnuo.quanmb.Adapter.Adapter_JiazhengTYPE;
 import com.jingnuo.quanmb.Adapter.Adapter_WeixiuJiazheng;
 import com.jingnuo.quanmb.Adapter.Adapter_jiazhengBiaoge;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
@@ -52,6 +54,7 @@ import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.JiaZhengTypeBean;
 import com.jingnuo.quanmb.entityclass.JiazhengbiaogeBean;
 import com.jingnuo.quanmb.entityclass.WeixiuJiazhengBean;
 import com.jingnuo.quanmb.popwinow.Popwindow_ChooseTime;
@@ -63,6 +66,7 @@ import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.MoneyTextWatcher;
 import com.jingnuo.quanmb.utils.ReducePIC;
+import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Utils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -91,6 +95,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
     View rootview;
     //控件
     MyGridView gridview_type;
+    MyGridView gridview_horizontal;//横向gridview
 //    TextView mTextview_time;//预约时间
 //    TextView textview_shouqi;//收起
     TextView textview_tip;//服务提醒
@@ -107,15 +112,14 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 
 
     //对象
-    PermissionHelper permissionHelper;
-    Popwindow_ChooseTime popwindow_chooseTime;
-        Popwindow_CompleteTime popwindow_completeTime;
+//    PermissionHelper permissionHelper;
+//    Popwindow_ChooseTime popwindow_chooseTime;
+//        Popwindow_CompleteTime popwindow_completeTime;
 //    DataTime_select dataTimeSelect;
 //    Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;  //展示上传图片的adapter
-    KProgressHUD mKProgressHUD;
 //    Adapter_jiazhengBiaoge adapter_jiazhengBiaoge;//展示表格的adapter
+    KProgressHUD mKProgressHUD;
     Adapter_WeixiuJiazheng adapter_weixiuJiazheng;//展示类型图标的adapter
-    JiazhengbiaogeBean jiazhengbiaogeBean;
 
     boolean isShowAll=true;
     int  se_position;//选择的位置
@@ -133,27 +137,27 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
     int task_typeID = 1300;
     String JiazhengTypeJson = "{\"list\":[{\"specialty_id\":1300,\"specialty_name\":\"家庭保洁\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1306,\"specialty_name\":\"送水\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1302," +
-            "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆\"," +
-            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"月嫂\",\"image\":\"\",\"isselect\":false}," +
+            "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1310,\"specialty_name\":\"家电清洗\"," +
+            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆月嫂\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1305,\"specialty_name\":\"搬家\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1303," +
             "\"specialty_name\":\"擦玻璃\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1307,\"specialty_name\":\"小时工\"," +
             "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
             ",{\"specialty_id\":1301,\"specialty_name\":\"新居开荒\",\"image\":\"\",\"isselect\":false}]}";
-    String JiazhengTypeJson_shao = "{\"list\":[{\"specialty_id\":1300,\"specialty_name\":\"家庭保洁\",\"image\":\"\",\"isselect\":false}," +
-            "{\"specialty_id\":1306,\"specialty_name\":\"送水\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1302," +
-            "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆\"," +
-            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"月嫂\",\"image\":\"\",\"isselect\":false}," +
-            "{\"specialty_id\":1305,\"specialty_name\":\"搬家\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1303," +
-            "\"specialty_name\":\"擦玻璃\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1307,\"specialty_name\":\"小时工\"," +
-            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
-            ",{\"specialty_id\":1301,\"specialty_name\":\"新居开荒\",\"image\":\"\",\"isselect\":false}]}";
+//    String JiazhengTypeJson_shao = "{\"list\":[{\"specialty_id\":1300,\"specialty_name\":\"家庭保洁\",\"image\":\"\",\"isselect\":false}," +
+//            "{\"specialty_id\":1306,\"specialty_name\":\"送水\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1302," +
+//            "\"specialty_name\":\"擦油烟机\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1308,\"specialty_name\":\"保姆\"," +
+//            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1309,\"specialty_name\":\"月嫂\",\"image\":\"\",\"isselect\":false}," +
+//            "{\"specialty_id\":1305,\"specialty_name\":\"搬家\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1303," +
+//            "\"specialty_name\":\"擦玻璃\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1307,\"specialty_name\":\"小时工\"," +
+//            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
+//            ",{\"specialty_id\":1301,\"specialty_name\":\"新居开荒\",\"image\":\"\",\"isselect\":false}]}";
     List<WeixiuJiazhengBean.ListBean> mdata;
     int[] images = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.yuesao_b, R.mipmap.banjia_b
             , R.mipmap.boli_b, R.mipmap.xiaoshigong_b, R.mipmap.diban_b, R.mipmap.kaihuang_b};
     int[] images_select = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.yuesao_b, R.mipmap.banjia_b
             , R.mipmap.boli_b, R.mipmap.xiaoshigong_b, R.mipmap.diban_b, R.mipmap.kaihuang_b};
-    int[] images_shao = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.b_all};
-    int[] images_select_shao = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.b_all};
+//    int[] images_shao = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.b_all};
+//    int[] images_select_shao = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.b_all};
 
 
 
@@ -167,7 +171,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
     UpLoadImage upLoadImage;
 //    List<JiazhengbiaogeBean.DataBean.AppTaskReferenceFormBean> mData_jiazhengbiaoge;//表格内容list
 
-
+    List<JiaZhengTypeBean.TypeBean>mData_jiazhengType;
+    Adapter_JiazhengTYPE adapter_jiazhengTYPE;
 
     //数字动态添加变化
     int time = 0;
@@ -211,7 +216,6 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
     }
 
     private void initview() {
-        gridview_type = rootview.findViewById(R.id.gridview_type);
 //        imageview_jiazheng = rootview.findViewById(R.id.imageview_jiazheng);
 //        textview_shouqi = rootview.findViewById(R.id.textview_shouqi);
 //        mTextview_time = rootview.findViewById(R.id.edit_tasktime);
@@ -221,15 +225,203 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 //        imageGridview = rootview.findViewById(R.id.GridView_PIC);
 //        image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
 //        mylistview_biaoge = rootview.findViewById(R.id.mylistview_biaoge);
+        gridview_horizontal = rootview.findViewById(R.id.gridview_horizontal);
+        gridview_type = rootview.findViewById(R.id.gridview_type);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
         textview_suiji = rootview.findViewById(R.id.textview_suiji);
     }
+    private void initjiazhengtype(){
+        if(task_typeID==1300){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_baojie1);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：40元/小时");
+            typeBean.setXiangmu("日常保洁");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_baojie2);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：8元/平方");
+            typeBean1.setXiangmu("深度保洁");
+            mData_jiazhengType.add(typeBean1);
+            return;
+        }
+        if(task_typeID==1306){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_songshui1);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：12-30/桶");
+            typeBean.setXiangmu("单桶");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_songshui12);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：10桶以上");
+            typeBean1.setXiangmu("批量");
+            mData_jiazhengType.add(typeBean1);
+            return;
+        }
+        if(task_typeID==1302){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_cayouyanji1);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：100元");
+            typeBean.setXiangmu("中式油烟机");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_cayouyanji2);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：120元");
+            typeBean1.setXiangmu("侧吸式油烟机");
+            mData_jiazhengType.add(typeBean1);
+            JiaZhengTypeBean.TypeBean   typeBean2=new JiaZhengTypeBean.TypeBean();
+            typeBean2.setImage(R.mipmap.jiazheng_cayouyanji3);
+            typeBean2.setIsselect(false);
+            typeBean2.setPrice("参考价：100元");
+            typeBean2.setXiangmu("欧式油烟机");
+            mData_jiazhengType.add(typeBean2);
+            return;
+        }
+        if(task_typeID==1310){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_jiadianqingxi1);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：120元");
+            typeBean.setXiangmu("洗衣机清洗");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_jiadianqingxi2);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：120元");
+            typeBean1.setXiangmu("冰箱清洗");
+            mData_jiazhengType.add(typeBean1);
+            JiaZhengTypeBean.TypeBean   typeBean2=new JiaZhengTypeBean.TypeBean();
+            typeBean2.setImage(R.mipmap.jiazheng_jiadianqingxi3);
+            typeBean2.setIsselect(false);
+            typeBean2.setPrice("参考价：100-200元");
+            typeBean2.setXiangmu("空调清洗");
+            mData_jiazhengType.add(typeBean2);
+            return;
+        }
+        if(task_typeID==1308){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_baomu);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：2600-3000/月");
+            typeBean.setXiangmu("保姆");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_yuesao);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：6000-8000/月");
+            typeBean1.setXiangmu("月嫂");
+            mData_jiazhengType.add(typeBean1);
+            return;
+        }
+        if(task_typeID==1305){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_xiaomianbaoche);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：100元/次");
+            typeBean.setXiangmu("小面包车");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_zhongxinghuoche);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：180元/次");
+            typeBean1.setXiangmu("中型货车");
+            mData_jiazhengType.add(typeBean1);
+            JiaZhengTypeBean.TypeBean   typeBean2=new JiaZhengTypeBean.TypeBean();
+            typeBean2.setImage(R.mipmap.jiazheng_daxinghuoche);
+            typeBean2.setIsselect(false);
+            typeBean2.setPrice("参考价：240元/次");
+            typeBean2.setXiangmu("大型货车");
+            mData_jiazhengType.add(typeBean2);
+            return;
+        }
+        if(task_typeID==1303){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_caboli);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：15元/平米");
+            typeBean.setXiangmu("擦玻璃");
+            mData_jiazhengType.add(typeBean);
+            return;
+        }
+        if(task_typeID==1307){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_xiaoshigong);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：50元/小时");
+            typeBean.setXiangmu("小时工");
+            mData_jiazhengType.add(typeBean);
+            return;
+        }
+        if(task_typeID==1304){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_ditan);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("参考价：15元/平米");
+            typeBean.setXiangmu("地毯清洗");
+            mData_jiazhengType.add(typeBean);
+            JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
+            typeBean1.setImage(R.mipmap.jiazheng_diban);
+            typeBean1.setIsselect(false);
+            typeBean1.setPrice("参考价：15元/平米");
+            typeBean1.setXiangmu("地板养护");
+            mData_jiazhengType.add(typeBean1);
+            return;
+        }
+        if(task_typeID==1301){
+            mData_jiazhengType.clear();
+            JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
+            typeBean.setImage(R.mipmap.jiazheng_kaihuang);
+            typeBean.setIsselect(true);
+            typeBean.setPrice("新居开荒");
+            typeBean.setXiangmu("新居开荒");
+            mData_jiazhengType.add(typeBean);
+            return;
+        }
+    }
+    /**
+     * 将GridView改成单行横向布局
+     */
+    private void changeGridView() {
+        int w=Staticdata.ScreenWidth;
+         w=w/2;
 
+//         item之间的间隔
+        int itemPaddingH =SizeUtils.dip2px(getActivity(),5);
+        int size = mData_jiazhengType.size();
+        // 计算GridView宽度
+        int gridviewWidth = size * w;
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                gridviewWidth, LinearLayout.LayoutParams.MATCH_PARENT);
+        gridview_horizontal.setLayoutParams(params);
+        gridview_horizontal.setColumnWidth(w);
+//        gridview_horizontal.setHorizontalSpacing(itemPaddingH);
+        gridview_horizontal.setStretchMode(GridView.NO_STRETCH);
+        gridview_horizontal.setNumColumns(size);
+    }
     private void initdata() {
 //        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
 //        int hight = (int) (Staticdata.ScreenWidth * 0.45);
 //        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, hight);
 //        imageview_jiazheng.setLayoutParams(mLayoutparams);
+        mData_jiazhengType=new ArrayList<>();//家政图片类型
+        adapter_jiazhengTYPE=new Adapter_JiazhengTYPE(mData_jiazhengType,getActivity());
+        gridview_horizontal.setAdapter(adapter_jiazhengTYPE);
+
 
         mdata = new ArrayList<>();//展示图标
         mdata.clear();
@@ -242,8 +434,9 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 //        adapter_jiazhengBiaoge=new Adapter_jiazhengBiaoge(mData_jiazhengbiaoge,getActivity());
 //        mylistview_biaoge.setAdapter(adapter_jiazhengBiaoge);
 
-
-
+        initjiazhengtype();//设置图片类型的数据
+        task_description=mData_jiazhengType.get(0).getXiangmu();//每次默认选择第一个
+        changeGridView();
 
         //随机数动态变化
         textview_suiji.setText(Staticdata.suijiAcount + "");
@@ -258,7 +451,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 
         mList_picID = new ArrayList<>();
         mKProgressHUD = new KProgressHUD(getActivity());
-        permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+//        permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
 //        mTextview_taskAddress.setText(Staticdata.aoi);
 
@@ -523,7 +716,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
         gridview_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (isShowAll) {
+
 //                    if(position==mdata.size()-1){
 //                        mdata.clear();
 //                        adapter_weixiuJiazheng=null;
@@ -535,6 +728,14 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
                     adapter_weixiuJiazheng.setSelectedPosition(se_position);
                     adapter_weixiuJiazheng.notifyDataSetInvalidated();
                     task_typeID = mdata.get(se_position).getSpecialty_id();
+
+                LogUtils.LOG("ceshi11","点击了gridview)))))"+mData_jiazhengType.get(0).getXiangmu(),"gridview");
+
+                initjiazhengtype();
+                changeGridView();
+                task_description=mData_jiazhengType.get(0).getXiangmu();//每次默认选择第一个
+                adapter_jiazhengTYPE.notifyDataSetChanged();
+
 //                    }
 //                    new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
 //                        @Override
@@ -548,52 +749,22 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 //                            requestBiaoge(id);
 //                        }
 //                    }).showPopwindow();
-                } else {
-                    if (position == 4) {
-                        isShowAll=true;
-                        mdata.clear();
-                        adapter_weixiuJiazheng = null;
-                        mdata.addAll(new Gson().fromJson(JiazhengTypeJson, WeixiuJiazhengBean.class).getList());
-                        adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images, images_select);
-                        adapter_weixiuJiazheng.setSelectedPosition(se_position);
-                        adapter_weixiuJiazheng.isShowAll(isShowAll);
-                        gridview_type.setAdapter(adapter_weixiuJiazheng);
-//                        textview_shouqi.setVisibility(View.VISIBLE);
-                    } else {
-                        se_position=position;
-                        adapter_weixiuJiazheng.setSelectedPosition(se_position);
-                        adapter_weixiuJiazheng.notifyDataSetInvalidated();
-                        task_typeID = mdata.get(se_position).getSpecialty_id();
-//                        new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
-//                            @Override
-//                            public void onDestext(String text) {
-//                                LogUtils.LOG("ceshi",text,"descriptionTYPE");
-//                                mEditview_taskdetails.setText(text);
-//                            }
-//
-//                            @Override
-//                            public void onDesId(String id) {
-//                                requestBiaoge(id);
-//                            }
-//                        }).showPopwindow();
-                    }
-                }
+
             }
         });
-//        mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                popwindow_completeTime.showPopwindow();
-////                dataTimeSelect.timeSelect(getActivity());
-////                popwindow_chooseTime = new Popwindow_ChooseTime(getActivity(), new InterfaceDate_select() {
-////                    @Override
-////                    public void onResult(String time) {
-////                        mTextview_time.setText(time);
-////                    }
-////                });
-//                popwindow_chooseTime.showPopwindow();
-//            }
-//        });
+        gridview_horizontal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                for (int i=0;i<mData_jiazhengType.size();i++){
+                    mData_jiazhengType.get(i).setIsselect(false);
+                    LogUtils.LOG("ceshi","点击了gridview)))))"+i,"gridview");
+                }
+                mData_jiazhengType.get(position).setIsselect(true);
+                adapter_jiazhengTYPE.notifyDataSetChanged();
+                task_description=mData_jiazhengType.get(position).getXiangmu();
+                LogUtils.LOG("ceshi","点击了gridview"+position,"gridview");
+            }
+        });
 
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -781,13 +952,13 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
         Staticdata.aoi = address_left;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (permissionHelper != null) {
-            permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (permissionHelper != null) {
+//            permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//    }
 
     @Override
     public void onPause() {
