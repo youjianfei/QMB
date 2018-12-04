@@ -20,13 +20,13 @@
         android:id="@+id/textview_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:gravity="center"
         android:textSize="13dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:textColor="@color/text_black"
-        android:text=""
+        android:text="sdfaf"
         />
     <ImageView
         android:id="@+id/iamge_1"
@@ -41,10 +41,10 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textSize="13dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:textColor="@color/text_black"
-        android:text=""
+        android:text="sadfsd"
         />
     <ImageView
         android:id="@+id/iamge_2"
@@ -56,13 +56,13 @@
         android:id="@+id/textview_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:gravity="center"
         android:textSize="13dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:textColor="@color/text_black"
-        android:text=""
+        android:text="asdfa"
         />
 </LinearLayout>
 

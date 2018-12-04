@@ -44,9 +44,25 @@ public class Adapter_jiazhengBiaoge extends  BaseAdapter{
         if(position==0){
             iamge_1.setVisibility(View.GONE);
             iamge_2.setVisibility(View.GONE);
-        }else {
+            textView1.setBackground(mContext.getResources().getDrawable(R.drawable.background_white_corners_8_zuoshang));
+            textView2.setBackgroundColor(mContext.getResources().getColor(R.color.gray_dfdfdf));
+            textView3.setBackground(mContext.getResources().getDrawable(R.drawable.background_white_corners_8_youshang));
+        }
+        else
+            if(position==mDatas.size()-1)
+            {
             iamge_1.setVisibility(View.VISIBLE);
             iamge_2.setVisibility(View.VISIBLE);
+            textView1.setBackground(mContext.getResources().getDrawable(R.drawable.background_white_corners_8_zuoxia));
+            textView2.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            textView3.setBackground(mContext.getResources().getDrawable(R.drawable.background_white_corners_8_youxia));
+        }
+        else  {
+            iamge_1.setVisibility(View.VISIBLE);
+            iamge_2.setVisibility(View.VISIBLE);
+            textView1.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            textView2.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            textView3.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }
 
         return convertView;
