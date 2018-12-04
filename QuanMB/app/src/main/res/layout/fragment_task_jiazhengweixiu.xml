@@ -111,33 +111,33 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="17dp"
             android:src="@mipmap/more" />
-        <ImageView
-            android:id="@+id/image_chosePIC"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/edit_detailtask"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:visibility="visible"
-            android:src="@mipmap/chosepic" />
+        <!--<ImageView-->
+            <!--android:id="@+id/image_chosePIC"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_below="@+id/edit_detailtask"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:visibility="visible"-->
+            <!--android:src="@mipmap/chosepic" />-->
 
-        <com.jingnuo.quanmb.customview.MyGridView
-            android:id="@+id/GridView_PIC"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image_chosePIC"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@color/white"
-            android:numColumns="3"
-            android:visibility="gone" />
+        <!--<com.jingnuo.quanmb.customview.MyGridView-->
+            <!--android:id="@+id/GridView_PIC"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/image_chosePIC"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:numColumns="3"-->
+            <!--android:visibility="gone" />-->
 
         <ImageView
             android:id="@+id/image_line2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/GridView_PIC"
+            android:layout_below="@+id/edit_detailtask"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"

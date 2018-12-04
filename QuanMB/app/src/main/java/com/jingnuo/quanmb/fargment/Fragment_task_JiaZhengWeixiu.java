@@ -74,7 +74,7 @@ import java.util.TimerTask;
 /**
  * //维修Fragment
  */
-public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnClickListener {
+public class Fragment_task_JiaZhengWeixiu extends Fragment  {
     View rootview;
     //控件
     MyGridView gridview_type;
@@ -83,8 +83,8 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
     RelativeLayout mRelativelayout_chosetime;//选择时间
     //    EditText mEditview_addressDetail;//详细地址
     TextView mEditview_taskdetails;
-    MyGridView imageGridview;
-    ImageView image_chosePIC;
+//    MyGridView imageGridview;
+//    ImageView image_chosePIC;
     Button mButton_sub;
     ImageView imageview_jiazheng;
 
@@ -217,8 +217,8 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         textview_shouqi = rootview.findViewById(R.id.textview_shouqi);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
-        imageGridview = rootview.findViewById(R.id.GridView_PIC);
-        image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
+//        imageGridview = rootview.findViewById(R.id.GridView_PIC);
+//        image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
         textview_suiji=rootview.findViewById(R.id.textview_suiji);
 
@@ -406,7 +406,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
          bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         Staticdata.mlistdata_pic.add(bitmap);
         adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
-        imageGridview.setAdapter(adapter_gridviewpic_upLoad);
+//        imageGridview.setAdapter(adapter_gridviewpic_upLoad);
         dataTimeSelect=new DataTime_select(getActivity(), new InterfaceDate_select() {
             @Override
             public void onResult(String time) {
@@ -455,7 +455,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         PIC_mix = 3 - mList_PicPath_down.size();
         adapter_gridviewpic_upLoad.notifyDataSetChanged();
         if (Staticdata.mlistdata_pic.size() > 1) {
-            imageGridview.setVisibility(View.VISIBLE);
+//            imageGridview.setVisibility(View.VISIBLE);
         }
     }
 
@@ -637,36 +637,36 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
 
             }
         });
-        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.LOG("ceshi", "点击+" + position, "选择图片");
-                if (Staticdata.mlistdata_pic.size() - 1 == position) {
-                    choosePIC();
-                } else {
-                    Staticdata.mlistdata_pic.remove(position);
-                    mList_PicPath_down.remove(position);//删除图片地址以便上传；
-                    PIC_mix = 3 - mList_PicPath_down.size();
-                    adapter_gridviewpic_upLoad.notifyDataSetChanged();
-                    if (Staticdata.mlistdata_pic.size() <= 1) {
-                        imageGridview.setVisibility(View.GONE);
-                    }
-                }
-            }
-        });
-        image_chosePIC.setOnClickListener(this);
+//        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                LogUtils.LOG("ceshi", "点击+" + position, "选择图片");
+//                if (Staticdata.mlistdata_pic.size() - 1 == position) {
+//                    choosePIC();
+//                } else {
+//                    Staticdata.mlistdata_pic.remove(position);
+//                    mList_PicPath_down.remove(position);//删除图片地址以便上传；
+//                    PIC_mix = 3 - mList_PicPath_down.size();
+//                    adapter_gridviewpic_upLoad.notifyDataSetChanged();
+//                    if (Staticdata.mlistdata_pic.size() <= 1) {
+//                        imageGridview.setVisibility(View.GONE);
+//                    }
+//                }
+//            }
+//        });
+//        image_chosePIC.setOnClickListener(this);
 
     }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.image_chosePIC:
-                choosePIC();
-
-                break;
-        }
-
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.image_chosePIC:
+//                choosePIC();
+//
+//                break;
+//        }
+//
+//    }
 
     boolean initmap_zhaoshanghu() {
 
@@ -789,8 +789,8 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment implements View.OnCli
         mList_PicPath_down.clear();//删除图片地址以便上传；
         PIC_mix = 3 - mList_PicPath_down.size();
         adapter_gridviewpic_upLoad.notifyDataSetChanged();
-        if (Staticdata.mlistdata_pic.size() <= 1) {
-            imageGridview.setVisibility(View.GONE);
-        }
+//        if (Staticdata.mlistdata_pic.size() <= 1) {
+//            imageGridview.setVisibility(View.GONE);
+//        }
     }
 }
