@@ -87,20 +87,20 @@ import static android.app.Activity.RESULT_OK;
 /**
  *  //家政Fragmen
  */
-public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickListener {
+public class Fragment_tsk_ZhaoRenShou extends Fragment {
     View rootview;
     //控件
     MyGridView gridview_type;
-    TextView mTextview_time;//预约时间
-    TextView textview_shouqi;//收起
+//    TextView mTextview_time;//预约时间
+//    TextView textview_shouqi;//收起
     TextView textview_tip;//服务提醒
-    RelativeLayout mRelativelayout_chosetime;//选择时间
-    TextView mEditview_taskdetails;//任务描述
-    MyGridView imageGridview;//图片展示grid
-    ImageView image_chosePIC;//添加图片
-    MyListView mylistview_biaoge;//收费建议表格list
+//    RelativeLayout mRelativelayout_chosetime;//选择时间
+//    TextView mEditview_taskdetails;//任务描述
+//    MyGridView imageGridview;//图片展示grid
+//    ImageView image_chosePIC;//添加图片
+//    MyListView mylistview_biaoge;//收费建议表格list
     Button mButton_sub;//提交按钮
-    ImageView imageview_jiazheng;//广告图
+//    ImageView imageview_jiazheng;//广告图
 
 
     TextView textview_suiji;//随机数
@@ -109,15 +109,15 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     //对象
     PermissionHelper permissionHelper;
     Popwindow_ChooseTime popwindow_chooseTime;
-    //    Popwindow_CompleteTime popwindow_completeTime;
-    DataTime_select dataTimeSelect;
-    Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;  //展示上传图片的adapter
+        Popwindow_CompleteTime popwindow_completeTime;
+//    DataTime_select dataTimeSelect;
+//    Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;  //展示上传图片的adapter
     KProgressHUD mKProgressHUD;
-    Adapter_jiazhengBiaoge adapter_jiazhengBiaoge;//展示表格的adapter
+//    Adapter_jiazhengBiaoge adapter_jiazhengBiaoge;//展示表格的adapter
     Adapter_WeixiuJiazheng adapter_weixiuJiazheng;//展示类型图标的adapter
     JiazhengbiaogeBean jiazhengbiaogeBean;
 
-    boolean isShowAll=false;
+    boolean isShowAll=true;
     int  se_position;//选择的位置
 
 
@@ -125,8 +125,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     String yValue = "";//经度
     String citycode = "";//城市名字
 
-    String task_description = "";
-    String task_time = "";
+    String task_description = "";//任务说明
+    String task_time = "尽快";
     String release_address = "";
     Bitmap mBitmap = null;
     String commission = "";
@@ -165,7 +165,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     List<List<String>> mList_PicPath_down;//；压缩后本地图片path集合;
     Map map_issueTask;
     UpLoadImage upLoadImage;
-    List<JiazhengbiaogeBean.DataBean.AppTaskReferenceFormBean> mData_jiazhengbiaoge;//表格内容list
+//    List<JiazhengbiaogeBean.DataBean.AppTaskReferenceFormBean> mData_jiazhengbiaoge;//表格内容list
 
 
 
@@ -212,35 +212,36 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
     private void initview() {
         gridview_type = rootview.findViewById(R.id.gridview_type);
-        imageview_jiazheng = rootview.findViewById(R.id.imageview_jiazheng);
-        textview_shouqi = rootview.findViewById(R.id.textview_shouqi);
-        mTextview_time = rootview.findViewById(R.id.edit_tasktime);
-        textview_tip = rootview.findViewById(R.id.textview_tip);
-        mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
-        mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
-        imageGridview = rootview.findViewById(R.id.GridView_PIC);
-        image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
-        mylistview_biaoge = rootview.findViewById(R.id.mylistview_biaoge);
+//        imageview_jiazheng = rootview.findViewById(R.id.imageview_jiazheng);
+//        textview_shouqi = rootview.findViewById(R.id.textview_shouqi);
+//        mTextview_time = rootview.findViewById(R.id.edit_tasktime);
+//        textview_tip = rootview.findViewById(R.id.textview_tip);
+//        mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
+//        mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
+//        imageGridview = rootview.findViewById(R.id.GridView_PIC);
+//        image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
+//        mylistview_biaoge = rootview.findViewById(R.id.mylistview_biaoge);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
         textview_suiji = rootview.findViewById(R.id.textview_suiji);
     }
 
     private void initdata() {
-        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
-        int hight = (int) (Staticdata.ScreenWidth * 0.45);
-        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, hight);
-        imageview_jiazheng.setLayoutParams(mLayoutparams);
+//        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
+//        int hight = (int) (Staticdata.ScreenWidth * 0.45);
+//        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, hight);
+//        imageview_jiazheng.setLayoutParams(mLayoutparams);
 
         mdata = new ArrayList<>();//展示图标
         mdata.clear();
-        mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao, WeixiuJiazhengBean.class).getList());
-        adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images_shao, images_select_shao);
+        mdata.addAll(new Gson().fromJson(JiazhengTypeJson, WeixiuJiazhengBean.class).getList());
+        adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images, images_select);
         adapter_weixiuJiazheng.isShowAll(isShowAll);
         gridview_type.setAdapter(adapter_weixiuJiazheng);
 
-        mData_jiazhengbiaoge=new ArrayList<>();//表格内容data
-        adapter_jiazhengBiaoge=new Adapter_jiazhengBiaoge(mData_jiazhengbiaoge,getActivity());
-        mylistview_biaoge.setAdapter(adapter_jiazhengBiaoge);
+//        mData_jiazhengbiaoge=new ArrayList<>();//表格内容data
+//        adapter_jiazhengBiaoge=new Adapter_jiazhengBiaoge(mData_jiazhengbiaoge,getActivity());
+//        mylistview_biaoge.setAdapter(adapter_jiazhengBiaoge);
+
 
 
 
@@ -320,28 +321,28 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             }
         });
     }
-    void requestBiaoge(String des_id){
-        new  Volley_Utils(new Interface_volley_respose() {
-            @Override
-            public void onSuccesses(String respose) {
-                LogUtils.LOG("ceshi",respose,"表格");
-                jiazhengbiaogeBean=new Gson().fromJson(respose,JiazhengbiaogeBean.class);
-                if(jiazhengbiaogeBean.getCode()==1){
-                    mData_jiazhengbiaoge.clear();
-                    mData_jiazhengbiaoge.addAll(jiazhengbiaogeBean.getData().getApp_taskReferenceForm());
-                    adapter_jiazhengBiaoge.notifyDataSetChanged();
-                    textview_tip.setText(jiazhengbiaogeBean.getData().getDescription());
-                }
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-        }).Http(Urls.Baseurl_cui+Urls.JiazhengBiaoge+des_id,getActivity(),0);
-
-    }
+//    void requestBiaoge(String des_id){
+//        new  Volley_Utils(new Interface_volley_respose() {
+//            @Override
+//            public void onSuccesses(String respose) {
+//                LogUtils.LOG("ceshi",respose,"表格");
+//                jiazhengbiaogeBean=new Gson().fromJson(respose,JiazhengbiaogeBean.class);
+//                if(jiazhengbiaogeBean.getCode()==1){
+//                    mData_jiazhengbiaoge.clear();
+//                    mData_jiazhengbiaoge.addAll(jiazhengbiaogeBean.getData().getApp_taskReferenceForm());
+//                    adapter_jiazhengBiaoge.notifyDataSetChanged();
+//                    textview_tip.setText(jiazhengbiaogeBean.getData().getDescription());
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(int error) {
+//
+//            }
+//        }).Http(Urls.Baseurl_cui+Urls.JiazhengBiaoge+des_id,getActivity(),0);
+//
+//    }
 
     void uploadimg() {
         if (Staticdata.imagePathlist.size() >= 1) {
@@ -448,16 +449,16 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
         mList_PicPath_down = new ArrayList<>();
         bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.addpic);
         Staticdata.mlistdata_pic.add(bitmap);
-        adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
-        imageGridview.setAdapter(adapter_gridviewpic_upLoad);
-        dataTimeSelect = new DataTime_select(getActivity(), new InterfaceDate_select() {
-            @Override
-            public void onResult(String time) {
-                LogUtils.LOG("ceshi", "时间选择器返回的结果" + time, "zhaorenshou");
-                mTextview_time.setText(time);
-            }
-        });
-        requestBiaoge("93");//默认展示日常保洁40元/时的表格
+//        adapter_gridviewpic_upLoad = new Adapter_Gridviewpic_UPLoad(Staticdata.mlistdata_pic, getActivity());
+//        imageGridview.setAdapter(adapter_gridviewpic_upLoad);
+//        dataTimeSelect = new DataTime_select(getActivity(), new InterfaceDate_select() {
+//            @Override
+//            public void onResult(String time) {
+//                LogUtils.LOG("ceshi", "时间选择器返回的结果" + time, "zhaorenshou");
+//                mTextview_time.setText(time);
+//            }
+//        });
+//        requestBiaoge("93");//默认展示日常保洁40元/时的表格
     }
 
     public void setview(Intent data) {
@@ -481,44 +482,44 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             mList_PicPath_down.add(0, mList_picpath);
         }
         PIC_mix = 3 - mList_PicPath_down.size();
-        adapter_gridviewpic_upLoad.notifyDataSetChanged();
-        if (Staticdata.mlistdata_pic.size() > 1) {
-            imageGridview.setVisibility(View.VISIBLE);
-        }
+//        adapter_gridviewpic_upLoad.notifyDataSetChanged();
+//        if (Staticdata.mlistdata_pic.size() > 1) {
+//            imageGridview.setVisibility(View.VISIBLE);
+//        }
     }
 
     private void initlistenner() {
-        mEditview_taskdetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
-                    @Override
-                    public void onDestext(String text) {
-                        LogUtils.LOG("ceshi",text,"descriptionTYPE");
-                        mEditview_taskdetails.setText(text);
-                    }
-
-                    @Override
-                    public void onDesId(String id) {
-                        requestBiaoge(id);
-                    }
-                }).showPopwindow();
-            }
-        });
-        textview_shouqi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isShowAll=false;
-                mdata.clear();
-                adapter_weixiuJiazheng = null;
-                mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao, WeixiuJiazhengBean.class).getList());
-                adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images_shao, images_select_shao);
-                adapter_weixiuJiazheng.isShowAll(isShowAll);
-                adapter_weixiuJiazheng.setSelectedPosition(se_position);
-                gridview_type.setAdapter(adapter_weixiuJiazheng);
-                textview_shouqi.setVisibility(View.GONE);
-            }
-        });
+//        mEditview_taskdetails.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
+//                    @Override
+//                    public void onDestext(String text) {
+//                        LogUtils.LOG("ceshi",text,"descriptionTYPE");
+//                        mEditview_taskdetails.setText(text);
+//                    }
+//
+//                    @Override
+//                    public void onDesId(String id) {
+//                        requestBiaoge(id);
+//                    }
+//                }).showPopwindow();
+//            }
+//        });
+//        textview_shouqi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                isShowAll=false;
+//                mdata.clear();
+//                adapter_weixiuJiazheng = null;
+//                mdata.addAll(new Gson().fromJson(JiazhengTypeJson_shao, WeixiuJiazhengBean.class).getList());
+//                adapter_weixiuJiazheng = new Adapter_WeixiuJiazheng(mdata, getActivity(), images_shao, images_select_shao);
+//                adapter_weixiuJiazheng.isShowAll(isShowAll);
+//                adapter_weixiuJiazheng.setSelectedPosition(se_position);
+//                gridview_type.setAdapter(adapter_weixiuJiazheng);
+//                textview_shouqi.setVisibility(View.GONE);
+//            }
+//        });
         gridview_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -535,18 +536,18 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                     adapter_weixiuJiazheng.notifyDataSetInvalidated();
                     task_typeID = mdata.get(se_position).getSpecialty_id();
 //                    }
-                    new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
-                        @Override
-                        public void onDestext(String text) {
-                            LogUtils.LOG("ceshi",text,"descriptionTYPE");
-                            mEditview_taskdetails.setText(text);
-                        }
-
-                        @Override
-                        public void onDesId(String id) {
-                            requestBiaoge(id);
-                        }
-                    }).showPopwindow();
+//                    new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
+//                        @Override
+//                        public void onDestext(String text) {
+//                            LogUtils.LOG("ceshi",text,"descriptionTYPE");
+//                            mEditview_taskdetails.setText(text);
+//                        }
+//
+//                        @Override
+//                        public void onDesId(String id) {
+//                            requestBiaoge(id);
+//                        }
+//                    }).showPopwindow();
                 } else {
                     if (position == 4) {
                         isShowAll=true;
@@ -557,42 +558,42 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
                         adapter_weixiuJiazheng.setSelectedPosition(se_position);
                         adapter_weixiuJiazheng.isShowAll(isShowAll);
                         gridview_type.setAdapter(adapter_weixiuJiazheng);
-                        textview_shouqi.setVisibility(View.VISIBLE);
+//                        textview_shouqi.setVisibility(View.VISIBLE);
                     } else {
                         se_position=position;
                         adapter_weixiuJiazheng.setSelectedPosition(se_position);
                         adapter_weixiuJiazheng.notifyDataSetInvalidated();
                         task_typeID = mdata.get(se_position).getSpecialty_id();
-                        new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
-                            @Override
-                            public void onDestext(String text) {
-                                LogUtils.LOG("ceshi",text,"descriptionTYPE");
-                                mEditview_taskdetails.setText(text);
-                            }
-
-                            @Override
-                            public void onDesId(String id) {
-                                requestBiaoge(id);
-                            }
-                        }).showPopwindow();
+//                        new Popwindow_descriptionType(task_typeID, getActivity(), new Interface_descriptionType() {
+//                            @Override
+//                            public void onDestext(String text) {
+//                                LogUtils.LOG("ceshi",text,"descriptionTYPE");
+//                                mEditview_taskdetails.setText(text);
+//                            }
+//
+//                            @Override
+//                            public void onDesId(String id) {
+//                                requestBiaoge(id);
+//                            }
+//                        }).showPopwindow();
                     }
                 }
             }
         });
-        mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                popwindow_completeTime.showPopwindow();
-//                dataTimeSelect.timeSelect(getActivity());
-                popwindow_chooseTime = new Popwindow_ChooseTime(getActivity(), new InterfaceDate_select() {
-                    @Override
-                    public void onResult(String time) {
-                        mTextview_time.setText(time);
-                    }
-                });
-                popwindow_chooseTime.showPopwindow();
-            }
-        });
+//        mRelativelayout_chosetime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                popwindow_completeTime.showPopwindow();
+////                dataTimeSelect.timeSelect(getActivity());
+////                popwindow_chooseTime = new Popwindow_ChooseTime(getActivity(), new InterfaceDate_select() {
+////                    @Override
+////                    public void onResult(String time) {
+////                        mTextview_time.setText(time);
+////                    }
+////                });
+//                popwindow_chooseTime.showPopwindow();
+//            }
+//        });
 
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -659,55 +660,46 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
 
             }
         });
-        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.LOG("ceshi", "点击+" + position, "选择图片");
-                if (Staticdata.mlistdata_pic.size() - 1 == position) {
-                    choosePIC();
-                } else {
-                    Staticdata.mlistdata_pic.remove(position);
-                    mList_PicPath_down.remove(position);//删除图片地址以便上传；
-                    PIC_mix = 3 - mList_PicPath_down.size();
-                    adapter_gridviewpic_upLoad.notifyDataSetChanged();
-                    if (Staticdata.mlistdata_pic.size() <= 1) {
-                        imageGridview.setVisibility(View.GONE);
-                    }
-                }
-            }
-        });
-        image_chosePIC.setOnClickListener(this);
+//        imageGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                LogUtils.LOG("ceshi", "点击+" + position, "选择图片");
+//                if (Staticdata.mlistdata_pic.size() - 1 == position) {
+//                    choosePIC();
+//                } else {
+//                    Staticdata.mlistdata_pic.remove(position);
+//                    mList_PicPath_down.remove(position);//删除图片地址以便上传；
+//                    PIC_mix = 3 - mList_PicPath_down.size();
+//                    adapter_gridviewpic_upLoad.notifyDataSetChanged();
+//                    if (Staticdata.mlistdata_pic.size() <= 1) {
+//                        imageGridview.setVisibility(View.GONE);
+//                    }
+//                }
+//            }
+//        });
+//        image_chosePIC.setOnClickListener(this);
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.image_chosePIC:
-                choosePIC();
 
-                break;
-        }
-
-    }
 
     boolean initmap_zhaoshanghu() {
 
-        task_description = mEditview_taskdetails.getText() + "";
-        if (task_description.trim().equals("")) {
-            ToastUtils.showToast(getActivity(), "请填写任务说明");
-            return false;
-        }
+//        task_description = mEditview_taskdetails.getText() + "";
+//        if (task_description.trim().equals("")) {
+//            ToastUtils.showToast(getActivity(), "请填写任务说明");
+//            return false;
+//        }
 //        if (task_description.length() < 5) {
 //            ToastUtils.showToast(getActivity(), "任务说明太短了");
 //            return false;
 //        }
 
-        task_time = mTextview_time.getText() + "";
-        if (task_time.equals("请选择预约时间")) {
-            ToastUtils.showToast(getActivity(), "请选择预约时间");
-            return false;
-        }
+//        task_time = mTextview_time.getText() + "";
+//        if (task_time.equals("请选择预约时间")) {
+//            ToastUtils.showToast(getActivity(), "请选择预约时间");
+//            return false;
+//        }
         release_address = address_left + "";
 
         if (release_address.equals("")) {
@@ -738,43 +730,43 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
     }
 
     void choosePIC() {
-        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
-            @Override
-            public void onResult(boolean result) {
-                LogUtils.LOG("ceshi", result + "", "");
-                if (result) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//安卓7.0权限 代替了FileProvider方式   https://blog.csdn.net/xiaoyu940601/article/details/54406725
-                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                        StrictMode.setVmPolicy(builder.build());
-                    }
-                    ImageConfig imageConfig
-                            = new ImageConfig.Builder(new GlideLoader())
-                            // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
-                            .steepToolBarColor(getResources().getColor(R.color.yellow_jianbian_end))
-                            // 标题的背景颜色 （默认黑色）
-                            .titleBgColor(getResources().getColor(R.color.yellow_jianbian_end))
-                            // 提交按钮字体的颜色  （默认白色）
-                            .titleSubmitTextColor(getResources().getColor(R.color.white))
-                            // 标题颜色 （默认白色）
-                            .titleTextColor(getResources().getColor(R.color.white))
-//                            // 开启单选   （默认为多选）
-//                            .singleSelect()
-                            // 开启多选   （默认为多选）
-                            .mutiSelect()
-                            // 多选时的最大数量   （默认 9 张）
-                            //这里只允许上传3张
-                            .mutiSelectMaxSize(PIC_mix)
-                            .showCamera()
-                            // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
-                            .filePath("/ImageSelector/Pictures")
-                            .build();
-                    ImageSelector.open(getActivity(), imageConfig);   // 开启图片选择器
-                } else {
-                    ToastUtils.showToast(getActivity(), "请允许开启照相功能，并读取本地文件");
-                }
-            }
-        });
-        permissionmanage.requestpermission();
+//        Permissionmanage permissionmanage = new Permissionmanage(permissionHelper, new InterfacePermission() {
+//            @Override
+//            public void onResult(boolean result) {
+//                LogUtils.LOG("ceshi", result + "", "");
+//                if (result) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//安卓7.0权限 代替了FileProvider方式   https://blog.csdn.net/xiaoyu940601/article/details/54406725
+//                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//                        StrictMode.setVmPolicy(builder.build());
+//                    }
+//                    ImageConfig imageConfig
+//                            = new ImageConfig.Builder(new GlideLoader())
+//                            // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
+//                            .steepToolBarColor(getResources().getColor(R.color.yellow_jianbian_end))
+//                            // 标题的背景颜色 （默认黑色）
+//                            .titleBgColor(getResources().getColor(R.color.yellow_jianbian_end))
+//                            // 提交按钮字体的颜色  （默认白色）
+//                            .titleSubmitTextColor(getResources().getColor(R.color.white))
+//                            // 标题颜色 （默认白色）
+//                            .titleTextColor(getResources().getColor(R.color.white))
+////                            // 开启单选   （默认为多选）
+////                            .singleSelect()
+//                            // 开启多选   （默认为多选）
+//                            .mutiSelect()
+//                            // 多选时的最大数量   （默认 9 张）
+//                            //这里只允许上传3张
+//                            .mutiSelectMaxSize(PIC_mix)
+//                            .showCamera()
+//                            // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
+//                            .filePath("/ImageSelector/Pictures")
+//                            .build();
+//                    ImageSelector.open(getActivity(), imageConfig);   // 开启图片选择器
+//                } else {
+//                    ToastUtils.showToast(getActivity(), "请允许开启照相功能，并读取本地文件");
+//                }
+//            }
+//        });
+//        permissionmanage.requestpermission();
     }
 
     String address_left = "";
@@ -805,17 +797,16 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment implements View.OnClickLi
             timer.cancel();
             timerTask.cancel();
         }
-        isShowAll=false;//恢复初始
         task_typeID = 1300;//恢复初始
         se_position=0;//恢复初始
         timer = null;
-        Staticdata.mlistdata_pic.clear();
-        Staticdata.mlistdata_pic.add(bitmap);
-        mList_PicPath_down.clear();//删除图片地址以便上传；
-        PIC_mix = 3 - mList_PicPath_down.size();
-        adapter_gridviewpic_upLoad.notifyDataSetChanged();
-        if (Staticdata.mlistdata_pic.size() <= 1) {
-            imageGridview.setVisibility(View.GONE);
-        }
+//        Staticdata.mlistdata_pic.clear();
+//        Staticdata.mlistdata_pic.add(bitmap);
+//        mList_PicPath_down.clear();//删除图片地址以便上传；
+//        PIC_mix = 3 - mList_PicPath_down.size();
+//        adapter_gridviewpic_upLoad.notifyDataSetChanged();
+//        if (Staticdata.mlistdata_pic.size() <= 1) {
+//            imageGridview.setVisibility(View.GONE);
+//        }
     }
 }

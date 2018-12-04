@@ -93,7 +93,7 @@ public class Popwindow_coupon {
         Glide.with(activity).load(Imagesub).into(image_get);
         ImageView image = new ImageView(activity);
         Glide.with(activity).load(ImageBG).into(image);
-        image.setBackgroundResource(R.mipmap.maincoupon);
+//        image.setBackgroundResource(R.mipmap.maincoupon);
         int w=Staticdata.ScreenWidth-SizeUtils.dip2px(activity,20);
         int h= (int) (w*1.08);
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
