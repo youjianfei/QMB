@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativelayout"
+    >
+        <LinearLayout
+            android:id="@+id/iamage_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"/>
+        <ImageView
+            android:id="@+id/image_cancell"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/cancel3"
+            android:layout_below="@+id/iamage_coupon"
+            android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="260dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+             android:gravity="center"
+            >
+                <Button
+                    android:id="@+id/button_cancle"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:text="暂不更新"
+                    android:textSize="14dp"
+                    android:textColor="@color/yelllow_updata"
+                    android:background="@drawable/text_yellowupdata_miaobian_20"
+
+                    />
+                <Button
+                    android:id="@+id/button_updata"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:text="马上更新"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_yellowupdata_20dp"
+                  />
+
+        </LinearLayout>
+
+
+
+</RelativeLayout>

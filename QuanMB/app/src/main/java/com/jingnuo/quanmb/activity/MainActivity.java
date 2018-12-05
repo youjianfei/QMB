@@ -242,8 +242,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         StrictMode.setVmPolicy(builder.build());
                     }
                     //检测是否更新
-                    autoUpdate = new AutoUpdate(MainActivity.this);
-                    autoUpdate.requestVersionData();
+//                    autoUpdate = new AutoUpdate();
+//                    autoUpdate.requestVersionData();
 
                 } else {
                     Toast.makeText(MainActivity.this, "请开启存储权限,以便安装最新版本", Toast.LENGTH_SHORT).show();

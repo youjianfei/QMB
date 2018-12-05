@@ -152,9 +152,9 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 //            "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1304,\"specialty_name\":\"地板养护\",\"image\":\"\",\"isselect\":false}" +
 //            ",{\"specialty_id\":1301,\"specialty_name\":\"新居开荒\",\"image\":\"\",\"isselect\":false}]}";
     List<WeixiuJiazhengBean.ListBean> mdata;
-    int[] images = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.yuesao_b, R.mipmap.banjia_b
+    int[] images = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.jiadianqingxi_b, R.mipmap.yuesao_b, R.mipmap.banjia_b
             , R.mipmap.boli_b, R.mipmap.xiaoshigong_b, R.mipmap.diban_b, R.mipmap.kaihuang_b};
-    int[] images_select = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.yuesao_b, R.mipmap.banjia_b
+    int[] images_select = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.jiadianqingxi_b, R.mipmap.yuesao_b, R.mipmap.banjia_b
             , R.mipmap.boli_b, R.mipmap.xiaoshigong_b, R.mipmap.diban_b, R.mipmap.kaihuang_b};
 //    int[] images_shao = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.b_all};
 //    int[] images_select_shao = {R.mipmap.baojie_b, R.mipmap.songshui_b, R.mipmap.youyanji_b, R.mipmap.baomu_b, R.mipmap.b_all};

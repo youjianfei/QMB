@@ -138,15 +138,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
     }else {
         URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+Staticdata.static_userBean.getData().getUser_token();
     }
-        //随机数动态变化
-        timer = new Timer();
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mhandler.sendEmptyMessage(0);
-            }
-        };
-        timer.schedule(timerTask, 1500);
+
     }
     void requestCouponPopwindow(String URL){
         LogUtils.LOG("ceshi","新用户弹窗"+URL,"tanchuang");
@@ -410,7 +402,23 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
                         StrictMode.setVmPolicy(builder.build());
                     }
                     //检测是否更新
-                    autoUpdate = new AutoUpdate(IssueTaskActivity.this);
+                    autoUpdate = new AutoUpdate(IssueTaskActivity.this, new InterfacePermission() {
+                        @Override
+                        public void onResult(boolean result) {
+                            if(result){
+
+                            }else {
+                                timer = new Timer();
+                                timerTask = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        mhandler.sendEmptyMessage(0);
+                                    }
+                                };
+                                timer.schedule(timerTask, 1500);
+                            }
+                        }
+                    });
                     autoUpdate.requestVersionData();
 
                 } else {
