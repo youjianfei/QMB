@@ -133,6 +133,7 @@
                     android:background="@drawable/button_miaobian_yellow_5dp"
                     android:layout_below="@+id/button_recharge"
                     android:layout_marginTop="10dp"
+                    android:visibility="invisible"
                     />
 
 

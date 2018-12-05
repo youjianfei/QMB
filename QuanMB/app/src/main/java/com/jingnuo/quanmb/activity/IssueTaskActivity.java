@@ -453,13 +453,18 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 //                    startActivity(intent);
 //                }
                 if (isLogin) {
-                    image_dot.setVisibility(View.INVISIBLE);
-                    RongIM.getInstance().setMessageAttachedUserInfo(true);
+//                    image_dot.setVisibility(View.INVISIBLE);
+//                    RongIM.getInstance().setMessageAttachedUserInfo(true);
+//
+//                    intent = new Intent(IssueTaskActivity.this, ConversationListActivity.class);
+//                    intent.putExtra("newmessageTYpe", Staticdata.newmessageTYpe);
+//                    startActivity(intent);
+//                    Staticdata.newmessageTYpe = "notype";//跳转完之后归0
 
-                    intent = new Intent(IssueTaskActivity.this, ConversationListActivity.class);
-                    intent.putExtra("newmessageTYpe", Staticdata.newmessageTYpe);
-                    startActivity(intent);
-                    Staticdata.newmessageTYpe = "notype";//跳转完之后归0
+                    Intent  intent1=new Intent(this,CancelloederActivity.class);
+                    startActivity(intent1);
+
+
                 } else {
                     intent = new Intent(this, LoginActivityPhone.class);
                     startActivity(intent);
