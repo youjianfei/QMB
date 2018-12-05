@@ -35,6 +35,7 @@ import com.jingnuo.quanmb.entityclass.Matchshoplistbean;
 import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.fargment.Fragment_shopdetail;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
+import com.jingnuo.quanmb.popwinow.Popwindow_cancleorder;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
@@ -60,13 +61,14 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     //控件
     ImageView iv_back;
-    ImageView image_left;
-    ImageView image_right;
+//    ImageView image_left;
+//    ImageView image_right;
     private ViewPager mViewPager;
     LinearLayout mtextview_change;//换一批
-    TextView text_timelow;
+//    TextView text_timelow;
     LinearLayout iamge_newacount;
 
+    LinearLayout linearLayout_cancle;//撤销
     LinearLayout linearLayout_callphone;//电话
     LinearLayout linearlayout_zixun;//咨询
     LinearLayout linearLayout_choose;//预约下单
@@ -120,9 +122,9 @@ public class MatchShopActivity extends AppCompatActivity  {
     }
 
     private void initdata() {
-        if(page_all==0){
-            image_right.setVisibility(View.INVISIBLE);
-        }
+//        if(page_all==0){
+//            image_right.setVisibility(View.INVISIBLE);
+//        }
         Staticdata.ScreenHight = SizeUtils.getScreenHeightPx(this);
         Staticdata.ScreenWidth = SizeUtils.getScreenWidthPx(this);
         ID = getIntent().getStringExtra("id");
@@ -139,21 +141,23 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     private void initview() {
         iv_back = findViewById(R.id.iv_back);
-        image_left = findViewById(R.id.image_left);
-        image_right = findViewById(R.id.image_right);
+//        image_left = findViewById(R.id.image_left);
+//        image_right = findViewById(R.id.image_right);
         mViewPager = findViewById(R.id.viewPager);
         mtextview_change=findViewById(R.id.textview_change);
         linearLayout_callphone=findViewById(R.id.linearLayout_callphone);
+        linearLayout_cancle=findViewById(R.id.linearLayout_cancle);
         linearLayout_choose=findViewById(R.id.linearLayout_choose);
         linearlayout_zixun=findViewById(R.id.linearlayout_zixun);
-        text_timelow=findViewById(R.id.text_timelow);
+//        text_timelow=findViewById(R.id.text_timelow);
         iamge_newacount=findViewById(R.id.iamge_newacount);
 
         if(matchshoplistbean.getData().getIsShow().equals("1")){
             ImageView image = new ImageView(MatchShopActivity.this);
-            Glide.with(MatchShopActivity.this).load(matchshoplistbean.getData().getImg_url()).into(image);
-            int w=Staticdata.ScreenWidth- SizeUtils.dip2px(this,20);
-            int h= (int) (w*0.2);
+//            Glide.with(MatchShopActivity.this).load(matchshoplistbean.getData().getImg_url()).into(image);
+            image.setBackgroundResource(R.mipmap.hongbaotip);
+            int w=Staticdata.ScreenWidth;
+            int h= (int) (w*0.15);
             LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
             image.setLayoutParams(mLayoutparams);
             iamge_newacount.addView(image);
@@ -161,6 +165,24 @@ public class MatchShopActivity extends AppCompatActivity  {
 
     }
     private  void  initlistenner(){
+        linearLayout_cancle.setOnClickListener(new View.OnClickListener() {//换一个
+            @Override
+            public void onClick(View v) {
+                new Popwindow_cancleorder("是否取消任务？", MatchShopActivity.this, new Interence_complteTask() {
+                    @Override
+                    public void onResult(boolean result) {
+                        if(result){
+                            huanyipi();//请求换一批
+                            ProgressDlog.showProgress(mKProgressHUD);
+                        }else {
+                            Intent  intent1=new Intent(MatchShopActivity.this,CancelloederActivity.class);
+                            intent1.putExtra("taskid",ID+"");
+                            startActivity(intent1);
+                        }
+                    }
+                }).showPopwindow();
+            }
+        });
         linearLayout_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,22 +300,22 @@ public class MatchShopActivity extends AppCompatActivity  {
                 }
             }
         });
-        image_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewPager.setCurrentItem(--page);
-            }
-        });
-        image_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewPager.setCurrentItem(++page);
-            }
-        });
+//        image_left.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mViewPager.setCurrentItem(--page);
+//            }
+//        });
+//        image_right.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mViewPager.setCurrentItem(++page);
+//            }
+//        });
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Popwindow_Tip("放弃任务？", MatchShopActivity.this, new Interence_complteTask() {
+                new Popwindow_Tip("商户已接单，是否返回？", MatchShopActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
                         if (result){
@@ -323,18 +345,18 @@ public class MatchShopActivity extends AppCompatActivity  {
             public void onPageSelected(int position) {
                 LogUtils.LOG("ceshi","选择了第一页"+position,"匹配商家");
                 page=position;
-                if(position==page_all){
-                    image_right.setVisibility(View.INVISIBLE);
-                }else {
-                    image_right.setVisibility(View.VISIBLE);
-
-                }
-                if(position==0){
-                    image_left.setVisibility(View.INVISIBLE);
-                }else {
-                    image_left.setVisibility(View.VISIBLE);
-
-                }
+//                if(position==page_all){
+//                    image_right.setVisibility(View.INVISIBLE);
+//                }else {
+//                    image_right.setVisibility(View.VISIBLE);
+//
+//                }
+//                if(position==0){
+//                    image_left.setVisibility(View.INVISIBLE);
+//                }else {
+//                    image_left.setVisibility(View.VISIBLE);
+//
+//                }
             }
 
             @Override
@@ -364,12 +386,22 @@ public class MatchShopActivity extends AppCompatActivity  {
         new  Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                int  status=0;
+                String msg="";
+                try {
+                    JSONObject object=new JSONObject(respose);
+                    status = (Integer) object.get("code");//登录状态
+                    msg = (String) object.get("message");//登录返回信息
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 mKProgressHUD.dismiss();
                 LogUtils.LOG("ceshi",respose,"换一批");
                 mtextview_change.setVisibility(View.INVISIBLE);
-                text_timelow.setVisibility(View.VISIBLE);
-                matchshoplistbean=new Gson().fromJson(respose,Matchshoplistbean.class);
-                if(matchshoplistbean.getCode()==1){
+//                text_timelow.setVisibility(View.VISIBLE);
+
+                if(status==1){
+                    matchshoplistbean=new Gson().fromJson(respose,Matchshoplistbean.class);
                     list_matchbea.clear();
                     list_matchbea.addAll(matchshoplistbean.getData().getMatching());
                     list_myfragments.clear();
@@ -377,16 +409,16 @@ public class MatchShopActivity extends AppCompatActivity  {
                         list_myfragments.add(new Fragment_shopdetail(matchshoplistbean.getData().getMatching().get(i),ID));
                     }
                     adapterFragment.setNewFragments(list_myfragments);
-                    timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            mhandler.sendEmptyMessage(0);
-                        }
-                    };
-                    timer.schedule(timerTask, 0, 1000);
+//                    timer = new Timer();
+//                    TimerTask timerTask = new TimerTask() {
+//                        @Override
+//                        public void run() {
+//                            mhandler.sendEmptyMessage(0);
+//                        }
+//                    };
+//                    timer.schedule(timerTask, 0, 1000);
                 }else {
-                    ToastUtils.showToast(MatchShopActivity.this,"附近没有此类型商户");
+                    ToastUtils.showToast(MatchShopActivity.this,msg);
                 }
             }
 
@@ -396,7 +428,7 @@ public class MatchShopActivity extends AppCompatActivity  {
             }
         }).Http(Urls.Baseurl_cui+Urls.issuetask_huanyipi
                 +Staticdata.static_userBean.getData().getUser_token()+"&task_id="
-                +ID,MatchShopActivity.this,0);
+                +ID+"&order_no="+matchshoplistbean.getData().getOrder_no(),MatchShopActivity.this,0);
     }
 
     Timer timer;
@@ -408,11 +440,11 @@ public class MatchShopActivity extends AppCompatActivity  {
             switch (msg.what) {
                 case 0:
                     time--;
-                    text_timelow.setText(time+"s");
+//                    text_timelow.setText(time+"s");
                     if(time==0){
                         timer.cancel();
                         mtextview_change.setVisibility(View.VISIBLE);
-                        text_timelow.setVisibility(View.INVISIBLE);
+//                        text_timelow.setVisibility(View.INVISIBLE);
                         time=16;
                     }
                     break;
@@ -439,7 +471,7 @@ public class MatchShopActivity extends AppCompatActivity  {
     }
     @Override
     public void onBackPressed() {
-        new Popwindow_Tip("放弃任务？", MatchShopActivity.this, new Interence_complteTask() {
+        new Popwindow_Tip("商户已结单，是否返回？", MatchShopActivity.this, new Interence_complteTask() {
             @Override
             public void onResult(boolean result) {
                 if (result){

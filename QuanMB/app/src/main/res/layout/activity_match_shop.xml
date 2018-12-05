@@ -54,8 +54,10 @@
             android:id="@+id/text_matchCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="已为您选择附近的商家"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp"
+            android:text="师傅已接单"
             android:textColor="@color/black"
             android:textSize="23dp" />
 
@@ -67,6 +69,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="13dp"
             android:gravity="center"
+            android:visibility="invisible"
             android:orientation="vertical">
 
             <ImageView
@@ -95,9 +98,8 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="245dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/text_matchCount"
-            android:layout_gravity="bottom"
             android:clipToPadding="false"
             android:overScrollMode="never" />
 
@@ -120,62 +122,101 @@
             android:layout_below="@+id/textview_change"
             android:layout_marginRight="15dp"
             android:layout_marginTop="150dp"
+            android:visibility="invisible"
             android:src="@mipmap/right" />
 
 
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/relativelayout1"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="55dp"
             android:layout_alignParentBottom="true"
             android:background="@mipmap/background_line">
-
             <LinearLayout
-                android:id="@+id/linearLayout_callphone"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="22dp"
+                android:id="@+id/linearLayout_cancle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="8dp"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/phone5" />
+                    android:src="@mipmap/chexiao1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="电话"
+                    android:text="撤销"
+                    android:layout_marginTop="8dp"
                     android:textColor="@color/gray_969696"
+                    android:layout_marginLeft="8dp"
                     android:textSize="13dp" />
             </LinearLayout>
-
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_background"
+                android:layout_marginTop="5dp"
+                />
             <LinearLayout
                 android:id="@+id/linearlayout_zixun"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="22dp"
                 android:layout_toRightOf="@+id/linearLayout_callphone"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/zixun4" />
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/zixun5" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="咨询"
+                    android:text="一键询价"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/gray_969696"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="13dp" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_background"
+                />
+            <LinearLayout
+                android:id="@+id/linearLayout_callphone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/dianhua" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="打电话"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/gray_969696"
                     android:textSize="13dp" />
             </LinearLayout>
 
@@ -189,6 +230,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@+id/linearlayout_zixun"
                 android:background="@color/yellow_jianbian_start"
+                android:visibility="gone"
                 android:gravity="center">
 
                 <ImageView
@@ -208,26 +250,15 @@
             </LinearLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textviewtip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:lineSpacingMultiplier="1.2"
-            android:layout_above="@+id/relativelayout1"
-            android:text="已为您匹配到附近最适合商家，预约下单商家将在30分钟之内与您联系为您提供上门服务"
-            android:textSize="11dp" />
+
         <LinearLayout
             android:id="@+id/iamge_newacount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_above="@+id/textviewtip"
-            android:layout_marginBottom="30dp"
+            android:layout_above="@+id/relativelayout1"
             android:orientation="horizontal" />
 
     </RelativeLayout>

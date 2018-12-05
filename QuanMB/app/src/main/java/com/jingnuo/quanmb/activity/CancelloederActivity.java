@@ -1,5 +1,6 @@
 package com.jingnuo.quanmb.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,14 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Adapter.Adapter_Cancleorder;
+import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.CancelOrderBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_cancleorder_success;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
@@ -61,7 +64,7 @@ public class CancelloederActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-//        ID=getIntent().getStringExtra("taskid");
+        ID=getIntent().getStringExtra("taskid");
         mData=new ArrayList<>();
         mData.addAll(new Gson().fromJson(result,CancelOrderBean.class).getData());
         adapter_cancleorder=new Adapter_Cancleorder(mData,this);
@@ -112,8 +115,21 @@ public class CancelloederActivity extends BaseActivityother {
                             msg = (String) object.get("message");//登录返回信息
 
                             if (status == 1) {
-                                ToastUtils.showToast(CancelloederActivity.this, "撤回任务成功");
-                                finish();
+                                new Popwindow_cancleorder_success(CancelloederActivity.this, new Interence_complteTask() {
+                                    @Override
+                                    public void onResult(boolean result) {
+                                        if(result){
+                                            Intent intent=new Intent(CancelloederActivity.this,IssueTaskActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }else {
+                                            Intent intent=new Intent(CancelloederActivity.this,MyOrderActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                }).showPopwindow();
+
                             } else {
                                 ToastUtils.showToast(CancelloederActivity.this, msg);
                             }

@@ -2,6 +2,7 @@ package com.jingnuo.quanmb.fargment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jingnuo.quanmb.Adapter.BaseAdapter;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
@@ -29,6 +31,7 @@ import com.jingnuo.quanmb.activity.IssueTaskNextActivity;
 import com.jingnuo.quanmb.activity.MainActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.activity.SkillDetailActivity;
+import com.jingnuo.quanmb.customview.MyGridView;
 import com.jingnuo.quanmb.customview.SimpleRatingBar;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -42,7 +45,9 @@ import com.master.permissionhelper.PermissionHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,17 +66,16 @@ public class Fragment_shopdetail extends Fragment{
     TextView text_orders;
     ImageView text_vip;
     SimpleRatingBar simpleRatingBar;
-//    TextView text_lv;
     CircleImageView image_head;
-//    LinearLayout button_choose;
-//    LinearLayout linearlayout_zixun;
+    MyGridView gridview_userthink;
 
     //对象
+    Adapter_userthing adapter_userthing;
+    List <String>  mData;
 
-    Map map_choosebissness;
+
     String task_id="";
 
-    double xingxing=0;
 
 
     //数据
@@ -96,74 +100,6 @@ public class Fragment_shopdetail extends Fragment{
 
     private void initlistenner() {
 
-//        button_choose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Popwindow_Tip("是否选择此商家下单?", getActivity(), new Interence_complteTask() {
-//                    @Override
-//                    public void onResult(boolean result) {
-//                        if(result) {
-//                            map_choosebissness=new HashMap();
-//                            map_choosebissness.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-//                            map_choosebissness.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                            map_choosebissness.put("task_id", task_id);
-//                            map_choosebissness.put("business_no", matchingBean.getBusiness_no());
-////                    map_choosebissness.put("counteroffer_amount", text_money.getText());
-//                            new Volley_Utils(new Interface_volley_respose() {
-//                                @Override
-//                                public void onSuccesses(String respose) {
-//                                    int status = 0;
-//                                    String msg = "";
-//                                    String data = "";
-//                                    try {
-//                                        JSONObject object = new JSONObject(respose);
-//                                        status = (Integer) object.get("code");//
-//                                        msg = (String) object.get("message");//
-//                                        data = (String) object.get("data");//
-//                                        if(status==1){
-////                                    timer.cancel();
-//                                            Intent intentpay = new Intent(getActivity(), MytaskDetailActivity.class);
-////                                    intentpay.putExtra("title", "匹配商户成功付款");//支付需要传 isBargainPay:(是否还价支付,	Y：是	N：否)还价支付时必传Y，其他支付可不传或N
-//                                            intentpay.putExtra("id", task_id);
-////                                    intentpay.putExtra("order_no", data);
-////                                    intentpay.putExtra("taskid", task_id);
-//                                            startActivity(intentpay);
-//                                            getActivity().finish();
-//
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//
-//                                }
-//
-//                                @Override
-//                                public void onError(int error) {
-//
-//                                }
-//                            }).postHttp(Urls.Baseurl_cui+Urls.chooseBusiness,getContext(),1,map_choosebissness);
-//                        }
-//                    }
-//                }).showPopwindow();
-//            }
-//        });
-//        linearlayout_zixun.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                RongIM.getInstance().setMessageAttachedUserInfo(true);
-//                RongIM.getInstance().setCurrentUserInfo(new UserInfo(matchingBean.getBusiness_no(),
-//                        matchingBean.getBusiness_name(),
-//                        Uri.parse(matchingBean.getHeadUrl())));
-//                RongIM.getInstance().setCurrentUserInfo(new UserInfo(Staticdata.static_userBean.getData().getAppuser().getClient_no(),
-//                        Staticdata.static_userBean.getData().getAppuser().getNick_name(),
-//                        Uri.parse( Staticdata.static_userBean.getData().getImg_url())));
-////                RongIM.getInstance().refreshUserInfoCache(new UserInfo(matchingBean.getClient_no(),
-////                        matchingBean.getBusiness_name(),
-////                        Uri.parse(matchingBean.getHeadUrl())));
-////                RongIM.getInstance().setMessageAttachedUserInfo(true);
-//                RongIM.getInstance().startPrivateChat(getActivity(),matchingBean.getBusiness_no(),matchingBean.getBusiness_name());
-//            }
-//        });
     }
 
     private void setdata() {
@@ -179,14 +115,10 @@ public class Fragment_shopdetail extends Fragment{
         }
         text_orders.setText(matchingBean.getOverCount()+"单");
         setstar((float) matchingBean.getEvaluation_star());
-//        timer = new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                mhandler.sendEmptyMessage(0);
-//            }
-//        };
-//        timer.schedule(timerTask, 0, 100);
+        mData=new ArrayList<>();
+        mData.addAll(matchingBean.getEvaluate());
+        adapter_userthing=new Adapter_userthing(mData,getContext());
+        gridview_userthink.setAdapter(adapter_userthing);
     }
 
     private void initview() {
@@ -196,9 +128,7 @@ public class Fragment_shopdetail extends Fragment{
         text_vip=rootview.findViewById(R.id.text_vip);
         simpleRatingBar=rootview.findViewById(R.id.SimpleRatingBar);
         image_head=rootview.findViewById(R.id.image_head);
-//        button_choose=rootview.findViewById(R.id.button_choose);
-//        linearlayout_zixun=rootview.findViewById(R.id.linearlayout_zixun);
-//        iamge_newacount=rootview.findViewById(R.id.iamge_newacount);
+        gridview_userthink=rootview.findViewById(R.id.gridview_userthink);
 
 
     }
@@ -213,24 +143,43 @@ public class Fragment_shopdetail extends Fragment{
     }
 
 
-//    Timer timer;
-//    private Handler mhandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what) {
-//                case 0:
-//                    text_money.setText(Staticdata.price);
-//                    break;
-//            }
-//        }
-//
-//    };
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        timer.cancel();
-//        timer=null;
+    }
+
+
+    class Adapter_userthing extends BaseAdapter {
+        List<String> mData;
+        Context mContext;
+        LayoutInflater mInflater;
+
+        public Adapter_userthing(List mDatas, Context mContext) {
+            super(mDatas, mContext);
+            this.mContext=mContext;
+            this.mData=mDatas;
+            mInflater=LayoutInflater.from(mContext);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Viewholder  viewholder=null;
+            if(convertView==null){
+                viewholder=new Viewholder();
+                convertView=mInflater.inflate(R.layout.item_text4,null,false);
+                viewholder.mtextview_choose=convertView.findViewById(R.id.text_text);
+                convertView.setTag(viewholder);
+            }else {
+                viewholder= (Viewholder) convertView.getTag();
+            }
+            viewholder.mtextview_choose.setText(mData.get(position));
+
+            return convertView;
+        }
+        class Viewholder {
+            TextView mtextview_choose;
+        }
     }
 }

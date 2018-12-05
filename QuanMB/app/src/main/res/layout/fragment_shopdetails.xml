@@ -6,7 +6,7 @@
     android:background="@color/white">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@mipmap/background_matchtask"
         >
         <de.hdodenhof.circleimageview.CircleImageView
@@ -48,18 +48,19 @@
             android:layout_below="@+id/text_name"
             android:layout_toRightOf="@+id/image_head"
             />
+
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray_background"
-            android:layout_below="@+id/text_name"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_alignBaseline="@+id/text_orders"
+            android:layout_alignBottom="@+id/text_orders"
+            android:layout_toEndOf="@+id/text_vip"
+            android:layout_toRightOf="@+id/text_vip"
             android:lines="1"
-            android:textSize="15dp"
-            android:layout_toRightOf="@+id/SimpleRatingBar"
-            android:text="|" />
+            android:text="|"
+            android:textColor="@color/gray_background"
+            android:textSize="15dp" />
         <TextView
             android:id="@+id/text_orders"
             android:layout_width="wrap_content"
@@ -177,6 +178,41 @@
             </LinearLayout>
 
         </LinearLayout>
+        
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_background"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="25dp"
+            android:layout_below="@+id/linearlayout__"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/textview_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户评价"
+            android:textSize="13dp"
+            android:layout_below="@+id/image"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_hide_tip"
+            />
+        <com.jingnuo.quanmb.customview.MyGridView
+            android:id="@+id/gridview_userthink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2"
+            android:layout_below="@+id/textview_1"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:horizontalSpacing="15dp"
+            android:verticalSpacing="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            />
 
 
         <!--<LinearLayout-->

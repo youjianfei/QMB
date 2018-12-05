@@ -415,7 +415,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
                                         mhandler.sendEmptyMessage(0);
                                     }
                                 };
-                                timer.schedule(timerTask, 1500);
+                                timer.schedule(timerTask, 500);
                             }
                         }
                     });
@@ -453,17 +453,13 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 //                    startActivity(intent);
 //                }
                 if (isLogin) {
-//                    image_dot.setVisibility(View.INVISIBLE);
-//                    RongIM.getInstance().setMessageAttachedUserInfo(true);
-//
-//                    intent = new Intent(IssueTaskActivity.this, ConversationListActivity.class);
-//                    intent.putExtra("newmessageTYpe", Staticdata.newmessageTYpe);
-//                    startActivity(intent);
-//                    Staticdata.newmessageTYpe = "notype";//跳转完之后归0
+                    image_dot.setVisibility(View.INVISIBLE);
+                    RongIM.getInstance().setMessageAttachedUserInfo(true);
 
-                    Intent  intent1=new Intent(this,CancelloederActivity.class);
-                    startActivity(intent1);
-
+                    intent = new Intent(IssueTaskActivity.this, ConversationListActivity.class);
+                    intent.putExtra("newmessageTYpe", Staticdata.newmessageTYpe);
+                    startActivity(intent);
+                    Staticdata.newmessageTYpe = "notype";//跳转完之后归0
 
                 } else {
                     intent = new Intent(this, LoginActivityPhone.class);

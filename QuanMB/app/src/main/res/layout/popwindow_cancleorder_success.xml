@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_white_corners"
+    >
+    <TextView
+        android:id="@+id/textview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="已收到您的反馈"
+        android:gravity="center"
+        android:textColor="@color/text_title2"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <TextView
+        android:id="@+id/textview_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="每次为您提供服务时，我们都将指派最近的师傅。当周边师傅不足时，您可能需要多等待一些时间。"
+        android:gravity="center"
+        android:textColor="@color/text_title2"
+        android:layout_below="@+id/textview_title"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <ImageView
+        android:id="@+id/image_q"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_background"
+        android:layout_below="@id/textview_text"
+        android:layout_marginTop="20dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/image_q"
+        >
+        <TextView
+            android:id="@+id/textview_cancle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="暂时不需要"
+            android:gravity="center"
+            />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray_background"
+             />
+        <TextView
+            android:id="@+id/textview_submit"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="重新下单"
+            android:textColor="@color/yellow_jianbian_start"
+            android:gravity="center"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

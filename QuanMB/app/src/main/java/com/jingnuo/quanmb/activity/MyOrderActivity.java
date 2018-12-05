@@ -169,6 +169,18 @@ public class MyOrderActivity extends BaseActivityother {
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                Intent intent=new Intent(MyOrderActivity.this,IssueTaskActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+
+    }
+
+    @Override
     protected void onRestart() {
         super.onRestart();
         LogUtils.LOG("ceshi","onRestart","MyOrderActivity");
@@ -177,5 +189,10 @@ public class MyOrderActivity extends BaseActivityother {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(MyOrderActivity.this,IssueTaskActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
