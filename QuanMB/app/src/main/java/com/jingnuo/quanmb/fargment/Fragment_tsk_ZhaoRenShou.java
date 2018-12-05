@@ -113,15 +113,11 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 
 
     //对象
-//    PermissionHelper permissionHelper;
-//    Popwindow_ChooseTime popwindow_chooseTime;
-//        Popwindow_CompleteTime popwindow_completeTime;
-//    DataTime_select dataTimeSelect;
-//    Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;  //展示上传图片的adapter
-//    Adapter_jiazhengBiaoge adapter_jiazhengBiaoge;//展示表格的adapter
-//    KProgressHUD mKProgressHUD;
     Adapter_WeixiuJiazheng adapter_weixiuJiazheng;//展示类型图标的adapter
+    Popwindow_matching popwindow_matching;
 
+
+    boolean requestTask = false;//是否取消gif
     boolean isShowAll=true;
     int  se_position;//选择的位置
 
@@ -178,6 +174,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
     //数字动态添加变化
     int time = 0;
     Timer timer;
+    Timer timer2;
+    TimerTask timerTask2;
     TimerTask timerTask;
     private Handler mhandler = new Handler() {
         @Override
@@ -415,10 +413,16 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
         gridview_horizontal.setNumColumns(size);
     }
     private void initdata() {
-//        imageview_jiazheng.setBackgroundResource(R.mipmap.zhaojiahzheng);
-//        int hight = (int) (Staticdata.ScreenWidth * 0.45);
-//        LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(Staticdata.ScreenWidth, hight);
-//        imageview_jiazheng.setLayoutParams(mLayoutparams);
+        popwindow_matching=new Popwindow_matching(getActivity(), new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                requestTask=result;
+                if(!result){
+                    timer2.cancel();
+                    timerTask2.cancel();
+                }
+            }
+        });
         mData_jiazhengType=new ArrayList<>();//家政图片类型
         adapter_jiazhengTYPE=new Adapter_JiazhengTYPE(mData_jiazhengType,getActivity());
         gridview_horizontal.setAdapter(adapter_jiazhengTYPE);
@@ -461,7 +465,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "发布技能上传图片返回respose");
                 if (respose.equals("erro")) {
-                    Popwindow_matching.dismissPopwindow(getActivity());
+                    popwindow_matching.dismissPopwindow();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -497,7 +501,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 //                            requast(Staticdata.map_task);//正式发布任务
                         }
                     } else {
-                        Popwindow_matching.dismissPopwindow(getActivity());
+                        popwindow_matching.dismissPopwindow();
                         mList_picID.clear();
                         final String finalMsg = msg;
                         getActivity().runOnUiThread(new Runnable() {
@@ -572,7 +576,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 
                     } else {
                         ToastUtils.showToast(getActivity(), msg);
-                        Popwindow_matching.dismissPopwindow(getActivity());
+                        popwindow_matching.dismissPopwindow();
+
                     }
 
                 } catch (JSONException e) {
@@ -594,7 +599,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                Popwindow_matching.dismissPopwindow(getActivity());
+                popwindow_matching.dismissPopwindow();
+
 
                 LogUtils.LOG("ceshi", "发布任务返回json" + respose, "发布任务");
                 int status = 0;
@@ -618,7 +624,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
                 } else {
                     count = 0;
                     mList_picID.clear();
-                    Popwindow_matching.dismissPopwindow(getActivity());
+                    popwindow_matching.dismissPopwindow();
+
                     ToastUtils.showToast(getActivity(), msg);
                 }
 
@@ -626,7 +633,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 
             @Override
             public void onError(int error) {
-                Popwindow_matching.dismissPopwindow(getActivity());
+                popwindow_matching.dismissPopwindow();
+
                 count = 0;
                 mList_picID.clear();
             }
@@ -774,7 +782,8 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
                     map_issueTask.put("y_value", yValue + "");
                     map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
                     if (initmap_zhaoshanghu()) {
-                        Popwindow_matching.showPopwindow(getActivity());
+                        popwindow_matching.showPopwindow();
+
                         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
                         Staticdata.imagePathlist = mList_PicPath_down;
@@ -782,49 +791,56 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
                         map_check.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                         map_check.put("task_description", map_issueTask.get("task_description"));
 //                    map_check.put("houseNumber", map_issueTask.get("houseNumber"));
-                        timer = new Timer();
-                        timerTask = new TimerTask() {
+                        timer2 = new Timer();
+                        timerTask2 = new TimerTask() {
                             @Override
                             public void run() {
-                                new Volley_Utils(new Interface_volley_respose() {
-                                    @Override
-                                    public void onSuccesses(String respose) {
-                                        int status = 0;
-                                        String msg = "";
+                                if(requestTask){
+                                    new Volley_Utils(new Interface_volley_respose() {
+                                        @Override
+                                        public void onSuccesses(String respose) {
+                                            int status = 0;
+                                            String msg = "";
 
-                                        try {
-                                            JSONObject object = new JSONObject(respose);
-                                            status = (Integer) object.get("code");//
-                                            msg = (String) object.get("msg");//
+                                            try {
+                                                JSONObject object = new JSONObject(respose);
+                                                status = (Integer) object.get("code");//
+                                                msg = (String) object.get("msg");//
 
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        if (status == 1) {
-                                            Staticdata.map_task.put("check", 1 + "");
-                                            LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            if (status == 1) {
+                                                Staticdata.map_task.put("check", 1 + "");
+                                                LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
 //                                Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
 //                                intent.putExtra("issuetask","zhaorenshou");
 //                                startActivity(intent);
-                                            mList_picID.clear();
-                                            count = 0;
-                                            uploadimg();
-                                        } else {
-                                            Popwindow_matching.dismissPopwindow(getActivity());
-                                            ToastUtils.showToast(getActivity(), msg);
-                                        }
-                                    }
+                                                mList_picID.clear();
+                                                count = 0;
+                                                uploadimg();
+                                            } else {
+                                                popwindow_matching.dismissPopwindow();
 
-                                    @Override
-                                    public void onError(int error) {
-                                        Popwindow_matching.dismissPopwindow(getActivity());
-                                    }
-                                }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
+                                                ToastUtils.showToast(getActivity(), msg);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(int error) {
+                                            popwindow_matching.dismissPopwindow();
+
+                                        }
+                                    }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
+                                }else {
+                                    return;
+                                }
+
 
 
                             }
                         };
-                        timer.schedule(timerTask, 3000);
+                        timer2.schedule(timerTask2, 3000);
 
 
                     }
@@ -975,6 +991,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
         }
         task_typeID = 1300;//恢复初始
         se_position=0;//恢复初始
+        requestTask=false;
         timer = null;
 //        Staticdata.mlistdata_pic.clear();
 //        Staticdata.mlistdata_pic.add(bitmap);

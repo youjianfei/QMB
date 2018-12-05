@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.jingnuo.quanmb.Interface.InterfacePermission;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.utils.SizeUtils;
@@ -18,16 +19,21 @@ import com.jingnuo.quanmb.utils.SizeUtils;
  */
 
 public class Popwindow_matching {
-    public static RelativeLayout progress_background;
+    Activity activity;
+    public  RelativeLayout progress_background;
+    public PopupWindow mPopupWindow;
+    InterfacePermission interfacePermission;
 
 
-    public static PopupWindow mPopupWindow;
+    public Popwindow_matching(Activity activity, InterfacePermission interfacePermission) {
+        this.activity = activity;
+        this.interfacePermission = interfacePermission;
+    }
 
-
-    public static void showPopwindow(Activity activity) {
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            return;
-        }
+    public  void showPopwindow() {
+//        if (mPopupWindow != null && mPopupWindow.isShowing()) {
+//            return;
+//        }
         int hight = SizeUtils.dip2px(activity, 64);
         //初始化popwindow；
         View conView = LayoutInflater.from(activity).inflate(R.layout.popwindow_matching, null, false);
@@ -37,11 +43,18 @@ public class Popwindow_matching {
         progress_background = conView.findViewById(R.id.progress_backgroud);
         RelativeLayout.LayoutParams mLayoutParams = new RelativeLayout.LayoutParams(Staticdata.ScreenWidth, Staticdata.ScreenHight - hight);
         progress_background.setLayoutParams(mLayoutParams);
+        interfacePermission.onResult(true);
 
 //      Utils.setAlpha((float) 0.3,activity);
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                interfacePermission.onResult(false);
+            }
+        });
     }
 
-    public static void dismissPopwindow(Activity activity) {
+    public void dismissPopwindow() {
 
         if (mPopupWindow != null) {
             mPopupWindow.dismiss();

@@ -90,8 +90,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 //    Popwindow_CompleteTime popwindow_completeTime;
 //    DataTime_select dataTimeSelect;
     Adapter_Gridviewpic_UPLoad adapter_gridviewpic_upLoad;
-//    KProgressHUD mKProgressHUD;
-
+    Popwindow_matching popwindow_matching;
+    boolean requestTask = false;
     String xValue = "";//纬度
     String yValue = "";//经度
     String citycode = "";//城市名字
@@ -143,7 +143,16 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     }
 
     private void initdata() {
-//        mKProgressHUD = new KProgressHUD(getActivity());
+        popwindow_matching=new Popwindow_matching(getActivity(), new InterfacePermission() {
+            @Override
+            public void onResult(boolean result) {
+                requestTask=result;
+                if(!result){
+                    timer.cancel();
+                    timerTask.cancel();
+                }
+            }
+        });
         permissionHelper = new PermissionHelper(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         map_issueTask = new HashMap();
 //        if(!Staticdata.aoi.equals("")){
@@ -157,7 +166,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "发布技能上传图片返回respose");
                 if (respose.equals("erro")) {
-                    Popwindow_matching.dismissPopwindow(getActivity());
+                   popwindow_matching.dismissPopwindow();
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -194,7 +203,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 //                            requast(Staticdata.map_task);//正式发布任务
                         }
                     } else {
-                        Popwindow_matching.dismissPopwindow(getActivity());
+                        popwindow_matching.dismissPopwindow();
+
 
                         mList_picID.clear();
                         final String finalMsg = msg;
@@ -248,7 +258,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
                     } else {
                         ToastUtils.showToast(getActivity(), msg);
-                        Popwindow_matching.dismissPopwindow(getActivity());
+                        popwindow_matching.dismissPopwindow();
+
 
                     }
 
@@ -270,9 +281,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                Popwindow_matching.dismissPopwindow(getActivity());
-
-
+                popwindow_matching.dismissPopwindow();
                 LogUtils.LOG("ceshi", "发布任务返回json"+respose, "发布任务");
                 int status = 0;
                 String msg = "";
@@ -295,7 +304,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
                 } else {
                     count = 0;
                     mList_picID.clear();
-                    Popwindow_matching.dismissPopwindow(getActivity());
+                    popwindow_matching.dismissPopwindow();
+
 
                     ToastUtils.showToast(getActivity(), msg);
                 }
@@ -304,7 +314,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
 
             @Override
             public void onError(int error) {
-                Popwindow_matching.dismissPopwindow(getActivity());
+                popwindow_matching.dismissPopwindow();
+
 
                 count = 0;
                 mList_picID.clear();
@@ -407,7 +418,8 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
                     map_issueTask.put("y_value", yValue + "");
                     map_issueTask.put("user_token", Staticdata.static_userBean.getData().getUser_token() + "");
                     if (initmap_zhaoshanghu()) {
-                        Popwindow_matching.showPopwindow(getActivity());
+                        popwindow_matching.showPopwindow();
+
                         Staticdata.map_task = map_issueTask;//借助全局变量来传递数据
 
                         Staticdata.imagePathlist = mList_PicPath_down;
@@ -420,42 +432,48 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
                         timerTask = new TimerTask() {
                             @Override
                             public void run() {
-
-                                new Volley_Utils(new Interface_volley_respose() {
-                                    @Override
-                                    public void onSuccesses(String respose) {
-                                        int status = 0;
-                                        String msg = "";
+                                if(requestTask){
+                                    new Volley_Utils(new Interface_volley_respose() {
+                                        @Override
+                                        public void onSuccesses(String respose) {
+                                            int status = 0;
+                                            String msg = "";
 //                            mKProgressHUD.dismiss();
-                                        try {
-                                            JSONObject object = new JSONObject(respose);
-                                            status = (Integer) object.get("code");//
-                                            msg = (String) object.get("msg");//
+                                            try {
+                                                JSONObject object = new JSONObject(respose);
+                                                status = (Integer) object.get("code");//
+                                                msg = (String) object.get("msg");//
 
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        if (status == 1) {
-                                            Staticdata.map_task.put("check", 1 + "");
-                                            LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            if (status == 1) {
+                                                Staticdata.map_task.put("check", 1 + "");
+                                                LogUtils.LOG("ceshi", "图片地址的个数" + Staticdata.imagePathlist.size(), "发布任务图片");
 //                                Intent intent = new Intent(getActivity(), IssueTaskNextActivity.class);
 //                                intent.putExtra("issuetask","zhaoshanghu");
 //                                startActivity(intent);
-                                            mList_picID.clear();
-                                            count = 0;
-                                            uploadimg();
+                                                mList_picID.clear();
+                                                count = 0;
+                                                uploadimg();
 
-                                        } else {
-                                            Popwindow_matching.dismissPopwindow(getActivity());
-                                            ToastUtils.showToast(getActivity(), msg);
+                                            } else {
+                                                popwindow_matching.dismissPopwindow();
+
+                                                ToastUtils.showToast(getActivity(), msg);
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onError(int error) {
-                                        Popwindow_matching.dismissPopwindow(getActivity());
-                                    }
-                                }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
+                                        @Override
+                                        public void onError(int error) {
+                                            popwindow_matching.dismissPopwindow();
+
+                                        }
+                                    }).postHttp(Urls.Baseurl_cui + Urls.checkissuetask, getActivity(), 1, map_check);
+                                }else {
+                                    return;
+                                }
+
                             }
                         };
                         timer.schedule(timerTask, 3000);
@@ -599,6 +617,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
     @Override
     public void onPause() {
         super.onPause();
+        requestTask=false;
         Staticdata.mlistdata_pic.clear();
         Staticdata.mlistdata_pic.add(bitmap);
         mList_PicPath_down.clear();//删除图片地址以便上传；
