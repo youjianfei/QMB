@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ public class MyOrderActivity extends BaseActivityother {
     //控件
     TabLayout  mTablayout;
     PullToRefreshListView mListView;
+    ImageView imageview_empty;
 
     //对象
     Adapter_myIssue adapter_myIssue;
@@ -134,6 +136,7 @@ public class MyOrderActivity extends BaseActivityother {
         mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("07,13,09"));
 
         mListView=findViewById(R.id.list_myorder);
+        imageview_empty=findViewById(R.id.imageview_empty);
 
     }
     void request(Map  map, final int page){
@@ -150,12 +153,18 @@ public class MyOrderActivity extends BaseActivityother {
                     if(myorderBean.getData()!=null){
                         mData.addAll(myorderBean.getData());
                         adapter_myIssue.notifyDataSetChanged();
+
                     }
                 }else {
                     if (myorderBean.getData()!=null){
                         mData.addAll(myorderBean.getData());
                         adapter_myIssue.notifyDataSetChanged();
                     }
+                }
+                if(mData.size()==0){
+                    imageview_empty.setVisibility(View.VISIBLE);
+                }else {
+                    imageview_empty.setVisibility(View.GONE);
 
                 }
             }

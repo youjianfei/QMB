@@ -55,8 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="28dp"
             android:text="师傅已接单"
             android:textColor="@color/black"
             android:textSize="23dp" />
@@ -130,7 +129,7 @@
         <LinearLayout
             android:id="@+id/relativelayout1"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:background="@mipmap/background_line">
             <LinearLayout
@@ -144,7 +143,7 @@
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/chexiao1" />
 
@@ -152,16 +151,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="撤销"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/gray_969696"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="13dp" />
             </LinearLayout>
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/gray_background"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 />
             <LinearLayout
                 android:id="@+id/linearlayout_zixun"
@@ -177,14 +176,14 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:src="@mipmap/zixun5" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="一键询价"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/gray_969696"
                     android:layout_marginLeft="15dp"
                     android:textSize="13dp" />
@@ -207,14 +206,14 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:src="@mipmap/dianhua" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="打电话"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/gray_969696"
                     android:textSize="13dp" />

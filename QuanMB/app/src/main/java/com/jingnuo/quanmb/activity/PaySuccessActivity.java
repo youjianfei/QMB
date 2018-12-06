@@ -21,6 +21,7 @@ public class PaySuccessActivity extends BaseActivityother {
 
     String  title="";
     String  typesuccess="";
+    String taskid="";
 
 
     @Override
@@ -38,6 +39,9 @@ public class PaySuccessActivity extends BaseActivityother {
     protected void initData() {
         title=getIntent().getStringExtra("title");
         typesuccess=getIntent().getStringExtra("typesuccess");
+        if(getIntent().getStringExtra("taskid")!=null){
+            taskid=getIntent().getStringExtra("taskid");
+        }
     }
 
     @Override
@@ -47,15 +51,7 @@ public class PaySuccessActivity extends BaseActivityother {
             public void onClick(View v) {
             if(Staticdata.PayissuetaskSuccess){
                 Intent intend_think = new Intent(PaySuccessActivity.this, OrderThinkActivity.class);
-                intend_think.putExtra("task_id", Staticdata. taskDetailBeanStatic.getData().getTask_id() + "");
-                if(Staticdata. taskDetailBeanStatic.getData().getBusiness_name().equals("")){
-                    intend_think.putExtra("helpername", Staticdata. taskDetailBeanStatic.getData().getHelper_name() + "");
-                }else {
-                    intend_think.putExtra("helpername", Staticdata. taskDetailBeanStatic.getData().getBusiness_name() + "");
-                }
-
-                intend_think.putExtra("orderno", Staticdata. taskDetailBeanStatic.getData().getSpecialty_name() + "");
-                intend_think.putExtra("imageurl", Staticdata. taskDetailBeanStatic.getData().getB_h_url() + "");
+                intend_think.putExtra("task_id", taskid+ "");
                 startActivity(intend_think);
                 Staticdata. ispipei=false;
                 LogUtils.LOG("payqq","11111","PaySuccessActivity");

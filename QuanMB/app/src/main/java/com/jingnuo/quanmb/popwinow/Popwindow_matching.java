@@ -34,7 +34,7 @@ public class Popwindow_matching {
 //        if (mPopupWindow != null && mPopupWindow.isShowing()) {
 //            return;
 //        }
-        int hight = SizeUtils.dip2px(activity, 64);
+        int hight = SizeUtils.dip2px(activity, 60);
         //初始化popwindow；
         View conView = LayoutInflater.from(activity).inflate(R.layout.popwindow_matching, null, false);
         mPopupWindow = new PopupWindow(conView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);

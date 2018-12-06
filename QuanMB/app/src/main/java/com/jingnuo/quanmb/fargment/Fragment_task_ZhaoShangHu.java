@@ -1,7 +1,9 @@
 package com.jingnuo.quanmb.fargment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -409,6 +412,7 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         mButton_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hide_keyboard_from(getActivity(),mEditview_taskdetails);
                 if(Staticdata.isLogin){
                     xValue=Staticdata.xValue;
                     yValue=Staticdata.yValue;
@@ -509,6 +513,10 @@ public class Fragment_task_ZhaoShangHu extends Fragment implements View.OnClickL
         image_chosePIC.setOnClickListener(this);
 
     }
+    public void hide_keyboard_from(Context context, View view) {
+             InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+         }
     Timer timer;
     TimerTask timerTask;
     @Override

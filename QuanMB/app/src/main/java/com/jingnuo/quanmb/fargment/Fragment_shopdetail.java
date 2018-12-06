@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -67,7 +68,7 @@ public class Fragment_shopdetail extends Fragment{
     ImageView text_vip;
     SimpleRatingBar simpleRatingBar;
     CircleImageView image_head;
-    MyGridView gridview_userthink;
+    GridView gridview_userthink;
 
     //对象
     Adapter_userthing adapter_userthing;

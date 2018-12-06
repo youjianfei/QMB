@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray_background"
     tools:context="com.jingnuo.quanmb.activity.CouponActivity">
     <RelativeLayout
@@ -40,8 +39,17 @@
         android:dividerHeight="8dp"
         android:divider="@color/gray_background"
         android:layout_margin="8dp"
+        android:layout_below="@+id/re_title"
         >
 
     </ListView>
-
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageview_empty"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/empry_coupon"
+        android:visibility="gone"
+        />
+</RelativeLayout>

@@ -133,12 +133,15 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
     };
     protected void setData() {
-    if(Staticdata.static_userBean.getData()==null){
-        URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+"";
-    }else {
-        URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+Staticdata.static_userBean.getData().getUser_token();
-    }
-
+        if(Staticdata.static_userBean==null){
+            URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+"";
+        }else {
+            if(Staticdata.static_userBean.getData()==null){
+                URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+"";
+            }else {
+                URL_popwindow=Urls.Baseurl_cui+Urls.couponPopwindow+Staticdata.static_userBean.getData().getUser_token();
+            }
+        }
     }
     void requestCouponPopwindow(String URL){
         LogUtils.LOG("ceshi","新用户弹窗"+URL,"tanchuang");

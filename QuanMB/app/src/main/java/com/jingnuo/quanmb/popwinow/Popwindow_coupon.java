@@ -35,7 +35,7 @@ public class Popwindow_coupon {
     //控件
     LinearLayout linearLayout_coupon;
     ImageView image_cancell;
-    ImageView image_get;
+    LinearLayout image_get;
 
 
     public Popwindow_coupon(Activity activity,String ImageBG,String Imagesub ) {
@@ -90,15 +90,28 @@ public class Popwindow_coupon {
         linearLayout_coupon=view.findViewById(R.id.iamage_coupon);
         image_cancell=view.findViewById(R.id.image_cancell);
         image_get=view.findViewById(R.id.image_get);
-        Glide.with(activity).load(Imagesub).into(image_get);
+
+
         ImageView image = new ImageView(activity);
         Glide.with(activity).load(ImageBG).into(image);
-//        image.setBackgroundResource(R.mipmap.maincoupon);
         int w=Staticdata.ScreenWidth-SizeUtils.dip2px(activity,20);
         int h= (int) (w*1.08);
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
         image.setLayoutParams(mLayoutparams);
         linearLayout_coupon.addView(image);
+
+
+        ImageView imageget = new ImageView(activity);
+        Glide.with(activity).load(Imagesub).into(imageget);
+        int w1=SizeUtils.dip2px(activity,120);
+        int h1= SizeUtils.dip2px(activity,40);
+        RelativeLayout.LayoutParams mLayoutparams1 = new RelativeLayout.LayoutParams(w1, h1);
+        int  left=w-SizeUtils.dip2px(activity,100);left=left/2;
+        int  top=h-SizeUtils.dip2px(activity,30);
+        mLayoutparams1.setMargins(left, top, left, 0);
+        image_get.setLayoutParams(mLayoutparams1);
+        image_get.addView(imageget);
+
     }
 
 

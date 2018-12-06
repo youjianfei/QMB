@@ -205,12 +205,14 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_zhaorenshou, container, false);
+        se_position=0;//恢复初始
 
         initview();
         initdata();
         setdata();
         initlistenner();
-
+       task_typeID = 1300;
+        initjiazhengtype();
         return rootview;
     }
 
@@ -295,13 +297,13 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
             JiaZhengTypeBean.TypeBean   typeBean1=new JiaZhengTypeBean.TypeBean();
             typeBean1.setImage(R.mipmap.jiazheng_jiadianqingxi2);
             typeBean1.setIsselect(false);
-            typeBean1.setPrice("参考价：120元");
+            typeBean1.setPrice("参考价：100-140元");
             typeBean1.setXiangmu("冰箱清洗");
             mData_jiazhengType.add(typeBean1);
             JiaZhengTypeBean.TypeBean   typeBean2=new JiaZhengTypeBean.TypeBean();
             typeBean2.setImage(R.mipmap.jiazheng_jiadianqingxi3);
             typeBean2.setIsselect(false);
-            typeBean2.setPrice("参考价：100-200元");
+            typeBean2.setPrice("参考价：100-120元");
             typeBean2.setXiangmu("空调清洗");
             mData_jiazhengType.add(typeBean2);
             return;
@@ -360,7 +362,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
             typeBean.setImage(R.mipmap.jiazheng_xiaoshigong);
             typeBean.setIsselect(true);
             typeBean.setPrice("参考价：50元/小时");
-            typeBean.setXiangmu("小时工");
+            typeBean.setXiangmu("钟点工");
             mData_jiazhengType.add(typeBean);
             return;
         }
@@ -385,7 +387,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
             JiaZhengTypeBean.TypeBean   typeBean=new JiaZhengTypeBean.TypeBean();
             typeBean.setImage(R.mipmap.jiazheng_kaihuang);
             typeBean.setIsselect(true);
-            typeBean.setPrice("新居开荒");
+            typeBean.setPrice("参考价：6元/平米");
             typeBean.setXiangmu("新居开荒");
             mData_jiazhengType.add(typeBean);
             return;
@@ -892,6 +894,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
 //            ToastUtils.showToast(getActivity(), "请选择预约时间");
 //            return false;
 //        }
+        task_typeID=mdata.get(se_position).getSpecialty_id();
         release_address = address_left + "";
 
         if (release_address.equals("")) {
@@ -989,8 +992,7 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
             timer.cancel();
             timerTask.cancel();
         }
-        task_typeID = 1300;//恢复初始
-        se_position=0;//恢复初始
+//        task_typeID = 1300;//恢复初始
         requestTask=false;
         timer = null;
 //        Staticdata.mlistdata_pic.clear();

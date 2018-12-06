@@ -75,7 +75,6 @@ public class Volley_Utils {
                         Staticdata.isLogin=false;//将登录状态改为未登录
                         mContext.startActivity(new Intent(mContext, LoginActivityPhone.class));
                     }else {
-
                         mInterface.onSuccesses(response);
                     }
                 }

@@ -83,6 +83,18 @@ public class LoginActivityPhone extends BaseActivityother {
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                LogUtils.LOG("ceshi1","点击返回","~~~~login");
+                Intent intent_main=new Intent(this,IssueTaskActivity.class);
+                startActivity(intent_main);
+                finish();
+                break;
+        }
+    }
+
+    @Override
     protected void initListener() {
         textview_passwordLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,5 +292,12 @@ public class LoginActivityPhone extends BaseActivityother {
         }).postHttp(Urls.Baseurl + Urls.phoneLogin, LoginActivityPhone.this, 1, map);
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        LogUtils.LOG("ceshi1","点击返回","~~~~login");
+        Intent intent_main=new Intent(this,IssueTaskActivity.class);
+        startActivity(intent_main);
+        finish();
     }
 }

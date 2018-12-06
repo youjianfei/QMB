@@ -91,7 +91,6 @@ public class OrderThinkActivity extends BaseActivityother {
     protected void setData() {
 //        textVieworderno.setText("类型-" + orderno);
 
-        Glide.with(this).load(imageurl).error(R.mipmap.user_pic).into(imageView);
     }
 
     @Override
@@ -99,9 +98,9 @@ public class OrderThinkActivity extends BaseActivityother {
         mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         Intent intent = getIntent();
         Taskid= intent.getStringExtra("task_id");
-        imageurl= intent.getStringExtra("imageurl");
-        name= intent.getStringExtra("helpername");
-        orderno= intent.getStringExtra("orderno");
+//        imageurl= intent.getStringExtra("imageurl");
+//        name= intent.getStringExtra("helpername");
+//        orderno= intent.getStringExtra("orderno");
 
         map_think = new HashMap();
         initmap();
@@ -158,6 +157,7 @@ public class OrderThinkActivity extends BaseActivityother {
                     textview_shiji_amount.setText(orderThinkBean.getData().getActually_amount()+"");
                     textview_coupon.setText("优惠券已抵扣"+orderThinkBean.getData().getAmount()+"元");
                     shopPhonenumber=orderThinkBean.getData().getBusiness_mobile_no();
+                    Glide.with(OrderThinkActivity.this).load(orderThinkBean.getData().getBus_head_url()).error(R.mipmap.user_pic).into(imageView);
 
                 }
             }

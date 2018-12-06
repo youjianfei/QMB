@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ import java.util.List;
 public class CouponActivity extends BaseActivityother {
 
     TextView     text_title;
+    ImageView imageview_empty;
     ListView mylistview_coupon;
 
 
@@ -74,6 +76,12 @@ public class CouponActivity extends BaseActivityother {
 //                    adapter_coupon.notifyDataSetChanged();
                     adapter_coupon.setSelectedPosition(selectposition);
                     adapter_coupon.notifyDataSetInvalidated();
+                }
+                if(mData.size()==0){
+                    imageview_empty.setVisibility(View.VISIBLE);
+                }else {
+                    imageview_empty.setVisibility(View.GONE);
+
                 }
             }
 
@@ -128,5 +136,6 @@ public class CouponActivity extends BaseActivityother {
     protected void initView() {
         text_title=findViewById(R.id.text_title);
         mylistview_coupon=findViewById(R.id.Mylistview_coupon);
+        imageview_empty=findViewById(R.id.imageview_empty);
     }
 }

@@ -204,7 +204,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_task_jiazhengweixiu, container, false);
-
+        se_position=0;//恢复初始
         initview();
         initdata();
         setdata();
@@ -221,8 +221,6 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment  {
         textview_shouqi = rootview.findViewById(R.id.textview_shouqi);
         mRelativelayout_chosetime = rootview.findViewById(R.id.relative_chosetime);
         mEditview_taskdetails = rootview.findViewById(R.id.edit_detailtask);
-//        imageGridview = rootview.findViewById(R.id.GridView_PIC);
-//        image_chosePIC = rootview.findViewById(R.id.image_chosePIC);
         mButton_sub = rootview.findViewById(R.id.button_submitsave);
         textview_suiji=rootview.findViewById(R.id.textview_suiji);
 
@@ -697,7 +695,7 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment  {
 //    }
 
     boolean initmap_zhaoshanghu() {
-
+        task_typeID=mdata.get(se_position).getSpecialty_id();
         task_description = mEditview_taskdetails.getText() + "";
         if (task_description.trim().equals("")) {
             ToastUtils.showToast(getActivity(), "请填写任务说明");
@@ -809,9 +807,9 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment  {
             timerTask.cancel();
         }
         isShowAll=false;//恢复初始
-        requestTask=false;
-        task_typeID=1204;//恢复初始
-        se_position=0;//恢复初始
+//        requestTask=false;
+//        task_typeID=1204;//恢复初始
+
         timer=null;
         Staticdata.mlistdata_pic.clear();
         Staticdata.mlistdata_pic.add(bitmap);

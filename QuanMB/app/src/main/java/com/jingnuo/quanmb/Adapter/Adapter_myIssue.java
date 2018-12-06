@@ -3,6 +3,7 @@ package com.jingnuo.quanmb.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
+import com.jingnuo.quanmb.activity.CancelloederActivity;
+import com.jingnuo.quanmb.activity.MatchShopActivity;
 import com.jingnuo.quanmb.activity.MytaskDetailActivity;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
@@ -133,35 +136,40 @@ public class Adapter_myIssue extends BaseAdapter {
                     @Override
                     public void onResult(boolean result) {
                         if (result){
-                            Map map=new HashMap();
-                            map.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-                            map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                            map.put("id",mData.get(position).getTask_id()+"");
-                            new Volley_Utils(new Interface_volley_respose() {
-                                @Override
-                                public void onSuccesses(String respose) {
-                                    int status = 0;
-                                    String msg = "";
-                                    try {
-                                        JSONObject object = new JSONObject(respose);
-                                        status = (Integer) object.get("code");//登录状态
-                                        msg = (String) object.get("message");//登录返回信息
 
-                                        if (status == 1) {
-                                            ToastUtils.showToast(mContext, "取消任务成功");
-                                        } else {
-                                            ToastUtils.showToast(mContext, msg);
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
+                            Intent intent1=new Intent(mContext,CancelloederActivity.class);
+                            intent1.putExtra("taskid",mData.get(position).getTask_id()+"");
+                            mContext.startActivity(intent1);
 
-                                @Override
-                                public void onError(int error) {
-
-                                }
-                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, mContext, 1, map);
+//                            Map map=new HashMap();
+//                            map.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+//                            map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
+//                            map.put("id",mData.get(position).getTask_id()+"");
+//                            new Volley_Utils(new Interface_volley_respose() {
+//                                @Override
+//                                public void onSuccesses(String respose) {
+//                                    int status = 0;
+//                                    String msg = "";
+//                                    try {
+//                                        JSONObject object = new JSONObject(respose);
+//                                        status = (Integer) object.get("code");//登录状态
+//                                        msg = (String) object.get("message");//登录返回信息
+//
+//                                        if (status == 1) {
+//                                            ToastUtils.showToast(mContext, "取消任务成功");
+//                                        } else {
+//                                            ToastUtils.showToast(mContext, msg);
+//                                        }
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onError(int error) {
+//
+//                                }
+//                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, mContext, 1, map);
                         }
 
                     }

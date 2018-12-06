@@ -244,40 +244,47 @@ public class MytaskDetailActivity extends BaseActivityother {
 
                 String tip = "";
                 if (taskDetailBean.getData().getTask_Status_code().equals("01") || taskDetailBean.getData().getTask_Status_code().equals("08")) {
-                    tip = "撤回成功后将在24小时内退还佣金，是否继续？";
+                    tip = "是否取消任务？";
                 } else {
-                    tip = "3分钟内取消订单不受惩罚";
+                    tip = "是否取消任务？";
                 }
                 new Popwindow_Tip(tip, MytaskDetailActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
                         if (result) {
-                            new Volley_Utils(new Interface_volley_respose() {
-                                @Override
-                                public void onSuccesses(String respose) {
-                                    int status = 0;
-                                    String msg = "";
-                                    try {
-                                        JSONObject object = new JSONObject(respose);
-                                        status = (Integer) object.get("code");//登录状态
-                                        msg = (String) object.get("message");//登录返回信息
 
-                                        if (status == 1) {
-                                            ToastUtils.showToast(MytaskDetailActivity.this, "撤回任务成功");
-                                            finish();
-                                        } else {
-                                            ToastUtils.showToast(MytaskDetailActivity.this, msg);
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
 
-                                @Override
-                                public void onError(int error) {
+                            Intent intent1=new Intent(MytaskDetailActivity.this,CancelloederActivity.class);
+                            intent1.putExtra("taskid",ID+"");
+                            startActivity(intent1);
 
-                                }
-                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MytaskDetailActivity.this, 1, map_taskdetail);
+
+//                            new Volley_Utils(new Interface_volley_respose() {
+//                                @Override
+//                                public void onSuccesses(String respose) {
+//                                    int status = 0;
+//                                    String msg = "";
+//                                    try {
+//                                        JSONObject object = new JSONObject(respose);
+//                                        status = (Integer) object.get("code");//登录状态
+//                                        msg = (String) object.get("message");//登录返回信息
+//
+//                                        if (status == 1) {
+//                                            ToastUtils.showToast(MytaskDetailActivity.this, "撤回任务成功");
+//                                            finish();
+//                                        } else {
+//                                            ToastUtils.showToast(MytaskDetailActivity.this, msg);
+//                                        }
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onError(int error) {
+//
+//                                }
+//                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MytaskDetailActivity.this, 1, map_taskdetail);
 
                         }
                     }
@@ -347,14 +354,13 @@ public class MytaskDetailActivity extends BaseActivityother {
 //                                request(map_taskdetail);
                                     Intent intend_think = new Intent(MytaskDetailActivity.this, OrderThinkActivity.class);
                                     intend_think.putExtra("task_id", taskDetailBean.getData().getTask_id() + "");
-                                    if (taskDetailBean.getData().getBusiness_name().equals("")) {
-                                        intend_think.putExtra("helpername", taskDetailBean.getData().getHelper_name() + "");
-                                    } else {
-                                        intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
-                                    }
-
-                                    intend_think.putExtra("orderno", taskDetailBean.getData().getSpecialty_name() + "");
-                                    intend_think.putExtra("imageurl", taskDetailBean.getData().getB_h_url() + "");
+//                                    if (taskDetailBean.getData().getBusiness_name().equals("")) {
+//                                        intend_think.putExtra("helpername", taskDetailBean.getData().getHelper_name() + "");
+//                                    } else {
+//                                        intend_think.putExtra("helpername", taskDetailBean.getData().getBusiness_name() + "");
+//                                    }
+//                                    intend_think.putExtra("orderno", taskDetailBean.getData().getSpecialty_name() + "");
+//                                    intend_think.putExtra("imageurl", taskDetailBean.getData().getB_h_url() + "");
                                     startActivity(intend_think);
                                 } else {
                                     ToastUtils.showToast(MytaskDetailActivity.this, msg);

@@ -112,6 +112,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Intent intent = new Intent(PayActivity.this, PaySuccessActivity.class);
                     intent.putExtra("title", "支付成功");
                     intent.putExtra("typesuccess", "支付成功");
+                    intent.putExtra("taskid", taskid);
                     startActivity(intent);
                     finish();
                 }
