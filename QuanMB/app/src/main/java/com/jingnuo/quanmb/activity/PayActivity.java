@@ -47,6 +47,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PayActivity extends BaseActivityother implements PayPwdView.InputCallBack {
 
     //控件
+    TextView textview_maintitle;
     CircleImageView mImageview_head;
     TextView mTextview_amount;
     RelativeLayout mRelayout_yue;
@@ -232,6 +233,8 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
     @Override
     protected void initView() {
+        textview_maintitle = findViewById(R.id.textview_maintitle);
+        textview_maintitle .setText("待支付");
         mImageview_head = findViewById(R.id.image_viewHead);
         mTextview_amount = findViewById(R.id.textview);
         mRelayout_yue = findViewById(R.id.relayoutyue);

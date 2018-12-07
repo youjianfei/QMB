@@ -34,6 +34,7 @@ public class SettingActivity extends BaseActivityother {
     private UMShareAPI mShareAPI;//第三方登录登录
     //控件
 
+    TextView textview_maintitle;
     TextView mTextview_cleancache;
     TextView mTextview_textview_cleancacheSize;
     TextView mTextview_share;
@@ -73,6 +74,8 @@ public class SettingActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_maintitle=findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("设置");
         mTextview_cleancache=findViewById(R.id.textview_cleancache);
         mTextview_textview_cleancacheSize=findViewById(R.id.textview_cleancacheSize);
         mTextview_share=findViewById(R.id.textview_shareAPP);

@@ -53,6 +53,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MytaskDetailActivity extends BaseActivityother {
     //控件
 
+    TextView textview_maintitle;
     RelativeLayout mRelativylaout_background;
     RelativeLayout mRelativylaout_re1;
     RelativeLayout mRelativylaout_re4;
@@ -420,6 +421,8 @@ public class MytaskDetailActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_maintitle = findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("任务详情");
         mImageview_phonenumber = findViewById(R.id.image_phonenumber);
         mImageview_todo = findViewById(R.id.image_touxiang);
         todoShenfen = findViewById(R.id.text_shenfen);

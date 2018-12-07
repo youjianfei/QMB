@@ -82,7 +82,7 @@ public class PaySuccessActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        textview_title=findViewById(R.id.textview_title);
+        textview_title=findViewById(R.id.textview_maintitle);
         textview_typesuccess=findViewById(R.id.text_type);
         mButton=findViewById(R.id.button_submit);
         imageView=findViewById(R.id.iv_back);

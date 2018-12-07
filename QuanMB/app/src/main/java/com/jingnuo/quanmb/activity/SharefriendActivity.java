@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.R;
@@ -23,6 +24,7 @@ import static com.jingnuo.quanmb.data.Urls.Baseurl_index;
 public class SharefriendActivity extends BaseActivityother {
 
     LinearLayout linearLayout_iamge;
+    TextView textview_maintitle;
 
     ImageView image_wxShare;
     ImageView image_wxcircleShare;
@@ -108,6 +110,8 @@ public class SharefriendActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_maintitle = findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("邀请好友");
         linearLayout_iamge = findViewById(R.id.linearLayout_iamge);
         image_wxShare = findViewById(R.id.image_wxShare);
         image_wxcircleShare = findViewById(R.id.image_wxcircleShare);

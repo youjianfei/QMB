@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -28,6 +29,7 @@ import java.util.Map;
 
 public class MyOrderActivity extends BaseActivityother {
     //控件
+    TextView textview_maintitle;
     TabLayout  mTablayout;
     PullToRefreshListView mListView;
     ImageView imageview_empty;
@@ -128,6 +130,8 @@ public class MyOrderActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_maintitle=findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("我的发布");
         mTablayout=findViewById(R.id.tablayout);
         mTablayout.addTab(mTablayout.newTab().setText("全部").setTag(""));
         mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01,08"));

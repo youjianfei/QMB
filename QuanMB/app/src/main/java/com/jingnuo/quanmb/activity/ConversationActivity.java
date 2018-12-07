@@ -21,7 +21,7 @@ public class ConversationActivity extends FragmentActivity {
         setContentView(R.layout.activity_conversation);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.white), 0);//状态栏颜色
         mImageview_back =  findViewById(R.id.iv_back);
-        text_title =  findViewById(R.id.text_title);
+        text_title =  findViewById(R.id.textview_maintitle);
         mImageview_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -246,7 +246,7 @@ public class ZixunKefuWebActivity extends BaseActivityother {
     @Override
     protected void initView() {
         webView = findViewById(R.id.webview);
-        textview_webtitle = findViewById(R.id.textview_webtitle);
+        textview_webtitle = findViewById(R.id.textview_maintitle);
         mPrigressBer = findViewById(R.id.pb);
 
     }

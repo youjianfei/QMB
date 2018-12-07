@@ -45,6 +45,7 @@ public class PersonInfoActivity extends BaseActivityother {
     //控件
     TextView mtextview_phonenumber,mTextview_changepassword,mTextview_setsafepassword;
     TextView mTextview_issetsafepassword;
+    TextView textview_title;
     TextView mtextview_nickname;
     TextView mtextview_setshequ;
     TextView mtextview_text_issetshequ;
@@ -138,6 +139,8 @@ public class PersonInfoActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_title=  findViewById(R.id.textview_maintitle);
+        textview_title.setText("个人资料");
         mtextview_phonenumber=  findViewById(R.id.text_phonrnumber);
         mTextview_changepassword=findViewById(R.id.text_changephonenumber);
         mtextview_nickname=findViewById(R.id.text_name);

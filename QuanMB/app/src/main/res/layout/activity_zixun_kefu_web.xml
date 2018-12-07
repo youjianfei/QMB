@@ -7,31 +7,12 @@
     android:orientation="vertical"
     android:background="@color/gray_background"
     tools:context=".activity.ZixunKefuWebActivity">
-    <RelativeLayout
+    <include
         android:id="@+id/re_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/back_black" />
-
-        <TextView
-            android:id="@+id/textview_webtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        layout="@layout/include_title"
+        />
     <ProgressBar
         android:id="@+id/pb"
         style="?android:attr/progressBarStyleHorizontal"

@@ -47,6 +47,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class OrderThinkActivity extends BaseActivityother {
 
     //控件
+    TextView textview_maintitle;
     SimpleRatingBar mRatinBar;
     String Taskid = "";
     EditText mEdit_think;
@@ -268,6 +269,8 @@ public class OrderThinkActivity extends BaseActivityother {
     @Override
     protected void initView() {
 //        textVieworderno = findViewById(R.id.textview_helperorder);
+        textview_maintitle = findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("评价");
         mTextview_name = findViewById(R.id.textview_helpername);
         textview_startcounts = findViewById(R.id.textview_startcounts);
         textview_shiji_amount = findViewById(R.id.textview_shiji_amount);

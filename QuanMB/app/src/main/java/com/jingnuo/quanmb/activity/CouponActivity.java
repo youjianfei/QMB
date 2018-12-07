@@ -134,7 +134,7 @@ public class CouponActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        text_title=findViewById(R.id.text_title);
+        text_title=findViewById(R.id.textview_maintitle);
         mylistview_coupon=findViewById(R.id.Mylistview_coupon);
         imageview_empty=findViewById(R.id.imageview_empty);
     }

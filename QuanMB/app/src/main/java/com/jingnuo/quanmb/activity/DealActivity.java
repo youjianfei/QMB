@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -29,6 +30,7 @@ public class DealActivity extends BaseActivityother {
 
 
     //控件
+    TextView textview_maintitle;
     PullToRefreshListView mListview;
     ImageView mImage_view_empty;
     //数据
@@ -137,6 +139,8 @@ public class DealActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_maintitle=findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("交易提醒");
         mListview=findViewById(R.id.list_dealmessage);
         mImage_view_empty=findViewById(R.id.image_empty);
     }

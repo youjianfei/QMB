@@ -38,6 +38,7 @@ public class ConversationListActivity extends FragmentActivity {
 
     //控件
 //    RelativeLayout mRelativelayout_bargain;
+    TextView textview_maintitle;
     RelativeLayout mRelativelayout_systemmessage;
     RelativeLayout mRelativelayout_dealmessage;
 //    RelativeLayout mRelativelayout_tuijianrenwu;
@@ -166,6 +167,8 @@ public class ConversationListActivity extends FragmentActivity {
     private void initview() {
 
 //        mRelativelayout_bargain=findViewById(R.id.relativelayout_Kanprice);
+        textview_maintitle=findViewById(R.id.textview_maintitle);
+        textview_maintitle.setText("消息");
         mRelativelayout_systemmessage=findViewById(R.id.relativelayout_systemnotice);
         mRelativelayout_dealmessage=findViewById(R.id.relativelayout_Jiaoyinotice);
 //        mRelativelayout_tuijianrenwu=findViewById(R.id.relativelayout_tuijianrenwu);

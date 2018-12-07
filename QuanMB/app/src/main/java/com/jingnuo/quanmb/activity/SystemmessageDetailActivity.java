@@ -47,7 +47,7 @@ public class SystemmessageDetailActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
-        mTextview_title=findViewById(R.id.text_title);
+        mTextview_title=findViewById(R.id.textview_maintitle);
         mTextview_content=findViewById(R.id.text_content);
         mTextview_time=findViewById(R.id.text_time);
 
