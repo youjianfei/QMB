@@ -109,12 +109,19 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             public void onSuccesses(String respose) {
                 LogUtils.LOG("ceshi", respose, "payResult");
                 if (respose.equals("success")) {//支付成功
-                    Staticdata.PayissuetaskSuccess = true;
-                    Intent intent = new Intent(PayActivity.this, PaySuccessActivity.class);
-                    intent.putExtra("title", "支付成功");
-                    intent.putExtra("typesuccess", "支付成功");
-                    intent.putExtra("taskid", taskid);
-                    startActivity(intent);
+//                    Staticdata.PayissuetaskSuccess = true;
+//                    Intent intent = new Intent(PayActivity.this, PaySuccessActivity.class);
+//                    intent.putExtra("title", "支付成功");
+//                    intent.putExtra("typesuccess", "支付成功");
+//                    intent.putExtra("taskid", taskid);
+//                    startActivity(intent);
+//                    finish();
+
+                    Intent intend_think = new Intent(PayActivity.this, OrderThinkActivity.class);
+                    intend_think.putExtra("task_id", taskid+ "");
+                    startActivity(intend_think);
+                    Staticdata. ispipei=false;
+                    LogUtils.LOG("payqq","11111","PaySuccessActivity");
                     finish();
                 }
             }

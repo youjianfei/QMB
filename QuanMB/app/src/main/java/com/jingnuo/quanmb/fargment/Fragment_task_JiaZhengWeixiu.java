@@ -118,20 +118,16 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment  {
             "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1210,\"specialty_name\":\"家电\"," +
             "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1206,\"specialty_name\":\"数码\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1208,\"specialty_name\":\"电路\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1202,\"specialty_name\"" +
-            ":\"家具\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1212,\"specialty_name\":\"手表\",\"image\":\"\",\"isselect\":false}" +
-            ",{\"specialty_id\":1205,\"specialty_name\":\"空调\",\"image\":\"\",\"isselect\":false},\n" +
-            "{\"specialty_id\":1203,\"specialty_name\":\"电脑\",\"image\":\"\",\"isselect\":false},\n" +
-            "{\"specialty_id\":1211,\"specialty_name\":\"电动车\",\"image\":\"\",\"isselect\":false}]}";
+            ":\"家具\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1205,\"specialty_name\":\"空调\",\"image\":\"\",\"isselect\":false},\n" +
+            "{\"specialty_id\":1203,\"specialty_name\":\"电脑\",\"image\":\"\",\"isselect\":false}]}";
     String  JiazhengTypeJson_shao="{\"list\":[{\"specialty_id\":1204,\"specialty_name\":\"手机\",\"image\":\"\"," +
             "\"isselect\":true},{\"specialty_id\":1201,\"specialty_name\":\"房屋\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1209,\"specialty_name\":\"开锁\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1207," +
             "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1209,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1210,\"specialty_name\":\"家电\"," +
             "\"image\":\"\",\"isselect\":false},{\"specialty_id\":1206,\"specialty_name\":\"数码\",\"image\":\"\",\"isselect\":false}," +
             "{\"specialty_id\":1208,\"specialty_name\":\"电路\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1202,\"specialty_name\"" +
-            ":\"家具\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1212,\"specialty_name\":\"手表\",\"image\":\"\",\"isselect\":false}" +
-            ",{\"specialty_id\":1205,\"specialty_name\":\"空调\",\"image\":\"\",\"isselect\":false},\n" +
-            "{\"specialty_id\":1203,\"specialty_name\":\"电脑\",\"image\":\"\",\"isselect\":false},\n" +
-            "{\"specialty_id\":1211,\"specialty_name\":\"电动车\",\"image\":\"\",\"isselect\":false}]}";
+            ":\"家具\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1205,\"specialty_name\":\"空调\",\"image\":\"\",\"isselect\":false},\n" +
+            "{\"specialty_id\":1203,\"specialty_name\":\"电脑\",\"image\":\"\",\"isselect\":false}]}";
 
 //    String  JiazhengTypeJson_shao="{\"list\":[{\"specialty_id\":1204,\"specialty_name\":\"手机\",\"image\":\"\"," +
 //            "\"isselect\":true},{\"specialty_id\":1201,\"specialty_name\":\"房屋\",\"image\":\"\",\"isselect\":false}," +

@@ -253,40 +253,38 @@ public class MytaskDetailActivity extends BaseActivityother {
                     @Override
                     public void onResult(boolean result) {
                         if (result) {
+                            Map map_taskdetail = new HashMap();
+                            map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                            map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_taskdetail.put("id", ID);
+                            LogUtils.LOG("ceshi", map_taskdetail.toString(), "cancleorder");
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//登录状态
+                                        msg = (String) object.get("message");//登录返回信息
 
+                                        if (status == 1) {
+                                            Intent intent1 = new Intent(MytaskDetailActivity.this, CancelloederActivity.class);
+                                            intent1.putExtra("taskid", ID + "");
+                                            startActivity(intent1);
 
-                            Intent intent1=new Intent(MytaskDetailActivity.this,CancelloederActivity.class);
-                            intent1.putExtra("taskid",ID+"");
-                            startActivity(intent1);
+                                        } else {
+                                            ToastUtils.showToast(MytaskDetailActivity. this, msg);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                @Override
+                                public void onError(int error) {
 
-
-//                            new Volley_Utils(new Interface_volley_respose() {
-//                                @Override
-//                                public void onSuccesses(String respose) {
-//                                    int status = 0;
-//                                    String msg = "";
-//                                    try {
-//                                        JSONObject object = new JSONObject(respose);
-//                                        status = (Integer) object.get("code");//登录状态
-//                                        msg = (String) object.get("message");//登录返回信息
-//
-//                                        if (status == 1) {
-//                                            ToastUtils.showToast(MytaskDetailActivity.this, "撤回任务成功");
-//                                            finish();
-//                                        } else {
-//                                            ToastUtils.showToast(MytaskDetailActivity.this, msg);
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onError(int error) {
-//
-//                                }
-//                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MytaskDetailActivity.this, 1, map_taskdetail);
-
+                                }
+                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MytaskDetailActivity.this, 1, map_taskdetail);
                         }
                     }
                 }).showPopwindow();

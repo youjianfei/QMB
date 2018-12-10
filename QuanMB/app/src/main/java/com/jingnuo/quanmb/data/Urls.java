@@ -13,15 +13,15 @@ public class Urls {
     public static String  pipeijiemianhuodong= "";//匹配商家界面活动点击接口
     public static String shareweb = "https://app.quanminbang.top/v1.0/uploadIge/goShareHaveGift?client_no=";//新用户活动领取点击接口
     //正式
-    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  测试
-//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
 
 
     //  本地
@@ -79,6 +79,7 @@ public class Urls {
     public static String tasksort = "task/querySort/getSortBy";//任务智能排序方式
     public static String taskdetails = "task/taskDetail/getTaskDetail";//任务详情  ?id=
     public static String taskdetailscancle = "task/taskCancel";//撤消任务
+    public static String taskCancelCause = "task/taskCancelCause";//撤消任务原因
     public static String helptask = "order/taskHelp";//确认帮助 ?id=
     public static String barginmonry = "bargain/taskBargain";//广场单还价
     public static String barginPiPei = "bargain/businessBid";//匹配单出价

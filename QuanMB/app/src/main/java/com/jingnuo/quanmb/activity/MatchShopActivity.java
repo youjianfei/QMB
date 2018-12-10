@@ -36,6 +36,7 @@ import com.jingnuo.quanmb.entityclass.TaskDetailBean;
 import com.jingnuo.quanmb.fargment.Fragment_shopdetail;
 import com.jingnuo.quanmb.popwinow.Popwindow_Tip;
 import com.jingnuo.quanmb.popwinow.Popwindow_cancleorder;
+import com.jingnuo.quanmb.popwinow.Popwindow_cancleorder_success;
 import com.jingnuo.quanmb.popwinow.ProgressDlog;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
@@ -173,16 +174,49 @@ public class MatchShopActivity extends AppCompatActivity  {
         linearLayout_cancle.setOnClickListener(new View.OnClickListener() {//换一个
             @Override
             public void onClick(View v) {
-                new Popwindow_cancleorder("是否取消任务？", MatchShopActivity.this, new Interence_complteTask() {
+                new Popwindow_cancleorder("您即将取消任务，是否继续？", MatchShopActivity.this, new Interence_complteTask() {
                     @Override
                     public void onResult(boolean result) {
                         if(result){
                             huanyipi();//请求换一批
                             ProgressDlog.showProgress(mKProgressHUD);
                         }else {
-                            Intent  intent1=new Intent(MatchShopActivity.this,CancelloederActivity.class);
-                            intent1.putExtra("taskid",ID+"");
-                            startActivity(intent1);
+
+                            Map map_taskdetail = new HashMap();
+                            map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
+                            map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
+                            map_taskdetail.put("id", ID);
+                            LogUtils.LOG("ceshi", map_taskdetail.toString(), "cancleorder");
+                            new Volley_Utils(new Interface_volley_respose() {
+                                @Override
+                                public void onSuccesses(String respose) {
+                                    int status = 0;
+                                    String msg = "";
+                                    try {
+                                        JSONObject object = new JSONObject(respose);
+                                        status = (Integer) object.get("code");//登录状态
+                                        msg = (String) object.get("message");//登录返回信息
+
+                                        if (status == 1) {
+                                            Intent intent1 = new Intent(MatchShopActivity.this, CancelloederActivity.class);
+                                            intent1.putExtra("taskid", ID + "");
+                                            startActivity(intent1);
+
+                                        } else {
+                                            ToastUtils.showToast(MatchShopActivity. this, msg);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(int error) {
+
+                                }
+                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, MatchShopActivity.this, 1, map_taskdetail);
+
+
                         }
                     }
                 }).showPopwindow();

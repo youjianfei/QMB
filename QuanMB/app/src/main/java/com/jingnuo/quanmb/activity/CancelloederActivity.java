@@ -35,7 +35,6 @@ public class CancelloederActivity extends BaseActivityother {
     String   ID="";
     String res="";
 
-    boolean isCancel=false;
 
     String result="{\"data\":[{\"isselect\":true,\"task_des\":\"师傅未按约定时间到岗\"}," +
             "{\"isselect\":false,\"task_des\":\"下错单，重新下单\"}," +
@@ -117,7 +116,6 @@ public class CancelloederActivity extends BaseActivityother {
                             msg = (String) object.get("message");//登录返回信息
 
                             if (status == 1) {
-                                isCancel=true;
                                 mylistview_result.setEnabled(false);
                                 button_submit.setEnabled(false);
                                 new Popwindow_cancleorder_success(CancelloederActivity.this, new Interence_complteTask() {
@@ -147,7 +145,7 @@ public class CancelloederActivity extends BaseActivityother {
                     public void onError(int error) {
 
                     }
-                }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, CancelloederActivity.this, 1, map_taskdetail);
+                }).postHttp(Urls.Baseurl_cui + Urls.taskCancelCause, CancelloederActivity.this, 1, map_taskdetail);
 
 
             }
@@ -165,17 +163,17 @@ public class CancelloederActivity extends BaseActivityother {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_back:
-                if(!isCancel){
-                    finish();
-                }
+                Intent intent=new Intent(CancelloederActivity.this,MyOrderActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
 
     @Override
     public void onBackPressed() {
-        if(!isCancel){
-            finish();
-        }
+        Intent intent=new Intent(CancelloederActivity.this,MyOrderActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
