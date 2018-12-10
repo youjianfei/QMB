@@ -132,13 +132,15 @@ public class LoginActivityPhone extends BaseActivityother {
                     } else {
                         //直接登陆流程
                         LogUtils.LOG("ceshi", "直接登陆流程", getPackageName());
-
+                        tuijianma = edit_tuijianma.getText().toString();
 //                        Userphonenumber = phonenumber;//将电话号设为全局变量
                         Map map = new HashMap();
                         map.put("ValidateCode", yangzhengma);
                         map.put("phoneNumbers", phonenumber);
                         map.put("uuid", Staticdata.UUID);
                         map.put("Jpush_id", Staticdata.JpushID);
+                        map.put("recommend_code", tuijianma);
+
                         loginrequest(map);
 
                     }
