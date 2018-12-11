@@ -173,37 +173,42 @@
     <RelativeLayout
         android:id="@+id/relayoutyue"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         >
-        <ImageView
-            android:id="@+id/image_1"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/yue"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
+
         <TextView
+            android:id="@+id/textview_yue_dikou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="余额支付"
+            android:text="余额抵扣0.00元"
             android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/image_1"
+            android:layout_marginTop="8dp"
             />
         <ImageView
             android:id="@+id/image_yue"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginRight="20dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/select_duigou2"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/selsect_tuijianrenwu"
             />
-
+        <TextView
+            android:id="@+id/text_yue_useable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="余额可用200元"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/red2"
+            android:background="@color/yellow2"
+            android:layout_below="@+id/textview_yue_dikou"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/relayout_wechat"

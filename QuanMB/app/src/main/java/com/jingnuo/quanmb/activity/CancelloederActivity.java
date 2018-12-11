@@ -98,7 +98,7 @@ public class CancelloederActivity extends BaseActivityother {
                         res=mData.get(i).getTask_des();
                     }
                 }
-                res=res+edit_think.getText()+"";
+                res=res+"-"+edit_think.getText();
                 Map  map_taskdetail = new HashMap();
                 map_taskdetail.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                 map_taskdetail.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());

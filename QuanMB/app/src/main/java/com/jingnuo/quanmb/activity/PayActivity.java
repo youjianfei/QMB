@@ -39,6 +39,7 @@ import com.jingnuo.quanmb.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +52,8 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     CircleImageView mImageview_head;
     TextView mTextview_amount;
     RelativeLayout mRelayout_yue;
+    TextView textview_yue_dikou;//余额抵扣金额
+    TextView text_yue_useable;//可用余额
     RelativeLayout mRelayout_wechat;
     RelativeLayout mRelayout_zhifubao;
     RelativeLayout relayout_selectCoupon;//选择优惠券
@@ -65,17 +68,19 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     TextView txtview_shopname;//商户名字
     TextView textview_startcounts;//商户星级值
 
-
+    DecimalFormat doubleo00;
     //数据
     private IntentFilter intentFilter_paysuccess;//定义广播过滤器；
     private PaySuccessOrErroBroadcastReciver paysuccess_BroadcastReciver;//定义广播监听器
 
     PayFragment fragment;
+    String title_pay = "";
 
     double balance = 0;//余额
-    String title_pay = "";
-    String amount = "";//订单金额
+    double amount ;//订单金额
+    double diKou_amount;//抵扣的金额
     double pay_amount;//要付的金额
+    double coupon_amout;//优惠券金额
 
     String taskid = "";
     String coupon_code = "";//优惠券码
@@ -84,10 +89,10 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     String business_no = "";
     String shopPhonenumber="";//商家电话号
 
-    double coupon_amout;//优惠券金额
+
     int coupon_possition = 100;
 
-    int pay = 1;  //1 余额支付 2 微信支付  3 支付宝支付
+    int pay = 2;  // 2 微信支付  3 支付宝支付
     private IWXAPI api;
 
 
@@ -141,6 +146,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
     @Override
     protected void initData() {
+         doubleo00 = new DecimalFormat("0.00");
         mPermission = new PermissionHelper(this, new String[]{Manifest.permission.CALL_PHONE}, 100);
         api = WXAPIFactory.createWXAPI(PayActivity.this, Staticdata.WechatApi);//微信支付用到
         Intent intent = getIntent();
@@ -153,7 +159,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 //        tasktypeid = intent.getStringExtra("tasktypeid");
 
 
-        image_yue.setSelected(true);
+        image_wechat.setSelected(true);//默认微信支付
 
         requestInfo();//请求商户信息
     }
@@ -175,10 +181,10 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Glide.with(PayActivity.this).load(orderThinkBean.getData().getBus_head_url()).into(mImageview_head);
                     business_no=orderThinkBean.getData().getBusiness_no();
                     tasktypeid = orderThinkBean.getData().getTask_type();
-                    amount=orderThinkBean.getData().getOrder_amount();
-                    pay_amount = Double.parseDouble(amount);//要付的金额
+                    amount = Double.parseDouble(orderThinkBean.getData().getOrder_amount());//总金额
+                    pay_amount = amount;//要付的金额
                     mTextview_amount.setText("" + amount);
-
+                    mButton_submit.setText("立即支付" +doubleo00.format(pay_amount)+ "元");
 
                     requestYue();//请求实时余额
                 }
@@ -205,11 +211,18 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     if (status == 1) {
                         balan = (String) object.get("balance");
                         balance = Double.parseDouble(balan);
-                        if (balance < pay_amount) {
+                        text_yue_useable.setText("余额可用"+balance+"元");
+
+
+                        if (balance < 0) {//没有余额
+
                             image_yue.setSelected(false);
                             image_wechat.setSelected(true);
                             image_zhifubao.setSelected(false);
                             pay = 2;
+                        }else {
+                            image_yue.setSelected(true);
+                            PanDuanYuE();//判断有余额各个情况
                         }
                     }
                 } catch (JSONException e) {
@@ -238,6 +251,20 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
     }
 
+
+    void PanDuanYuE(){
+            if(pay_amount>balance){//实际支付金额大
+                diKou_amount=balance;
+                textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+
+            }else {//余额大
+                diKou_amount=pay_amount;
+                textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+            }
+        pay_amount=amount-coupon_amout-diKou_amount;
+        mButton_submit.setText("立即支付"+doubleo00.format(pay_amount)+"元");
+    }
+
     @Override
     protected void initView() {
         textview_maintitle = findViewById(R.id.textview_maintitle);
@@ -245,6 +272,8 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         mImageview_head = findViewById(R.id.image_viewHead);
         mTextview_amount = findViewById(R.id.textview);
         mRelayout_yue = findViewById(R.id.relayoutyue);
+        text_yue_useable = findViewById(R.id.text_yue_useable);
+        textview_yue_dikou = findViewById(R.id.textview_yue_dikou);
         mRelayout_wechat = findViewById(R.id.relayout_wechat);
         mRelayout_zhifubao = findViewById(R.id.relayout_zhifubao);
         relayout_selectCoupon = findViewById(R.id.relayout_selectCoupon);
@@ -315,24 +344,26 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                 startActivityForResult(intent_selectcoupon, 1637);
 
                 break;
-            case R.id.relayoutyue:
-                if (balance < pay_amount) {
-                    ToastUtils.showToast(this, "余额不足");
-                    return;
+            case R.id.relayoutyue://点击余额抵扣
+                if(image_yue.isSelected()){//开
+                    image_yue.setSelected(false);
+                    resultMoney();
+                }else {//关
+                    if(balance>0){
+                        image_yue.setSelected(true);
+                        resultMoney();
+                    }else {
+                        ToastUtils.showToast(PayActivity.this,"没有可用余额");
+                    }
                 }
-                image_yue.setSelected(true);
-                image_wechat.setSelected(false);
-                image_zhifubao.setSelected(false);
-                pay = 1;
+
                 break;
             case R.id.relayout_wechat:
-                image_yue.setSelected(false);
                 image_wechat.setSelected(true);
                 image_zhifubao.setSelected(false);
                 pay = 2;
                 break;
             case R.id.relayout_zhifubao:
-                image_yue.setSelected(false);
                 image_wechat.setSelected(false);
                 image_zhifubao.setSelected(true);
                 pay = 3;
@@ -342,7 +373,8 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     ToastUtils.showToast(PayActivity.this,"订单异常");
                     return;
                 }
-                if (pay == 1) {
+
+                if (pay_amount == 0) {
                     if (Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")) {
                         ToastUtils.showToast(this, "请先设置安全密码");
                         Intent intent_setsafe = new Intent(PayActivity.this, SetSafepassword1Activity.class);
@@ -365,6 +397,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_pay.put("isrecharge", "N");
                     map_pay.put("body", title_pay);
                     map_pay.put("total_fee", pay_amount + "");
+                    map_pay.put("balance_credit", diKou_amount + "");
                     map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_pay.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_pay.put("task_id", taskid);
@@ -392,6 +425,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     map_zpay.put("isrecharge", "N");
                     map_zpay.put("subject", title_pay);
                     map_zpay.put("total_fee", pay_amount + "");
+                    map_zpay.put("balance_credit", diKou_amount + "");
                     map_zpay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_zpay.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_zpay.put("task_id", taskid);
@@ -466,11 +500,48 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             coupon_code = data.getStringExtra("coupon_code");
             text_couponTextContent.setText("已抵用" + coupon_amout + "元");
             text_select.setVisibility(View.VISIBLE);
-            pay_amount = Double.parseDouble(amount) - coupon_amout;
-            mButton_submit.setText("立即支付" + pay_amount + "元");
+//            if(diKou_amount>coupon_amout){
+//                diKou_amount=diKou_amount-coupon_amout;
+//            }
+//            textview_yue_dikou.setText("余额抵扣"+diKou_amount+"元");
+//            pay_amount=amount-coupon_amout-diKou_amount;
+//            mButton_submit.setText("立即支付" + pay_amount + "元");
+            resultMoney();
             LogUtils.LOG("ceshi", "优惠金额" + coupon_amout + "条目" + coupon_possition + "现价" + pay_amount, "payactivity");
         }
     }
+
+     void resultMoney(){
+        if(image_yue.isSelected()){//余额抵扣开启
+            if(coupon_amout==0){//没有优惠券
+                if(balance>amount){//余额多
+                    diKou_amount=amount;
+                    textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+                    pay_amount=amount-diKou_amount;
+                }else {//余额少
+                    diKou_amount=balance;
+                    textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+                    pay_amount=amount-diKou_amount;
+                }
+            }else {//有优惠券
+                if(coupon_amout+balance>amount){
+                    diKou_amount=amount-coupon_amout;
+                    textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+                    pay_amount=amount-diKou_amount-coupon_amout;
+                }else {
+                    diKou_amount=balance;
+                    textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+                    pay_amount=amount-diKou_amount-coupon_amout;
+                }
+            }
+
+        }else {//余额抵扣关闭
+            pay_amount=amount-coupon_amout;
+            diKou_amount=0;
+            textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
+        }
+         mButton_submit.setText("立即支付"+doubleo00.format(pay_amount)+"元");
+     }
 
     @Override
     protected void onDestroy() {
