@@ -263,7 +263,8 @@
         <activity android:name=".activity.OrderThinkSuccessActivity" />
         <activity android:name=".activity.SharefriendActivity" />
         <activity android:name=".activity.LoginActivityPhone" />
-        <activity android:name=".activity.CancelloederActivity"></activity>
+        <activity android:name=".activity.CancelloederActivity" />
+        <activity android:name=".activity.YaoqingHaoyouActivity"></activity>
     </application>
 
 </manifest>

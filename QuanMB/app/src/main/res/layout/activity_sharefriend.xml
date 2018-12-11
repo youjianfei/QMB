@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white"
     tools:context="com.jingnuo.quanmb.activity.SharefriendActivity">
     <include
@@ -12,71 +13,181 @@
         android:layout_height="wrap_content"
         layout="@layout/include_title"
         />
-    <LinearLayout
-        android:id="@+id/linearLayout_iamge"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/textviewtip"
-        android:layout_below="@+id/re_title"
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal" />
-    <LinearLayout
-        android:id="@+id/linearlayout_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout_iamge"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
             >
-            <ImageView
-                android:id="@+id/image_wxShare"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/weixinlogo2"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/learlayout_tip2"
-                />
-            <TextView
+            <LinearLayout
+                android:id="@+id/linearLayout_iamge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享给好友"
-                android:textSize="13dp"
-                android:textColor="@color/black"
-                android:layout_marginTop="8dp"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginLeft="50dp"
-            >
-            <ImageView
-                android:id="@+id/image_wxcircleShare"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/pengyouquan"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/learlayout_tip2"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/re_title"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
                 />
             <TextView
+                android:id="@+id/textview_jiangli"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享到朋友圈"
-                android:textSize="13dp"
-                android:textColor="@color/black"
-                android:layout_marginTop="8dp"
+                android:text="0"
+                android:textColor="@color/yellow_jianbian_start"
+                android:textSize="45dp"
+                android:layout_gravity="center_horizontal"
                 />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="邀请人数"
+                        android:textColor="@color/text_gray"
+                        />
+                    <TextView
+                        android:id="@+id/textview_yaoqingrenshu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="100dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下单人数"
+                        android:textColor="@color/text_gray"
+
+                        />
+                    <TextView
+                        android:id="@+id/textview_xiadanrenshu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/gray_dfdfdf"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="立即邀请好友得奖励"
+                    android:textSize="13dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textColor="@color/gray_dbdbdb"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/gray_dfdfdf"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearlayout_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:id="@+id/image_wxShare"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/weixinlogo2"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分享给好友"
+                        android:textSize="13dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="50dp"
+                    >
+                    <ImageView
+                        android:id="@+id/image_wxcircleShare"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/pengyouquan"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分享到朋友圈"
+                        android:textSize="13dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-    </LinearLayout>
-</RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

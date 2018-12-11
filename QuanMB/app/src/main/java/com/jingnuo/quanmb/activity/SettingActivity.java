@@ -31,7 +31,7 @@ import io.rong.imkit.RongIM;
 import static com.jingnuo.quanmb.utils.Utils.deleteAllFiles;
 
 public class SettingActivity extends BaseActivityother {
-    private UMShareAPI mShareAPI;//第三方登录登录
+    private UMShareAPI mShareAPI;
     //控件
 
     TextView textview_maintitle;

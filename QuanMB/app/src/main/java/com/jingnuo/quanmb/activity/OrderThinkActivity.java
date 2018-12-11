@@ -187,7 +187,7 @@ public class OrderThinkActivity extends BaseActivityother {
         linearlayout_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_kefuzhongxin = new Intent(OrderThinkActivity.this, SharefriendActivity.class);
+                Intent intent_kefuzhongxin = new Intent(OrderThinkActivity.this, YaoqingHaoyouActivity.class);
 //                intent_kefuzhongxin.putExtra("webtitle", "优惠活动");
                 startActivity(intent_kefuzhongxin);
             }

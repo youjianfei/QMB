@@ -178,7 +178,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
             switch (i) {
                 case 0://我的发布
                     MenuBean menuBean0 = new MenuBean();
-                    menuBean0.setMenu_name("我的发布");
+                    menuBean0.setMenu_name("我的订单");
                     Bitmap bitmap0 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.myrelease);
                     menuBean0.setmBitmap(bitmap0);
                     menuList.add(menuBean0);

@@ -8,11 +8,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.data.Staticdata;
+import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.YaoqinghaoyouBean;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
+import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -25,12 +30,17 @@ public class SharefriendActivity extends BaseActivityother {
 
     LinearLayout linearLayout_iamge;
     TextView textview_maintitle;
+    TextView textview_jiangli;
+    TextView textview_yaoqingrenshu;
+    TextView textview_xiadanrenshu;
 
     ImageView image_wxShare;
     ImageView image_wxcircleShare;
 
     UMImage image;
     public UMShareListener umShareListener;
+
+    YaoqinghaoyouBean  yaoqinghaoyouBean;
 
     @Override
     public int setLayoutResID() {
@@ -69,10 +79,12 @@ public class SharefriendActivity extends BaseActivityother {
         image.setBackgroundResource(R.mipmap.sharebg);
 //        int w= Staticdata.ScreenWidth- SizeUtils.dip2px(this,20);
         int w = Staticdata.ScreenWidth;
-        int h = (int) (w * 1.2);
+        int h = w;
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
         image.setLayoutParams(mLayoutparams);
         linearLayout_iamge.addView(image);
+
+        request();
     }
 
     @Override
@@ -110,10 +122,33 @@ public class SharefriendActivity extends BaseActivityother {
 
     @Override
     protected void initView() {
+        textview_jiangli = findViewById(R.id.textview_jiangli);
+        textview_yaoqingrenshu = findViewById(R.id.textview_yaoqingrenshu);
+        textview_xiadanrenshu = findViewById(R.id.textview_xiadanrenshu);
         textview_maintitle = findViewById(R.id.textview_maintitle);
         textview_maintitle.setText("邀请好友");
         linearLayout_iamge = findViewById(R.id.linearLayout_iamge);
         image_wxShare = findViewById(R.id.image_wxShare);
         image_wxcircleShare = findViewById(R.id.image_wxcircleShare);
     }
+    void request(){
+        new Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"邀请好友");
+                yaoqinghaoyouBean=new Gson().fromJson(respose,YaoqinghaoyouBean.class);
+                textview_jiangli.setText(yaoqinghaoyouBean.getData().getBonus());
+                textview_yaoqingrenshu.setText(yaoqinghaoyouBean.getData().getAmount());
+                textview_xiadanrenshu.setText(yaoqinghaoyouBean.getData().getIs_order());
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.userInvite+Staticdata.static_userBean.getData().getUser_token(),this,0);
+    }
+
+
+
 }

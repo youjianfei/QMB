@@ -180,6 +180,7 @@ public class Urls {
     public static String setSafepassword = "user/setSecurityCode";//设置支付密码
     public static String checkSafepassword = "user/checkSecurityCode";//校验支付密码
     public static String updataXYDU = "user/updateXYDu?user_token=";//更新经纬度
+    public static String userInvite = "user/queryUserInvite?user_token=";//邀请好友奖励以及人数
 
 
     public static String couponPopwindow= "coupon/getCouponWindow?user_token=";//新用户弹窗

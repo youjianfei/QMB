@@ -14,6 +14,7 @@ import com.jingnuo.quanmb.Interface.Interence_jubao;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.activity.OrderThinkActivity;
 import com.jingnuo.quanmb.activity.SharefriendActivity;
+import com.jingnuo.quanmb.activity.YaoqingHaoyouActivity;
 import com.jingnuo.quanmb.utils.Utils;
 
 public class Popwindow_orderthinkShare {
@@ -67,7 +68,7 @@ public class Popwindow_orderthinkShare {
             @Override
             public void onClick(View v) {
                 //点击分享
-                Intent intent_kefuzhongxin = new Intent(activity, SharefriendActivity.class);
+                Intent intent_kefuzhongxin = new Intent(activity, YaoqingHaoyouActivity.class);
 //                intent_kefuzhongxin.putExtra("webtitle", "优惠活动");
                 activity.startActivity(intent_kefuzhongxin);
 //                activity.finish();
