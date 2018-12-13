@@ -29,7 +29,7 @@ public class Popwindow_yaoqingguize {
 
     //控件
     LinearLayout linearLayout_coupon;
-
+    ImageView iamge_cancle;
 
     public Popwindow_yaoqingguize(Activity activity  ) {
         this.activity = activity;
@@ -60,15 +60,15 @@ public class Popwindow_yaoqingguize {
     private void initview() {
         Utils.setAlpha((float) 0.3,activity);
         linearLayout_coupon=view.findViewById(R.id.iamage_coupon);
-
+        iamge_cancle=view.findViewById(R.id.iamge_cancle);
         ImageView image = new ImageView(activity);
         image.setBackgroundResource(R.mipmap.yaoqingtankuang);
         int w=Staticdata.ScreenWidth-SizeUtils.dip2px(activity,40);
-        int h= (int) (w*1.16);
+        int h= w;
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
         image.setLayoutParams(mLayoutparams);
         linearLayout_coupon.addView(image);
-        linearLayout_coupon.setOnClickListener(new View.OnClickListener() {
+        iamge_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPopupWindow.dismiss();

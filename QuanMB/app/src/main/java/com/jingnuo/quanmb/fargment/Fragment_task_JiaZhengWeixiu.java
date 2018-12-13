@@ -135,9 +135,9 @@ public class Fragment_task_JiaZhengWeixiu extends Fragment  {
 //            "\"specialty_name\":\"管道\",\"image\":\"\",\"isselect\":false},{\"specialty_id\":1209,\"specialty_name\":\"全部\",\"image\":\"\",\"isselect\":false}]}";
     List<WeixiuJiazhengBean.ListBean>mdata;
     int [] images={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_jiadian,R.mipmap.b_shuma
-            ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_shoubiao,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao,R.mipmap.b_diandongche};
+            ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao};
     int [] images_select={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_jiadian,R.mipmap.b_shuma
-            ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_shoubiao,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao,R.mipmap.b_diandongche};
+            ,R.mipmap.b_dianlu,R.mipmap.b_jiaju,R.mipmap.b_kongtiaoweixiu5,R.mipmap.b_diannao};
     int [] images_shao={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_all};
     int [] images_select_shao={R.mipmap.b_shouji,R.mipmap.b_fangwu,R.mipmap.b_kaisuo,R.mipmap.b_guandao,R.mipmap.b_all};
 

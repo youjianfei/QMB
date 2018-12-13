@@ -4,11 +4,20 @@
     android:layout_height="match_parent"
     android:id="@+id/relativelayout"
     >
+        <ImageView
+            android:id="@+id/iamge_cancle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/cancel3"
+            android:layout_alignParentRight="true"
+            />
         <LinearLayout
             android:id="@+id/iamage_coupon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_below="@+id/iamge_cancle"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"/>
 
 
