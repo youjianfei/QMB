@@ -230,6 +230,7 @@ public class MytaskDetailActivity extends BaseActivityother {
                 Intent intent = new Intent(MytaskDetailActivity.this, ZixunKefuWebActivity.class);
                 intent.putExtra("webtitle", "全民帮客服中心");
                 intent.putExtra("type", "全民帮客服中心");
+                intent.putExtra("URL", Urls.Baseurl_zixunkefu);
                 startActivity(intent);
             }
         });

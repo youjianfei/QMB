@@ -151,6 +151,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
                         Intent intent_kefuzhongxin = new Intent(getActivity(), ZixunKefuWebActivity.class);
                         intent_kefuzhongxin.putExtra("webtitle", "全民帮客服中心");
                         intent_kefuzhongxin.putExtra("type", "全民帮客服中心");
+                        intent_kefuzhongxin.putExtra("URL", Urls.Baseurl_zixunkefu);
                         startActivity(intent_kefuzhongxin);
                         break;
                     case 5://邀请有奖

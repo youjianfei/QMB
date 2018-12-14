@@ -79,6 +79,7 @@ public class SystemMessageActivity extends BaseActivityother {
                 intent_messagedetail.putExtra("title",mData.get(position-1).getTitle());
                 intent_messagedetail.putExtra("content",mData.get(position-1).getContent());
                 intent_messagedetail.putExtra("time",mData.get(position-1).getCreateDate());
+                intent_messagedetail.putExtra("url",mData.get(position-1).getClick_url());
                 startActivity(intent_messagedetail);
             }
         });

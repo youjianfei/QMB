@@ -72,6 +72,14 @@ public class Popwindow_coupon {
                 Intent intent_kefuzhongxin = new Intent(activity, ZixunKefuWebActivity.class);
                 intent_kefuzhongxin.putExtra("webtitle", "优惠活动");
                 intent_kefuzhongxin.putExtra("type", "首页弹窗");
+                String url="";
+                if(Staticdata.static_userBean.getData()==null){
+                    url = Urls.newpeoplecoupon;
+                }else {
+                    url = Urls.newpeoplecoupon+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();
+                }
+                intent_kefuzhongxin.putExtra("URL", url);
+
                 activity.startActivity(intent_kefuzhongxin);
                 mPopupWindow.dismiss();
             }

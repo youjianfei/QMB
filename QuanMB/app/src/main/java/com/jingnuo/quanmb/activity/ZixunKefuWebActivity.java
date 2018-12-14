@@ -54,6 +54,7 @@ public class ZixunKefuWebActivity extends BaseActivityother {
         WebSettings settings = webView.getSettings();
         web_title = getIntent().getStringExtra("webtitle");
         type = getIntent().getStringExtra("type");
+        url = getIntent().getStringExtra("URL");
         textview_webtitle.setText(web_title);
         if (type.equals("全民帮客服中心")) {
             url = Urls.Baseurl_zixunkefu;

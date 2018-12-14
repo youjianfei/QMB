@@ -334,6 +334,7 @@ public class MatchShopActivity extends AppCompatActivity  {
                     Intent intent_kefuzhongxin = new Intent(MatchShopActivity.this, ZixunKefuWebActivity.class);
                     intent_kefuzhongxin.putExtra("webtitle", "优惠活动");
                     intent_kefuzhongxin.putExtra("type", "匹配商家界面");
+                    intent_kefuzhongxin.putExtra("URL", Urls.pipeijiemianhuodong+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no());
                     startActivity(intent_kefuzhongxin);
 
                 }
