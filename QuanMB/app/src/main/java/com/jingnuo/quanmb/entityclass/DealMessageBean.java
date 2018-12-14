@@ -7,7 +7,7 @@ public class DealMessageBean {
 
     /**
      * code : 1
-     * data : [{"Id":16594,"binding_id":"5757","content":"您发布的任务已被商家:挖矿大师完成啦！赶快去确认吧","createDate":"2018-11-15 17:19:33","createName":"root@47.95.254.3","order_no":"QMB181115100000901","receive_client_no":"90000000002","send_client_no":"60000000040","status":"1","task_Status_code":"05","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-15 17:19:33"},{"Id":16582,"binding_id":"5754","content":"您发布的任务已被商家:强强科技完成啦！赶快去确认吧","createDate":"2018-11-15 10:04:37","createName":"root@47.95.254.3","order_no":"QMB181115100000893","receive_client_no":"90000000002","send_client_no":"60000000046","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-15 10:04:37"},{"Id":16580,"binding_id":"5753","content":"您发布的任务已被商家:挖矿大师完成啦！赶快去确认吧","createDate":"2018-11-15 09:30:17","createName":"root@47.95.254.3","order_no":"QMB181115100000892","receive_client_no":"90000000002","send_client_no":"60000000040","status":"1","task_Status_code":"05","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-15 09:30:17"},{"Id":16563,"binding_id":"5748","content":"您发布的任务已被商家:挖矿大师完成啦！赶快去确认吧","createDate":"2018-11-14 19:15:54","createName":"root@47.95.254.3","order_no":"QMB181114100000888","receive_client_no":"90000000002","send_client_no":"60000000040","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-14 19:15:54"},{"Id":16552,"binding_id":"5745","content":"您发布的任务已被商家:挖矿大师完成啦！赶快去确认吧","createDate":"2018-11-14 18:04:52","createName":"root@47.95.254.3","order_no":"QMB181114100000886","receive_client_no":"90000000002","send_client_no":"60000000040","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-14 18:04:52"},{"Id":16551,"binding_id":"5746","content":"您发布的任务已被商家:挖矿大师完成啦！赶快去确认吧","createDate":"2018-11-14 18:04:45","createName":"root@47.95.254.3","order_no":"QMB181114100000887","receive_client_no":"90000000002","send_client_no":"60000000040","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-14 18:04:45"},{"Id":16550,"binding_id":"5592","content":"您发布的任务已被商家:强强科技完成啦！赶快去确认吧","createDate":"2018-11-14 18:04:12","createName":"root@47.95.254.3","order_no":"QMB181113100000834","receive_client_no":"90000000002","send_client_no":"60000000046","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-14 18:04:12"},{"Id":16549,"binding_id":"5743","content":"您发布的任务已被商家:强强科技完成啦！赶快去确认吧","createDate":"2018-11-14 18:04:04","createName":"root@47.95.254.3","order_no":"QMB181114100000884","receive_client_no":"90000000002","send_client_no":"60000000046","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-11-14 18:04:04"}]
+     * data : [{"Id":17615,"binding_id":"6770","content":"您发布的任务已被商家:强强科技完成啦！赶快去确认吧","createDate":"2018-12-12 17:21:11","createName":"root@47.95.254.3","order_no":"QMB181211100001499","receive_client_no":"90000000002","send_client_no":"60000000046","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-12 17:21:11"},{"Id":17569,"binding_id":"6852","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 22:01:27","createName":"root@47.95.254.3","order_no":"QMB181211100001581","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 22:01:27"},{"Id":17565,"binding_id":"6851","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 22:00:47","createName":"root@47.95.254.3","order_no":"QMB181211100001580","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 22:00:47"},{"Id":17563,"binding_id":"6850","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 21:59:20","createName":"root@47.95.254.3","order_no":"QMB181211100001579","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 21:59:20"},{"Id":17559,"binding_id":"6848","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 21:52:08","createName":"root@47.95.254.3","order_no":"QMB181211100001577","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 21:52:08"},{"Id":17551,"binding_id":"6845","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 21:46:13","createName":"root@47.95.254.3","order_no":"QMB181211100001574","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 21:46:13"},{"Id":17549,"binding_id":"6844","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 21:44:59","createName":"root@47.95.254.3","order_no":"QMB181211100001573","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 21:44:59"},{"Id":17524,"binding_id":"6838","content":"您发布的任务已被商家:月嫂大师完成啦！赶快去确认吧","createDate":"2018-12-11 21:26:29","createName":"root@47.95.254.3","order_no":"QMB181211100001567","receive_client_no":"90000000002","send_client_no":"60000000061","status":"1","task_Status_code":"06","title":"您发布的任务已被商家完成啦!","type":"3","updateDate":"2018-12-11 21:26:29"}]
      * msg : 获取消息列表成功
      */
 
@@ -41,19 +41,19 @@ public class DealMessageBean {
 
     public static class DataBean {
         /**
-         * Id : 16594
-         * binding_id : 5757
-         * content : 您发布的任务已被商家:挖矿大师完成啦！赶快去确认吧
-         * createDate : 2018-11-15 17:19:33
+         * Id : 17615
+         * binding_id : 6770
+         * content : 您发布的任务已被商家:强强科技完成啦！赶快去确认吧
+         * createDate : 2018-12-12 17:21:11
          * createName : root@47.95.254.3
-         * order_no : QMB181115100000901
+         * order_no : QMB181211100001499
          * receive_client_no : 90000000002
-         * send_client_no : 60000000040
+         * send_client_no : 60000000046
          * status : 1
-         * task_Status_code : 05
+         * task_Status_code : 06
          * title : 您发布的任务已被商家完成啦!
          * type : 3
-         * updateDate : 2018-11-15 17:19:33
+         * updateDate : 2018-12-12 17:21:11
          */
 
         private int Id;
@@ -69,13 +69,30 @@ public class DealMessageBean {
         private String title;
         private String type;
         private String updateDate;
-
+        private String click_url="";
+        private String img_url="";
         public int getId() {
             return Id;
         }
 
         public void setId(int Id) {
             this.Id = Id;
+        }
+
+        public String getClick_url() {
+            return click_url;
+        }
+
+        public void setClick_url(String click_url) {
+            this.click_url = click_url;
+        }
+
+        public String getImg_url() {
+            return img_url;
+        }
+
+        public void setImg_url(String img_url) {
+            this.img_url = img_url;
         }
 
         public String getBinding_id() {

@@ -116,6 +116,8 @@ public class SystemMessageActivity extends BaseActivityother {
                 if (mListview.isRefreshing()) {
                     mListview.onRefreshComplete();
                 }
+                LogUtils.LOG("ceshi","系统消息内容"+respose,"SystemMessageActivity");
+
                 systemmessageBean=new Gson().fromJson(respose,SystemmessageBean.class);
                 if(page==1){
                     mData.clear();

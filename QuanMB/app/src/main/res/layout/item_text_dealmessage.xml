@@ -16,15 +16,7 @@
         android:paddingRight="10dp"
         android:background="@drawable/text_gray3"
         />
-    <ImageView
-        android:id="@+id/imageview1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:src="@mipmap/tip"
-        android:layout_below="@+id/textview_time"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        />
+
 
 
     <LinearLayout
@@ -35,7 +27,6 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/textview_time"
-        android:layout_toRightOf="@+id/imageview1"
         android:background="@drawable/background_white"
         >
         <TextView
@@ -50,28 +41,27 @@
             android:layout_marginRight="15dp"
             />
         <TextView
-            android:id="@+id/text_systemmessagetext"
-            android:layout_width="match_parent"
+            android:id="@+id/text_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_title2"
-            android:textSize="15dp"
-            android:text="交易提醒详情"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
-        <TextView
-            android:id="@+id/text_looknow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
+            android:textColor="@color/gray_text"
             android:textSize="12dp"
+            android:singleLine="true"
             android:text="立即查看"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp"
             />
-
+        <ImageView
+            android:id="@+id/imageviewPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            />
 
     </LinearLayout>
 
