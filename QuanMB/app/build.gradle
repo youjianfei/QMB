@@ -71,6 +71,8 @@ dependencies {
     // 1、maven { url 'https://jitpack.io' }  2、'com.github.Jay-Goo:RangeSeekBar:v1.2.2'  双向滑动选择器
     //动态申请权限compile 'com.master.android:permissionhelper:1.4'
     compile 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support:cardview-v7:27.1.1'
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jaeger.statusbaruitl:library:1.0.0'
     compile 'com.android.support:design:27.1.1'

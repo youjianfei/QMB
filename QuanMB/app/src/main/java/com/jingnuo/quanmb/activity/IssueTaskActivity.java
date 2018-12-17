@@ -33,6 +33,7 @@ import com.jingnuo.quanmb.class_.Permissionmanage;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.NewCouponBean;
+import com.jingnuo.quanmb.fargment.Fragment_shenghuoquan;
 import com.jingnuo.quanmb.fargment.Fragment_task_JiaZhengWeixiu;
 import com.jingnuo.quanmb.fargment.Fragment_task_ZhaoShangHu;
 import com.jingnuo.quanmb.fargment.Fragment_tsk_ZhaoRenShou;
@@ -77,6 +78,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
 
 
     Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
+    Fragment_shenghuoquan fragmentShenghuoquan;
     Fragment_tsk_ZhaoRenShou  fragmentTskZhaoRenShou;
     Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;
 
@@ -318,11 +320,11 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
                case "2":
                    Tag=2;
                    transaction = fragmetnmanager.beginTransaction();
-                   if (fragmentTaskZhaoShangHu == null) {
-                       fragmentTaskZhaoShangHu = new Fragment_task_ZhaoShangHu();
-                       transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
+                   if (fragmentShenghuoquan == null) {
+                       fragmentShenghuoquan = new Fragment_shenghuoquan();
+                       transaction.replace(R.id.framelayout_main, fragmentShenghuoquan).commit();
                    } else {
-                       transaction.replace(R.id.framelayout_main, fragmentTaskZhaoShangHu).commit();
+                       transaction.replace(R.id.framelayout_main, fragmentShenghuoquan).commit();
                    }
                    break;
            }
@@ -357,7 +359,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
         mImageview_iamge_person = findViewById(R.id.iamge_person);
         tablayout_issue.addTab(tablayout_issue.newTab().setText("维修").setTag("0"));
         tablayout_issue.addTab(tablayout_issue.newTab().setText("家政").setTag("1"));
-        tablayout_issue.addTab(tablayout_issue.newTab().setText("其他").setTag("2"));
+        tablayout_issue.addTab(tablayout_issue.newTab().setText("生活圈").setTag("2"));
     }
 
     @Override
@@ -371,9 +373,9 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
             if(Tag==1&&fragmentTskZhaoRenShou!=null){
                 fragmentTskZhaoRenShou.setview(data);
             }
-            if(Tag==2&&fragmentTaskZhaoShangHu!=null){
-                fragmentTaskZhaoShangHu.setview(data);
-            }
+//            if(Tag==2&&fragmentShenghuoquan!=null){
+//                fragmentTaskZhaoShangHu.setview(data);
+//            }
 
 //            if(Tag==2&&fragment_task_jiaZhengWeixiu!=null){
 //                fragment_task_jiaZhengWeixiu.setview(data);
@@ -388,9 +390,9 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
             if(Tag==1&&fragmentTskZhaoRenShou!=null){
                 fragmentTskZhaoRenShou.setAddress(data);
             }
-            if(Tag==2&&fragmentTaskZhaoShangHu!=null){
-                fragmentTaskZhaoShangHu.setAddress(data);
-            }
+//            if(Tag==2&&fragmentTaskZhaoShangHu!=null){
+//                fragmentTaskZhaoShangHu.setAddress(data);
+//            }
         }
     }
     AutoUpdate autoUpdate;

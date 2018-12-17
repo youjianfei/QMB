@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_background"
+    android:orientation="vertical">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout_title"
+        android:layout_width="match_parent"
+        app:tabMode="fixed"
+        android:layout_height="40dp"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/red2"
+        app:tabIndicatorHeight="0dp"
+        app:tabMinWidth="110dp"
+        />
+    <GridView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        />
+
+
+
+</LinearLayout>
