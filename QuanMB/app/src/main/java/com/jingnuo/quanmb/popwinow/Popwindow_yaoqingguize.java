@@ -64,7 +64,7 @@ public class Popwindow_yaoqingguize {
         ImageView image = new ImageView(activity);
         image.setBackgroundResource(R.mipmap.yaoqingtankuang);
         int w=Staticdata.ScreenWidth-SizeUtils.dip2px(activity,40);
-        int h= w;
+        int h= (int) (w*1.07);
         LinearLayout.LayoutParams mLayoutparams = new LinearLayout.LayoutParams(w, h);
         image.setLayoutParams(mLayoutparams);
         linearLayout_coupon.addView(image);

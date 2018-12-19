@@ -92,7 +92,15 @@ public class Popwindow_ChooseTime {
                         month=1;
                     }
                 }
-                    listdata_one.add(month+"月"+day+"日");
+                String monthh=month+"";
+                if(monthh.length()==1){
+                    monthh="0"+month;
+                }
+                String dayy=day+"";
+                if(dayy.length()==1){
+                    dayy="0"+day;
+                }
+                    listdata_one.add(monthh+"月"+dayy+"日");
                 day++;
             }
         }else if(month==4||month==6||month==9||month==11){
@@ -104,7 +112,15 @@ public class Popwindow_ChooseTime {
                         month=1;
                     }
                 }
-                listdata_one.add(month+"月"+day+"日");
+                String monthh=month+"";
+                if(monthh.length()==1){
+                    monthh="0"+month;
+                }
+                String dayy=day+"";
+                if(dayy.length()==1){
+                    dayy="0"+day;
+                }
+                listdata_one.add(monthh+"月"+dayy+"日");
                 day++;
             }
         }else {
@@ -117,7 +133,15 @@ public class Popwindow_ChooseTime {
                             month=1;
                         }
                     }
-                    listdata_one.add(month+"月"+day+"日");
+                    String monthh=month+"";
+                    if(monthh.length()==1){
+                        monthh="0"+month;
+                    }
+                    String dayy=day+"";
+                    if(dayy.length()==1){
+                        dayy="0"+day;
+                    }
+                    listdata_one.add(monthh+"月"+dayy+"日");
                     day++;
                 }
             }else {
@@ -129,7 +153,15 @@ public class Popwindow_ChooseTime {
                             month=1;
                         }
                     }
-                    listdata_one.add(month+"月"+day+"日");
+                    String monthh=month+"";
+                    if(monthh.length()==1){
+                        monthh="0"+month;
+                    }
+                    String dayy=day+"";
+                    if(dayy.length()==1){
+                        dayy="0"+day;
+                    }
+                    listdata_one.add(monthh+"月"+dayy+"日");
                     day++;
                 }
             }

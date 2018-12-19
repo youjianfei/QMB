@@ -220,6 +220,7 @@ public class Urls {
     public static String getCommunityList = "Community/getMyCommunity";//模糊查询所有社区
     public static String bindCommunity = "Community/RequiredCom";//绑定社区
     public static String CommunityNotice = "Community/getCommunityNotice?user_token=";//社区公告
+    public static String shenghuoquan = "task/querySpecialty/getLifeCircle?type=";//生活圈
 
 
     //省市县

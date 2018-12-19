@@ -14,6 +14,7 @@ import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.YaoqinghaoyouBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_yaoqingguize;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -33,6 +34,7 @@ public class SharefriendActivity extends BaseActivityother {
     TextView textview_jiangli;
     TextView textview_yaoqingrenshu;
     TextView textview_xiadanrenshu;
+    TextView textview_guize;
 
     ImageView image_wxShare;
     ImageView image_wxcircleShare;
@@ -117,7 +119,13 @@ public class SharefriendActivity extends BaseActivityother {
                         .share();
             }
         });
+        textview_guize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Popwindow_yaoqingguize(SharefriendActivity.this).showpopwindow();
 
+            }
+        });
     }
 
     @Override
@@ -125,6 +133,7 @@ public class SharefriendActivity extends BaseActivityother {
         textview_jiangli = findViewById(R.id.textview_jiangli);
         textview_yaoqingrenshu = findViewById(R.id.textview_yaoqingrenshu);
         textview_xiadanrenshu = findViewById(R.id.textview_xiadanrenshu);
+        textview_guize = findViewById(R.id.textview_guize);
         textview_maintitle = findViewById(R.id.textview_maintitle);
         textview_maintitle.setText("邀请好友");
         linearLayout_iamge = findViewById(R.id.linearLayout_iamge);

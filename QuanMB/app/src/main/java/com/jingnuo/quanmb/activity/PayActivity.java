@@ -51,13 +51,15 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
     TextView textview_maintitle;
     CircleImageView mImageview_head;
     TextView mTextview_amount;
-    RelativeLayout mRelayout_yue;
+    RelativeLayout mRelayout_yue;//余额抵扣
+    RelativeLayout relayout_yuepay;//余额支付
     TextView textview_yue_dikou;//余额抵扣金额
     TextView text_yue_useable;//可用余额
     RelativeLayout mRelayout_wechat;
     RelativeLayout mRelayout_zhifubao;
     RelativeLayout relayout_selectCoupon;//选择优惠券
     ImageView image_yue;
+    ImageView image_yuepay;
     ImageView image_wechat;
     ImageView image_zhifubao;
     ImageView image_phonenumber;
@@ -241,6 +243,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
     @Override
     protected void initListener() {
+        relayout_yuepay.setOnClickListener(this);
         mRelayout_yue.setOnClickListener(this);
         mRelayout_wechat.setOnClickListener(this);
         mRelayout_zhifubao.setOnClickListener(this);
@@ -272,12 +275,14 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         mImageview_head = findViewById(R.id.image_viewHead);
         mTextview_amount = findViewById(R.id.textview);
         mRelayout_yue = findViewById(R.id.relayoutyue);
+        relayout_yuepay = findViewById(R.id.relayout_yuepay);
         text_yue_useable = findViewById(R.id.text_yue_useable);
         textview_yue_dikou = findViewById(R.id.textview_yue_dikou);
         mRelayout_wechat = findViewById(R.id.relayout_wechat);
         mRelayout_zhifubao = findViewById(R.id.relayout_zhifubao);
         relayout_selectCoupon = findViewById(R.id.relayout_selectCoupon);
         image_yue = findViewById(R.id.image_yue);
+        image_yuepay = findViewById(R.id.image_yuepay);
         image_wechat = findViewById(R.id.image_wechat);
         image_zhifubao = findViewById(R.id.image_zhifubao);
         image_phonenumber = findViewById(R.id.image_phonenumber);
@@ -357,14 +362,25 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                         ToastUtils.showToast(PayActivity.this,"没有可用余额");
                     }
                 }
-
+                break;
+            case R.id.relayout_yuepay://选择余额支付
+                if(balance>amount-coupon_amout){
+                    image_yuepay.setSelected(true);
+                    image_wechat.setSelected(false);
+                    image_zhifubao.setSelected(false);
+                    pay = 1;
+                }else {
+                    ToastUtils.showToast(PayActivity.this,"余额不足");
+                }
                 break;
             case R.id.relayout_wechat:
+                image_yuepay.setSelected(false);
                 image_wechat.setSelected(true);
                 image_zhifubao.setSelected(false);
                 pay = 2;
                 break;
             case R.id.relayout_zhifubao:
+                image_yuepay.setSelected(false);
                 image_wechat.setSelected(false);
                 image_zhifubao.setSelected(true);
                 pay = 3;
@@ -375,7 +391,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     return;
                 }
 
-                if (pay_amount == 0) {
+                if (pay_amount == 0||pay==1) {
                     if (Staticdata.static_userBean.getData().getAppuser().getSecurity_code().equals("")) {
                         ToastUtils.showToast(this, "请先设置安全密码");
                         Intent intent_setsafe = new Intent(PayActivity.this, SetSafepassword1Activity.class);
@@ -385,7 +401,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     }
                     //余额支付
                     Bundle bundle = new Bundle();
-                    bundle.putString(PayFragment.EXTRA_CONTENT, title_pay + "：¥ " + pay_amount);
+                    bundle.putString(PayFragment.EXTRA_CONTENT, "余额支付" + "：¥ " + (amount-coupon_amout));
                     fragment = new PayFragment();
                     fragment.setArguments(bundle);
                     fragment.setPaySuccessCallBack(PayActivity.this);

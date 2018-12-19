@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray_background"
-    android:orientation="vertical">
+    >
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout_title"
         android:layout_width="match_parent"
@@ -15,16 +15,27 @@
         app:tabIndicatorHeight="0dp"
         app:tabMinWidth="110dp"
         />
-    <GridView
+    <com.jingnuo.quanmb.customview.MyListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_below="@+id/tablayout_title"
+        android:dividerHeight="10dp"
+        android:divider="@color/gray_background"
+        />
+    <com.jingnuo.quanmb.customview.MyGridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
         android:numColumns="2"
+        android:layout_below="@+id/tablayout_title"
         />
 
 
-
-</LinearLayout>
+</RelativeLayout>

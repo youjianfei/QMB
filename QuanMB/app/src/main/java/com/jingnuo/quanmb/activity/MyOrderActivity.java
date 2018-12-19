@@ -134,7 +134,7 @@ public class MyOrderActivity extends BaseActivityother {
         textview_maintitle.setText("我的发布");
         mTablayout=findViewById(R.id.tablayout);
         mTablayout.addTab(mTablayout.newTab().setText("全部").setTag(""));
-        mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01,08"));
+//        mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01,08"));
         mTablayout.addTab(mTablayout.newTab().setText("进行中").setTag("02,03,05"));
         mTablayout.addTab(mTablayout.newTab().setText("已完成").setTag("06"));
         mTablayout.addTab(mTablayout.newTab().setText("已关闭").setTag("07,13,09"));

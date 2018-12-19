@@ -306,6 +306,19 @@ public class Fragment_tsk_ZhaoRenShou extends Fragment {
             typeBean2.setPrice("参考价：100-120元");
             typeBean2.setXiangmu("空调清洗");
             mData_jiazhengType.add(typeBean2);
+
+            JiaZhengTypeBean.TypeBean   typeBean3=new JiaZhengTypeBean.TypeBean();
+            typeBean3.setImage(R.mipmap.nuanqiqingxi);
+            typeBean3.setIsselect(false);
+            typeBean3.setPrice("参考价：100-120元");
+            typeBean3.setXiangmu("暖气清洗");
+            mData_jiazhengType.add(typeBean3);
+            JiaZhengTypeBean.TypeBean   typeBean4=new JiaZhengTypeBean.TypeBean();
+            typeBean4.setImage(R.mipmap.reshuiqi);
+            typeBean4.setIsselect(false);
+            typeBean4.setPrice("参考价：100-120元");
+            typeBean4.setXiangmu("热水器清洗");
+            mData_jiazhengType.add(typeBean4);
             return;
         }
         if(task_typeID==1308){

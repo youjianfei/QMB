@@ -44,7 +44,7 @@ public class FulisheActivity extends BaseActivityother {
     @Override
     protected void initData() {
         mdata=new ArrayList<>();
-        adapter_fulisheList=new Adapter_FulisheList(mdata,this);
+//        adapter_fulisheList=new Adapter_FulisheList(mdata,this,"1");
         mlistview_fulishe.setAdapter(adapter_fulisheList);
     }
 

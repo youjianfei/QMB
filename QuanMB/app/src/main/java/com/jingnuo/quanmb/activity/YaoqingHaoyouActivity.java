@@ -30,7 +30,7 @@ public class YaoqingHaoyouActivity extends BaseActivityother {
 
     YaoqinghaoyouBean yaoqinghaoyouBean;
 
-//    Share_yaoqinghaoyou share_yaoqinghaoyou;
+    //    Share_yaoqinghaoyou share_yaoqinghaoyou;
     ShareGoodWeb share_yaoqinghaoyou;
 
     @Override
@@ -45,7 +45,7 @@ public class YaoqingHaoyouActivity extends BaseActivityother {
 
     @Override
     protected void initData() {
-        share_yaoqinghaoyou=new ShareGoodWeb(this);
+        share_yaoqinghaoyou = new ShareGoodWeb(this);
     }
 
     @Override
@@ -60,10 +60,10 @@ public class YaoqingHaoyouActivity extends BaseActivityother {
         image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Utils.isWxInstall(YaoqingHaoyouActivity.this)){
+                if (Utils.isWxInstall(YaoqingHaoyouActivity.this)) {
                     share_yaoqinghaoyou.shareapp();
-                }else {
-                    ToastUtils.showToast(YaoqingHaoyouActivity.this,"未安装微信");
+                } else {
+                    ToastUtils.showToast(YaoqingHaoyouActivity.this, "未安装微信");
                 }
 
             }

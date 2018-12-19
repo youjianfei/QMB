@@ -54,6 +54,7 @@ public class OrderThinkActivity extends BaseActivityother {
     Button mButton_submit;
     TextView mTextview_name;
     TextView textview_startcounts;
+    TextView textview_good;
     TextView textview_shiji_amount;
     TextView textview_coupon;
     ImageView image_phonenumber;
@@ -245,13 +246,37 @@ public class OrderThinkActivity extends BaseActivityother {
         mRatinBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(SimpleRatingBar simpleRatingBar, float rating, boolean fromUser) {
-                map_think.put("star_level", (int)rating+"");
+                int  xingxingcount= (int)rating;
+                switch (xingxingcount){
+                    case 1:
+                        textview_good.setText("非常不满，各方面都很差");
+                        break;
+                    case 2:
+                        textview_good.setText("不满意，比较差");
+
+                        break;
+                    case 3:
+                        textview_good.setText("一般，还需改善");
+
+                        break;
+                    case 4:
+                        textview_good.setText("比较满意，再接再厉");
+                        break;
+                    case 5:
+                        textview_good.setText("非常满意，无可挑剔");
+
+                        break;
+                }
+
+
+                map_think.put("star_level", xingxingcount+"");
 
             }
         });
         mButton_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 for(int i=0;i<4;i++){
                     if(order_thinkList.get(i).isIsselect()){
                         contenttext=contenttext+order_thinkList.get(i).getName()+",";
@@ -272,6 +297,7 @@ public class OrderThinkActivity extends BaseActivityother {
         textview_maintitle = findViewById(R.id.textview_maintitle);
         textview_maintitle.setText("评价");
         mTextview_name = findViewById(R.id.textview_helpername);
+        textview_good = findViewById(R.id.textview_good);
         textview_startcounts = findViewById(R.id.textview_startcounts);
         textview_shiji_amount = findViewById(R.id.textview_shiji_amount);
         textview_coupon = findViewById(R.id.textview_coupon);

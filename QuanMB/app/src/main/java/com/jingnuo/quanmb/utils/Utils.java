@@ -345,10 +345,10 @@ public class Utils {
         hour = (diff / (60 * 60 * 1000) - day * 24);
         min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
         sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-        if (day != 0) return day + "天" + hour + "小时" + min + "分钟";
-        if (hour != 0) return hour + "小时" + min + "分钟" + sec + "秒";
-        if (min != 0) return hour + "小时" + min + "分钟" + sec + "秒";
-        if (sec != 0) return hour + "小时" + min + "分钟" + sec + "秒";
-        return "刚刚";
+        if (day != 0) return day + "天" + hour + "小时" + min + "分";
+        if (hour != 0) return hour + "小时" + min + "分" + sec + "秒";
+        if (min != 0) return  min + "分" + sec + "秒";
+        if (sec != 0) return  sec + "秒";
+        return "结束";
     }
 }
