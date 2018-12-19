@@ -22,7 +22,6 @@ import com.jingnuo.quanmb.customview.MyListView;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.ShenghuoquanBean;
-import com.jingnuo.quanmb.utils.CountDownUtil;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 

@@ -18,7 +18,6 @@ import com.jingnuo.quanmb.entityclass.GuanggaoBean;
 import com.jingnuo.quanmb.entityclass.SheQuListBean;
 import com.jingnuo.quanmb.R;
 import com.jingnuo.quanmb.entityclass.ShenghuoquanBean;
-import com.jingnuo.quanmb.utils.CountDownUtil;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.SizeUtils;
 import com.jingnuo.quanmb.utils.Utils;

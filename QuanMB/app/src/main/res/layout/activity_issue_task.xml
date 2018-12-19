@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
     <LinearLayout
         android:id="@+id/linearLayout_focus"
         android:layout_width="0dp"
@@ -72,17 +71,12 @@
 
     </RelativeLayout>
 
-    <com.jingnuo.quanmb.customview.CustomerScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/re_title"
-        android:overScrollMode="never"
-        android:scrollbars="vertical"
-        android:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_below="@+id/re_title"
             android:orientation="vertical">
             <android.support.design.widget.TabLayout
                 android:id="@+id/tablayout_issue"
@@ -103,7 +97,6 @@
                 />
         </LinearLayout>
 
-    </com.jingnuo.quanmb.customview.CustomerScrollView>
     </RelativeLayout>
     <fragment
         android:id="@+id/id_left_menu"
