@@ -77,7 +77,7 @@ public class IssueTaskActivity extends FragmentActivity implements View.OnClickL
     String Aoi="";
 
 
-    Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
+//    Fragment_task_ZhaoShangHu fragmentTaskZhaoShangHu;
     Fragment_shenghuoquan fragmentShenghuoquan;
     Fragment_tsk_ZhaoRenShou  fragmentTskZhaoRenShou;
     Fragment_task_JiaZhengWeixiu fragment_task_jiaZhengWeixiu;

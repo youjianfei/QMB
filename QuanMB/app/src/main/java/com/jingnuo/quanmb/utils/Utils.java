@@ -345,7 +345,22 @@ public class Utils {
         hour = (diff / (60 * 60 * 1000) - day * 24);
         min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
         sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-        if (day != 0) return day + "天" + hour + "小时" + min + "分";
+        if (day != 0) return day + "天" + hour + "小时" + min + "分"+sec + "秒";
+        if (hour != 0) return hour + "小时" + min + "分" + sec + "秒";
+        if (min != 0) return  min + "分" + sec + "秒";
+        if (sec != 0) return  sec + "秒";
+        return "结束";
+    }
+    public static String getDistanceTime5(long diff) {
+        long day = 0;
+        long hour = 0;
+        long min = 0;
+        long sec = 0;
+//        day = diff / (24 * 60 * 60 * 1000);
+        hour = (diff / (60 * 60 * 1000) );
+        min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+//        if (day != 0) return day + "天" + hour + "小时" + min + "分"+sec + "秒";
         if (hour != 0) return hour + "小时" + min + "分" + sec + "秒";
         if (min != 0) return  min + "分" + sec + "秒";
         if (sec != 0) return  sec + "秒";

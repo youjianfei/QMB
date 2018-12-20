@@ -71,6 +71,8 @@ public class ZixunKefuWebActivity extends BaseActivityother {
         else if(type.equals("匹配商家界面")){
             url = Urls.pipeijiemianhuodong+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();
             settings.setUseWideViewPort(true);
+        }else if(type.equals("生活圈")){
+            settings.setUseWideViewPort(true);
         }
         // 设置与Js交互的权限
         settings.setJavaScriptEnabled(true);

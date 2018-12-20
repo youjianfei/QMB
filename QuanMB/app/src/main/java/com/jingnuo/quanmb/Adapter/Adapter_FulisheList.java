@@ -144,8 +144,8 @@ public class Adapter_FulisheList extends BaseAdapter {
                     countDownTimer =  new CountDownTimer((endtime-nowtime),1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
-                           String daojishi= Utils.getDistanceTime4(millisUntilFinished);
-//                            LogUtils.LOG("ceshi", Utils.getDistanceTime4(millisUntilFinished)+"","倒计时");
+                           String daojishi= Utils.getDistanceTime5(millisUntilFinished);
+//                            LogUtils.LOG("ceshi", daojishi+"","倒计时");
                             viewholder_xianshimiaosha.textview_time.setText("倒计时:"+daojishi);
                         }
 

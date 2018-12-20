@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray_background"
     >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--&gt;-->
             <android.support.design.widget.TabLayout
                 android:id="@+id/tablayout_title"
                 android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 app:tabIndicatorHeight="0dp"
                 app:tabMinWidth="110dp"
                 />
-            <com.jingnuo.quanmb.customview.MyListView
+            <ListView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,9 +32,10 @@
                 android:dividerHeight="10dp"
                 android:divider="@color/gray_background"
                 android:layout_marginBottom="10dp"
+                android:layout_below="@+id/tablayout_title"
 
                 />
-            <com.jingnuo.quanmb.customview.MyGridView
+            <GridView
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -44,10 +45,11 @@
                 android:verticalSpacing="10dp"
                 android:numColumns="2"
                 android:layout_marginBottom="10dp"
+                android:layout_below="@+id/tablayout_title"
                 />
 
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-    </ScrollView>
+    <!--</ScrollView>-->
 </RelativeLayout>

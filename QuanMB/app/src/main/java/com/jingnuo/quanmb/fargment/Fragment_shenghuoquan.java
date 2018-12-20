@@ -36,8 +36,8 @@ import java.util.List;
 public class Fragment_shenghuoquan extends Fragment {
     View view;
     TabLayout  tablayout_title;
-    MyListView listview;
-    MyGridView gridview;
+    ListView listview;
+    GridView gridview;
 //    CountDownUtil countDownUtil;
 
     Adapter_FulisheList adapter_fulisheList;
@@ -69,6 +69,7 @@ public class Fragment_shenghuoquan extends Fragment {
                     intent.putExtra("type", "生活圈");
                     intent.putExtra("URL", mdata.get(position).getClick_url());
                     startActivity(intent);
+                    LogUtils.LOG("ceshi",position+"oooooo","点击listview");
                 }
             }
         });
@@ -81,6 +82,8 @@ public class Fragment_shenghuoquan extends Fragment {
                     intent.putExtra("type", "生活圈");
                     intent.putExtra("URL", mdata.get(position).getClick_url());
                     startActivity(intent);
+                    LogUtils.LOG("ceshi",position+"oooooo","点击gridview");
+
                 }
             }
         });
@@ -169,7 +172,15 @@ public class Fragment_shenghuoquan extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+//
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         type="1";
         adapter_fulisheList.cancelAllTimers();
+        LogUtils.LOG("ceshi","onDestroy()","生活圈");
+
     }
 }
