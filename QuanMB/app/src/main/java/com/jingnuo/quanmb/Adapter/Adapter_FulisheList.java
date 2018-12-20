@@ -122,16 +122,16 @@ public class Adapter_FulisheList extends BaseAdapter {
              long starttime=Long.parseLong(mData.get(position).getStart_date_code())*1000;
             long endtime=Long.parseLong(mData.get(position).getEnd_date_code())*1000;
             LogUtils.LOG("zeshii","no"+starttime+"qqqqqq"+position,"倒计时");
-            viewholder_xianshimiaosha.linearlayout_qianggou.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(mContext, ZixunKefuWebActivity.class);
-                    intent.putExtra("webtitle", "");
-                    intent.putExtra("type", "生活圈");
-                    intent.putExtra("URL", mData.get(position).getClick_url());
-                    mContext.startActivity(intent);
-                }
-            });
+//            viewholder_xianshimiaosha.linearlayout_qianggou.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent=new Intent(mContext, ZixunKefuWebActivity.class);
+//                    intent.putExtra("webtitle", "");
+//                    intent.putExtra("type", "生活圈");
+//                    intent.putExtra("URL", mData.get(position).getClick_url());
+//                    mContext.startActivity(intent);
+//                }
+//            });
             CountDownTimer countDownTimer = countDownCounters.get(viewholder_xianshimiaosha.textview_time.hashCode());
             if (countDownTimer != null) {
                 //将复用的倒计时清除
@@ -152,6 +152,7 @@ public class Adapter_FulisheList extends BaseAdapter {
                         @Override
                         public void onFinish() {
                             viewholder_xianshimiaosha.textview_time.setText("活动已结束");
+                            viewholder_xianshimiaosha.linearlayout_qianggou.setVisibility(View.GONE);
                         }
                     }.start();
                     //将此 countDownTimer 放入list.

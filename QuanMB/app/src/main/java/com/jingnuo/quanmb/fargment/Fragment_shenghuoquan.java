@@ -63,7 +63,7 @@ public class Fragment_shenghuoquan extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {//点击列表
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mdata.get(position).getClick_url()!=null&&!mdata.get(position).getClick_url().equals("")&&type.equals("3")){
+                if(mdata.get(position).getClick_url()!=null&&!mdata.get(position).getClick_url().equals("")){
                     Intent intent=new Intent(getActivity(), ZixunKefuWebActivity.class);
                     intent.putExtra("webtitle", "");
                     intent.putExtra("type", "生活圈");
@@ -179,7 +179,9 @@ public class Fragment_shenghuoquan extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         type="1";
-        adapter_fulisheList.cancelAllTimers();
+        if(adapter_fulisheList!=null){
+            adapter_fulisheList.cancelAllTimers();
+        }
         LogUtils.LOG("ceshi","onDestroy()","生活圈");
 
     }

@@ -364,7 +364,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                 }
                 break;
             case R.id.relayout_yuepay://选择余额支付
-                if(balance>amount-coupon_amout){
+                if(balance>=amount-coupon_amout){
                     image_yuepay.setSelected(true);
                     image_wechat.setSelected(false);
                     image_zhifubao.setSelected(false);
