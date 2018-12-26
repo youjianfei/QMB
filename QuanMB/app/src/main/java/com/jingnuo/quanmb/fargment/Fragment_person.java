@@ -121,7 +121,7 @@ public class Fragment_person extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0://我的发布
+                    case 0://我的订单
                         Intent intent_myorder = new Intent(getActivity(), MyOrderActivity.class);
                         getActivity().startActivity(intent_myorder);
                         break;

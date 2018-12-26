@@ -531,88 +531,21 @@ public class MytaskDetailActivity extends BaseActivityother {
                     } else {
                         todoVIP.setText(vip);
                     }
-                    if (taskDetailBean.getData().getBusiness_name().equals("")) {
-                        //没有商户名字   是帮手
-                        todoName.setText(taskDetailBean.getData().getHelper_name());
-                        todoShenfen.setText("个人帮手");
-                        phonenumber = taskDetailBean.getData().getHelper_mobile_no();
-                    } else {
+//                    if (taskDetailBean.getData().getBusiness_name().equals("")) {
+//                        //没有商户名字   是帮手
+//                        todoName.setText(taskDetailBean.getData().getHelper_name());
+//                        todoShenfen.setText("个人帮手");
+//                        phonenumber = taskDetailBean.getData().getHelper_mobile_no();
+//                    } else
+//                        {
                         //商户
                         todoName.setText(taskDetailBean.getData().getBusiness_name());
                         todoShenfen.setText("认证商户");
                         phonenumber = taskDetailBean.getData().getBusiness_mobile_no();
-                    }
+//                    }
                 }
                 mTextview_guzhuName.setText(taskDetailBean.getData().getNick_name());
                 mTextview_taskstate.setText(taskDetailBean.getData().getSpecialty_name());
-//                if(taskDetailBean.getData().getIs_delay().equals("Y")&&taskDetailBean.getData().getDelay().equals("")&&taskDetailBean.getData().getTask_Status_code().equals("02")){
-//                    String Tip="";
-//                    switch (taskDetailBean.getData().getDelay_time()){
-//                        case "1" :
-//                            Tip="帮手申请延时3小时完成任务";
-//                            break;
-//                        case "2" :
-//                            Tip="帮手申请延时一天完成任务";
-//                            break;
-//                        case "3" :
-//                            Tip="帮手申请延时三天完成任务";
-//                            break;
-//                        case "4" :
-//                            Tip="帮手申请延时七天完成任务";
-//                            break;
-//                        case "5" :
-//                            Tip="帮手申请延时十五天完成任务";
-//                            break;
-//                        case "6" :
-//                            Tip="帮手申请延时三十天完成任务";
-//                            break;
-//                    }
-//                    if(popwindow_tip==null){
-//                    popwindow_tip=new Popwindow_Tip(Tip, MytaskDetailActivity.this, new Interence_complteTask() {
-//                        @Override
-//                        public void onResult(boolean result) {
-//                            Map map_agreeorefuse =new HashMap();
-//                            map_agreeorefuse.put("user_token",Staticdata.static_userBean.getData().getUser_token());
-//                            map_agreeorefuse.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                            map_agreeorefuse.put("task_id",taskDetailBean.getData().getTask_id()+"");
-//                            map_agreeorefuse.put("order_no",taskDetailBean.getData().getOrder_no()+"");
-//                            if(result){
-//                                map_agreeorefuse.put("delay","Y");
-//                            }else {
-//                                map_agreeorefuse.put("delay","N");
-//                            }
-//
-//                            map_agreeorefuse.put("delay_time",taskDetailBean.getData().getDelay_time()+"");
-//                            LogUtils.LOG("ceshi",Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,"申请延时接口");
-//                            LogUtils.LOG("ceshi",map_agreeorefuse.toString(),"申请延时接口");
-//                            new  Volley_Utils(new Interface_volley_respose() {
-//                                @Override
-//                                public void onSuccesses(String respose) {
-//                                    int status = 0;
-//                                    String msg = "";
-//                                    try {
-//                                        JSONObject object = new JSONObject(respose);
-//                                        status = (Integer) object.get("code");//
-//                                        msg = (String) object.get("message");//
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                    ToastUtils.showToast(MytaskDetailActivity.this,msg);
-//
-//                                }
-//
-//                                @Override
-//                                public void onError(int error) {
-//
-//                                }
-//                            }).postHttp(Urls.Baseurl_cui+Urls.agreeOrrefuse_longtime,MytaskDetailActivity.this,1,map_agreeorefuse);
-//                            }
-//
-//
-//                    });
-//                    popwindow_tip.showPopwindow();
-//                    }
-//                }
 
                 if (taskDetailBean.getData().getIs_helper_bid().equals("Y")) {
                     mTextview_taskmoney.setText("佣金：" + "帮手出价");

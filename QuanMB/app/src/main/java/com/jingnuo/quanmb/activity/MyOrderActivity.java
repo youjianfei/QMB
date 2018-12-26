@@ -118,9 +118,16 @@ public class MyOrderActivity extends BaseActivityother {
                     intent_mytaskdetail.putExtra("taskid", mData.get(i-1).getTask_id()+"");
                     startActivity(intent_mytaskdetail);
                 }else {
-                    Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
-                    intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id()+"");
-                    startActivity(intent_mytaskdetail);
+                    if(mData.get(i-1).getTask_Status_code().equals("02")||mData.get(i-1).getTask_Status_code().equals("03")){
+                        Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,Mytaskdetails_JinxingzhongActivity.class);
+                        intent_mytaskdetail.putExtra("taskid",mData.get(i-1).getTask_id()+"");
+                        startActivity(intent_mytaskdetail);
+                    }else {
+                        Intent intent_mytaskdetail=new Intent(MyOrderActivity.this,MytaskDetailActivity.class);
+                        intent_mytaskdetail.putExtra("id",mData.get(i-1).getTask_id()+"");
+                        startActivity(intent_mytaskdetail);
+                    }
+
                 }
 
 
@@ -131,7 +138,7 @@ public class MyOrderActivity extends BaseActivityother {
     @Override
     protected void initView() {
         textview_maintitle=findViewById(R.id.textview_maintitle);
-        textview_maintitle.setText("我的发布");
+        textview_maintitle.setText("我的订单");
         mTablayout=findViewById(R.id.tablayout);
         mTablayout.addTab(mTablayout.newTab().setText("全部").setTag(""));
 //        mTablayout.addTab(mTablayout.newTab().setText("待接单").setTag("01,08"));

@@ -1,15 +1,27 @@
 package com.jingnuo.quanmb.entityclass;
 
+import java.util.List;
+
 public class TaskDetailBean {
+
+
     /**
-     * data : {"Status_name":"待帮助","client_name":"看看","client_no":"90000000003","client_sex":"0","commission":63,"createDate":"2018-05-09 09:08:23","detailed_address":"了了了我我","is_counteroffer":"1","mobile_no":"2556","nick_name":"天天","specialty_name":"app开发","task_EndDate":"2018-05-12 09:08:23","task_ID":46,"task_Status_code":"01","task_Time":5,"task_description":"开发炸弹","task_name":"我选","url":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/05cdaca5-5fa8-4e99-a439-b3bfb73f3d21dts_featured_ath_clr100.png?Expires=1525919126&OSSAccessKeyId=LTAIcYmxp0FtpOf4&Signature=eLBGuzFvy8PxOb1LSGBnSFOQ0gI%3D,","user_grade":"1"}
-     * message : 获取列表成功
-     * status : 1
+     * code : 1
+     * data : {"Avatar_imgUrl":"http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/3657847f-1883-4e8b-949d-5f44b0c422bb1537250201597.png,","Evaluation_star":4.8,"Status_name":"已接单","app_type":"1","b_h_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/avatar/business.png","business_mobile_no":"18539931923","business_name":"月嫂大师","business_no":"60000000061","client_name":"测试环境","client_no":"90000000002","client_sex":"0","commission":0,"count":17,"createDate":"2018-12-25 17:50:12","detailed_address":"裕华文清园","evaluate":["专业认真","技术过硬","上门速度快","服务态度好"],"is_counteroffer":"1","is_helper_bid":"Y","level":"VIP1","memberImgUrl":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/VIP1.png","member_enddate":"2019-01-31 00:00:00","member_level":1,"member_lv":"会员VIP1","mobile_no":"18539931923","nick_name":"测试环境","order_no":"QMB181225100001711","overCount":17,"release_address":"裕华文清园","specialty_name":"保姆月嫂","task_EndDate":"2018-12-28 17:50:12","task_ImgUrl":"","task_Startdate":"2018-12-25 17:50:12","task_Status_code":"02","task_Time":"尽快","task_description":"保姆","task_id":7011,"task_type":1308,"total_score":81,"user_level":122,"x_value":"34.799874","y_value":"113.632031"}
+     * message : 获取信息成功
      */
 
+    private int code;
     private DataBean data;
     private String message;
-    private int status;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public DataBean getData() {
         return data;
@@ -27,80 +39,115 @@ public class TaskDetailBean {
         this.message = message;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public static class DataBean {
+        /**
+         * Avatar_imgUrl : http://quanminbang-img.oss-cn-beijing.aliyuncs.com/image/avatar/3657847f-1883-4e8b-949d-5f44b0c422bb1537250201597.png,
+         * Evaluation_star : 4.8
+         * Status_name : 已接单
+         * app_type : 1
+         * b_h_url : https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/avatar/business.png
+         * business_mobile_no : 18539931923
+         * business_name : 月嫂大师
+         * business_no : 60000000061
+         * client_name : 测试环境
+         * client_no : 90000000002
+         * client_sex : 0
+         * commission : 0.0
+         * count : 17
+         * createDate : 2018-12-25 17:50:12
+         * detailed_address : 裕华文清园
+         * evaluate : ["专业认真","技术过硬","上门速度快","服务态度好"]
+         * is_counteroffer : 1
+         * is_helper_bid : Y
+         * level : VIP1
+         * memberImgUrl : https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/VIP1.png
+         * member_enddate : 2019-01-31 00:00:00
+         * member_level : 1
+         * member_lv : 会员VIP1
+         * mobile_no : 18539931923
+         * nick_name : 测试环境
+         * order_no : QMB181225100001711
+         * overCount : 17
+         * release_address : 裕华文清园
+         * specialty_name : 保姆月嫂
+         * task_EndDate : 2018-12-28 17:50:12
+         * task_ImgUrl :
+         * task_Startdate : 2018-12-25 17:50:12
+         * task_Status_code : 02
+         * task_Time : 尽快
+         * task_description : 保姆
+         * task_id : 7011
+         * task_type : 1308
+         * total_score : 81
+         * user_level : 122
+         * x_value : 34.799874
+         * y_value : 113.632031
+         */
 
-
+        private String Avatar_imgUrl;
+        private double Evaluation_star;
         private String Status_name;
+        private String app_type;
+        private String b_h_url;
+        private String business_mobile_no;
+        private String business_name;
+        private String business_no;
         private String client_name;
         private String client_no;
         private String client_sex;
-        private String app_type;
         private double commission;
-        private double counteroffer_amount=0;
+        private int count;
         private String createDate;
         private String detailed_address;
         private String is_counteroffer;
+        private String is_helper_bid;
+        private String level;
+        private String memberImgUrl="";
+        private String member_enddate;
+        private int member_level;
+        private String member_lv;
         private String mobile_no;
         private String nick_name;
+        private String order_no;
+        private int overCount;
+        private String release_address;
         private String specialty_name;
         private String task_EndDate;
-        private int task_id;
-        private String task_Status_code;
-        private String task_hope;
-        private String task_description;
-        private String is_helper_bid;
-        private String task_name;
-        private String task_Time;
-        private String task_type;
-        private String Avatar_imgUrl;
         private String task_ImgUrl;
-        private String user_grade;
-        private String order_no;
-        private String release_address;
-        private String helper_name="";
-        private String helper_mobile_no;
-        private String b_h_url;
-        private String business_name="";
-        private String business_mobile_no;
-        private String business_no;
-        private String level="";
-        private String delay="";
-        private String is_delay="";
-        private String delay_time;
         private String task_Startdate;
-        private String x_value="";
-        private String y_value="";
+        private String task_Status_code;
+        private String task_Time;
+        private String task_description;
+        private int task_id;
+        private int task_type;
+        private int total_score;
+        private int user_level;
+        private String x_value;
+        private String y_value;
+        private List<String> evaluate;
 
-        public String getTask_type() {
-            return task_type;
+        public String getAvatar_imgUrl() {
+            return Avatar_imgUrl;
         }
 
-        public void setTask_type(String task_type) {
-            this.task_type = task_type;
+        public void setAvatar_imgUrl(String Avatar_imgUrl) {
+            this.Avatar_imgUrl = Avatar_imgUrl;
         }
 
-        public String getBusiness_no() {
-            return business_no;
+        public double getEvaluation_star() {
+            return Evaluation_star;
         }
 
-        public void setBusiness_no(String business_no) {
-            this.business_no = business_no;
+        public void setEvaluation_star(double Evaluation_star) {
+            this.Evaluation_star = Evaluation_star;
         }
 
-        public double getCounteroffer_amount() {
-            return counteroffer_amount;
+        public String getStatus_name() {
+            return Status_name;
         }
 
-        public void setCounteroffer_amount(double counteroffer_amount) {
-            this.counteroffer_amount = counteroffer_amount;
+        public void setStatus_name(String Status_name) {
+            this.Status_name = Status_name;
         }
 
         public String getApp_type() {
@@ -111,76 +158,12 @@ public class TaskDetailBean {
             this.app_type = app_type;
         }
 
-        public String getTask_Time() {
-            return task_Time;
-        }
-
-        public void setTask_Time(String task_Time) {
-            this.task_Time = task_Time;
-        }
-
-        public String getX_value() {
-            return x_value;
-        }
-
-        public void setX_value(String x_value) {
-            this.x_value = x_value;
-        }
-
-        public String getY_value() {
-            return y_value;
-        }
-
-        public void setY_value(String y_value) {
-            this.y_value = y_value;
-        }
-
-        public String getTask_Startdate() {
-            return task_Startdate;
-        }
-
-        public void setTask_Startdate(String task_Startdate) {
-            this.task_Startdate = task_Startdate;
-        }
-
-        public String getDelay() {
-            return delay;
-        }
-
-        public void setDelay(String delay) {
-            this.delay = delay;
-        }
-
-        public String getIs_delay() {
-            return is_delay;
-        }
-
-        public void setIs_delay(String is_delay) {
-            this.is_delay = is_delay;
-        }
-
-        public String getDelay_time() {
-            return delay_time;
-        }
-
-        public void setDelay_time(String delay_time) {
-            this.delay_time = delay_time;
-        }
-
         public String getB_h_url() {
             return b_h_url;
         }
 
         public void setB_h_url(String b_h_url) {
             this.b_h_url = b_h_url;
-        }
-
-        public String getLevel() {
-            return level;
-        }
-
-        public void setLevel(String level) {
-            this.level = level;
         }
 
         public String getBusiness_mobile_no() {
@@ -199,70 +182,12 @@ public class TaskDetailBean {
             this.business_name = business_name;
         }
 
-
-
-        public String getHelper_mobile_no() {
-            return helper_mobile_no;
+        public String getBusiness_no() {
+            return business_no;
         }
 
-        public void setHelper_mobile_no(String helper_mobile_no) {
-            this.helper_mobile_no = helper_mobile_no;
-        }
-
-        public String getHelper_name() {
-            return helper_name;
-        }
-
-        public void setHelper_name(String helper_name) {
-            this.helper_name = helper_name;
-        }
-
-        public String getRelease_address() {
-            return release_address;
-        }
-
-        public void setRelease_address(String release_address) {
-            this.release_address = release_address;
-        }
-
-        public String getIs_helper_bid() {
-            return is_helper_bid;
-        }
-
-        public void setIs_helper_bid(String is_helper_bid) {
-            this.is_helper_bid = is_helper_bid;
-        }
-
-        public String getAvatar_imgUrl() {
-            return Avatar_imgUrl;
-        }
-
-        public void setAvatar_imgUrl(String avatar_imgUrl) {
-            Avatar_imgUrl = avatar_imgUrl;
-        }
-
-        public String getTask_ImgUrl() {
-            return task_ImgUrl;
-        }
-
-        public void setTask_ImgUrl(String task_ImgUrl) {
-            this.task_ImgUrl = task_ImgUrl;
-        }
-
-        public String getOrder_no() {
-            return order_no;
-        }
-
-        public void setOrder_no(String order_no) {
-            this.order_no = order_no;
-        }
-
-        public String getStatus_name() {
-            return Status_name;
-        }
-
-        public void setStatus_name(String Status_name) {
-            this.Status_name = Status_name;
+        public void setBusiness_no(String business_no) {
+            this.business_no = business_no;
         }
 
         public String getClient_name() {
@@ -297,6 +222,14 @@ public class TaskDetailBean {
             this.commission = commission;
         }
 
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
         public String getCreateDate() {
             return createDate;
         }
@@ -321,6 +254,54 @@ public class TaskDetailBean {
             this.is_counteroffer = is_counteroffer;
         }
 
+        public String getIs_helper_bid() {
+            return is_helper_bid;
+        }
+
+        public void setIs_helper_bid(String is_helper_bid) {
+            this.is_helper_bid = is_helper_bid;
+        }
+
+        public String getLevel() {
+            return level;
+        }
+
+        public void setLevel(String level) {
+            this.level = level;
+        }
+
+        public String getMemberImgUrl() {
+            return memberImgUrl;
+        }
+
+        public void setMemberImgUrl(String memberImgUrl) {
+            this.memberImgUrl = memberImgUrl;
+        }
+
+        public String getMember_enddate() {
+            return member_enddate;
+        }
+
+        public void setMember_enddate(String member_enddate) {
+            this.member_enddate = member_enddate;
+        }
+
+        public int getMember_level() {
+            return member_level;
+        }
+
+        public void setMember_level(int member_level) {
+            this.member_level = member_level;
+        }
+
+        public String getMember_lv() {
+            return member_lv;
+        }
+
+        public void setMember_lv(String member_lv) {
+            this.member_lv = member_lv;
+        }
+
         public String getMobile_no() {
             return mobile_no;
         }
@@ -335,6 +316,30 @@ public class TaskDetailBean {
 
         public void setNick_name(String nick_name) {
             this.nick_name = nick_name;
+        }
+
+        public String getOrder_no() {
+            return order_no;
+        }
+
+        public void setOrder_no(String order_no) {
+            this.order_no = order_no;
+        }
+
+        public int getOverCount() {
+            return overCount;
+        }
+
+        public void setOverCount(int overCount) {
+            this.overCount = overCount;
+        }
+
+        public String getRelease_address() {
+            return release_address;
+        }
+
+        public void setRelease_address(String release_address) {
+            this.release_address = release_address;
         }
 
         public String getSpecialty_name() {
@@ -353,12 +358,20 @@ public class TaskDetailBean {
             this.task_EndDate = task_EndDate;
         }
 
-        public int getTask_id() {
-            return task_id;
+        public String getTask_ImgUrl() {
+            return task_ImgUrl;
         }
 
-        public void setTask_id(int task_id) {
-            this.task_id = task_id;
+        public void setTask_ImgUrl(String task_ImgUrl) {
+            this.task_ImgUrl = task_ImgUrl;
+        }
+
+        public String getTask_Startdate() {
+            return task_Startdate;
+        }
+
+        public void setTask_Startdate(String task_Startdate) {
+            this.task_Startdate = task_Startdate;
         }
 
         public String getTask_Status_code() {
@@ -369,13 +382,12 @@ public class TaskDetailBean {
             this.task_Status_code = task_Status_code;
         }
 
-
-        public String getTask_hope() {
-            return task_hope;
+        public String getTask_Time() {
+            return task_Time;
         }
 
-        public void setTask_hope(String task_hope) {
-            this.task_hope = task_hope;
+        public void setTask_Time(String task_Time) {
+            this.task_Time = task_Time;
         }
 
         public String getTask_description() {
@@ -386,26 +398,60 @@ public class TaskDetailBean {
             this.task_description = task_description;
         }
 
-        public String getTask_name() {
-            return task_name;
+        public int getTask_id() {
+            return task_id;
         }
 
-        public void setTask_name(String task_name) {
-            this.task_name = task_name;
+        public void setTask_id(int task_id) {
+            this.task_id = task_id;
         }
 
-
-        public String getUser_grade() {
-            return user_grade;
+        public int getTask_type() {
+            return task_type;
         }
 
-        public void setUser_grade(String user_grade) {
-            this.user_grade = user_grade;
+        public void setTask_type(int task_type) {
+            this.task_type = task_type;
+        }
+
+        public int getTotal_score() {
+            return total_score;
+        }
+
+        public void setTotal_score(int total_score) {
+            this.total_score = total_score;
+        }
+
+        public int getUser_level() {
+            return user_level;
+        }
+
+        public void setUser_level(int user_level) {
+            this.user_level = user_level;
+        }
+
+        public String getX_value() {
+            return x_value;
+        }
+
+        public void setX_value(String x_value) {
+            this.x_value = x_value;
+        }
+
+        public String getY_value() {
+            return y_value;
+        }
+
+        public void setY_value(String y_value) {
+            this.y_value = y_value;
+        }
+
+        public List<String> getEvaluate() {
+            return evaluate;
+        }
+
+        public void setEvaluate(List<String> evaluate) {
+            this.evaluate = evaluate;
         }
     }
-
-
-
-
-
 }

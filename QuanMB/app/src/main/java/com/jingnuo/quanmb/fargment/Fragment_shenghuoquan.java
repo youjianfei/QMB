@@ -13,6 +13,9 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jingnuo.quanmb.Adapter.Adapter_FulisheList;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
@@ -36,8 +39,8 @@ import java.util.List;
 public class Fragment_shenghuoquan extends Fragment {
     View view;
     TabLayout  tablayout_title;
-    ListView listview;
-    GridView gridview;
+    PullToRefreshListView listview;
+    PullToRefreshGridView gridview;
 //    CountDownUtil countDownUtil;
 
     Adapter_FulisheList adapter_fulisheList;
@@ -46,7 +49,9 @@ public class Fragment_shenghuoquan extends Fragment {
 
     String type="1";
 
+    int page=1;
 
+    ShenghuoquanBean shenghuoquanBean;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,29 +65,58 @@ public class Fragment_shenghuoquan extends Fragment {
     }
 
     private void initlistenner() {
+        listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page=1;
+                request(type,page);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page++;
+                request(type,page);
+            }
+        });
+      gridview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+          @Override
+          public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+              page=1;
+              request(type,page);
+          }
+
+          @Override
+          public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+              page++;
+              request(type,page);
+          }
+      });
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {//点击列表
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mdata.get(position).getClick_url()!=null&&!mdata.get(position).getClick_url().equals("")){
+                LogUtils.LOG("ceshi",position-1+"oooooo","点击listview");
+                if(mdata.get(position-1).getClick_url()!=null&&!mdata.get(position-1).getClick_url().equals("")){
                     Intent intent=new Intent(getActivity(), ZixunKefuWebActivity.class);
                     intent.putExtra("webtitle", "");
                     intent.putExtra("type", "生活圈");
-                    intent.putExtra("URL", mdata.get(position).getClick_url());
+                    intent.putExtra("URL", mdata.get(position-1).getClick_url());
                     startActivity(intent);
-                    LogUtils.LOG("ceshi",position+"oooooo","点击listview");
+                    LogUtils.LOG("ceshi",position-1+"oooooo","点击listview");
                 }
             }
         });
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi",position+"oooooo","点击gridview");
                 if(mdata.get(position).getClick_url()!=null&&!mdata.get(position).getClick_url().equals("")){
                     Intent intent=new Intent(getActivity(), ZixunKefuWebActivity.class);
                     intent.putExtra("webtitle", "");
                     intent.putExtra("type", "生活圈");
                     intent.putExtra("URL", mdata.get(position).getClick_url());
                     startActivity(intent);
-                    LogUtils.LOG("ceshi",position+"oooooo","点击gridview");
+
 
                 }
             }
@@ -127,36 +161,67 @@ public class Fragment_shenghuoquan extends Fragment {
         tablayout_title.addTab(tablayout_title.newTab().setText("限时秒杀").setTag("1"));
         tablayout_title.addTab(tablayout_title.newTab().setText("周边").setTag("2"));
         tablayout_title.addTab(tablayout_title.newTab().setText("新鲜事").setTag("3"));
-
+        listview.setMode(PullToRefreshBase.Mode.BOTH);//设置你需要的模式
+        gridview.setMode(PullToRefreshBase.Mode.BOTH);//设置你需要的模式
     }
     private  void initdata(){
         request(type,1);
         mdata=new ArrayList<>();
     }
-    private void request(final String   type, int  papageNum){
+    private void request(final String   type, final int  papageNum){
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
+                if (gridview.isRefreshing()) {
+                    gridview.onRefreshComplete();
+                }
+                if (listview.isRefreshing()) {
+                    listview.onRefreshComplete();
+                }
+                shenghuoquanBean= new Gson().fromJson(respose,ShenghuoquanBean.class);
                 if(type.equals("2")){
                     gridview.setVisibility(View.VISIBLE);
                     listview.setVisibility(View.GONE);
                     LogUtils.LOG("ceshi",respose,"生活圈");
-                    adapter_fulisheList=null;
-                    adapter_fulisheList=new Adapter_FulisheList(mdata,getActivity(),type);
-                    gridview.setAdapter(adapter_fulisheList);
-                    mdata.clear();
-                    mdata.addAll(new Gson().fromJson(respose,ShenghuoquanBean.class).getData());
-                    adapter_fulisheList.notifyDataSetInvalidated();
+                    if(papageNum==1){
+                        if(shenghuoquanBean.getData()!=null){
+                            adapter_fulisheList=null;
+                            adapter_fulisheList=new Adapter_FulisheList(mdata,getActivity(),type);
+                            gridview.setAdapter(adapter_fulisheList);
+                            mdata.clear();
+                            mdata.addAll(new Gson().fromJson(respose,ShenghuoquanBean.class).getData());
+                            adapter_fulisheList.notifyDataSetInvalidated();
+                        }
+
+                    }else {
+                        if(shenghuoquanBean.getData()!=null){
+                            mdata.addAll(new Gson().fromJson(respose,ShenghuoquanBean.class).getData());
+                            adapter_fulisheList.notifyDataSetChanged();
+                        }
+                    }
+
                 }else {
                     LogUtils.LOG("ceshi",respose,"生活圈");
                     gridview.setVisibility(View.GONE);
                     listview.setVisibility(View.VISIBLE);
-                    adapter_fulisheList=null;
-                    adapter_fulisheList=new Adapter_FulisheList(mdata,getActivity(),type);
-                    listview.setAdapter(adapter_fulisheList);
-                    mdata.clear();
-                    mdata.addAll(new Gson().fromJson(respose,ShenghuoquanBean.class).getData());
-                    adapter_fulisheList.notifyDataSetInvalidated();
+                    if(papageNum==1){
+                        if(shenghuoquanBean.getData()!=null){
+                            adapter_fulisheList=null;
+                            adapter_fulisheList=new Adapter_FulisheList(mdata,getActivity(),type);
+                            listview.setAdapter(adapter_fulisheList);
+                            mdata.clear();
+                            mdata.addAll(new Gson().fromJson(respose,ShenghuoquanBean.class).getData());
+                            adapter_fulisheList.notifyDataSetInvalidated();
+                        }
+
+                    }else {
+                        if(shenghuoquanBean.getData()!=null){
+                            mdata.addAll(new Gson().fromJson(respose,ShenghuoquanBean.class).getData());
+                            adapter_fulisheList.notifyDataSetChanged();
+                        }
+
+                    }
+
                 }
 
             }

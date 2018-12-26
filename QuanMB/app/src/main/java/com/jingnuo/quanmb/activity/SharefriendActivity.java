@@ -95,8 +95,8 @@ public class SharefriendActivity extends BaseActivityother {
             @Override
             public void onClick(View v) {
                 UMWeb web = new UMWeb(Baseurl_index + Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                web.setTitle("全民帮|专业家政维修");//标题
-                web.setDescription("一键下单，找到你的专属师傅");//描述
+                web.setTitle("全民帮|送你一张30元优惠券，快去使用吧！");//标题
+                web.setDescription("专业家政维修，一键下单，找到你的专属师傅！");//描述
                 web.setThumb(image);
                 new ShareAction(SharefriendActivity.this).setPlatform(SHARE_MEDIA.WEIXIN)
                         .withMedia(web)
@@ -110,8 +110,8 @@ public class SharefriendActivity extends BaseActivityother {
             public void onClick(View v) {
 
                 UMWeb web = new UMWeb(Baseurl_index + Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                web.setTitle("全民帮|专业家政维修");//标题
-                web.setDescription("一键下单，找到你的专属师傅");//描述
+                web.setTitle("全民帮|送你一张30元优惠券，快去使用吧！");//标题
+                web.setDescription("专业家政维修，一键下单，找到你的专属师傅！");//描述
                 web.setThumb(image);
                 new ShareAction(SharefriendActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .withMedia(web)

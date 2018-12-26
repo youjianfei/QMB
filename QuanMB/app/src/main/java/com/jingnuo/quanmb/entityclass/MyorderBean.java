@@ -90,6 +90,15 @@ public class MyorderBean {
         private String is_helper_bid="";
         private String app_type="";
         private String order_no="";
+        private String task_type_img_url="";
+
+        public String getTask_type_img_url() {
+            return task_type_img_url;
+        }
+
+        public void setTask_type_img_url(String task_type_img_url) {
+            this.task_type_img_url = task_type_img_url;
+        }
 
         public String getOrder_no() {
             return order_no;

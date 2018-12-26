@@ -47,7 +47,7 @@ public class ShareGoodWeb {//直接分享商品卡片链接
         mKProgressHUD=new KProgressHUD(activity);
         LogUtils.LOG("ceshi","我是拉出来的微信分享","分享");
         image_small= "https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/512.png";
-        description="一键下单，找到你的专属师傅";
+        description="专业家政维修，一键下单，找到你的专属师傅！";
         umShareListener = new UMShareListener() {
             @Override
             public void onStart(SHARE_MEDIA share_media) {
@@ -86,7 +86,7 @@ public class ShareGoodWeb {//直接分享商品卡片链接
 //                    cm.setPrimaryClip(mClipData);
 
                     UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                    web.setTitle("全民帮|专业家政维修");//标题
+                    web.setTitle("全民帮|送你一张30元优惠券，快去使用吧！");//标题
                     web.setDescription(description);//描述
                     web.setThumb(image);
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
@@ -98,7 +98,7 @@ public class ShareGoodWeb {//直接分享商品卡片链接
 
 
                     UMWeb web = new UMWeb(Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no());
-                    web.setTitle("全民帮|专业家政维修");//标题
+                    web.setTitle("全民帮|送你一张30元优惠券，快去使用吧！");//标题
                     web.setDescription(description);//描述
                     web.setThumb(image);
                     new ShareAction(activity).setPlatform(SHARE_MEDIA.WEIXIN)

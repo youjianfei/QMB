@@ -26,7 +26,7 @@ public class Urls {
 
     //  本地
 //    public static String Baseurl = "http://192.168.0.186:8080/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "http://192.168.0.186:8080/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://1/92.168.0.186:8080/QuanMinBang/v1.0/";
 //    public  static  String Baseurl_hu="http://192.168.0.147:8080/QuanMinBang/v1.0/";
 
     public static String sendyanzhengma = "send/sendValidate";//登录发送短信验证码  post
@@ -167,7 +167,7 @@ public class Urls {
     //个人中心
     public static String personinfo = "user/queryUserInfo?user_token=";//  post
     public static String myorderlist = "task/taskQueryMyList";//  post
-    public static String mytaskdetails = "task/getTaskDetail";//任务详情  ?id=
+    public static String mytaskdetails = "task/getTaskDetail";//任务详情  ?id=  client_no=
     public static String myLianxiren = "user/getContactsList";//常用联系人
     public static String deleteLianxiren = "user/deleteContacts?user_token=";//删除联系人
     public static String setmorenLianxiren = "user/setIsDefault?user_token=";//设为默认联系人
