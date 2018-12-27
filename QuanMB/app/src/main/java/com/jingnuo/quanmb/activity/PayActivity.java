@@ -124,7 +124,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 //                    startActivity(intent);
 //                    finish();
 
-                    Intent intend_think = new Intent(PayActivity.this, OrderThinkActivity.class);
+                    Intent intend_think = new Intent(PayActivity.this, ChoujiangActivity.class);
                     intend_think.putExtra("task_id", taskid+ "");
                     startActivity(intend_think);
                     Staticdata. ispipei=false;

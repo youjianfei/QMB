@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/gray_background"
     tools:context="com.jingnuo.quanmb.activity.PayActivity">
     <include
         android:id="@+id/re_title"
@@ -13,6 +12,19 @@
         android:layout_height="wrap_content"
         layout="@layout/include_title"
         />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_background"
+            android:orientation="vertical"
+            >
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -165,11 +177,6 @@
             android:background="@color/gray_background"
             />
     </LinearLayout>
-
-
-
-
-
     <RelativeLayout
         android:id="@+id/relayoutyue"
         android:layout_width="match_parent"
@@ -387,7 +394,9 @@
         android:textColor="@color/yellow_jianbian_start"
         android:textSize="12dp"
         android:layout_marginRight="35dp"
+        android:layout_marginBottom="15dp"
         />
 
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

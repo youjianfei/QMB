@@ -4,6 +4,8 @@
     package="com.jingnuo.quanmb">
 
     <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.hardware.sensor.accelerometer" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 申明网络权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -265,7 +267,8 @@
         <activity android:name=".activity.LoginActivityPhone" />
         <activity android:name=".activity.CancelloederActivity" />
         <activity android:name=".activity.YaoqingHaoyouActivity" />
-        <activity android:name=".activity.Mytaskdetails_JinxingzhongActivity"></activity>
+        <activity android:name=".activity.Mytaskdetails_JinxingzhongActivity" />
+        <activity android:name=".activity.ChoujiangActivity"></activity>
     </application>
 
 </manifest>
