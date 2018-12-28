@@ -59,5 +59,5 @@ public class ShakeUtils implements SensorEventListener {
 
     private SensorManager mSensorManager = null;
     private OnShakeListener mOnShakeListener = null;
-    private static final int SENSOR_VALUE = 20;
+    private static final int SENSOR_VALUE = 17;
 }

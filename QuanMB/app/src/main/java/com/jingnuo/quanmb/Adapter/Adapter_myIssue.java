@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingnuo.quanmb.Interface.Interence_complteTask;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.activity.CancelloederActivity;
@@ -52,76 +53,30 @@ public class Adapter_myIssue extends BaseAdapter {
             viewHolder = new viewHolde();
             convertView = mInlayout.inflate(R.layout.item_myissue_list, null, false);
             viewHolder.mTextview_type = convertView.findViewById(R.id.text_type);
-            viewHolder.mTextview_type2 = convertView.findViewById(R.id.text_type2);
             viewHolder.mTextview_title = convertView.findViewById(R.id.textview_titl);
             viewHolder.mTextview_issuetime = convertView.findViewById(R.id.textview_issuename);
-            viewHolder.mTextview_money = convertView.findViewById(R.id.textview_moneyy);
             viewHolder.mTextview_taskstate = convertView.findViewById(R.id.text_taskstate);
-            viewHolder.mTextview_resttime = convertView.findViewById(R.id.text_resttime);
             viewHolder.mTextview_cancel=convertView.findViewById(R.id.text_taskcancle);
-            viewHolder.mImage_resttime=convertView.findViewById(R.id.iamge_resttimepic);
-            viewHolder.resttime=convertView.findViewById(R.id.resttime);
+            viewHolder.image_typePIC=convertView.findViewById(R.id.image_typePIC);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (viewHolde) convertView.getTag();
         }
+        Glide.with(mContext).load(mData.get(position).getTask_type_img_url()).into(viewHolder.image_typePIC);
         viewHolder.mTextview_type.setText(mData.get(position).getSpecialty_name());
-        viewHolder.mTextview_type2.setText(mData.get(position).getSpecialty_name());
-        if(mData.get(position).getSpecialty_name().length()>3){
-            viewHolder.mTextview_type.setVisibility(View.INVISIBLE);
-            viewHolder.mTextview_type2.setVisibility(View.VISIBLE);
-        }else {
-            viewHolder.mTextview_type.setVisibility(View.VISIBLE);
-            viewHolder.mTextview_type2.setVisibility(View.INVISIBLE);
-        }
         viewHolder.mTextview_title.setText(mData.get(position).getTask_description());
         viewHolder.mTextview_issuetime.setText("发布时间：" + mData.get(position).getTask_StartDate());
         viewHolder.mTextview_taskstate.setText(mData.get(position).getStatus_name());
-        if(mData.get(position).getTask_Status_code().equals("07")||mData.get(position).getTask_Status_code().equals("13")
-                ||mData.get(position).getTask_Status_code().equals("09")||mData.get(position).getTask_Status_code().equals("06")){
-            viewHolder.resttime.setVisibility(View.INVISIBLE);
-        }else{
-            viewHolder.resttime.setVisibility(View.VISIBLE);
-        }
 
         if(mData.get(position).getStatus_name().equals("待帮助")){
+
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_green2);
-            if(mData.get(position).getIs_helper_bid().equals("Y")){//待帮助状态下  判断是否由帮手出价
-                viewHolder.mTextview_money.setText("佣金：帮手出价");
-            }else {
-                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
-            }
 
         }else if(mData.get(position).getStatus_name().equals("已完成")||mData.get(position).getStatus_name().equals("已失效")
                 ||mData.get(position).getStatus_name().equals("取消任务")){
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_gray2);
-            if(mData.get(position).getCounteroffer_Amount()==0){
-                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
-            }else {
-                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCounteroffer_Amount() + "元");
-            }
         }else {
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_red);
-            if(mData.get(position).getCounteroffer_Amount()==0){
-                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCommission() + "元");
-            }else {
-                viewHolder.mTextview_money.setText("佣金：" + mData.get(position).getCounteroffer_Amount() + "元");
-            }
-        }
-        if(mData.get(position).getApp_type().equals("1")&&mData.get(position).getCommission()==0){
-            viewHolder.mTextview_money.setText("佣金：等待报价");
-        }
-        if(mData.get(position).getTask_Status_code().equals("01")){
-            viewHolder.mTextview_resttime.setVisibility(View.VISIBLE);
-            viewHolder.mImage_resttime.setVisibility(View.VISIBLE);
-            long now = Long.parseLong(Utils.getTime(Utils.getTimeString()));//系统当前时间
-            long ago = Long.parseLong(Utils.getTime(mData.get(position).getTask_EndDate()));
-            String time = Utils.getDistanceTime(ago, now);//算出的差值
-            viewHolder.mTextview_resttime.setText("剩余时间："+time);
-        }else {
-
-            viewHolder.mTextview_resttime.setVisibility(View.INVISIBLE);
-            viewHolder.mImage_resttime.setVisibility(View.INVISIBLE);
         }
         if(mData.get(position).getTask_Status_code().equals("01")||mData.get(position).getTask_Status_code().equals("02")||
         mData.get(position).getTask_Status_code().equals("08")){
@@ -140,36 +95,6 @@ public class Adapter_myIssue extends BaseAdapter {
                             Intent intent1=new Intent(mContext,CancelloederActivity.class);
                             intent1.putExtra("taskid",mData.get(position).getTask_id()+"");
                             mContext.startActivity(intent1);
-
-//                            Map map=new HashMap();
-//                            map.put("user_token", Staticdata.static_userBean.getData().getUser_token());
-//                            map.put("client_no",Staticdata.static_userBean.getData().getAppuser().getClient_no());
-//                            map.put("id",mData.get(position).getTask_id()+"");
-//                            new Volley_Utils(new Interface_volley_respose() {
-//                                @Override
-//                                public void onSuccesses(String respose) {
-//                                    int status = 0;
-//                                    String msg = "";
-//                                    try {
-//                                        JSONObject object = new JSONObject(respose);
-//                                        status = (Integer) object.get("code");//登录状态
-//                                        msg = (String) object.get("message");//登录返回信息
-//
-//                                        if (status == 1) {
-//                                            ToastUtils.showToast(mContext, "取消任务成功");
-//                                        } else {
-//                                            ToastUtils.showToast(mContext, msg);
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onError(int error) {
-//
-//                                }
-//                            }).postHttp(Urls.Baseurl_cui + Urls.taskdetailscancle, mContext, 1, map);
                         }
 
                     }
@@ -183,15 +108,15 @@ public class Adapter_myIssue extends BaseAdapter {
     }
 
     class viewHolde {
+        ImageView image_typePIC;
         TextView mTextview_type;
-        TextView mTextview_type2;
         TextView mTextview_title;
         TextView mTextview_issuetime;
-        TextView mTextview_money;
+//        TextView mTextview_money;
         TextView mTextview_taskstate;
-        TextView mTextview_resttime;
+//        TextView mTextview_resttime;
         TextView mTextview_cancel;
-        ImageView mImage_resttime;
-        RelativeLayout resttime;
+//        ImageView mImage_resttime;
+//        RelativeLayout resttime;
     }
 }

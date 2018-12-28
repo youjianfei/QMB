@@ -66,7 +66,7 @@ public class ZixunKefuWebActivity extends BaseActivityother {
             }
             settings.setUseWideViewPort(true);
         }else if(type.equals("优惠活动")){
-            url = Urls.shareweb+ Staticdata.static_userBean.getData().getAppuser().getClient_no();
+            url = Urls.Baseurl_index+ Staticdata.static_userBean.getData().getAppuser().getClient_no();
         }
         else if(type.equals("匹配商家界面")){
             url = Urls.pipeijiemianhuodong+"?mobile_no="+ Staticdata.static_userBean.getData().getAppuser().getMobile_no();

@@ -20,10 +20,13 @@ import android.widget.ViewSwitcher;
 import com.google.gson.Gson;
 import com.jingnuo.quanmb.Interface.Interface_volley_respose;
 import com.jingnuo.quanmb.R;
+import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShouyeRadios;
+import com.jingnuo.quanmb.entityclass.YaoyiyaoBean;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ShakeUtils;
+import com.jingnuo.quanmb.utils.ToastUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class ChoujiangActivity extends BaseActivityother {
     ImageView image_close;
 
     ShakeUtils  shakeUtils;
+    YaoyiyaoBean yaoyiyaoBean;
 
     int  time=0;
 
@@ -59,9 +63,8 @@ public class ChoujiangActivity extends BaseActivityother {
                 LogUtils.LOG("yyy","摇过之后","抽红包");
                 time++;
                 if(time<2){//网络请求中奖接口
-                    Vibrator vibrator = (Vibrator)ChoujiangActivity.this.getSystemService(Service.VIBRATOR_SERVICE);
-                    vibrator.vibrate(500);
-                    gifimageview.setImageResource(R.mipmap.jiangpingif1);
+//                    time=0;
+                    request();
                 }
             }
         });
@@ -80,7 +83,44 @@ public class ChoujiangActivity extends BaseActivityother {
                 R.anim.slide_in_bottom);
         tv_notice.setOutAnimation(getApplicationContext(), R.anim.slide_out_up);
     }
+    void  request(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                yaoyiyaoBean=new  Gson().fromJson(respose,YaoyiyaoBean.class);
+                if(yaoyiyaoBean.getStatus()==1){
+                    textview_count.setText("0");
+                    Vibrator vibrator = (Vibrator)ChoujiangActivity.this.getSystemService(Service.VIBRATOR_SERVICE);
+                    vibrator.vibrate(500);
+                    switch (yaoyiyaoBean.getData().getId()){
+                        case 1:
+                            gifimageview.setImageResource(R.mipmap.jiangpingif1);
+                            break;
+                        case 2:
+                            gifimageview.setImageResource(R.mipmap.jiangpingif2);
 
+                            break;
+                        case 3:
+                            gifimageview.setImageResource(R.mipmap.jiangpingif3);
+                            break;
+                        case 4:
+                            gifimageview.setImageResource(R.mipmap.jiangpingif4);
+                            break;
+                    }
+                    ToastUtils.showToast(ChoujiangActivity.this,yaoyiyaoBean.getData().getPrize_name());
+                }else {
+                    time=0;
+                    ToastUtils.showToast(ChoujiangActivity.this,"再摇一次");
+                }
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+        }).Http(Urls.Baseurl_cui+Urls.shoujiangyaoyiyao+ Staticdata.static_userBean.getData().getUser_token(),ChoujiangActivity.this,0);
+    }
     @Override
     protected void initData() {
         ID=getIntent().getStringExtra("task_id");
@@ -153,5 +193,13 @@ public class ChoujiangActivity extends BaseActivityother {
     protected void onPause() {
         super.onPause();
         shakeUtils.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intend_think=new Intent(ChoujiangActivity.this,OrderThinkActivity.class);
+        intend_think.putExtra("task_id", ID+ "");
+        startActivity(intend_think);
+        finish();
     }
 }

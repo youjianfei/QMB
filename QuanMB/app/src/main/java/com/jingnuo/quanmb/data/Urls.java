@@ -227,4 +227,12 @@ public class Urls {
     public static String getallCity = "area/getAllCity";//所有城市
 
 
+
+
+    public static String shoujiangyaoyiyao= "task/getLottery?user_token=";//摇一摇抽奖
+
+
+
+
+
 }
