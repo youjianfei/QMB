@@ -70,13 +70,13 @@ public class Adapter_myIssue extends BaseAdapter {
 
         if(mData.get(position).getStatus_name().equals("待帮助")){
 
-            viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_green2);
+            viewHolder.mTextview_taskstate.setBackgroundResource(R.color.yellow_jianbian_start);
 
         }else if(mData.get(position).getStatus_name().equals("已完成")||mData.get(position).getStatus_name().equals("已失效")
                 ||mData.get(position).getStatus_name().equals("取消任务")){
             viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_gray2);
         }else {
-            viewHolder.mTextview_taskstate.setBackgroundResource(R.drawable.text_red);
+            viewHolder.mTextview_taskstate.setBackgroundResource(R.color.yellow_jianbian_start);
         }
         if(mData.get(position).getTask_Status_code().equals("01")||mData.get(position).getTask_Status_code().equals("02")||
         mData.get(position).getTask_Status_code().equals("08")){

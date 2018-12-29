@@ -8,11 +8,12 @@
     tools:context="com.jingnuo.quanmb.activity.ChoujiangActivity">
     <ImageView
         android:id="@+id/image_close"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@mipmap/close1"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
         />
     <ScrollView
         android:layout_width="match_parent"

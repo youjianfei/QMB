@@ -25,6 +25,7 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.entityclass.ShouyeRadios;
 import com.jingnuo.quanmb.entityclass.YaoyiyaoBean;
+import com.jingnuo.quanmb.popwinow.Popwindow_yaoyiyao;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ShakeUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -63,7 +64,7 @@ public class ChoujiangActivity extends BaseActivityother {
             public void onShake() {
                 LogUtils.LOG("yyy", "摇过之后", "抽红包");
                 time++;
-                if (time < 2) {//网络请求中奖接口
+                if (time == 1) {//网络请求中奖接口
 //                    time=0;
                     request();
                 }
@@ -94,27 +95,30 @@ public class ChoujiangActivity extends BaseActivityother {
                     textview_count.setText("0");
                     Vibrator vibrator = (Vibrator) ChoujiangActivity.this.getSystemService(Service.VIBRATOR_SERVICE);
                     vibrator.vibrate(500);
-                    switch (yaoyiyaoBean.getData().getId()) {
-                        case 1:
-                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
-//                            gifimageview.setImageResource(R.mipmap.jiangpingif1);
-                            break;
-                        case 2:
-//                            gifimageview.setImageResource(R.mipmap.jiangpingif2);
-                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
+                    new Popwindow_yaoyiyao(ChoujiangActivity.this,yaoyiyaoBean.getData().getGif_url(),
+                            yaoyiyaoBean.getData().getPrize_name()).showpopwindow();
 
-                            break;
-                        case 3:
-//                            gifimageview.setImageResource(R.mipmap.jiangpingif3);
-                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
-
-                            break;
-                        case 4:
-//                            gifimageview.setImageResource(R.mipmap.jiangpingif4);
-                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
-
-                            break;
-                    }
+//                    switch (yaoyiyaoBean.getData().getId()) {
+//                        case 1:
+//                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
+////                            gifimageview.setImageResource(R.mipmap.jiangpingif1);
+//                            break;
+//                        case 2:
+////                            gifimageview.setImageResource(R.mipmap.jiangpingif2);
+//                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
+//
+//                            break;
+//                        case 3:
+////                            gifimageview.setImageResource(R.mipmap.jiangpingif3);
+//                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
+//
+//                            break;
+//                        case 4:
+////                            gifimageview.setImageResource(R.mipmap.jiangpingif4);
+//                            Glide.with(ChoujiangActivity.this).load(yaoyiyaoBean.getData().getGif_url()).into(gifimageview);
+//
+//                            break;
+//                    }
                     ToastUtils.showToast(ChoujiangActivity.this, yaoyiyaoBean.getData().getPrize_name());
                 } else {
                     textview_count.setText("0");

@@ -66,7 +66,12 @@ public class Fragment_shenghuoquan extends Fragment {
         initview();
         initdata();
         initlistenner();
-        requestjifen();
+        if(Staticdata.static_userBean==null||Staticdata.static_userBean.getData()==null){
+
+        }else {
+            requestjifen();
+        }
+
 
         return view;
     }
@@ -141,7 +146,12 @@ public class Fragment_shenghuoquan extends Fragment {
                     case "2"://周边
                         type="2";
                         request(type,1);
-                        cardview_jifen.setVisibility(View.VISIBLE);
+                        if(Staticdata.static_userBean==null||Staticdata.static_userBean.getData()==null){
+
+                        }else {
+                            cardview_jifen.setVisibility(View.VISIBLE);
+                        }
+
                         break;
                     case "3"://新鲜事
                         type="3";
