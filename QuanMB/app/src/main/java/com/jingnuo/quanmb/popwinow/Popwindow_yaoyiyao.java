@@ -70,6 +70,7 @@ public class Popwindow_yaoyiyao {
             @Override
             public void onClick(View view) {//取消
                 mPopupWindow.dismiss();
+
             }
         });
     }
