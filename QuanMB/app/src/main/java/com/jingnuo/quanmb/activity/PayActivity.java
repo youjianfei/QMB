@@ -27,6 +27,7 @@ import com.jingnuo.quanmb.customview.PayFragment;
 import com.jingnuo.quanmb.customview.PayPwdView;
 import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
+import com.jingnuo.quanmb.entityclass.IsYaoyiyao;
 import com.jingnuo.quanmb.entityclass.OrderThinkBean;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.ToastUtils;
@@ -86,6 +87,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
     String taskid = "";
     String coupon_code = "";//优惠券码
+    String coupon_id = "";//优惠券ID
     String tasktypeid = "";
     String order_no = "";
     String business_no = "";
@@ -100,7 +102,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 
     OrderThinkBean orderThinkBean;
     PermissionHelper mPermission;//动态申请权限
-
+    IsYaoyiyao isYaoyiyao; //是否摇一摇
 
     @Override
     public int setLayoutResID() {
@@ -123,13 +125,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 //                    intent.putExtra("taskid", taskid);
 //                    startActivity(intent);
 //                    finish();
+                    //任务支付成功之后是否进入抽奖活动
+                    requestISYaoyiyao();
 
-                    Intent intend_think = new Intent(PayActivity.this, ChoujiangActivity.class);
-                    intend_think.putExtra("task_id", taskid+ "");
-                    startActivity(intend_think);
-                    Staticdata. ispipei=false;
-                    LogUtils.LOG("payqq","11111","PaySuccessActivity");
-                    finish();
                 }
             }
 
@@ -145,6 +143,45 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
         });
         registerReceiver(paysuccess_BroadcastReciver, intentFilter_paysuccess); //将广播监听器和过滤器注册在一起；
     }
+    void requestISYaoyiyao(){
+        new  Volley_Utils(new Interface_volley_respose() {
+            @Override
+            public void onSuccesses(String respose) {
+                LogUtils.LOG("ceshi",respose,"是否摇一摇");
+                isYaoyiyao=new Gson().fromJson(respose,IsYaoyiyao.class);
+                if(isYaoyiyao.getCode()==1){
+                    if(isYaoyiyao.getData().getKey().equals("Y")){
+                        Intent intend_think = new Intent(PayActivity.this, ChoujiangActivity.class);
+                        intend_think.putExtra("task_id", taskid+ "");
+                        startActivity(intend_think);
+                        Staticdata. ispipei=false;
+                        LogUtils.LOG("payqq","11111","PaySuccessActivity");
+                        finish();
+                    }else {
+                        Intent intend_think = new Intent(PayActivity.this, OrderThinkActivity.class);
+                        intend_think.putExtra("task_id", taskid+ "");
+                        startActivity(intend_think);
+                        Staticdata. ispipei=false;
+                        LogUtils.LOG("payqq","11111","PaySuccessActivity");
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onError(int error) {
+                Intent intend_think = new Intent(PayActivity.this, OrderThinkActivity.class);
+                intend_think.putExtra("task_id", taskid+ "");
+                startActivity(intend_think);
+                Staticdata. ispipei=false;
+                LogUtils.LOG("payqq","11111","PaySuccessActivity");
+                finish();
+            }
+        }).Http(Urls.Baseurl_cui+Urls.ischoujiang+Staticdata.static_userBean.getData().getUser_token(),PayActivity.this,0);
+
+
+    }
+
 
     @Override
     protected void initData() {
@@ -265,6 +302,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                 textview_yue_dikou.setText("余额抵扣"+doubleo00.format(diKou_amount)+"元");
             }
         pay_amount=amount-coupon_amout-diKou_amount;
+
         mButton_submit.setText("立即支付"+doubleo00.format(pay_amount)+"元");
     }
 
@@ -401,7 +439,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     }
                     //余额支付
                     Bundle bundle = new Bundle();
-                    bundle.putString(PayFragment.EXTRA_CONTENT, "余额支付" + "：¥ " + (amount-coupon_amout));
+                    bundle.putString(PayFragment.EXTRA_CONTENT, "余额支付" + "：¥ " +doubleo00.format(amount-coupon_amout) );
                     fragment = new PayFragment();
                     fragment.setArguments(bundle);
                     fragment.setPaySuccessCallBack(PayActivity.this);
@@ -413,12 +451,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Map map_pay = new HashMap();
                     map_pay.put("isrecharge", "N");
                     map_pay.put("body", title_pay);
-                    map_pay.put("total_fee", pay_amount + "");
+                    map_pay.put("total_fee", doubleo00.format(pay_amount) + "");
                     map_pay.put("balance_credit", diKou_amount + "");
                     map_pay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_pay.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_pay.put("task_id", taskid);
-                    map_pay.put("coupon_code", coupon_code);//优惠券代码
+                    map_pay.put("coupon_id", coupon_id);//优惠券代码
                     map_pay.put("order_no", order_no);
                     if (title_pay.equals("匹配商户成功付款") || title_pay.equals("任务补差价")) {
                         map_pay.put("isBargainPay", "Y");
@@ -441,12 +479,12 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
                     Map map_zpay = new HashMap();
                     map_zpay.put("isrecharge", "N");
                     map_zpay.put("subject", title_pay);
-                    map_zpay.put("total_fee", pay_amount + "");
+                    map_zpay.put("total_fee", doubleo00.format(pay_amount) + "");
                     map_zpay.put("balance_credit", diKou_amount + "");
                     map_zpay.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
                     map_zpay.put("user_token", Staticdata.static_userBean.getData().getUser_token());
                     map_zpay.put("task_id", taskid);
-                    map_zpay.put("coupon_code", coupon_code);//优惠券代码
+                    map_zpay.put("coupon_id", coupon_id);//优惠券代码
                     map_zpay.put("order_no", order_no);
                     if (title_pay.equals("匹配商户成功付款") || title_pay.equals("任务补差价")) {
                         map_zpay.put("isBargainPay", "Y");
@@ -515,6 +553,10 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             coupon_amout = data.getDoubleExtra("amount", 0.0);
             coupon_possition = data.getIntExtra("position", 0);
             coupon_code = data.getStringExtra("coupon_code");
+            coupon_id = data.getStringExtra("coupon_id");
+            if(coupon_id.equals("0")){
+                coupon_id="";
+            }
             text_couponTextContent.setText("已抵用" + coupon_amout + "元");
             text_select.setVisibility(View.VISIBLE);
 //            if(diKou_amount>coupon_amout){
@@ -524,7 +566,7 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
 //            pay_amount=amount-coupon_amout-diKou_amount;
 //            mButton_submit.setText("立即支付" + pay_amount + "元");
             resultMoney();
-            LogUtils.LOG("ceshi", "优惠金额" + coupon_amout + "条目" + coupon_possition + "现价" + pay_amount, "payactivity");
+            LogUtils.LOG("ceshi", "优惠ID" + coupon_id + "条目" + coupon_possition + "现价" + pay_amount, "payactivity");
         }
     }
 
@@ -572,9 +614,9 @@ public class PayActivity extends BaseActivityother implements PayPwdView.InputCa
             Map map_yue = new HashMap();
             map_yue.put("user_token", Staticdata.static_userBean.getData().getUser_token());
             map_yue.put("client_no", Staticdata.static_userBean.getData().getAppuser().getClient_no());
-            map_yue.put("pay_money", pay_amount + "");
+            map_yue.put("pay_money", doubleo00.format(pay_amount)+"");
             map_yue.put("task_id", taskid);
-            map_yue.put("coupon_code", coupon_code);//优惠券代码
+            map_yue.put("coupon_id", coupon_id);//优惠券代码
             map_yue.put("order_no", order_no);
             LogUtils.LOG("ceshi", title_pay.toString(), "title_pay");
             if (title_pay.equals("匹配商户成功付款") || title_pay.equals("任务补差价")) {

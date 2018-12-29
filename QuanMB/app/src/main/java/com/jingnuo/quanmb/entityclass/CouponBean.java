@@ -67,6 +67,15 @@ public class CouponBean {
         private String status;
         private int type;
         private int usable;
+        private int coupon_id;
+
+        public int getCoupon_id() {
+            return coupon_id;
+        }
+
+        public void setCoupon_id(int coupon_id) {
+            this.coupon_id = coupon_id;
+        }
 
         public int getUsable() {
             return usable;

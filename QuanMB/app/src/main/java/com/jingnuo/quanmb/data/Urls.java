@@ -181,6 +181,7 @@ public class Urls {
     public static String checkSafepassword = "user/checkSecurityCode";//校验支付密码
     public static String updataXYDU = "user/updateXYDu?user_token=";//更新经纬度
     public static String userInvite = "user/queryUserInvite?user_token=";//邀请好友奖励以及人数
+    public static String jifencount = "user/queryIntegral?user_token=";//邀请好友奖励以及人数
 
 
     public static String couponPopwindow= "coupon/getCouponWindow?user_token=";//新用户弹窗
@@ -230,6 +231,7 @@ public class Urls {
 
 
     public static String shoujiangyaoyiyao= "task/getLottery?user_token=";//摇一摇抽奖
+    public static String ischoujiang= "task/getLotteryOrNo?user_token=";//摇一摇抽奖
 
 
 

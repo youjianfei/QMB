@@ -111,6 +111,7 @@ public class CouponActivity extends BaseActivityother {
         mylistview_coupon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LogUtils.LOG("ceshi","优惠券ID"+mData.get(position).getCoupon_id()+"position"+position,"选择优惠券");
                 if(title.equals("优惠券")){
                     Intent  intent=new Intent(CouponActivity.this,IssueTaskActivity.class);
                     startActivity(intent);
@@ -123,6 +124,7 @@ public class CouponActivity extends BaseActivityother {
                         result.putExtra("position", position);
                         result.putExtra("amount", mData.get(position).getAmount());
                         result.putExtra("coupon_code", mData.get(position).getCoupon_code());
+                        result.putExtra("coupon_id", mData.get(position).getCoupon_id()+"");
                         setResult(1637, result);
                         finish();
                     }

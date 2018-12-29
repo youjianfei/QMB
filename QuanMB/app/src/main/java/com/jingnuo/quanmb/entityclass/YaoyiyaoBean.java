@@ -6,15 +6,24 @@ package com.jingnuo.quanmb.entityclass;
 
 public class YaoyiyaoBean {
 
+
     /**
-     * data : {"begin":500,"end":9000,"id":2,"img_url":"0","prize_name":"50积分奖励"}
+     * code : 1
+     * data : {"begin":1500,"end":10000,"gif_url":"https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/fudai4.png","id":4,"img_url":"0https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/zhongjiang4.png","prize_name":"30元余额红包"}
      * message : 获取信息成功
-     * status : 1
      */
 
+    private int code;
     private DataBean data;
     private String message;
-    private int status;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public DataBean getData() {
         return data;
@@ -32,25 +41,19 @@ public class YaoyiyaoBean {
         this.message = message;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public static class DataBean {
         /**
-         * begin : 500
-         * end : 9000
-         * id : 2
-         * img_url : 0
-         * prize_name : 50积分奖励
+         * begin : 1500
+         * end : 10000
+         * gif_url : https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/fudai4.png
+         * id : 4
+         * img_url : 0https://qmb-img.oss-cn-hangzhou.aliyuncs.com/image/icon/zhongjiang4.png
+         * prize_name : 30元余额红包
          */
 
         private int begin;
         private int end;
+        private String gif_url;
         private int id;
         private String img_url;
         private String prize_name;
@@ -69,6 +72,14 @@ public class YaoyiyaoBean {
 
         public void setEnd(int end) {
             this.end = end;
+        }
+
+        public String getGif_url() {
+            return gif_url;
+        }
+
+        public void setGif_url(String gif_url) {
+            this.gif_url = gif_url;
         }
 
         public int getId() {
