@@ -1,7 +1,9 @@
 package com.jingnuo.quanmb.activity;
 
+import android.app.AlertDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
@@ -98,6 +100,23 @@ public class ZixunKefuWebActivity extends BaseActivityother {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String request) {
+                if(request.startsWith("alipays:") || request.startsWith("alipay")) {
+                    try {
+                        ZixunKefuWebActivity.this.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(request)));
+                    } catch (Exception e) {
+                    new AlertDialog.Builder(ZixunKefuWebActivity.this)
+                            .setMessage("未检测到支付宝客户端，请安装后重试。")
+                            .setPositiveButton("立即安装", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Uri alipayUrl = Uri.parse("https://d.alipay.com");
+                                    ZixunKefuWebActivity.this.startActivity(new Intent("android.intent.action.VIEW", alipayUrl));
+                                }
+                            }).setNegativeButton("取消", null).show();
+                }
+                    return true;
+                }
                 view.loadUrl(request);
                 return true;
             }
@@ -128,11 +147,7 @@ public class ZixunKefuWebActivity extends BaseActivityother {
                 if (newProgress == 100) {
                     mPrigressBer.setVisibility(View.GONE);//加载完网页进度条消失
                     LogUtils.LOG("ceshi", webView.getUrl(), "网..址");
-//                    if(webView.getUrl().contains("https://eoskoreanode.com/app/index/index.html")||
-//                            webView.getUrl().contains("https://eoskoreanode.com/app/asset/index.html")||
-//                            webView.getUrl().contains("https://eoskoreanode.com/app/user/index.html")){
-//                        webView.clearHistory();
-//                    }
+
                 } else {
                     mPrigressBer.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
                     mPrigressBer.setProgress(newProgress);//设置进度值

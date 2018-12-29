@@ -76,13 +76,13 @@ public class Fragment_shenghuoquan extends Fragment {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mdata.get(position).getClick_url()!=null&&!mdata.get(position).getClick_url().equals("")){
+                if(mdata.get(position-1).getClick_url()!=null&&!mdata.get(position-1).getClick_url().equals("")){
                     Intent intent=new Intent(getActivity(), ZixunKefuWebActivity.class);
                     intent.putExtra("webtitle", "");
                     intent.putExtra("type", "生活圈");
-                    intent.putExtra("URL", mdata.get(position).getClick_url());
+                    intent.putExtra("URL", mdata.get(position-1).getClick_url());
                     startActivity(intent);
-                    LogUtils.LOG("ceshi",position+"oooooo","点击gridview");
+                    LogUtils.LOG("ceshi",position-1+"oooooo","点击gridview");
 
                 }
             }
