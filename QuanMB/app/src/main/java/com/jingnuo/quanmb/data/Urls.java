@@ -13,15 +13,19 @@ public class Urls {
     public static String  pipeijiemianhuodong= "";//匹配商家界面活动点击接口
     public static String shareweb = "https://app.quanminbang.top/v1.0/uploadIge/goShareHaveGift?client_no=";//新用户活动领取点击接口
     //正式
-//    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
-//    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_cui = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String Baseurl_hu = "https://app.quanminbang.top/QuanMinBang/v1.0/";
+    public static String H5weixinPay = "https://app.quanminbang.top";
+
 
 
     //  测试
-    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
-    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_cui = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//    public static String Baseurl_hu = "http://www.quanminbang.top/QuanMinBang/v1.0/";
+//        public static String H5weixinPay = "http://www.quanminbang.top";
+
 
 
     //  本地
@@ -92,7 +96,7 @@ public class Urls {
     public static String gettaskid = "task/getTaskId?user_token=";//获取任务号
     public static String Issue_again = "task/taskBackon?user_token=";//重新上架任务
     public static String apply_longtime = "order/applyforDelay";//帮手商家申请延时
-    public static String agreeOrrefuse_longtime = "task/delayAcceptOrNo";//雇主同意或者拒接延时
+    public static String agreeOrrefuse_longtime = "task/delayAcceptOrNo";//雇主同意或者拒接延时 
     public static String taskaddCommission = "task/addCommission";//任务加价
     public static String issuetask = "task/querySpecialty/TaskAnnouncementList";//发布个性任务
     public static String jiazhengweixiuTYpe = "task/querySpecialty/getMaintainType?user_token=";//发布任务   家政维修子专业

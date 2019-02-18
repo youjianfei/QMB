@@ -30,6 +30,9 @@ import com.jingnuo.quanmb.data.Staticdata;
 import com.jingnuo.quanmb.data.Urls;
 import com.jingnuo.quanmb.utils.LogUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ZixunKefuWebActivity extends BaseActivityother {
     //控件
     private WebView webView;
@@ -117,6 +120,24 @@ public class ZixunKefuWebActivity extends BaseActivityother {
                 }
                     return true;
                 }
+                else {
+                    if (request.startsWith("https://wx.tenpay.com/")) {
+                        Map<String, String> extraHeaders = new HashMap<>();
+                        extraHeaders.put("Referer", Urls.H5weixinPay);
+                        view.loadUrl(request, extraHeaders);
+                        return true;
+                    }
+
+                    if (request.startsWith("weixin://wap/pay?")) {
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(request));
+                        startActivity(intent);
+                        return true;
+                    }
+
+                }
+
                 view.loadUrl(request);
                 return true;
             }
