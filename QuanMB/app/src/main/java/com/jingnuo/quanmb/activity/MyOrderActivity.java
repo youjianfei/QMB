@@ -1,6 +1,7 @@
 package com.jingnuo.quanmb.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,11 @@ import com.jingnuo.quanmb.entityclass.MyorderBean;
 import com.jingnuo.quanmb.utils.LogUtils;
 import com.jingnuo.quanmb.utils.Volley_Utils;
 import com.jingnuo.quanmb.R;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +37,9 @@ public class MyOrderActivity extends BaseActivityother {
     //控件
     TextView textview_maintitle;
     TabLayout  mTablayout;
-    PullToRefreshListView mListView;
+    SmartRefreshLayout SmartRefreshLayout_refreshLayout;
+
+    ListView mListView;
     ImageView imageview_empty;
 
     //对象
@@ -90,19 +98,23 @@ public class MyOrderActivity extends BaseActivityother {
 
             }
         });
-        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+
+
+        SmartRefreshLayout_refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 page=1;
                 request(map_myorder,page);
             }
-
+        });
+        SmartRefreshLayout_refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-            page++;
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                page++;
                 request(map_myorder,page);
             }
         });
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -148,6 +160,7 @@ public class MyOrderActivity extends BaseActivityother {
 
         mListView=findViewById(R.id.list_myorder);
         imageview_empty=findViewById(R.id.imageview_empty);
+        SmartRefreshLayout_refreshLayout=findViewById(R.id.SmartRefreshLayout_refreshLayout);
 
     }
     void request(Map  map, final int page){
@@ -155,9 +168,8 @@ public class MyOrderActivity extends BaseActivityother {
         new Volley_Utils(new Interface_volley_respose() {
             @Override
             public void onSuccesses(String respose) {
-                if (mListView.isRefreshing()) {
-                    mListView.onRefreshComplete();
-                }
+                SmartRefreshLayout_refreshLayout.finishLoadMore();
+                SmartRefreshLayout_refreshLayout.finishRefresh();
                 myorderBean=new Gson().fromJson(respose,MyorderBean.class);
                 if(page==1){
                     mData.clear();
